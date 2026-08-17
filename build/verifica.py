@@ -23,6 +23,7 @@ import openpyxl
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from date import ANALITICE, CORELATII, FLUXURI, plan as dplan  # noqa: E402
+from date import module as dmod  # noqa: E402
 
 RADACINA = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SURSE = os.path.join(RADACINA, "surse", "training-4-2026-08-14")
@@ -35,6 +36,29 @@ ERORI_EXCEL = ("#REF!", "#VALUE!", "#DIV/0!", "#NAME?", "#N/A", "#NULL!", "#NUM!
 
 esecuri = []
 note = []
+
+
+def _echilibru(formula):
+    """(adâncime_paranteze, șir_rămas_deschis) pentru o formulă Excel.
+
+    Parantezele din interiorul șirurilor nu se numără, iar `""` este ghilimeaua
+    scăpată din Excel, nu un sfârșit de șir.
+    """
+    adanc, in_sir, i = 0, False, 0
+    while i < len(formula):
+        ch = formula[i]
+        if ch == '"':
+            if in_sir and i + 1 < len(formula) and formula[i + 1] == '"':
+                i += 2
+                continue
+            in_sir = not in_sir
+        elif not in_sir:
+            if ch == "(":
+                adanc += 1
+            elif ch == ")":
+                adanc -= 1
+        i += 1
+    return adanc, in_sir
 
 
 def cade(poarta, mesaj):
@@ -233,7 +257,22 @@ def poarta_module():
     else:
         ok("6", f"toate cele {len(referite)} module referite există în CatalogModule")
 
-    # poarta 8 — valori de formulă
+    # poarta 8a — formule sintactic valide (paranteze și ghilimele echilibrate).
+    # Fără asta, o formulă stricată e prinsă abia de recalc, cu un traceback opac.
+    stricate = 0
+    for ws in wb.worksheets:
+        for row in ws.iter_rows():
+            for c in row:
+                if isinstance(c.value, str) and c.value.startswith("="):
+                    adanc, in_sir = _echilibru(c.value)
+                    if adanc != 0 or in_sir:
+                        cade("8", f"{ws.title}!{c.coordinate}: formulă dezechilibrată "
+                                  f"(paranteze={adanc}, șir deschis={in_sir})")
+                        stricate += 1
+    if stricate == 0:
+        ok("8", "toate formulele au paranteze și ghilimele echilibrate")
+
+    # poarta 8b — valori de formulă
     wbv = openpyxl.load_workbook(MODULE, data_only=True)
     erori, checkuri, checkuri_ok = 0, 0, 0
     for ws in wbv.worksheets:
@@ -278,6 +317,23 @@ def poarta_neatins():
                 permise.add(("Plan de conturi", f"B{r}"))
                 permise.add(("Plan de conturi", f"F{r}"))
 
+    # coloana Status a modulelor promovate din „EXEMPLU EXTERN” în implementate
+    sursa_mod = os.path.join(SURSE, "Module_Declarative_Fluxuri.xlsx")
+    if os.path.exists(sursa_mod):
+        wsc = openpyxl.load_workbook(sursa_mod)["CatalogModule"]
+        for r in range(1, wsc.max_row + 1):
+            if str(wsc.cell(row=r, column=2).value or "").strip() in dmod.STATUS_INLOCUIT:
+                permise.add(("CatalogModule", f"H{r}"))
+
+    def semnatura(ws, rand, ignora_coloane=()):
+        vals = []
+        for c in range(1, ws.max_column + 1):
+            if c in ignora_coloane:
+                continue
+            v = ws.cell(row=rand, column=c).value
+            vals.append(None if v is None else str(v))
+        return tuple(vals)
+
     for sursa, iesire in perechi:
         if not os.path.exists(iesire):
             continue
@@ -288,21 +344,41 @@ def poarta_neatins():
                 cade("9", f"{os.path.basename(iesire)}: foaia {nume!r} a dispărut")
                 continue
             wa, wbs = a[nume], b[nume]
-            for row in wa.iter_rows():
-                for c in row:
-                    if c.value is None:
-                        continue
-                    nou = wbs.cell(row=c.row, column=c.column).value
-                    if nou != c.value:
-                        # actualizările în loc pe coloanele G–J din plan sunt intenționate
-                        if nume == "Plan de conturi" and c.column >= 7:
-                            continue
-                        if (nume, c.coordinate) in permise:
-                            continue
-                        cade("9", f"{nume}!{c.coordinate} modificat: {str(c.value)[:40]!r} "
-                                  f"→ {str(nou)[:40]!r}")
+            # actualizările în loc pe coloanele G–J din plan sunt intenționate
+            ignora = tuple(range(7, 11)) if nume == "Plan de conturi" else ()
+
+            # Rândurile originale trebuie să apară, în aceeași ordine, în fișierul
+            # generat. Inserarea de rânduri noi între ele e permisă (extindere);
+            # ștergerea sau rescrierea unui rând nu e.
+            noi = [semnatura(wbs, r, ignora) for r in range(1, wbs.max_row + 1)]
+            i = 0
+            for r in range(1, wa.max_row + 1):
+                orig = semnatura(wa, r, ignora)
+                if all(v is None for v in orig):
+                    continue
+                # celulele declarate ca modificabile se neutralizează pe ambele părți
+                masca = [j for j in range(len(orig))
+                         if (nume, f"{chr(65 + j)}{r}") in permise]
+                def aplica(t):
+                    t = list(t)
+                    for j in masca:
+                        if j < len(t):
+                            t[j] = "«permis»"
+                    return tuple(t)
+                tinta = aplica(orig)
+                gasit = False
+                while i < len(noi):
+                    if aplica(noi[i][:len(orig)]) == tinta:
+                        gasit = True
+                        i += 1
+                        break
+                    i += 1
+                if not gasit:
+                    cade("9", f"{nume}: rândul original {r} nu se mai regăsește "
+                              f"({str(orig[:3])[:70]})")
+                    break
     if not any(e.startswith("[9]") for e in esecuri):
-        ok("9", "conținutul original din training 4 e păstrat neatins")
+        ok("9", "conținutul original din training 4 e păstrat (rândurile originale, în ordine)")
 
 
 def main():
