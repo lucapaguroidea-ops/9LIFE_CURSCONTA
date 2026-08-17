@@ -33,7 +33,8 @@ def _rand(valori):
                   stil_nou=dict(font=stil.F_NORMAL, align=stil.A_WRAP))
 
 
-def construieste(wb, *, mutate, orfane, reformulari, resturi=(), absorbite=None):
+def construieste(wb, *, mutate, orfane, reformulari, resturi=(), absorbite=None,
+                 statusuri=None):
     """Creează foaia Istoric. `mutate` = rândurile de narativ scoase din Legendă."""
     gol = R.Rand([])
     out = [
@@ -51,10 +52,15 @@ def construieste(wb, *, mutate, orfane, reformulari, resturi=(), absorbite=None)
     out.append(_nota("Numerotarea veche era secvențială, în ordinea livrărilor. Cea nouă "
                      "codifică clasa contului principal, deci un flux adăugat peste un an "
                      "primește următorul număr liber din clasa lui și stă fizic la locul lui. "
-                     "Tabelul rămâne aici permanent, ca referințele vechi să se poată rezolva."))
-    out.append(_cap(["ID nou", "ID vechi", "Clasa", "Denumire"]))
+                     "Tabelul rămâne aici permanent, ca referințele vechi să se poată rezolva. "
+                     "Ultima coloană păstrează statusul dinainte de curățare: „(Etapa N)” "
+                     "era istoric de livrare, nu stare a fluxului, deci a ieșit din foaia "
+                     "de lucru."))
+    out.append(_cap(["ID nou", "ID vechi", "Clasa", "Denumire",
+                     "Status original (înainte de curățare)"]))
     for nou, vechi, den in O.ORDINE:
-        out.append(_rand([nou, vechi, O.CLASA[nou], den]))
+        out.append(_rand([nou, vechi, O.CLASA[nou], den,
+                          (statusuri or {}).get(vechi, "")]))
     out.append(gol)
 
     # ---- 2. contopiri

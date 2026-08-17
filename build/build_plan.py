@@ -363,7 +363,7 @@ def ordoneaza_canonic(wb):
     Ordinea contează. Istoricul se construiește ÎNAINTE de renumerotare, iar
     renumerotarea îl ocolește — altfel și-ar rescrie propriul tabel de echivalență.
     """
-    orfane, resturi, absorbite = reordoneaza.rescrie(wb)
+    orfane, resturi, absorbite, statusuri = reordoneaza.rescrie(wb)
 
     dupl = reordoneaza_foi.reordoneaza_tabel(
         wb, "Analitice (Tier A)", latime=7,
@@ -379,7 +379,7 @@ def ordoneaza_canonic(wb):
 
     istoric.construieste(wb, mutate=mutate, orfane=orfane,
                          reformulari=dreform.INLOCUIRI,
-                         resturi=resturi, absorbite=absorbite)
+                         resturi=resturi, absorbite=absorbite, statusuri=statusuri)
 
     schimbate = renumeroteaza.in_workbook(wb, O.HARTA, exclude=("Istoric",))
     ramase = renumeroteaza.ramase(wb, set(O.HARTA), exclude=("Istoric",))

@@ -213,6 +213,7 @@ def rescrie(wb, nume="Fluxuri"):
         cap = [sablon_cap] if (sablon_cap and bloc[0].text().strip() != "Flux ID") else []
         blocuri[fid] = [sablon_titlu.cu_valoare(1, titlu)] + cap + bloc
 
+    statusuri = {}
     out = list(preambul)
     out.append(_nota(sablon,
                      "Observație păstrată din gruparea veche, valabilă în continuare: fluxurile "
@@ -237,6 +238,9 @@ def rescrie(wb, nume="Fluxuri"):
             r = r.cu_valoare(2, clasa)
             if nou in O.RETITULARI:
                 r = r.cu_valoare(3, O.RETITULARI[nou])
+            vechi_status = str(r.valori().get(7, "") or "").strip()
+            statusuri[vechi] = vechi_status
+            r = r.cu_valoare(7, _status_curat(vechi_status))
             out.append(r)
     out.append(gol)
     out.append(gol)
@@ -270,7 +274,7 @@ def rescrie(wb, nume="Fluxuri"):
             titlu=blocuri[vechi][0].text().strip() if vechi in blocuri else "",
             catalog=catalog.get(vechi).valori() if vechi in catalog else {},
         )
-    return orfane, resturi, absorbite
+    return orfane, resturi, absorbite, statusuri
 
 
 def _varianta(bloc, id_gazda, eticheta, motiv, sablon):
@@ -281,6 +285,19 @@ def _varianta(bloc, id_gazda, eticheta, motiv, sablon):
         out.append(r.cu_valoare(1, id_gazda) if RE_ID.match(r.text().strip()) else r)
     out.append(_nota(sablon, f"De ce e variantă și nu flux separat: {motiv}", 9))
     return out
+
+
+RE_ETAPA = re.compile(r"\s*\(Etapa\s*\d+\)")
+
+
+def _status_curat(status):
+    """Scoate „(Etapa N)” din status — e istoric de livrare, nu stare a fluxului.
+
+    Marcajele „CORECTAT / CLARIFICAT <dată>” rămân: acelea spun ceva despre CONȚINUT
+    (că o eroare a fost reparată), nu despre ordinea în care a fost scris fișierul.
+    Statusul original se păstrează integral în foaia Istoric.
+    """
+    return RE_ETAPA.sub("", str(status or "")).strip() or "Detaliat"
 
 
 def _rand_nou(text, latime, **stil_nou):
