@@ -67,6 +67,50 @@ make tot        # build + verifica
 
 Necesită `openpyxl`, `formulas`, `numpy` (`pip install openpyxl formulas numpy`).
 
+## Ce conține sistemul acum
+
+| | Training 4 (existent) | + Etapa 4 (traininguri 2 și 3) |
+|---|---|---|
+| Fluxuri | F-01…F-44 | **+18** → F-45…F-62 |
+| Corelații de control | C-01…C-12 | **+10** → C-13…C-22 |
+| Conturi Tier A cu analitice | 37 | **+21** (clasele 1 și 2) |
+| Module declarative | 7 implementate | **+4** (LEASING_FIN, IMOBILIZARI, IESIRE_MF, CAPITALURI) |
+
+Porțile de calitate rulate de `make verifica`:
+
+1. ΣDebit = ΣCredit pe fiecare pas de flux cu sume
+2. fiecare flux se închide cu stare terminală declarată și un „Principiul:”
+3. fiecare flux didactic ★ are exact un pas revelator
+4. matricea de acoperire nu are goluri nedeclarate; marcajele promise ca rezolvate chiar sunt
+5. fiecare analitic Tier A are un factor din `D/N/C/F/B/V/O` și spune ce se rupe fără el
+6. fiecare token `MOD_*` referit există în `CatalogModule` (verificare între fișiere)
+7. corelațiile se recalculează pe cifrele fluxurilor, nu declarativ
+8. formulele au paranteze echilibrate; zero erori de formulă; toate celulele `Check` = OK
+9. rândurile originale din training 4 supraviețuiesc, în ordine, în fișierele generate
+
+Poarta 1 verifică sumele din **structura de date**, nu din textul afișat, deci cifrele
+din coloana „Sumă” nu pot diverge de cele verificate.
+
+## Ce a rămas marcat onest
+
+- **Salarii** (`421/431/444/436`, `641/642/646`) rămân `PARȚIAL` în matricea de acoperire.
+  Fluxurile noi ating 641 doar ca bază de capitalizare (F-52, F-58), nu ca monografie
+  completă de salarizare — aceea stă în `MOD_SALARII`, exemplu extern. Golurile sunt
+  declarate explicit în `date/plan.py → GOLURI_ACCEPTATE`; orice gol *nedeclarat* pică
+  verificarea.
+- Întrebările marcate `❓` în notițele revizuite (TVA nededusă pe rata de capital —
+  capitalizare vs. cheltuială; baza legală exactă pentru vânzarea sub valoarea rămasă)
+  apar în sistem ca **opțiune de configurare** și ca **notă de risc**, nu ca regulă
+  tranșată. Tratamentul nu a fost inventat.
+
+## O corecție aplicată planului original
+
+Contul **235** purta denumirea contului **233**. Conform OMFP 1802/2014:
+231 = imobilizări corporale în curs, 233 = imobilizări necorporale în curs,
+235 = investiții imobiliare în curs. Contul 233 lipsea complet din plan și a fost adăugat
+(training 3 îl folosește pentru softul dezvoltat intern). Corecția e vizibilă în foaia
+`Legendă` și în observația contului.
+
 ## Două decizii de proiectare (abateri conștiente, documentate)
 
 1. **Extindere pe bază de seed, nu regenerare completă.** Generatoarele **încarcă**
