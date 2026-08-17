@@ -18,6 +18,7 @@ import os
 import sys
 
 import openpyxl
+from openpyxl.workbook.defined_name import DefinedName
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -32,21 +33,42 @@ IESIRE = os.path.join(RADACINA, "dist", "Module_Declarative_Fluxuri.xlsx")
 
 
 def extinde_parametri(wb):
-    """Scrie parametrii noi și întoarce {cheie: 'Parametri!Bxx'}."""
+    """Scrie parametrii globali și le dă NUME definite. Întoarce {cheie: nume}.
+
+    Modulele referă `P["prag_mf"]`, deci formula scrisă în fișier devine
+    `=param_prag_mf` în loc de `=Parametri!B21`. Două câștiguri:
+
+    - se citește în Excel fără să sari la altă foaie ca să afli ce e B21;
+    - dacă cineva inserează un rând în `Parametri`, numele urmează celula, iar toate
+      cele 13 module rămân corecte.
+
+    E convenția din templateul extern de deconturi (`decl_cota_standard`), adusă aici.
+    """
     ws = wb["Parametri"]
     rand = ws.max_row + 2
-    stil.scrie(ws, rand, 1, "Parametri adăugați în Etapa 4 (capitaluri și imobilizări)",
+    stil.scrie(ws, rand, 1, "Parametri globali — referiți prin nume definit (param_*)",
                font=stil.F_TITLU_BLOC)
+    rand += 1
+    stil.scrie(ws, rand, 1, "Numele din coloana C se folosește direct în formule. "
+                            "Schimbă valoarea aici o singură dată; toate modulele o preiau.",
+               font=stil.F_NOTA, align=stil.A_WRAP)
     rand += 1
     if ws.column_dimensions["C"].width is None or ws.column_dimensions["C"].width < 50:
         ws.column_dimensions["C"].width = 56
 
+    stil.scrie(ws, rand, 1, "Parametru", font=stil.F_CAP_TABEL)
+    stil.scrie(ws, rand, 2, "Valoare", font=stil.F_CAP_TABEL)
+    stil.scrie(ws, rand, 3, "Nume definit · temei", font=stil.F_CAP_TABEL)
+    rand += 1
+
     refs = {}
     for cheie, eticheta, valoare, nota in PARAMETRI_NOI:
+        nume = f"param_{cheie}"
         stil.scrie(ws, rand, 1, eticheta, font=stil.F_NORMAL, align=stil.A_WRAP)
         stil.scrie(ws, rand, 2, valoare, font=stil.F_INPUT, fill=stil.FILL_INPUT)
-        stil.scrie(ws, rand, 3, nota, font=stil.F_NOTA, align=stil.A_WRAP)
-        refs[cheie] = f"Parametri!B{rand}"
+        stil.scrie(ws, rand, 3, f"{nume} — {nota}", font=stil.F_NOTA, align=stil.A_WRAP)
+        wb.defined_names.add(DefinedName(nume, attr_text=f"Parametri!$B${rand}"))
+        refs[cheie] = nume
         rand += 1
     return refs
 
