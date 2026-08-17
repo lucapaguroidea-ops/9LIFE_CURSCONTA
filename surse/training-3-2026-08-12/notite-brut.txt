@@ -1,0 +1,463 @@
+
+205
+
+marcile se inregistreaza pe 10 ani
+
+
+208 - 404 
+
+achizitionare program de contabilitate
+
+	partea de amortizare
+
+
+
+crearea unui soft de contabilitate
+
+	x
+
+	641 - 241 => cu fondul de salarii
+	641 - 436 => CAM 
+
+	la sf lunii, inregistrez aceasta cheltuiala -> pe venit
+
+	203 - ?
+
+	inclus laptopurile, licente -> amortizarea (6811 - 2805 sa zicem ca a fost 100 lei)
+
+	la sf lunii=> 208 - 233, cu suma care s-a acumulat in 233; 
+
+
+
+
+7815 - 2805/2808 -> face programul, luna de luna
+
+
+
+
+
+
+imobilizari corporale:
+
+
+
+toata grupa trebuie declarata la primarie in 30 zile de la achizitie - si impozitul se plateste pe tot anul <-> chiar daca eu il vand in decursul anului, primaria nu o sa returneze impozitul platit; 
+
+
+terenurile - nu se amortizeaza - trebuie inregistrate cat mai analitic (daca sunt arabile, daca sunt in curs constructii) -> pentru ca tratamentul fiscal este diferit la vindere => se inregistreaza automat la primarie 
+
+
+se amortizeaza terenurile pe terenuri <-> informatia pentru perioada de amortizare a amenajarile de terenuri - se amortizeaza pe 10 ani; 
+
+	Legea 15; cum este	 - documentul de capatai prin care se calculeaza amortizarea; 
+
+	amenajari - am un teren si vreau sa il imbunatatesc - sa il tasez - aceste lucrari pot fi amortizate;
+
+
+
+
+
+
+constructii:
+
+212 - 404 furnizori de imobilizari (nu 401)
+
+tot in catalogul de clasificare - de vazut ce fel de cladire este - cladire administrativa (30-40 ani) / de afaceri / sopron (16 ani) / hala - trebuiesc incadrate, pentru ca durata de amortizare este diferita 
+
+
+codul de clasificare a mijloacelor fixe din catalogul de clasificare trebuie trecut in contabilitate (in modulul de mijloace fixe x 12 luni - pentru ca amortizarea se inregistreaza lunar), pentru ca merge in 406
+
+
+amortizarea fiscala vs contabila - cea din catalogul de clasificare este amortizarea fiscala 
+
+
+amortizarea se inregistreaza cu luna urmatoare / luna punerii in functiune (la utilaje)
+
+
+la cladiri putem sa avem mai multe tipuri de achiziti 
+	- o achizitie de cladire cu cod clasic de TVA (21%)
+	- o achizitie de la persoane fizice (fara TVA)
+	- o achizitie cu taxare inversa:
+		4426 - 4427 => urmeaza cota de 21% => se preia si pe TVA deductibil si pe colectat 
+
+ce este important pentru taxarea inversa -> daca nu trec un cod 27, decontul / 394 nu va recunoaste operatia ca taxare inversa 
+
+tot ce inseamna taxare inversa - folosind codul din nomenclatorul declaratiei 394 -> pentru cladiri e 27 
+
+
+
+cladirile au obligatoriu inregistrare liniara
+
+amortizare accelerata - in primul an 50%, si diferenta in urmatorii 2 ani -> se aplica doar la ? => de retinut ca nu poate sa mai fie aplicata o alta facilitate fiscala = reducere pentru profitul reinvestit = de facut un calcul, ce este mai avantajos 
+
+
+
+
+
+
+
+instalatii tehnice si mijloace de transport:
+
+	2101/2102/2103 - 404
+
+	si aici putem avea operatiuni cu taxare invesa - atunci cand sunt din spatiul intracomunitar 
+
+	sa fim inregistrati in VIES si cod TVA + trebuie sa avem dovada transportului din spatiul UE in Romania
+
+
+	2131 - 404 - 100k
+	4426 - 4427 - 21k
+
+	se aplica cota de TVA din Romania, cand fac achizitie intracomunitara
+
+
+
+
+	achizitii din import:
+		cand am import, ce document am - din vama (declaratia vamala de import) - in baza careia facem inregistrare
+
+	2131 - 404 cu valoarea pe care o am in declaratia vamala de import (trebuie sa avem atentie la diferentele de curs valutar -> unele sisteme calculeaza la plata)
+	635 - 5121 partea de taxe vamale
+	4426 - 5121 TVA-ul platit in vama
+ 		TVA si taxele vamale se platesc separat -> e obligatoriu - introducerea in pretul de achizitie a transportului si a taxelor vamale
+
+
+	ma uit in catalogul de clasificare, sa gasim un echipament tehnologic - sa alegem un cod de clasificare si durata
+
+	
+	2.1.16.4.1.	- compresoare cu piston, stabile.	8-12
+
+		nu numai ca trebuie sa stiu date tehnice, ca sa pot incadra mijlocul fix
+
+	
+
+birotica
+
+	214 - 404
+
+	partea de TVA si taxare inversa, poate sa fie valabila la fiecare grupa de mijloace fixe - ca pot cumpara un calculator de la persoana fizica, deci e scutit
+
+	e valabila la toata grupa
+
+
+
+in contul de investitii imobilare, putem inregistra achizitia de cladiri si terenuri - le pastrez in vederea in valorificarii peste 5-10 ani = o consider o investitie = ramane la valoarea pe document 
+
+
+ce trebuie sa soliticam in afara de factura fiscala => tranzactiile se desfasoara prin notariat - ne trebuie contractul - vine oricum cerere de la primarie 
+
+
+
+
+
+
+daca nu este facuta impartirea:
+
+cat teren - cat cladire 
+
+primesc notarial, 120k
+
+trebuie cerut ori incheiere de notificare (cat e valoarea terenului, si cat valoarea cladirii) - sau - un raport de evaluare in cadrul firmei, sa pot inregistra bunurile la primarie <=> e obligatoriu, nu imi dau eu cu parerea 
+
+=> de verificat daca valoarea facturii = valoarea facturii din contractul notarial 
+
+
+
+
+
+cumparate dar nesosit - am factura dar nu pot sa ii fac receptia => TVA sau taxare inversa 
+
+utilajul / mijloc de transport:
+
+	231/233 la 223 
+
+
+
+
+sfat: la sfarsitul fiecarei luni - sa scoate mijloacele imobilare din soft - si sa le verificam cu balanta ->  nu risc sa ramana un mijloc fix neamortizat 
+		listing la mijloace fixe 
+			ce suma am in analitic in balanta contabila - gasesc aceasi suma in balanta de mijloace conturi 
+				listez o fisa de cont -> vazut in ce cont nu s-a facut bunurile de amortizare
+
+		daca mijloacele fixe nu se duc modulul de imoblizari => nu inregistrez amortizarea => cand fac calculul de impozit pe profit, dau mai mult la plata, neinregistrand amortizarea 
+
+
+
+
+
+pasi de urmati:
+
+
+- inregistrez factura
+
+- catalogul de clasificare (sa ii incadram corect / amortizare) + durata de amortizare
+
+- comparatia analitic cu sintetic, ca au aceleasi sume (balanta contabila cu situatia din imobilizari (submodul - fisa mijlocului fix, registrul mijloacelor fixe) <> deci e o metoda de focus a analizei) <=> lunar
+
+	amortizarea nefacanduse automat, verificarea analitic cu sintetic trebuie facuta lunar 
+
+- in prima luna, de verificat corespondenta intre contul de mijloc fix si amortizarea
+
+	in prima luna in care facem amortizarea - sa vedem nota contabila pentru amortizare 
+
+		cladirea o duc in 212 cu cont de amortizare 2812 => daca softul nu stie sa faca automat aceasta corespondenta - sfatuit sa verificam daca in prima luna se posteaza asa (!)
+
+
+
+
+
+
+
+declaratia mijloacelor fixe, se depune o singura data (LA BILANT?) - si trebuie sa fie corecta, altfel da eroare la bilant
+
+
+
+
+
+
+
+
+
+
+
+Imobilizari in curs
+
+
+
+la sfarsit, la 231, facem un proces verbal de punere in functiune - si sa inregistrez valoarea lui reala 
+
+
+sa zicem ca lucram cu un tert - contracte cu situatii de lucrari - statul imi solicita contractul de prestari de servici -> nu ma duc cu cheltuiala, ma duc in 231 cu 401 => toate cheltuielile aferente acestui imobil - arhitectul - tot ce inseamna partea de prestari de servicii (nu 628)
+
+daca avem posibilitatea sa cream 231 sub posibilitatea unui stoc - ca la sf anului, sa zicem ca am un 1mld - trebuie sa stiu ce am acolo => ca poate sunt administratori care ma intreaba 
+
+
+daca avem salariati - acestia ii trecem prin codurile de clasa 6
+
+
+
+"de fiecare data avem o cheltuiala in cadrul socieatii, si trebuie sa o reluam" - ne gandim la un cont de venit - clasa 7 => trebuie facuta o notificare in cadrul firmei, ca salartii x,y,z sunt pentru firma respectiva
+
+	231 - 711 => pentru partea de cheltuieli cu salariile
+
+
+
+includem parte de cheltuieli cu salarii, pentru ridicarea acestei cladiri / hale 
+
+
+la sfarsitul proiectului:
+
+	212 - 231
+
+	231 = 0
+	212 
+
+si astfel "urmarim cursul apei in natura" 
+
+
+
+
+
+
+
+
+daca incadrarea in catalogul de clasficare a mijloacelor fixe, nu e corect - calculam gresit amortizarea 
+
+
+
+sincronicitatea ( analiticul, cu sinteticul, si cu contul de amortizare )
+	
+212 este in oglinda cu 2812
+2131 este in oglinda cu 2813
+2132 este in oglinda cu 2813
+2133 este in oglinda cu 2813
+2114 este in oglinda cu 2814
+
+
+
+
+niciodata, conturile de 281, nu pot fi mai mari, ca sold decat conturile 21*
+
+
+atentie la 2813 care deserveste mai mult conturi de clasa 1 <=> la care se aplica aceasi regula de mai sus
+
+
+
+
+conturi de activ - unde ma uit in balanta ca sunt bune
+
+
+
+(!) conturile de activ sunt intotdeauna pe debit = bogatia firmei
+
+
+(!!) pasivul reprezinta datorie
+
+
+	Dr mijlocul fix
+	Cr amortizare
+
+
+
+
+
+se poate ca inregistrarea sa fie eronata, sau, in planul de conturi al societatii a fost setat contul gresit (ori bifunctional, ori pe invers)
+
+
+
+
+
+
+
+
+
+
+Sa zicem ca s-a amortizat pana la o perioada: si
+
+
+
+conturile de cheltuieli si venituri, nu prezinta niciodata sold
+
+
+
+
+
+am o cladire cu valoare de inventar 100k (212) - si s-a amorizat 30k (2812) => vreau sa vand acest mijloc fix
+
+
+Dr 212 100k Activ
+Cr 2812 30k Pasiv
+
+Dr 2812 30k
+Cr 212 100k
+
+
+restul din 212 la 2812 este o cheltuiala deductibila fiscal
+
+ 
+Dr 6583 70k
+Cr 212 70k
+
+
+la vanzare
+
+Dr 411/461 ?
+Cr 7853?
+
+
+70k este valoarea ramasa - trebuie sa fie mai mica decat venitul
+
+
+<=> alternativ, daca are dovezi certe - ca, cladirea a fost avariata -> dar daca nu prezinta documente, o duc pe valoare nedeductibila 
+
+
+dpdv fiscal - daca o vinde cu 50k:
+
+50k cheltuieli deductibile
+20k cheltuieli neded
+
+
+trebuie sa vii cu un argument -> cu 20k, fiind o chelt. neded fiscal - nu reduci impozitul => daca imi aduci dovezi, ca este daramata, etc = ok => dar daca nu, atunci trebuie sa te anunt ca nu este o cheltiala ded / ca este o chelatuiala neded 
+
+
+la mijloc fix, ne uitam la valoarea ramasa = s-a recupearat sau nu; un aspect fiscal;
+
+
+
+
+daca vin cu dovada de la service - se procedeaza la fel pentru utilaje 
+	=>  daca masina nu mai poate rula, eu vand piese de schimb => s-au obisnuit cu acest deviz de la service => la inmatriculare trebuie sa scrii seria sasiului => daca scriu pe factura, seria, ca il duce si il imatriculeaza - ca vinde un autoturism => dar daca vine cu dovada de la service, ca masina e deterioata in proportie de 60% => trebuie sa tratez operatiune ca descarcare din mijloace fixe => 2133 = 50k; 2813 = 50k; => 
+
+legea spune, ca cea mai mica valoare pe care pot valorifica un autorism, e ori la valoarea pietei (Autovit / OLX) sau fier vechi => nu il pot vinde cu 100eur, chiar daca e amortizat complet
+
+
+
+cazul 1: vindem un autorism
+
+2813 - 2133 
+
+
+in modulul de imobilizari, avem starea mijlocului fix = il vand acum - starea nu mai este in amortizare - trebuie sa aiba o stare vandut - trebuie corelata iesirea din nota contabila, cu modulul de imobilizari (trebuie sa fie curat) => ce pot sa fac cu mij fixe (vand, casez, etc) => daca il casez, bunul nu mai este al societatii 
+
+
+are o uzura morala / nu mai este de actualitate:
+
+	cheltuiala / venit / ambele sau nimic 
+
+
+
+proces de verbal de scoatere din functie 
+
+
+ce rezulta din casare = deseu / piese componente care pot fi reutilizate
+
+
+concluzie: cand scoatem un mijloc fix din gestiune, sa ii schimbam starea (!) <> mai ales pentru sistemele care fac amortizarea automat 
+
+
+
+la sf de luna: cls 21* si 28* daca corespunde si cu registrul mijloacelor fixe / modulul de imobilizari 
+
+
+trebuie ori raport de evaluare / pretul pietei => daca il vinde sub valoarea ramasa (in conta), poate fi trecut ca si cheltuiala neded => important sa stim daca este pentru inmatriculare / pentru piese de schimb (trb sa fie o comisie tehnica, sa imi dea o lista de piese: volan, scaune) = se inregistreaza pe un cont stoc 3024 si unul de venituri 7588 => le vand de acolo 
+
+
+
+cazul 2: este defect
+
+
+
+
+
+
+
+imobilizari financiare
+
+
+
+261 = daca am eu, societatea x, la societatea y, actiuni
+
+261 - 5121/5124
+
+garantii - de pe la licitatie / de chirii - 267
+	care, se pot recupera ulterior - la finalul contractului -> sa avem tip de partener, pentru identificare mai usoara - pentru identificarea soldului 
+
+
+
+
+sa tina minte, softul, ca de aia e soft, cat mai mult analitice - sa nu stam sa scoatem fise de cont, pe 3, pe 4, pe 5 ani, fise de cont ... 
+
+
+cu atat mai mult pentru preluarea firme noi <> preluarea unei societati financiare, care are totul la un loc - pentru o firma de contabilitate, este periculos 
+
+
+
+ 
+
+
+
+10 min pentru ajustari, data viitoare 
+
+
+intrebari pe mail 
+
+
+
+
+ca am verificat analiticul cu sinteticul -> am verficiat firma x, avem in 212 x lei, dar in balanta contabila / imobilizari am x,y,z => sa vedem o procedura, ce e de facut 
+
+
+
+
+
+
+
+
+
+
+
+		
+
+
+
+

@@ -1,0 +1,528 @@
+conturile de clasa 3 sunt conturi de active
+
+301 - Materii Prime - care se utilizeaza cu contul cel mai utilizat 401
+
+301 - 401 
+
+putem vedea acelasi regim:
+
+	TVA:
+
+		301
+			401
+
+	taxare inversa (intracomunitara):
+
+		301
+			401
+			4427 - cota de TVA din Romania
+
+	scutire:
+  
+		301
+			401
+
+		firme platitoare de TVA:
+			admin are cazier
+			nu s-au depus D300 2 luni consecutive
+
+
+			-> pot sa aiba TVA pe factura in continuare, dar sa fie neplatitori printr-o amenda <=> decis de ANAF 
+
+				=> daca lucram cu furnizori noi, sa verificam daca sunt platitori de TVA - chiar daca este TVA pe factura => verificam pe Google, verificare cod TVA 
+				=> nu pot sa deduc TVA pentru ca intamplator a iesit din zona TVA 
+				=> sunt software-uri care fac asta automat - verifica automat la ANAF 
+					- si de asemeni verifica TVA la incasare, la inchidere
+
+
+			-> mai e situatia cand eu de la neplatitor intru la platitor -> unde se mai duce informatia, in afara de D300? D394 => unde avem case separate pentru platitori, neplatitori => in soft trebuie sa pun un atribut RO, care imi spune ca acea firma este platitoare de TVA (daca sunt neplatitoare, nu au RO) <= ca informatia sa se duce corect in D394 - se duce in functie de atributul CUI-ului 
+
+
+cand l-am uitiliza 301, in special - la productie <=> este cuplat dpdv al tratamentului contabil -> cu 704 si 7015 (cont pentru produse finite) {deci trebuie sa fie prezente impreuna}
+
+
+
+
+
+302 
+
+3021
+etc
+
+
+
+
+spec ca nu faceti niciodata:
+
+6021 / 6024 / 6028 - 401 <=> trebuie sa treaca prin 3021 / 3024 / 3028
+
+
+este un motiv legat de actiunea de audit - cand imi vine un auditor in control pentru auditarea situatilor financiare - pentru a-i fi usor sa vada balanta - ei vin si solicita balanta analitica la 401 - se uite si vede niste corelatii - pe debit vede ce a achizionat clientul de-alungul anului, in credit vede ce a consumat 
+
+
+din 3024 le mut in 371, si le pun adaos -> daca vand ulterior, piese de schimb, pentru profit (in alt scop decat cel de achizitie)
+
+
+
+
+
+<5,000 = obiect de inventar
+>5,000 = mijloc fix
+
+
+>1 an durata de utilizare, chiar daca <5,000 <=> mijloc fix
+
+majoritatea societatilor isi doresc obiecte de inventar, sa isi scada cheltuiala direct - sa nu mai faca amortizarea
+
+
+603 - 303 => darea in consum; concomitent - software-urile mai destept ar trebui sa lase: Dr 8035
+	cand vand sau casez obiectul de inventar, Cr 8035
+
+
+
+
+sa vedem cum softul listeaza obiectele de inventar, la inventariare - trebuie sa am o lista, asta este valoarea scriptica a obiectelor de inventar, vreau sa le gasesc pe teren unde am valoarea faptica  <=> sa adresam aceasta intrebare
+
+
+
+
+
+
+aceste obiecte de inventar, prin darea in folosinta, dispar din balanta - dar e posibil ca software-urle sa aiba o lista de obiecte de inventar <=> atunci cand le casez sau le vand - independent de venit - unde am valoarea obiectelor de inventar = 8035
+
+
+
+
+
+
+
+stocuri in curs de aprovizionare - asa cum le spune denumirea - am inregistrat, stocuri cumparate care nu au fost livrate = marfa care nu a ajuns in gestiune = pleaca marfa pe 30 si ajunge pe 2 si 3 = am factura in masina, o am in SPV invarcata <-> marfa nu a ajuns in gestiune <=> legiutorul s-a gandit si la acest aspect, pentru ca sunt foarte destepti 
+
+
+
+
+
+
+
+cand am materii prime in curs de aprovizionare 
+
+incep cu:
+
+321 - 401
+322 - 401
+
+4426 - 401
+4426 - 4427 (taxare inversa - efectul in decontul de TVA este 0 = masura de simplificare, incat nici eu sa nu deduc, nici celalt sa nu corecteze) <=> pentru cel care face achizitia
+
+
+in Romania avem categorii de produse cu risc fiscal ridicat - ia nu mai deduce tu, ca nu stim daca celallt colecteaza => taxare inversa => cel care livreaza si cel care achizitioneaza nu mai deduc
+
+produse cu taxare inversa pe teritoriul Romaniei:
+	- cheresteaua 
+	- imobile noi si se vand intre societatii
+	- x
+
+
+care este principiul ca este aceasta taxare inversa, pe teritoriul Romaniei - cand o aplic = CAND AMBII PARTENERI SUNT PLATITORI DE TVA (!)
+
+atunci cand vedeti o operatiune cu taxare inversa pe o factura, trebuie verificat daca ambii parteneri sunt platitori de TVA
+ 
+
+
+
+un lucru ft important, care trebuie mentionat pe factura:
+	daca nu am cota de 21/11% standard - trebuie sa inscriu articolul in baza caruia fac inregistrarea cu drept de deducere / scutire - pentru cei care fac export, livrari intracomunitare - LEGEA SPUNE CA TREBUIE SA SCRIU ARTICOLUL IN BAZA CARUIA NU AM INREGISTRAT TVA-UL (PE FACTURA)
+
+
+
+
+in luna urmatoarea ajunge marfa in curte, gestionarul confirma ca a venit marfa
+
+301 - 321
+
+
+cand consumam materia prima, facem bon de consum - si facem cheltuiala => reluam ce am avut in curs de aprivizionare prin 301 
+
+
+
+aprivizionam materii prime
+
+301 - 321 
+
+
+aprivizionam marfuri
+
+371 - 327
+
+
+
+
+aceste conturi pe Debit, prin 322 - prin curs de aprovizionare 
+
+303 - 323
+
+
+
+
+
+
+331/332 
+
+cu 
+
+711/722 - in curs de executie => soft facut cu salariatii societarii 
+
+
+
+
+
+
+CHEIE:
+
+
+productie geam termopan => are mai mult stagii de productie 
+
+=>
+
+cand am avut si cheltuiala si venit - nu am afectat contul de impozit pe profit
+
+
+
+
+
+sticla
+
+301 - 601 50k
+
+bon de consum (am taiat sticla)
+
+601 - 301 50k
+
+ nu am toata materia prima sa livrez produsul finit => nu livrez un produs
+
+331 - 711 (se foloseste cand nu livrez un produs - cand am produse in curs de executie, sa nu afecteze 121)
+
+trebuie sa stiu comanda pentru care s-a facut aceasta productie (OMF 1802 - avem tipuri de tine aceasta gestiune 331 = o metoda des utilizata - metoda pe comenzi)
+
+
+
+nu pot sa am o cheltuiala, fara sa am un venit - statul / legiutoriul mi-a dat posibilitatea sa inregistrez aceasta productie in curs de executie => sa folosesc contul 331
+
+
+
+
+sa zicem ca luna viitoare il finalizez - produse finite 
+
+=> sa anulez aceasta inreg, sa o analizez
+
+711 - 331
+
+si am consumat sticla; 
+
+
+=> sa inregistrez produsul finit
+
+345 - 711
+
+
+cand am un produs in societate, il inregistrez pe 711 - indeferent in ce etapa e
+
+
+efectul in 121 este
+
+
+
+il vindem
+
+4111 - ?
+
+
+
+
+
+
+
+
+
+conturi de TVA importante:
+
+4423 - de plata
+4424 - de rambursat
+
+4426 - deductibil (achizitie-funizori-401) - jurnalul de cumparari
+4427 - colectat (vanzari-clienti-411) - jurnalul de vanzari
+
+4428 - neexigibil
+
+
+
+
+
+conturile de clasa 6 si 7 nu prezinta sold in balanta (excluzand in 711) - de asemeni nici 4426 si 4427
+
+
+
+
+
+
+4426 vs jurnalul de cumparari
+4427 vs jurnalul de vanzari
+
+=> trebui sa verific ca TVA-ul din jurnalul de cumparari cu 4426
+
+
+
+
+
+inregistrari care nu il fac pe un document -> 50% nedeductibil, la achizitia de autoturisme -> am facut acest lucru printr-o inregistrare contabila - dar nu printr-un document (i.e. factura) -> trebuie sa ne asiguram ca ea apare in jurnalul de cumparari, cu -
+
+lipsa la inventar - pe langa cheltuala neded => trebuie sa colectez si TVA
+
+inregistari in j. de cumparari si vanzari care nu sunt generate automat din factura (!)  => decontul de TVA este in baza acestor jurnale => ei o sa solicite aceste 2 jurnale, si decontul de TVA <= la inspectie ANAF 
+
+
+
+
+
+
+
+
+4428
+
+	poate fi un cont intermediat pentru TVA la incasare - ca sa deduc ulterior TVA-ul pe care nu l-am dedus <= pentru care ar fi benefic un analitic 
+		observam ca poate fi si de activ si de pasiv  => vedem ca putem stinge pe 4426 sau 4427 daca nu l-am dedus din capul locului pe un document
+
+	cand vand marfa la pret cu amanuntul -> vine administratorul, pune un adaos comercial -> peste care punem si TVA <> este TVA in asteptare - pe care il dau la stat cand il primesc si eu de la clientii mei 
+
+
+
+
+
+
+346 - 711 cu valoarea pe care o am negociata in contractul de ridicare a deseurilor 
+
+	346 produsele reziduale, il utilizam in cazul in care din productie imi raman diverse deseuri, pe care le predau mai departe la colectorii de deseuri -> 
+
+
+-> mai departe trebuie sa fac factura -> 
+
+
+
+
+
+
+ambalaje 
+
+
+
+	pentru cantiatile de ambalaje trebuie sa dam taxa de mediu de ambalaje (2lei/kg) - avem posibilitatea sa o predam unei firme - o alta discutie care tine de mediu - care, ca economisti, trebuie sa depunem aceasta declaratie - am o tranzactie intracomunitara, ma uit pe CMR / factura, mi se aprinde beculetul ca am diferenta intre net si gross -> ca trebuie sa declar la mediu, aceasta taxa de ambalaj => platesti catre AFM, sau, lucrezi cu o firma autorizata de preluare a taxei de medii 
+	firma care aduce paluri si MDF din Austria => a ajuns sa plateasca 80lei, pentru ambalaje aduse pe teritoriul Romaniei, tip paleti -> sunt controale foarte mari, mai ales la vama - unde aveau informatia clara (pentru ca si pe aia, este diferenta intre gross si net) - pentru achiztii intracomunitare sau din import => pentru achizitii intracomunitare sa ni se aprinda inca un beculet - ai tranzactie intracomunitara, trebuie depusa: pun 3 intrebari, la client, ca poate are el o persoana autorizata pentru aceasta taxa de mediu 
+
+
+
+
+nu ma intereseaza:
+	mediul
+	statistica
+	resurse umane
+
+nu sfatuim aceasta abordare! 
+
+pentru ca noi, ca economisti - daca avem info suplimentare, sa facem relatii <-> nu sfatuim sa punem o bariera
+
+
+
+cand gasesc in extrasul de cont, o plata catre AFM => trebuie sa pun o intrebare - a platit, in ce fel
+
+652
+
+
+
+
+daca noi le avem, trebuie sa le transmit si colegilor si a clientilor 
+
+care este abordarea clientilor intr-un cabinet de contabilitate => nu mi-a spus contabilul - ca si cum contabilul trebuie sa stie tot 
+
+
+
+
+
+ambalaj prima - ce este in contact cu vopseaua
+ambalaj secundar - cutia 
+
+
+daca am ambalaj - face cineva aceasta declaratie de mediu (!) 
+
+
+
+
+
+
+
+
+Marfuri - 371:
+
+
+cum vindem marfa - cu amanuntul sau engross 
+
+cand hotarasc tipul de gestiune pe care o creez 
+
+
+en-gross:
+	la pret de achizitie; de ce? pentru ca pot sa am preturi preferentiale in functie de client -> pentru ca imi este foarte usor sa le urmaresc, ca si descarcare de gestiune; cand am gestiunile definite - cand vand la en-gross, le am la pret de achizitie:
+
+
+371 - 401 20k ron
+
+4426 - 401 (Ro)
+4426 - 4427 (intracomunitar)
+TVA-ul il platim in vama (import (achizitie China))
+
+
+
+plata se face:
+
+	- direct in vama 
+		- achit TVA-ul prin banca - atentie pentru ca este un TVA ded
+			4426 - 5121
+
+	- printr-un comisionar vamal (primesc factura pentru importul respectiv - ex daca e doar taxa):
+		4426 - 446 (valoarea TVA-ului pe care nu o achit eu prin banca)
+		446 - 401 (o inregistrare contabila putin forta, pentru ca e un cont de pasiv) 
+
+		daca si transportul e inclus - trebuie sa introducem transporul in pretul produsului / marfii => ca si cabinet de contabilitate, trebuie sa il sfatuim varianta optima ca sa isi inregistreze aceasta => nu vrea sa introduca in 371 costul de transport; el, in gestiune, softul din care vine - el inregistreaza pretul fara taxe vamale si fara transport - ia pretul din invoice - iar noi in contabilitate inregistram taxe vamale + transport  (OMFP spune ca taxele vamale trebuiesc incluse in pret) => la inventariere, noi ii dam o gestiune, cu o valoare mai mare - si pe teren o sa aiba o valoare mai mica; <=> trebuie sa ne asiguram ca inregistrarea marfurilor se face la acelasi pret <=> trebuie sa ne asiguram ca ce inregistram in 371, este aceasi ca si contul in care isi face el facturile el catre client - din softul lor de gestiune = tot timpul sa fim convinsi ca modul de inregistrare e acelasi si in contabilitate si in gestiune <=> afecteaza si descarcarea din gestiune (inregistrez o cheltuiala mai mare) => sa nu asteptam sf anului, la inventariere >< daca el face NIR-ul, el isi asuma acest lucru (taxe vamale si transport); 
+
+factura 100
+NIR 130
+=> analizam cu clientul de unde ia rezultat 130 lei => si el spune, am inclus taxe vamale + transport 
+
+
+
+am stabilit ca clientul are transportul inclus in pret => daca am o cheltuiala cu transporsul dus in marfuri 
+
+371 - 401 30lei receptia <=> trebuie sa stornez factura de transport - pentru ca altfel am si un pret marit la marfuri (cheltuiala care e preluata in pretul marfii) 
+
+	sunt sisteme care fac automat preluara taxei vamale si transport in pretul marfii 
+
+
+
+
+
+
+fiecare gestiune de marfa trebuie sa fie separata pe analiticul ei
+	nu amestec:
+		gestiune cu 11 si 21 %
+		gestiune cu engross si cu amanuntul 
+
+de ce?
+	TVA-ul 4428
+		se incata conform cotei de TVA = 21 / 11 
+
+
+ex 1:
+		marfa 20k
+		adaos 20%
+		TVA 21% 
+
+
+
+incarcarea gestiunii cu amanuntul, pentru a folosi 4428:
+
+
+371 - 401 20k 
+371 - 378  4k
+371 - 4428 5.04 (se aplica la valoarea marfii + adaosul comercial) 
+
+
+
+371 = 29.04k lei
+401 = 20k
+378 = 4k
+4428 = 5.04
+
+
+
+ex 2:
+		marfa 20k
+		adaos 20%
+		TVA 11%
+
+
+
+incarcarea gestiunii cu amanuntul, pentru a folosi 4428:
+
+
+371 - 401 20k
+371 - 378  4k
+371 - 4428 .44 (se aplica la valoarea marfii + adaosul comercial)
+
+
+
+
+371 = 29.04k lei
+401 = 20k
+378 = 4k
+4428 = .44
+
+
+
+sumar
+
+
+
+TVA-ul trebuie sa se incaseze si pentru acest adaos comercial (!) 
+
+
+
+4428 se calculeaza la valoarea cu adaos comercial 
+
+
+
+
+sa presupunem ca vindem integral aceasta marfa
+
+
+???
+
+
+
+
+
+
+
+
+de notat, important:
+
+707 (tot ce am aici) - 607 = debitul lui 378 [corelatia asta este sfanta]
+
+soldul contului 371 * 21 / 121 = 4428
+
+
+
+din acest motiv gestiunile trebuie separate pe 11/21 %, ca eu sa pot urmarii aceste corelatii <=> in momentul in care luati o balanta de verificat aceste corelatii 
+
+
+
+
+Fisierul atasat arata corelatii importante intre conturi - intelegi?
+
+
+
+task 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+pentru ca clasa de clasa 3 sunt in corelatie directa, 303 - 603 => se face concomitent ci 8035, cont in afara bilantului - ca sa avem evidenta bunurilor care au fost in stoc (pentru ca nu mai stiu la inventariere, ce am in patrimoniul societatii: ca 603 devine 0)

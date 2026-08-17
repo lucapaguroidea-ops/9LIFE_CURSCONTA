@@ -1,0 +1,399 @@
+
+
+5k cat (Q)
+
+456 = 1011
+	din practica - analitice distincte pentru diferiti asociati 
+
+1011 = 1012
+	inregistrarea la (Q - ONRC)
+		capital social devine capital social subscris si varsat
+
+fiecare nota contabila sa aiba un document
+
+
+
+capitalurile proprii > 50% din capitalul social, ca sa putem (Q - creditare de societate, dividende / dividende interminare) 
+
+
+
+
+re 105:
+
+	cheltuiala cu amortizarea deductibila (1175)
+
+
+
+
+
+1061:
+	5% din profitul contabil (soldul 121 + 691), la sfarsitul anului; nu mai mult de 20% din valoarea capitalului social (Q);
+
+
+		121 = 250 lei
+
+		129 - 1061 = 125 lei, in Decembrie
+	
+
+
+
+		121 - 1171 => profitul de la sf anului, anul urmator, cand hotararea AGA
+
+		129 - 1171 = 125 lei (inchis privind repartizarile legale)
+	
+		1171 => decis, in curs de 3 ani, ce face cu diferenta dintre 250 si 125 lei
+			1068
+			dividende 
+
+
+		1171 e cu analitic pe an, bifunctional, inchide soldul lui 121
+
+
+			pierderea din anii anterior se recupereaza in proportie de 70% din profitul impozibil - in termen de 5 ani
+
+
+
+
+		 e important 1171 sa fie clar, re Dr / Cr pe an - pentru impozitul pe profit 
+
+
+la firmele preluate - de scos duplicate D101 - aferente anilor trecuti => obs randurile de pierdere 
+	contul 1171 care nu are pierdere - de clarificat - pentru ca nu e constituit la valoarea lui reala - implica x la impozitul de profit 
+
+
+1171 Debitor - trebuie sa stim daca pierderea este deductibil fiscal 
+
+	sunt anumite pierderi care nu sunt deductibile fiscal - astea se inregistreaza intr-un cont separat
+
+
+
+
+
+	
+	
+
+in politicile contabile - prag de semnificatie => astazi am obs ca nu am inregistrat, un doc aferent altei perioade (un client nu a incarcat un doc in SPV / s-a incarcat eronat), si am idenficat intr-un exercitiu financiar diferit (se refera la ani diferiti) => ramane la latitudine daca D100 se reface cu corectie (D710 - decl rectificativa a lui D100; pentru ca D100 nu are bifa ca D112) - pentru o factura inregistrata care nu era a mea, si constant intr-o luna ulterioara, fac 628 cu minus, si inchid furnizorul cu minus - daca e achitata, e alta discutie - efectul pe cheltuiala,la furnizor e 0, efectul pe TVA este 0 => daca sunt un bun contribuabil, fac rect la D100 -> daca am avut profit, rezulta penalizari <=> daca eu gresesc, de purtat discutia cu administratorul - de facut decont de corectii materiale la decontul de TVA <=> daca o descopar in timpul anului e mult mai bine; alternativ, o descopar in alt exercitiu financiar - in anul urmator, inregistrez 1174 si 4426 la 401 <=> nu mai fac corectie prin 628; automat facut corectie la D101, obligatoriu - sa corectez impozitul pe profit al anului anterior, sa inregistrez 1174 - cont care nu poate sa ramana cu sold, pentru ca a fost un profit eronat - trebuie corectat prin 1171 <=> lucrurile sa complica cand nu mai am sold in 1171, pentru ca propietarul a  decis sa ia dividende; 1174 e folosit ca sa nu mai denaturam profitul anilor - introdus de vreo 10 ani; 
+
+
+
+(Q daca scopul lui 1174 era sa nu denatureze profitul anilor precedenti, cand inchidem 1174 in 1171 nu denaturam profitul anilor precedenti - sau nu am inteles eu ceva?)
+
+
+pentru facturi neinregistrate, aferente exercitiului curent - si erau neinregistrate cronologic - mergeam cu ele in zona de cheltuier aferente 
+
+pentru facturi neinregistrate, aferente exercitiului anterior -> (Q)
+
+
+
+
+
+
+
+
+
+1175 tot cu analitice 
+
+
+
+
+121 bifunctional
+	Cr profit
+	Dr pierdere
+	tot timpul se inchide in timpul exercitiului financiar anterior 
+		sa acordam atentie in cursul anului urmator, cand ramane fara sold - sa calculam suma de clasa 7 si 6 sa ne dea 121 
+
+		daca nu facem 121 care se inchide prin 1171 - in anul viitor cand facem venituri fara cheltuieli, o sa ne blocam ca nu da 121 
+
+		la 2-3 luni, la impozitul pe profit - sa dea clasa 7 si 6 cu 121 => uitase sa inchida 121 
+
+
+
+2027 depuneri
+	101 in Martie
+	bilant in mai
+
+
+
+Ianuartie - Martie, Ianuarie - Mai => se mai uita sa se inchida soldul lui 121 - nu exista aplicatie automata ca la TVA -> sa facem inregistrarea contabila pentru 121 
+
+
+
+se implica toate 3:
+121
+1171
+1068
+
+
+129 trebuie inchis dupa repartizarea rezervelor
+121 trebuie inchis pentru corelatie anul viitor 
+
+
+
+
+
+
+
+ft atent la creditele in EUR - cat am dobanda, cat am rata -> lunar / obligatoriu la 3 luni - sa verific si soldul in valuta, cand fac impozitul pe profit <-> unde am lei, treabea trebuie sa fie foarte simpla
+
+
+1621 - 5121/5124 : 2 FX diff - una la plata, una la sf lunii
+
+
+cat am rata de capital 1621 - 5121 cand fac plata ratei de capital
+cat am dobanda 666 dobanda
+
+uneori le arata impreuna, si trebuie sa ma duc la scadentar => sa nu ajung cu 1621 pe debit 
+
+=> se poate, cand ajung la sf creditului, cu o parte de cheltuiala inregistrata mai mult decat trebuie -> inlfuneteaza impozitul pe profit / dividende 
+
+
+
+
+
+
+1621 / 162x e acelasi lucru - la nivel de analitice
+
+
+
+
+
+
+
+
+167 - imprumuturi de la o societate de leasing
+
+
+
+	2 categorii de leasing:
+
+		operational
+
+			sa inregistrez bunul la mijloace fixe / primarii -> la sf contractului de leasing, vorba de valoarea reziduala (din contractul de leasing), cand pot achizitiona acel bun; daca mergem pe regula ca autombilul este 100% deductibil - costa 10500 lei in contractul de leasing =>
+	factura de avans pentru leasing 4093 si 4426 la 404 - 50,000
+
+	contract de leasing 150,000 lei fara TVA - valoarea de intrare a autoturismului - 167
+		redus 167 cu 4093
+			unii reduc cu 231
+
+
+
+	scandentarul are 100,000
+		+ dobanda
+		+ comisioane
+		+ CASCO 
+
+
+
+	2 scopuri clare:
+
+	1067 - banii pe care ii datorez firmei de leasing, conform scadentarului (sold curent)
+	
+	mijlocul fix la mijloc fix
+
+
+
+	scandetarul si rata la care se refera fiecare factura -> cand fac calculu soldului 167, in valuta, trebuie sa stiu la ce rata ma refer - sa nu fac revaluarea la o rata gresita 
+
+
+
+
+	am bunul, merg la primarie in 30 de zile
+
+
+	factura de rata leasing - cand achizitionez un bun 100% deductibil fiscal
+
+		167 rata, la cursul pe care ni-l da firma de leasing (pe factura)
+		666 - 404 
+		628 comision de administrare
+		613 casco (pe care cel mai multi il factureaza lunar)
+		4426
+		
+
+
+
+
+	factura de rata leasing - cand achizitionez un bun 50% deductibil fiscal
+
+
+		4093 4426 la 404
+
+		4093 50k
+		4426 10.5k
+
+		2133 167 150k
+
+		167 4093 50k (inchiderea avansului)
+
+		50% din 10.5k = 5.25k 
+	
+		2133 4426 <=> in norme
+
+		4426 404 5.25k (de rosu)
+		2133 404 5.25k (de negru)
+
+
+		155.25k valoarea in mijloace fixe 
+
+		=> nu doar avansul e cu 50% TVA, ci si factura lunara de leasing
+
+
+
+
+
+		factura de leasing
+
+
+		167 2k (rata)
+		4426 420lei (TVA)
+
+		666 500 lei (dobanda)
+		4426 105 lei (TVA)
+
+		628 100 lei (comision)
+		4426 21 lei (TVA)
+
+		613 20 lei (CASCO - fara TVA)
+
+		404 x
+
+
+
+
+
+		re TVA
+
+		50% din 420 lei
+			210 neded fiscal 
+			210 ded fiscal
+
+		50% din 105 lei
+			52.5 neded fiscal
+			52.5 ded fiscal
+
+		50% din 21 lei
+			10.5 neded fiscal
+			10.5 ded fiscal
+
+		factura o inregistram la valoarea ei, fara sa o split-uim
+
+
+
+
+
+
+
+
+		pentru corectie TVA, 50% rata
+
+
+		RATA
+
+		4426 - 4424 210 lei (de rosu)
+		6588 (un cont de cheltuiala neded fiscal) - 404 210 lei (de negru)
+
+
+
+		DOBANDA
+
+		4426 - 4424 52.5 lei (de rosu)
+		666 - 404 52.5 lei (de negru)
+
+		
+		rulaj 666 - 500 + 52.5 lei (marit rulajul prin 52.5 TVA neded)
+
+			50% din aceasta este neded fiscal = 276.25 lei
+
+		666 - 404 276.25 de rosu
+		666 neded - 404 276.25 de negru
+
+				
+	
+
+		COMISION
+
+		50% din 21 lei
+			10.5 neded fiscal
+			10.5 ded fiscal
+
+
+
+		4426 - 404 10.5 lei (de rosu)
+		628 - 404 10.5 lei (de negru)
+		
+		628 = 110.5 *0.5 = 55.25 lei 
+
+		628 - 404 (de rosu)
+		628 neded - 404 (de negru)
+		
+
+		CASCO
+
+
+		613 - 404 100 lei de rosu
+		615 neded - 404 100 lei de negru
+
+
+
+
+
+
+
+
+
+
+
+		financiar 
+
+			xyz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(!)
+	 167 inregistrat pe fiecare contract in parte 
+		
+		167 e 1 la 1 cu contractul de leasing, indiferent de cate bunuri in cadrul contractului, pe tip de valuta 
+
+
+		
+
+
+
+
+
+
+151* Provizioane
+
+	Provizioane - presupun ca in exercitiul financiar urmator, o sa am o cheltuiala care este aferenta exercitiului curent
+		ex: provizioane pentru litigii => in instanta cu un client, si presupun ca anul viitor o sa am cheltueli foarte mari cu avocatul - stiu ca in 2027 o sa am o cheltuiala care stiu ca e aferenta exercitiului curent -> cand vine factura de la avocat in 2027, o inregistrez pe 151 
+
+
+
+
+
+
+poti sa modifici anul fiscal, pentru cei care isi doresc sa aiba aceasi raportate ca la firma mama - prevazut in codul fiscal 
+
+
+
+
+
+
+
+
+
+partea juridica -> partea economica -> partea contabila <=> sa avem o coerenta si logica, intre partea juridica si economica <=> fara sa te blochezi cand nu ai vazut operatiuni pe care nu le-ai vazut - cautat dintr-un articol in altul - nu tras o linie foarte repede - cautat cateva opinii
+
+
