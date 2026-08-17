@@ -43,6 +43,93 @@ INLOCUIRI = [
         motiv="Idem — afirmația „nu în Fluxuri” a devenit falsă odată cu F-50.",
         devine="F-50 pas 9: 167 = scadențar, 1:1 cu contractul",
     ),
+    # ---- MOD_LEASING_FIN: din „exemplu extern” în modul implementat ----------
+    # Rândul din CatalogModule / Index module se ACTUALIZEAZĂ în loc, ca modulul să
+    # aibă un singur rând. Metadatele vechi descriau un fișier separat care nu mai e
+    # sursa adevărului, deci nu se contopesc — se înlocuiesc.
+    *[
+        dict(text=t, devine=d,
+             motiv="MOD_LEASING_FIN a devenit modul intern, cu foile "
+                   "Declarații/Reguli/Jurnale/NotaExport în acest workbook. Metadatele "
+                   "vechi trimiteau la un fișier separat și la un status „EXEMPLU "
+                   "EXTERN” care nu mai sunt adevărate.")
+        for t, d in [
+            ("Leasing financiar auto (limitări TVA/amortizare)",
+             "Leasing financiar auto: avans, intrare, rate, corecții TVA 50%, "
+             "amortizare plafonată"),
+            ("Template_leasing_financiar_auto.xlsx",
+             "Declarații_LEASING_FIN, Reguli_, Jurnale_, NotaExport_"),
+            ("Pe contract + lună — fișier separat", "Pe contract + lunar"),
+            ("Pe contract + lună", "Pe contract + lunar"),
+            ("F-26 + F-28 + reeval", "F-50"),
+            ("Contract, Scadențar, Regim vehicul, Curs BNR — vezi "
+             "Template_leasing_financiar_auto",
+             "Valoare contract, avans, rată, dobândă, comision, CASCO, regim vehicul, durată"),
+            ("MIXT/EXCLUSIV/EXCEPTAT; Capitalizare vs Cheltuială TVA neded.",
+             "MIXT 50% / EXCLUSIV 100% / EXCEPTAT; capitalizare vs. cheltuială pentru "
+             "TVA nededusă"),
+            ("B1–B7 pe momente — EXEMPLU EXTERN complet",
+             "B1 Avans; B2 TVA avans; B3 Intrare + 167; B4 Stingere avans; "
+             "B5 Factura lunară; B6 Corecție TVA 50%; B7 Limitare 50% cheltuieli; "
+             "B8 Amortizare"),
+        ]
+    ],
+
+    # ---- MOD_SALARII și MOD_DECONT: din „exemplu extern” în module interne ---
+    # Fișierele-sursă rămân în surse/module-externe/ ca referință de verificare, dar
+    # nu mai sunt LOCUL unde se face treaba, deci metadatele care trimiteau la ele au
+    # devenit false.
+    *[
+        dict(text=t, devine=d,
+             motiv="Modulul a devenit intern, cu foile Declarații/Reguli/(Registru)/"
+                   "Jurnale/NotaExport în acest workbook. Cifrele lui sunt verificate "
+                   "contra fișierului extern, care rămâne în surse/module-externe/ "
+                   "doar ca referință.")
+        for t, d in [
+            ("Salarii complete (exemplu extern cifrat)",
+             "B1 Plata avansului; B2 Costurile lunii; B3 Plăți (net, taxe, CAM)"),
+            ("Salarii AS Kids - 31.07.2026.xlsx",
+             "Declarații_SALARII, Reguli_SALARII, Jurnale_SALARII, NotaExport_SALARII"),
+            ("Brut, Tichete, Avans, Angajat, Luna — vezi fișierul Salarii AS Kids",
+             "Brut, tichete, avans, pe angajat; cotele CAS/CASS/impozit/CAM"),
+            ("B1 Costuri; B2 Plăți net+taxe; B3 Tichete — EXEMPLU EXTERN complet",
+             "B1 Plata avansului; B2 Costurile lunii; B3 Plăți (net, taxe, CAM)"),
+            ("Lunar — fișier separat", "Lunar, pe registru de angajați"),
+            ("Lunar + plăți", "Lunar, pe registru de angajați"),
+            ("Deconturi cheltuieli + avansuri",
+             "B1 Avans; B2 Cheltuieli + TVA; B3 Regularizare avans; B4 Plată / restituire"),
+            ("Deconturi AS Kids - ….xlsx",
+             "Declarații_DECONT, Reguli_DECONT, Registru_DECONT, Jurnale_DECONT, "
+             "NotaExport_DECONT"),
+            ("Linii decont, Titular, Avans, Cotă TVA — vezi Deconturi AS Kids",
+             "Linii de decont (furnizor, sumă, natură, tip document, CUI), avans, cote"),
+            ("B1 Avans; B2 Cheltuieli; B3 Regularizare; B4 Plată — EXEMPLU EXTERN complet",
+             "B1 Avans; B2 Cheltuieli + TVA; B3 Regularizare avans; B4 Plată / restituire"),
+            ("La deconturi — fișier separat", "Pe decont"),
+            ("F-35 + deplasări", "F-35"),
+            ("Platitor TVA, % ded. vehicule",
+             "Plătitor de TVA; % deducere vehicule; matricea document × CUI"),
+        ]
+    ],
+
+    # ---- marcaje PARȚIAL pe salarii, rezolvate de MOD_SALARII ---------------
+    *[
+        dict(text=t, devine=d,
+             motiv="Marcajul PARȚIAL era corect cât timp salariile existau doar ca "
+                   "exemplu extern cifrat. MOD_SALARII acoperă acum lanțul complet "
+                   "(brut → CAS/CASS/impozit → net → CAM → tichete → plăți), cu cifre "
+                   "verificate contra statului real din 31.07.2026. Limitările rămase "
+                   "sunt declarate în Reguli_SALARII, tabelul C.")
+        for t, d in [
+            ("F-32 ilustrativ; modul extern Salarii e cifrat",
+             "Lanțul complet în MOD_SALARII, cu cifre verificate contra statului real "
+             "din 31.07.2026; F-52/F-58 acoperă ipostaza de cost capitalizat"),
+            ("Idem F-32 / modul extern",
+             "MOD_SALARII acoperă 641 salarii, 642 tichete și 646 CAM; limitările "
+             "rămase sunt declarate în Reguli_SALARII, tabelul C"),
+        ]
+    ],
+
     # ---- retitulări care elimină concurența semantică între fluxuri ----------
     dict(
         text="Achiziție MF + amortizare",

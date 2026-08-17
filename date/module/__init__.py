@@ -4,9 +4,9 @@ Fiecare modul expune `COD`, `CATALOG` (rândul din CatalogModule) și
 `construieste(F, P)`, unde F e fabrica de foi (build.foaie.Foaie legat de workbook)
 și P e dicționarul de referințe către parametrii globali.
 """
-from . import capitaluri, iesire_mf, imobilizari, leasing_fin
+from . import capitaluri, decont, iesire_mf, imobilizari, leasing_fin, salarii
 
-MODULE = [imobilizari, iesire_mf, capitaluri, leasing_fin]
+MODULE = [imobilizari, iesire_mf, capitaluri, leasing_fin, salarii, decont]
 
 # Parametri globali adăugați în foaia `Parametri`: cheie, etichetă, valoare, notă.
 # Cheia se folosește în module ca P["cheie"] și se rezolvă la o referință de celulă.
@@ -21,6 +21,13 @@ PARAMETRI_NOI = [
      "art. 298 CF (TVA) și art. 25 alin. (3) lit. l) CF (cheltuieli)"),
     ("plafon_amo_auto", "Plafon amortizare autoturism (lei/lună)", 1500,
      "art. 28 alin. (14) CF — NU se cumulează cu limitarea de 50%"),
+    # cotele de salarii, confirmate pe toți cei 4 angajați din statul real 31.07.2026
+    ("cota_cas", "CAS — pensie (pe brut)", 0.25, "art. 138 CF"),
+    ("cota_cass", "CASS — sănătate (pe brut + tichete)", 0.10,
+     "art. 156 CF — tichetele intră în bază, dar NU în baza CAS"),
+    ("cota_impozit", "Impozit pe venit (pe venit net + tichete)", 0.10, "art. 78 CF"),
+    ("cota_cam", "CAM — asigurare de muncă (pe brut)", 0.0225,
+     "art. 220^3 CF — cheltuiala angajatorului, nu reținere"),
 ]
 
 # Module care existau în CatalogModule ca „EXEMPLU EXTERN” și sunt acum implementate.

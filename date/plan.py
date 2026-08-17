@@ -143,16 +143,15 @@ MATRICE = [
 
 # Conturi din matricea originală marcate PARȚIAL care trec acum pe NU,
 # prin fluxurile din tranșa 4. Verificate de build_plan.py.
-PARTIAL_REZOLVATE = ["28x", "681/781", "167"]
+PARTIAL_REZOLVATE = ["28x", "681/781", "167", "421/431/444/436", "641/642/646"]
 
-# Goluri PARȚIAL din matricea originală pe care tranșa 4 NU le rezolvă.
+# Goluri PARȚIAL din matricea originală pe care extinderea NU le rezolvă.
 # Sunt lăsate marcate onest, nu trecute pe „NU”. Poarta 4 le acceptă doar pentru că
 # sunt enumerate aici cu motiv — orice gol nou, nedeclarat, pică verificarea.
-GOLURI_ACCEPTATE = {
-    "421/431/444/436": "Salariile apar în F-52 și F-58 doar în ipostaza de cost CAPITALIZAT "
-                       "(641 = 421, apoi 231/233 = 722/721). Lanțul complet de salarizare — "
-                       "contribuții, rețineri, plăți, D112 — rămâne în MOD_SALARII (exemplu extern, "
-                       "cifrat). Trainingul dedicat salariilor nu a fost încă prelucrat.",
-    "641/642/646": "Idem: 641 e folosit în F-52 și F-58 ca bază de capitalizare, nu ca monografie "
-                   "completă de cheltuieli cu personalul (642 tichete, 646 contribuții nu apar).",
-}
+#
+# Salariile au ieșit din listă odată cu MOD_SALARII: modulul acoperă lanțul complet
+# (brut → CAS/CASS/impozit → net → CAM → tichete → plăți), cu cifre verificate contra
+# statului real din 31.07.2026. Ce rămâne neacoperit e declarat în Reguli_SALARII,
+# tabelul C — deducere personală, facilități sectoriale, scutiri, Pilon II, concedii
+# medicale — și e o limitare a MODULULUI, nu un gol al matricei.
+GOLURI_ACCEPTATE = {}

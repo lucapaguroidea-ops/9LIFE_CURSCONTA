@@ -69,39 +69,77 @@ Necesită `openpyxl`, `formulas`, `numpy` (`pip install openpyxl formulas numpy`
 
 ## Ce conține sistemul acum
 
-| | Training 4 (existent) | + Etapa 4 (traininguri 2 și 3) |
-|---|---|---|
-| Fluxuri | F-01…F-44 | **+18** → F-45…F-62 |
-| Corelații de control | C-01…C-12 | **+10** → C-13…C-22 |
-| Conturi Tier A cu analitice | 37 | **+21** (clasele 1 și 2) |
-| Module declarative | 7 implementate | **+4** (LEASING_FIN, IMOBILIZARI, IESIRE_MF, CAPITALURI) |
+Sistemul e ordonat după **planul de conturi**, nu după ordinea în care au fost adăugate
+trainingurile. ID-ul unui flux codifică clasa contului principal, deci un flux adăugat
+peste un an primește următorul număr liber din clasa lui și stă fizic la locul lui.
 
-Porțile de calitate rulate de `make verifica`:
+| Bloc | Conținut | Fluxuri |
+|---|---|---|
+| `F-1xx` | capitaluri, provizioane, împrumuturi, închiderea exercițiului, leasing | 8 |
+| `F-2xx` | imobilizări: intrare pe grupe → în curs → regie proprie → subvenții → ieșiri → control analitic↔sintetic | 14 |
+| `F-3xx` | stocuri și producție: aprovizionare, obiecte de inventar, producție, mărfuri, import | 20 |
+| `F-4xx` | terți și TVA: TVA la încasare, taxare inversă, închidere lunară, 408/418, salarii | 14 |
+| `F-5xx` | trezorerie | 2 |
+| `F-8xx` | conturi în afara bilanțului | 2 |
+
+**13 module declarative**, fiecare cu `Declarații → Reguli → Jurnale → NotaExport` și
+celule `Check`. Niciunul nu mai e „exemplu extern”: `MOD_LEASING_FIN`, `MOD_SALARII` și
+`MOD_DECONT` au devenit interne, cu cifrele verificate contra fișierelor reale.
+
+22 corelații de control, 58 de conturi Tier A cu analitice justificate.
+
+## Cum crește sistemul
+
+Un training nou **nu se lipește la coadă**. Se adaugă la clasa lui:
+
+1. fluxul nou intră în lista clasei din `date/ordine.py`, la locul lui contabil, cu
+   următorul număr liber din clasă (`ordine.urmatorul_liber(3)`);
+2. monografia se scrie în `date/fluxuri_*.py`;
+3. `make tot` reordonează, renumerotează și verifică.
+
+Catalogul de fluxuri e **derivat** din monografii, deci nu poate rămâne în urma lor.
+
+## Porțile de calitate
+
+`make verifica` rulează 11 porți; toate trebuie verzi:
 
 1. ΣDebit = ΣCredit pe fiecare pas de flux cu sume
 2. fiecare flux se închide cu stare terminală declarată și un „Principiul:”
 3. fiecare flux didactic ★ are exact un pas revelator
-4. matricea de acoperire nu are goluri nedeclarate; marcajele promise ca rezolvate chiar sunt
+4. matricea de acoperire nu are goluri nedeclarate
 5. fiecare analitic Tier A are un factor din `D/N/C/F/B/V/O` și spune ce se rupe fără el
 6. fiecare token `MOD_*` referit există în `CatalogModule` (verificare între fișiere)
 7. corelațiile se recalculează pe cifrele fluxurilor, nu declarativ
-8. formulele au paranteze echilibrate; zero erori de formulă; toate celulele `Check` = OK
-9. rândurile originale din training 4 supraviețuiesc, în ordine, în fișierele generate
+8. formule echilibrate; zero erori; toate celulele `Check` = OK
+9. **conservare** — vezi mai jos
+10. catalogul acoperă fix monografiile
+11. zero nume definite rupte
 
-Poarta 1 verifică sumele din **structura de date**, nu din textul afișat, deci cifrele
-din coloana „Sumă” nu pot diverge de cele verificate.
+### Poarta de conservare
 
-## Ce a rămas marcat onest
+Cea mai importantă. Verifică faptul că **fiecare linie de text din workbook-urile
+originale se regăsește în cele generate** — ca *mulțime*, nu ca ordine, tocmai ca
+reordonarea să fie liberă iar pierderea de conținut să fie imposibilă. Renumerotarea nu
+contează ca pierdere: textul original trece prin harta `F-vechi → F-nou` înainte de
+căutare.
 
-- **Salarii** (`421/431/444/436`, `641/642/646`) rămân `PARȚIAL` în matricea de acoperire.
-  Fluxurile noi ating 641 doar ca bază de capitalizare (F-52, F-58), nu ca monografie
-  completă de salarizare — aceea stă în `MOD_SALARII`, exemplu extern. Golurile sunt
-  declarate explicit în `date/plan.py → GOLURI_ACCEPTATE`; orice gol *nedeclarat* pică
-  verificarea.
-- Întrebările marcate `❓` în notițele revizuite (TVA nededusă pe rata de capital —
-  capitalizare vs. cheltuială; baza legală exactă pentru vânzarea sub valoarea rămasă)
-  apar în sistem ca **opțiune de configurare** și ca **notă de risc**, nu ca regulă
-  tranșată. Tratamentul nu a fost inventat.
+Un text care chiar trebuie înlocuit se declară în `date/reformulari.py`, **cu motiv**.
+Fără declarație, build-ul pică. Cele 32 de înlocuiri declarate apar și în foaia
+`Istoric`, cu textul original alături de cel nou.
+
+Poarta a prins imediat 12 linii pe care o etapă anterioară le pierduse prin „actualizări
+în loc”. De aceea actualizarea unei celule se face acum prin **contopire**: ce era acolo
+rămâne, noul conținut se adaugă. Clasa asta de pierdere a devenit imposibilă, nu doar
+reparată o dată.
+
+## Defecte preexistente, găsite la citirea integrală
+
+| Defect | Remediu |
+|---|---|
+| **13 din 44 de fluxuri nu aveau rând de catalog** — `F-08…F-14` fuseseră împinse afară de un bloc orfan `F-07`, `F-39…F-44` nu fuseseră adăugate niciodată | catalogul se generează din monografii |
+| **`F-07` duplicat** — pașii 2 și 3 apăreau de două ori, cu aceleași cifre și formulare diferită | deduplicat; formularea eliminată e păstrată verbatim în `Istoric` |
+| **`F-18` fără antet** — pașii lui pluteau după blocul `F-16`, deci fluxul nu era vizibil ca entitate | a primit titlu și antet proprii |
+| **contul 235 purta denumirea lui 233**, iar 233 lipsea din plan | corectat; 233 adăugat |
 
 ## O corecție aplicată planului original
 

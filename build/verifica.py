@@ -149,8 +149,11 @@ def poarta_acoperire(wb):
     if goluri:
         cade("4", "goluri nedeclarate în matrice: " + "; ".join(goluri))
     else:
-        ok("4", f"fără goluri nedeclarate; {len(dplan.GOLURI_ACCEPTATE)} goluri preexistente "
-                f"rămân marcate onest (salarii — vezi GOLURI_ACCEPTATE)")
+        if dplan.GOLURI_ACCEPTATE:
+            ok("4", f"fără goluri nedeclarate; {len(dplan.GOLURI_ACCEPTATE)} rămân marcate "
+                    f"onest: {', '.join(sorted(dplan.GOLURI_ACCEPTATE))}")
+        else:
+            ok("4", "matricea nu are niciun gol — toate conturile Tier A sunt acoperite")
 
     # marcajele pe care extinderea s-a angajat să le rezolve trebuie chiar rezolvate
     for s in dplan.PARTIAL_REZOLVATE:

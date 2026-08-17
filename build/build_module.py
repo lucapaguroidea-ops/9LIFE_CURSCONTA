@@ -80,27 +80,35 @@ def extinde_catalog(wb, module):
     if rand is None:
         raise SystemExit("Nu găsesc blocul „REGULĂ DE SUMONARE” în CatalogModule")
 
-    insereaza_randuri(ws, rand, len(module) + 1)
-    for i, m in enumerate(module):
-        r = rand + i
+    # Un modul care exista deja în catalog (MOD_LEASING_FIN era „EXEMPLU EXTERN”) se
+    # ACTUALIZEAZĂ în loc. Altfel catalogul ajunge să aibă două rânduri pentru același
+    # modul, care se contrazic — exact defectul semnalat la citirea integrală.
+    existente = {}
+    for r in range(1, ws.max_row + 1):
+        cod = str(ws.cell(row=r, column=2).value or "").strip()
+        if cod.startswith("MOD_"):
+            existente[cod] = r
+
+    noi = [m for m in module if m.COD not in existente]
+    if noi:
+        insereaza_randuri(ws, rand, len(noi) + 1)
+        # rândurile de mai jos s-au deplasat
+        existente = {c: (r + len(noi) + 1 if r >= rand else r) for c, r in existente.items()}
+
+    i = 0
+    for m in module:
         cat = m.CATALOG
-        stil.scrie(ws, r, 1, "NU", font=stil.F_INPUT, fill=stil.FILL_NU, align=stil.A_CENTER)
+        if m.COD in existente:
+            r = existente[m.COD]
+        else:
+            r = rand + i
+            i += 1
+            stil.scrie(ws, r, 1, "NU", font=stil.F_INPUT, fill=stil.FILL_NU,
+                       align=stil.A_CENTER)
         for col, val in enumerate([m.COD, cat["fluxuri"], cat["tip"], cat["variabile"],
                                    cat["porti"], cat["blocuri"], "IMPLEMENTAT"], start=2):
             stil.scrie(ws, r, col, val, font=stil.F_NORMAL, fill=stil.FILL_DA,
                        align=stil.A_WRAP)
-
-
-def marcheaza_leasing_implementat(wb):
-    """MOD_LEASING_FIN era „EXEMPLU EXTERN” în catalogul original."""
-    ws = wb["CatalogModule"]
-    for r in range(1, ws.max_row + 1):
-        if str(ws.cell(row=r, column=2).value or "").strip() == "MOD_LEASING_FIN":
-            if str(ws.cell(row=r, column=8).value or "").strip() == "EXEMPLU EXTERN":
-                ws.cell(row=r, column=8,
-                        value="ÎNLOCUIT — vezi rândul MOD_LEASING_FIN implementat mai jos")
-                return
-    # rândul vechi poate lipsi; nu e o eroare
 
 
 def main():
@@ -116,7 +124,6 @@ def main():
     for m in MODULE:
         m.construieste(fabrica, P)
 
-    marcheaza_leasing_implementat(wb)
     extinde_catalog(wb, MODULE)
 
     os.makedirs(os.path.dirname(IESIRE), exist_ok=True)

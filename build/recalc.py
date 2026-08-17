@@ -22,12 +22,21 @@ import zipfile
 from xml.sax.saxutils import escape
 
 import numpy as np
+import xml.etree.ElementTree as ET
+
 import openpyxl
 
 warnings.filterwarnings("ignore")
 
 _KEY = re.compile(r"\](.+?)'?!\$?([A-Z]+)\$?(\d+)$")
-_CELL = re.compile(r'(<c\b[^>]*\br="([A-Z]+\d+)"[^>]*>)(.*?)(</c>)', re.DOTALL)
+# O celulă goală e auto-închisă: `<c r="B10" s="81"/>`. Dacă tiparul o tratează ca
+# deschizător, `(.*?)</c>` sare peste ea și înghite CELULA URMĂTOARE — iar injectarea
+# scrie atributul în mijlocul lui `/>`, producând XML invalid. De aceea alternativa
+# auto-închisă e recunoscută explicit, prima, și lăsată neatinsă.
+_CELL = re.compile(
+    r'(?P<sing><c\b[^>]*\br="[A-Z]+\d+"[^>]*/>)'
+    r'|(?P<open><c\b[^>]*\br="(?P<coord>[A-Z]+\d+)"[^>]*>)(?P<inner>.*?)(?P<close></c>)',
+    re.DOTALL)
 _V = re.compile(r"<v\b[^>]*/>|<v\b[^>]*>.*?</v>", re.DOTALL)
 
 
@@ -129,7 +138,10 @@ def injecteaza(path: str, vals: dict) -> None:
 
 def _patch_sheet(xml: str, sheet_upper: str, vals: dict) -> str:
     def repl(m):
-        open_tag, coord, inner, close = m.groups()
+        if m.group("sing") is not None:
+            return m.group(0)                     # celulă goală, auto-închisă
+        open_tag, coord = m.group("open"), m.group("coord")
+        inner, close = m.group("inner"), m.group("close")
         if "<f" not in inner:
             return m.group(0)                    # nu e celulă cu formulă
         got = vals.get((sheet_upper, coord))
@@ -138,14 +150,21 @@ def _patch_sheet(xml: str, sheet_upper: str, vals: dict) -> str:
             return m.group(0)
         text, typ = fmt
         inner = _V.sub("", inner)                 # scoate orice <v> gol lăsat de openpyxl
-        new_open = open_tag
         # tipul curent al celulei (t="...") trebuie să reflecte valoarea injectată
-        new_open = re.sub(r'\s+t="[^"]*"', "", new_open)
+        new_open = re.sub(r'\s+t="[^"]*"', "", open_tag)
         if typ:
-            new_open = new_open[:-1] + f' t="{typ}">'
+            new_open = new_open[:-1].rstrip() + f' t="{typ}">'
         return f"{new_open}{inner}<v>{text}</v>{close}"
 
-    return _CELL.sub(repl, xml)
+    nou = _CELL.sub(repl, xml)
+    # Gardă: o injectare care strică XML-ul trebuie să pice aici, nu la citirea de peste
+    # trei pași, cu un traceback de parser care nu spune nimic despre cauză.
+    try:
+        ET.fromstring(nou)
+    except ET.ParseError as e:
+        raise SystemExit(
+            f"recalc: injectarea a produs XML invalid în foaia {sheet_upper}: {e}") from e
+    return nou
 
 
 def recalc(path: str) -> dict:

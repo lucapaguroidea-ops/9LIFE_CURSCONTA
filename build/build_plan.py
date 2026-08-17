@@ -27,6 +27,7 @@ from build.recalc import recalc  # noqa: E402
 from date import ANALITICE, CORELATII, FLUXURI, plan as dplan  # noqa: E402
 from date import reformulari as dreform  # noqa: E402
 from date import ordine as O  # noqa: E402
+from date import module as dmodule  # noqa: E402
 from build import istoric, renumeroteaza, reordoneaza, reordoneaza_foi  # noqa: E402
 from date.comun import ro  # noqa: E402
 
@@ -252,6 +253,14 @@ def extinde_matrice(wb):
         "28x": ("F-26, F-31, F-59, F-60, F-61", "F-61 oglinda 21x↔28x; F-59/F-60 descărcare la ieșire"),
         "681/781": ("F-26, F-29, F-50, F-52, F-53, F-54, F-51", "F-50 plafon 1.500 lei/lună; F-51 reluare 7812"),
         "167": ("F-50", "F-50 pas 9: 167 = scadențar, 1:1 cu contractul"),
+        "421/431/444/436": (
+            "F-32, F-52, F-58",
+            "Lanțul complet în MOD_SALARII, cu cifre verificate contra statului real "
+            "din 31.07.2026; F-52/F-58 acoperă ipostaza de cost capitalizat"),
+        "641/642/646": (
+            "F-32, F-52, F-58",
+            "MOD_SALARII acoperă 641 salarii, 642 tichete și 646 CAM; limitările "
+            "rămase sunt declarate în Reguli_SALARII, tabelul C"),
     }
     gasite = set()
     for r in range(1, ws.max_row + 1):
@@ -318,28 +327,30 @@ def actualizeaza_index(wb):
     rand = _titlu_sectiune(ws, rand, "MODULE ADĂUGATE ÎN ETAPA 4", 6)
     rand = _cap_tabel(ws, rand, ["Cod modul", "Fluxuri acoperite", "Ce face", "Status",
                                  "Foile din modul", "Când îl rulezi"], alb=True)
+    # derivat din date/module — altfel indexul rămâne în urma modulelor reale, exact
+    # cum s-a întâmplat cu MOD_LEASING_FIN, care figura și „EXEMPLU EXTERN”, și
+    # „IMPLEMENTAT”, în două rânduri care se contraziceau
     module = [
-        ("MOD_LEASING_FIN", "F-50", "Leasing financiar auto: avans, intrare, rate, "
-         "corecții TVA 50%, amortizare plafonată", "IMPLEMENTAT",
-         "Declarații_LEASING_FIN, Reguli_, Jurnale_, NotaExport_",
-         "Pe contract + lunar (nu mai e exemplu extern)"),
-        ("MOD_IMOBILIZARI", "F-54, F-55, F-57, F-61", "Intrare mijloc fix pe grupe, regim TVA, "
-         "plan de amortizare, oglinda 21x↔28x", "IMPLEMENTAT",
-         "Declarații_IMOBILIZARI, Reguli_, Jurnale_, NotaExport_",
-         "La fiecare achiziție de imobilizare + control lunar"),
-        ("MOD_IESIRE_MF", "F-59, F-60", "Vânzare / casare: descărcare 28x, valoare rămasă, "
-         "test de deductibilitate, piese recuperate", "IMPLEMENTAT",
-         "Declarații_IESIRE_MF, Reguli_, Jurnale_, NotaExport_",
-         "La fiecare ieșire de mijloc fix"),
-        ("MOD_CAPITALURI", "F-46, F-47", "Rezervă legală cu dublu plafon, repartizare 129, "
-         "report 1171 pe an, corecții 1174", "IMPLEMENTAT",
-         "Declarații_CAPITALURI, Reguli_, Jurnale_, NotaExport_",
-         "La 31.12 și în ianuarie, după închiderea exercițiului"),
+        (m.COD, m.CATALOG["fluxuri"], m.CATALOG["blocuri"], "IMPLEMENTAT",
+         ", ".join(f"{f}_{m.COD.removeprefix('MOD_')}"
+                   for f in ("Declarații", "Reguli", "Jurnale", "NotaExport")),
+         m.CATALOG["tip"])
+        for m in dmodule.MODULE
     ]
+    # modulele care există deja în index se actualizează în loc — un modul are un
+    # singur rând, altfel indexul se contrazice singur (MOD_LEASING_FIN apărea de
+    # două ori: „EXEMPLU EXTERN” și „IMPLEMENTAT”)
+    existente = {}
+    for r in range(1, ws.max_row + 1):
+        cod = str(ws.cell(row=r, column=1).value or "").strip()
+        if cod.startswith("MOD_"):
+            existente[cod] = r
     for m in module:
+        r = existente.get(m[0], rand)
         for col, val in enumerate(m, start=1):
-            stil.scrie(ws, rand, col, val, font=stil.F_NORMAL, align=stil.A_WRAP)
-        rand += 1
+            stil.scrie(ws, r, col, val, font=stil.F_NORMAL, align=stil.A_WRAP)
+        if m[0] not in existente:
+            rand += 1
     rand += 1
     _nota(ws, rand,
           "MOD_CAPITALURI nu dublează MOD_INCHIDERE_EX: acela închide clasele 6 și 7 pe 121, "
