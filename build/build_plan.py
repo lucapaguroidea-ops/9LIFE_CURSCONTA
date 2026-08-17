@@ -25,6 +25,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from build import stil  # noqa: E402
 from build.recalc import recalc  # noqa: E402
 from date import ANALITICE, CORELATII, FLUXURI, plan as dplan  # noqa: E402
+from date import reformulari as dreform  # noqa: E402
+from date import ordine as O  # noqa: E402
+from build import istoric, renumeroteaza, reordoneaza, reordoneaza_foi  # noqa: E402
 from date.comun import ro  # noqa: E402
 
 RADACINA = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -36,6 +39,26 @@ IESIRE = os.path.join(RADACINA, "dist", "Plan_de_conturi_ROL_Analitice_Fluxuri_S
 COL_SIMBOL, COL_DENUMIRE, COL_FCT = 1, 2, 3
 COL_NATURA, COL_SUBTIP, COL_OBS = 4, 5, 6
 COL_ANALITICE, COL_FACTOR, COL_FLUX, COL_TIER = 7, 8, 9, 10
+
+
+def _contopeste(vechi, nou):
+    """Actualizează o celulă PĂSTRÂND ce era acolo.
+
+    Regula implicită e contopirea, nu suprascrierea: dacă rândul avea deja o notă,
+    ea rămâne și noul conținut se adaugă după ea. Suprascrierea e permisă doar
+    pentru textele declarate în `date/reformulari.py`, cu motiv.
+
+    Așa, clasa asta de pierdere devine imposibilă, nu doar reparată o dată.
+    """
+    v = str(vechi or "").strip()
+    n = str(nou or "").strip()
+    if not v or v == "—":
+        return n
+    if v in dreform.SUPRASCRIE:
+        return dreform.SUPRASCRIE[v]
+    if not n or n == v or v in n:
+        return n or v
+    return f"{v} — {n}"
 
 
 def _primul_rand_liber(ws, col=1):
@@ -93,21 +116,18 @@ def extinde_plan_conturi(wb):
         marca = f"⚠ Corectat 2026: {c['motiv']}"
         ws.cell(row=r, column=COL_OBS, value=(obs + " " + marca).strip())
 
-    # 2. actualizări în loc
+    # 2. actualizări în loc — prin CONTOPIRE, nu prin suprascriere
     lipsa = []
     for simbol, camp in dplan.ACTUALIZARI.items():
         r = indice.get(simbol)
         if r is None:
             lipsa.append(simbol)
             continue
-        if "analitice" in camp:
-            ws.cell(row=r, column=COL_ANALITICE, value=camp["analitice"])
-        if "factor" in camp:
-            ws.cell(row=r, column=COL_FACTOR, value=camp["factor"])
-        if "flux" in camp:
-            ws.cell(row=r, column=COL_FLUX, value=camp["flux"])
-        if "tier" in camp:
-            ws.cell(row=r, column=COL_TIER, value=camp["tier"])
+        for cheie, col in (("analitice", COL_ANALITICE), ("factor", COL_FACTOR),
+                           ("flux", COL_FLUX), ("tier", COL_TIER)):
+            if cheie in camp:
+                ws.cell(row=r, column=col, value=_contopeste(
+                    ws.cell(row=r, column=col).value, camp[cheie]))
     if lipsa:
         raise SystemExit(f"Conturi din ACTUALIZARI care nu există în plan: {lipsa}")
 
@@ -326,6 +346,38 @@ def actualizeaza_index(wb):
           "acesta repartizează rezultatul obținut (129/1061/1171).", 6)
 
 
+def ordoneaza_canonic(wb):
+    """Faza finală: din ordinea adăugirii în ordinea planului de conturi.
+
+    Ordinea contează. Istoricul se construiește ÎNAINTE de renumerotare, iar
+    renumerotarea îl ocolește — altfel și-ar rescrie propriul tabel de echivalență.
+    """
+    orfane, resturi, absorbite = reordoneaza.rescrie(wb)
+
+    dupl = reordoneaza_foi.reordoneaza_tabel(
+        wb, "Analitice (Tier A)", latime=7,
+        nota="Ordonat pe simbol de cont, ca planul de conturi. Rândurile duplicate "
+             "apărute la extinderi succesive au fost contopite, fără pierdere de text.")
+    dupl += reordoneaza_foi.reordoneaza_tabel(
+        wb, "Matrice acoperire", latime=6,
+        nota="Ordonat pe simbol de cont. PARȚIAL rămâne doar unde acoperirea chiar "
+             "este parțială — vezi GOLURI_ACCEPTATE în date/plan.py.")
+
+    mutate = reordoneaza_foi.curata_legenda(
+        wb, total_fluxuri=len(O.ORDINE), total_corelatii=12 + len(CORELATII))
+
+    istoric.construieste(wb, mutate=mutate, orfane=orfane,
+                         reformulari=dreform.INLOCUIRI,
+                         resturi=resturi, absorbite=absorbite)
+
+    schimbate = renumeroteaza.in_workbook(wb, O.HARTA, exclude=("Istoric",))
+    ramase = renumeroteaza.ramase(wb, set(O.HARTA), exclude=("Istoric",))
+    if ramase:
+        raise SystemExit(f"ID-uri vechi rămase după renumerotare: "
+                         f"{ {k: v[:3] for k, v in ramase.items()} }")
+    return orfane, dupl, schimbate
+
+
 def main():
     if not os.path.exists(SEED):
         raise SystemExit(f"Lipsește fișierul-sămânță: {SEED}")
@@ -337,13 +389,15 @@ def main():
     extinde_matrice(wb)
     actualizeaza_legenda(wb)
     actualizeaza_index(wb)
+    orfane, dupl, schimbate = ordoneaza_canonic(wb)
 
     os.makedirs(os.path.dirname(IESIRE), exist_ok=True)
     wb.save(IESIRE)
     recalc(IESIRE)
-    print(f"scris: {os.path.relpath(IESIRE, RADACINA)}  "
-          f"({len(FLUXURI)} fluxuri noi, {len(CORELATII)} corelații noi, "
-          f"{len(ANALITICE)} conturi Tier A noi)")
+    print(f"scris: {os.path.relpath(IESIRE, RADACINA)}\n"
+          f"   {len(O.ORDINE)} fluxuri ordonate pe clase, {schimbate} celule renumerotate\n"
+          f"   {dupl} rânduri duplicate contopite, {len(orfane)} rânduri orfane "
+          f"mutate în Istoric")
 
 
 if __name__ == "__main__":

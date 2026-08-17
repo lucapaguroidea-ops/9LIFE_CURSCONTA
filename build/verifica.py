@@ -24,6 +24,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from date import ANALITICE, CORELATII, FLUXURI, plan as dplan  # noqa: E402
 from date import module as dmod  # noqa: E402
+from date import ordine as O, reformulari as dreform  # noqa: E402
+from build import conservare  # noqa: E402
 
 RADACINA = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SURSE = os.path.join(RADACINA, "surse", "training-4-2026-08-14")
@@ -129,7 +131,8 @@ def poarta_factori():
 
 # ------------------------------------------------------------------------ poarta 4
 def poarta_acoperire(wb):
-    ids = {f["id"] for f in FLUXURI}
+    # fluxurile din date/ poartă ID-uri vechi; matricea le are pe cele noi
+    ids = {O.HARTA.get(f["id"], f["id"]) for f in FLUXURI}
     ws = wb["Matrice acoperire"]
     goluri = []
     referite = set()
@@ -293,92 +296,68 @@ def poarta_module():
         ok("8", f"zero erori de formulă; {checkuri_ok}/{checkuri} celule Check = OK")
 
 
-# ------------------------------------------------------------------------ poarta 9
-def poarta_neatins():
-    """Conținutul original din training 4 trebuie păstrat identic în fișierele generate."""
-    perechi = [
-        (os.path.join(SURSE, "Plan_de_conturi_ROL_Analitice_Fluxuri_SAGA.xlsx"), PLAN),
-        (os.path.join(SURSE, "Module_Declarative_Fluxuri.xlsx"), MODULE),
-    ]
-    # Celulele pe care extinderea are voie să le schimbe, deduse din `date/`, nu hardcodate:
-    #  - coloanele D/E/F ale rândurilor din matrice promise ca PARȚIAL_REZOLVATE
-    #  - denumirea și observația conturilor din CORECTII
-    permise = set()
-    if os.path.exists(PLAN):
-        wsm = openpyxl.load_workbook(PLAN)["Matrice acoperire"]
-        for r in range(1, wsm.max_row + 1):
-            if str(wsm.cell(row=r, column=1).value or "").strip() in dplan.PARTIAL_REZOLVATE:
-                for col in ("D", "E", "F"):
-                    permise.add(("Matrice acoperire", f"{col}{r}"))
-        wsp = openpyxl.load_workbook(PLAN)["Plan de conturi"]
-        simboluri = {c["simbol"] for c in dplan.CORECTII}
-        for r in range(1, wsp.max_row + 1):
-            if str(wsp.cell(row=r, column=1).value or "").strip() in simboluri:
-                permise.add(("Plan de conturi", f"B{r}"))
-                permise.add(("Plan de conturi", f"F{r}"))
+# ------------------------------------------------------------- porțile 9, 10, 11
+def poarta_conservare():
+    """Nimic din conținutul original nu dispare — verificat ca MULȚIME, nu ca ordine.
 
-    # coloana Status a modulelor promovate din „EXEMPLU EXTERN” în implementate
-    sursa_mod = os.path.join(SURSE, "Module_Declarative_Fluxuri.xlsx")
-    if os.path.exists(sursa_mod):
-        wsc = openpyxl.load_workbook(sursa_mod)["CatalogModule"]
-        for r in range(1, wsc.max_row + 1):
-            if str(wsc.cell(row=r, column=2).value or "").strip() in dmod.STATUS_INLOCUIT:
-                permise.add(("CatalogModule", f"H{r}"))
+    Înlocuiește vechea poartă de „rânduri originale în aceeași ordine”, care interzicea
+    tocmai reordonarea cerută. Renumerotarea nu contează ca pierdere: textul original e
+    trecut prin harta F-vechi → F-nou înainte de căutare.
+    """
+    surse = [os.path.join(SURSE, n) for n in
+             ("Plan_de_conturi_ROL_Analitice_Fluxuri_SAGA.xlsx",
+              "Module_Declarative_Fluxuri.xlsx")]
+    pierdute = conservare.verifica(surse, [PLAN, MODULE], O.HARTA,
+                                   set(dreform.DECLARATE))
+    if pierdute:
+        for t_ in pierdute[:10]:
+            cade("9", f"text original pierdut nedeclarat: {t_[:100]}")
+        if len(pierdute) > 10:
+            cade("9", f"…și încă {len(pierdute) - 10} linii")
+    else:
+        ok("9", f"conservare: tot textul original se regăsește "
+                f"({len(dreform.DECLARATE)} înlocuiri declarate, cu motiv)")
 
-    def semnatura(ws, rand, ignora_coloane=()):
-        vals = []
-        for c in range(1, ws.max_column + 1):
-            if c in ignora_coloane:
-                continue
-            v = ws.cell(row=rand, column=c).value
-            vals.append(None if v is None else str(v))
-        return tuple(vals)
 
-    for sursa, iesire in perechi:
-        if not os.path.exists(iesire):
-            continue
-        a = openpyxl.load_workbook(sursa)
-        b = openpyxl.load_workbook(iesire)
-        for nume in a.sheetnames:
-            if nume not in b.sheetnames:
-                cade("9", f"{os.path.basename(iesire)}: foaia {nume!r} a dispărut")
-                continue
-            wa, wbs = a[nume], b[nume]
-            # actualizările în loc pe coloanele G–J din plan sunt intenționate
-            ignora = tuple(range(7, 11)) if nume == "Plan de conturi" else ()
+def poarta_catalog(wb):
+    """Catalogul trebuie să acopere fix monografiile — nici mai mult, nici mai puțin.
 
-            # Rândurile originale trebuie să apară, în aceeași ordine, în fișierul
-            # generat. Inserarea de rânduri noi între ele e permisă (extindere);
-            # ștergerea sau rescrierea unui rând nu e.
-            noi = [semnatura(wbs, r, ignora) for r in range(1, wbs.max_row + 1)]
-            i = 0
-            for r in range(1, wa.max_row + 1):
-                orig = semnatura(wa, r, ignora)
-                if all(v is None for v in orig):
-                    continue
-                # celulele declarate ca modificabile se neutralizează pe ambele părți
-                masca = [j for j in range(len(orig))
-                         if (nume, f"{chr(65 + j)}{r}") in permise]
-                def aplica(t):
-                    t = list(t)
-                    for j in masca:
-                        if j < len(t):
-                            t[j] = "«permis»"
-                    return tuple(t)
-                tinta = aplica(orig)
-                gasit = False
-                while i < len(noi):
-                    if aplica(noi[i][:len(orig)]) == tinta:
-                        gasit = True
-                        i += 1
-                        break
-                    i += 1
-                if not gasit:
-                    cade("9", f"{nume}: rândul original {r} nu se mai regăsește "
-                              f"({str(orig[:3])[:70]})")
-                    break
-    if not any(e.startswith("[9]") for e in esecuri):
-        ok("9", "conținutul original din training 4 e păstrat (rândurile originale, în ordine)")
+    În originalul training 4, 13 din 44 de fluxuri lipseau din catalog. Catalogul e
+    acum derivat din monografii, deci poarta asta ar trebui să fie imposibil de rupt —
+    exact de aceea merită verificată.
+    """
+    ws = wb["Fluxuri"]
+    catalog, monografii = set(), set()
+    for r in range(1, ws.max_row + 1):
+        a = str(ws.cell(row=r, column=1).value or "").strip()
+        d = str(ws.cell(row=r, column=4).value or "").strip()
+        if re.fullmatch(r"F-\d{3}", a) and d in ("nu", "★ DA"):
+            catalog.add(a)
+        m = re.match(r"^(F-\d{3})\s+—", a)
+        if m:
+            monografii.add(m.group(1))
+    if catalog - monografii:
+        cade("10", f"în catalog dar fără monografie: {sorted(catalog - monografii)}")
+    if monografii - catalog:
+        cade("10", f"cu monografie dar absente din catalog: {sorted(monografii - catalog)}")
+    if catalog == monografii:
+        ok("10", f"catalogul acoperă fix cele {len(catalog)} monografii")
+
+
+def poarta_nume_definite():
+    """Niciun nume definit rupt.
+
+    Templateul extern de deconturi are `decl_nr_decont` → `#REF!`. E exact defectul pe
+    care nu vrem să-l reproducem când trecem modulele pe nume definite.
+    """
+    for cale in (PLAN, MODULE):
+        wbn = openpyxl.load_workbook(cale)
+        rupte = {n: str(d.value) for n, d in wbn.defined_names.items()
+                 if "#REF" in str(d.value)}
+        if rupte:
+            cade("11", f"{os.path.basename(cale)}: nume definite rupte: {rupte}")
+    if not any(e.startswith("[11]") for e in esecuri):
+        ok("11", "zero nume definite rupte")
 
 
 def main():
@@ -390,7 +369,9 @@ def main():
     poarta_acoperire(wb)
     poarta_corelatii()
     poarta_module()
-    poarta_neatins()
+    poarta_conservare()
+    poarta_catalog(wb)
+    poarta_nume_definite()
 
     print("\n".join(note))
     if esecuri:
