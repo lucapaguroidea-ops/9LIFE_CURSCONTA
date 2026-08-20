@@ -26,6 +26,8 @@ from date import ANALITICE, CORELATII, FLUXURI, plan as dplan  # noqa: E402
 from date import module as dmod  # noqa: E402
 from date import ordine as O, reformulari as dreform  # noqa: E402
 from build import conservare  # noqa: E402
+from build import documente as bdoc  # noqa: E402
+from date import documente as ddoc  # noqa: E402
 
 RADACINA = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SURSE = os.path.join(RADACINA, "surse", "training-4-2026-08-14")
@@ -380,6 +382,60 @@ def poarta_nume_definite():
         ok("11", "zero nume definite rupte")
 
 
+def poarta_documente():
+    """Porțile 12 și 13 — pe documentele revizuite, nu pe workbook-uri.
+
+    12: aceeași garanție ca la Excel-uri — nicio linie din documentul original nu
+        dispare la armonizare.
+    13: cele trei documente arată ca același gen de document: aceeași legendă, anexe
+        denumite canonic, în ordine.
+    """
+    pierdute_total = 0
+    for cfg in ddoc.DOCUMENTE:
+        cale = os.path.join(RADACINA, cfg["iesire"])
+        if not os.path.exists(cale):
+            cade("12", f"{cfg['nume']}: lipsește {cfg['iesire']} — rulează `make documente`")
+            continue
+        nou_text, original = bdoc.armonizeaza(cfg)
+        lipsa = bdoc.verifica_conservare(original, nou_text, cfg)
+        if lipsa:
+            pierdute_total += len(lipsa)
+            for l in lipsa[:5]:
+                cade("12", f"{cfg['nume']}: linie pierdută — {l[:90]}")
+    if pierdute_total == 0 and not any(e.startswith("[12]") for e in esecuri):
+        ok("12", f"conservare pe cele {len(ddoc.DOCUMENTE)} documente revizuite: "
+                 f"zero linii pierdute la armonizare")
+
+    # 13 — aceeași legendă și anexe canonice
+    titlu_legenda = f"## {ddoc.LEGENDA_TITLU}"
+    for cfg in ddoc.DOCUMENTE:
+        cale = os.path.join(RADACINA, cfg["iesire"])
+        if not os.path.exists(cale):
+            continue
+        with open(cale, encoding="utf-8") as f:
+            text = f.read()
+        if text.count(titlu_legenda) != 1:
+            cade("13", f"{cfg['nume']}: legenda apare de {text.count(titlu_legenda)} ori, "
+                       f"se cere exact o dată")
+        for m, _ in ddoc.LEGENDA_TABEL:
+            if f"| {m} |" not in text:
+                cade("13", f"{cfg['nume']}: lipsește marcajul {m} din legendă")
+        gasite = re.findall(r"^## Anexa ([A-F]) — (.+)$", text, flags=re.M)
+        for litera, den in gasite:
+            asteptat = ddoc.ANEXE[litera]
+            if not den.startswith(asteptat.split(" (")[0]):
+                cade("13", f"{cfg['nume']}: Anexa {litera} se numește {den!r}, "
+                           f"se aștepta {asteptat!r}")
+        litere = [l for l, _ in gasite]
+        if litere != sorted(litere):
+            cade("13", f"{cfg['nume']}: anexele nu sunt în ordine: {litere}")
+        docx = cale.replace(".md", ".docx")
+        if not os.path.exists(docx):
+            cade("13", f"{cfg['nume']}: lipsește {os.path.basename(docx)}")
+    if not any(e.startswith("[13]") for e in esecuri):
+        ok("13", "cele trei documente au aceeași legendă, anexe canonice și .docx")
+
+
 def main():
     if not os.path.exists(PLAN):
         raise SystemExit("Rulează întâi `make build` — lipsește dist/Plan_de_conturi_...xlsx")
@@ -392,6 +448,7 @@ def main():
     poarta_conservare()
     poarta_catalog(wb)
     poarta_nume_definite()
+    poarta_documente()
 
     print("\n".join(note))
     if esecuri:

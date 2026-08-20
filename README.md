@@ -82,11 +82,24 @@ peste un an primește următorul număr liber din clasa lui și stă fizic la lo
 | `F-5xx` | trezorerie | 2 |
 | `F-8xx` | conturi în afara bilanțului | 2 |
 
-**13 module declarative**, fiecare cu `Declarații → Reguli → Jurnale → NotaExport` și
+**16 module declarative**, fiecare cu `Declarații → Reguli → Jurnale → NotaExport` și
 celule `Check`. Niciunul nu mai e „exemplu extern”: `MOD_LEASING_FIN`, `MOD_SALARII` și
-`MOD_DECONT` au devenit interne, cu cifrele verificate contra fișierelor reale.
+`MOD_DECONT` au devenit interne, cu cifrele verificate contra fișierelor reale, iar
+`MOD_CREDIT_VALUTA`, `MOD_PROVIZION` și `MOD_SUBVENTIE` acoperă fluxurile care aveau
+monografie dar nu și motor executabil.
 
 22 corelații de control, 58 de conturi Tier A cu analitice justificate.
+
+## Ce mai produce repo-ul, pe lângă workbook-uri
+
+| Livrabil | Ce e |
+|---|---|
+| `dist/intrebari-formator.md` + `.html` | cele 21 de întrebări rămase deschise, grupate pe temă contabilă, cu context și cu ce s-a presupus între timp |
+| `dist/notite-training-*.md` + `.docx` | cele trei documente revizuite, armonizate: aceeași legendă, aceleași anexe, aceeași ordine |
+
+Documentele din `surse/` rămân neatinse — acolo stau variantele tale originale.
+`.docx`-urile generate **nu** reproduc identic pe cele existente (acelea vin din alt
+lanț, cu fonturi încorporate); sunt însă consistente între ele.
 
 ## Cum crește sistemul
 
@@ -101,7 +114,7 @@ Catalogul de fluxuri e **derivat** din monografii, deci nu poate rămâne în ur
 
 ## Porțile de calitate
 
-`make verifica` rulează 11 porți; toate trebuie verzi:
+`make verifica` rulează 13 porți; toate trebuie verzi:
 
 1. ΣDebit = ΣCredit pe fiecare pas de flux cu sume
 2. fiecare flux se închide cu stare terminală declarată și un „Principiul:”
@@ -110,10 +123,12 @@ Catalogul de fluxuri e **derivat** din monografii, deci nu poate rămâne în ur
 5. fiecare analitic Tier A are un factor din `D/N/C/F/B/V/O` și spune ce se rupe fără el
 6. fiecare token `MOD_*` referit există în `CatalogModule` (verificare între fișiere)
 7. corelațiile se recalculează pe cifrele fluxurilor, nu declarativ
-8. formule echilibrate; zero erori; toate celulele `Check` = OK
+8. formule echilibrate; zero erori; toate celulele `Check` = OK; nicio celulă de text scrisă din greșeală ca formulă
 9. **conservare** — vezi mai jos
 10. catalogul acoperă fix monografiile
 11. zero nume definite rupte
+12. conservare pe documentele revizuite — nicio linie pierdută la armonizare
+13. cele trei documente au aceeași legendă și anexe canonice, în ordine
 
 ### Poarta de conservare
 
