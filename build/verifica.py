@@ -27,6 +27,8 @@ descris multă vreme nouă porți, cu poarta 9 în forma ei veche.
  17. disciplina de închidere e ancorată în ambele sensuri: fiecare cont urmărit
      periodic e starea terminală a unui flux, iar fiecare cont cu rol în flux care
      se golește are o cadență — sau un motiv declarat pentru care nu are
+ 18. monografiile scrise în proză se echilibrează, iar aritmetica afirmată în text
+     („5% din 250 = 12,50”) chiar se verifică — acolo unde poarta 1 nu ajunge
 
 Rulare:  python build/verifica.py
 """
@@ -43,10 +45,12 @@ from date import module as dmod  # noqa: E402
 from date import ordine as O, reformulari as dreform  # noqa: E402
 from date import repartizare as drep  # noqa: E402
 from date import inchideri as dinch  # noqa: E402
+from date import monografii as dmono  # noqa: E402
 from build import conservare  # noqa: E402
 from build import documente as bdoc  # noqa: E402
 from build import repartizare as brep  # noqa: E402
 from build import inchideri as binch  # noqa: E402
+from build import monografii as bmono  # noqa: E402
 from date import documente as ddoc  # noqa: E402
 
 RADACINA = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -657,6 +661,69 @@ def poarta_inchideri(wb):
                  f"({len(dinch.FARA_CADENTA)} scutiri declarate)")
 
 
+# ----------------------------------------------------------------------- poarta 18
+def poarta_monografii():
+    """Poarta 18 — cifrele din monografiile scrise în proză.
+
+    Poarta 1 se uită doar în `date/`. Documentele conțin peste o sută de blocuri de
+    monografie prin care au trecut deja două erori, prinse de citire, nu de o poartă.
+
+    a) articolele COMPUSE (`%`) se echilibrează: liniile de continuare trebuie să
+       însumeze totalul declarat pe rândul de cap. Articolul simplu, scris pe o linie,
+       nu are ce dezechilibra — are o singură sumă, aceeași pe ambele părți — deci
+       verificarea lui ar fi vacuă, iar raportarea lui ca „verificat” ar minți;
+    b) aritmetica afirmată în text se verifică. Asta e ramura care ar fi prins eroarea
+       rezervei legale din trainingul 2: articolul se echilibra (125 = 125), dar „5% din
+       250” nu face 125. Echilibrul singur nu vede așa ceva.
+
+    Blocurile care citează deliberat o eroare din notițele brute sunt scutite, declarate
+    în `date/monografii.py`.
+    """
+    articole = dezechilibrate = scutite = simple = 0
+    for cfg in ddoc.DOCUMENTE:
+        cale = os.path.join(RADACINA, cfg["iesire"])
+        if not os.path.exists(cale):
+            cade("18", f"{cfg['nume']}: lipsește {cfg['iesire']}")
+            continue
+        for bloc in bmono.citeste(cale):
+            corp = "\n".join(bloc["linii"])
+            if any(frag in corp for frag in dmono.CITEAZA_EROARE):
+                scutite += 1
+                continue
+            for a in bloc["articole"]:
+                if not any(x is not None for _, x in a["debit"] + a["credit"]):
+                    continue
+                simple += not a["compus"]
+                if not a["compus"]:
+                    continue        # o singură sumă: echilibrat prin construcție
+                articole += 1
+                sd = sum(x for _, x in a["debit"] if x is not None)
+                sc = sum(x for _, x in a["credit"] if x is not None)
+                if abs(sd - sc) > 0.005:
+                    dezechilibrate += 1
+                    cade("18", f"{cfg['nume']}:{a['rand']} ΣD={sd:,.2f} ≠ ΣC={sc:,.2f} "
+                               f"— {a['brut'][0].strip()[:60]}")
+    if not dezechilibrate:
+        ok("18", f"toate cele {articole} articole compuse din monografiile în proză se "
+                 f"echilibrează; {simple} articole simple n-au ce dezechilibra "
+                 f"({scutite} blocuri scutite: citează o eroare)")
+
+    gresite = total = 0
+    for cfg in ddoc.DOCUMENTE:
+        cale = os.path.join(RADACINA, cfg["iesire"])
+        if not os.path.exists(cale):
+            continue
+        for rand, text, calculat, scris in bmono.afirmatii(cale):
+            total += 1
+            prag = max(dmono.TOLERANTA_ABSOLUTA, abs(scris) * dmono.TOLERANTA_RELATIVA)
+            if abs(calculat - scris) > prag:
+                gresite += 1
+                cade("18", f"{cfg['nume']}:{rand} aritmetică falsă — „{text}” dă "
+                           f"{calculat:,.2f}, nu {scris:,.2f}")
+    if not gresite:
+        ok("18", f"toate cele {total} afirmații aritmetice din text se verifică")
+
+
 def main():
     if not os.path.exists(PLAN):
         raise SystemExit("Rulează întâi `make build` — lipsește dist/Plan_de_conturi_...xlsx")
@@ -674,6 +741,7 @@ def main():
     poarta_parcurs(wb)
     poarta_repartizare(wb)
     poarta_inchideri(wb)
+    poarta_monografii()
 
     print("\n".join(note))
     if esecuri:

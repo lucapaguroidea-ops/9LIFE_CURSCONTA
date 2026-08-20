@@ -171,6 +171,7 @@ Fiecare poartă are un motiv scris în `build/verifica.py`. Dacă un text chiar 
 | `date/fluxuri_imobilizari.py` | Fluxurile F-52…F-62 — imobilizări necorporale, corporale, în curs, ieșiri, financiare. |
 | `date/inchideri.py` | Cadența de urmărire a conturilor — partea care NU se poate deduce din fluxuri. |
 | `date/intrebari.py` | Cele 21 de întrebări deschise, grupate pe temă contabilă. |
+| `date/monografii.py` | Excepțiile porții 18 — blocuri de monografie care NU trebuie să se echilibreze. |
 | `date/ordine.py` | Ordinea canonică a sistemului — singura sursă de adevăr pentru poziții și ID-uri. |
 | `date/parcurs.py` | Partea SCRISĂ DE MÂNĂ a documentului de parcurs. |
 | `date/plan.py` | Actualizări pe foaia `Plan de conturi` + conturi sintetice lipsă + rânduri de matrice. |
@@ -234,6 +235,7 @@ Un flux e util și fără modul: fluxul explică, modulul execută. Dacă adaugi
 | **15** | documentul de parcurs nu citează foi, fișiere sau porți care nu există |
 | **16** | o sursă împărțită pe mai multe destinații nu pierde nimic în cusătură: fiecare subsecțiune are destinație declarată și ajunge exact acolo |
 | **17** | disciplina de închidere e ancorată în ambele sensuri: fiecare cont urmărit periodic e starea terminală a unui flux, iar fiecare cont cu rol în flux care se golește are o cadență — sau un motiv declarat pentru care nu are |
+| **18** | monografiile scrise în proză se echilibrează, iar aritmetica afirmată în text („5% din 250 = 12,50”) chiar se verifică — acolo unde poarta 1 nu ajunge |
 
 Motivul fiecărei porți e scris în `build/verifica.py`, lângă ea. Când o poartă pică, acolo scrie de ce există.
 
@@ -261,7 +263,9 @@ cunoscute**: acolo trebuie să te uiți tu.
 | Subsecțiune dintr-o sursă împărțită, rămasă nerepartizată | O sursă poate alimenta mai multe documente. Riscul nu e „nimeni n-a luat-o”, ci „am crezut că a luat-o celălalt”: fiecare document trece poarta 12 separat, în timp ce materialul cade între ele. | poarta 16 |
 | Material repartizat undeva, dar ajuns în altă parte | Verificarea pe reuniunea destinațiilor ar spune doar că textul există pe undeva — întrebarea greșită. Poarta compară cu destinația declarată. | poarta 16 |
 | Cont urmărit periodic fără flux care să-i demonstreze starea | Checklistul de închidere ar cere ceva ce sistemul nu arată nicăieri. Invers, un cont cu rol în flux care se golește și nu e urmărit dispare din disciplina lunară. | poarta 17 |
-| Cifre care nu se leagă într-un exemplu scris în proză | Documentul revizuit conține o monografie greșită, iar poarta 1 nu se uită acolo. | **nimic — verifică tu** |
+| Articol compus în proză cu totalul greșit | Liniile de continuare nu însumează totalul de pe rândul de cap — exact forma erorii avansului din 19.08. | poarta 18 |
+| Aritmetică falsă afirmată în text („5% din 250 = 125”) | Articolul se echilibrează, deci poarta de echilibru nu vede nimic. Eroarea rezervei legale din trainingul 2 era exact asta. | poarta 18 |
+| Sumă greșită într-un articol SIMPLU, scris pe o linie | Un articol pe o linie are o singură sumă, deci nu se poate dezechilibra: nu există nimic contra cui să fie verificată. Poarta 18 nu ajunge aici, iar totalurile afirmate în proză s-au dovedit prea variate ca să fie potrivite mecanic — trei fals pozitive din șase la măsurare. | **nimic — verifică tu** |
 
 ---
 
@@ -309,9 +313,9 @@ procedură abstractă, pentru că include și ce a mers prost.
 
 Lucruri care ar merita mecanizate și care azi cad în sarcina cititorului. Enumerate ca să nu fie confundate cu ceva acoperit.
 
-**Cifrele din monografiile scrise în proză**
+**Suma dintr-un articol simplu scris în proză**
 
-Poarta 1 verifică doar fluxurile din `date/`. Un parser care extrage articolele contabile din blocurile ``` ale documentelor revizuite și verifică ΣD=ΣC ar fi prins singur eroarea din trainingul 2.
+Poarta 18 citește acum monografiile din documente și verifică articolele compuse plus aritmetica afirmată în text. Articolul simplu îi scapă însă prin construcție: scris pe o linie, are o singură sumă, deci nu există nimic contra cui să fie verificat. Confruntarea cu totalurile afirmate în proză s-a dovedit prea nesigură — trei fals pozitive din șase la măsurare, pentru că „sold creditor de 4.000” e un rezultat net, nu o sumă de debite.
 
 **Conturile folosite în fluxuri dar absente din plan**
 
@@ -323,4 +327,4 @@ Fiecare ❓ din `.md` ar trebui să aibă corespondent în lista de întrebări.
 
 ---
 
-*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 17 porți, 16 module, 61 fluxuri la data generării.*
+*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 18 porți, 16 module, 61 fluxuri la data generării.*

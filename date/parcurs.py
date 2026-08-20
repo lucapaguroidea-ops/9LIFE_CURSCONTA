@@ -202,9 +202,19 @@ CONVERGENTA = [
      "cont cu rol în flux care se golește și nu e urmărit dispare din disciplina "
      "lunară.", 17),
 
-    ("Cifre care nu se leagă într-un exemplu scris în proză",
-     "Documentul revizuit conține o monografie greșită, iar poarta 1 nu se uită acolo.",
-     None),
+    ("Articol compus în proză cu totalul greșit",
+     "Liniile de continuare nu însumează totalul de pe rândul de cap — exact forma "
+     "erorii avansului din 19.08.", 18),
+
+    ("Aritmetică falsă afirmată în text („5% din 250 = 125”)",
+     "Articolul se echilibrează, deci poarta de echilibru nu vede nimic. Eroarea "
+     "rezervei legale din trainingul 2 era exact asta.", 18),
+
+    ("Sumă greșită într-un articol SIMPLU, scris pe o linie",
+     "Un articol pe o linie are o singură sumă, deci nu se poate dezechilibra: nu "
+     "există nimic contra cui să fie verificată. Poarta 18 nu ajunge aici, iar "
+     "totalurile afirmate în proză s-au dovedit prea variate ca să fie potrivite "
+     "mecanic — trei fals pozitive din șase la măsurare.", None),
 ]
 
 # ---------------------------------------------------------------------------
@@ -257,10 +267,13 @@ TRASEU = [
 # ---------------------------------------------------------------------------
 
 GOLURI = [
-    ("Cifrele din monografiile scrise în proză",
-     "Poarta 1 verifică doar fluxurile din `date/`. Un parser care extrage articolele "
-     "contabile din blocurile ``` ale documentelor revizuite și verifică ΣD=ΣC ar fi "
-     "prins singur eroarea din trainingul 2."),
+    ("Suma dintr-un articol simplu scris în proză",
+     "Poarta 18 citește acum monografiile din documente și verifică articolele compuse "
+     "plus aritmetica afirmată în text. Articolul simplu îi scapă însă prin construcție: "
+     "scris pe o linie, are o singură sumă, deci nu există nimic contra cui să fie "
+     "verificat. Confruntarea cu totalurile afirmate în proză s-a dovedit prea "
+     "nesigură — trei fals pozitive din șase la măsurare, pentru că „sold creditor de "
+     "4.000” e un rezultat net, nu o sumă de debite."),
 
     ("Conturile folosite în fluxuri dar absente din plan",
      "Comparație mecanică între simbolurile din pașii fluxurilor și coloana Simbol a "
