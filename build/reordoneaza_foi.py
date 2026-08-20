@@ -131,6 +131,9 @@ FOI_LIPSA = [
                              "SUSPECT · fluxul și modulul legat"),
     ("Întrebări deschise", "Ce e încă provizoriu în workbook: întrebările la care "
                            "sistemul așteaptă răspuns. Fluxurile atinse poartă ❓"),
+    ("Închideri periodice", "Disciplina de închidere: ce cont, la ce cadență, cu ce "
+                            "stare terminală declarată în flux. Rândurile fără flux "
+                            "sunt goluri cunoscute, marcate ca atare"),
     ("Istoric", "Echivalența de numerotare veche → nouă, contopirile, defectele "
                 "reparate, textul mutat la deduplicare"),
 ]

@@ -22,6 +22,11 @@ descris multă vreme nouă porți, cu poarta 9 în forma ei veche.
  13. cele trei documente au aceeași legendă, anexe canonice în ordine, și .docx
  14. tabelul de structură din foaia Legendă cunoaște toate foile workbook-ului
  15. documentul de parcurs nu citează foi, fișiere sau porți care nu există
+ 16. o sursă împărțită pe mai multe destinații nu pierde nimic în cusătură:
+     fiecare subsecțiune are destinație declarată și ajunge exact acolo
+ 17. disciplina de închidere e ancorată în ambele sensuri: fiecare cont urmărit
+     periodic e starea terminală a unui flux, iar fiecare cont cu rol în flux care
+     se golește are o cadență — sau un motiv declarat pentru care nu are
 
 Rulare:  python build/verifica.py
 """
@@ -36,8 +41,12 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from date import ANALITICE, CORELATII, FLUXURI, plan as dplan  # noqa: E402
 from date import module as dmod  # noqa: E402
 from date import ordine as O, reformulari as dreform  # noqa: E402
+from date import repartizare as drep  # noqa: E402
+from date import inchideri as dinch  # noqa: E402
 from build import conservare  # noqa: E402
 from build import documente as bdoc  # noqa: E402
+from build import repartizare as brep  # noqa: E402
+from build import inchideri as binch  # noqa: E402
 from date import documente as ddoc  # noqa: E402
 
 RADACINA = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -543,6 +552,110 @@ def poarta_documente():
         ok("13", "cele trei documente au aceeași legendă, anexe canonice și .docx")
 
 
+# ----------------------------------------------------------------------- poarta 16
+def poarta_repartizare(wb):
+    """Poarta 16 — o sursă care alimentează mai multe destinații nu pierde în cusătură.
+
+    Poarta 12 verifică perechea document ↔ sursa lui. Când o singură sursă hrănește
+    patru destinații, fiecare document poate trece poarta 12 separat în timp ce
+    material cade ÎNTRE ele. Riscul nu e „nimeni n-a luat-o”, ci „am crezut că a
+    luat-o celălalt”.
+
+    a) fiecare subsecțiune a sursei are destinație declarată în `date/repartizare.py`;
+    b) fiecare fragment ajunge în destinația DECLARATĂ — nu doar undeva. Verificarea
+       pe reuniunea destinațiilor ar spune că textul există pe undeva, ceea ce e exact
+       întrebarea greșită.
+    """
+    foi = {ws.title: {conservare._normalizeaza(l)
+                      for row in ws.iter_rows() for c in row
+                      if isinstance(c.value, str) for l in c.value.split("\n")
+                      if conservare._normalizeaza(l)}
+           for ws in wb.worksheets}
+
+    orfane, lipsa, fara_artefact = brep.verifica(foi)
+
+    for t in orfane:
+        cade("16", f"subsecțiune fără destinație declarată: {t[:80]}")
+    if not orfane:
+        ok("16", f"toate cele {len(drep.REPARTIZARE)} subsecțiuni ale sursei au "
+                 f"destinație declarată")
+
+    for dest in fara_artefact:
+        cade("16", f"destinația {dest} nu are încă artefact — "
+                   f"{drep.DESTINATII[dest][0]} lipsește")
+    for titlu, dest, frag in lipsa[:8]:
+        cade("16", f"{titlu[:44]} → {dest}: nu s-a regăsit acolo — {frag[:70]}")
+    if lipsa:
+        cade("16", f"total {len(lipsa)} fragmente nu au ajuns în destinația declarată")
+    elif not fara_artefact:
+        ok("16", f"tot conținutul sursei a ajuns în destinația declarată "
+                 f"({len(drep.DESTINATII)} destinații)")
+
+
+# ----------------------------------------------------------------------- poarta 17
+def poarta_inchideri(wb):
+    """Poarta 17 — checklistul de închidere și monografiile spun același lucru.
+
+    Foaia „Închideri periodice” afirmă că un cont trebuie să ajungă într-o anumită
+    stare. Dacă nicio monografie nu demonstrează starea aia, checklistul cere ceva ce
+    sistemul nu arată nicăieri. Invers, dacă un cont cu rol în flux se golește într-o
+    monografie dar nu apare în checklist, disciplina lunară uită de el.
+
+    Ambele sensuri, ca la porțile 4 (matrice ↔ fluxuri) și 10 (catalog ↔ monografii).
+    Golul se declară — în `GOLURI` pentru primul sens, în `FARA_CADENTA` pentru al
+    doilea — dar nu poate rămâne tăcut.
+    """
+    if binch.NUME not in wb.sheetnames:
+        cade("17", f"lipsește foaia „{binch.NUME}” — rulează `make plan`")
+        return
+
+    harta = binch.asertiuni(wb)
+
+    # sensul 1: cont urmărit → există aserțiune, sau golul e declarat
+    nedeclarate = []
+    for cont, _, _ in dinch.CADENTA:
+        for s_ in binch.simboluri(cont):
+            if s_ not in harta and s_ not in dinch.GOLURI:
+                nedeclarate.append((cont, s_))
+    for cont, s_ in nedeclarate:
+        cade("17", f"{s_} (din „{cont[:30]}”) nu e starea terminală a niciunui flux "
+                   f"și nu e declarat în GOLURI")
+    if not nedeclarate:
+        ok("17", f"toate cele {len(dinch.CADENTA)} rânduri de cadență sunt ancorate în "
+                 f"fluxuri sau au golul declarat ({len(dinch.GOLURI)} goluri)")
+
+    # sensul 2: cont cu rol în flux care se golește → are cadență, sau scutire declarată
+    ws = wb["Plan de conturi"]
+    rol = {}
+    for r in range(1, ws.max_row + 1):
+        v = str(ws.cell(row=r, column=1).value or "").strip()
+        if re.fullmatch(r"\d{3,4}([./]\d+)?", v):
+            rol[v] = str(ws.cell(row=r, column=4).value or "").strip().lower()
+
+    urmarite = set()
+    for cont, _, _ in dinch.CADENTA:
+        urmarite.update(binch.simboluri(cont))
+    urmarite |= set(dinch.GOLURI)
+
+    uitate = []
+    for simbol, aparitii in harta.items():
+        if simbol in urmarite or simbol in dinch.FARA_CADENTA:
+            continue
+        r = rol.get(simbol) or rol.get(simbol[:3]) or ""
+        if "rol in flux" not in r and "rol în flux" not in r:
+            continue                       # patrimonialele au voie să poarte sold
+        if not any(re.search(rf"[Ss]old(ul)?\s+{re.escape(simbol)}[^=]{{0,14}}=\s*0", t)
+                   for _, _, t in aparitii):
+            continue                       # se golește? dacă nu, nu e treaba listei
+        uitate.append((simbol, aparitii[0][0]))
+    for simbol, fid in uitate:
+        cade("17", f"{simbol} are rol în flux și se golește în {fid}, dar nu are "
+                   f"cadență și nu e scutit în FARA_CADENTA")
+    if not uitate:
+        ok("17", f"niciun cont cu rol în flux care se golește nu a rămas fără cadență "
+                 f"({len(dinch.FARA_CADENTA)} scutiri declarate)")
+
+
 def main():
     if not os.path.exists(PLAN):
         raise SystemExit("Rulează întâi `make build` — lipsește dist/Plan_de_conturi_...xlsx")
@@ -558,6 +671,8 @@ def main():
     poarta_structura(wb)
     poarta_documente()
     poarta_parcurs(wb)
+    poarta_repartizare(wb)
+    poarta_inchideri(wb)
 
     print("\n".join(note))
     if esecuri:

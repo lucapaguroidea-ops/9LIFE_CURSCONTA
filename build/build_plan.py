@@ -28,7 +28,7 @@ from date import ANALITICE, CORELATII, FLUXURI, plan as dplan  # noqa: E402
 from date import reformulari as dreform  # noqa: E402
 from date import ordine as O  # noqa: E402
 from date import module as dmodule  # noqa: E402
-from build import ancore, foaie_intrebari, istoric, renumeroteaza  # noqa: E402
+from build import ancore, foaie_intrebari, inchideri, istoric, renumeroteaza  # noqa: E402
 from build import reordoneaza, reordoneaza_foi  # noqa: E402
 from date.comun import ro  # noqa: E402
 
@@ -396,6 +396,10 @@ def ordoneaza_canonic(wb):
     # foaia de întrebări + marcajele ❓ pe fluxurile și corelațiile atinse
     marcaje = foaie_intrebari.construieste(wb)
     anc["intrebari"] = foaie_intrebari.marcheaza(wb, marcaje)
+
+    # Închiderile se derivă din pașii de verificare ai fluxurilor, deci se construiesc
+    # DUPĂ renumerotare — altfel ar cita F-46 în loc de F-405.
+    anc["inchideri"] = inchideri.construieste(wb)
 
     return orfane, dupl, schimbate, anc
 

@@ -1,0 +1,386 @@
+<title>Ghid Contabilitate Mărfuri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F8F9F7; --surface:#FFFFFF; --sunk:#F1F4F1;
+  --ink:#1A2421; --ink-2:#3D4A45; --muted:#6B7671;
+  --accent:#1B5E44; --accent-soft:#E6EFEA; --accent-line:#B9D2C6;
+  --storno:#A6342B; --storno-soft:#FAECEA;
+  --rule:#DDE2DE; --rule-soft:#EAEEEB;
+  --shadow:0 1px 2px rgba(26,36,33,.05), 0 8px 24px -12px rgba(26,36,33,.14);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+    --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+    --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+    --storno:#E08278; --storno-soft:#2B1B19;
+    --rule:#2A3430; --rule-soft:#222B27;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+  --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+  --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+  --storno:#E08278; --storno-soft:#2B1B19;
+  --rule:#2A3430; --rule-soft:#222B27;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;
+}
+.masthead{
+  border-bottom:1px solid var(--rule); background:var(--surface);
+  padding:56px 28px 40px;
+}
+.mast-in{max-width:1180px; margin:0 auto; display:flex; flex-direction:column; gap:18px}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0;
+}
+h1{
+  font-family:Spectral,Georgia,"Times New Roman",serif; font-weight:600;
+  font-size:clamp(2rem,4.6vw,3.15rem); line-height:1.12; letter-spacing:-.015em;
+  margin:0; text-wrap:balance; max-width:20ch;
+}
+.lede{color:var(--muted); font-size:1.02rem; margin:0; max-width:62ch}
+.conv{
+  border-left:3px solid var(--accent); background:var(--accent-soft);
+  padding:12px 18px; border-radius:0 6px 6px 0; max-width:62ch;
+}
+.conv-l{margin:0 0 6px!important;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.conv p{margin:0; font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.86rem; color:var(--ink-2)}
+.wrap{max-width:1180px; margin:0 auto; padding:0 28px; display:grid; grid-template-columns:232px minmax(0,1fr); gap:56px; align-items:start}
+nav.rail{position:sticky; top:24px; padding:36px 0 40px; max-height:100vh; overflow-y:auto}
+.rail-h{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.66rem; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted); margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--rule);
+}
+.rail ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px}
+.rail a{
+  display:grid; grid-template-columns:24px 1fr; gap:8px; align-items:baseline;
+  text-decoration:none; color:var(--ink-2); padding:6px 8px; border-radius:5px;
+  font-size:.845rem; line-height:1.35; transition:background .12s,color .12s;
+}
+.rail a:hover{background:var(--sunk); color:var(--accent)}
+.rail a:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+.tnum{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem; color:var(--muted); font-variant-numeric:tabular-nums}
+main{padding:36px 0 96px; min-width:0; max-width:70ch}
+section{padding-top:24px; margin-bottom:16px; scroll-margin-top:20px}
+section+section{border-top:1px solid var(--rule-soft); margin-top:40px; padding-top:44px}
+h2{
+  font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.72rem; line-height:1.22;
+  letter-spacing:-.01em; margin:0 0 22px; display:grid; grid-template-columns:auto 1fr;
+  gap:14px; align-items:baseline; text-wrap:balance;
+}
+.secnum{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.8rem; font-weight:500;
+  color:var(--accent); background:var(--accent-soft); border:1px solid var(--accent-line);
+  border-radius:5px; padding:3px 8px; font-variant-numeric:tabular-nums;
+}
+h3{
+  font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.14rem; line-height:1.3;
+  margin:34px 0 12px; color:var(--ink); text-wrap:balance;
+}
+.subnum{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.82rem; color:var(--accent); margin-right:5px; font-variant-numeric:tabular-nums}
+p{margin:0 0 14px; max-width:68ch}
+ul,ol{margin:0 0 16px; padding-left:1.15rem; max-width:68ch}
+li{margin-bottom:7px}
+li::marker{color:var(--muted)}
+strong{font-weight:600}
+code{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.875em;
+  background:var(--sunk); border:1px solid var(--rule-soft); border-radius:4px; padding:1px 5px; color:var(--ink);
+}
+/* ---- ledger entries: debit left, credit right ---- */
+.ledger{
+  margin:0 0 20px; border:1px solid var(--rule); border-left:3px solid var(--accent);
+  border-radius:0 7px 7px 0; background:var(--surface); overflow-x:auto; box-shadow:var(--shadow);
+}
+.led-row{
+  display:grid; grid-template-columns:5.5em 1.2em 5.5em 7.5em 1fr;
+  gap:10px; align-items:baseline; padding:8px 16px;
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.855rem; white-space:nowrap;
+}
+.led-row+.led-row{border-top:1px solid var(--rule-soft)}
+.led-d{color:var(--ink); font-weight:500}
+.led-eq{color:var(--muted)}
+.led-c{color:var(--ink); font-weight:500}
+.led-amt{text-align:right; font-variant-numeric:tabular-nums; color:var(--accent); font-weight:500}
+.led-amt.neg{color:var(--storno)}
+.led-note{color:var(--muted); font-size:.9em; white-space:normal; font-family:"IBM Plex Sans",sans-serif}
+.led-raw{grid-template-columns:1fr; color:var(--ink-2)}
+/* ---- note callouts ---- */
+.note{
+  border-left:3px solid var(--accent-line); background:var(--sunk);
+  padding:13px 18px; border-radius:0 6px 6px 0; margin:0 0 20px; max-width:68ch;
+}
+.note p{margin:0; color:var(--ink-2); font-size:.94rem}
+/* ---- tables: greenbar ledger striping ---- */
+.tw{overflow-x:auto; margin:0 0 22px; border:1px solid var(--rule); border-radius:7px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem}
+thead th{
+  text-align:left; font-family:"IBM Plex Mono",ui-monospace,monospace; font-weight:500;
+  font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; color:var(--muted);
+  padding:11px 14px; border-bottom:1px solid var(--rule); white-space:nowrap; background:var(--sunk);
+}
+tbody td{padding:10px 14px; border-bottom:1px solid var(--rule-soft); vertical-align:top; color:var(--ink-2)}
+tbody tr:nth-child(even){background:var(--accent-soft)}
+tbody tr:last-child td{border-bottom:none}
+tbody td:first-child{color:var(--ink); font-weight:500; white-space:nowrap}
+tbody td code{background:transparent; border:none; padding:0}
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr; gap:0}
+  nav.rail{position:static; max-height:none; padding:28px 0 8px; border-bottom:1px solid var(--rule)}
+  .rail ol{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:2px}
+  main{padding-top:26px}
+  .masthead{padding:40px 22px 30px}
+  .wrap{padding:0 22px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style>
+
+<header class="masthead"><div class="mast-in">
+<p class="eyebrow">Notițe de training · 19.08.2026</p>
+<h1>Ghid de contabilitate — mărfuri, TVA neexigibilă și clasa 4</h1>
+<p class="lede">Material de studiu structurat pe baza notițelor de training din 19.08.2026.</p>
+<div class="conv"><p class="conv-l">Convenție de notare</p><p><code>cont debitor = cont creditor · sumă</code></p></div>
+</div></header>
+<div class="wrap">
+<nav class="rail" aria-label="Cuprins">
+<p class="rail-h">Cuprins</p>
+<ol><li><a href="#s1"><span class="tnum">1</span><span class="tname">Cum se citește un cont</span></a></li><li><a href="#s2"><span class="tnum">2</span><span class="tname">Mărfuri la preț cu amănuntul (371)</span></a></li><li><a href="#s3"><span class="tnum">3</span><span class="tname">Ajustări pentru deprecierea stocurilor</span></a></li><li><a href="#s4"><span class="tnum">4</span><span class="tname">Mecanica TVA</span></a></li><li><a href="#s5"><span class="tnum">5</span><span class="tname">Furnizori — clasa 40</span></a></li><li><a href="#s6"><span class="tnum">6</span><span class="tname">Clienți — clasa 41</span></a></li><li><a href="#s7"><span class="tnum">7</span><span class="tname">Operațiuni speciale</span></a></li><li><a href="#s8"><span class="tnum">8</span><span class="tname">Numerar și plafoane (Legea 70/2015)</span></a></li><li><a href="#s9"><span class="tnum">9</span><span class="tname">Documente, contracte și riscuri la control</span></a></li><li><a href="#s10"><span class="tnum">10</span><span class="tname">Conturi de urmărit periodic</span></a></li><li><a href="#s11"><span class="tnum">11</span><span class="tname">Tabel recapitulativ de conturi</span></a></li><li><a href="#s12"><span class="tnum">12</span><span class="tname">Erori frecvente și capcane</span></a></li><li><a href="#s13"><span class="tnum">13</span><span class="tname">De verificat și de testat</span></a></li></ol>
+</nav>
+<main>
+
+
+
+
+<section id="s1"><h2><span class="secnum">1</span><span class="sectitle">Cum se citește un cont</span></h2>
+<p>Înainte de orice înregistrare, două lucruri fixe, care nu se schimbă niciodată:</p>
+<ul><li><strong>Debitul este partea stângă</strong> a contului.</li><li><strong>Creditul este partea dreaptă</strong> a contului.</li></ul>
+<p>Restul decurge din natura contului:</p>
+<div class="tw"><table><thead><tr><th></th><th>Cont de <strong>ACTIV</strong></th><th>Cont de <strong>PASIV</strong></th></tr></thead><tbody><tr><td>Ce reprezintă</td><td>Ce <strong>deține</strong> societatea (bunuri, creanțe, bani)</td><td>Ce <strong>datorează</strong> societatea (datorii, capital)</td></tr><tr><td>Prima funcțiune</td><td>Începe prin a se <strong>debita</strong></td><td>Începe prin a se <strong>credita</strong></td></tr><tr><td>Crește</td><td>pe <strong>debit</strong> (stânga)</td><td>pe <strong>credit</strong> (dreapta)</td></tr><tr><td>Scade</td><td>pe <strong>credit</strong> (dreapta)</td><td>pe <strong>debit</strong> (stânga)</td></tr><tr><td>Sold final</td><td><strong>debitor</strong></td><td><strong>creditor</strong></td></tr></tbody></table></div>
+<p>Exemple: 371 Mărfuri, 4111 Clienți, 5121 Conturi la bănci → <strong>activ</strong>.</p>
+<p>401 Furnizori, 419 Clienți-creditori, 4423 TVA de plată → <strong>pasiv</strong>.</p>
+<p><strong>Conturi bifuncționale.</strong> Câteva conturi pot avea, după caz, sold debitor sau creditor: <strong>408</strong>, <strong>418</strong>, <strong>4428</strong>, <strong>473</strong>, <strong>481</strong>. Exact acestea sunt cele care cer atenție și analitice — vezi secțiunile 4 și 5.</p>
+<p><strong>Semnal de eroare:</strong> un cont de activ cu sold creditor (sau invers) înseamnă aproape întotdeauna o înregistrare greșită. Un 4111 cu sold creditor = ai încasat mai mult decât ai facturat (vezi 7.3).</p>
+</section>
+<section id="s2"><h2><span class="secnum">2</span><span class="sectitle">Mărfuri la preț cu amănuntul (371)</span></h2>
+<p>Metoda prețului cu amănuntul: marfa stă în gestiune la <strong>prețul de vânzare cu TVA</strong>, nu la cost. Diferența dintre cost și prețul de raft se ține în două conturi <strong>rectificative</strong> ale lui 371:</p>
+<ul><li><strong>378</strong> Diferențe de preț la mărfuri (adaosul comercial)</li><li><strong>4428</strong> TVA neexigibilă</li></ul>
+<h3><span class="subnum">2.1</span> Achiziția</h3>
+<p>Cost de achiziție 20.000 lei, TVA 11%, adaos comercial 20%.</p>
+<div class="ledger"><div class="led-row"><span class="led-d">371</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">20.000</span><span class="led-note">costul de achiziție</span></div><div class="led-row"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">2.200</span><span class="led-note">TVA deductibilă, 11% × 20.000</span></div><div class="led-row"><span class="led-d">371</span><span class="led-eq">=</span><span class="led-c">378</span><span class="led-amt">4.000</span><span class="led-note">adaos comercial, 20% × 20.000</span></div><div class="led-row"><span class="led-d">371</span><span class="led-eq">=</span><span class="led-c">4428</span><span class="led-amt">2.640</span><span class="led-note">TVA neexigibilă, 11% × 24.000</span></div></div>
+<p>Atenție la baza TVA-ului neexigibil: se aplică la <strong>marfă + adaos</strong> (20.000 + 4.000 = 24.000), nu doar la cost.</p>
+<p>Soldul lui 371 devine <strong>26.640</strong> = 20.000 + 4.000 + 2.640, adică exact prețul de raft cu TVA.</p>
+<h3><span class="subnum">2.2</span> Vânzarea prin casierie</h3>
+<div class="ledger"><div class="led-row"><span class="led-d">5311</span><span class="led-eq">=</span><span class="led-c">707</span><span class="led-amt">24.000</span><span class="led-note">venitul din vânzarea mărfurilor</span></div><div class="led-row"><span class="led-d">5311</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">2.640</span><span class="led-note">TVA colectată</span></div></div>
+<h3><span class="subnum">2.3</span> Descărcarea de gestiune</h3>
+<p>Se scot cele trei componente cu care a intrat marfa:</p>
+<div class="ledger"><div class="led-row"><span class="led-d">607</span><span class="led-eq">=</span><span class="led-c">371</span><span class="led-amt">20.000</span><span class="led-note">cheltuiala — costul de achiziție, fără adaos</span></div><div class="led-row"><span class="led-d">378</span><span class="led-eq">=</span><span class="led-c">371</span><span class="led-amt">4.000</span><span class="led-note">anularea adaosului</span></div><div class="led-row"><span class="led-d">4428</span><span class="led-eq">=</span><span class="led-c">371</span><span class="led-amt">2.640</span><span class="led-note">TVA devine exigibilă</span></div></div>
+<p>Total scos din 371: 26.640 — gestiunea se închide exact.</p>
+<p>În practică se face ca articol contabil compus: <code>% = 371 · 26.640</code>.</p>
+<h3><span class="subnum">2.4</span> Închiderea TVA la sfârșitul lunii</h3>
+<p>Situația conturilor înainte de închidere:</p>
+<ul><li>4426 TVA deductibilă → <strong>2.200</strong> debitor</li><li>4427 TVA colectată → <strong>2.640</strong> creditor</li></ul>
+<div class="ledger"><div class="led-row"><span class="led-d">4427</span><span class="led-eq">=</span><span class="led-c">4426</span><span class="led-amt">2.200</span><span class="led-note">se compensează partea comună</span></div><div class="led-row"><span class="led-d">4427</span><span class="led-eq">=</span><span class="led-c">4423</span><span class="led-amt">440</span><span class="led-note">diferența rămasă = TVA de plată</span></div></div>
+<p>Dacă deductibilul ar fi fost mai mare decât colectatul, diferența mergea invers, în <strong>4424 TVA de recuperat</strong>: <code>4424 = 4426</code>.</p>
+<h3><span class="subnum">2.5</span> Plata TVA</h3>
+<div class="ledger"><div class="led-row"><span class="led-d">4423</span><span class="led-eq">=</span><span class="led-c">5121</span><span class="led-amt">440</span><span class="led-note"></span></div></div>
+<p><strong>5121</strong> este contul de bancă, indiferent de instrumentul folosit (ordin de plată, internet banking, mandat). Nu confunda: <strong>5311</strong> este casa în lei, iar <strong>5111</strong> este <em>Cecuri de încasat</em> — un cont de <strong>încasări</strong>, care nu are ce căuta într-o plată de TVA.</p>
+<p>Dacă ai TVA de recuperat din luna anterioară (sold debitor pe 4424) și TVA de plată în luna curentă, se pot compensa:</p>
+<div class="ledger"><div class="led-row"><span class="led-d">4423</span><span class="led-eq">=</span><span class="led-c">4424</span><span class="led-amt"></span><span class="led-note"></span></div></div>
+<h3><span class="subnum">2.6</span> Închiderea conturilor de cheltuieli și venituri</h3>
+<div class="ledger"><div class="led-row"><span class="led-d">121</span><span class="led-eq">=</span><span class="led-c">607</span><span class="led-amt">20.000</span><span class="led-note"></span></div><div class="led-row"><span class="led-d">707</span><span class="led-eq">=</span><span class="led-c">121</span><span class="led-amt">24.000</span><span class="led-note"></span></div></div>
+<p>Rezultatul contabil: 121 are sold <strong>creditor de 4.000</strong> lei — profitul pe care se calculează impozitul.</p>
+<h3><span class="subnum">2.7</span> Impozitul pe profit</h3>
+<p>Cota este <strong>16%</strong>, aplicată la baza impozabilă. Cei 4.000 lei sunt <strong>baza</strong>, nu impozitul:</p>
+<div class="note"><p>16% × 4.000 = <strong>640 lei</strong></p></div>
+<div class="ledger"><div class="led-row"><span class="led-d">691</span><span class="led-eq">=</span><span class="led-c">4411</span><span class="led-amt">640</span><span class="led-note">cheltuiala cu impozitul pe profit</span></div><div class="led-row"><span class="led-d">121</span><span class="led-eq">=</span><span class="led-c">691</span><span class="led-amt">640</span><span class="led-note">închiderea contului de cheltuială</span></div></div>
+<p>Profitul net rămâne 4.000 − 640 = <strong>3.360 lei</strong>.</p>
+<div class="note"><p>Contul sintetic este <strong>441</strong> <em>Impozitul pe profit și alte impozite</em>; pentru impozitul pe profit se folosește analiticul <strong>4411</strong>.</p></div>
+</section>
+<section id="s3"><h2><span class="secnum">3</span><span class="sectitle">Ajustări pentru deprecierea stocurilor</span></h2>
+<p>Când marfa se depreciază (expiră, se demodează, se degradează), deprecierea nu se estimează după ureche: se <strong>întrunește o comisie tehnică</strong>, se face inventarierea, iar procentul (20%, 15%, 50% — după caz) se stabilește de comun acord și ajunge în contabilitate printr-un <strong>proces-verbal</strong>.</p>
+<p>Ajustarea se înregistrează la valoarea din gestiune / prețul de achiziție.</p>
+<h3><span class="subnum">3.1</span> Înregistrarea deprecierii</h3>
+<p>Cost de achiziție 20 lei, depreciere stabilită 30% → 6 lei.</p>
+<div class="ledger"><div class="led-row"><span class="led-d">6814</span><span class="led-eq">=</span><span class="led-c">391</span><span class="led-amt">6</span><span class="led-note">cheltuiala cu ajustarea</span></div></div>
+<h3><span class="subnum">3.2</span> Reluarea la venituri, la valorificarea bunului</h3>
+<p>Vine un cumpărător și dă 10 lei pe bun. În momentul în care bunul iese din gestiune, ajustarea nu mai are obiect și <strong>legea obligă la reluarea ei la venituri</strong>:</p>
+<div class="ledger"><div class="led-row"><span class="led-d">391</span><span class="led-eq">=</span><span class="led-c">7814</span><span class="led-amt">6</span><span class="led-note"></span></div></div>
+<p>Conturile de ajustare funcționează <strong>în oglindă</strong>: <code>6814 ↔ 7814</code>.</p>
+<p><strong>Logica, pe scurt:</strong> la vânzarea bunului din gestiune, ajustarea se mută de pe 39\* într-un cont de venit, ca să compenseze cheltuiala deja înregistrată în luna în care s-a constituit ajustarea. Efectul pe rezultat: −20 (descărcare) +10 (venit din vânzare) +6 (reluarea ajustării) = <strong>−4 lei</strong>.</p>
+<h3><span class="subnum">3.3</span> Regimul fiscal — atenție</h3>
+<p>Ajustările pentru deprecierea <strong>stocurilor</strong> sunt <strong>nedeductibile fiscal</strong>. Art. 26 din Codul fiscal enumeră limitativ provizioanele și ajustările deductibile, iar deprecierea stocurilor nu se regăsește acolo.</p>
+<p>Corespunzător, <strong>venitul din reluarea lor este neimpozabil</strong> (art. 23 lit. d — veniturile din anularea cheltuielilor pentru care nu s-a acordat deducere). Cele două se neutralizează fiscal.</p>
+<p>Deductibile — condiționat — sunt ajustările pentru deprecierea <strong>creanțelor</strong> (491, 496), în limitele și condițiile art. 26. Nu confunda cele două regimuri.</p>
+<h3><span class="subnum">3.4</span> Inventarierea — nota de practică</h3>
+<p>De partea de inventariere răspunde <strong>administratorul</strong>, deci e la latitudinea lui. Dar un economist bun punctează aceste lucruri clientului, indiferent de mărimea firmei: pentru fiecare proprietar, afacerea lui este cea mai importantă, iar clientul trebuie să simtă că ai un interes real față de business-ul lui.</p>
+</section>
+<section id="s4"><h2><span class="secnum">4</span><span class="sectitle">Mecanica TVA</span></h2>
+<h3><span class="subnum">4.1</span> Conturile</h3>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Denumire</th><th>Natură</th><th>Când apare</th></tr></thead><tbody><tr><td><strong>4426</strong></td><td>TVA deductibilă</td><td>activ</td><td>la achiziții, pe baza facturii</td></tr><tr><td><strong>4427</strong></td><td>TVA colectată</td><td>pasiv</td><td>la livrări/prestări, pe baza facturii</td></tr><tr><td><strong>4423</strong></td><td>TVA de plată</td><td>pasiv</td><td>la închidere, dacă colectat &gt; deductibil</td></tr><tr><td><strong>4424</strong></td><td>TVA de recuperat</td><td>activ</td><td>la închidere, dacă deductibil &gt; colectat</td></tr><tr><td><strong>4428</strong></td><td>TVA neexigibilă</td><td><strong>bifuncțional</strong></td><td>aviz, facturi nesosite, mărfuri la preț cu amănuntul</td></tr></tbody></table></div>
+<h3><span class="subnum">4.2</span> Taxarea inversă</h3>
+<p>La achiziții intracomunitare și la operațiunile supuse măsurilor de simplificare, TVA se auto-lichidează:</p>
+<div class="ledger"><div class="led-row"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt"></span><span class="led-note"></span></div></div>
+<p>Efectul pe trezorerie este zero — se colectează și se deduce simultan.</p>
+<p><strong>Nuanță importantă:</strong> un <strong>avans</strong> plătit pentru o <strong>achiziție intracomunitară de bunuri</strong> nu generează exigibilitatea TVA. Faptul generator intervine la emiterea facturii sau cel târziu în a 15-a zi a lunii următoare livrării. La serviciile intracomunitare regula diferă.</p>
+<h3><span class="subnum">4.3</span> De ce are 4428 nevoie de analitice</h3>
+<p>4428 este bifuncțional și apare în trei situații diferite, cu sensuri diferite:</p>
+<div class="tw"><table><thead><tr><th>Situație</th><th>Înregistrare</th><th>Sensul lui 4428</th></tr></thead><tbody><tr><td><strong>Achiziție pe aviz</strong> (facturi nesosite)</td><td><code>4428 = 408</code></td><td><strong>debitor</strong></td></tr><tr><td><strong>Livrare pe aviz</strong> (facturi de întocmit)</td><td><code>418 = 4428</code></td><td><strong>creditor</strong></td></tr><tr><td><strong>Mărfuri la preț cu amănuntul</strong></td><td><code>371 = 4428</code></td><td><strong>creditor</strong></td></tr></tbody></table></div>
+<p>Fără analitice distincte — pe fiecare situație <strong>și pe fiecare cotă de TVA</strong> — programul nu va ști să facă distincția la descărcarea de gestiune și va amesteca sumele.</p>
+<p>Regula practică: <strong>dacă firma are mărfuri și aprovizionare prin aviz, analiticele pe 4428 nu sunt opționale.</strong></p>
+<p>Același raționament se aplică lui <strong>408</strong> și <strong>418</strong>: sunt bifuncționale și trebuie urmărite.</p>
+</section>
+<section id="s5"><h2><span class="secnum">5</span><span class="sectitle">Furnizori — clasa 40</span></h2>
+<h3><span class="subnum">5.1</span> Contul 408 — Furnizori, facturi nesosite</h3>
+<p>Se folosește când <strong>prestația s-a produs, dar factura nu a sosit</strong> — tipic serviciile din decembrie facturate în ianuarie (principiul independenței exercițiului / <em>accrual</em>). La mărfuri și materii prime, echivalentul este intrarea <strong>pe aviz</strong>.</p>
+<p>Legal, marfa livrată pe aviz poate fi facturată <strong>până pe data de 15 a lunii următoare</strong> celei în care a avut loc faptul generator.</p>
+<p><strong>Recepție de materii prime pe aviz:</strong></p>
+<div class="ledger"><div class="led-row"><span class="led-d">301</span><span class="led-eq">=</span><span class="led-c">408</span><span class="led-amt"></span><span class="led-note">în baza avizului</span></div></div>
+<p>Problema practică: de cele mai multe ori, <strong>avizul nu conține prețul</strong>. Legea nu obligă furnizorul să îl treacă. Ca să poți face înregistrarea la o valoare corectă, îți trebuie <strong>contractul</strong>. Dacă factura vine ulterior cu alt preț, se fac ajustări — sau, în practică, se convine un discount / se facturează la valoarea pusă pe 408.</p>
+<p><strong>La primirea facturii:</strong></p>
+<div class="ledger"><div class="led-row"><span class="led-d">408</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt"></span><span class="led-note">se închide provizionul de factură</span></div></div>
+<h3><span class="subnum">5.2</span> Varianta completă, cu TVA</h3>
+<p>Recepție în valoare de 10.000 lei, TVA 21%.</p>
+<p><strong>Pasul 1 — la recepție, în baza avizului:</strong></p>
+<div class="ledger"><div class="led-row"><span class="led-d">231</span><span class="led-eq">=</span><span class="led-c">408</span><span class="led-amt">10.000</span><span class="led-note"></span></div><div class="led-row"><span class="led-d">4428</span><span class="led-eq">=</span><span class="led-c">408</span><span class="led-amt">2.100</span><span class="led-note">TVA neexigibilă</span></div></div>
+<p><strong>Pasul 2 — la primirea facturii:</strong></p>
+<div class="ledger"><div class="led-row"><span class="led-d">408</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">10.000</span><span class="led-note"></span></div><div class="led-row"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">2.100</span><span class="led-note">TVA devine deductibilă</span></div></div>
+<p><strong>Pasul 3 — închiderea TVA-ului neexigibil:</strong></p>
+<div class="ledger"><div class="led-row"><span class="led-d">408</span><span class="led-eq">=</span><span class="led-c">4428</span><span class="led-amt">2.100</span><span class="led-note"></span></div></div>
+<p>După pasul 3 atât 408, cât și 4428 rămân cu sold zero pe operațiunea respectivă. Pasul 3 este <strong>corect și necesar</strong> — fără el, cele două conturi rămân umflate reciproc.</p>
+<p>Pentru 4428 provenit din 408 se folosesc <strong>analitice distincte</strong>.</p>
+<div class="note"><p>Notă: 231 este <em>Imobilizări corporale în curs</em>, iar furnizorul de imobilizări este <strong>404</strong>. Când se lucrează cu imobilizări, folosește analitice dedicate pe 408 sau direct 404, ca să nu amesteci furnizorii de exploatare cu cei de imobilizări.</p></div>
+<h3><span class="subnum">5.3</span> De ce 408 este un cont periculos</h3>
+<p>Când livrezi cu aviz, legea cere ca <strong>factura să menționeze numărul avizului</strong>. Dacă cel care a întocmit factura nu a fost atent și factura nu se împerechează cu avizul — iar tu nu sesizezi — înregistrezi materii prime a doua oară și <strong>dublezi gestiunea</strong>.</p>
+<p>Contabilitatea primește documente fără să aibă legătură cu ce se întâmplă pe teren. De aceea:</p>
+<ul><li>trebuie să știi permanent <strong>ce facturi sunt înregistrate pentru ce avize</strong>;</li><li>închiderea facturilor pe furnizori prin 408 se urmărește activ;</li><li>la orice dubiu, se sună clientul. El știe cel mai bine ce se întâmplă în curtea lui și clarifică în câteva secunde ceea ce ție ți-ar lua ore.</li></ul>
+<h3><span class="subnum">5.4</span> Contul 409 — Furnizori-debitori (avansuri plătite)</h3>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Pentru ce</th><th>Furnizor asociat</th></tr></thead><tbody><tr><td><strong>4091</strong></td><td>avansuri pentru stocuri / mărfuri</td><td>401</td></tr><tr><td><strong>4092</strong></td><td>avansuri pentru prestări de servicii</td><td>401</td></tr><tr><td><strong>4093</strong></td><td>avansuri pentru imobilizări corporale</td><td><strong>404</strong></td></tr><tr><td><strong>4094</strong></td><td>avansuri pentru imobilizări necorporale</td><td><strong>404</strong></td></tr></tbody></table></div>
+<p><strong>La plata avansului (factura de avans), 50.000 lei + TVA 21%:</strong></p>
+<div class="ledger"><div class="led-row"><span class="led-d">4091</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">50.000</span><span class="led-note"></span></div><div class="led-row"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">10.500</span><span class="led-note"></span></div></div>
+<p><strong>La primirea facturii finale</strong>, factura conține două poziții — stornarea avansului și produsele efectiv facturate:</p>
+<div class="ledger"><div class="led-row"><span class="led-d">4091</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt neg">−30.000</span><span class="led-note">storno avans, în roșu; parțial dacă avansul a fost parțial</span></div><div class="led-row"><span class="led-d">?</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt"></span><span class="led-note">produsele/serviciile facturate</span></div></div>
+<p>Legea cere ca stornarea să se facă <strong>și pe 4091, și pe 401</strong> — pentru că efectul net trebuie să fie zero: 401 apare pe debit, 4091 pe credit, se anulează reciproc.</p>
+<p>Factura finală poate avea sold zero sau orice sold, în funcție de cât a acoperit avansul.</p>
+<p><strong>Avansurile în valută:</strong> pe avansuri <strong>nu</strong> se calculează diferențe de curs valutar. Stornarea avansului se face la <strong>cursul de la data înregistrării avansului</strong>. Avansurile sunt elemente nemonetare și nu se reevaluează.</p>
+<h3><span class="subnum">5.5</span> Regula generală pe clasa 40</h3>
+<p>La toate înregistrările care țin de furnizori (40\*) avem <strong>TVA deductibilă (4426)</strong> — și putem avea și <strong>taxare inversă</strong>.</p>
+</section>
+<section id="s6"><h2><span class="secnum">6</span><span class="sectitle">Clienți — clasa 41</span></h2>
+<h3><span class="subnum">6.1</span> Contul 411 și legătura cu veniturile</h3>
+<p>411 intră în legătură fie cu conturi de **venituri (70\*)<strong>, fie cu </strong>venituri în avans (472)**.</p>
+<p><strong>Care e diferența?</strong></p>
+<div class="tw"><table><thead><tr><th></th><th><strong>70\</strong>* Venituri</th><th><strong>472</strong> Venituri în avans</th><th><strong>419</strong> Clienți-creditori</th></tr></thead><tbody><tr><td>Natură</td><td>cont de venit</td><td><strong>pasiv</strong> (datorie)</td><td><strong>pasiv</strong> (datorie)</td></tr><tr><td>Când</td><td>prestația <strong>este</strong> realizată, în perioada curentă</td><td>sumă facturată/încasată care privește <strong>perioade viitoare</strong></td><td><strong>avans</strong> încasat <strong>înainte</strong> de livrare/prestare</td></tr><tr><td>Exemplu</td><td>vânzare de marfă în luna curentă</td><td>chirie încasată anticipat pe 12 luni, abonamente</td><td>30% avans la o lucrare care nu a început</td></tr><tr><td>Cum dispare</td><td>se închide la 121</td><td><code>472 = 70*</code> pe măsura trecerii timpului</td><td>se stornează la factura finală</td></tr><tr><td>TVA</td><td>colectată la faptul generator</td><td>urmează regulile de exigibilitate</td><td><strong>colectată la încasarea avansului</strong></td></tr></tbody></table></div>
+<p>Conturi <strong>în oglindă</strong>:</p>
+<ul><li><code>409</code> (furnizori-debitori) ↔ <code>419</code> (clienți-creditori)</li><li><code>471</code> (cheltuieli în avans) ↔ <code>472</code> (venituri în avans)</li></ul>
+<p>O cheltuială financiară care se întinde pe 2 ani se înregistrează pe <strong>471</strong> și se reia eșalonat.</p>
+<h3><span class="subnum">6.2</span> Contul 418 — Clienți, facturi de întocmit</h3>
+<p>Oglinda lui 408, pentru situația în care <strong>noi</strong> livrăm marfă pe aviz.</p>
+<p><strong>La livrarea pe aviz</strong> — marfă de 10.000 lei, TVA 21%:</p>
+<div class="ledger"><div class="led-row"><span class="led-d">418</span><span class="led-eq">=</span><span class="led-c">707</span><span class="led-amt">10.000</span><span class="led-note">venitul</span></div><div class="led-row"><span class="led-d">418</span><span class="led-eq">=</span><span class="led-c">4428</span><span class="led-amt">2.100</span><span class="led-note">TVA neexigibilă</span></div></div>
+<p>Creanța totală pe 418 este <strong>12.100</strong> lei.</p>
+<p><strong>La emiterea facturii finale:</strong></p>
+<div class="ledger"><div class="led-row"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">418</span><span class="led-amt">12.100</span><span class="led-note">creanța trece pe client</span></div><div class="led-row"><span class="led-d">4428</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">2.100</span><span class="led-note">TVA devine exigibilă</span></div></div>
+<p>Observă sensul: TVA-ul <strong>iese</strong> din 4428 (care era creditor) și <strong>intră</strong> în 4427. Nu invers.</p>
+<p>După aceste înregistrări, 418 și 4428 rămân cu sold zero pe operațiune, iar creanța reală de încasat este 12.100 lei pe 4111.</p>
+<h3><span class="subnum">6.3</span> Avans încasat de la client</h3>
+<p>Lucrare de 100.000 lei, avans 30%, TVA 21%.</p>
+<p><strong>La încasarea avansului:</strong></p>
+<div class="ledger"><div class="led-row"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">419</span><span class="led-amt">30.000</span><span class="led-note"></span></div><div class="led-row"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">6.300</span><span class="led-note">TVA se colectează la avans</span></div></div>
+<p><strong>La livrarea produsului finit — storno avans:</strong></p>
+<div class="ledger"><div class="led-row"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">419</span><span class="led-amt neg">−30.000</span><span class="led-note"></span></div><div class="led-row"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt neg">−6.300</span><span class="led-note"></span></div></div>
+<p><strong>Produsul finit facturat:</strong></p>
+<div class="ledger"><div class="led-row"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">7015</span><span class="led-amt">100.000</span><span class="led-note"></span></div><div class="led-row"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">21.000</span><span class="led-note"></span></div></div>
+<p><strong>Factura finală de încasat:</strong> 121.000 − 36.300 = <strong>84.700 lei</strong>.</p>
+<div class="ledger"><div class="led-row"><span class="led-d">5121</span><span class="led-eq">=</span><span class="led-c">4111</span><span class="led-amt">84.700</span><span class="led-note">încasarea prin bancă</span></div></div>
+</section>
+<section id="s7"><h2><span class="secnum">7</span><span class="sectitle">Operațiuni speciale</span></h2>
+<h3><span class="subnum">7.1</span> Vânzarea unui mijloc fix</h3>
+<p>Preț de vânzare 60.000 lei, TVA 21%.</p>
+<p><strong>Facturarea:</strong></p>
+<div class="ledger"><div class="led-row"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">7583</span><span class="led-amt">60.000</span><span class="led-note">venituri din vânzarea activelor</span></div><div class="led-row"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">12.600</span><span class="led-note"></span></div></div>
+<p>Raționamentul de control: conturile de clasa 6 stau pe <strong>debit</strong>, cele de clasa 7 stau pe <strong>credit</strong>. Deci contul de venit (7583) merge pe credit, iar clientul (4111) pe debit. TVA-ul colectat, fiind un cont de pasiv care crește, merge tot pe <strong>credit</strong>.</p>
+<p><strong>Scoaterea din evidență a mijlocului fix</strong> — pasul pe care nu trebuie să-l uiți. Presupunem valoare de intrare 50.000, amortizare cumulată 38.000:</p>
+<div class="ledger"><div class="led-row"><span class="led-d">2813</span><span class="led-eq">=</span><span class="led-c">213</span><span class="led-amt">38.000</span><span class="led-note">amortizarea cumulată</span></div><div class="led-row"><span class="led-d">6583</span><span class="led-eq">=</span><span class="led-c">213</span><span class="led-amt">12.000</span><span class="led-note">valoarea rămasă neamortizată</span></div></div>
+<p><strong>Închiderea TVA colectată</strong> (dacă nu există deductibil în luna respectivă):</p>
+<div class="ledger"><div class="led-row"><span class="led-d">4427</span><span class="led-eq">=</span><span class="led-c">4423</span><span class="led-amt">12.600</span><span class="led-note"></span></div></div>
+<h3><span class="subnum">7.2</span> Prețul din contract fără mențiune de TVA</h3>
+<p>Când un contract menționează sec o sumă — „100.000 lei", punct, fără nicio precizare — acea sumă se consideră că este <strong>cu tot cu TVA</strong>.</p>
+<p>De aceea este esențial ca în contract să se menționeze explicit: prețul <strong>cu sau fără TVA</strong>, și tranșele în care se primesc banii.</p>
+<p>Principiul este consacrat de jurisprudența CJUE (cauzele conexate C-249/12 și C-250/12, <em>Tulică și Plavoșin</em>).</p>
+<h3><span class="subnum">7.3</span> Încasare mai mare decât factura</h3>
+<p>Ai emis o factură de 10.000 lei și ai încasat 15.000 lei.</p>
+<p>Diferența de 5.000 lei este un <strong>avans</strong>, nu un venit — deci <strong>nu</strong> poate merge pe 472. Merge pe <strong>419</strong>, iar din ea trebuie extras TVA-ul și colectat, chiar dacă banii se returnează partenerului luna următoare.</p>
+<p>Suma încasată în plus este TVA-inclusivă:</p>
+<ul><li>baza: 5.000 ÷ 1,21 = <strong>4.132,23</strong></li><li>TVA: <strong>867,77</strong></li></ul>
+<div class="ledger"><div class="led-row"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">419</span><span class="led-amt">4.132,23</span><span class="led-note"></span></div><div class="led-row"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">867,77</span><span class="led-note"></span></div></div>
+<p>Impactul fiscal apare doar când încasarea și restituirea <strong>nu se închid în aceeași lună</strong>. Dacă returnezi banii în aceeași lună, situația se neutralizează.</p>
+<p>Practic: soldul lui 4111 poate apărea ca debit cu minus sau ca sold creditor — de aceea se ia <strong>fișa pe plătitor</strong> și se verifică. Trebuie contraverificat <strong>4427</strong>, ca să confirmi că softul chiar a extras TVA-ul pentru tranzacția respectivă.</p>
+<p>Legiuitorul nu impune corecții când <strong>tu</strong> plătești în plus, dar impune corecția atunci când <strong>tu încasezi</strong> în plus.</p>
+<h3><span class="subnum">7.4</span> Note despre 455</h3>
+<p>Contul <strong>455</strong> Sume datorate acționarilor/asociaților are restricții privind operațiunile în numerar: plățile din 455 prin casierie nu mai sunt permise în condițiile anterioare. Vezi secțiunea 13 — punct de verificat în textul legal în vigoare.</p>
+</section>
+<section id="s8"><h2><span class="secnum">8</span><span class="sectitle">Numerar și plafoane (Legea 70/2015)</span></h2>
+<p>Plafoanele reținute la training:</p>
+<div class="tw"><table><thead><tr><th>Tip operațiune</th><th>Plafon</th></tr></thead><tbody><tr><td>Între persoane juridice (B2B)</td><td><strong>5.000 lei</strong></td></tr><tr><td>Încasări de la persoane fizice (B2C)</td><td><strong>10.000 lei</strong></td></tr><tr><td>Între persoane fizice (C2C)</td><td><strong>50.000 lei</strong></td></tr></tbody></table></div>
+<p><strong>Cum se citesc plafoanele — răspuns la întrebarea din notițe:</strong></p>
+<ul><li>Sunt <strong>plafoane zilnice</strong>, <strong>per persoană</strong> — nu per contract și nu per document izolat. Adică: de la același partener, într-o zi, nu poți încasa în numerar peste plafon, indiferent câte documente emiți.</li><li>Pentru operațiunile între persoane juridice există și un <strong>plafon total zilnic</strong>, peste limita per persoană.</li><li><strong>Fragmentarea este interzisă expres.</strong> Nu poți sparge o factură de 12.000 lei în trei tranșe de 4.000 lei, nici în aceeași zi, nici pe zile consecutive, dacă scopul este eludarea plafonului. Aceasta este și logica pentru care plafonul e „pe zi": altfel ar fi trivial de ocolit.</li><li>Există și un plafon pentru <strong>soldul casieriei</strong> la sfârșitul zilei.</li></ul>
+<p>Restul, peste plafon, se decontează obligatoriu prin bancă.</p>
+<div class="note"><p>Cifrele exacte au fost modificate prin Legea 296/2023. Înainte de a le aplica la un client, confirmă valorile în textul Legii 70/2015 în vigoare la data operațiunii — vezi secțiunea 13.</p></div>
+</section>
+<section id="s9"><h2><span class="secnum">9</span><span class="sectitle">Documente, contracte și riscuri la control</span></h2>
+<h3><span class="subnum">9.1</span> „Prestări servicii conform contract"</h3>
+<p>Când pe documentul de intrare scrie doar atât, ai o problemă: legea obligă la descrierea <strong>naturii serviciului prestat</strong> (art. 319 Cod fiscal — denumirea și cantitatea bunurilor livrate, denumirea serviciilor prestate).</p>
+<p>Prestările de servicii sunt foarte diverse, iar încadrarea contează:</p>
+<ul><li>dacă factura menționează <strong>numărul contractului</strong>, ești norocos — te uiți în contract;</li><li>o factură de 628 de 100.000 lei cere o cu totul altă abordare decât una de 500 lei;</li><li>cazul fericit: servicii de arhitectură / proiectare → nu e cheltuială, e <strong>imobilizare în curs</strong>.</li></ul>
+<h3><span class="subnum">9.2</span> Contractul la prestările de servicii</h3>
+<p>La prestări de servicii trebuie să existe <strong>contract</strong>. Factura este documentul fiscal; contractul detaliază <strong>cum interacționezi cu partenerul</strong>.</p>
+<div class="note"><p>Nuanță: cerința expresă de a avea contract pentru servicii de management și consultanță, din vechiul Cod fiscal, a fost abrogată. Codul fiscal actual (art. 25 alin. 1) cere ca o cheltuială să fie efectuată <strong>în scopul desfășurării activității economice</strong> și susținută cu documente justificative. Contractul rămâne principalul mijloc de probă la control — deci, practic, indispensabil.</p></div>
+<h3><span class="subnum">9.3</span> Cazul penalităților — de reținut</h3>
+<p>O firmă de construcții a avut contract de livrare cu un client. Clientul nu a mai achitat. În contract, la capitolul penalități, erau trecute sume foarte mari — pe care firma nu le-a mai facturat și nu le-a trecut la venituri.</p>
+<p>ANAF a constatat că firma <strong>nu și-a respectat propriul contract</strong>, a calculat venituri și majorări pentru soldurile neîncasate, iar firma a rămas și fără venit, și cu bani dați la stat.</p>
+<p><strong>Concluzie:</strong> în contracte se trec <strong>penalități realiste</strong>. O clauză de penalitate exagerată nu te protejează — te expune.</p>
+<h3><span class="subnum">9.4</span> Sistemele informatice</h3>
+<p>Programele au ecrane cu o structură în spate care generează notele contabile fără ca tu să le vezi. Dacă ceva pare suspect, instrumentul de verificare este <strong>fișa de cont</strong>. Nu te baza pe faptul că softul „știe" — mai ales pe conturile bifuncționale.</p>
+</section>
+<section id="s10"><h2><span class="secnum">10</span><span class="sectitle">Conturi de urmărit periodic</span></h2>
+<p>Răspuns la întrebarea din notițe: care sunt conturile care trebuie urmărite cel puțin trimestrial, dacă nu lunar.</p>
+<h3>Lunar — obligatoriu</h3>
+<div class="tw"><table><thead><tr><th>Cont</th><th>De ce</th></tr></thead><tbody><tr><td><strong>4426 / 4427 / 4423 / 4424</strong></td><td>închiderea TVA; orice sold rămas e o eroare</td></tr><tr><td><strong>4428</strong></td><td>bifuncțional; trebuie să se golească pe operațiunile facturate</td></tr><tr><td><strong>408 / 418</strong></td><td>bifuncționale; risc de dublare a gestiunii</td></tr><tr><td><strong>471 / 472</strong></td><td>reluarea eșalonată trebuie făcută lună de lună</td></tr><tr><td><strong>473</strong> Decontări din operațiuni în curs de clarificare</td><td>trebuie să ajungă la <strong>sold zero</strong>; altfel ascunde erori</td></tr><tr><td><strong>581</strong> Viramente interne</td><td>trebuie să aibă <strong>sold zero</strong>; sold ≠ 0 = transfer neînchis</td></tr><tr><td><strong>5311 / 5121</strong></td><td>reconciliere cu extrasul și cu registrul de casă</td></tr><tr><td><strong>542</strong> Avansuri de trezorerie</td><td>deconturi nejustificate</td></tr></tbody></table></div>
+<h3>Cel puțin trimestrial</h3>
+<div class="tw"><table><thead><tr><th>Cont</th><th>De ce</th></tr></thead><tbody><tr><td><strong>4091 – 4094</strong></td><td>avansuri care nu s-au stornat la factura finală</td></tr><tr><td><strong>419</strong></td><td>avansuri de la clienți rămase deschise</td></tr><tr><td><strong>401 / 411</strong></td><td>balanță analitică; <strong>solduri cu semn contrar</strong> = eroare</td></tr><tr><td><strong>455</strong></td><td>sume datorate asociaților, cu restricții legale</td></tr><tr><td><strong>461 / 462</strong></td><td>debitori/creditori diverși, se împotmolesc ușor</td></tr><tr><td><strong>231</strong></td><td>imobilizări în curs care trebuiau puse în funcțiune</td></tr><tr><td><strong>1621 / 5187</strong></td><td>credite și dobânzi de calculat</td></tr></tbody></table></div>
+</section>
+<section id="s11"><h2><span class="secnum">11</span><span class="sectitle">Tabel recapitulativ de conturi</span></h2>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Denumire</th><th>Natură</th></tr></thead><tbody><tr><td>121</td><td>Profit sau pierdere</td><td>bifuncțional</td></tr><tr><td>213</td><td>Instalații tehnice și mijloace de transport</td><td>activ</td></tr><tr><td>231</td><td>Imobilizări corporale în curs</td><td>activ</td></tr><tr><td>2813</td><td>Amortizarea instalațiilor și mijloacelor de transport</td><td>rectificativ pasiv</td></tr><tr><td>301</td><td>Materii prime</td><td>activ</td></tr><tr><td>371</td><td>Mărfuri</td><td>activ</td></tr><tr><td>378</td><td>Diferențe de preț la mărfuri (adaos)</td><td>rectificativ</td></tr><tr><td>391</td><td>Ajustări pentru deprecierea mărfurilor</td><td>rectificativ</td></tr><tr><td>401</td><td>Furnizori</td><td>pasiv</td></tr><tr><td>404</td><td>Furnizori de imobilizări</td><td>pasiv</td></tr><tr><td>408</td><td>Furnizori — facturi nesosite</td><td><strong>bifuncțional</strong></td></tr><tr><td>4091‑4094</td><td>Furnizori-debitori (avansuri plătite)</td><td>activ</td></tr><tr><td>4111</td><td>Clienți</td><td>activ</td></tr><tr><td>418</td><td>Clienți — facturi de întocmit</td><td><strong>bifuncțional</strong></td></tr><tr><td>419</td><td>Clienți-creditori (avansuri încasate)</td><td>pasiv</td></tr><tr><td>4411</td><td>Impozitul pe profit</td><td>pasiv</td></tr><tr><td>4423</td><td>TVA de plată</td><td>pasiv</td></tr><tr><td>4424</td><td>TVA de recuperat</td><td>activ</td></tr><tr><td>4426</td><td>TVA deductibilă</td><td>activ</td></tr><tr><td>4427</td><td>TVA colectată</td><td>pasiv</td></tr><tr><td>4428</td><td>TVA neexigibilă</td><td><strong>bifuncțional</strong></td></tr><tr><td>455</td><td>Sume datorate acționarilor/asociaților</td><td>pasiv</td></tr><tr><td>471</td><td>Cheltuieli înregistrate în avans</td><td>activ</td></tr><tr><td>472</td><td>Venituri înregistrate în avans</td><td>pasiv</td></tr><tr><td>473</td><td>Decontări din operațiuni în curs de clarificare</td><td><strong>bifuncțional</strong></td></tr><tr><td>491</td><td>Ajustări pentru deprecierea creanțelor-clienți</td><td>rectificativ</td></tr><tr><td>5121</td><td>Conturi la bănci în lei</td><td>activ</td></tr><tr><td>5311</td><td>Casa în lei</td><td>activ</td></tr><tr><td>581</td><td>Viramente interne</td><td>bifuncțional</td></tr><tr><td>607</td><td>Cheltuieli privind mărfurile</td><td>cheltuială</td></tr><tr><td>628</td><td>Alte cheltuieli cu serviciile executate de terți</td><td>cheltuială</td></tr><tr><td>6583</td><td>Cheltuieli privind activele cedate</td><td>cheltuială</td></tr><tr><td>6814</td><td>Cheltuieli de exploatare privind ajustările pentru deprecierea activelor circulante</td><td>cheltuială</td></tr><tr><td>691</td><td>Cheltuieli cu impozitul pe profit</td><td>cheltuială</td></tr><tr><td>701 / 7015</td><td>Venituri din vânzarea produselor finite</td><td>venit</td></tr><tr><td>707</td><td>Venituri din vânzarea mărfurilor</td><td>venit</td></tr><tr><td>7583</td><td>Venituri din vânzarea activelor și alte operațiuni de capital</td><td>venit</td></tr><tr><td>7814</td><td>Venituri din ajustări pentru deprecierea activelor circulante</td><td>venit</td></tr></tbody></table></div>
+</section>
+<section id="s12"><h2><span class="secnum">12</span><span class="sectitle">Erori frecvente și capcane</span></h2>
+<ol><li><strong>Confuzia 5121 / 5311 / 5111.</strong> 5121 = bancă, 5311 = casa în lei, 5111 = <em>cecuri de încasat</em>. Orice plată bancară — inclusiv prin ordin de plată — trece prin <strong>5121</strong>.</li></ol>
+<ol><li><strong>Impozitul pe profit calculat pe baza greșită.</strong> Soldul creditor al lui 121 este <strong>baza</strong>, nu impozitul. Impozitul este 16% din el.</li></ol>
+<ol><li><strong>Sensul lui 4428.</strong> Debitor la achiziții pe aviz (<code>4428 = 408</code>), creditor la livrări pe aviz (<code>418 = 4428</code>) și la mărfuri la preț cu amănuntul (<code>371 = 4428</code>). Fără analitice, softul le amestecă.</li></ol>
+<ol><li><strong>Uitarea pasului <code>408 = 4428</code>.</strong> Fără el, ambele conturi rămân umflate reciproc la infinit.</li></ol>
+<ol><li><strong>Dublarea gestiunii prin 408.</strong> Factura care nu menționează numărul avizului este cauza clasică. Se verifică împerecherea aviz–factură.</li></ol>
+<ol><li><strong>TVA neexigibilă calculată pe bază greșită</strong> la mărfuri: se aplică la <strong>cost + adaos</strong>, nu la cost.</li></ol>
+<ol><li><strong>Ajustările pentru deprecierea stocurilor tratate ca deductibile.</strong> Sunt nedeductibile; reluarea lor e neimpozabilă. Nu confunda cu ajustările pentru creanțe.</li></ol>
+<ol><li><strong>Uitarea scoaterii din evidență la vânzarea unui mijloc fix.</strong> Facturarea (7583) nu e suficientă — trebuie și <code>2813 = 213</code> plus <code>6583 = 213</code>.</li></ol>
+<ol><li><strong>Diferențe de curs pe avansuri.</strong> Nu se calculează. Stornarea se face la cursul de la data avansului.</li></ol>
+<ol><li><strong>Încasarea în plus pusă pe 472.</strong> Nu este venit — este avans (419) și cere colectare de TVA.</li></ol>
+<ol><li><strong>Conturi cu sold contrar naturii lor</strong> (401 debitor, 4111 creditor) — aproape întotdeauna semn de eroare sau de avans neînregistrat corect.</li></ol>
+<ol><li><strong>473 și 581 cu sold la închidere.</strong> Ambele trebuie golite; un sold acolo ascunde o operațiune neterminată.</li></ol>
+<ol><li><strong>Penalități contractuale nerealiste.</strong> Dacă nu le facturezi, ANAF le poate impune ca venit. Vezi 9.3.</li></ol>
+</section>
+<section id="s13"><h2><span class="secnum">13</span><span class="sectitle">De verificat și de testat</span></h2>
+<p>Puncte rămase deschise, de confirmat înainte de a le aplica la un client:</p>
+<ol><li><strong>Plafoanele de numerar</strong> — valorile exacte din Legea 70/2015, așa cum a fost modificată prin Legea 296/2023, la data operațiunii.</li><li><strong>Restricțiile pe contul 455</strong> — care sunt exact operațiunile în numerar interzise și temeiul legal.</li><li><strong>Simulare în softul de contabilitate</strong> pentru cazul încasării în plus (7.3): de verificat dacă programul extrage automat TVA-ul pe diferența trecută la 419, sau dacă trebuie forțat manual. De contraverificat 4427 după simulare.</li><li><strong>Analiticele pe 4428</strong> — de configurat pe fiecare situație (aviz intrare / aviz ieșire / mărfuri) <strong>și</strong> pe fiecare cotă de TVA, înainte de a începe operarea.</li><li><strong>Contul folosit pentru facturi nesosite la imobilizări</strong> — 408 cu analitic sau 404 cu analitic; de stabilit convenția și de respectat consecvent.</li></ol>
+</section>
+</main>
+</div>
