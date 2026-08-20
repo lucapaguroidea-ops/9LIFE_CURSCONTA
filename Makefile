@@ -1,8 +1,10 @@
 PY ?= python3
 
-.PHONY: tot build plan module documente intrebari verifica curat
+.PHONY: tot build plan module documente intrebari parcurs verifica curat
 
-tot: build documente intrebari verifica
+# `parcurs` citește workbook-urile construite (harta de referință e chiar tabelul de
+# structură din Legendă), deci vine după `build`.
+tot: build documente intrebari parcurs verifica
 
 build: plan module
 
@@ -17,6 +19,9 @@ documente:
 
 intrebari:
 	$(PY) build/intrebari.py
+
+parcurs:
+	$(PY) build/parcurs.py
 
 verifica:
 	$(PY) build/verifica.py

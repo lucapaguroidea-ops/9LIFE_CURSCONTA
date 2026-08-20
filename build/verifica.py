@@ -1,16 +1,27 @@
 """Porțile de calitate ale sistemului. Cod de ieșire ≠ 0 la orice eșec.
 
-Porțile (din foaia Legendă a workbook-ului original, plus cele adăugate în Etapa 4):
+Lista de mai jos e SURSA CANONICĂ a descrierilor: documentul de parcurs o citește de
+aici, iar poarta 15 verifică faptul că numerele din listă coincid cu porțile chemate
+efectiv mai jos. Fără verificarea aia, lista ar rămâne în urmă — s-a și întâmplat: a
+descris multă vreme nouă porți, cu poarta 9 în forma ei veche.
 
   1. ΣDebit = ΣCredit pe fiecare pas de flux care are sume
-  2. fiecare flux se închide cu un pas de verificare și o stare terminală declarată
+  2. fiecare flux se închide cu un pas de verificare, o stare terminală și „Principiul:”
   3. fiecare flux didactic ★ are exact un pas revelator
-  4. fiecare cont Tier A apare în cel puțin un flux (matricea fără goluri)
-  5. fiecare analitic recomandat are un factor din D/N/C/F/B/V/O
+  4. matricea nu are goluri nedeclarate, iar fiecare flux nou e referit în ea
+  5. fiecare analitic Tier A are un factor din D/N/C/F/B/V/O și spune ce se rupe fără el
   6. fiecare token MOD_* referit există în CatalogModule (verificare între fișiere)
   7. corelațiile se verifică pe cifrele fluxurilor, nu declarativ
-  8. după recalc: zero erori de formulă, toate celulele Check = OK
-  9. conținutul original din training 4 e păstrat neatins în fișierele generate
+  8. formule echilibrate, niciun text scris din greșeală ca formulă, zero erori după
+     recalc, toate celulele Check = OK
+  9. conservare: fiecare linie din workbook-urile originale se regăsește în cele
+     generate; înlocuirile intenționate se declară în `date/reformulari.py`, cu motiv
+ 10. catalogul de fluxuri acoperă fix monografiile — nici mai mult, nici mai puțin
+ 11. zero nume definite rupte
+ 12. conservare pe documentele revizuite: nicio linie pierdută la armonizare
+ 13. cele trei documente au aceeași legendă, anexe canonice în ordine, și .docx
+ 14. tabelul de structură din foaia Legendă cunoaște toate foile workbook-ului
+ 15. documentul de parcurs nu citează foi, fișiere sau porți care nu există
 
 Rulare:  python build/verifica.py
 """
@@ -408,6 +419,76 @@ def poarta_structura(wb):
         ok("14", f"tabelul de structură cunoaște toate cele {len(wb.sheetnames)} foi")
 
 
+def poarta_parcurs(wb):
+    """Poarta 15 — documentul de parcurs nu minte despre starea sistemului.
+
+    Două lucruri, ambele fiind aceeași idee: o listă scrisă de mână rămâne în urmă dacă
+    nimeni nu o verifică.
+
+    a) Lista canonică de porți din docstring-ul acestui fișier trebuie să coincidă cu
+       porțile chemate efectiv. A divergit deja o dată: descria nouă porți, cu poarta 9
+       în forma ei veche.
+    b) Documentul de parcurs nu citează fișiere, module, fluxuri sau porți inexistente.
+    """
+    import build.parcurs as bpar
+
+    # (a) lista canonică vs. porțile chemate
+    listate = {n for n, _ in bpar.porti()}
+    with open(os.path.abspath(__file__), encoding="utf-8") as f:
+        corp = f.read().split('"""', 2)[2]
+    chemate = {int(n) for n in re.findall(r'(?:ok|cade)\(\s*"(\d+)"', corp)}
+    if listate != chemate:
+        if chemate - listate:
+            cade("15", f"porți chemate dar absente din lista canonică: "
+                       f"{sorted(chemate - listate)}")
+        if listate - chemate:
+            cade("15", f"porți în lista canonică dar nechemate niciodată: "
+                       f"{sorted(listate - chemate)}")
+    else:
+        ok("15", f"lista canonică de porți coincide cu cele {len(chemate)} chemate")
+
+    # (b) referințele documentului
+    cale = os.path.join(DIST, "parcurs-training-nou.md")
+    if not os.path.exists(cale):
+        cade("15", "lipsește dist/parcurs-training-nou.md — rulează `make parcurs`")
+        return
+    with open(cale, encoding="utf-8") as f:
+        text = f.read()
+
+    lipsa = []
+    for fis in set(re.findall(r"`((?:date|build|surse|dist)/[\w./-]+)`", text)):
+        if not os.path.exists(os.path.join(RADACINA, fis)):
+            lipsa.append(f"fișier inexistent: {fis}")
+
+    wm = openpyxl.load_workbook(MODULE)["CatalogModule"]
+    module_reale = {str(wm.cell(row=r, column=2).value or "").strip()
+                    for r in range(1, wm.max_row + 1)}
+    for cod in set(re.findall(r"`(MOD_[A-Z_]+)`", text)):
+        if cod not in module_reale:
+            lipsa.append(f"modul inexistent: {cod}")
+
+    for nr in set(re.findall(r"poarta (\d+)", text)):
+        if int(nr) not in listate:
+            lipsa.append(f"poartă inexistentă: {nr}")
+
+    fluxuri_reale = set()
+    wf = wb["Fluxuri"]
+    for r in range(1, wf.max_row + 1):
+        a = str(wf.cell(row=r, column=1).value or "").strip()
+        if re.fullmatch(r"F-\d{3}", a):
+            fluxuri_reale.add(a)
+    for fid in set(re.findall(r"`(F-\d{3})`", text)):
+        # ID-urile „următorul liber” sunt intenționat inexistente încă
+        if fid not in fluxuri_reale and fid not in {O.urmatorul_liber(c)
+                                                    for c, _, _ in O.BLOCURI}:
+            lipsa.append(f"flux inexistent: {fid}")
+
+    for l in lipsa:
+        cade("15", f"documentul de parcurs citează {l}")
+    if not lipsa:
+        ok("15", "documentul de parcurs nu citează nimic inexistent")
+
+
 def poarta_documente():
     """Porțile 12 și 13 — pe documentele revizuite, nu pe workbook-uri.
 
@@ -476,6 +557,7 @@ def main():
     poarta_nume_definite()
     poarta_structura(wb)
     poarta_documente()
+    poarta_parcurs(wb)
 
     print("\n".join(note))
     if esecuri:

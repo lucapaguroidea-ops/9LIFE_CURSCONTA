@@ -47,14 +47,18 @@ date/          CONȚINUTUL NOU, separat de cod (structuri Python, ușor de citit
   corelatii.py     C-13…C-22
   analitice.py     conturi clasa 1 și 2 promovate la Tier A
   plan.py          conturi noi / actualizări de coloană „Flux (pas)”
-  module/          definițiile celor 4 module declarative noi
+  module/          definițiile celor 9 module declarative noi
+  ordine.py        ordinea canonică: singura sursă de adevăr pentru poziții și ID-uri
+  intrebari.py     cele 21 de întrebări deschise (o sursă → .md, .html și foaia din workbook)
+  parcurs.py       partea scrisă de mână a documentului de parcurs
 build/         generatoarele
   stil.py          paleta exactă a workbook-urilor originale
   build_plan.py    surse/…Plan…xlsx  → dist/…Plan…xlsx  (extindere non-distructivă)
   build_module.py  surse/…Module…xlsx → dist/…Module…xlsx
   recalc.py        recalc pur-Python (vezi mai jos)
+  parcurs.py       dist/parcurs-training-nou.md (straturile generate)
   verifica.py      porțile de calitate; cod de ieșire ≠ 0 la eșec
-dist/          cele două xlsx generate (commit-ate)
+dist/          xlsx-urile, documentele și listele generate (commit-ate)
 ```
 
 ## Cum se construiește
@@ -62,7 +66,7 @@ dist/          cele două xlsx generate (commit-ate)
 ```sh
 make build      # generează dist/*.xlsx din surse/ + date/
 make verifica   # rulează porțile de calitate pe dist/*.xlsx
-make tot        # build + verifica
+make tot        # build + documente + întrebări + parcurs + verifica
 ```
 
 Necesită `openpyxl`, `formulas`, `numpy` (`pip install openpyxl formulas numpy`).
@@ -96,6 +100,7 @@ monografie dar nu și motor executabil.
 |---|---|
 | `dist/intrebari-formator.md` + `.html` | cele 21 de întrebări rămase deschise, grupate pe temă contabilă, cu context și cu ce s-a presupus între timp |
 | `dist/notite-training-*.md` + `.docx` | cele trei documente revizuite, armonizate: aceeași legendă, aceleași anexe, aceeași ordine |
+| `dist/parcurs-training-nou.md` | parcursul pe care trebuie să-l urmeze **următorul set de notițe** — vezi mai jos |
 
 Documentele din `surse/` rămân neatinse — acolo stau variantele tale originale.
 `.docx`-urile generate **nu** reproduc identic pe cele existente (acelea vin din alt
@@ -126,9 +131,27 @@ Un training nou **nu se lipește la coadă**. Se adaugă la clasa lui:
 
 Catalogul de fluxuri e **derivat** din monografii, deci nu poate rămâne în urma lor.
 
+### `dist/parcurs-training-nou.md`
+
+Parcursul complet al unui set nou de notițe — de la fișierul brut până la workbook.
+E un document de **îndrumare**, nu de explicare: unde există poartă, spune „poarta N
+verifică asta” și se oprește. Regulile contabile rămân în documentele de referință, ca
+să nu existe un al doilea adevăr care să diveargă de ele.
+
+Are două straturi. Cel scris de mână (`date/parcurs.py`) ține doar ce nu se poate deduce
+din cod: întrebările de judecată ale fazei A, punctele de convergență, traseul real al
+trainingului 3. Cel generat (`build/parcurs.py`) ține tot ce enumeră starea sistemului —
+lista porților, harta claselor, modulele, fișierele din `date/` — citit din cod și din
+workbook-urile construite. Harta documentelor de referință nu e nici măcar scrisă: e
+chiar tabelul de structură din foaia `Legendă`.
+
+Miezul lui e secțiunea **puncte de convergență**: cele 12 locuri unde un training nou
+poate rupe coerența. Opt sunt prinse de câte o poartă și sunt enumerate ca să nu te uiți
+degeaba după ele; **patru sunt goluri cunoscute**, marcate „nimic — verifică tu”.
+
 ## Porțile de calitate
 
-`make verifica` rulează 14 porți; toate trebuie verzi:
+`make verifica` rulează 15 porți; toate trebuie verzi:
 
 1. ΣDebit = ΣCredit pe fiecare pas de flux cu sume
 2. fiecare flux se închide cu stare terminală declarată și un „Principiul:”
@@ -144,6 +167,8 @@ Catalogul de fluxuri e **derivat** din monografii, deci nu poate rămâne în ur
 12. conservare pe documentele revizuite — nicio linie pierdută la armonizare
 13. cele trei documente au aceeași legendă și anexe canonice, în ordine
 14. tabelul de structură din Legendă cunoaște toate foile workbook-ului
+15. documentul de parcurs nu citează foi, fișiere sau porți care nu există — și lista
+    canonică de porți din `build/verifica.py` coincide cu porțile chemate efectiv
 
 ### Poarta de conservare
 
@@ -154,7 +179,7 @@ contează ca pierdere: textul original trece prin harta `F-vechi → F-nou` îna
 căutare.
 
 Un text care chiar trebuie înlocuit se declară în `date/reformulari.py`, **cu motiv**.
-Fără declarație, build-ul pică. Cele 32 de înlocuiri declarate apar și în foaia
+Fără declarație, build-ul pică. Cele 34 de înlocuiri declarate apar și în foaia
 `Istoric`, cu textul original alături de cel nou.
 
 Poarta a prins imediat 12 linii pe care o etapă anterioară le pierduse prin „actualizări
