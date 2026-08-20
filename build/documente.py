@@ -25,6 +25,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from build.conservare import _normalizeaza  # noqa: E402
 from build.docx_out import converteste  # noqa: E402
+from build.html_out import converteste as converteste_html  # noqa: E402
 from build import repartizare as brep
 from date import documente as D
 from date import intrebari as dintr  # noqa: E402
@@ -418,11 +419,12 @@ def main():
         os.makedirs(os.path.dirname(cale), exist_ok=True)
         with open(cale, "w", encoding="utf-8") as f:
             f.write(nou)
-        docx = cale.replace(".md", ".docx")
-        converteste(nou, docx)
+        converteste(nou, cale.replace(".md", ".docx"))
+        converteste_html(nou, cale.replace(".md", ".html"),
+                         titlu=cfg["titlu"], subtitlu=cfg["subtitlu"])
         anexe = sorted(set(cfg["anexe"].values()) | set(cfg["genereaza"]))
-        print(f"scris: {cfg['iesire']} + .docx  (anexe {', '.join(anexe) or '—'}, "
-              f"0 linii pierdute)")
+        print(f"scris: {cfg['iesire']} + .docx + .html  "
+              f"(anexe {', '.join(anexe) or '—'}, 0 linii pierdute)")
         total += 1
     print(f"{total} documente armonizate")
 

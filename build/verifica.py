@@ -19,7 +19,8 @@ descris multă vreme nouă porți, cu poarta 9 în forma ei veche.
  10. catalogul de fluxuri acoperă fix monografiile — nici mai mult, nici mai puțin
  11. zero nume definite rupte
  12. conservare pe documentele revizuite: nicio linie pierdută la armonizare
- 13. cele trei documente au aceeași legendă, anexe canonice în ordine, și .docx
+ 13. documentele au aceeași legendă, anexe canonice în ordine, și toate trei
+     formatele: .md, .docx, .html
  14. tabelul de structură din foaia Legendă cunoaște toate foile workbook-ului
  15. documentul de parcurs nu citează foi, fișiere sau porți care nu există
  16. o sursă împărțită pe mai multe destinații nu pierde nimic în cusătură:
@@ -552,12 +553,13 @@ def poarta_documente():
         litere = [l for l, _ in gasite]
         if litere != sorted(litere):
             cade("13", f"{cfg['nume']}: anexele nu sunt în ordine: {litere}")
-        docx = cale.replace(".md", ".docx")
-        if not os.path.exists(docx):
-            cade("13", f"{cfg['nume']}: lipsește {os.path.basename(docx)}")
+        for ext in (".docx", ".html"):
+            frate = cale.replace(".md", ext)
+            if not os.path.exists(frate):
+                cade("13", f"{cfg['nume']}: lipsește {os.path.basename(frate)}")
     if not any(e.startswith("[13]") for e in esecuri):
-        ok("13", f"cele {len(ddoc.DOCUMENTE)} documente au aceeași legendă, anexe canonice "
-                 f"și .docx")
+        ok("13", f"cele {len(ddoc.DOCUMENTE)} documente au aceeași legendă, anexe "
+                 f"canonice și cele trei formate (.md, .docx, .html)")
 
 
 # ----------------------------------------------------------------------- poarta 16

@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ro"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Control, documente și numerar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F8F9F7; --surface:#FFFFFF; --sunk:#F1F4F1;
+  --ink:#1A2421; --ink-2:#3D4A45; --muted:#6B7671;
+  --accent:#1B5E44; --accent-soft:#E6EFEA; --accent-line:#B9D2C6;
+  --storno:#A6342B;
+  --rule:#DDE2DE; --rule-soft:#EAEEEB;
+  --shadow:0 1px 2px rgba(26,36,33,.05), 0 8px 24px -12px rgba(26,36,33,.14);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+    --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+    --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+    --storno:#E08278;
+    --rule:#2A3430; --rule-soft:#222B27;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+  --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+  --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+  --storno:#E08278;
+  --rule:#2A3430; --rule-soft:#222B27;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased}
+.masthead{border-bottom:1px solid var(--rule); background:var(--surface); padding:56px 28px 40px}
+.mast-in{max-width:1180px; margin:0 auto; display:flex; flex-direction:column; gap:16px}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0}
+h1{font-family:Spectral,Georgia,"Times New Roman",serif; font-weight:600;
+  font-size:clamp(2rem,4.6vw,3.15rem); line-height:1.12; letter-spacing:-.015em;
+  margin:0; text-wrap:balance; max-width:22ch}
+.lede{color:var(--muted); font-size:1.02rem; margin:0; max-width:66ch}
+.wrap{max-width:1180px; margin:0 auto; padding:0 28px; display:grid;
+  grid-template-columns:232px minmax(0,1fr); gap:56px; align-items:start}
+nav.rail{position:sticky; top:24px; padding:36px 0 40px; max-height:100vh; overflow-y:auto}
+.rail-h{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.66rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+  margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--rule)}
+.rail ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px}
+.rail a{display:grid; grid-template-columns:24px 1fr; gap:8px; align-items:baseline;
+  text-decoration:none; color:var(--ink-2); padding:6px 8px; border-radius:5px;
+  font-size:.845rem; line-height:1.35; transition:background .12s,color .12s}
+.rail a:hover{background:var(--sunk); color:var(--accent)}
+.rail a:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+.tnum{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  color:var(--muted); font-variant-numeric:tabular-nums}
+main{padding:36px 0 96px; min-width:0; max-width:74ch}
+h2{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.62rem; line-height:1.22;
+  letter-spacing:-.01em; margin:44px 0 18px; text-wrap:balance;
+  padding-top:20px; border-top:1px solid var(--rule-soft); scroll-margin-top:20px}
+h3{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.14rem;
+  margin:30px 0 10px; scroll-margin-top:20px}
+h4{font-size:1rem; margin:22px 0 8px; scroll-margin-top:20px}
+p{margin:0 0 14px; max-width:72ch}
+ul,ol{margin:0 0 16px; padding-left:1.2rem; max-width:72ch}
+li{margin-bottom:7px}
+li::marker{color:var(--muted)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.875em;
+  background:var(--sunk); border:1px solid var(--rule-soft); border-radius:4px;
+  padding:1px 5px; color:var(--ink)}
+hr{border:0; border-top:1px solid var(--rule); margin:32px 0}
+pre.cod{background:var(--sunk); border:1px solid var(--rule); border-radius:7px;
+  padding:14px 16px; overflow-x:auto; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; color:var(--ink-2)}
+.ledger{margin:0 0 20px; border:1px solid var(--rule); border-left:3px solid var(--accent);
+  border-radius:0 7px 7px 0; background:var(--surface); overflow-x:auto; box-shadow:var(--shadow)}
+.led-row{display:grid; grid-template-columns:6.5em 1.2em 6.5em 8.5em 1fr; gap:10px;
+  align-items:baseline; padding:8px 16px; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; white-space:nowrap; scroll-margin-top:20px}
+.led-row+.led-row{border-top:1px solid var(--rule-soft)}
+.led-row:target{background:var(--accent-soft)}
+.led-d,.led-c{color:var(--ink); font-weight:500}
+.led-eq{color:var(--muted)}
+.led-amt{text-align:right; font-variant-numeric:tabular-nums; color:var(--accent); font-weight:500}
+.led-amt.neg{color:var(--storno)}
+.led-note{color:var(--muted); font-size:.9em; white-space:normal;
+  font-family:"IBM Plex Sans",sans-serif}
+.note{border-left:3px solid var(--accent-line); background:var(--sunk);
+  padding:13px 18px; border-radius:0 6px 6px 0; margin:0 0 20px; max-width:72ch}
+.note p{margin:0; color:var(--ink-2); font-size:.94rem}
+.tw{overflow-x:auto; margin:0 0 22px; border:1px solid var(--rule); border-radius:7px;
+  background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem}
+thead th{text-align:left; font-family:"IBM Plex Mono",ui-monospace,monospace; font-weight:500;
+  font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; color:var(--muted);
+  padding:11px 14px; border-bottom:1px solid var(--rule); background:var(--sunk)}
+tbody td{padding:10px 14px; border-bottom:1px solid var(--rule-soft);
+  vertical-align:top; color:var(--ink-2)}
+tbody tr:nth-child(even){background:var(--accent-soft)}
+tbody tr:last-child td{border-bottom:none}
+tbody td code{background:transparent; border:none; padding:0}
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr; gap:0; padding:0 22px}
+  nav.rail{position:static; max-height:none; padding:28px 0 8px; border-bottom:1px solid var(--rule)}
+  .rail ol{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:2px}
+  main{padding-top:26px}
+  .masthead{padding:40px 22px 30px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style></head><body>
+<header class="masthead"><div class="mast-in">
+<p class="eyebrow">Notițe de curs · contabilitate</p>
+<h1>Control, documente și numerar</h1>
+<p class="lede">Sursă: training 19.08.2026 — cum se citește un cont, ce cere legea de la un document și unde se rupe disciplina de casă</p>
+</div></header>
+<div class="wrap">
+<nav class="rail" aria-label="Cuprins"><p class="rail-h">Cuprins</p><ol><li><a href="#cum-cite-ti-acest-document"><span class="tnum">1</span><span>Cum citești acest document</span></a></li><li><a href="#conven-ia-de-notare"><span class="tnum">2</span><span>Convenția de notare</span></a></li><li><a href="#1-cum-se-cite-te-un-cont"><span class="tnum">3</span><span>1. Cum se citește un cont</span></a></li><li><a href="#2-opera-iuni-speciale"><span class="tnum">4</span><span>2. Operațiuni speciale</span></a></li><li><a href="#3-numerar-i-plafoane-legea-70-2015"><span class="tnum">5</span><span>3. Numerar și plafoane (Legea 70/2015)</span></a></li><li><a href="#4-documente-contracte-i-riscuri-la-control"><span class="tnum">6</span><span>4. Documente, contracte și riscuri la control</span></a></li><li><a href="#anexa-b-checklist-practic"><span class="tnum">7</span><span>Anexa B — Checklist practic</span></a></li><li><a href="#anexa-d-r-mase-deschise"><span class="tnum">8</span><span>Anexa D — Rămase deschise</span></a></li><li><a href="#anexa-e-baza-legal-citat"><span class="tnum">9</span><span>Anexa E — Baza legală citată</span></a></li></ol></nav>
+<main>
+<h3 id="surs-training-19-08-2026-cum-se-cite-te-un-cont-">Sursă: training 19.08.2026 — cum se citește un cont, ce cere legea de la un document și unde se rupe disciplina de casă</h3>
+<hr>
+<h2 id="cum-cite-ti-acest-document">Cum citești acest document</h2>
+<div class="tw"><table><thead><tr><th>Marcaj</th><th>Semnificație</th></tr></thead><tbody><tr><td>✅</td><td>Notița originală era corectă — doar reformulată/completată</td></tr><tr><td>⚠️</td><td><strong>Eroare în notița originală</strong> — corectată aici, cu explicație</td></tr><tr><td>➕</td><td>Completare (lucru care lipsea, dar era necesar ca raționamentul să stea în picioare)</td></tr><tr><td>❓</td><td>Rămas deschis — de clarificat cu formatorul (vezi Anexa D)</td></tr></tbody></table></div>
+<hr>
+<h2 id="conven-ia-de-notare">Convenția de notare</h2>
+<p><em>Material de studiu structurat pe baza notițelor de training din 19.08.2026.</em></p>
+<p>Convenție de notare folosită peste tot în ghid:</p>
+<div class="note"><p><code>cont debitor = cont creditor · sumă</code></p></div>
+<h2 id="1-cum-se-cite-te-un-cont">1. Cum se citește un cont</h2>
+<p>Înainte de orice înregistrare, două lucruri fixe, care nu se schimbă niciodată:</p>
+<ul><li><strong>Debitul este partea stângă</strong> a contului.</li><li><strong>Creditul este partea dreaptă</strong> a contului.</li></ul>
+<p>Restul decurge din natura contului:</p>
+<div class="tw"><table><thead><tr><th></th><th>Cont de <strong>ACTIV</strong></th><th>Cont de <strong>PASIV</strong></th></tr></thead><tbody><tr><td>Ce reprezintă</td><td>Ce <strong>deține</strong> societatea (bunuri, creanțe, bani)</td><td>Ce <strong>datorează</strong> societatea (datorii, capital)</td></tr><tr><td>Prima funcțiune</td><td>Începe prin a se <strong>debita</strong></td><td>Începe prin a se <strong>credita</strong></td></tr><tr><td>Crește</td><td>pe <strong>debit</strong> (stânga)</td><td>pe <strong>credit</strong> (dreapta)</td></tr><tr><td>Scade</td><td>pe <strong>credit</strong> (dreapta)</td><td>pe <strong>debit</strong> (stânga)</td></tr><tr><td>Sold final</td><td><strong>debitor</strong></td><td><strong>creditor</strong></td></tr></tbody></table></div>
+<p>Exemple: 371 Mărfuri, 4111 Clienți, 5121 Conturi la bănci → <strong>activ</strong>.</p>
+<p>401 Furnizori, 419 Clienți-creditori, 4423 TVA de plată → <strong>pasiv</strong>.</p>
+<p><strong>Conturi bifuncționale.</strong> Câteva conturi pot avea, după caz, sold debitor sau creditor: <strong>408</strong>, <strong>418</strong>, <strong>4428</strong>, <strong>473</strong>, <strong>481</strong>. Exact acestea sunt cele care cer atenție și analitice — vezi secțiunile 4 și 5.</p>
+<p><strong>Semnal de eroare:</strong> un cont de activ cu sold creditor (sau invers) înseamnă aproape întotdeauna o înregistrare greșită. Un 4111 cu sold creditor = ai încasat mai mult decât ai facturat (vezi 7.3).</p>
+<hr>
+<h2 id="2-opera-iuni-speciale">2. Operațiuni speciale</h2>
+<h3 id="2-1-pre-ul-din-contract-f-r-men-iune-de-tva">2.1 Prețul din contract fără mențiune de TVA</h3>
+<p>Când un contract menționează sec o sumă — „100.000 lei&quot;, punct, fără nicio precizare — acea sumă se consideră că este <strong>cu tot cu TVA</strong>.</p>
+<p>De aceea este esențial ca în contract să se menționeze explicit: prețul <strong>cu sau fără TVA</strong>, și tranșele în care se primesc banii.</p>
+<p>Principiul este consacrat de jurisprudența CJUE (cauzele conexate C-249/12 și C-250/12, <em>Tulică și Plavoșin</em>).</p>
+<h3 id="2-2-ncasare-mai-mare-dec-t-factura">2.2 Încasare mai mare decât factura</h3>
+<p>Ai emis o factură de 10.000 lei și ai încasat 15.000 lei.</p>
+<p>Diferența de 5.000 lei este un <strong>avans</strong>, nu un venit — deci <strong>nu</strong> poate merge pe 472. Merge pe <strong>419</strong>, iar din ea trebuie extras TVA-ul și colectat, chiar dacă banii se returnează partenerului luna următoare.</p>
+<p>Suma încasată în plus este TVA-inclusivă:</p>
+<ul><li>baza: 5.000 ÷ 1,21 = <strong>4.132,23</strong></li><li>TVA: <strong>867,77</strong></li></ul>
+<div class="ledger"><div class="led-row" id="m1-a1"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">419</span><span class="led-amt">4.132,23</span><span class="led-note"></span></div><div class="led-row" id="m1-a2"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">867,77</span><span class="led-note"></span></div></div>
+<p>Impactul fiscal apare doar când încasarea și restituirea <strong>nu se închid în aceeași lună</strong>. Dacă returnezi banii în aceeași lună, situația se neutralizează.</p>
+<p>Practic: soldul lui 4111 poate apărea ca debit cu minus sau ca sold creditor — de aceea se ia <strong>fișa pe plătitor</strong> și se verifică. Trebuie contraverificat <strong>4427</strong>, ca să confirmi că softul chiar a extras TVA-ul pentru tranzacția respectivă.</p>
+<p>Legiuitorul nu impune corecții când <strong>tu</strong> plătești în plus, dar impune corecția atunci când <strong>tu încasezi</strong> în plus.</p>
+<h3 id="2-3-note-despre-455">2.3 Note despre 455</h3>
+<p>Contul <strong>455</strong> Sume datorate acționarilor/asociaților are restricții privind operațiunile în numerar: plățile din 455 prin casierie nu mai sunt permise în condițiile anterioare. ❓ Punct de verificat în textul legal în vigoare — vezi Anexa D.</p>
+<hr>
+<h2 id="3-numerar-i-plafoane-legea-70-2015">3. Numerar și plafoane (Legea 70/2015)</h2>
+<p>Plafoanele reținute la training:</p>
+<div class="tw"><table><thead><tr><th>Tip operațiune</th><th>Plafon</th></tr></thead><tbody><tr><td>Între persoane juridice (B2B)</td><td><strong>5.000 lei</strong></td></tr><tr><td>Încasări de la persoane fizice (B2C)</td><td><strong>10.000 lei</strong></td></tr><tr><td>Între persoane fizice (C2C)</td><td><strong>50.000 lei</strong></td></tr></tbody></table></div>
+<p><strong>Cum se citesc plafoanele — răspuns la întrebarea din notițe:</strong></p>
+<ul><li>Sunt <strong>plafoane zilnice</strong>, <strong>per persoană</strong> — nu per contract și nu per document izolat. Adică: de la același partener, într-o zi, nu poți încasa în numerar peste plafon, indiferent câte documente emiți.</li><li>Pentru operațiunile între persoane juridice există și un <strong>plafon total zilnic</strong>, peste limita per persoană.</li><li><strong>Fragmentarea este interzisă expres.</strong> Nu poți sparge o factură de 12.000 lei în trei tranșe de 4.000 lei, nici în aceeași zi, nici pe zile consecutive, dacă scopul este eludarea plafonului. Aceasta este și logica pentru care plafonul e „pe zi&quot;: altfel ar fi trivial de ocolit.</li><li>Există și un plafon pentru <strong>soldul casieriei</strong> la sfârșitul zilei.</li></ul>
+<p>Restul, peste plafon, se decontează obligatoriu prin bancă.</p>
+<div class="note"><p>Cifrele exacte au fost modificate prin Legea 296/2023. Înainte de a le aplica la un client, confirmă valorile în textul Legii 70/2015 în vigoare la data operațiunii ❓ — vezi Anexa D.</p></div>
+<hr>
+<h2 id="4-documente-contracte-i-riscuri-la-control">4. Documente, contracte și riscuri la control</h2>
+<h3 id="4-1-prest-ri-servicii-conform-contract">4.1 „Prestări servicii conform contract&quot;</h3>
+<p>Când pe documentul de intrare scrie doar atât, ai o problemă: legea obligă la descrierea <strong>naturii serviciului prestat</strong> (art. 319 Cod fiscal — denumirea și cantitatea bunurilor livrate, denumirea serviciilor prestate).</p>
+<p>Prestările de servicii sunt foarte diverse, iar încadrarea contează:</p>
+<ul><li>dacă factura menționează <strong>numărul contractului</strong>, ești norocos — te uiți în contract;</li><li>o factură de 628 de 100.000 lei cere o cu totul altă abordare decât una de 500 lei;</li><li>cazul fericit: servicii de arhitectură / proiectare → nu e cheltuială, e <strong>imobilizare în curs</strong>.</li></ul>
+<h3 id="4-2-contractul-la-prest-rile-de-servicii">4.2 Contractul la prestările de servicii</h3>
+<p>La prestări de servicii trebuie să existe <strong>contract</strong>. Factura este documentul fiscal; contractul detaliază <strong>cum interacționezi cu partenerul</strong>.</p>
+<div class="note"><p>Nuanță: cerința expresă de a avea contract pentru servicii de management și consultanță, din vechiul Cod fiscal, a fost abrogată. Codul fiscal actual (art. 25 alin. 1) cere ca o cheltuială să fie efectuată <strong>în scopul desfășurării activității economice</strong> și susținută cu documente justificative. Contractul rămâne principalul mijloc de probă la control — deci, practic, indispensabil.</p></div>
+<h3 id="4-3-cazul-penalit-ilor-de-re-inut">4.3 Cazul penalităților — de reținut</h3>
+<p>O firmă de construcții a avut contract de livrare cu un client. Clientul nu a mai achitat. În contract, la capitolul penalități, erau trecute sume foarte mari — pe care firma nu le-a mai facturat și nu le-a trecut la venituri.</p>
+<p>ANAF a constatat că firma <strong>nu și-a respectat propriul contract</strong>, a calculat venituri și majorări pentru soldurile neîncasate, iar firma a rămas și fără venit, și cu bani dați la stat.</p>
+<p><strong>Concluzie:</strong> în contracte se trec <strong>penalități realiste</strong>. O clauză de penalitate exagerată nu te protejează — te expune.</p>
+<h3 id="4-4-sistemele-informatice">4.4 Sistemele informatice</h3>
+<p>Programele au ecrane cu o structură în spate care generează notele contabile fără ca tu să le vezi. Dacă ceva pare suspect, instrumentul de verificare este <strong>fișa de cont</strong>. Nu te baza pe faptul că softul „știe&quot; — mai ales pe conturile bifuncționale.</p>
+<hr>
+<hr>
+<h2 id="anexa-b-checklist-practic">Anexa B — Checklist practic</h2>
+<ol><li><strong>Confuzia 5121 / 5311 / 5111.</strong> 5121 = bancă, 5311 = casa în lei, 5111 = <em>cecuri de încasat</em>. Orice plată bancară — inclusiv prin ordin de plată — trece prin <strong>5121</strong>.</li><li><strong>Impozitul pe profit calculat pe baza greșită.</strong> Soldul creditor al lui 121 este <strong>baza</strong>, nu impozitul. Impozitul este 16% din el.</li><li><strong>Sensul lui 4428.</strong> Debitor la achiziții pe aviz (<code>4428 = 408</code>), creditor la livrări pe aviz (<code>418 = 4428</code>) și la mărfuri la preț cu amănuntul (<code>371 = 4428</code>). Fără analitice, softul le amestecă.</li><li><strong>Uitarea pasului <code>408 = 4428</code>.</strong> Fără el, ambele conturi rămân umflate reciproc la infinit.</li><li><strong>Dublarea gestiunii prin 408.</strong> Factura care nu menționează numărul avizului este cauza clasică. Se verifică împerecherea aviz–factură.</li><li><strong>TVA neexigibilă calculată pe bază greșită</strong> la mărfuri: se aplică la <strong>cost + adaos</strong>, nu la cost.</li><li><strong>Ajustările pentru deprecierea stocurilor tratate ca deductibile.</strong> Sunt nedeductibile; reluarea lor e neimpozabilă. Nu confunda cu ajustările pentru creanțe.</li><li><strong>Uitarea scoaterii din evidență la vânzarea unui mijloc fix.</strong> Facturarea (7583) nu e suficientă — trebuie și <code>2813 = 213</code> plus <code>6583 = 213</code>.</li><li><strong>Diferențe de curs pe avansuri.</strong> Nu se calculează. Stornarea se face la cursul de la data avansului.</li><li><strong>Încasarea în plus pusă pe 472.</strong> Nu este venit — este avans (419) și cere colectare de TVA.</li><li><strong>Conturi cu sold contrar naturii lor</strong> (401 debitor, 4111 creditor) — aproape întotdeauna semn de eroare sau de avans neînregistrat corect.</li><li><strong>473 și 581 cu sold la închidere.</strong> Ambele trebuie golite; un sold acolo ascunde o operațiune neterminată.</li><li><strong>Penalități contractuale nerealiste.</strong> Dacă nu le facturezi, ANAF le poate impune ca venit. Vezi 9.3.</li></ol>
+<hr>
+<hr>
+<h2 id="anexa-d-r-mase-deschise">Anexa D — Rămase deschise</h2>
+<p>Ce e încă provizoriu în documentul ăsta. Lista nu e scrisă aici: vine din <code>date/intrebari.py</code>, aceeași sursă cu foaia „Întrebări deschise” a workbook-ului și cu lista trimisibilă formatorului.</p>
+<p><strong>❓ Care sunt valorile exacte ale plafoanelor din Legea 70/2015 în forma modificată prin Legea 296/2023, la data operațiunii?</strong></p>
+<p><em>Plafoane de numerar și contul 455 · training 19.08.2026, punctul 1</em></p>
+<p>Notițele rețin 5.000 lei B2B, 10.000 lei încasări de la persoane fizice și 50.000 lei între persoane fizice, plus un plafon separat pentru soldul casieriei la sfârșitul zilei. Sunt și plafoane totale zilnice, peste cele per persoană.</p>
+<p><strong>Ce am presupus între timp:</strong> Am păstrat cifrele din notițe, cu mențiunea explicită că trebuie confirmate în textul în vigoare la data operațiunii.</p>
+<p><strong>❓ Care sunt exact operațiunile în numerar interzise pe contul 455 și care e temeiul legal?</strong></p>
+<p><em>Plafoane de numerar și contul 455 · training 19.08.2026, punctul 2</em></p>
+<p>Notițele spun doar că „plățile din 455 prin casierie nu mai sunt permise în condițiile anterioare”, fără să precizeze care condiții și din ce text.</p>
+<p><strong>Ce am presupus între timp:</strong> Am lăsat 455 fără flux, cu golul marcat ca atare în foaie.</p>
+<p><strong>❓ Programul de contabilitate extrage automat TVA-ul din diferența trecută pe 419 la o încasare mai mare decât factura, sau trebuie forțat manual?</strong></p>
+<p><em>Comportamentul softului la încasarea în plus · training 19.08.2026, punctul 3</em></p>
+<p>Suma încasată în plus e TVA-inclusivă: din 5.000 lei ies 4.132,23 bază și 867,77 TVA. Dacă softul nu face extragerea, TVA-ul rămâne necolectat fără ca nimic să semnaleze.</p>
+<p><strong>Ce am presupus între timp:</strong> Am scris fluxul cu extragerea explicită a TVA-ului, ca pas separat, tocmai ca să nu depindă de comportamentul softului.</p>
+<hr>
+<h2 id="anexa-e-baza-legal-citat">Anexa E — Baza legală citată</h2>
+<p>Extrasă automat din textul documentului: sunt listate actele și articolele care apar efectiv citate mai sus. Contextul fiecărei citări e în secțiunea unde apare.</p>
+<p><strong>Acte normative citate</strong></p>
+<ul><li>Legea 70/2015</li><li>Legea 296/2023</li><li>Codul fiscal</li></ul>
+<p><strong>Articole citate</strong></p>
+<p>art. 25 alin. (1), art. 319</p>
+<hr>
+<p><em>Singurul document care nu vine dintr-o zi de training proprie: e partea din 19.08.2026 care nu adâncea niciun subiect existent.</em></p>
+</main></div></body></html>

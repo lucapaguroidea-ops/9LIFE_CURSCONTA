@@ -113,10 +113,15 @@ mai rău decât unul incomplet.
 | Livrabil | Ce e |
 |---|---|
 | `dist/intrebari-formator.md` + `.html` | cele 21 de întrebări rămase deschise, grupate pe temă contabilă, cu context și cu ce s-a presupus între timp |
-| `dist/stocuri-tva-corelatii.md`, `imobilizari.md`, `capitaluri-credite-provizioane.md`, `control-documente-numerar.md` (+ `.docx`) | cele patru documente revizuite, **titrate pe subiect, nu pe ziua de training** — un document care crește cu material din mai multe zile nu mai poate purta cinstit o dată |
+| `dist/stocuri-tva-corelatii.md`, `imobilizari.md`, `capitaluri-credite-provizioane.md`, `control-documente-numerar.md` (+ `.docx` + `.html`) | cele patru documente revizuite, **titrate pe subiect, nu pe ziua de training** — un document care crește cu material din mai multe zile nu mai poate purta cinstit o dată |
 | `dist/parcurs-training-nou.md` | parcursul pe care trebuie să-l urmeze **următorul set de notițe** — vezi mai jos |
 
 Documentele din `surse/` rămân neatinse — acolo stau variantele tale originale.
+În `.html`, monografiile nu sunt text preformatat: trec prin același parser ca poarta 18
+și ies ca **registru** — debit, credit, sumă aliniată la dreapta, storno în roșu, cu
+ancoră pe fiecare înregistrare. Randarea și verificarea citesc aceeași structură, deci
+nu pot diverge; un `.html` convertit separat devine al doilea adevăr.
+
 `.docx`-urile generate **nu** reproduc identic pe cele existente (acelea vin din alt
 lanț, cu fonturi încorporate); sunt însă consistente între ele.
 

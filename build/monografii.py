@@ -41,8 +41,16 @@ RE_ARTICOL = re.compile(
 #: continuarea de un articol nou e absența separatorului, nu marginea din stânga.
 RE_CONTINUARE = re.compile(rf"^(?P<ind>\s*)(?P<cont>{CONT})\s+(?P<rest>.*)$")
 
+#: Semnul minus al stornoului e „−” (U+2212) în documente, nu cratima ASCII. Fără el
+#: în clasă, un storno de −30.000 se citea ca +30.000 — deci nici echilibrul n-ar fi
+#: fost verificat pe cifrele reale, nu doar randarea ar fi greșit culoarea.
+MINUS = "-−–"
+
 #: Sume: cu separator de mii, cu zecimale, sau întregi (poziția le confirmă).
-RE_SUMA = re.compile(r"-?\d{1,3}(?:\.\d{3})+(?:,\d{1,2})?|-?\d+,\d{1,2}|-?\d+")
+RE_SUMA = re.compile(
+    rf"[{MINUS}]?\d{{1,3}}(?:\.\d{{3}})+(?:,\d{{1,2}})?"
+    rf"|[{MINUS}]?\d+,\d{{1,2}}"
+    rf"|[{MINUS}]?\d+")
 
 #: Afirmațiile aritmetice din proză: „5% din 250 = 12,50”, „0,1667 × 24.000 = 4.000”,
 #: „5.000 ÷ 1,21 = 4.132,23”. ASTA e verificarea care ar fi prins eroarea rezervei legale
@@ -85,8 +93,11 @@ def afirmatii(cale):
 
 
 def numar(text):
-    """„26.640” → 26640.0, „4.132,23” → 4132.23, „55,25” → 55.25."""
-    t = text.strip().replace(".", "").replace(",", ".")
+    """„26.640” → 26640.0, „4.132,23” → 4132.23, „−30.000” → -30000.0."""
+    t = text.strip()
+    for m in MINUS[1:]:
+        t = t.replace(m, "-")
+    t = t.replace(".", "").replace(",", ".")
     try:
         return float(t)
     except ValueError:
