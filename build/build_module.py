@@ -26,6 +26,8 @@ from build import stil  # noqa: E402
 from build.foaie import Foaie  # noqa: E402
 from build.recalc import recalc  # noqa: E402
 from date.module import MODULE, PARAMETRI_NOI  # noqa: E402
+from date import ordine as O  # noqa: E402
+from build import renumeroteaza  # noqa: E402
 
 RADACINA = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SEED = os.path.join(RADACINA, "surse", "training-4-2026-08-14", "Module_Declarative_Fluxuri.xlsx")
@@ -148,11 +150,20 @@ def main():
 
     extinde_catalog(wb, MODULE)
 
+    # `date/` foloseste numerotarea VECHE a fluxurilor; renumerotarea e o singura
+    # trecere finala, ca in workbook-ul de plan. Fara ea, catalogul de module ar arata
+    # F-46 langa F-107 -- exact genul de drift pe care sistemul trebuie sa-l excluda.
+    schimbate = renumeroteaza.in_workbook(wb, O.HARTA)
+    ramase = renumeroteaza.ramase(wb, set(O.HARTA))
+    if ramase:
+        raise SystemExit(f"ID-uri vechi ramase in modulele declarative: "
+                         f"{ {k: v[:3] for k, v in ramase.items()} }")
+
     os.makedirs(os.path.dirname(IESIRE), exist_ok=True)
     wb.save(IESIRE)
     recalc(IESIRE)
     print(f"scris: {os.path.relpath(IESIRE, RADACINA)}  "
-          f"({len(MODULE)} module noi × 4 foi = {len(MODULE) * 4} foi adăugate)")
+          f"({len(MODULE)} module, {schimbate} celule renumerotate)")
 
 
 if __name__ == "__main__":

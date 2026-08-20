@@ -112,7 +112,7 @@ def construieste(F, P):
     for row in [
         ("1", "129", "1061", "MIN(5% × profit brut; 20% × capital vărsat − rezerva existentă)",
          "La 31.12.N", "art. 183 L. 31/1990 + art. 26 alin. (1) lit. a) CF"),
-        ("2", "121", "129", "= rezerva constituită", "În ianuarie N+1",
+        ("2", "121", "129", "cât rezerva constituită", "În ianuarie N+1",
          "129 are sold DEBITOR → se închide prin creditare. NU `129 = 1171`"),
         ("3", "121", "1171", "profit rămas nerepartizat", "În ianuarie N+1",
          "1171 cu analitic PE AN (C-21)"),
@@ -121,7 +121,7 @@ def construieste(F, P):
          "cota urmează data DISTRIBUIRII, nu a plății"),
         ("5", "1174", "401", "corecție eroare semnificativă an anterior", "Dacă e cazul",
          "Nu prin 628. Obligatoriu D101 rectificativ"),
-        ("6", "1171", "1174", "= baza corecției", "După AGA",
+        ("6", "1171", "1174", "cât baza corecției", "După AGA",
          "1174 e tranzitoriu — nu poate rămâne cu sold (C-18)"),
     ]:
         g.rand(list(row))

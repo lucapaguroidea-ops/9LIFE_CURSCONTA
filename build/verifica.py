@@ -278,6 +278,23 @@ def poarta_module():
     if stricate == 0:
         ok("8", "toate formulele au paranteze și ghilimele echilibrate")
 
+    # poarta 8c — proză scrisă din greșeală ca formulă.
+    # `openpyxl` scrie orice text care începe cu „=” drept formulă, iar Excel afișează
+    # #NAME?. Motorul de recalc nici măcar nu semnalează: nu poate parsa, deci nu
+    # injectează valoare, deci celula rămâne tăcut stricată. Semnul distinctiv e spațiul
+    # imediat după egal — nicio formulă reală nu arată așa.
+    proza = 0
+    for cale in (PLAN, MODULE):
+        for ws in openpyxl.load_workbook(cale).worksheets:
+            for row in ws.iter_rows():
+                for c in row:
+                    if isinstance(c.value, str) and re.match(r"^=\s", c.value):
+                        cade("8", f"{os.path.basename(cale)} {ws.title}!{c.coordinate}: "
+                                  f"text scris ca formulă — {c.value[:40]!r}")
+                        proza += 1
+    if proza == 0:
+        ok("8", "nicio celulă de text nu e scrisă din greșeală ca formulă")
+
     # poarta 8b — valori de formulă
     wbv = openpyxl.load_workbook(MODULE, data_only=True)
     erori, checkuri, checkuri_ok = 0, 0, 0
