@@ -1,8 +1,17 @@
-"""Armonizează cele trei documente revizuite și le scrie în `dist/`.
+"""Armonizează documentele revizuite și le scrie în `dist/`.
 
-Regula de bază: **corpul nu se atinge.** Se schimbă doar forma legendei, denumirea și
-poziția anexelor, plus se generează Anexa E acolo unde lipsește. Fiecare linie din
-document trebuie să se regăsească în varianta armonizată — verificat, nu promis.
+Regula de bază: **nimic nu se pierde.** Se schimbă forma legendei, denumirea și poziția
+anexelor, se generează Anexa E acolo unde lipsește. Fiecare linie din document trebuie
+să se regăsească în varianta armonizată — verificat, nu promis.
+
+Documentele sunt titrate pe SUBIECT, nu pe ziua de training: un document care crește cu
+material din mai multe zile n-ar mai putea purta cinstit o dată. Zilele-sursă sunt
+listate în antet. E aceeași mișcare făcută în Excel — ordonare pe logică contabilă, nu
+pe tranșe.
+
+Corpul primește adâncirile din sursa împărțită, contopite ÎN secțiunea care tratează
+același subiect, nu lipite la coadă. Ce nu are secțiune-gazdă devine secțiune nouă:
+acela e un gol de subiect, nu o tranșă.
 
 `surse/` rămâne neatins: acolo stau documentele așa cum le-ai scris.
 
@@ -16,9 +25,13 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from build.conservare import _normalizeaza  # noqa: E402
 from build.docx_out import converteste  # noqa: E402
-from date import documente as D  # noqa: E402
+from build import repartizare as brep
+from date import documente as D
+from date import repartizare as drep  # noqa: E402
 
 RADACINA = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+RE_NUMAR_TITLU = re.compile(r"^(#{2,3})\s*\d+(\.\d+)*\.?\s*")
 
 # Tiparele de citare. Sunt deliberat stricte: mai bine ratez o citare exotică decât să
 # raportez ca „act normativ” un fragment de propoziție.
@@ -88,12 +101,159 @@ def _anexa_e(text):
     return "\n".join(out)
 
 
-def armonizeaza(cfg):
-    sursa = os.path.join(RADACINA, cfg["sursa"])
-    with open(sursa, encoding="utf-8") as f:
-        original = f.read()
+# ------------------------------------------------------------------ contopirea
+# O sursă poate alimenta mai multe documente (vezi `date/repartizare.py`). Blocul ei
+# nu se lipește la coada documentului-destinație — asta ar fi o cusătură pe tranșe,
+# exact ce s-a eliminat din Excel. Intră ÎN secțiunea care tratează același subiect,
+# cu subsecțiunile renumerotate ca fii ai ei. Unde destinația n-are secțiune pe acel
+# subiect, blocul devine secțiune nouă: e un gol de subiect, nu o tranșă.
 
-    antet, sectiuni = _sectiuni(original)
+def _fara_numar(titlu):
+    """„### 2.1 Achiziția” → „Achiziția”. Numerotarea e poziție, nu conținut."""
+    return RE_NUMAR_TITLU.sub("", titlu).strip()
+
+
+def blocuri(dest):
+    """Blocurile sursei împărțite care aparțin destinației `dest`.
+
+    Un bloc e o secțiune `##` împreună cu subsecțiunile ei care merg în ACEEAȘI
+    destinație. §2.6 nu vine cu §2: e repartizat la capitaluri, și pleacă acolo.
+    """
+    cale = os.path.join(RADACINA, drep.SURSA)
+    if not os.path.exists(cale):
+        return {}
+    with open(cale, encoding="utf-8") as f:
+        sectiuni_sursa = brep.sectiuni(f.read())
+
+    grupe, curent = {}, None
+    for titlu, linii in sectiuni_sursa:
+        if titlu.startswith("## "):
+            curent = titlu
+            grupe[curent] = dict(intro=linii, sub=[])
+        elif titlu.startswith("### ") and curent:
+            grupe[curent]["sub"].append((titlu, linii))
+
+    out = {}
+    for titlu, g in grupe.items():
+        al_meu = drep.UNDE.get(titlu) == dest
+        sub = [(st, sl) for st, sl in g["sub"] if drep.UNDE.get(st) == dest]
+        if al_meu or sub:
+            out[titlu] = dict(intro=g["intro"] if al_meu else [], sub=sub)
+    return out
+
+
+def _randeaza(bloc, numar, primul_copil):
+    """Corpul unui bloc, cu subsecțiunile renumerotate ca `numar.k`."""
+    out = [l.rstrip() for l in bloc["intro"]]
+    k = primul_copil
+    for titlu, linii in bloc["sub"]:
+        out += ["", f"### {numar}.{k} {_fara_numar(titlu)}", ""]
+        out += [l.rstrip() for l in linii]
+        k += 1
+    return "\n".join(out).strip("\n")
+
+
+def _ultimul_copil(body):
+    """Al câtelea `###` are secțiunea — ca adăugirea să continue numerotarea, nu s-o reia."""
+    nr = [int(m.group(1)) for m in re.finditer(r"^###\s*\d+\.(\d+)", body, flags=re.M)]
+    return max(nr) if nr else 0
+
+
+def _contopeste_adaugirile(cfg, sectiuni):
+    """Bagă blocurile repartizate acestui document în secțiunile lor gazdă.
+
+    Întoarce (secțiuni, textul adăugat). Textul adăugat se lipește la `original`
+    pentru conservare: poarta 12 verifică documentul față de tot ce ar fi trebuit să
+    conțină, nu doar față de sursa lui inițială.
+    """
+    adaugiri = cfg.get("adaugiri") or []
+    if not adaugiri:
+        return sectiuni, ""
+
+    disponibile = blocuri(cfg["cheie"])
+    sectiuni = list(sectiuni)
+    indice = {t.strip(): i for i, (t, _) in enumerate(sectiuni)}
+    adaugat = []
+    noi = {}                                   # titlu secțiune nouă → [bloc, …]
+
+    for a in adaugiri:
+        bloc = disponibile.get(a["bloc"])
+        if bloc is None:
+            raise SystemExit(f"{cfg['nume']}: blocul {a['bloc']!r} nu e repartizat aici "
+                             f"— verifică date/repartizare.py")
+        if a.get("sectiune_noua"):
+            noi.setdefault(a["sectiune_noua"], []).append(bloc)
+            continue
+
+        gazda = a["in_sectiune"]
+        if gazda not in indice:
+            raise SystemExit(f"{cfg['nume']}: secțiunea gazdă {gazda!r} nu există")
+        i = indice[gazda]
+        titlu, body = sectiuni[i]
+        numar = re.match(r"^##\s*(\d+)", titlu)
+        numar = numar.group(1) if numar else "0"
+        text = _randeaza(bloc, numar, _ultimul_copil(body) + 1)
+        sectiuni[i] = (titlu, body.rstrip() + "\n\n" + text + "\n")
+        adaugat.append(text)
+
+    # secțiunile noi merg la coada corpului, numerotate în continuare
+    urmator = max([int(m.group(1)) for t, _ in sectiuni
+                   for m in [re.match(r"^##\s*(\d+)", t)] if m] or [0]) + 1
+    for titlu_nou, lista in noi.items():
+        corp, k = [], 1
+        for bloc in lista:
+            text = _randeaza(bloc, urmator, k)
+            k += len(bloc["sub"])
+            corp.append(text)
+        body = "\n\n".join(corp)
+        # Înaintea anexelor: un document care are deja anexe în corp (training 4 le
+        # avea denumite corect de la bun început) nu trebuie să primească secțiuni de
+        # conținut după ele.
+        prima_anexa = next((i for i, (t, _) in enumerate(sectiuni)
+                            if t.strip().startswith("## Anexa")), len(sectiuni))
+        sectiuni.insert(prima_anexa, (f"## {urmator}. {titlu_nou}", body))
+        adaugat.append(body)
+        urmator += 1
+
+    return sectiuni, "\n".join(adaugat)
+
+
+def _din_repartizare(cfg):
+    """Documentul construit integral din secțiunile care i-au fost repartizate.
+
+    Preambulul sursei (convenția de notare) merge în prima secțiune, nu în antet:
+    antetul e rescris cu titlul și legenda canonice, deci ce s-ar pune acolo s-ar
+    pierde la armonizare — iar poarta 16 chiar asta verifică.
+    """
+    disponibile = blocuri(cfg["cheie"])
+    sectiuni, bucati = [], []
+    if drep.UNDE.get(brep.PREAMBUL) == cfg["cheie"]:
+        cale = os.path.join(RADACINA, drep.SURSA)
+        with open(cale, encoding="utf-8") as f:
+            pre = next((l for t, l in brep.sectiuni(f.read()) if t == brep.PREAMBUL), [])
+        text = "\n".join(l.rstrip() for l in pre
+                          if not l.startswith("# ") and l.strip() != "---").strip("\n")
+        if text:
+            sectiuni.append(("## Convenția de notare", text))
+            bucati.append(text)
+    for nr, (titlu, bloc) in enumerate(disponibile.items(), start=1):
+        text = _randeaza(bloc, nr, 1)
+        sectiuni.append((f"## {nr}. {_fara_numar(titlu)}", text))
+        bucati.append(f"{titlu}\n{text}")
+    return "\n\n".join(bucati), sectiuni
+
+
+def armonizeaza(cfg):
+    if cfg.get("repartizat"):
+        original, sectiuni = _din_repartizare(cfg)
+        antet = ""
+    else:
+        sursa = os.path.join(RADACINA, cfg["sursa"])
+        with open(sursa, encoding="utf-8") as f:
+            original = f.read()
+        antet, sectiuni = _sectiuni(original)
+        sectiuni, adaugat = _contopeste_adaugirile(cfg, sectiuni)
+        original += "\n" + adaugat
 
     # Documentul care are deja secțiunea canonică nu o primește a doua oară — ar apărea
     # de două ori. Tabelul canonic e chiar al lui, deci nu are ce să se schimbe.
@@ -113,11 +273,13 @@ def armonizeaza(cfg):
     antet_nou += ["---", ""]
 
     # --- corpul, fără secțiunile care devin anexe
-    de_mutat = cfg["anexe"]
+    # potrivirea se face fără numerotare: o secțiune repartizată e renumerotată în
+    # documentul-gazdă, dar rămâne aceeași secțiune.
+    de_mutat = {_fara_numar(t): a for t, a in cfg["anexe"].items()}
     corp, mutate = [], {}
     for titlu, body in sectiuni:
-        if titlu in de_mutat:
-            mutate[de_mutat[titlu]] = body.strip("\n")
+        if _fara_numar(titlu) in de_mutat:
+            mutate[de_mutat[_fara_numar(titlu)]] = body.strip("\n")
         else:
             corp += [titlu, body.rstrip() + "\n"]
 
@@ -149,10 +311,17 @@ def verifica_conservare(original, nou, cfg):
                   if l.startswith("# ") or l.startswith("### ") or l.startswith("*Versiune")}
 
     prezente = {_normalizeaza(l) for l in nou.split("\n") if l.strip()}
+    # Un titlu renumerotat nu e un titlu pierdut: secțiunea repartizată primește
+    # numerotarea documentului-gazdă. Aceeași regulă ca la poarta 16 — numerotarea e
+    # poziție, iar poziția a fost liberă de la reordonarea Excel-ului încoace.
+    titluri = {_normalizeaza(_fara_numar(l)) for l in nou.split("\n")
+               if l.startswith("##")}
     lipsa = []
     for l in original.split("\n"):
         n = _normalizeaza(l)
         if not n or n in declarate or n in prezente:
+            continue
+        if l.startswith("##") and _normalizeaza(_fara_numar(l)) in titluri:
             continue
         if any(n in p for p in prezente):
             continue

@@ -549,7 +549,8 @@ def poarta_documente():
         if not os.path.exists(docx):
             cade("13", f"{cfg['nume']}: lipsește {os.path.basename(docx)}")
     if not any(e.startswith("[13]") for e in esecuri):
-        ok("13", "cele trei documente au aceeași legendă, anexe canonice și .docx")
+        ok("13", f"cele {len(ddoc.DOCUMENTE)} documente au aceeași legendă, anexe canonice "
+                 f"și .docx")
 
 
 # ----------------------------------------------------------------------- poarta 16

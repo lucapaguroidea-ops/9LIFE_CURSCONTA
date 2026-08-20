@@ -178,3 +178,38 @@ UNDE = {titlu: dest for titlu, dest, _ in REPARTIZARE}
 
 #: titlu → motiv
 DE_CE = {titlu: motiv for titlu, _, motiv in REPARTIZARE}
+
+
+# ---------------------------------------------------------------------------
+# Titlurile absorbite
+#
+# Contopirea „în secțiunea care tratează același subiect” înseamnă că titlul blocului
+# dispare: conținutul lui §4 „Mecanica TVA” trăiește sub §7 „Conturile de TVA”, iar
+# două titluri pe același subiect ar fi doar zgomot.
+#
+# Dispariția e o DECIZIE, nu o pierdere — deci se declară, cu gazda ei. Fără lista
+# asta, poarta 16 ar cere ca fiecare titlu-sursă să apară undeva, iar singurul mod de
+# a o mulțumi ar fi lipirea blocurilor la coadă: exact cusătura pe tranșe pe care
+# retitrarea pe subiect a eliminat-o.
+# ---------------------------------------------------------------------------
+
+ABSORBITE = {
+    "# Ghid de contabilitate — mărfuri, TVA neexigibilă și clasa 4":
+        "Titlul sursei. Documentele poartă acum titluri pe subiect, iar materialul "
+        "sursei s-a împărțit la patru: un singur titlu nu-l mai poate acoperi.",
+    "## 2. Mărfuri la preț cu amănuntul (371)":
+        "Absorbit în „## 8. Mărfuri (371)” din documentul de stocuri.",
+    "## 3. Ajustări pentru deprecierea stocurilor":
+        "Absorbit tot în „## 8. Mărfuri (371)”: ajustarea se face pe gestiunea de "
+        "mărfuri, deci stă lângă ea.",
+    "## 4. Mecanica TVA":
+        "Absorbit în „## 7. Conturile de TVA”.",
+    "## 5. Furnizori — clasa 40":
+        "Absorbit în secțiunea nouă „Furnizori și clienți — clasele 40 și 41”.",
+    "## 6. Clienți — clasa 41":
+        "Absorbit în aceeași secțiune nouă, împreună cu furnizorii: 408 și 418 sunt "
+        "oglinzi, iar separate ar cere cititorului să sară între secțiuni.",
+    "## 7. Operațiuni speciale":
+        "Blocul s-a rupt în trei destinații, deci titlul lui n-are ce acoperi: §7.1 e "
+        "la imobilizări, restul la control.",
+}

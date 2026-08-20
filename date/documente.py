@@ -62,11 +62,18 @@ originale.
 
 DOCUMENTE = [
     dict(
-        nume="training-2",
+        nume="capitaluri",
+        cheie="doc:capitaluri",
         sursa="surse/training-2-2026-08-07/notite-revizuit.md",
-        iesire="dist/notite-training-2-2026-08-07.md",
-        titlu="Notițe training — 07.08.2026",
-        subtitlu="Capitaluri, credite, leasing, provizioane — versiune revizuită",
+        iesire="dist/capitaluri-credite-provizioane.md",
+        titlu="Capitaluri, credite, leasing și provizioane",
+        subtitlu="Surse: training 07.08.2026 · adâncit cu 19.08.2026 — versiune revizuită",
+        adaugiri=[
+            # Închiderea lui 121 și impozitul pe profit sunt F-104: capitaluri, nu
+            # stocuri. Sursa le ține sub §2, „mărfuri” — aici se rup de acolo.
+            dict(bloc="## 2. Mărfuri la preț cu amănuntul (371)",
+                 in_sectiune="## 2. Pierderea contabilă vs. pierderea fiscală"),
+        ],
         # rândurile de legendă vechi, înlocuite de tabelul canonic
         legenda_veche=[
             "**Legendă:**",
@@ -82,11 +89,17 @@ DOCUMENTE = [
              "față pentru că funcționează ca rezumat executiv al documentului.",
     ),
     dict(
-        nume="training-3",
+        nume="imobilizari",
+        cheie="doc:imobilizari",
         sursa="surse/training-3-2026-08-12/notite-revizuit.md",
-        iesire="dist/notite-training-3-2026-08-12.md",
-        titlu="Imobilizări — notițe training 12.08.2026",
-        subtitlu="Versiune revizuită, reorganizată și contraverificată",
+        iesire="dist/imobilizari.md",
+        titlu="Imobilizări",
+        subtitlu="Surse: training 12.08.2026 · adâncit cu 19.08.2026 — "
+                 "versiune revizuită, reorganizată și contraverificată",
+        adaugiri=[
+            dict(bloc="## 7. Operațiuni speciale",
+                 in_sectiune="## 11. Ieșiri din gestiune"),
+        ],
         legenda_veche=[
             "**Legendă folosită în document:**",
             "| Marcaj | Semnificație |",
@@ -106,15 +119,49 @@ DOCUMENTE = [
              "anexe: e conținut de continuare, nu material de referință.",
     ),
     dict(
-        nume="training-4",
+        nume="stocuri-tva",
+        cheie="doc:stocuri-tva",
         sursa="surse/training-4-2026-08-14/notite-revizuit.md",
-        iesire="dist/notite-training-4-2026-08-14.md",
-        titlu="Notițe training — 14.08.2026",
-        subtitlu="Stocuri (clasa 3), TVA și corelații de balanță — versiune revizuită",
+        iesire="dist/stocuri-tva-corelatii.md",
+        titlu="Stocuri, TVA și corelații de balanță",
+        subtitlu="Surse: training 14.08.2026 · adâncit cu 19.08.2026 — "
+                 "stocuri (clasa 3), TVA și corelații de balanță, versiune revizuită",
+        adaugiri=[
+            dict(bloc="## 4. Mecanica TVA", in_sectiune="## 7. Conturile de TVA"),
+            dict(bloc="## 2. Mărfuri la preț cu amănuntul (371)",
+                 in_sectiune="## 8. Mărfuri (371)"),
+            dict(bloc="## 3. Ajustări pentru deprecierea stocurilor",
+                 in_sectiune="## 8. Mărfuri (371)"),
+            # Clasele 40 și 41 nu aveau secțiune-gazdă: e un gol de subiect într-un
+            # document titrat pe subiect, deci devin secțiune proprie.
+            dict(bloc="## 5. Furnizori — clasa 40",
+                 sectiune_noua="Furnizori și clienți — clasele 40 și 41"),
+            dict(bloc="## 6. Clienți — clasa 41",
+                 sectiune_noua="Furnizori și clienți — clasele 40 și 41"),
+        ],
         legenda_veche=[],          # are deja forma canonică
         anexe={},                  # anexele A–E sunt deja denumite corect
         genereaza=["F"],
-        nota="Singurul dintre cele trei care avea deja anexele denumite. Primește "
-             "Anexa F, care exista doar ca notă în foaia Legendă a workbook-ului.",
+        nota="Singurul care avea deja anexele denumite. Primește Anexa F, care exista "
+             "doar ca notă în foaia Legendă a workbook-ului.",
+    ),
+    dict(
+        # Construit integral din secțiunile pe care `date/repartizare.py` i le dă.
+        # Materialul lui nu e monografie: plafoane, reguli de document, practică de
+        # control. De-asta n-avea unde să intre în celelalte trei — sistemul e făcut
+        # pentru fluxuri, iar astea nu produc articole contabile.
+        nume="control",
+        cheie="doc:control",
+        repartizat=True,
+        sursa="surse/training-5-2026-08-19/ghid-contabilitate.md",
+        iesire="dist/control-documente-numerar.md",
+        titlu="Control, documente și numerar",
+        subtitlu="Sursă: training 19.08.2026 — cum se citește un cont, ce cere legea de "
+                 "la un document și unde se rupe disciplina de casă",
+        legenda_veche=[],
+        anexe={"## 12. Erori frecvente și capcane": "B"},
+        genereaza=["E"],
+        nota="Singurul document care nu vine dintr-o zi de training proprie: e partea "
+             "din 19.08.2026 care nu adâncea niciun subiect existent.",
     ),
 ]

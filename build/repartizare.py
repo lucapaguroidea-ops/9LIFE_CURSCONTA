@@ -122,6 +122,10 @@ def verifica(foi):
         text = f.read()
 
     declarate = {_norm(t) for t in dreform.DECLARATE}
+    # titlurile de bloc absorbite într-o secțiune-gazdă: dispariția lor e o
+    # decizie de repartizare, declarată cu gazda ei în date/repartizare.py
+    declarate |= {_norm(t) for t in drep.ABSORBITE}
+    declarate |= {cheie_titlu(t) for t in drep.ABSORBITE if t.startswith("#")}
     cunoscute = {cheie_titlu(t) for t in drep.UNDE}
 
     orfane, lipsa, fara_artefact = [], [], []
