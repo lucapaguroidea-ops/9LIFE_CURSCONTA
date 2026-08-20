@@ -8,7 +8,7 @@
 
 Documentul ăsta nu explică sistemul. Îl **indică**.
 
-Suprafața de referință e mare — două workbook-uri, trei documente revizuite, o listă de
+Suprafața de referință e mare — două workbook-uri, patru documente revizuite, o listă de
 întrebări deschise — și fiecare are logica lui internă. O parafrază a lor s-ar citi mai
 ușor decât originalul, deci ar fi crezută în locul lui. Exact asta trebuie evitat.
 
@@ -36,12 +36,13 @@ Tabelul de mai jos nu e scris aici: e citit din foaia `Legendă`, secțiunea „
 | Plan de conturi | 270+ rânduri, cu 3 coloane noi: Analitice recomandate · Factor · Flux (pas) |
 | Doar rol în flux | 81 conturi de serviciu, grupate pe rol |
 | Analitice (Tier A) | Detaliu pe conturile Tier A: structură, factor, ce se rupe și de ce |
-| Fluxuri | 60 fluxuri × pași, tabelar cu note complete + coloană Declarativ |
+| Fluxuri | 61 fluxuri × pași, tabelar cu note complete + coloană Declarativ |
 | Matrice acoperire | Cont → flux(uri) → pas revelator; arată golurile |
 | Index module | Legătura cu Module_Declarative_Fluxuri.xlsx: ce modul acoperă ce flux, cu ce foi și când se rulează |
 | Arbore analitice | Arborele de decizie pentru analitice (3 întrebări) + contra-regula: când analiticul e o greșeală |
 | Corelații de control | Formulă · unde se verifică · ce o rupe LEGITIM vs. SUSPECT · fluxul și modulul legat |
 | Întrebări deschise | Ce e încă provizoriu în workbook: întrebările la care sistemul așteaptă răspuns. Fluxurile atinse poartă ❓ |
+| Închideri periodice | Disciplina de închidere: ce cont, la ce cadență, cu ce stare terminală declarată în flux. Rândurile fără flux sunt goluri cunoscute, marcate ca atare |
 | Istoric | Echivalența de numerotare veche → nouă, contopirile, defectele reparate, textul mutat la deduplicare |
 
 **Documente conexe:** cele trei `.md`/`.docx` revizuite (structura lor canonică e în `date/documente.py`) și `intrebari-formator.md` — lista întrebărilor deschise, aceeași sursă cu foaia `Întrebări deschise`.
@@ -97,7 +98,7 @@ Se schimbă prin OUG peste noapte. Un prag corect acum poate fi fals la aplicare
 
 Completările ➕ sunt partea care transformă notițele în material utilizabil. Trebuie însă marcate ca atare: cititorul are dreptul să știe ce a spus formatorul și ce am adăugat eu.
 
-↳ legenda de marcaje, identică în toate trei documentele (poarta 13)
+↳ legenda de marcaje, identică în toate documentele (poarta 13)
 
 **8. Ce a rămas ambiguu?**
 
@@ -152,7 +153,7 @@ Fiecare analitic are un factor și spune ce se rupe fără el (poarta 5). Fiecar
 
 **5. Rulează `make tot`**
 
-Regenerează ambele workbook-uri, cele trei documente și lista de întrebări, apoi rulează toate porțile. Nimic nu se consideră gata până nu sunt toate verzi.
+Regenerează ambele workbook-uri, documentele și lista de întrebări, apoi rulează toate porțile. Nimic nu se consideră gata până nu sunt toate verzi.
 
 **6. Când o poartă pică, nu o ocoli**
 
@@ -166,12 +167,15 @@ Fiecare poartă are un motiv scris în `build/verifica.py`. Dacă un text chiar 
 | `date/corelatii.py` | Corelațiile de control C-13…C-22 (capitaluri și imobilizări). |
 | `date/documente.py` | Planul de armonizare a celor trei documente revizuite. |
 | `date/fluxuri_capitaluri.py` | Fluxurile F-45…F-51 — capitaluri, credite, leasing, provizioane. |
+| `date/fluxuri_control.py` | Fluxul F-63 (→ F-415) — încasare mai mare decât factura. |
 | `date/fluxuri_imobilizari.py` | Fluxurile F-52…F-62 — imobilizări necorporale, corporale, în curs, ieșiri, financiare. |
+| `date/inchideri.py` | Cadența de urmărire a conturilor — partea care NU se poate deduce din fluxuri. |
 | `date/intrebari.py` | Cele 21 de întrebări deschise, grupate pe temă contabilă. |
 | `date/ordine.py` | Ordinea canonică a sistemului — singura sursă de adevăr pentru poziții și ID-uri. |
 | `date/parcurs.py` | Partea SCRISĂ DE MÂNĂ a documentului de parcurs. |
 | `date/plan.py` | Actualizări pe foaia `Plan de conturi` + conturi sintetice lipsă + rânduri de matrice. |
 | `date/reformulari.py` | Textele din originalul training 4 care au voie să dispară, fiecare cu motiv. |
+| `date/repartizare.py` | Unde merge fiecare subsecțiune a unei surse care alimentează mai multe destinații. |
 
 ### Clasele de fluxuri *[generat]*
 
@@ -182,7 +186,7 @@ ID-ul codifică clasa contului principal. Un flux nou primește următorul numă
 | `F-1xx` | CAPITALURI, PROVIZIOANE, ÎMPRUMUTURI | 8 | `F-109` |
 | `F-2xx` | IMOBILIZĂRI | 14 | `F-215` |
 | `F-3xx` | STOCURI ȘI PRODUCȚIE | 20 | `F-321` |
-| `F-4xx` | TERȚI, TVA, DECONTĂRI | 14 | `F-415` |
+| `F-4xx` | TERȚI, TVA, DECONTĂRI | 15 | `F-416` |
 | `F-5xx` | TREZORERIE | 2 | `F-503` |
 | `F-8xx` | CONTURI ÎN AFARA BILANȚULUI | 2 | `F-803` |
 
@@ -228,6 +232,8 @@ Un flux e util și fără modul: fluxul explică, modulul execută. Dacă adaugi
 | **13** | cele trei documente au aceeași legendă, anexe canonice în ordine, și .docx |
 | **14** | tabelul de structură din foaia Legendă cunoaște toate foile workbook-ului |
 | **15** | documentul de parcurs nu citează foi, fișiere sau porți care nu există |
+| **16** | o sursă împărțită pe mai multe destinații nu pierde nimic în cusătură: fiecare subsecțiune are destinație declarată și ajunge exact acolo |
+| **17** | disciplina de închidere e ancorată în ambele sensuri: fiecare cont urmărit periodic e starea terminală a unui flux, iar fiecare cont cu rol în flux care se golește are o cadență — sau un motiv declarat pentru care nu are |
 
 Motivul fiecărei porți e scris în `build/verifica.py`, lângă ea. Când o poartă pică, acolo scrie de ce există.
 
@@ -249,9 +255,12 @@ cunoscute**: acolo trebuie să te uiți tu.
 | Suprascrierea unei celule care avea deja conținut | Conținut vechi pierdut tăcut. S-a întâmplat: 12 linii pierdute la o etapă anterioară. | poarta 9 |
 | Catalogul rămâne în urma monografiilor | Indexul nu mai cunoaște toate fluxurile. S-a întâmplat: 13 din 44 lipseau — de atunci catalogul se derivă din monografii. | poarta 10 |
 | Foaie nouă absentă din tabelul de structură al Legendei | Legenda nu-și mai cunoaște propriul fișier. | poarta 14 |
-| Cont folosit într-un flux dar absent din `Plan de conturi` | Navigarea cont → flux se rupe pentru contul acela. La trainingurile 2 și 3 erau 27 de conturi în situația asta. | **nimic — verifică tu** |
+| Cont folosit într-un flux dar absent din `Plan de conturi` | Navigarea cont → flux se rupe pentru contul acela. La trainingurile 2 și 3 erau 27 de conturi în situația asta; poarta 16 a mai scos la iveală șapte (6583, 7583, 6814, 7814, 5121, 2813, 4091), dar din întâmplare — pentru că sursa le enumera într-un tabel. Nimic nu face comparația sistematic. | **nimic — verifică tu** |
 | Întrebare marcată ❓ în document, dar neintrodusă în `date/intrebari.py` | Rămâne în proză și nu ajunge nici în foaia `Întrebări deschise`, nici în lista pentru formator. Semnalul se pierde exact unde ar trebui să apară. | **nimic — verifică tu** |
 | Modul nou care nu declară fluxul în `CATALOG['fluxuri']` | Ancora modul nu se mai generează — nici pe flux, nici pe corelație, nici pe matrice. Legătura se pierde tăcut, pentru că derivarea nu are de unde ști. | **nimic — verifică tu** |
+| Subsecțiune dintr-o sursă împărțită, rămasă nerepartizată | O sursă poate alimenta mai multe documente. Riscul nu e „nimeni n-a luat-o”, ci „am crezut că a luat-o celălalt”: fiecare document trece poarta 12 separat, în timp ce materialul cade între ele. | poarta 16 |
+| Material repartizat undeva, dar ajuns în altă parte | Verificarea pe reuniunea destinațiilor ar spune doar că textul există pe undeva — întrebarea greșită. Poarta compară cu destinația declarată. | poarta 16 |
+| Cont urmărit periodic fără flux care să-i demonstreze starea | Checklistul de închidere ar cere ceva ce sistemul nu arată nicăieri. Invers, un cont cu rol în flux care se golește și nu e urmărit dispare din disciplina lunară. | poarta 17 |
 | Cifre care nu se leagă într-un exemplu scris în proză | Documentul revizuit conține o monografie greșită, iar poarta 1 nu se uită acolo. | **nimic — verifică tu** |
 
 ---
@@ -314,4 +323,4 @@ Fiecare ❓ din `.md` ar trebui să aibă corespondent în lista de întrebări.
 
 ---
 
-*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 15 porți, 16 module, 60 fluxuri la data generării.*
+*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 17 porți, 16 module, 61 fluxuri la data generării.*

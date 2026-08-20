@@ -295,6 +295,18 @@ def armonizeaza(cfg):
             anexe += ["---", "", f"## Anexa {litera} — {D.ANEXE[litera]}", "",
                       D.ANEXA_F_TRAINING_4, ""]
 
+    # Anexele care există deja în corp se EXTIND, nu se rescriu: corecțiile aduse de o
+    # sursă nouă stau lângă cele vechi, în aceeași anexă, nu într-una paralelă.
+    for litera, text in (cfg.get("extinde_anexe") or {}).items():
+        cap = f"## Anexa {litera} — "
+        # `corp` e o listă plată titlu, corp, titlu, corp… — corpul e imediat după titlu
+        for i in range(0, len(corp) - 1, 2):
+            if str(corp[i]).strip().startswith(cap):
+                corp[i + 1] = corp[i + 1].rstrip() + "\n\n" + text + "\n"
+                break
+        else:
+            raise SystemExit(f"{cfg['nume']}: nu există Anexa {litera} de extins")
+
     if cfg["nota"]:
         anexe += ["---", "", f"*{cfg['nota']}*", ""]
 

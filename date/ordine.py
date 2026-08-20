@@ -90,6 +90,7 @@ CLASA_4 = [
     ("F-412", "F-30", "Avansuri 471 / 472 (regularizare temporală)"),
     ("F-413", "F-32", "Salarii"),
     ("F-414", "F-38", "Decontări 481 / 482 (unitate ↔ subunități)"),
+    ("F-415", "F-63", "Încasare peste factură (supraîncasare → 419 + TVA)"),
 ]
 
 CLASA_5 = [

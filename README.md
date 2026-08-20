@@ -92,14 +92,28 @@ celule `Check`. Niciunul nu mai e „exemplu extern”: `MOD_LEASING_FIN`, `MOD_
 `MOD_CREDIT_VALUTA`, `MOD_PROVIZION` și `MOD_SUBVENTIE` acoperă fluxurile care aveau
 monografie dar nu și motor executabil.
 
-22 corelații de control, 58 de conturi Tier A cu analitice justificate.
+23 corelații de control, 58 de conturi Tier A cu analitice justificate.
+
+### Foaia `Închideri periodice`
+
+Disciplina de închidere — ce cont, la ce cadență, cu ce stare terminală. Nu e o listă
+scrisă de mână: aserțiunile există deja în monografii, în pașii de verificare (`F-405`:
+„Sold 4426 = 0; sold 4427 = 0”, `F-501`: „Sold 581 = 0”), iar foaia le **citește** de
+acolo. De mână rămâne doar cadența — un flux spune ce stare atinge contul, nu cât de des
+te uiți la el.
+
+Poarta 17 leagă cele două sensuri. Sensul invers a găsit imediat două conturi de tranzit
+pe care notițele le omiseseră: `327` și `223`, ambele „în curs de aprovizionare”, ambele
+cu „sold = 0” declarat în monografie. Conturile fără flux în spate apar în foaie **fără
+ancoră**, cu motivul scris — un checklist care afirmă ceva ce sistemul nu demonstrează e
+mai rău decât unul incomplet.
 
 ## Ce mai produce repo-ul, pe lângă workbook-uri
 
 | Livrabil | Ce e |
 |---|---|
 | `dist/intrebari-formator.md` + `.html` | cele 21 de întrebări rămase deschise, grupate pe temă contabilă, cu context și cu ce s-a presupus între timp |
-| `dist/notite-training-*.md` + `.docx` | cele trei documente revizuite, armonizate: aceeași legendă, aceleași anexe, aceeași ordine |
+| `dist/stocuri-tva-corelatii.md`, `imobilizari.md`, `capitaluri-credite-provizioane.md`, `control-documente-numerar.md` (+ `.docx`) | cele patru documente revizuite, **titrate pe subiect, nu pe ziua de training** — un document care crește cu material din mai multe zile nu mai poate purta cinstit o dată |
 | `dist/parcurs-training-nou.md` | parcursul pe care trebuie să-l urmeze **următorul set de notițe** — vezi mai jos |
 
 Documentele din `surse/` rămân neatinse — acolo stau variantele tale originale.
@@ -151,7 +165,7 @@ degeaba după ele; **patru sunt goluri cunoscute**, marcate „nimic — verific
 
 ## Porțile de calitate
 
-`make verifica` rulează 15 porți; toate trebuie verzi:
+`make verifica` rulează 17 porți; toate trebuie verzi:
 
 1. ΣDebit = ΣCredit pe fiecare pas de flux cu sume
 2. fiecare flux se închide cu stare terminală declarată și un „Principiul:”
@@ -165,10 +179,29 @@ degeaba după ele; **patru sunt goluri cunoscute**, marcate „nimic — verific
 10. catalogul acoperă fix monografiile
 11. zero nume definite rupte
 12. conservare pe documentele revizuite — nicio linie pierdută la armonizare
-13. cele trei documente au aceeași legendă și anexe canonice, în ordine
+13. documentele au aceeași legendă și anexe canonice, în ordine
 14. tabelul de structură din Legendă cunoaște toate foile workbook-ului
 15. documentul de parcurs nu citează foi, fișiere sau porți care nu există — și lista
     canonică de porți din `build/verifica.py` coincide cu porțile chemate efectiv
+16. **repartizare** — o sursă împărțită pe mai multe destinații nu pierde nimic în
+    cusătură: fiecare subsecțiune are destinație declarată și ajunge exact acolo
+17. disciplina de închidere e ancorată în ambele sensuri: fiecare cont urmărit periodic
+    e starea terminală a unui flux, iar fiecare cont cu rol în flux care se golește are
+    o cadență — sau un motiv declarat pentru care nu are
+
+### Poarta de repartizare
+
+Poarta 12 verifică perechea document ↔ sursa lui. Când o singură sursă hrănește patru
+destinații, fiecare document poate trece poarta 12 separat **în timp ce material cade
+între ele**. Riscul nu e „nimeni n-a luat-o”, ci *„am crezut că a luat-o celălalt”*.
+
+`date/repartizare.py` declară împărțirea înainte de a fi făcută — fiecare subsecțiune cu
+destinația și **motivul** ei. Destinația nu e mereu un document: tabelul de conturi
+aparține planului, întrebările deschise listei de întrebări, disciplina de închidere foii
+care o ține.
+
+Verificarea pe *reuniunea* destinațiilor ar spune doar că textul există pe undeva — exact
+întrebarea greșită. Poarta compară cu destinația **declarată**.
 
 ### Poarta de conservare
 

@@ -135,4 +135,23 @@ CORELATII = [
         flux="F-52, F-58",
         severitate="Înaltă — amortizare neînregistrată, bilanț denaturat",
     ),
+    dict(
+        id="C-23",
+        formula="sensul soldului = natura contului\n"
+                "401, 404 → creditor · 4111, 409 → debitor\n"
+                "(pe analitic de partener, NU pe total)",
+        unde="Balanța analitică de terți + fișa pe plătitor",
+        legitim="Avans plătit unui furnizor, ținut pe 401 în loc de 4091 —\n"
+                "sold debitor real, dar pus pe contul greșit (se reclasifică, nu se ignoră)\n"
+                "Storno de factură înregistrat înaintea facturii pe care o anulează\n"
+                "Notă de credit primită și neînchisă încă",
+        suspect="Încasare mai mare decât factura, nereclasificată pe 419 —\n"
+                "  TVA-ul din diferență rămâne necolectat (F-415)\n"
+                "Plată dublă către același furnizor\n"
+                "Factură înregistrată de două ori și stornată o singură dată\n"
+                "Analitic de partener greșit: soldul se compensează pe total și\n"
+                "  dispare din vedere, deși pe partener e contrar naturii",
+        flux="F-415, F-410",
+        severitate="Înaltă — TVA necolectat și creanțe/datorii raportate eronat",
+    ),
 ]

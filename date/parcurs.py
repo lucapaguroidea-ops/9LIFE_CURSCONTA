@@ -15,7 +15,7 @@ nicio regulă contabilă în acest fișier, ci doar trimiteri la locul unde stă
 INTRO = """\
 Documentul ăsta nu explică sistemul. Îl **indică**.
 
-Suprafața de referință e mare — două workbook-uri, trei documente revizuite, o listă de
+Suprafața de referință e mare — două workbook-uri, patru documente revizuite, o listă de
 întrebări deschise — și fiecare are logica lui internă. O parafrază a lor s-ar citi mai
 ușor decât originalul, deci ar fi crezută în locul lui. Exact asta trebuie evitat.
 
@@ -79,7 +79,7 @@ FAZA_A = [
      "Completările ➕ sunt partea care transformă notițele în material utilizabil. "
      "Trebuie însă marcate ca atare: cititorul are dreptul să știe ce a spus formatorul "
      "și ce am adăugat eu.",
-     "legenda de marcaje, identică în toate trei documentele (poarta 13)"),
+     "legenda de marcaje, identică în toate documentele (poarta 13)"),
 
     ("Ce a rămas ambiguu?",
      "Ambiguitatea nu se rezolvă prin ghicit. Se marchează ❓, se scrie ce am presupus "
@@ -124,7 +124,7 @@ RUNBOOK = [
      "corelația nu ajută pe nimeni la închiderea lunii."),
 
     ("5. Rulează `make tot`",
-     "Regenerează ambele workbook-uri, cele trei documente și lista de întrebări, apoi "
+     "Regenerează ambele workbook-uri, documentele și lista de întrebări, apoi "
      "rulează toate porțile. Nimic nu se consideră gata până nu sunt toate verzi."),
 
     ("6. Când o poartă pică, nu o ocoli",
@@ -176,7 +176,9 @@ CONVERGENTA = [
 
     ("Cont folosit într-un flux dar absent din `Plan de conturi`",
      "Navigarea cont → flux se rupe pentru contul acela. La trainingurile 2 și 3 erau "
-     "27 de conturi în situația asta.", None),
+     "27 de conturi în situația asta; poarta 16 a mai scos la iveală șapte (6583, "
+     "7583, 6814, 7814, 5121, 2813, 4091), dar din întâmplare — pentru că sursa le "
+     "enumera într-un tabel. Nimic nu face comparația sistematic.", None),
 
     ("Întrebare marcată ❓ în document, dar neintrodusă în `date/intrebari.py`",
      "Rămâne în proză și nu ajunge nici în foaia `Întrebări deschise`, nici în lista "
@@ -185,6 +187,20 @@ CONVERGENTA = [
     ("Modul nou care nu declară fluxul în `CATALOG['fluxuri']`",
      "Ancora modul nu se mai generează — nici pe flux, nici pe corelație, nici pe "
      "matrice. Legătura se pierde tăcut, pentru că derivarea nu are de unde ști.", None),
+
+    ("Subsecțiune dintr-o sursă împărțită, rămasă nerepartizată",
+     "O sursă poate alimenta mai multe documente. Riscul nu e „nimeni n-a luat-o”, ci "
+     "„am crezut că a luat-o celălalt”: fiecare document trece poarta 12 separat, în "
+     "timp ce materialul cade între ele.", 16),
+
+    ("Material repartizat undeva, dar ajuns în altă parte",
+     "Verificarea pe reuniunea destinațiilor ar spune doar că textul există pe undeva "
+     "— întrebarea greșită. Poarta compară cu destinația declarată.", 16),
+
+    ("Cont urmărit periodic fără flux care să-i demonstreze starea",
+     "Checklistul de închidere ar cere ceva ce sistemul nu arată nicăieri. Invers, un "
+     "cont cu rol în flux care se golește și nu e urmărit dispare din disciplina "
+     "lunară.", 17),
 
     ("Cifre care nu se leagă într-un exemplu scris în proză",
      "Documentul revizuit conține o monografie greșită, iar poarta 1 nu se uită acolo.",

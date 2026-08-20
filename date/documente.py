@@ -60,6 +60,29 @@ originale.
 | `4424` la corecția TVA nedeductibilă | Contul este `4426` |
 """
 
+#: Defectele găsite la verificarea cifrelor sursei din 19.08.2026. Toate șase cad în
+#: documentul de stocuri, pentru că toate sunt în §2–§6 ale sursei. Se adaugă la Anexa C
+#: existentă, cu textul original alături — reparate tăcut, ar fi dispărut din istorie.
+CORECTII_SURSA_19_08 = """### Corecții la materialul din 19.08.2026
+
+Cifrele fiecărui exemplu din sursă au fost refăcute. Cinci din șase se leagă exact:
+gestiunea la preț cu amănuntul (26.640 la intrare și la descărcare), avansul de client
+(121.000 − 36.300 = 84.700), vânzarea mijlocului fix (38.000 + 12.000 = valoarea de
+intrare), supraîncasarea (4.132,23 + 867,77 = 5.000) și închiderea 408/4428 la zero.
+Mai jos, ce nu s-a legat.
+
+| # | În sursă scria | Corect | De ce contează |
+|---|---|---|---|
+| 1 | `391` — „Ajustări pentru deprecierea mărfurilor” | **`397`** | În OMFP 1802/2014, `391` e pentru materii prime, iar `397` pentru mărfuri. Planul nostru le are pe amândouă, denumite corect, iar F-307 folosea deja `397`. Simbolul din sursă intra în coliziune directă cu ce aveam. |
+| 2 | avans furnizor 50.000, stornat cu `4091 = 401 · −30.000` | storno pe suma avansului, **plus `4426 = 401 · −10.500`** | Sursa sare de la 50.000 la 30.000 fără explicație, iar stornarea TVA lipsește cu totul. Fără ea rămâne TVA dedusă pe un avans anulat. |
+| 3 | „La încasarea avansului” urmat doar de `4111 = 419` și `4111 = 4427` | plus **`5121 = 4111 · 36.300`** | Titlul spune încasare, dar dedesubt sunt doar înregistrările de facturare. Fără pasul de încasare, 4111 rămâne cu sold și fluxul nu are stare terminală — ceea ce poarta 2 refuză. |
+| 4 | `408` și `418` — „bifuncționale” | `408` = **P**, `418` = **A** | Observația practică e corectă: pot ajunge cu sold contrar. Dar ce descrie sursa nu e *funcțiunea* contului, e **rolul în flux** — intermediar/clarificare. Distincția e chiar grila acestui sistem, iar amestecarea lor face 408 să pară că are voie să stea oricum. |
+| 5 | §2 la cota de **11%**, restul materialului la **21%** | ambele corecte, dar motivul lipsea | Fără explicație, cititorul poate lua 11% drept „cota la mărfuri”. 11% e cota redusă (alimente, cărți, medicamente), 21% cea standard — L. 141/2025. |
+| 6 | „Efectul pe rezultat: −20 +10 +6 = **−4 lei**” | −4 e efectul **lunii vânzării** | Cumulat, pierderea reală e −10: bun cumpărat cu 20, vândut cu 10. Cei 6 lei ai ajustării au lovit rezultatul în luna constituirii. Afirmația nu e greșită, e neterminată — și fără precizare pare că pierderea totală ar fi 4.|
+
+Punctele 1–3 sunt erori de conținut. Punctul 4 e o confuzie de vocabular cu efect real
+asupra controlului. Punctele 5–6 sunt afirmații incomplete, nu greșite."""
+
 DOCUMENTE = [
     dict(
         nume="capitaluri",
@@ -142,6 +165,7 @@ DOCUMENTE = [
         legenda_veche=[],          # are deja forma canonică
         anexe={},                  # anexele A–E sunt deja denumite corect
         genereaza=["F"],
+        extinde_anexe={"C": CORECTII_SURSA_19_08},
         nota="Singurul care avea deja anexele denumite. Primește Anexa F, care exista "
              "doar ca notă în foaia Legendă a workbook-ului.",
     ),

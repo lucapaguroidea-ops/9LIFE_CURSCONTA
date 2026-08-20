@@ -182,6 +182,11 @@ CORECTII = [
 # 4. Rânduri noi pentru foaia `Matrice acoperire`
 # --------------------------------------------------------------------------
 MATRICE = [
+    # ---- supraîncasare (sursa 19.08) ---------------------------------------
+    ("419", "Clienți-creditori (avansuri încasate)", "A", "F-25, F-63",
+     "F-63 pas 3: soldul creditor de pe 4111 se dovedește avans cu TVA", "NU"),
+    ("4111", "Clienți", "A", "F-63",
+     "F-63 pas 2: cont de activ ajuns cu sold creditor = avans neînregistrat", "NU"),
     ("101 / 1012", "Capital social", "A", "F-45, F-46", "F-45 pas 3: nevărsat → vărsat", "NU"),
     ("456", "Decontări cu asociații", "A", "F-45", "F-45 stingere la vărsare", "NU"),
     ("117 (1171)", "Rezultat reportat", "A", "F-46, F-47", "F-46 pas 4; analitic pe an (C-21)", "NU"),
