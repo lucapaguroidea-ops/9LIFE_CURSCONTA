@@ -382,6 +382,32 @@ def poarta_nume_definite():
         ok("11", "zero nume definite rupte")
 
 
+def poarta_structura(wb):
+    """Poarta 14 — tabelul de structură din Legendă știe de toate foile.
+
+    Tabelul enumera șase foi dintr-un workbook care ajunsese la unsprezece. E exact
+    genul de listă scrisă de mână care rămâne în urmă fără să spună nimeni; verificată,
+    nu mai poate.
+    """
+    ws = wb["Legendă"]
+    listate = set()
+    inauntru = False
+    for r in range(1, ws.max_row + 1):
+        a = str(ws.cell(row=r, column=1).value or "").strip()
+        if a.startswith("5. STRUCTURA"):
+            inauntru = True
+            continue
+        if inauntru and a.startswith("6. "):
+            break
+        if inauntru and a and a != "Foaie":
+            listate.add(a)
+    lipsa = [s for s in wb.sheetnames if s not in listate]
+    if lipsa:
+        cade("14", f"foi absente din tabelul de structură al Legendei: {lipsa}")
+    else:
+        ok("14", f"tabelul de structură cunoaște toate cele {len(wb.sheetnames)} foi")
+
+
 def poarta_documente():
     """Porțile 12 și 13 — pe documentele revizuite, nu pe workbook-uri.
 
@@ -448,6 +474,7 @@ def main():
     poarta_conservare()
     poarta_catalog(wb)
     poarta_nume_definite()
+    poarta_structura(wb)
     poarta_documente()
 
     print("\n".join(note))

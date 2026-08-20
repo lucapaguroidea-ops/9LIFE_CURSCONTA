@@ -119,7 +119,40 @@ HARTA_CLASE = [
 ]
 
 
-def curata_legenda(wb, *, total_fluxuri, total_corelatii):
+#: Foile care lipseau din tabelul „STRUCTURA FINALĂ A WORKBOOK-ULUI”. Tabelul enumera
+#: șase foi dintr-un workbook care are unsprezece — se completează în loc, ca să rămână
+#: o singură listă, nu două care se contrazic.
+FOI_LIPSA = [
+    ("Index module", "Legătura cu Module_Declarative_Fluxuri.xlsx: ce modul acoperă "
+                     "ce flux, cu ce foi și când se rulează"),
+    ("Arbore analitice", "Arborele de decizie pentru analitice (3 întrebări) + "
+                         "contra-regula: când analiticul e o greșeală"),
+    ("Corelații de control", "Formulă · unde se verifică · ce o rupe LEGITIM vs. "
+                             "SUSPECT · fluxul și modulul legat"),
+    ("Întrebări deschise", "Ce e încă provizoriu în workbook: întrebările la care "
+                           "sistemul așteaptă răspuns. Fluxurile atinse poartă ❓"),
+    ("Istoric", "Echivalența de numerotare veche → nouă, contopirile, defectele "
+                "reparate, textul mutat la deduplicare"),
+]
+
+
+def _livrabile(nr_module):
+    return [
+        ("LIVRABILE CONEXE — sistemul nu se termină la acest fișier", stil.F_TITLU_BLOC),
+        (f"Module_Declarative_Fluxuri.xlsx — {nr_module} module declarative "
+         "(Declarații → Reguli → Jurnale → NotaExport). Niciunul nu mai e „exemplu "
+         "extern”: salariile, deconturile și leasingul au devenit interne, cu cifrele "
+         "verificate contra fișierelor reale de la client.", stil.F_NORMAL),
+        ("intrebari-formator.md / .html — cele 21 de întrebări rămase deschise, grupate "
+         "pe temă contabilă. Aceeași sursă cu foaia „Întrebări deschise” de aici.",
+         stil.F_NORMAL),
+        ("notite-training-2/3/4 .md și .docx — cele trei documente revizuite, "
+         "armonizate: aceeași legendă de marcaje, aceleași anexe, aceeași ordine.",
+         stil.F_NORMAL),
+    ]
+
+
+def curata_legenda(wb, *, total_fluxuri, total_corelatii, nr_module=16):
     """Scoate narativul de etape și lista pe tranșe. Întoarce rândurile mutate."""
     ws = wb["Legendă"]
     rows = R.citeste(ws)
@@ -151,6 +184,22 @@ def curata_legenda(wb, *, total_fluxuri, total_corelatii):
 
         pastrate.append(_actualizeaza_cifre(r, total_fluxuri, total_corelatii))
         i += 1
+
+    # completează tabelul de structură cu foile care lipseau din el
+    tinta = next((i for i, r in enumerate(pastrate)
+                  if r.text().strip().startswith("6. HARTA FLUXURILOR")), None)
+    if tinta is not None:
+        randuri = [R.Rand([(1, nume, None), (2, ce, None)],
+                          stil_nou=dict(font=stil.F_NORMAL, align=stil.A_WRAP_TOP))
+                   for nume, ce in FOI_LIPSA]
+        existente = {r.text().strip() for r in pastrate}
+        randuri = [r for r in randuri if r.text().strip() not in existente]
+        pastrate[tinta:tinta] = randuri + [R.Rand([])]
+
+    pastrate.append(R.Rand([]))
+    for text, font in _livrabile(nr_module):
+        pastrate.append(R.Rand([(1, text, None)], span=(1, 7),
+                               stil_nou=dict(font=font, align=stil.A_WRAP_TOP)))
 
     pastrate.append(R.Rand([]))
     for text, font in [

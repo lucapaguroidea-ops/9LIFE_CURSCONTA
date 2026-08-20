@@ -101,6 +101,20 @@ Documentele din `surse/` rămân neatinse — acolo stau variantele tale origina
 `.docx`-urile generate **nu** reproduc identic pe cele existente (acelea vin din alt
 lanț, cu fonturi încorporate); sunt însă consistente între ele.
 
+## Invariantul: cont → flux → modul → întrebare
+
+Sistemul se navighează în lanț, iar fiecare verigă e **derivată**, nu scrisă de mână:
+
+- din `Plan de conturi`, coloana „Flux (pas)” duce la fluxurile contului;
+- din `Fluxuri`, `Corelații de control` și `Matrice acoperire`, ancora `modul: MOD_…`
+  duce la motorul care produce nota. Legătura se deduce din `CATALOG["fluxuri"]` al
+  fiecărui modul — o hartă scrisă separat ar fi al doilea adevăr, care diverge;
+- marcajul `❓ Î-nn` duce la foaia `Întrebări deschise`, unde scrie ce anume din acea
+  regulă e încă provizoriu și ce s-a presupus între timp.
+
+Ultima verigă contează: restul workbook-ului prezintă regulile ca tranșate. Unde nu
+sunt, marcajul o spune acolo unde te uiți.
+
 ## Cum crește sistemul
 
 Un training nou **nu se lipește la coadă**. Se adaugă la clasa lui:
@@ -114,7 +128,7 @@ Catalogul de fluxuri e **derivat** din monografii, deci nu poate rămâne în ur
 
 ## Porțile de calitate
 
-`make verifica` rulează 13 porți; toate trebuie verzi:
+`make verifica` rulează 14 porți; toate trebuie verzi:
 
 1. ΣDebit = ΣCredit pe fiecare pas de flux cu sume
 2. fiecare flux se închide cu stare terminală declarată și un „Principiul:”
@@ -129,6 +143,7 @@ Catalogul de fluxuri e **derivat** din monografii, deci nu poate rămâne în ur
 11. zero nume definite rupte
 12. conservare pe documentele revizuite — nicio linie pierdută la armonizare
 13. cele trei documente au aceeași legendă și anexe canonice, în ordine
+14. tabelul de structură din Legendă cunoaște toate foile workbook-ului
 
 ### Poarta de conservare
 

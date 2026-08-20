@@ -28,7 +28,8 @@ from date import ANALITICE, CORELATII, FLUXURI, plan as dplan  # noqa: E402
 from date import reformulari as dreform  # noqa: E402
 from date import ordine as O  # noqa: E402
 from date import module as dmodule  # noqa: E402
-from build import istoric, renumeroteaza, reordoneaza, reordoneaza_foi  # noqa: E402
+from build import ancore, foaie_intrebari, istoric, renumeroteaza  # noqa: E402
+from build import reordoneaza, reordoneaza_foi  # noqa: E402
 from date.comun import ro  # noqa: E402
 
 RADACINA = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -386,7 +387,17 @@ def ordoneaza_canonic(wb):
     if ramase:
         raise SystemExit(f"ID-uri vechi rămase după renumerotare: "
                          f"{ {k: v[:3] for k, v in ramase.items()} }")
-    return orfane, dupl, schimbate
+
+    # Ancorele se pun DUPĂ renumerotare, ca să poarte ID-urile finale.
+    seed = openpyxl.load_workbook(SEED)
+    harta_fm = ancore.harta_flux_modul(dmodule.MODULE, seed["Index module"], O.HARTA)
+    anc = ancore.adauga(wb, harta_fm)
+
+    # foaia de întrebări + marcajele ❓ pe fluxurile și corelațiile atinse
+    marcaje = foaie_intrebari.construieste(wb)
+    anc["intrebari"] = foaie_intrebari.marcheaza(wb, marcaje)
+
+    return orfane, dupl, schimbate, anc
 
 
 def main():
@@ -400,7 +411,7 @@ def main():
     extinde_matrice(wb)
     actualizeaza_legenda(wb)
     actualizeaza_index(wb)
-    orfane, dupl, schimbate = ordoneaza_canonic(wb)
+    orfane, dupl, schimbate, anc = ordoneaza_canonic(wb)
 
     os.makedirs(os.path.dirname(IESIRE), exist_ok=True)
     wb.save(IESIRE)
@@ -408,7 +419,10 @@ def main():
     print(f"scris: {os.path.relpath(IESIRE, RADACINA)}\n"
           f"   {len(O.ORDINE)} fluxuri ordonate pe clase, {schimbate} celule renumerotate\n"
           f"   {dupl} rânduri duplicate contopite, {len(orfane)} rânduri orfane "
-          f"mutate în Istoric")
+          f"mutate în Istoric\n"
+          f"   ancore de modul: {anc['fluxuri']} fluxuri, {anc['corelatii']} corelații, "
+          f"{anc['matrice']} rânduri de matrice\n"
+          f"   foaia Întrebări deschise + {anc['intrebari']} marcaje ❓")
 
 
 if __name__ == "__main__":
