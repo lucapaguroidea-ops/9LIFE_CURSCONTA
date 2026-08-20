@@ -180,9 +180,17 @@ CONVERGENTA = [
      "7583, 6814, 7814, 5121, 2813, 4091), dar din întâmplare — pentru că sursa le "
      "enumera într-un tabel. Nimic nu face comparația sistematic.", None),
 
-    ("Întrebare marcată ❓ în document, dar neintrodusă în `date/intrebari.py`",
-     "Rămâne în proză și nu ajunge nici în foaia `Întrebări deschise`, nici în lista "
-     "pentru formator. Semnalul se pierde exact unde ar trebui să apară.", None),
+    ("Document cu întrebări deschise, dar fără niciun marcaj ❓",
+     "Cititorul vede un document care pare tranșat, deși sistemul știe că nu e. "
+     "Documentul de control chiar era așa: trei întrebări deschise, zero marcaje.", 19),
+
+    ("Marcaj ❓ într-un document fără întrebări deschise",
+     "Marcajul promite o anexă care nu-l explică. Mai rău decât lipsa lui.", 19),
+
+    ("Marcaj ❓ folosit cu alt înțeles decât cel din legendă",
+     "Poarta 19 verifică prezența marcajului pe document, nu înțelesul fiecărei "
+     "apariții. Două ❓ marcau răspunsuri, nu întrebări — găsite prin citire și "
+     "corectate ca reformulări declarate, nu de o poartă.", None),
 
     ("Modul nou care nu declară fluxul în `CATALOG['fluxuri']`",
      "Ancora modul nu se mai generează — nici pe flux, nici pe corelație, nici pe "
@@ -279,7 +287,10 @@ GOLURI = [
      "Comparație mecanică între simbolurile din pașii fluxurilor și coloana Simbol a "
      "planului. Le-am găsit manual; o poartă le-ar găsi de fiecare dată."),
 
-    ("Marcajele ❓ din documente vs. `date/intrebari.py`",
-     "Fiecare ❓ din `.md` ar trebui să aibă corespondent în lista de întrebări. "
-     "Divergența dintre ele nu e verificată azi."),
+    ("Înțelesul fiecărui marcaj ❓ în parte",
+     "Poarta 19 leagă marcajele de întrebări la nivel de DOCUMENT: unul cu întrebări "
+     "deschise îl poartă, unul care îl poartă are întrebări. Ce anume marchează fiecare "
+     "apariție rămâne necontrolat — iar două chiar marcau răspunsuri, nu întrebări. "
+     "Legarea unu-la-unu ar cere o ancoră de text pe fiecare întrebare, rescrisă la "
+     "fiecare editare de frază: o hartă de mână care diverge, exact ce evită sistemul."),
 ]

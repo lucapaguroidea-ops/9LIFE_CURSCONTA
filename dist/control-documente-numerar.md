@@ -83,7 +83,7 @@ Legiuitorul nu impune corecții când **tu** plătești în plus, dar impune cor
 ### 2.3 Note despre 455
 
 
-Contul **455** Sume datorate acționarilor/asociaților are restricții privind operațiunile în numerar: plățile din 455 prin casierie nu mai sunt permise în condițiile anterioare. Vezi secțiunea 13 — punct de verificat în textul legal în vigoare.
+Contul **455** Sume datorate acționarilor/asociaților are restricții privind operațiunile în numerar: plățile din 455 prin casierie nu mai sunt permise în condițiile anterioare. ❓ Punct de verificat în textul legal în vigoare — vezi Anexa D.
 
 ---
 
@@ -105,7 +105,7 @@ Plafoanele reținute la training:
 
 Restul, peste plafon, se decontează obligatoriu prin bancă.
 
-> Cifrele exacte au fost modificate prin Legea 296/2023. Înainte de a le aplica la un client, confirmă valorile în textul Legii 70/2015 în vigoare la data operațiunii — vezi secțiunea 13.
+> Cifrele exacte au fost modificate prin Legea 296/2023. Înainte de a le aplica la un client, confirmă valorile în textul Legii 70/2015 în vigoare la data operațiunii ❓ — vezi Anexa D.
 
 ---
 
@@ -177,6 +177,37 @@ Programele au ecrane cu o structură în spate care generează notele contabile 
 13. **Penalități contractuale nerealiste.** Dacă nu le facturezi, ANAF le poate impune ca venit. Vezi 9.3.
 
 ---
+
+---
+
+## Anexa D — Rămase deschise
+
+Ce e încă provizoriu în documentul ăsta. Lista nu e scrisă aici: vine din `date/intrebari.py`, aceeași sursă cu foaia „Întrebări deschise” a workbook-ului și cu lista trimisibilă formatorului.
+
+**❓ Care sunt valorile exacte ale plafoanelor din Legea 70/2015 în forma modificată prin Legea 296/2023, la data operațiunii?**
+
+*Plafoane de numerar și contul 455 · training 19.08.2026, punctul 1*
+
+Notițele rețin 5.000 lei B2B, 10.000 lei încasări de la persoane fizice și 50.000 lei între persoane fizice, plus un plafon separat pentru soldul casieriei la sfârșitul zilei. Sunt și plafoane totale zilnice, peste cele per persoană.
+
+**Ce am presupus între timp:** Am păstrat cifrele din notițe, cu mențiunea explicită că trebuie confirmate în textul în vigoare la data operațiunii.
+
+**❓ Care sunt exact operațiunile în numerar interzise pe contul 455 și care e temeiul legal?**
+
+*Plafoane de numerar și contul 455 · training 19.08.2026, punctul 2*
+
+Notițele spun doar că „plățile din 455 prin casierie nu mai sunt permise în condițiile anterioare”, fără să precizeze care condiții și din ce text.
+
+**Ce am presupus între timp:** Am lăsat 455 fără flux, cu golul marcat ca atare în foaie.
+
+**❓ Programul de contabilitate extrage automat TVA-ul din diferența trecută pe 419 la o încasare mai mare decât factura, sau trebuie forțat manual?**
+
+*Comportamentul softului la încasarea în plus · training 19.08.2026, punctul 3*
+
+Suma încasată în plus e TVA-inclusivă: din 5.000 lei ies 4.132,23 bază și 867,77 TVA. Dacă softul nu face extragerea, TVA-ul rămâne necolectat fără ca nimic să semnaleze.
+
+**Ce am presupus între timp:** Am scris fluxul cu extragerea explicită a TVA-ului, ca pas separat, tocmai ca să nu depindă de comportamentul softului.
+
 
 ---
 

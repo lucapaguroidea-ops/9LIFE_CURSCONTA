@@ -18,6 +18,7 @@ import os
 import re
 
 from build.conservare import PRAG, _normalizeaza
+from date import documente as ddoc
 from date import repartizare as drep
 from date import reformulari as dreform
 
@@ -120,12 +121,24 @@ def verifica(foi):
     cale = os.path.join(RADACINA, drep.SURSA)
     with open(cale, encoding="utf-8") as f:
         text = f.read()
+    # Sursa trece prin înlocuirile declarate ale documentelor înainte de comparație.
+    # Declararea singură n-ar ajunge: înlocuirea prinde un FRAGMENT de linie, iar
+    # poarta compară linii și celule întregi. Aplicată unde nu apare, e un no-op.
+    for cfg in ddoc.DOCUMENTE:
+        for i in cfg.get("inlocuiri") or []:
+            text = text.replace(i["text"], i["devine"])
 
     declarate = {_norm(t) for t in dreform.DECLARATE}
     # titlurile de bloc absorbite într-o secțiune-gazdă: dispariția lor e o
     # decizie de repartizare, declarată cu gazda ei în date/repartizare.py
     declarate |= {_norm(t) for t in drep.ABSORBITE}
     declarate |= {cheie_titlu(t) for t in drep.ABSORBITE if t.startswith("#")}
+    # Un text înlocuit declarat într-un document e declarat pentru TOATE porțile de
+    # conservare, nu doar pentru cea care l-a văzut prima. Altfel aceeași decizie ar
+    # trebui scrisă de două ori, iar cele două copii ar începe să difere.
+    for cfg in ddoc.DOCUMENTE:
+        for i in cfg.get("inlocuiri") or []:
+            declarate.add(_norm(i["text"]))
     cunoscute = {cheie_titlu(t) for t in drep.UNDE}
 
     orfane, lipsa, fara_artefact = [], [], []

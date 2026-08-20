@@ -236,6 +236,7 @@ Un flux e util și fără modul: fluxul explică, modulul execută. Dacă adaugi
 | **16** | o sursă împărțită pe mai multe destinații nu pierde nimic în cusătură: fiecare subsecțiune are destinație declarată și ajunge exact acolo |
 | **17** | disciplina de închidere e ancorată în ambele sensuri: fiecare cont urmărit periodic e starea terminală a unui flux, iar fiecare cont cu rol în flux care se golește are o cadență — sau un motiv declarat pentru care nu are |
 | **18** | monografiile scrise în proză se echilibrează, iar aritmetica afirmată în text („5% din 250 = 12,50”) chiar se verifică — acolo unde poarta 1 nu ajunge |
+| **19** | marcajul ❓ e aplicat, nu doar definit: un document pe care o întrebare deschisă îl privește îl poartă, iar un document care îl poartă are întrebări deschise |
 
 Motivul fiecărei porți e scris în `build/verifica.py`, lângă ea. Când o poartă pică, acolo scrie de ce există.
 
@@ -258,7 +259,9 @@ cunoscute**: acolo trebuie să te uiți tu.
 | Catalogul rămâne în urma monografiilor | Indexul nu mai cunoaște toate fluxurile. S-a întâmplat: 13 din 44 lipseau — de atunci catalogul se derivă din monografii. | poarta 10 |
 | Foaie nouă absentă din tabelul de structură al Legendei | Legenda nu-și mai cunoaște propriul fișier. | poarta 14 |
 | Cont folosit într-un flux dar absent din `Plan de conturi` | Navigarea cont → flux se rupe pentru contul acela. La trainingurile 2 și 3 erau 27 de conturi în situația asta; poarta 16 a mai scos la iveală șapte (6583, 7583, 6814, 7814, 5121, 2813, 4091), dar din întâmplare — pentru că sursa le enumera într-un tabel. Nimic nu face comparația sistematic. | **nimic — verifică tu** |
-| Întrebare marcată ❓ în document, dar neintrodusă în `date/intrebari.py` | Rămâne în proză și nu ajunge nici în foaia `Întrebări deschise`, nici în lista pentru formator. Semnalul se pierde exact unde ar trebui să apară. | **nimic — verifică tu** |
+| Document cu întrebări deschise, dar fără niciun marcaj ❓ | Cititorul vede un document care pare tranșat, deși sistemul știe că nu e. Documentul de control chiar era așa: trei întrebări deschise, zero marcaje. | poarta 19 |
+| Marcaj ❓ într-un document fără întrebări deschise | Marcajul promite o anexă care nu-l explică. Mai rău decât lipsa lui. | poarta 19 |
+| Marcaj ❓ folosit cu alt înțeles decât cel din legendă | Poarta 19 verifică prezența marcajului pe document, nu înțelesul fiecărei apariții. Două ❓ marcau răspunsuri, nu întrebări — găsite prin citire și corectate ca reformulări declarate, nu de o poartă. | **nimic — verifică tu** |
 | Modul nou care nu declară fluxul în `CATALOG['fluxuri']` | Ancora modul nu se mai generează — nici pe flux, nici pe corelație, nici pe matrice. Legătura se pierde tăcut, pentru că derivarea nu are de unde ști. | **nimic — verifică tu** |
 | Subsecțiune dintr-o sursă împărțită, rămasă nerepartizată | O sursă poate alimenta mai multe documente. Riscul nu e „nimeni n-a luat-o”, ci „am crezut că a luat-o celălalt”: fiecare document trece poarta 12 separat, în timp ce materialul cade între ele. | poarta 16 |
 | Material repartizat undeva, dar ajuns în altă parte | Verificarea pe reuniunea destinațiilor ar spune doar că textul există pe undeva — întrebarea greșită. Poarta compară cu destinația declarată. | poarta 16 |
@@ -321,10 +324,10 @@ Poarta 18 citește acum monografiile din documente și verifică articolele comp
 
 Comparație mecanică între simbolurile din pașii fluxurilor și coloana Simbol a planului. Le-am găsit manual; o poartă le-ar găsi de fiecare dată.
 
-**Marcajele ❓ din documente vs. `date/intrebari.py`**
+**Înțelesul fiecărui marcaj ❓ în parte**
 
-Fiecare ❓ din `.md` ar trebui să aibă corespondent în lista de întrebări. Divergența dintre ele nu e verificată azi.
+Poarta 19 leagă marcajele de întrebări la nivel de DOCUMENT: unul cu întrebări deschise îl poartă, unul care îl poartă are întrebări. Ce anume marchează fiecare apariție rămâne necontrolat — iar două chiar marcau răspunsuri, nu întrebări. Legarea unu-la-unu ar cere o ancoră de text pe fiecare întrebare, rescrisă la fiecare editare de frază: o hartă de mână care diverge, exact ce evită sistemul.
 
 ---
 
-*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 18 porți, 16 module, 61 fluxuri la data generării.*
+*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 19 porți, 16 module, 61 fluxuri la data generării.*

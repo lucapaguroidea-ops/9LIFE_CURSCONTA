@@ -86,6 +86,7 @@ asupra controlului. Punctele 5–6 sunt afirmații incomplete, nu greșite."""
 DOCUMENTE = [
     dict(
         nume="capitaluri",
+        zi="07.08.2026",
         cheie="doc:capitaluri",
         sursa="surse/training-2-2026-08-07/notite-revizuit.md",
         iesire="dist/capitaluri-credite-provizioane.md",
@@ -108,11 +109,23 @@ DOCUMENTE = [
             "## 10. Listă de verificat / întrebări pentru trainer": "D",
         },
         genereaza=["E"],
+        inlocuiri=[
+            dict(text="- ❓ **Răspuns la (Q – ONRC):**",
+                 devine="- ✅ **Răspuns la (Q – ONRC):**",
+                 motiv="Legenda spune că ❓ înseamnă „rămas deschis”. Rândul ăsta e un "
+                       "răspuns tranșat, deci ✅. Cu marcajul vechi, cine căuta ce e "
+                       "provizoriu găsea un rezultat fals — iar poarta 13 verifică forma "
+                       "legendei, nu aplicarea ei."),
+            dict(text="### 3.4 ❓ Răspuns la întrebarea ta despre 1174",
+                 devine="### 3.4 ✅ Răspuns la întrebarea ta despre 1174",
+                 motiv="Același lucru: titlul anunță un răspuns, nu o întrebare deschisă."),
+        ],
         nota="Rolul Anexei C îl joacă secțiunea 0 (Sinteza corecțiilor), păstrată în "
              "față pentru că funcționează ca rezumat executiv al documentului.",
     ),
     dict(
         nume="imobilizari",
+        zi="12.08.2026",
         cheie="doc:imobilizari",
         sursa="surse/training-3-2026-08-12/notite-revizuit.md",
         iesire="dist/imobilizari.md",
@@ -143,6 +156,7 @@ DOCUMENTE = [
     ),
     dict(
         nume="stocuri-tva",
+        zi="14.08.2026",
         cheie="doc:stocuri-tva",
         sursa="surse/training-4-2026-08-14/notite-revizuit.md",
         iesire="dist/stocuri-tva-corelatii.md",
@@ -175,6 +189,7 @@ DOCUMENTE = [
         # control. De-asta n-avea unde să intre în celelalte trei — sistemul e făcut
         # pentru fluxuri, iar astea nu produc articole contabile.
         nume="control",
+        zi=None,   # nu vine dintr-o zi proprie: e partea din 19.08 care n-adâncea nimic
         cheie="doc:control",
         repartizat=True,
         sursa="surse/training-5-2026-08-19/ghid-contabilitate.md",
@@ -184,7 +199,19 @@ DOCUMENTE = [
                  "la un document și unde se rupe disciplina de casă",
         legenda_veche=[],
         anexe={"## 12. Erori frecvente și capcane": "B"},
-        genereaza=["E"],
+        genereaza=["D", "E"],
+        inlocuiri=[
+            dict(text="Vezi secțiunea 13 — punct de verificat în textul legal în vigoare.",
+                 devine="❓ Punct de verificat în textul legal în vigoare — vezi Anexa D.",
+                 motiv="Trimitere moartă: §13 al sursei nu a devenit secțiune aici, ci "
+                       "întrebări în `date/intrebari.py`. Primește și ❓, pentru că exact "
+                       "asta e: material provizoriu."),
+            dict(text="în vigoare la data operațiunii — vezi secțiunea 13.",
+                 devine="în vigoare la data operațiunii ❓ — vezi Anexa D.",
+                 motiv="Aceeași trimitere moartă. Plafoanele sunt primul lucru pe care "
+                       "cineva îl aplică la un client, deci marcajul trebuie să fie "
+                       "acolo unde se citește, nu doar în anexă."),
+        ],
         nota="Singurul document care nu vine dintr-o zi de training proprie: e partea "
              "din 19.08.2026 care nu adâncea niciun subiect existent.",
     ),

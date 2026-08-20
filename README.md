@@ -165,7 +165,7 @@ degeaba după ele; **patru sunt goluri cunoscute**, marcate „nimic — verific
 
 ## Porțile de calitate
 
-`make verifica` rulează 17 porți; toate trebuie verzi:
+`make verifica` rulează 19 porți; toate trebuie verzi:
 
 1. ΣDebit = ΣCredit pe fiecare pas de flux cu sume
 2. fiecare flux se închide cu stare terminală declarată și un „Principiul:”
@@ -188,6 +188,10 @@ degeaba după ele; **patru sunt goluri cunoscute**, marcate „nimic — verific
 17. disciplina de închidere e ancorată în ambele sensuri: fiecare cont urmărit periodic
     e starea terminală a unui flux, iar fiecare cont cu rol în flux care se golește are
     o cadență — sau un motiv declarat pentru care nu are
+18. **monografiile scrise în proză** se echilibrează, iar aritmetica afirmată în text
+    („5% din 250 = 12,50”) chiar se verifică — acolo unde poarta 1 nu ajunge
+19. marcajul ❓ e **aplicat**, nu doar definit: un document pe care o întrebare deschisă
+    îl privește îl poartă, iar un document care îl poartă are întrebări deschise
 
 ### Poarta de repartizare
 

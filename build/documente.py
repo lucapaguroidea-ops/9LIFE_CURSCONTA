@@ -27,6 +27,7 @@ from build.conservare import _normalizeaza  # noqa: E402
 from build.docx_out import converteste  # noqa: E402
 from build import repartizare as brep
 from date import documente as D
+from date import intrebari as dintr  # noqa: E402
 from date import repartizare as drep  # noqa: E402
 
 RADACINA = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -243,6 +244,60 @@ def _din_repartizare(cfg):
     return "\n\n".join(bucati), sectiuni
 
 
+litera_d = "D"
+
+
+def _anexa_d(cfg):
+    """Anexa D generată din `date/intrebari.py` — întrebările care privesc documentul.
+
+    Documentele trainingurilor 2, 3 și 4 au deja o secțiune de întrebări în textul lor;
+    ele nu primesc anexa asta, ar fi a doua listă. O primește documentul construit din
+    sursa împărțită, care altfel n-ar arăta nimic provizoriu — deși e.
+
+    Derivată, nu scrisă: aceeași sursă cu foaia „Întrebări deschise” și cu
+    `intrebari-formator.md`. Fiecare punct poartă ❓, ca legenda să spună adevărul.
+    """
+    ale_mele = [(t, q) for t, q in dintr.toate()
+                if dintr.documentul(q) == cfg["cheie"]]
+    out = [f"## Anexa {litera_d} — {D.ANEXE['D']}", "",
+           "Ce e încă provizoriu în documentul ăsta. Lista nu e scrisă aici: vine din "
+           "`date/intrebari.py`, aceeași sursă cu foaia „Întrebări deschise” a "
+           "workbook-ului și cu lista trimisibilă formatorului.", ""]
+    for tema, q in ale_mele:
+        out += [f"**❓ {q['intrebare']}**", "",
+                f"*{tema} · {q['sursa']}*", "",
+                q["context"], ""]
+        if q.get("presupunere"):
+            out += [f"**Ce am presupus între timp:** {q['presupunere']}", ""]
+    return "\n".join(out)
+
+
+def _aplica_inlocuiri(cfg, sectiuni):
+    """Înlocuirile declarate pe corpul documentului, fiecare cu motivul ei.
+
+    Se folosește rar și numai unde textul original spune ceva care a devenit fals: un
+    marcaj aplicat greșit, o trimitere la o secțiune care nu mai există. Textul înlocuit
+    e declarat, deci poarta de conservare știe că are voie să dispară — la fel ca la
+    workbook-uri.
+    """
+    inl = cfg.get("inlocuiri") or []
+    if not inl:
+        return sectiuni
+    out = []
+    for titlu, body in sectiuni:
+        t, b = titlu, body
+        for i in inl:
+            t = t.replace(i["text"], i["devine"])
+            b = b.replace(i["text"], i["devine"])
+        out.append((t, b))
+    negasite = [i["text"] for i in inl
+                if not any(i["devine"] in x for _, x in out)
+                and not any(i["devine"] in x for x, _ in out)]
+    if negasite:
+        raise SystemExit(f"{cfg['nume']}: înlocuiri fără țintă — {negasite}")
+    return out
+
+
 def armonizeaza(cfg):
     if cfg.get("repartizat"):
         original, sectiuni = _din_repartizare(cfg)
@@ -254,6 +309,7 @@ def armonizeaza(cfg):
         antet, sectiuni = _sectiuni(original)
         sectiuni, adaugat = _contopeste_adaugirile(cfg, sectiuni)
         original += "\n" + adaugat
+    sectiuni = _aplica_inlocuiri(cfg, sectiuni)
 
     # Documentul care are deja secțiunea canonică nu o primește a doua oară — ar apărea
     # de două ori. Tabelul canonic e chiar al lui, deci nu are ce să se schimbe.
@@ -289,6 +345,8 @@ def armonizeaza(cfg):
         if litera in mutate:
             anexe += ["---", "", f"## Anexa {litera} — {D.ANEXE[litera]}", "",
                       mutate[litera], ""]
+        elif litera == "D":
+            anexe += ["---", "", _anexa_d(cfg), ""]
         elif litera == "E":
             anexe += ["---", "", _anexa_e(original), ""]
         elif litera == "F":
@@ -316,6 +374,11 @@ def armonizeaza(cfg):
 def verifica_conservare(original, nou, cfg):
     """Fiecare linie din original trebuie să se regăsească în varianta armonizată."""
     declarate = {_normalizeaza(l) for l in cfg["legenda_veche"] if l.strip()}
+    # Originalul trece prin aceleași înlocuiri declarate înainte de comparație. A-l
+    # declara ca „text care are voie să dispară” n-ar funcționa: înlocuirea prinde un
+    # FRAGMENT de linie, iar conservarea compară linii întregi.
+    for i in cfg.get("inlocuiri") or []:
+        original = original.replace(i["text"], i["devine"])
     # titlurile redenumite: „## 10. Listă de verificat…” devine „## Anexa D — …”
     declarate |= {_normalizeaza(t) for t in cfg["anexe"]}
     # titlul și subtitlul se reformulează

@@ -48,7 +48,7 @@
 ```
 
 - ✅ **Analitice distincte pe fiecare asociat** la 456 – bună practică obligatorie în practică (altfel nu poți justifica cine ce datorează).
-- ❓ **Răspuns la (Q – ONRC):** momentul `1011 → 1012` este **vărsarea efectivă**, nu înregistrarea la ONRC. Înregistrarea la Registrul Comerțului validează juridic majorarea/constituirea (deci naște creanța 456), dar transformarea în „vărsat" urmează depunerii efective a banilor. Ordinea practică la o majorare: hotărâre AGA → depunere ONRC → `456 = 1011` → încasare → `5121 = 456` + `1011 = 1012`.
+- ✅ **Răspuns la (Q – ONRC):** momentul `1011 → 1012` este **vărsarea efectivă**, nu înregistrarea la ONRC. Înregistrarea la Registrul Comerțului validează juridic majorarea/constituirea (deci naște creanța 456), dar transformarea în „vărsat" urmează depunerii efective a banilor. Ordinea practică la o majorare: hotărâre AGA → depunere ONRC → `456 = 1011` → încasare → `5121 = 456` + `1011 = 1012`.
 
 ### ➕ 1.1.bis Capital social minim – reguli noi din 2026 (aici era „5k cat (Q)")
 
@@ -266,7 +266,7 @@ Profitul net rămâne 4.000 − 640 = **3.360 lei**.
 → se corectează pe contul de profit și pierdere **curent** (6xx).
 → ⚠️ Risc fiscal: cheltuiala nu e aferentă exercițiului curent, deci poate fi considerată nedeductibilă. Documentează decizia (nota de prag).
 
-### 3.4 ❓ Răspuns la întrebarea ta despre 1174
+### 3.4 ✅ Răspuns la întrebarea ta despre 1174
 
 > *„Dacă scopul lui 1174 era să nu denatureze profitul anilor precedenți, când închidem 1174 în 1171 nu denaturăm profitul anilor precedenți?"*
 

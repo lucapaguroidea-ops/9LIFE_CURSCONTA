@@ -29,6 +29,8 @@ descris multă vreme nouă porți, cu poarta 9 în forma ei veche.
      se golește are o cadență — sau un motiv declarat pentru care nu are
  18. monografiile scrise în proză se echilibrează, iar aritmetica afirmată în text
      („5% din 250 = 12,50”) chiar se verifică — acolo unde poarta 1 nu ajunge
+ 19. marcajul ❓ e aplicat, nu doar definit: un document pe care o întrebare deschisă
+     îl privește îl poartă, iar un document care îl poartă are întrebări deschise
 
 Rulare:  python build/verifica.py
 """
@@ -46,6 +48,7 @@ from date import ordine as O, reformulari as dreform  # noqa: E402
 from date import repartizare as drep  # noqa: E402
 from date import inchideri as dinch  # noqa: E402
 from date import monografii as dmono  # noqa: E402
+from date import intrebari as dintr  # noqa: E402
 from build import conservare  # noqa: E402
 from build import documente as bdoc  # noqa: E402
 from build import repartizare as brep  # noqa: E402
@@ -724,6 +727,62 @@ def poarta_monografii():
         ok("18", f"toate cele {total} afirmații aritmetice din text se verifică")
 
 
+# ----------------------------------------------------------------------- poarta 19
+def poarta_marcaje():
+    """Poarta 19 — legenda aplicată, nu doar declarată.
+
+    Poarta 13 verifică FORMA legendei: că toate cele patru marcaje sunt definite, la fel
+    în toate documentele. Nu verifică nimic despre folosirea lor — gol notat în
+    documentul de parcurs de la bun început.
+
+    ❓ e singurul marcaj cu înțeles testabil: „rămas deschis, vezi Anexa D”. Deci:
+
+    a) un document pe care cel puțin o întrebare din `date/intrebari.py` îl privește
+       trebuie să poarte ❓ în corp. Fără el, cititorul vede un document care pare
+       tranșat, deși sistemul știe că nu e;
+    b) un document care poartă ❓ trebuie să aibă întrebări deschise. Un marcaj care nu
+       trimite nicăieri e mai rău decât lipsa lui: promite o anexă care nu-l explică.
+
+    Legătura întrebare → document se DEDUCE din data din `sursa`; doar sursa din 19.08,
+    care alimentează patru documente, are cheile scrise explicit.
+
+    Rândul de legendă (`| ❓ | Rămas deschis … |`) nu se numără: e definiția marcajului,
+    nu o folosire a lui.
+    """
+    cu_intrebari = {}
+    for _, q in dintr.toate():
+        d = dintr.documentul(q)
+        if d:
+            cu_intrebari.setdefault(d, []).append(q)
+
+    poarta_marcaj = {}
+    for cfg in ddoc.DOCUMENTE:
+        cale = os.path.join(RADACINA, cfg["iesire"])
+        if not os.path.exists(cale):
+            cade("19", f"{cfg['nume']}: lipsește {cfg['iesire']}")
+            continue
+        n = 0
+        with open(cale, encoding="utf-8") as f:
+            for linie in f:
+                if "❓" not in linie or linie.strip().startswith("| ❓ |"):
+                    continue
+                n += 1
+        poarta_marcaj[cfg["cheie"]] = n
+
+    for cheie, intrebari in sorted(cu_intrebari.items()):
+        if poarta_marcaj.get(cheie, 0) == 0:
+            cade("19", f"{cheie} are {len(intrebari)} întrebări deschise, dar niciun "
+                       f"marcaj ❓ în corp — documentul pare tranșat, deși nu e")
+    for cheie, n in sorted(poarta_marcaj.items()):
+        if n and cheie not in cu_intrebari:
+            cade("19", f"{cheie} poartă {n} marcaje ❓ dar nu are nicio întrebare "
+                       f"deschisă — marcajul nu trimite nicăieri")
+
+    if not any(e.startswith("[19]") for e in esecuri):
+        ok("19", f"marcajul ❓ e aplicat unde trebuie: {len(cu_intrebari)} documente cu "
+                 f"întrebări deschise, {sum(poarta_marcaj.values())} marcaje în corp")
+
+
 def main():
     if not os.path.exists(PLAN):
         raise SystemExit("Rulează întâi `make build` — lipsește dist/Plan_de_conturi_...xlsx")
@@ -742,6 +801,7 @@ def main():
     poarta_repartizare(wb)
     poarta_inchideri(wb)
     poarta_monografii()
+    poarta_marcaje()
 
     print("\n".join(note))
     if esecuri:

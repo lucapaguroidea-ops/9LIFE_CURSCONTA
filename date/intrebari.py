@@ -14,6 +14,11 @@ Fiecare întrebare poartă:
   conteaza    — ce anume din sistem depinde de răspuns (flux / modul / corelație)
   presupunere — ce am ales între timp, unde a trebuit să aleg. Lipsește când nu a
                 fost nevoie de nicio presupunere.
+
+Documentul pe care îl privește o întrebare NU e un câmp: se DEDUCE din data din `sursa`,
+pentru că trainingurile 2, 3 și 4 au fiecare documentul lor. Sursa din 19.08 alimentează
+patru documente deodată, deci acolo nu e nimic de dedus — cele cinci excepții sunt
+scrise o singură dată, în `DOC_EXPLICIT` de mai jos.
 """
 
 
@@ -330,3 +335,44 @@ TEME = [
 ]
 
 TOTAL = sum(len(qs) for _, qs in TEME)
+
+
+# ---------------------------------------------------------------------------
+# Legătura întrebare → document
+#
+# Poarta 19 o folosește în ambele sensuri: un document pe care o întrebare îl privește
+# trebuie să poarte marcajul ❓, iar un ❓ într-un document fără întrebări deschise nu
+# are ce semnala.
+# ---------------------------------------------------------------------------
+
+#: dată din `sursa` → cheia documentului. Trainingurile cu document propriu.
+ZI_DOCUMENT = {
+    "07.08.2026": "doc:capitaluri",
+    "12.08.2026": "doc:imobilizari",
+    "14.08.2026": "doc:stocuri-tva",
+}
+
+#: Excepțiile: sursa din 19.08 s-a împărțit la patru documente, deci data nu mai spune
+#: nimic despre destinație. Fiecare punct își numește documentul.
+DOC_EXPLICIT = {
+    "training 19.08.2026, punctul 1": "doc:control",     # plafoanele de numerar
+    "training 19.08.2026, punctul 2": "doc:control",     # restricțiile pe 455
+    "training 19.08.2026, punctul 3": "doc:control",     # simularea încasării în plus
+    "training 19.08.2026, punctul 4": "doc:stocuri-tva",  # analiticele pe 4428
+    "training 19.08.2026, punctul 5": "doc:stocuri-tva",  # 408 vs. 404 la imobilizări
+}
+
+
+def documentul(intrebare):
+    """Cheia documentului pe care îl privește întrebarea, sau None."""
+    sursa = intrebare["sursa"]
+    if sursa in DOC_EXPLICIT:
+        return DOC_EXPLICIT[sursa]
+    import re
+    m = re.search(r"(\d\d\.\d\d\.\d{4})", sursa)
+    return ZI_DOCUMENT.get(m.group(1)) if m else None
+
+
+def toate():
+    """[(temă, întrebare)] — plate, în ordinea din fișier."""
+    return [(tema, q) for tema, qs in TEME for q in qs]
