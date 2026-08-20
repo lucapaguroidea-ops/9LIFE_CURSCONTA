@@ -1,0 +1,306 @@
+<title>Registrul întrebărilor deschise</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+:root{
+  --ground:#F6F8FA; --raised:#FFFFFF; --ink:#14202B; --muted:#5D6E7E;
+  --accent:#1F4E79; --rule:#DBE3EA; --panel:#EDF2F6; --flag:#A32424;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0F1721; --raised:#141F2B; --ink:#DCE5ED; --muted:#90A2B3;
+    --accent:#7FB0D8; --rule:#24313F; --panel:#17222E; --flag:#E08D8D;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0F1721; --raised:#141F2B; --ink:#DCE5ED; --muted:#90A2B3;
+  --accent:#7FB0D8; --rule:#24313F; --panel:#17222E; --flag:#E08D8D;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+  font-size:17px; line-height:1.62; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:46rem; margin:0 auto; padding:4rem 1.5rem 6rem; display:flex;
+  flex-direction:column; gap:3rem}
+h1,h2,h3,.label,.eyebrow,.num{font-family:Archivo,"Helvetica Neue",Arial,sans-serif}
+h1{font-size:2.1rem; line-height:1.15; font-weight:700; margin:0; text-wrap:balance;
+  letter-spacing:-.015em}
+.lede{margin:0; color:var(--muted); font-size:1.05rem}
+.lede+.lede{margin-top:.9rem}
+code,.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  font-size:.86em; background:var(--panel); padding:.1em .34em; border-radius:3px;
+  border:1px solid var(--rule)}
+
+/* --- cele trei prioritare --- */
+.prio{border:1px solid var(--rule); border-left:3px solid var(--flag);
+  background:var(--raised); padding:1.6rem 1.7rem; display:flex;
+  flex-direction:column; gap:1.1rem}
+.prio h2{margin:0; font-size:.78rem; text-transform:uppercase; letter-spacing:.09em;
+  color:var(--flag); font-weight:700}
+.prio ol{margin:0; padding-left:1.2rem; display:flex; flex-direction:column; gap:.9rem}
+.prio li::marker{font-family:"JetBrains Mono",monospace; color:var(--muted);
+  font-size:.85rem}
+.prio p{margin:0}
+.prio .why{color:var(--muted); font-size:.94rem; margin-top:.25rem}
+
+/* --- cuprins --- */
+.toc{border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+  padding:1.4rem 0}
+.toc h2{margin:0 0 .9rem; font-size:.78rem; text-transform:uppercase;
+  letter-spacing:.09em; color:var(--muted); font-weight:700}
+.toc ol{margin:0; padding:0; list-style:none; display:grid; gap:.35rem .5rem;
+  grid-template-columns:1fr}
+@media(min-width:38rem){.toc ol{grid-template-columns:1fr 1fr}}
+.toc a{color:var(--ink); text-decoration:none; display:flex; justify-content:space-between;
+  gap:.75rem; border-bottom:1px solid transparent; padding:.1rem 0; font-size:.96rem}
+.toc a:hover,.toc a:focus-visible{color:var(--accent); border-bottom-color:var(--accent)}
+.toc .n{font-family:"JetBrains Mono",monospace; font-size:.8rem; color:var(--muted);
+  font-variant-numeric:tabular-nums}
+
+/* --- teme și întrebări --- */
+.tema{display:flex; flex-direction:column; gap:2.2rem}
+.tema>h2{margin:0; font-size:1.02rem; font-weight:700; letter-spacing:.02em;
+  padding-bottom:.5rem; border-bottom:2px solid var(--accent); color:var(--accent);
+  text-wrap:balance}
+.q{display:flex; flex-direction:column; gap:.85rem}
+.q>h3{margin:0; font-size:1.16rem; line-height:1.32; font-weight:600;
+  text-wrap:balance; letter-spacing:-.005em}
+.num{font-family:"JetBrains Mono",monospace; font-size:.78rem; color:var(--muted);
+  letter-spacing:.06em; font-variant-numeric:tabular-nums}
+.field{display:flex; flex-direction:column; gap:.28rem}
+.label{font-size:.7rem; text-transform:uppercase; letter-spacing:.1em;
+  color:var(--muted); font-weight:700}
+.field p{margin:0}
+.presup{background:var(--panel); border-left:2px solid var(--accent);
+  padding:.85rem 1rem; border-radius:0 3px 3px 0}
+.presup .label{color:var(--accent)}
+.sursa{font-size:.78rem; color:var(--muted); font-family:"JetBrains Mono",monospace}
+footer{border-top:1px solid var(--rule); padding-top:1.5rem; color:var(--muted);
+  font-size:.9rem}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<div class="wrap">
+<header>
+<h1>Întrebări rămase deschise după trainingurile 2, 3 și 4</h1>
+<p class="lede">Cele <strong>21 de întrebări</strong> de mai jos s-au acumulat la revizuirea notițelor din 07.08.2026 (capitaluri), 12.08.2026 (imobilizări) și 14.08.2026 (stocuri și TVA).</p>
+<p class="lede">Sunt grupate pe <strong>temă contabilă</strong>, nu pe training, ca să nu răspundeți de trei ori la aceeași chestiune. Fiecare întrebare vine cu contextul din notițe, ca să nu fie nevoie de recitire.</p>
+<p class="lede">Sub fiecare întrebare, <strong>„Ce am presupus”</strong> spune ce am ales acolo unde a trebuit să aleg ca să pot merge mai departe. Acelea sunt exact locurile unde un răspuns diferit schimbă ce e deja construit.</p>
+</header>
+<section class="prio"><h2>Dacă aveți timp doar pentru trei</h2><ol>
+<li><p>Ne puteți da procedura scrisă de reconciliere, pentru cazul în care analiticul din balanța contabilă nu corespunde cu registrul mijloacelor fixe?</p><p class="why">Blochează singurul flux de procedură din sistem (<code>F-214</code>) și corelația <code>C-15</code>.</p></li>
+<li><p>TVA nedeductibilă de pe rata de capital la leasingul financiar: se capitalizează în valoarea mijlocului fix (2133) sau se trece pe cheltuială (635 / 6588)?</p><p class="why">Schimbă valoarea de intrare a mijlocului fix, deci amortizarea și impozitul pe profit pe toată durata contractului.</p></li>
+<li><p>Care este baza legală exactă pentru a trata ca nedeductibilă diferența dintre valoarea rămasă și prețul de vânzare, față de art. 28 alin. (17)?</p><p class="why">E testul central al <code>MOD_IESIRE_MF</code>; azi semnalează un risc fără să poată cita articolul pe care se sprijină.</p></li>
+</ol></section>
+<nav class="toc"><h2>Temele</h2><ol>
+<li><a href="#repartizarea-rezultatului-si-rezultatul-reportat"><span>Repartizarea rezultatului și rezultatul reportat</span><span class="n">4</span></a></li>
+<li><a href="#corectarea-erorilor-din-exercitii-anterioare"><span>Corectarea erorilor din exerciții anterioare</span><span class="n">1</span></a></li>
+<li><a href="#capital-social-si-activ-net"><span>Capital social și activ net</span><span class="n">2</span></a></li>
+<li><a href="#leasing-si-vehicule"><span>Leasing și vehicule</span><span class="n">1</span></a></li>
+<li><a href="#imobilizari-prag-si-amortizare"><span>Imobilizări — prag și amortizare</span><span class="n">2</span></a></li>
+<li><a href="#imobilizari-iesiri-din-gestiune"><span>Imobilizări — ieșiri din gestiune</span><span class="n">2</span></a></li>
+<li><a href="#imobilizari-control-si-raportare"><span>Imobilizări — control și raportare</span><span class="n">2</span></a></li>
+<li><a href="#stocuri-si-productie"><span>Stocuri și producție</span><span class="n">1</span></a></li>
+<li><a href="#tva-import-vama-taxare-inversa"><span>TVA — import, vamă, taxare inversă</span><span class="n">3</span></a></li>
+<li><a href="#tva-ajustari-fara-document"><span>TVA — ajustări fără document</span><span class="n">1</span></a></li>
+<li><a href="#obligatii-de-mediu"><span>Obligații de mediu</span><span class="n">1</span></a></li>
+<li><a href="#material-lipsa-din-notite"><span>Material lipsă din notițe</span><span class="n">1</span></a></li>
+</ol></nav>
+<section class="tema" id="repartizarea-rezultatului-si-rezultatul-reportat"><h2>Repartizarea rezultatului și rezultatul reportat</h2>
+<article class="q">
+<div class="num">Întrebarea 01 / 21</div>
+<h3>Care este temeiul legal al termenului de 3 ani pentru a decide ce se face cu soldul rămas în 1171?</h3>
+<div class="field"><div class="label">Context</div><p>Notițele spuneau: „1171 → decis, în curs de 3 ani, ce face cu diferența dintre 250 și 125 lei” — deci profitul reportat ar trebui repartizat într-un interval de trei ani. Nu am găsit termenul ăsta în Legea 31/1990 și nici în Codul fiscal.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>F-103</code> (repartizarea rezultatului) și <code>MOD_CAPITALURI</code>. Dacă termenul există, modulul ar trebui să semnaleze soldurile 1171 mai vechi de 3 ani; dacă nu, semnalarea ar fi un fals pozitiv la fiecare client cu profit nerepartizat.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Nu l-am implementat. <code>MOD_CAPITALURI</code> raportează soldul 1171 pe an, prin <code>C-21</code>, fără să-l judece după vechime.</p></div>
+<div class="sursa">training 07.08.2026, întrebarea 1</div>
+</article>
+<article class="q">
+<div class="num">Întrebarea 02 / 21</div>
+<h3>În exemplul cu rezerva legală, profitul era 250 sau 2.500 lei?</h3>
+<div class="field"><div class="label">Context</div><p>Notițele au „121 = 250 lei” și imediat „129 - 1061 = 125 lei”. Dar 5% din 250 înseamnă 12,50 lei, nu 125. Cifrele se leagă doar dacă profitul era 2.500.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>F-103</code> și <code>MOD_CAPITALURI</code> folosesc exemplul ca test. Am nevoie să știu dacă a fost o scăpare de notare sau dacă mi-a scăpat mie o regulă de calcul.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Am folosit 2.500 lei, singura variantă în care 5% dau 125. Dacă profitul chiar era 250, atunci procentul aplicat nu era 5% și trebuie relămurit.</p></div>
+<div class="sursa">training 07.08.2026, întrebarea 2</div>
+</article>
+<article class="q">
+<div class="num">Întrebarea 03 / 21</div>
+<h3>Pierderile nedeductibile fiscal se urmăresc pe analitic al lui 1171 sau pe alt cont?</h3>
+<div class="field"><div class="label">Context</div><p>Notițele: „sunt anumite pierderi care nu sunt deductibile fiscal — astea se înregistrează într-un cont separat”. Nu s-a spus care.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>C-21</code> cere ca 1171 să aibă analitic pe an, cu sensul debitor/creditor explicit. Dacă pierderea nedeductibilă are cont propriu, corelația trebuie extinsă, iar recuperarea în 5 ani (70% din profitul impozabil) se urmărește altfel.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Am lăsat 1171 cu analitic pe an, fără separare a pierderii nedeductibile.</p></div>
+<div class="sursa">training 07.08.2026, întrebarea 4</div>
+</article>
+<article class="q">
+<div class="num">Întrebarea 04 / 21</div>
+<h3>Care este actul normativ care a permanentizat termenul de 25 iunie pentru <code>D101</code>?</h3>
+<div class="field"><div class="label">Context</div><p>Notițele anunțau pentru 2027 „101 în Martie, bilanț în mai”. Termenul s-a mutat însă la 25 iunie, iar în documentul revizuit am marcat asta ca schimbare — dar fără să pot cita actul care o face permanentă, nu doar valabilă pentru un an.</p></div>
+<div class="field"><div class="label">De ce contează</div><p>Checklistul de închidere din documentele revizuite și calendarul din foaia Legendă. Un termen greșit aici se propagă la toți clienții.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Am scris 25 iunie, marcat ca „de reconfirmat”.</p></div>
+<div class="sursa">training 07.08.2026, întrebarea 6</div>
+</article>
+</section>
+<section class="tema" id="corectarea-erorilor-din-exercitii-anterioare"><h2>Corectarea erorilor din exerciții anterioare</h2>
+<article class="q">
+<div class="num">Întrebarea 05 / 21</div>
+<h3>Cum se tratează o factură a exercițiului anterior, descoperită neînregistrată în anul curent — și când se folosește 1174 în loc de 628 cu semn schimbat?</h3>
+<div class="field"><div class="label">Context</div><p>Notițele conțineau întrebarea ca atare, fără răspuns, plus observația că 1174 „a fost introdus ca să nu mai denaturăm profitul anilor” și că „lucrurile se complică atunci când nu mai am sold în 1171, pentru că proprietarul a decis să ia dividende”.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>F-105</code> (corecția erorilor prin 1174) și <code>MOD_CAPITALURI</code>. Pragul de semnificație din politicile contabile decide între cele două căi, dar nu știu ce prag folosește cabinetul.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Am construit arborele de decizie pe pragul de semnificație, cu 1174 pentru erorile semnificative din exerciții închise și corecția pe cheltuiala curentă sub prag. <code>C-18</code> cere ca 1174 să ajungă la zero la 31.12.</p></div>
+<div class="sursa">training 07.08.2026, întrebarea 5</div>
+</article>
+</section>
+<section class="tema" id="capital-social-si-activ-net"><h2>Capital social și activ net</h2>
+<article class="q">
+<div class="num">Întrebarea 06 / 21</div>
+<h3>Cum se documentează reîntregirea activului net cerută de Legea 239/2025 — prin conversia creanței asociatului în capital sau prin aport nou?</h3>
+<div class="field"><div class="label">Context</div><p>Legea condiționează dividendele și restituirile de împrumuturi de un activ net de cel puțin jumătate din capitalul social. Notițele semnalau problema, fără procedura de ieșire din blocaj.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>C-20</code> (testul de activ net) și <code>MOD_CAPITALURI</code>, care azi doar semnalează blocajul. Ca să propună o cale de rezolvare, are nevoie de varianta preferată a cabinetului.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Modulul semnalează blocajul și se oprește acolo — nu propune nicio soluție.</p></div>
+<div class="sursa">training 07.08.2026, întrebarea 7</div>
+</article>
+<article class="q">
+<div class="num">Întrebarea 07 / 21</div>
+<h3>Verificăm sistematic pragul de capital social minim (500 / 5.000 lei) pe tot portofoliul de clienți, sau doar la firmele noi?</h3>
+<div class="field"><div class="label">Context</div><p>Pragurile noi din 2026: 500 lei la înființare, 5.000 lei la cifră de afaceri netă peste 400.000 lei. Al doilea prag prinde firme existente, nu doar noi.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>F-101</code> (constituirea capitalului) și checklistul de deschidere de dosar. Dacă verificarea e sistematică, intră în checklistul lunar, nu în cel de deschidere.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Am pus-o în checklistul de deschidere a dosarului.</p></div>
+<div class="sursa">training 07.08.2026, întrebarea 8</div>
+</article>
+</section>
+<section class="tema" id="leasing-si-vehicule"><h2>Leasing și vehicule</h2>
+<article class="q">
+<div class="num">Întrebarea 08 / 21</div>
+<h3>TVA nedeductibilă de pe rata de capital la leasingul financiar: se capitalizează în valoarea mijlocului fix (2133) sau se trece pe cheltuială (635 / 6588)?</h3>
+<div class="field"><div class="label">Context</div><p>Notițele arătau capitalizarea TVA nededuse de pe AVANS în valoarea de intrare (150.000 + 5.250 = 155.250), dar pentru ratele lunare foloseau 6588. Practica e împărțită și în literatură.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>F-108</code> și <code>MOD_LEASING_FIN</code>. E singura variabilă a modulului care schimbă valoarea de intrare a mijlocului fix, deci și amortizarea, deci și impozitul pe profit pe toată durata contractului.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Am făcut din ea o OPȚIUNE DE CONFIGURARE în modul (CAPITALIZEAZA / CHELTUIALA), cu implicit „capitalizează”, coerent cu tratamentul avansului. Nu am tranșat-o ca regulă.</p></div>
+<div class="sursa">training 07.08.2026, întrebarea 3</div>
+</article>
+</section>
+<section class="tema" id="imobilizari-prag-si-amortizare"><h2>Imobilizări — prag și amortizare</h2>
+<article class="q">
+<div class="num">Întrebarea 09 / 21</div>
+<h3>Recomandați alinierea pragului contabil de recunoaștere la cel fiscal (5.000 lei), sau menținerea unui prag intern mai mic pentru control de gestiune?</h3>
+<div class="field"><div class="label">Context</div><p>OUG 8/2026 a urcat pragul fiscal la 5.000 lei. Pragul contabil rămâne la latitudinea entității, prin politici contabile.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>MOD_IMOBILIZARI</code> face un test de prag la intrare. Dacă cele două praguri diferă, apar diferențe temporare de urmărit în registrul de evidență fiscală — un lucru pe care modulul nu îl tratează azi.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Am folosit un singur prag, cel fiscal, și am semnalat în notițe că divergența produce diferențe temporare.</p></div>
+<div class="sursa">training 12.08.2026, întrebarea 1</div>
+</article>
+<article class="q">
+<div class="num">Întrebarea 10 / 21</div>
+<h3>Excepția de la cumulul cu profitul reinvestit (art. 22 alin. 9) acoperă doar amortizarea accelerată, sau și pe cea superaccelerată de 65%?</h3>
+<div class="field"><div class="label">Context</div><p>Notițele spuneau despre amortizarea accelerată că „nu poate să mai fie aplicată o altă facilitate fiscală = reducere pentru profitul reinvestit”, cu recomandarea de a calcula ce e mai avantajos.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>F-204</code> și <code>MOD_IMOBILIZARI</code>, la alegerea metodei de amortizare. Dacă excepția nu acoperă superaccelerata, calculul comparativ are altă concluzie.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Nu am implementat comparația. Modulul propune metoda, fără să optimizeze fiscal.</p></div>
+<div class="sursa">training 12.08.2026, întrebarea 2</div>
+</article>
+</section>
+<section class="tema" id="imobilizari-iesiri-din-gestiune"><h2>Imobilizări — ieșiri din gestiune</h2>
+<article class="q">
+<div class="num">Întrebarea 11 / 21</div>
+<h3>Care este baza legală exactă pentru a trata ca nedeductibilă diferența dintre valoarea rămasă și prețul de vânzare, față de art. 28 alin. (17)?</h3>
+<div class="field"><div class="label">Context</div><p>Notițele: la vânzarea cu 50.000 a unei clădiri cu valoare rămasă 70.000, „50k cheltuieli deductibile, 20k cheltuieli nedeductibile”, cu excepția cazului în care există dovezi (clădire avariată, deviz de service). Citit strict, art. 28 alin. (17) include pierderea în rezultatul fiscal.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>F-211</code> și <code>MOD_IESIRE_MF</code>. E testul central al modulului: azi calculează diferența și cere documentul justificativ, dar nu poate cita articolul pe care se sprijină.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Modulul semnalează riscul și cere documentarea prețului, invocând art. 11 (reîncadrare) și art. 25 alin. (1) (scopul activității economice) — nu art. 28.</p></div>
+<div class="sursa">training 12.08.2026, întrebarea 3</div>
+</article>
+<article class="q">
+<div class="num">Întrebarea 12 / 21</div>
+<h3>La o casare din care nu rezultă nici deșeuri, nici piese reutilizabile, cum se justifică deductibilitatea valorii rămase neamortizate?</h3>
+<div class="field"><div class="label">Context</div><p>Notițele tratau cazul cu valorificare (piese pe 3024, venit pe 7588), dar nu și pe cel fără nicio recuperare.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>F-212</code> (casarea) și <code>MOD_IESIRE_MF</code>, unde valoarea pieselor recuperate poate fi zero. Fără răspuns, modulul nu poate spune dacă procesul-verbal de scoatere din funcțiune e suficient singur.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Modulul acceptă valoarea zero a recuperărilor și lasă deductibilitatea nejudecată, cu procesul-verbal ca singur document.</p></div>
+<div class="sursa">training 12.08.2026, întrebarea 5</div>
+</article>
+</section>
+<section class="tema" id="imobilizari-control-si-raportare"><h2>Imobilizări — control și raportare</h2>
+<article class="q">
+<div class="num">Întrebarea 13 / 21</div>
+<h3>În secțiunea Active din <code>D406</code> (SAF-T) se raportează și 231 (investiții neterminate), și 261 (imobilizări financiare)?</h3>
+<div class="field"><div class="label">Context</div><p>Notițele menționau că informația din modulul de imobilizări „merge în 406”, fără să delimiteze ce anume intră.</p></div>
+<div class="field"><div class="label">De ce contează</div><p>Coloana Declarativ a fluxurilor <code>F-208</code> (imobilizări în curs) și <code>F-213</code> (imobilizări financiare). Azi nu marchez <code>D406</code> pe ele, ca să nu afirm ceva greșit.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Le-am lăsat nemarcate în coloana Declarativ.</p></div>
+<div class="sursa">training 12.08.2026, întrebarea 4</div>
+</article>
+<article class="q">
+<div class="num">Întrebarea 14 / 21</div>
+<h3>Ne puteți da procedura scrisă de reconciliere, pentru cazul în care analiticul din balanța contabilă nu corespunde cu registrul mijloacelor fixe?</h3>
+<div class="field"><div class="label">Context</div><p>Ultimul punct al trainingului 3, rămas nefinalizat: „am verificat analiticul cu sinteticul → am verificat firma X, avem în 212 x lei, dar în balanța contabilă / imobilizări am x, y, z → să vedem o procedură, ce e de făcut.” Formatorul a promis-o și sesiunea s-a încheiat înainte.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>F-214</code> este singurul flux de PROCEDURĂ din tot sistemul — nu produce note contabile, descrie un control lunar. Azi se oprește la „dacă soldurile nu corespund”, fără pașii de rezolvare. <code>C-15</code> depinde de aceeași procedură.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Am scris pașii de identificare (listing, comparare pe perechi 21x↔28x, fișă de cont), dar NU și pașii de corecție — aceia sunt procedura promisă.</p></div>
+<div class="sursa">training 12.08.2026, întrebarea 6 — PUNCTUL CEL MAI IMPORTANT</div>
+</article>
+</section>
+<section class="tema" id="stocuri-si-productie"><h2>Stocuri și producție</h2>
+<article class="q">
+<div class="num">Întrebarea 15 / 21</div>
+<h3>Care sunt celelalte metode de calculație a costurilor acceptate de OMFP 1802/2014, și în ce situații se alege fiecare?</h3>
+<div class="field"><div class="label">Context</div><p>Notițele menționau metoda pe comenzi ca fiind cea mai utilizată, în contextul producției de termopane. Celelalte (pe faze, pe produs, standard-cost) au rămas doar enumerate.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>F-311</code> (producția multi-stadiu) ține gestiunea lui 331 analitic pe comandă. Pe faze, structura analitică e alta, deci și fluxul.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Am implementat doar metoda pe comenzi.</p></div>
+<div class="sursa">training 14.08.2026, întrebarea 1</div>
+</article>
+</section>
+<section class="tema" id="tva-import-vama-taxare-inversa"><h2>TVA — import, vamă, taxare inversă</h2>
+<article class="q">
+<div class="num">Întrebarea 16 / 21</div>
+<h3>La decontarea cu comisionarul vamal folosiți 446 sau 462? Care e standardul cabinetului și de ce?</h3>
+<div class="field"><div class="label">Context</div><p>Notițele foloseau 446, cu observația proprie că „e o înregistrare puțin forțată, pentru că e un cont de pasiv”. Unele cabinete folosesc 461/462.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>F-319</code> (import prin comisionar) și analiticul 446.VAMA din foaia Analitice. Contul ales determină unde apare soldul în bilanț: datorie la buget vs. datorie către un terț.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Am păstrat 446.VAMA, ca în notițe, și am notat 461/462 ca alternativă.</p></div>
+<div class="sursa">training 14.08.2026, întrebarea 3</div>
+</article>
+<article class="q">
+<div class="num">Întrebarea 17 / 21</div>
+<h3>Verificăm sistematic dacă clienții importatori îndeplinesc condițiile pentru certificatul de amânare de la plata TVA în vamă?</h3>
+<div class="field"><div class="label">Context</div><p>Certificatul înlocuiește plata efectivă a TVA în vamă cu taxare inversă (4426 = 4427) — avantaj mare de cash-flow. Notițele nu îl menționau deloc; l-am adăugat eu la revizuire.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>F-320</code> (import cu plată directă) capătă o a treia variantă dacă certificatul există. Ar trebui să intre în checklistul de deschidere a dosarului.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>L-am adăugat ca variantă în documentul revizuit, dar nu în checklist.</p></div>
+<div class="sursa">training 14.08.2026, întrebarea 4</div>
+</article>
+<article class="q">
+<div class="num">Întrebarea 18 / 21</div>
+<h3>Derogarea UE pentru taxarea inversă la cereale și electronice avea termen 31.12.2026 — a fost prelungită?</h3>
+<div class="field"><div class="label">Context</div><p>Art. 331 alin. (6) limitează în timp o parte din categorii, iar Consiliul UE a prelungit derogarea succesiv. Nu se poate presupune prelungirea automată.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>F-402</code> (taxare inversă internă) și lista de categorii din documentul revizuit. Aplicarea taxării inverse după expirare înseamnă factură greșit întocmită.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Am marcat termenul în document cu avertisment de reverificare.</p></div>
+<div class="sursa">training 14.08.2026, întrebarea 7</div>
+</article>
+</section>
+<section class="tema" id="tva-ajustari-fara-document"><h2>TVA — ajustări fără document</h2>
+<article class="q">
+<div class="num">Întrebarea 19 / 21</div>
+<h3>La lipsa la inventar, practica implicită a cabinetului este colectarea de TVA sau ajustarea dreptului de deducere? Ce set de documente se cere clientului?</h3>
+<div class="field"><div class="label">Context</div><p>Notițele spuneau simplu „trebuie să colectez și TVA”. La revizuire am găsit că tratamentul diferă: lipsă imputabilă → colectare; neimputabilă nejustificată → ajustare; bunuri distruse cu documente → fără ajustare.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>F-406</code> (înregistrări fără document) și corelațiile <code>C-03</code> / <code>C-04</code>, unde ajustările care nu vin din facturi trebuie să apară în jurnale cu semnul corect. Cele două tratamente ating conturi diferite, deci și jurnale diferite.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Am descris toate patru situațiile, fără să declar una ca implicită.</p></div>
+<div class="sursa">training 14.08.2026, întrebarea 2</div>
+</article>
+</section>
+<section class="tema" id="obligatii-de-mediu"><h2>Obligații de mediu</h2>
+<article class="q">
+<div class="num">Întrebarea 20 / 21</div>
+<h3>Care este termenul curent de depunere a declarației la Fondul pentru Mediu — lunar sau trimestrial?</h3>
+<div class="field"><div class="label">Context</div><p>Notițele nu dădeau termenul, iar acesta s-a modificat de mai multe ori. La revizuire am scris „verifică termenul curent pe afm.ro”, ceea ce nu e un răspuns.</p></div>
+<div class="field"><div class="label">De ce contează</div><p><code>F-310</code> (ambalaje și taxa AFM) și checklistul lunar. Un termen greșit produce penalități direct.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Am lăsat termenul nespecificat, cu trimitere la sursa oficială.</p></div>
+<div class="sursa">training 14.08.2026, întrebarea 5</div>
+</article>
+</section>
+<section class="tema" id="material-lipsa-din-notite"><h2>Material lipsă din notițe</h2>
+<article class="q">
+<div class="num">Întrebarea 21 / 21</div>
+<h3>Ce fișier și ce sarcină erau în spatele notițelor „Fișierul atașat arată corelații importante între conturi” și „task”?</h3>
+<div class="field"><div class="label">Context</div><p>Ambele au rămas fără conținut în notițele originale — un rând care trimite la un atașament și un rând cu un singur cuvânt, „task”.</p></div>
+<div class="field"><div class="label">De ce contează</div><p>Fișierul cu corelații ar putea conține exact materialul din foaia „Corelații de control”, care azi are 22 de corelații construite de mine. Dacă există o listă a formatorului, merită confruntată cu a mea.</p></div>
+<div class="field presup"><div class="label">Ce am presupus</div><p>Am construit corelațiile din notițe și din practică, fără fișierul original.</p></div>
+<div class="sursa">training 14.08.2026, întrebarea 6</div>
+</article>
+</section>
+<footer>21 de întrebări, 12 teme. Generat din notițele revizuite; fiecare întrebare se poate urmări înapoi la training și la numărul ei original.</footer>
+</div>
