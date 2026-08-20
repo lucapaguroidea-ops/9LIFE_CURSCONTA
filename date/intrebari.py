@@ -266,6 +266,67 @@ TEME = [
           "formatorului, merită confruntată cu a mea.",
           "Am construit corelațiile din notițe și din practică, fără fișierul original."),
     ]),
+
+    ("Plafoane de numerar și contul 455", [
+        q("training 19.08.2026, punctul 1",
+          "Care sunt valorile exacte ale plafoanelor din Legea 70/2015 în forma modificată "
+          "prin Legea 296/2023, la data operațiunii?",
+          "Notițele rețin 5.000 lei B2B, 10.000 lei încasări de la persoane fizice și "
+          "50.000 lei între persoane fizice, plus un plafon separat pentru soldul casieriei "
+          "la sfârșitul zilei. Sunt și plafoane totale zilnice, peste cele per persoană.",
+          "Documentul „Control, documente și numerar”, secțiunea de plafoane. Un plafon "
+          "greșit produce amendă direct, iar fragmentarea e interzisă expres — deci nici "
+          "împărțirea pe tranșe nu e o ieșire.",
+          "Am păstrat cifrele din notițe, cu mențiunea explicită că trebuie confirmate în "
+          "textul în vigoare la data operațiunii."),
+        q("training 19.08.2026, punctul 2",
+          "Care sunt exact operațiunile în numerar interzise pe contul 455 și care e "
+          "temeiul legal?",
+          "Notițele spun doar că „plățile din 455 prin casierie nu mai sunt permise în "
+          "condițiile anterioare”, fără să precizeze care condiții și din ce text.",
+          "Foaia „Închideri periodice”, unde 455 e urmărit trimestrial fără flux în spate. "
+          "Fără regula exactă, rândul rămâne gol declarat — nu se poate scrie o monografie "
+          "pentru o restricție pe care n-o cunosc.",
+          "Am lăsat 455 fără flux, cu golul marcat ca atare în foaie."),
+    ]),
+
+    ("Comportamentul softului la încasarea în plus", [
+        q("training 19.08.2026, punctul 3",
+          "Programul de contabilitate extrage automat TVA-ul din diferența trecută pe 419 "
+          "la o încasare mai mare decât factura, sau trebuie forțat manual?",
+          "Suma încasată în plus e TVA-inclusivă: din 5.000 lei ies 4.132,23 bază și 867,77 "
+          "TVA. Dacă softul nu face extragerea, TVA-ul rămâne necolectat fără ca nimic "
+          "să semnaleze.",
+          "F-415 (încasare peste factură) și C-23. Notițele cer explicit contraverificarea "
+          "lui 4427 după simulare — deci nici formatorul nu presupune că softul o face.",
+          "Am scris fluxul cu extragerea explicită a TVA-ului, ca pas separat, tocmai ca "
+          "să nu depindă de comportamentul softului."),
+    ]),
+
+    ("Convenții de analitic rămase de fixat", [
+        q("training 19.08.2026, punctul 4",
+          "Care e structura analitică exactă pe 4428 — pe situație și pe cotă?",
+          "4428 apare în trei situații cu sensuri diferite: debitor la achiziția pe aviz "
+          "(4428 = 408), creditor la livrarea pe aviz (418 = 4428) și creditor la mărfuri "
+          "la preț cu amănuntul (371 = 4428). Notițele cer analitice pe fiecare situație "
+          "ȘI pe fiecare cotă, dar nu dau nomenclatorul.",
+          "F-316, F-408 și analiticul Tier A al lui 4428. Workbook-ul folosește azi "
+          "4428.AM (amănunt) și 4428.INC (la încasare); pentru avizul de intrare nu există "
+          "convenție scrisă.",
+          "Am folosit convenția existentă din training 4 și am lăsat avizul de intrare fără "
+          "analitic propriu — vizibil ca gol în foaia „Închideri periodice”."),
+        q("training 19.08.2026, punctul 5",
+          "Facturile nesosite pentru imobilizări se țin pe 408 cu analitic sau direct pe "
+          "404 cu analitic?",
+          "Exemplul din notițe folosește 231 = 408, dar furnizorul de imobilizări e 404. "
+          "Notițele semnalează singure problema și cer stabilirea unei convenții "
+          "consecvente.",
+          "F-408 și F-207. Alegerea decide dacă furnizorii de exploatare se amestecă sau nu "
+          "cu cei de imobilizări în balanța analitică — adică dacă 401/404 mai pot fi "
+          "verificate separat.",
+          "Am păstrat 408 cu analitic, ca în exemplul din notițe, semnalând alternativa în "
+          "observația contului."),
+    ]),
 ]
 
 TOTAL = sum(len(qs) for _, qs in TEME)

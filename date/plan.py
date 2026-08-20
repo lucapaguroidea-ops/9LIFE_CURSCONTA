@@ -11,6 +11,15 @@ J (Tier) pe rândurile care există deja.
 #    (se scriu doar câmpurile date; restul rândului rămâne neatins)
 # --------------------------------------------------------------------------
 ACTUALIZARI = {
+    # ---- denumiri completate din tabelul recapitulativ al sursei 19.08 -------
+    "378":  dict(observatie="Diferențe de preț la mărfuri (adaos). Rectificativ al lui "
+                            "371 la preț cu amănuntul, alături de 4428."),
+    "419":  dict(observatie="Clienți-creditori (avansuri încasate). TVA se colectează la "
+                            "încasarea avansului, iar la factura finală avansul se "
+                            "stornează — nu e venit, deci nu poate merge pe 472."),
+    "491":  dict(observatie="Ajustări pentru deprecierea creanțelor-clienți. Spre deosebire "
+                            "de ajustările de stoc, acestea SUNT deductibile condiționat, "
+                            "în limitele art. 26. Nu se confundă cele două regimuri."),
     # ---- clasa 1 -----------------------------------------------------------
     "101":  dict(analitice="1011 subscris nevărsat / 1012 subscris vărsat [N]", factor="N C",
                  flux="F-45, F-46", tier="A"),
@@ -98,6 +107,62 @@ CONTURI_NOI = [
          natura="Patrimonial (real)", subtip="Creanta",
          observatie="Alternativă la 4093 în unele planuri; a se folosi consecvent una singură.",
          analitice="—", factor="O", flux="—", tier="C"),
+
+    # ------------------------------------------------------------------
+    # Analiticele de gradul II pe care sursa 19.08 le numește și planul nu le avea.
+    #
+    # Planul e ținut la nivel sintetic, de trei cifre — o alegere bună pentru
+    # navigare. Dar șapte dintre conturile de mai jos sunt FOLOSITE în monografii
+    # (6583 și 7583 în ieșirile de mijloace fixe, 6814/7814 în ajustări, 5121
+    # aproape peste tot), fără să existe în plan. Adică navigarea cont → flux se
+    # rupea exact pentru ele — unul dintre golurile marcate „verifică tu” în
+    # documentul de parcurs.
+    #
+    # Le-a scos la iveală poarta 16: tabelul recapitulativ al sursei le numea, iar
+    # planul n-avea unde să le primească.
+    # ------------------------------------------------------------------
+    dict(simbol="2813", denumire="Amortizarea instalațiilor și mijloacelor de transport",
+         fct="P", natura="Rol in flux", subtip="Rectificativ / contra",
+         observatie="Rectificativ pasiv al lui 213. La ieșire se debitează cu amortizarea "
+                    "cumulată, iar valoarea rămasă trece prin 6583.",
+         analitice="2813 pe grupa de mijloc fix", factor="C B", flux="F-211, F-212", tier="A"),
+    dict(simbol="5121", denumire="Conturi la bănci în lei", fct="A",
+         natura="Patrimonial (real)", subtip="Trezorerie",
+         observatie="Contul de bancă, indiferent de instrument (ordin de plată, internet "
+                    "banking, mandat). Nu se confundă cu 5311 (casa) sau 5111 "
+                    "(cecuri de încasat, cont de ÎNCASĂRI).",
+         analitice="5121 pe bancă și pe valută", factor="V O", flux="F-405, F-410", tier="A"),
+    dict(simbol="6583", denumire="Cheltuieli privind activele cedate", fct="A",
+         natura="Patrimonial (real)", subtip="Cheltuiala",
+         observatie="Valoarea rămasă neamortizată la ieșirea unui activ. Perechea lui "
+                    "7583 — facturarea singură nu scoate activul din evidență.",
+         analitice="6583 pe activ cedat", factor="F C", flux="F-211, F-212", tier="A"),
+    dict(simbol="7583", denumire="Venituri din vânzarea activelor și alte operațiuni de capital",
+         fct="P", natura="Patrimonial (real)", subtip="Venit",
+         observatie="Prețul de vânzare al activului. Se compară cu 6583: diferența e "
+                    "rezultatul cedării.",
+         analitice="7583 pe activ cedat", factor="F C", flux="F-211, F-212", tier="A"),
+    dict(simbol="6814",
+         denumire="Cheltuieli de exploatare privind ajustările pentru deprecierea activelor circulante",
+         fct="A", natura="Patrimonial (real)", subtip="Cheltuiala",
+         observatie="Constituirea ajustării de stoc. NEDEDUCTIBILĂ fiscal — art. 26 Cod "
+                    "fiscal enumeră limitativ, iar deprecierea stocurilor nu e acolo. "
+                    "Funcționează în oglindă cu 7814.",
+         analitice="6814 pe natura stocului ajustat", factor="F N", flux="F-307", tier="A"),
+    dict(simbol="7814",
+         denumire="Venituri din ajustări pentru deprecierea activelor circulante",
+         fct="P", natura="Patrimonial (real)", subtip="Venit",
+         observatie="Reluarea ajustării la valorificarea bunului — obligatorie prin lege. "
+                    "NEIMPOZABILĂ (art. 23 lit. d), ca să neutralizeze cheltuiala "
+                    "nedeductibilă din 6814.",
+         analitice="7814 pe natura stocului ajustat", factor="F N", flux="F-307", tier="A"),
+    dict(simbol="4091", denumire="Furnizori-debitori (avansuri plătite)", fct="A",
+         natura="Patrimonial (real)", subtip="Creanta",
+         observatie="Avansurile se analitizează pe DESTINAȚIE: 4091 stocuri, 4092 servicii, "
+                    "4093 imobilizări corporale, 4094 imobilizări necorporale. "
+                    "4093/4094 au furnizor 404, nu 401. Stornarea la factura finală se "
+                    "face și pe 4091, și pe 401, ca efectul net să fie zero.",
+         analitice="4091 – 4094 pe destinație", factor="C O", flux="F-410", tier="A"),
 ]
 
 # --------------------------------------------------------------------------

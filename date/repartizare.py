@@ -209,6 +209,35 @@ ABSORBITE = {
     "## 6. Clienți — clasa 41":
         "Absorbit în aceeași secțiune nouă, împreună cu furnizorii: 408 și 418 sunt "
         "oglinzi, iar separate ar cere cititorului să sară între secțiuni.",
+    "## 12. Erori frecvente și capcane":
+        "Devine „Anexa B — Checklist practic” în documentul de control: aceeași listă, "
+        "denumirea canonică a anexelor.",
+    # §13 nu se copiază: se RESTRUCTUREAZĂ în formatul de întrebare, cu aceleași
+    # câmpuri ca celelalte 21 (`sursa`, `context`, `conteaza`, `presupunere`). Fiecare
+    # punct își păstrează trasabilitatea prin câmpul `sursa`. Copiat verbatim, ar fi
+    # rămas o listă paralelă care spune același lucru cu alte cuvinte.
+    "## 13. De verificat și de testat":
+        "Devine tema „Plafoane de numerar și contul 455” și următoarele două din "
+        "date/intrebari.py.",
+    "Puncte rămase deschise, de confirmat înainte de a le aplica la un client:":
+        "Introducerea listei; rolul ei îl joacă nota din capul foii „Întrebări deschise”.",
+    "1. **Plafoanele de numerar** — valorile exacte din Legea 70/2015, așa cum a fost "
+    "modificată prin Legea 296/2023, la data operațiunii.":
+        "Devine întrebarea „training 19.08.2026, punctul 1”.",
+    "2. **Restricțiile pe contul 455** — care sunt exact operațiunile în numerar "
+    "interzise și temeiul legal.":
+        "Devine întrebarea „training 19.08.2026, punctul 2”.",
+    "3. **Simulare în softul de contabilitate** pentru cazul încasării în plus (7.3): "
+    "de verificat dacă programul extrage automat TVA-ul pe diferența trecută la 419, "
+    "sau dacă trebuie forțat manual. De contraverificat 4427 după simulare.":
+        "Devine întrebarea „training 19.08.2026, punctul 3”.",
+    "4. **Analiticele pe 4428** — de configurat pe fiecare situație (aviz intrare / "
+    "aviz ieșire / mărfuri) **și** pe fiecare cotă de TVA, înainte de a începe operarea.":
+        "Devine întrebarea „training 19.08.2026, punctul 4”.",
+    "5. **Contul folosit pentru facturi nesosite la imobilizări** — 408 cu analitic sau "
+    "404 cu analitic; de stabilit convenția și de respectat consecvent.":
+        "Devine întrebarea „training 19.08.2026, punctul 5”.",
+
     "## 7. Operațiuni speciale":
         "Blocul s-a rupt în trei destinații, deci titlul lui n-are ce acoperi: §7.1 e "
         "la imobilizări, restul la control.",

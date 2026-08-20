@@ -126,7 +126,8 @@ def extinde_plan_conturi(wb):
             lipsa.append(simbol)
             continue
         for cheie, col in (("analitice", COL_ANALITICE), ("factor", COL_FACTOR),
-                           ("flux", COL_FLUX), ("tier", COL_TIER)):
+                           ("flux", COL_FLUX), ("tier", COL_TIER),
+                           ("observatie", COL_OBS)):
             if cheie in camp:
                 ws.cell(row=r, column=col, value=_contopeste(
                     ws.cell(row=r, column=col).value, camp[cheie]))
@@ -136,7 +137,9 @@ def extinde_plan_conturi(wb):
     # 3. conturi noi, la finalul tabelului
     rand = _primul_rand_liber(ws)
     rand += 1
-    rand = _titlu_sectiune(ws, rand, "CONTURI ADĂUGATE ÎN ETAPA 4 (lipseau din planul inițial)", 10)
+    rand = _titlu_sectiune(ws, rand, "CONTURI ADĂUGATE — lipseau din planul inițial "
+                                     "(inclusiv tabel recapitulativ de conturi, sursa "
+                                     "19.08.2026)", 10)
     for c in dplan.CONTURI_NOI:
         for col, val in (
             (COL_SIMBOL, c["simbol"]), (COL_DENUMIRE, c["denumire"]), (COL_FCT, c["fct"]),
