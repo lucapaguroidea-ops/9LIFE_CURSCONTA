@@ -20,6 +20,9 @@ CATALOG = dict(
 )
 
 
+from .comun import formula_activ  # noqa: E402
+
+
 def construieste(F, P):
     """F = fabrica de foi, P = dict cu referințele parametrilor globali."""
     # ---------------------------------------------------------------- Declarații
@@ -99,8 +102,8 @@ def construieste(F, P):
     sufix = d.kv("Sufix", f'="— repartizare rezultat " & {an}', tip="calc")
     d.gol()
     d.kv("Modul activ în CatalogModule?",
-         '=IF(INDEX(CatalogModule!A:A,MATCH("MOD_CAPITALURI",CatalogModule!B:B,0))="DA",'
-         '"ACTIV — jurnalele se generează","INACTIV — jurnalele rămân goale")', tip="calc")
+         formula_activ(COD, "ACTIV — jurnalele se generează",
+                       "INACTIV — jurnalele rămân goale"), tip="calc")
 
     # -------------------------------------------------------------------- Reguli
     g = F("Reguli_CAPITALURI", {"A": 10, "B": 14, "C": 14, "D": 34, "E": 26, "F": 56})

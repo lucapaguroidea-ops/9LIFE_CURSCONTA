@@ -4,15 +4,16 @@ Fiecare modul expune `COD`, `CATALOG` (rândul din CatalogModule) și
 `construieste(F, P)`, unde F e fabrica de foi (build.foaie.Foaie legat de workbook)
 și P e dicționarul de referințe către parametrii globali.
 """
+from .comun import CATALOG_RANDURI, formula_activ  # noqa: F401
 from . import (capitaluri, credit_valuta, decont, iesire_mf, imobilizari,
-               inchidere_lunara, leasing_fin,
+               inchidere_lunara, intermediar, leasing_fin,
                provizion, salarii, subventie)
 
 # Ordinea = ordinea claselor de conturi, ca in restul sistemului: capitaluri, apoi
 # imobilizari, apoi terti. Foile din workbook apar in aceeasi ordine.
 MODULE = [capitaluri, credit_valuta, provizion, leasing_fin,
           imobilizari, subventie, iesire_mf,
-          salarii, decont,
+          salarii, decont, intermediar,
           # verificarea vine la urmă: se sprijină pe fluxurile de mai sus
           inchidere_lunara]
 
@@ -45,4 +46,5 @@ PARAMETRI_NOI = [
 # implementat. Poarta 9 acceptă schimbarea DOAR pentru codurile enumerate aici.
 STATUS_INLOCUIT = ["MOD_LEASING_FIN"]
 
-__all__ = ["MODULE", "PARAMETRI_NOI", "STATUS_INLOCUIT"]
+__all__ = ["MODULE", "PARAMETRI_NOI", "STATUS_INLOCUIT", "formula_activ",
+           "CATALOG_RANDURI"]

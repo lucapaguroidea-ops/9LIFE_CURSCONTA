@@ -19,6 +19,9 @@ CATALOG = dict(
 )
 
 
+from .comun import formula_activ  # noqa: E402
+
+
 def construieste(F, P):
     # ---------------------------------------------------------------- Declarații
     d = F("Declarații_IESIRE_MF", {"A": 48, "B": 22, "C": 60})
@@ -92,8 +95,8 @@ def construieste(F, P):
     sufix = d.kv("Sufix", f'="— " & {denumire} & " " & {data_i}', tip="calc")
     d.gol()
     d.kv("Modul activ în CatalogModule?",
-         '=IF(INDEX(CatalogModule!A:A,MATCH("MOD_IESIRE_MF",CatalogModule!B:B,0))="DA",'
-         '"ACTIV — jurnalele se generează","INACTIV — jurnalele rămân goale")', tip="calc")
+         formula_activ(COD, "ACTIV — jurnalele se generează",
+                       "INACTIV — jurnalele rămân goale"), tip="calc")
 
     # -------------------------------------------------------------------- Reguli
     g = F("Reguli_IESIRE_MF", {"A": 10, "B": 16, "C": 16, "D": 34, "E": 26, "F": 58})

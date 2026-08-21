@@ -135,11 +135,38 @@ def extinde_catalog(wb, module):
                        align=stil.A_WRAP)
 
 
+#: Prefixele celor patru foi ale unui modul. `Verificări_`/`Abateri_` sunt varianta
+#: modulelor care dau un verdict, nu o înregistrare (MOD_INCHIDERE_LUNARA).
+PREFIXE = ("Declarații_", "Reguli_", "Jurnale_", "NotaExport_", "Verificări_",
+           "Abateri_", "Registru_")
+
+
+def scoate_foile_de_samanta(wb, module):
+    """Șterge foile pe care un modul portat urmează să le regenereze.
+
+    Un modul care exista DOAR ca foi de sămânță (MOD_INTERMEDIAR și celelalte șase) își
+    primește acum foile din cod. Fără ștergerea asta, `Foaie.__init__` ridică „foaia
+    există deja”.
+
+    Ce apără pasul ăsta: poarta de conservare cere ca fiecare linie din sămânță să se
+    regăsească în fișierul generat. Deci dacă portarea uită o propoziție din foaia
+    veche, poarta 9 o numește. Portarea se verifică singură — nu pe încrederea că am
+    transcris tot, ci pe mulțimea de text.
+    """
+    coduri = {m.COD.removeprefix("MOD_") for m in module}
+    scoase = [s for s in list(wb.sheetnames)
+              if any(s.startswith(p) and s.removeprefix(p) in coduri for p in PREFIXE)]
+    for s in scoase:
+        del wb[s]
+    return scoase
+
+
 def main():
     if not os.path.exists(SEED):
         raise SystemExit(f"Lipsește fișierul-sămânță: {SEED}")
     wb = openpyxl.load_workbook(SEED)
 
+    scoase = scoate_foile_de_samanta(wb, MODULE)
     P = extinde_parametri(wb)
 
     def fabrica(nume, latimi=None):
@@ -163,7 +190,9 @@ def main():
     wb.save(IESIRE)
     recalc(IESIRE)
     print(f"scris: {os.path.relpath(IESIRE, RADACINA)}  "
-          f"({len(MODULE)} module, {schimbate} celule renumerotate)")
+          f"({len(MODULE)} module, {schimbate} celule renumerotate"
+          + (f", {len(scoase)} foi de sămânță regenerate din cod" if scoase else "")
+          + ")")
 
 
 if __name__ == "__main__":

@@ -335,10 +335,11 @@ def actualizeaza_index(wb):
     # cum s-a întâmplat cu MOD_LEASING_FIN, care figura și „EXEMPLU EXTERN”, și
     # „IMPLEMENTAT”, în două rânduri care se contraziceau
     module = [
-        (m.COD, m.CATALOG["fluxuri"], m.CATALOG["blocuri"], "IMPLEMENTAT",
+        (m.COD, m.CATALOG["fluxuri"],
+         m.CATALOG.get("ce_face") or m.CATALOG["blocuri"], "IMPLEMENTAT",
          ", ".join(f"{f}_{m.COD.removeprefix('MOD_')}"
                    for f in ("Declarații", "Reguli", "Jurnale", "NotaExport")),
-         m.CATALOG["tip"])
+         m.CATALOG.get("cand") or m.CATALOG["tip"])
         for m in dmodule.MODULE
     ]
     # modulele care există deja în index se actualizează în loc — un modul are un

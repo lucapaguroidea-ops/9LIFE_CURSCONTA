@@ -202,6 +202,46 @@ INLOCUIRI = [
         devine="Tier C (36) — conturi rar folosite în cabinet (consolidare, fiducie, "
                "resurse minerale, clasa 9). Marcate explicit „acoperire minimă”",
     ),
+    # ---- portarea modulelor moștenite din sămânță în `date/module/` ----------
+    dict(
+        text='=IF(B10=473,"Sold 473 la 31.12 = suspect — clarificare obligatorie","—")',
+        motiv="Defect viu, găsit la portarea lui MOD_INTERMEDIAR. B10 conține TEXTUL "
+              "„473”, iar Excel nu compară text cu număr: „473”=473 e FALSE, mereu. Cu "
+              "tipul implicit chiar pe 473, celula afișa „—”. Adică singurul avertisment "
+              "serios al modulului — soldul de 473 rămas la 31.12, care în notițe e "
+              "SUSPECT, nu LEGITIM — era cod mort. Acum se compară text cu text.",
+        devine='=IF(B10="473","Sold 473 la 31.12 = suspect — clarificare '
+               'obligatorie","—")',
+    ),
+    dict(
+        text='=IF(CatalogModule!A14="DA","ACTIV","INACTIV")',
+        motiv="Rândul din catalog era scris în formulă. Mutai un rând și celula citea "
+              "steagul altui modul, tăcut. Se caută pe codul modulului, prin "
+              "INDEX/MATCH — vezi `date/module/comun.py:formula_activ`. Intervalul e "
+              "mărginit ($A$1:$A$200), pentru că motorul de recalcul nu evaluează "
+              "`INDEX(CatalogModule!A:A, …)` pe coloană întreagă; forma pe coloană "
+              "întreagă lăsa celula goală în toate cele patru module care o foloseau.",
+        devine="vezi date/module/comun.py:formula_activ",
+    ),
+    dict(
+        text="Declarații_INTER, Jurnale_INTER, NotaExport_INTER",
+        motiv="Foile nu se numesc așa. Sunt Declarații_INTERMEDIAR, Reguli_INTERMEDIAR, "
+              "Jurnale_INTERMEDIAR, NotaExport_INTERMEDIAR — iar `Reguli_` lipsea cu "
+              "totul din listă, deși modulul o are. O instrucțiune de navigare greșită "
+              "în foaia al cărei singur rost e navigarea. Se generează acum din cod.",
+        devine="Declarații_INTERMEDIAR, Reguli_INTERMEDIAR, Jurnale_INTERMEDIAR, "
+               "NotaExport_INTERMEDIAR",
+    ),
+    dict(
+        text="F-23, F-34, F-39",
+        motiv="Lista de fluxuri a lui MOD_INTERMEDIAR din `Index module` nu coincidea cu "
+              "cea din `CatalogModule` („F-23, F-33, F-34”) — două liste scrise de mână "
+              "despre același modul, divergente. Rămâne una singură, citită din "
+              "`CATALOG['fluxuri']`. F-39 (F-304, intersecția 32x ↔ 408 la același "
+              "furnizor) iese: e o stare inițială murdară, pe care tiparul generic "
+              "deschidere → stingere de aici nu o modelează.",
+        devine="F-23, F-33, F-34",
+    ),
     dict(
         text="Ilustrativ (sume descriptive)",
         motiv="Marcajul PARȚIAL de la 681/781 era corect când sumele erau descriptive. "
