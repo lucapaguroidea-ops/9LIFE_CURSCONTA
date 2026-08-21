@@ -91,6 +91,13 @@ CLASA_4 = [
     ("F-413", "F-32", "Salarii"),
     ("F-414", "F-38", "Decontări 481 / 482 (unitate ↔ subunități)"),
     ("F-415", "F-63", "Încasare peste factură (supraîncasare → 419 + TVA)"),
+    ("F-416", "F-64", "Concediu medical (împărțire angajator / FNUASS)"),
+    ("F-417", "F-65", "Poprire pe salariu (rețineri datorate terților)"),
+    ("F-418", "F-66", "Drepturi de personal neridicate (421 → 426)"),
+    ("F-419", "F-67", "Creanță față de un fost salariat (4282)"),
+    ("F-420", "F-68", "Impozitul pe venitul microîntreprinderii (698 → 4418)"),
+    ("F-421", "F-69", "Decizie de impunere ANAF pe TVA (analitic distinct)"),
+    ("F-422", "F-70", "Închiderea lunară a obligațiilor salariale (rulaj = sold)"),
 ]
 
 CLASA_5 = [

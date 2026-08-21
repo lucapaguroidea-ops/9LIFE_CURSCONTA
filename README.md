@@ -82,7 +82,7 @@ peste un an primește următorul număr liber din clasa lui și stă fizic la lo
 | `F-1xx` | capitaluri, provizioane, împrumuturi, închiderea exercițiului, leasing | 8 |
 | `F-2xx` | imobilizări: intrare pe grupe → în curs → regie proprie → subvenții → ieșiri → control analitic↔sintetic | 14 |
 | `F-3xx` | stocuri și producție: aprovizionare, obiecte de inventar, producție, mărfuri, import | 20 |
-| `F-4xx` | terți și TVA: TVA la încasare, taxare inversă, închidere lunară, 408/418, salarii | 14 |
+| `F-4xx` | terți, TVA, salarii: TVA la încasare, taxare inversă, închidere lunară, 408/418, salarii, medicale, popriri, impozit micro | 22 |
 | `F-5xx` | trezorerie | 2 |
 | `F-8xx` | conturi în afara bilanțului | 2 |
 

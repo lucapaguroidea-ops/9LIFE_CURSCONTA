@@ -121,6 +121,18 @@ CONTURI_NOI = [
     # Le-a scos la iveală poarta 16: tabelul recapitulativ al sursei le numea, iar
     # planul n-avea unde să le primească.
     # ------------------------------------------------------------------
+    # ---- conturi cerute de fluxurile din 21.08 -------------------------
+    dict(simbol="4282", denumire="Alte creanțe în legătură cu personalul", fct="A",
+         natura="Patrimonial (real)", subtip="Creanță",
+         observatie="Ce datorează salariatul firmei: echipament nepredat, avans "
+                    "nejustificat, imputații. ⚠️ Notițele din 21.08 foloseau 4428 — "
+                    "acela e TVA neexigibilă. Sold creditor = contrar naturii (C-23).",
+         analitice="4282 pe salariat", factor="C", flux="F-419", tier="A"),
+    dict(simbol="6458", denumire="Alte cheltuieli privind asigurările și protecția socială",
+         fct="A", natura="Patrimonial (real)", subtip="Cheltuială",
+         observatie="Partea din indemnizația de concediu medical suportată efectiv de "
+                    "angajator. Restul indemnizației NU e cheltuială: e creanță pe 4382.",
+         analitice="—", factor="D", flux="F-416", tier="B"),
     dict(simbol="2813", denumire="Amortizarea instalațiilor și mijloacelor de transport",
          fct="P", natura="Rol in flux", subtip="Rectificativ / contra",
          observatie="Rectificativ pasiv al lui 213. La ieșire se debitează cu amortizarea "
@@ -182,6 +194,28 @@ CORECTII = [
 # 4. Rânduri noi pentru foaia `Matrice acoperire`
 # --------------------------------------------------------------------------
 MATRICE = [
+    # ---- salarii și rețineri (sursa 21.08) ---------------------------------
+    ("423", "Personal — ajutoare materiale datorate", "A", "F-64",
+     "F-64 pas 3: indemnizația trece prin datorie, dar numai o parte e cheltuială", "NU"),
+    ("4382", "Alte creanțe sociale (FNUASS)", "A", "F-64",
+     "F-64 pas 3: creanță, nu cheltuială — firma a avansat banii casei", "NU"),
+    ("6458", "Alte cheltuieli privind asigurările și protecția socială", "A", "F-64",
+     "F-64 pas 1: partea de indemnizație suportată efectiv de angajator", "NU"),
+    ("427", "Rețineri din salarii datorate terților", "A", "F-65",
+     "F-65 pas 2: firma e conductă — intră și iese cu aceeași sumă", "NU"),
+    ("426", "Drepturi de personal neridicate", "A", "F-66",
+     "F-66 pas 3: datoria nu dispare, se reclasifică — corelația cu statul revine", "NU"),
+    ("4282", "Alte creanțe în legătură cu personalul", "A", "F-67",
+     "F-67 pas 2: la încasare crește un activ și scade altul", "NU"),
+    ("4418", "Impozitul pe venit (microîntreprindere)", "A", "F-68",
+     "F-68 pas 3: sold creditor = obligația trimestrului curent", "NU"),
+    ("698", "Cheltuieli cu impozitul pe venit", "A", "F-68",
+     "F-68 pas 1: baza e VENITUL, nu profitul — de aceea 698, nu 691", "NU"),
+    ("444 / 4315 / 4316 / 436", "Obligații salariale ale lunii", "A", "F-70",
+     "F-70 pas 3: rulajul creditor al lunii = soldul creditor la finalul ei", "NU"),
+    ("4423.ANAF", "TVA de plată din decizie de impunere", "A", "F-69",
+     "F-69 pas 3: analiticul ține decizia în afara circuitului declarativ", "NU"),
+
     # ---- supraîncasare (sursa 19.08) ---------------------------------------
     ("419", "Clienți-creditori (avansuri încasate)", "A", "F-25, F-63",
      "F-63 pas 3: soldul creditor de pe 4111 se dovedește avans cu TVA", "NU"),

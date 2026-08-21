@@ -154,4 +154,99 @@ CORELATII = [
         flux="F-415, F-410",
         severitate="Înaltă — TVA necolectat și creanțe/datorii raportate eronat",
     ),
+
+    # ======================================================================
+    # Familia „rulaj creditor = sold creditor” (sursa 21.08)
+    #
+    # Notițele numesc regula o singură dată, pe conturile de salarii. Ea e însă
+    # generală: se aplică oricărei datorii CONSTITUITE lunar și ACHITATE în luna
+    # următoare. În iulie se creditează obligația lui iulie și se debitează plata lui
+    # iunie; ce rămâne pe credit la 31 iulie e exact obligația lunii — adică rulajul.
+    #
+    # De aceea corelațiile de mai jos au aceeași formulă și diferă doar prin ce
+    # înseamnă abaterea. Sunt scrise separat, nu ca un rând cu „444/4315/4316/436”,
+    # pentru că SUSPECT-ul e altul la fiecare: la 427 e penal, la 444 e stopaj
+    # nevărsat, la 4423 e TVA restant.
+    # ======================================================================
+    dict(
+        id="C-24",
+        formula="sold creditor 421 + sold creditor 423\n= restul de plată din statul de plată",
+        unde="Balanța la 31 ale lunii vs. statul de plată al lunii",
+        legitim="Avans acordat în cursul lunii, ținut pe 425 și nescăzut încă\n"
+                "Drepturi neridicate reclasificate pe 426 (F-418) —\n"
+                "  suma iese din 421, dar rămâne datorată\n"
+                "Indemnizații de concediu medical decontate parțial (F-416)",
+        suspect="Plată înregistrată pe alt cont decât 421 (ex. 627 = 5121)\n"
+                "Salarii neplătite din luni anterioare, nereclasificate pe 426\n"
+                "Plată mai mare decât statul — venit neimpozitat la salariat\n"
+                "Stat rectificat de HR fără notă rectificativă în contabilitate",
+        flux="F-413, F-416, F-418",
+        severitate="Înaltă — cea mai ieftină verificare din contabilitate: "
+                   "documentul de control există deja",
+    ),
+    dict(
+        id="C-25",
+        formula="rulaj creditor 444 = sold creditor 444\n(la sfârșitul fiecărei luni)",
+        unde="Balanța lunii + fișa pe plătitor din SPV",
+        legitim="Luna în care s-a depus o rectificativă: obligația unei luni\n"
+                "  anterioare se modifică, deci soldul conține și diferența\n"
+                "Plată în avans a impozitului",
+        suspect="Sold > rulaj, constant pe mai multe luni = stopaj la sursă nevirat.\n"
+                "  Nevirat peste 30 de zile → răspundere penală\n"
+                "Fișa pe plătitor nu se potrivește cu balanța: D112 depus pe alte sume",
+        flux="F-413",
+        severitate="Înaltă — stopajul la sursă nevirat e infracțiune, nu întârziere",
+    ),
+    dict(
+        id="C-26",
+        formula="rulaj creditor 431 (4315 + 4316) = sold creditor 431\n"
+                "și rulaj creditor 436 = sold creditor 436",
+        unde="Balanța lunii + D112 + fișa pe plătitor",
+        legitim="Rectificativă pe o lună anterioară\n"
+                "Eșalonare la plată aprobată de ANAF — soldul rămâne legitim mai mare",
+        suspect="Contribuții restante acumulate\n"
+                "Bază de calcul greșită: rulajul nu corespunde cu brutul din 421",
+        flux="F-413",
+        severitate="Înaltă — contribuții restante blochează certificatul fiscal",
+    ),
+    dict(
+        id="C-27",
+        formula="2,25% × rulaj creditor 421 (brut realizat)\n= rulaj creditor 436",
+        unde="Balanța lunii: rulajele 421 și 436",
+        legitim="Categorii cu cotă redusă sau scutire, dacă societatea are astfel de\n"
+                "  salariați — verificat pe D112, nu presupus",
+        suspect="Bază de calcul incompletă: sporuri sau prime omise din fondul de salarii\n"
+                "Cotă aplicată greșit\n"
+                "CAM înregistrat invers (436 = 646) — cheltuiala lipsește din rezultat",
+        flux="F-413",
+        severitate="Medie — se corectează ușor, dar denaturează rezultatul lunii",
+    ),
+    dict(
+        id="C-28",
+        formula="rulaj creditor 427 = sold creditor 427\n(la sfârșitul fiecărei luni)",
+        unde="Balanța lunii + adresa de înființare a popririi",
+        legitim="Poprire înființată la finalul lunii, cu termen de virare în luna\n"
+                "  următoare — decalajul normal de scadență",
+        suspect="Sold care persistă = bani opriți din salariul altcuiva și nevirați.\n"
+                "  Firma nu are ce explica: trebuia fie să vireze, fie să nu rețină\n"
+                "Reținere peste limita legală, fără temei pentru cota majorată",
+        flux="F-417",
+        severitate="Înaltă — singura din grupa 42x care trece din contabil în penal",
+    ),
+    dict(
+        id="C-29",
+        formula="sold 4423 / 4424 din balanță\n= soldul din decontul de TVA (NU rulajul lunii)",
+        unde="Decontul D300 + balanța + fișa de rol",
+        legitim="Sume din decizii de impunere, ținute pe analitic distinct (F-421) —\n"
+                "  ele nu intră în decont, deci diferența e prin construcție\n"
+                "Facturi înregistrate după depunere, regularizate în decontul următor",
+        suspect="TVA neachitat din perioade precedente, omis din decont: la finanțe\n"
+                "  soldul pare corect, dar decontul e greșit\n"
+                "Sumă din decizie de impunere trecută pe 4423 fără analitic\n"
+                "Sold de rambursare pornit dintr-un sold inițial greșit — tot ce\n"
+                "  urmează e greșit",
+        flux="F-405, F-407, F-421",
+        severitate="Înaltă — decontul nu are variantă rectificativă; corecția se face "
+                   "doar pe regularizări",
+    ),
 ]

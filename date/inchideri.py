@@ -36,6 +36,27 @@ CADENTE = ["Lunar — obligatoriu", "Cel puțin trimestrial"]
 CADENTA = [
     ("4426 / 4427 / 4423 / 4424", "Lunar — obligatoriu",
      "închiderea TVA; orice sold rămas e o eroare"),
+    # ---- salarii și rețineri (sursa 21.08) --------------------------------
+    ("421 / 423", "Lunar — obligatoriu",
+     "soldul creditor trebuie să fie restul de plată de pe stat (C-24); documentul de "
+     "control există deja, deci verificarea durează secunde"),
+    ("444 / 4315 / 4316 / 436", "Lunar — obligatoriu",
+     "rulaj creditor = sold creditor (C-25, C-26); sold mai mare = obligații restante, "
+     "iar stopajul la sursă nevirat peste 30 de zile e infracțiune"),
+    ("427", "Lunar — obligatoriu",
+     "rulaj creditor = sold creditor (C-28); banii sunt opriți din salariul altcuiva, "
+     "deci un sold care persistă trece din contabil în penal"),
+    ("4382", "Lunar — obligatoriu",
+     "indemnizații de recuperat de la FNUASS; un sold care nu se stinge înseamnă bani "
+     "ai firmei blocați în dosare incomplete"),
+    ("426", "Cel puțin trimestrial",
+     "drepturi neridicate; dacă nu se golesc, se caută salariatul, nu se reportează"),
+    ("4282", "Cel puțin trimestrial",
+     "creanțe față de foști salariați; sold creditor = contrar naturii (C-23)"),
+    ("4418", "Cel puțin trimestrial",
+     "impozit micro; sold creditor = obligația trimestrului curent, sold debitor = "
+     "plată în plus, de investigat"),
+
     ("4428", "Lunar — obligatoriu",
      "bifuncțional; trebuie să se golească pe operațiunile facturate"),
     ("408 / 418", "Lunar — obligatoriu",
