@@ -29,7 +29,7 @@ from date import reformulari as dreform  # noqa: E402
 from date import ordine as O  # noqa: E402
 from date import module as dmodule  # noqa: E402
 from build import ancore, foaie_intrebari, inchideri, istoric, renumeroteaza  # noqa: E402
-from build import reordoneaza, reordoneaza_foi  # noqa: E402
+from build import cifre, reordoneaza, reordoneaza_foi  # noqa: E402
 from date.comun import ro  # noqa: E402
 
 RADACINA = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -378,8 +378,12 @@ def ordoneaza_canonic(wb):
         nota="Ordonat pe simbol de cont. PARȚIAL rămâne doar unde acoperirea chiar "
              "este parțială — vezi GOLURI_ACCEPTATE în date/plan.py.")
 
-    mutate = reordoneaza_foi.curata_legenda(
-        wb, total_fluxuri=len(O.ORDINE), total_corelatii=12 + len(CORELATII))
+    # Cifrele se numără din workbook-ul care se construiește, nu din `dist/` — acela
+    # se scrie abia la final. `Index module` e deja actualizat în acest punct, deci
+    # numărul de module e cel real, nu unul presupus.
+    n = cifre.din_workbook(wb)
+    reordoneaza_foi.actualizeaza_cifre_in_foaie(wb, "Fluxuri", n)
+    mutate = reordoneaza_foi.curata_legenda(wb, n=n)
 
     istoric.construieste(wb, mutate=mutate, orfane=orfane,
                          reformulari=dreform.INLOCUIRI,

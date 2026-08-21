@@ -35,6 +35,9 @@ descris multă vreme nouă porți, cu poarta 9 în forma ei veche.
  20. fiecare cont folosit într-un pas de flux există în „Plan de conturi”
  21. fiecare flux declarat de un modul în `CATALOG['fluxuri']` există cu adevărat
  22. blocul de cifre din README e exact cel pe care generatorul l-ar produce
+ 24. nicio frază cu cifră din workbook-uri nu contrazice cifra reală („17 module
+     declarative”, „68 fluxuri × pași”) — foaia Istoric e scutită, acolo cifrele
+     vechi sunt chiar conținutul
 
 Rulare:  python build/verifica.py
 """
@@ -58,6 +61,7 @@ from build import documente as bdoc  # noqa: E402
 from build import repartizare as brep  # noqa: E402
 from build import inchideri as binch  # noqa: E402
 from build import monografii as bmono  # noqa: E402
+from build import cifre as bcifre  # noqa: E402
 from build import readme as breadme  # noqa: E402
 from date import documente as ddoc  # noqa: E402
 
@@ -890,6 +894,28 @@ def poarta_readme():
                    f"generate — rulează `make readme`")
 
 
+def poarta_cifre_in_proza():
+    """Poarta 24 — frazele cu cifră din workbook-uri spun cifra reală.
+
+    Legenda afirma „16 module declarative” (erau 17), „cele 21 de întrebări rămase
+    deschise” (erau 20), „81 conturi de serviciu” (80) și „Tier A (~55)” (87 clasificate,
+    39 detaliate). Foaia Fluxuri își anunța catalogul cu „LISTA FLUXURILOR (~38)”, la
+    trei rânduri deasupra celor 68 pe care le lista.
+
+    Ce verifică: fiecare apariție a unui tipar din `cifre.FRAZE`. Ce NU verifică: un
+    număr scris în proză pentru care nu există tipar acolo. Acoperirea e exact acea
+    listă — un `\d+ conturi` generic ar fi picat pe „Adăugate … 21 de conturi Tier A”,
+    care e o afirmație istorică despre o adăugire, nu un total.
+    """
+    gresite = bcifre.fraze_gresite([PLAN, MODULE])
+    if not gresite:
+        ok("24", f"toate frazele cu cifră din cele două workbook-uri "
+                 f"({len(bcifre.FRAZE)} tipare) spun cifra reală")
+        return
+    for fis, foaie, cel, fraza, gasit, astept in gresite[:6]:
+        cade("24", f"{fis} · {foaie}!{cel}: „{fraza}” — sunt {astept}, nu {gasit}")
+
+
 def main():
     if not os.path.exists(PLAN):
         raise SystemExit("Rulează întâi `make build` — lipsește dist/Plan_de_conturi_...xlsx")
@@ -912,6 +938,7 @@ def main():
     poarta_conturi_in_plan(wb)
     poarta_module_declara(wb)
     poarta_readme()
+    poarta_cifre_in_proza()
 
     print("\n".join(note))
     if esecuri:

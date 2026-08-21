@@ -139,24 +139,42 @@ FOI_LIPSA = [
 ]
 
 
-def _livrabile(nr_module):
+def _livrabile(n):
+    """Blocul de livrabile conexe — toate cifrele din `n`, niciuna scrisă aici.
+
+    Versiunea scrisă de mână afirma „16 module declarative” (erau 17), „cele 21 de
+    întrebări rămase deschise” (erau 20) și „notite-training-2/3/4 … cele trei documente
+    revizuite” — când sunt cinci, retitrate pe subiect tocmai ca să nu se mai caute după
+    ziua de training. Trei afirmații, toate false, într-un bloc de trei rânduri.
+    """
+    from date import documente as ddoc
+    titluri = " · ".join(d["titlu"] for d in ddoc.DOCUMENTE)
     return [
         ("LIVRABILE CONEXE — sistemul nu se termină la acest fișier", stil.F_TITLU_BLOC),
-        (f"Module_Declarative_Fluxuri.xlsx — {nr_module} module declarative "
+        # Numărul de FOI din celălalt workbook nu se afirmă aici: `build_plan.py` nu-l
+        # poate ști (rulează înaintea lui `build_module.py`), iar o valoare presupusă ar
+        # fi exact felul de cifră care a adus fișierul ăsta aici. README-ul o raportează,
+        # pentru că el chiar deschide fișierul.
+        (f"Module_Declarative_Fluxuri.xlsx — {n['module']} module declarative "
          "(Declarații → Reguli → Jurnale → NotaExport). Niciunul nu mai e „exemplu "
          "extern”: salariile, deconturile și leasingul au devenit interne, cu cifrele "
          "verificate contra fișierelor reale de la client.", stil.F_NORMAL),
-        ("intrebari-formator.md / .html — cele 21 de întrebări rămase deschise, grupate "
-         "pe temă contabilă. Aceeași sursă cu foaia „Întrebări deschise” de aici.",
-         stil.F_NORMAL),
-        ("notite-training-2/3/4 .md și .docx — cele trei documente revizuite, "
-         "armonizate: aceeași legendă de marcaje, aceleași anexe, aceeași ordine.",
-         stil.F_NORMAL),
+        (f"intrebari-formator.md / .html — cele {n['deschise']} întrebări rămase "
+         f"deschise (din {n['intrebari']}: {n['verificate']} verificate cu temei legal, "
+         f"{n['decizii']} decizii de cabinet), grupate pe temă contabilă. Aceeași sursă "
+         "cu foaia „Întrebări deschise” de aici.", stil.F_NORMAL),
+        (f"Cele {n['documente']} documente de studiu, în .md, .docx și .html: {titluri}. "
+         "Titlurile sunt pe subiect contabil, nu pe ziua de training — cauți o regulă pe "
+         "clasa contului, nu pe data când s-a predat.", stil.F_NORMAL),
     ]
 
 
-def curata_legenda(wb, *, total_fluxuri, total_corelatii, nr_module=16):
-    """Scoate narativul de etape și lista pe tranșe. Întoarce rândurile mutate."""
+def curata_legenda(wb, *, n):
+    """Scoate narativul de etape și lista pe tranșe. Întoarce rândurile mutate.
+
+    `n` e dicționarul din `build/cifre.py`, citit din workbook-ul care se construiește.
+    Nicio cifră nu se mai scrie aici.
+    """
     ws = wb["Legendă"]
     rows = R.citeste(ws)
 
@@ -185,7 +203,7 @@ def curata_legenda(wb, *, total_fluxuri, total_corelatii, nr_module=16):
             pastrate.append(R.Rand([]))
             continue
 
-        pastrate.append(_actualizeaza_cifre(r, total_fluxuri, total_corelatii))
+        pastrate.append(_actualizeaza_cifre(r, n))
         i += 1
 
     # completează tabelul de structură cu foile care lipseau din el
@@ -200,7 +218,7 @@ def curata_legenda(wb, *, total_fluxuri, total_corelatii, nr_module=16):
         pastrate[tinta:tinta] = randuri + [R.Rand([])]
 
     pastrate.append(R.Rand([]))
-    for text, font in _livrabile(nr_module):
+    for text, font in _livrabile(n):
         pastrate.append(R.Rand([(1, text, None)], span=(1, 7),
                                stil_nou=dict(font=font, align=stil.A_WRAP_TOP)))
 
@@ -224,15 +242,31 @@ def curata_legenda(wb, *, total_fluxuri, total_corelatii, nr_module=16):
     return mutate
 
 
-def _actualizeaza_cifre(rand, total_fluxuri, total_corelatii):
-    """Numerele care descriau starea veche a fișierului devin cele reale."""
+def _actualizeaza_cifre(rand, n):
+    """Numerele care descriau starea veche a fișierului devin cele reale.
+
+    Fiecare intrare are DOUĂ chei pentru aceeași țintă: textul din sămânță și forma
+    intermediară pe care `date/reformulari.py` o pusese în loc. Motivul e că cele două
+    mecanisme ating aceleași celule, și oricare rulează primul, rezultatul final trebuie
+    să fie cifra derivată — nu una scrisă de mână acum un an în `devine`.
+    """
     inlocuiri = [
-        ("LISTA FLUXURILOR (~38", f"LISTA FLUXURILOR ({total_fluxuri}"),
-        ("~38 fluxuri", f"{total_fluxuri} fluxuri"),
-        ("Catalog 38 fluxuri", f"Catalog {total_fluxuri} fluxuri"),
-        ("Fluxuri: 38/38 detaliate", f"Fluxuri: {total_fluxuri}/{total_fluxuri} detaliate"),
-        ("~38 fluxuri × pași", f"{total_fluxuri} fluxuri × pași"),
-        ("245+ rânduri", "270+ rânduri"),
+        ("LISTA FLUXURILOR (~38", f"LISTA FLUXURILOR ({n['fluxuri']}"),
+        ("~38 fluxuri × pași", f"{n['fluxuri']} fluxuri × pași"),
+        ("60 fluxuri × pași", f"{n['fluxuri']} fluxuri × pași"),
+        ("~38 fluxuri", f"{n['fluxuri']} fluxuri"),
+        ("Catalog 38 fluxuri", f"Catalog {n['fluxuri']} fluxuri"),
+        ("Fluxuri: 38/38 detaliate", f"Fluxuri: {n['fluxuri']}/{n['fluxuri']} detaliate"),
+        ("Fluxuri: 60/60 detaliate", f"Fluxuri: {n['fluxuri']}/{n['fluxuri']} detaliate"),
+        ("245+ rânduri", f"{n['conturi']} conturi"),
+        ("270+ rânduri", f"{n['conturi']} conturi"),
+        ("81 conturi de serviciu", f"{n['rol_in_flux']} conturi de serviciu"),
+        # Tierizarea: trei aproximări, toate greșite. Tier C era dat „~80” când sunt 36 —
+        # eroarea nu era de rotunjire, era de peste dublu.
+        ("Tier A (~55)", f"Tier A ({n['tier_a']}, din care {n['detaliate']} cu rând "
+                         f"detaliat de analitice)"),
+        ("Tier B (~110)", f"Tier B ({n['tier_b']})"),
+        ("Tier C (~80)", f"Tier C ({n['tier_c']})"),
     ]
 
     def fn(v):
@@ -242,3 +276,14 @@ def _actualizeaza_cifre(rand, total_fluxuri, total_corelatii):
         return v
 
     return rand.transformat(fn)
+
+
+def actualizeaza_cifre_in_foaie(wb, nume, n):
+    """Aceleași înlocuiri, pe o foaie tabelară oarecare.
+
+    `Fluxuri` își anunța în rândul 1 „LISTA FLUXURILOR (~38)”. Înlocuirea exista deja,
+    dar rula numai pe `Legendă` — deci titlul catalogului rămăsese cu numărul din
+    sămânță, la trei rânduri deasupra celor 68 de fluxuri pe care le anunța.
+    """
+    randuri = [_actualizeaza_cifre(r, n) for r in R.citeste(wb[nume])]
+    R.inlocuieste_foaia(wb, nume, randuri)

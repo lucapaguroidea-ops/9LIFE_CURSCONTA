@@ -161,6 +161,47 @@ INLOCUIRI = [
               "(1011, 1012, 1171, 1174, 2812, 6583 ș.a.).",
         devine="270+ rânduri, cu 3 coloane noi: Analitice recomandate · Factor · Flux (pas)",
     ),
+    # ---- cifre care se derivă acum, deci nu mai pot fi scrise de mână ---------
+    #
+    # Cele cinci de mai jos au aceeași poveste: erau aproximări scrise în sămânță și
+    # rămase acolo. Nu se mai înlocuiesc cu alte numere fixe — `build/cifre.py` le
+    # numără din workbook la fiecare build, iar `devine` de aici arată doar valoarea
+    # din momentul declarării, ca motivul să fie citibil.
+    dict(
+        text="LISTA FLUXURILOR (~38) — structură + status implementare",
+        motiv="Titlul catalogului anunța 38 de fluxuri, la trei rânduri deasupra celor "
+              "68 pe care le lista. Înlocuirea exista în cod din prima curățare, dar "
+              "rula numai pe Legendă, niciodată pe foaia Fluxuri.",
+        devine="LISTA FLUXURILOR (68) — structură + status implementare",
+    ),
+    dict(
+        text="81 conturi de serviciu, grupate pe rol",
+        motiv="Foaia „Doar rol în flux” are 80 de conturi. Se numără la build.",
+        devine="80 conturi de serviciu, grupate pe rol",
+    ),
+    dict(
+        text="Tier A (~55) — tratate individual, cu analitice justificate rând cu rând",
+        motiv="Sunt 87 de conturi clasificate Tier A, din care 39 au rând detaliat în "
+              "foaia de analitice. Aproximarea „~55” nu era niciuna din cele două.",
+        devine="Tier A (87, din care 39 cu rând detaliat de analitice) — tratate "
+               "individual, cu analitice justificate rând cu rând",
+    ),
+    dict(
+        text="Tier B (~110) — analitic prin aplicarea unui tipar deja stabilit la Tier A "
+             "(ex. toate ajustările urmează același model)",
+        motiv="Sunt 134.",
+        devine="Tier B (134) — analitic prin aplicarea unui tipar deja stabilit la Tier A "
+               "(ex. toate ajustările urmează același model)",
+    ),
+    dict(
+        text="Tier C (~80) — conturi rar folosite în cabinet (consolidare, fiducie, "
+             "resurse minerale, clasa 9). Marcate explicit „acoperire minimă”",
+        motiv="Sunt 36. Eroarea nu era de rotunjire, era de peste dublu — și se vedea "
+              "abia când cele trei tiere s-au numărat: 87 + 134 + 36 = 257, adică fix "
+              "planul întreg. Aproximările nu însumau nimic.",
+        devine="Tier C (36) — conturi rar folosite în cabinet (consolidare, fiducie, "
+               "resurse minerale, clasa 9). Marcate explicit „acoperire minimă”",
+    ),
     dict(
         text="Ilustrativ (sume descriptive)",
         motiv="Marcajul PARȚIAL de la 681/781 era corect când sumele erau descriptive. "
