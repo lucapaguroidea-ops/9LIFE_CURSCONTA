@@ -13,11 +13,17 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 - **Ne puteți da procedura scrisă de reconciliere, pentru cazul în care analiticul din balanța contabilă nu corespunde cu registrul mijloacelor fixe?**  
   Blochează singurul flux de procedură din sistem (F-214) și corelația C-15.
 
-- **TVA nedeductibilă de pe rata de capital la leasingul financiar: se capitalizează în valoarea mijlocului fix (2133) sau se trece pe cheltuială (635 / 6588)?**  
-  Schimbă valoarea de intrare a mijlocului fix, deci amortizarea și impozitul pe profit pe toată durata contractului.
+- **Care este temeiul legal al termenului de 3 ani pentru a decide ce se face cu soldul rămas în 1171?**  
+  F-103 (repartizarea rezultatului) și MOD_CAPITALURI.
 
-- **Care este baza legală exactă pentru a trata ca nedeductibilă diferența dintre valoarea rămasă și prețul de vânzare, față de art. 28 alin. (17)?**  
-  E testul central al MOD_IESIRE_MF; azi semnalează un risc fără să poată cita articolul pe care se sprijină.
+- **În exemplul cu rezerva legală, profitul era 250 sau 2.500 lei?**  
+  F-103 și MOD_CAPITALURI folosesc exemplul ca test.
+
+---
+
+# Partea I — rămase deschise
+
+**11 întrebări de drept sau de practică la care n-am găsit răspuns cu certitudine.** Astea sunt cele care se trimit.
 
 ---
 
@@ -56,20 +62,9 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 07.08.2026, întrebarea 4</sub>
 
 
-### 4. Care este actul normativ care a permanentizat termenul de 25 iunie pentru D101?
-
-**Context.** Notițele anunțau pentru 2027 „101 în Martie, bilanț în mai”. Termenul s-a mutat însă la 25 iunie, iar în documentul revizuit am marcat asta ca schimbare — dar fără să pot cita actul care o face permanentă, nu doar valabilă pentru un an.
-
-**De ce contează.** Checklistul de închidere din documentele revizuite și calendarul din foaia Legendă. Un termen greșit aici se propagă la toți clienții.
-
-**Ce am presupus.** Am scris 25 iunie, marcat ca „de reconfirmat”.
-
-<sub>sursa: training 07.08.2026, întrebarea 6</sub>
-
-
 ## Corectarea erorilor din exerciții anterioare
 
-### 5. Cum se tratează o factură a exercițiului anterior, descoperită neînregistrată în anul curent — și când se folosește 1174 în loc de 628 cu semn schimbat?
+### 4. Cum se tratează o factură a exercițiului anterior, descoperită neînregistrată în anul curent — și când se folosește 1174 în loc de 628 cu semn schimbat?
 
 **Context.** Notițele conțineau întrebarea ca atare, fără răspuns, plus observația că 1174 „a fost introdus ca să nu mai denaturăm profitul anilor” și că „lucrurile se complică atunci când nu mai am sold în 1171, pentru că proprietarul a decis să ia dividende”.
 
@@ -82,7 +77,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 
 ## Capital social și activ net
 
-### 6. Cum se documentează reîntregirea activului net cerută de Legea 239/2025 — prin conversia creanței asociatului în capital sau prin aport nou?
+### 5. Cum se documentează reîntregirea activului net cerută de Legea 239/2025 — prin conversia creanței asociatului în capital sau prin aport nou?
 
 **Context.** Legea condiționează dividendele și restituirile de împrumuturi de un activ net de cel puțin jumătate din capitalul social. Notițele semnalau problema, fără procedura de ieșire din blocaj.
 
@@ -93,7 +88,89 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 07.08.2026, întrebarea 7</sub>
 
 
-### 7. Verificăm sistematic pragul de capital social minim (500 / 5.000 lei) pe tot portofoliul de clienți, sau doar la firmele noi?
+## Imobilizări — control și raportare
+
+### 6. În secțiunea Active din D406 (SAF-T) se raportează și 231 (investiții neterminate), și 261 (imobilizări financiare)?
+
+**Context.** Notițele menționau că informația din modulul de imobilizări „merge în 406”, fără să delimiteze ce anume intră.
+
+**De ce contează.** Coloana Declarativ a fluxurilor F-208 (imobilizări în curs) și F-213 (imobilizări financiare). Azi nu marchez D406 pe ele, ca să nu afirm ceva greșit.
+
+**Ce am presupus.** Le-am lăsat nemarcate în coloana Declarativ.
+
+<sub>sursa: training 12.08.2026, întrebarea 4</sub>
+
+
+## Stocuri și producție
+
+### 7. Care sunt celelalte metode de calculație a costurilor acceptate de OMFP 1802/2014, și în ce situații se alege fiecare?
+
+**Context.** Notițele menționau metoda pe comenzi ca fiind cea mai utilizată, în contextul producției de termopane. Celelalte (pe faze, pe produs, standard-cost) au rămas doar enumerate.
+
+**De ce contează.** F-311 (producția multi-stadiu) ține gestiunea lui 331 analitic pe comandă. Pe faze, structura analitică e alta, deci și fluxul.
+
+**Ce am presupus.** Am implementat doar metoda pe comenzi.
+
+<sub>sursa: training 14.08.2026, întrebarea 1</sub>
+
+
+## Material lipsă din notițe
+
+### 8. Ce fișier și ce sarcină erau în spatele notițelor „Fișierul atașat arată corelații importante între conturi” și „task”?
+
+**Context.** Ambele au rămas fără conținut în notițele originale — un rând care trimite la un atașament și un rând cu un singur cuvânt, „task”.
+
+**De ce contează.** Fișierul cu corelații ar putea conține exact materialul din foaia „Corelații de control”, care azi are 22 de corelații construite de mine. Dacă există o listă a formatorului, merită confruntată cu a mea.
+
+**Ce am presupus.** Am construit corelațiile din notițe și din practică, fără fișierul original.
+
+<sub>sursa: training 14.08.2026, întrebarea 6</sub>
+
+
+## Decontul de TVA și fișa de rol
+
+### 9. Ce rânduri din D300 sunt preluate în fișa de rol: 36 și 37, sau 44 și 45?
+
+**Context.** Notițele afirmă amândouă variantele, în două locuri diferite. Numerele de rând se schimbă între versiunile formularului, deci una dintre ele e dintr-o versiune anterioară.
+
+**De ce contează.** Corelația decont ↔ fișă de rol ↔ balanță. Fără numerele corecte, corelația nu se poate scrie ca formulă, ci doar descrie.
+
+**Ce am presupus.** Am scris corelația pe SOLD, care nu depinde de numerotarea rândurilor, și am marcat rândurile ca deschise.
+
+<sub>sursa: training 21.08.2026, punctul 5</sub>
+
+
+### 10. La declarațiile care admit rectificare, contează ordinea cronologică a înregistrării facturilor la redepunere?
+
+**Context.** Întrebarea era notată ca presupunere: dacă facturile nu sunt înregistrate cronologic, poate că redepunerea nu mai e posibilă și ar trebui altă metodă de corecție.
+
+**De ce contează.** Procedura de corecție după depunere, pe toate declarațiile care admit rectificativă. Decontul de TVA nu admite, deci acolo întrebarea nu se pune — dar la celelalte, da.
+
+**Ce am presupus.** N-am implementat nimic pe presupunerea asta.
+
+<sub>sursa: training 21.08.2026, punctul 6</sub>
+
+
+### 11. Care sunt corelațiile complete între D300 și fișa de rol la TVA?
+
+**Context.** Temă lăsată explicit la training. Notițele dau două fragmente: fișa preia rulajul lunii, nu soldul; și ANAF încarcă doar suma lunii, de unde greșeala de a omite TVA-ul neachitat din perioadele precedente.
+
+**De ce contează.** Corelațiile de control pe TVA. Ce avem acum se verifică pe sold; corelația pe rulaj, rând cu rând, are nevoie de structura exactă a fișei de rol.
+
+**Ce am presupus.** Am scris corelația pe sold și am lăsat-o pe cea pe rulaj ca gol declarat — n-am fișă de rol de citit.
+
+<sub>sursa: training 21.08.2026, punctul 7</sub>
+
+
+# Partea a II-a — decizii de cabinet
+
+**9 întrebări la care nicio sursă publică nu poate răspunde.** Nu sunt lucruri neaflate, sunt alegeri: ce cont folosim, ce prag intern stabilim, ce documente cerem clientului. Răspunsul e o decizie, nu o informație.
+
+---
+
+## Capital social și activ net
+
+### 12. Verificăm sistematic pragul de capital social minim (500 / 5.000 lei) pe tot portofoliul de clienți, sau doar la firmele noi?
 
 **Context.** Pragurile noi din 2026: 500 lei la înființare, 5.000 lei la cifră de afaceri netă peste 400.000 lei. Al doilea prag prinde firme existente, nu doar noi.
 
@@ -104,22 +181,9 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 07.08.2026, întrebarea 8</sub>
 
 
-## Leasing și vehicule
-
-### 8. TVA nedeductibilă de pe rata de capital la leasingul financiar: se capitalizează în valoarea mijlocului fix (2133) sau se trece pe cheltuială (635 / 6588)?
-
-**Context.** Notițele arătau capitalizarea TVA nededuse de pe AVANS în valoarea de intrare (150.000 + 5.250 = 155.250), dar pentru ratele lunare foloseau 6588. Practica e împărțită și în literatură.
-
-**De ce contează.** F-108 și MOD_LEASING_FIN. E singura variabilă a modulului care schimbă valoarea de intrare a mijlocului fix, deci și amortizarea, deci și impozitul pe profit pe toată durata contractului.
-
-**Ce am presupus.** Am făcut din ea o OPȚIUNE DE CONFIGURARE în modul (CAPITALIZEAZA / CHELTUIALA), cu implicit „capitalizează”, coerent cu tratamentul avansului. Nu am tranșat-o ca regulă.
-
-<sub>sursa: training 07.08.2026, întrebarea 3</sub>
-
-
 ## Imobilizări — prag și amortizare
 
-### 9. Recomandați alinierea pragului contabil de recunoaștere la cel fiscal (5.000 lei), sau menținerea unui prag intern mai mic pentru control de gestiune?
+### 13. Recomandați alinierea pragului contabil de recunoaștere la cel fiscal (5.000 lei), sau menținerea unui prag intern mai mic pentru control de gestiune?
 
 **Context.** OUG 8/2026 a urcat pragul fiscal la 5.000 lei. Pragul contabil rămâne la latitudinea entității, prin politici contabile.
 
@@ -130,53 +194,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 12.08.2026, întrebarea 1</sub>
 
 
-### 10. Excepția de la cumulul cu profitul reinvestit (art. 22 alin. 9) acoperă doar amortizarea accelerată, sau și pe cea superaccelerată de 65%?
-
-**Context.** Notițele spuneau despre amortizarea accelerată că „nu poate să mai fie aplicată o altă facilitate fiscală = reducere pentru profitul reinvestit”, cu recomandarea de a calcula ce e mai avantajos.
-
-**De ce contează.** F-204 și MOD_IMOBILIZARI, la alegerea metodei de amortizare. Dacă excepția nu acoperă superaccelerata, calculul comparativ are altă concluzie.
-
-**Ce am presupus.** Nu am implementat comparația. Modulul propune metoda, fără să optimizeze fiscal.
-
-<sub>sursa: training 12.08.2026, întrebarea 2</sub>
-
-
-## Imobilizări — ieșiri din gestiune
-
-### 11. Care este baza legală exactă pentru a trata ca nedeductibilă diferența dintre valoarea rămasă și prețul de vânzare, față de art. 28 alin. (17)?
-
-**Context.** Notițele: la vânzarea cu 50.000 a unei clădiri cu valoare rămasă 70.000, „50k cheltuieli deductibile, 20k cheltuieli nedeductibile”, cu excepția cazului în care există dovezi (clădire avariată, deviz de service). Citit strict, art. 28 alin. (17) include pierderea în rezultatul fiscal.
-
-**De ce contează.** F-211 și MOD_IESIRE_MF. E testul central al modulului: azi calculează diferența și cere documentul justificativ, dar nu poate cita articolul pe care se sprijină.
-
-**Ce am presupus.** Modulul semnalează riscul și cere documentarea prețului, invocând art. 11 (reîncadrare) și art. 25 alin. (1) (scopul activității economice) — nu art. 28.
-
-<sub>sursa: training 12.08.2026, întrebarea 3</sub>
-
-
-### 12. La o casare din care nu rezultă nici deșeuri, nici piese reutilizabile, cum se justifică deductibilitatea valorii rămase neamortizate?
-
-**Context.** Notițele tratau cazul cu valorificare (piese pe 3024, venit pe 7588), dar nu și pe cel fără nicio recuperare.
-
-**De ce contează.** F-212 (casarea) și MOD_IESIRE_MF, unde valoarea pieselor recuperate poate fi zero. Fără răspuns, modulul nu poate spune dacă procesul-verbal de scoatere din funcțiune e suficient singur.
-
-**Ce am presupus.** Modulul acceptă valoarea zero a recuperărilor și lasă deductibilitatea nejudecată, cu procesul-verbal ca singur document.
-
-<sub>sursa: training 12.08.2026, întrebarea 5</sub>
-
-
 ## Imobilizări — control și raportare
-
-### 13. În secțiunea Active din D406 (SAF-T) se raportează și 231 (investiții neterminate), și 261 (imobilizări financiare)?
-
-**Context.** Notițele menționau că informația din modulul de imobilizări „merge în 406”, fără să delimiteze ce anume intră.
-
-**De ce contează.** Coloana Declarativ a fluxurilor F-208 (imobilizări în curs) și F-213 (imobilizări financiare). Azi nu marchez D406 pe ele, ca să nu afirm ceva greșit.
-
-**Ce am presupus.** Le-am lăsat nemarcate în coloana Declarativ.
-
-<sub>sursa: training 12.08.2026, întrebarea 4</sub>
-
 
 ### 14. Ne puteți da procedura scrisă de reconciliere, pentru cazul în care analiticul din balanța contabilă nu corespunde cu registrul mijloacelor fixe?
 
@@ -189,22 +207,9 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 12.08.2026, întrebarea 6 — PUNCTUL CEL MAI IMPORTANT</sub>
 
 
-## Stocuri și producție
-
-### 15. Care sunt celelalte metode de calculație a costurilor acceptate de OMFP 1802/2014, și în ce situații se alege fiecare?
-
-**Context.** Notițele menționau metoda pe comenzi ca fiind cea mai utilizată, în contextul producției de termopane. Celelalte (pe faze, pe produs, standard-cost) au rămas doar enumerate.
-
-**De ce contează.** F-311 (producția multi-stadiu) ține gestiunea lui 331 analitic pe comandă. Pe faze, structura analitică e alta, deci și fluxul.
-
-**Ce am presupus.** Am implementat doar metoda pe comenzi.
-
-<sub>sursa: training 14.08.2026, întrebarea 1</sub>
-
-
 ## TVA — import, vamă, taxare inversă
 
-### 16. La decontarea cu comisionarul vamal folosiți 446 sau 462? Care e standardul cabinetului și de ce?
+### 15. La decontarea cu comisionarul vamal folosiți 446 sau 462? Care e standardul cabinetului și de ce?
 
 **Context.** Notițele foloseau 446, cu observația proprie că „e o înregistrare puțin forțată, pentru că e un cont de pasiv”. Unele cabinete folosesc 461/462.
 
@@ -215,7 +220,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 14.08.2026, întrebarea 3</sub>
 
 
-### 17. Verificăm sistematic dacă clienții importatori îndeplinesc condițiile pentru certificatul de amânare de la plata TVA în vamă?
+### 16. Verificăm sistematic dacă clienții importatori îndeplinesc condițiile pentru certificatul de amânare de la plata TVA în vamă?
 
 **Context.** Certificatul înlocuiește plata efectivă a TVA în vamă cu taxare inversă (4426 = 4427) — avantaj mare de cash-flow. Notițele nu îl menționau deloc; l-am adăugat eu la revizuire.
 
@@ -226,20 +231,9 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 14.08.2026, întrebarea 4</sub>
 
 
-### 18. Derogarea UE pentru taxarea inversă la cereale și electronice avea termen 31.12.2026 — a fost prelungită?
-
-**Context.** Art. 331 alin. (6) limitează în timp o parte din categorii, iar Consiliul UE a prelungit derogarea succesiv. Nu se poate presupune prelungirea automată.
-
-**De ce contează.** F-402 (taxare inversă internă) și lista de categorii din documentul revizuit. Aplicarea taxării inverse după expirare înseamnă factură greșit întocmită.
-
-**Ce am presupus.** Am marcat termenul în document cu avertisment de reverificare.
-
-<sub>sursa: training 14.08.2026, întrebarea 7</sub>
-
-
 ## TVA — ajustări fără document
 
-### 19. La lipsa la inventar, practica implicită a cabinetului este colectarea de TVA sau ajustarea dreptului de deducere? Ce set de documente se cere clientului?
+### 17. La lipsa la inventar, practica implicită a cabinetului este colectarea de TVA sau ajustarea dreptului de deducere? Ce set de documente se cere clientului?
 
 **Context.** Notițele spuneau simplu „trebuie să colectez și TVA”. La revizuire am găsit că tratamentul diferă: lipsă imputabilă → colectare; neimputabilă nejustificată → ajustare; bunuri distruse cu documente → fără ajustare.
 
@@ -250,59 +244,9 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 14.08.2026, întrebarea 2</sub>
 
 
-## Obligații de mediu
-
-### 20. Care este termenul curent de depunere a declarației la Fondul pentru Mediu — lunar sau trimestrial?
-
-**Context.** Notițele nu dădeau termenul, iar acesta s-a modificat de mai multe ori. La revizuire am scris „verifică termenul curent pe afm.ro”, ceea ce nu e un răspuns.
-
-**De ce contează.** F-310 (ambalaje și taxa AFM) și checklistul lunar. Un termen greșit produce penalități direct.
-
-**Ce am presupus.** Am lăsat termenul nespecificat, cu trimitere la sursa oficială.
-
-<sub>sursa: training 14.08.2026, întrebarea 5</sub>
-
-
-## Material lipsă din notițe
-
-### 21. Ce fișier și ce sarcină erau în spatele notițelor „Fișierul atașat arată corelații importante între conturi” și „task”?
-
-**Context.** Ambele au rămas fără conținut în notițele originale — un rând care trimite la un atașament și un rând cu un singur cuvânt, „task”.
-
-**De ce contează.** Fișierul cu corelații ar putea conține exact materialul din foaia „Corelații de control”, care azi are 22 de corelații construite de mine. Dacă există o listă a formatorului, merită confruntată cu a mea.
-
-**Ce am presupus.** Am construit corelațiile din notițe și din practică, fără fișierul original.
-
-<sub>sursa: training 14.08.2026, întrebarea 6</sub>
-
-
-## Plafoane de numerar și contul 455
-
-### 22. Care sunt valorile exacte ale plafoanelor din Legea 70/2015 în forma modificată prin Legea 296/2023, la data operațiunii?
-
-**Context.** Notițele rețin 5.000 lei B2B, 10.000 lei încasări de la persoane fizice și 50.000 lei între persoane fizice, plus un plafon separat pentru soldul casieriei la sfârșitul zilei. Sunt și plafoane totale zilnice, peste cele per persoană.
-
-**De ce contează.** Documentul „Control, documente și numerar”, secțiunea de plafoane. Un plafon greșit produce amendă direct, iar fragmentarea e interzisă expres — deci nici împărțirea pe tranșe nu e o ieșire.
-
-**Ce am presupus.** Am păstrat cifrele din notițe, cu mențiunea explicită că trebuie confirmate în textul în vigoare la data operațiunii.
-
-<sub>sursa: training 19.08.2026, punctul 1</sub>
-
-
-### 23. Care sunt exact operațiunile în numerar interzise pe contul 455 și care e temeiul legal?
-
-**Context.** Notițele spun doar că „plățile din 455 prin casierie nu mai sunt permise în condițiile anterioare”, fără să precizeze care condiții și din ce text.
-
-**De ce contează.** Foaia „Închideri periodice”, unde 455 e urmărit trimestrial fără flux în spate. Fără regula exactă, rândul rămâne gol declarat — nu se poate scrie o monografie pentru o restricție pe care n-o cunosc.
-
-**Ce am presupus.** Am lăsat 455 fără flux, cu golul marcat ca atare în foaie.
-
-<sub>sursa: training 19.08.2026, punctul 2</sub>
-
-
 ## Comportamentul softului la încasarea în plus
 
-### 24. Programul de contabilitate extrage automat TVA-ul din diferența trecută pe 419 la o încasare mai mare decât factura, sau trebuie forțat manual?
+### 18. Programul de contabilitate extrage automat TVA-ul din diferența trecută pe 419 la o încasare mai mare decât factura, sau trebuie forțat manual?
 
 **Context.** Suma încasată în plus e TVA-inclusivă: din 5.000 lei ies 4.132,23 bază și 867,77 TVA. Dacă softul nu face extragerea, TVA-ul rămâne necolectat fără ca nimic să semnaleze.
 
@@ -315,7 +259,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 
 ## Convenții de analitic rămase de fixat
 
-### 25. Care e structura analitică exactă pe 4428 — pe situație și pe cotă?
+### 19. Care e structura analitică exactă pe 4428 — pe situație și pe cotă?
 
 **Context.** 4428 apare în trei situații cu sensuri diferite: debitor la achiziția pe aviz (4428 = 408), creditor la livrarea pe aviz (418 = 4428) și creditor la mărfuri la preț cu amănuntul (371 = 4428). Notițele cer analitice pe fiecare situație ȘI pe fiecare cotă, dar nu dau nomenclatorul.
 
@@ -326,7 +270,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 19.08.2026, punctul 4</sub>
 
 
-### 26. Facturile nesosite pentru imobilizări se țin pe 408 cu analitic sau direct pe 404 cu analitic?
+### 20. Facturile nesosite pentru imobilizări se țin pe 408 cu analitic sau direct pe 404 cu analitic?
 
 **Context.** Exemplul din notițe folosește 231 = 408, dar furnizorul de imobilizări e 404. Notițele semnalează singure problema și cer stabilirea unei convenții consecvente.
 
@@ -337,89 +281,225 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 19.08.2026, punctul 5</sub>
 
 
+# Partea a III-a — răspunsuri verificate, de confirmat
+
+**13 întrebări la care am găsit răspuns pe surse publice**, fiecare cu actul normativ citat și data verificării. Nu înlocuiesc confirmarea — o scurtează: în loc de „care e regula?”, întrebarea devine „am citit bine?”.
+
+---
+
+## Repartizarea rezultatului și rezultatul reportat
+
+### 21. Care este actul normativ care a permanentizat termenul de 25 iunie pentru D101?
+
+**Răspuns.** Termenul de 25 iunie **nu a fost de la început permanent**: a venit prin **OUG 153/2020**, care l-a prelungit pentru perioada 2021–2025, odată cu bonificațiile pentru capital propriu pozitiv și în creștere. 2025 a fost ultimul an de aplicare a acelui mecanism, iar termenul uniform de 25 iunie a anului următor se aplică de la 2026. ❓ Actul care l-a permanentizat nu l-am putut identifica cu certitudine — surse îl descriu ca măsură adoptată în 2026, dar fără să-l numească. De confirmat înainte de a-l cita unui client.
+
+**Temei.** OUG 153/2020, art. I — aplicabil 2021–2025. Permanentizarea: act neidentificat.
+
+<sub>verificat pe surse publice la 21.08.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele anunțau pentru 2027 „101 în Martie, bilanț în mai”. Termenul s-a mutat însă la 25 iunie, iar în documentul revizuit am marcat asta ca schimbare — dar fără să pot cita actul care o face permanentă, nu doar valabilă pentru un an.
+
+**De ce contează.** Checklistul de închidere din documentele revizuite și calendarul din foaia Legendă. Un termen greșit aici se propagă la toți clienții.
+
+<sub>sursa: training 07.08.2026, întrebarea 6</sub>
+
+
+## Leasing și vehicule
+
+### 22. TVA nedeductibilă de pe rata de capital la leasingul financiar: se capitalizează în valoarea mijlocului fix (2133) sau se trece pe cheltuială (635 / 6588)?
+
+**Răspuns.** **Cheltuială, nu capitalizare.** La leasing, tratamentul diferă de achiziția directă: la cumpărarea internă a unui autoturism, TVA-ul nedeductibil de 50% intră în costul de achiziție, dar la leasing **nu** intră în valoarea mijlocului fix. Se înregistrează pe cheltuială, defalcat după componenta ratei: `635 = 4426` pentru 50% din TVA aferent ratei de capital, `666 = 4426` pentru cel aferent dobânzii, `628 = 4426` pentru cel aferent comisionului.
+
+**Temei.** Cod fiscal art. 298 (limitarea la 50%) coroborat cu OMFP 1802/2014 privind costul de achiziție; tratamentul distinct al leasingului față de achiziția directă.
+
+<sub>verificat pe surse publice la 21.08.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele arătau capitalizarea TVA nededuse de pe AVANS în valoarea de intrare (150.000 + 5.250 = 155.250), dar pentru ratele lunare foloseau 6588. Practica e împărțită și în literatură.
+
+**De ce contează.** F-108 și MOD_LEASING_FIN. E singura variabilă a modulului care schimbă valoarea de intrare a mijlocului fix, deci și amortizarea, deci și impozitul pe profit pe toată durata contractului.
+
+<sub>sursa: training 07.08.2026, întrebarea 3</sub>
+
+
+## Imobilizări — prag și amortizare
+
+### 23. Excepția de la cumulul cu profitul reinvestit (art. 22 alin. 9) acoperă doar amortizarea accelerată, sau și pe cea superaccelerată de 65%?
+
+**Răspuns.** Regula: cine aplică scutirea de impozit a profitului reinvestit **nu poate opta pentru amortizarea accelerată** pentru activele respective — se amortizează liniar sau degresiv. Există însă o **excepție pentru 2026**: dacă scutirea se aplică pentru subgrupa 2.1 (echipamente tehnologice — mașini, utilaje și instalații de lucru) și pentru calculatoare și echipamente periferice, contribuabilul **poate** opta pentru amortizare accelerată.
+
+**Temei.** Cod fiscal art. 22 alin. (9), cu trimitere la art. 28 alin. (5) lit. b) pentru excepția din 2026.
+
+<sub>verificat pe surse publice la 21.08.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele spuneau despre amortizarea accelerată că „nu poate să mai fie aplicată o altă facilitate fiscală = reducere pentru profitul reinvestit”, cu recomandarea de a calcula ce e mai avantajos.
+
+**De ce contează.** F-204 și MOD_IMOBILIZARI, la alegerea metodei de amortizare. Dacă excepția nu acoperă superaccelerata, calculul comparativ are altă concluzie.
+
+<sub>sursa: training 12.08.2026, întrebarea 2</sub>
+
+
+## Imobilizări — ieșiri din gestiune
+
+### 24. Care este baza legală exactă pentru a trata ca nedeductibilă diferența dintre valoarea rămasă și prețul de vânzare, față de art. 28 alin. (17)?
+
+**Răspuns.** **Nu există un asemenea temei — presupunerea din notițe e inversă.** La vânzarea unui mijloc fix la prețul pieței, valoarea rămasă neamortizată e cheltuială **deductibilă**, chiar dacă prețul e sub ea. Limitarea reală e alta și privește doar **autoturismele din categoria M1**: acolo valoarea rămasă e deductibilă în limita a **1.500 lei × numărul de luni rămase** de amortizat din durata normală de funcționare.
+
+**Temei.** Cod fiscal art. 28 alin. (17) și normele metodologice aferente (limitarea M1).
+
+<sub>verificat pe surse publice la 21.08.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele: la vânzarea cu 50.000 a unei clădiri cu valoare rămasă 70.000, „50k cheltuieli deductibile, 20k cheltuieli nedeductibile”, cu excepția cazului în care există dovezi (clădire avariată, deviz de service). Citit strict, art. 28 alin. (17) include pierderea în rezultatul fiscal.
+
+**De ce contează.** F-211 și MOD_IESIRE_MF. E testul central al modulului: azi calculează diferența și cere documentul justificativ, dar nu poate cita articolul pe care se sprijină.
+
+<sub>sursa: training 12.08.2026, întrebarea 3</sub>
+
+
+### 25. La o casare din care nu rezultă nici deșeuri, nici piese reutilizabile, cum se justifică deductibilitatea valorii rămase neamortizate?
+
+**Răspuns.** **Nu se cere nici deșeu, nici piesă reutilizabilă.** Cheltuielile înregistrate ca urmare a casării unui mijloc fix cu valoare fiscală incomplet amortizată sunt, prin lege, cheltuieli efectuate în scopul desfășurării activității economice — deci deductibile. Documentația de casare rămâne necesară ca probă a operațiunii, nu ca o condiție de deductibilitate.
+
+**Temei.** Cod fiscal art. 28 alin. (17).
+
+<sub>verificat pe surse publice la 21.08.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele tratau cazul cu valorificare (piese pe 3024, venit pe 7588), dar nu și pe cel fără nicio recuperare.
+
+**De ce contează.** F-212 (casarea) și MOD_IESIRE_MF, unde valoarea pieselor recuperate poate fi zero. Fără răspuns, modulul nu poate spune dacă procesul-verbal de scoatere din funcțiune e suficient singur.
+
+<sub>sursa: training 12.08.2026, întrebarea 5</sub>
+
+
+## TVA — import, vamă, taxare inversă
+
+### 26. Derogarea UE pentru taxarea inversă la cereale și electronice avea termen 31.12.2026 — a fost prelungită?
+
+**Răspuns.** Derogarea e prelungită până la **31 decembrie 2026** și acoperă opt operațiuni: cereale și plante tehnice, certificate de emisii de gaze cu efect de seră, energie electrică și gaze naturale către comercianți persoane impozabile, certificate verzi, telefoane mobile, dispozitive cu circuite integrate, console de jocuri, tablete și laptopuri. Pentru ultimele patru categorii, taxarea inversă se aplică **doar dacă valoarea fără TVA de pe factură e cel puțin 22.500 lei**. La data verificării **nu e publicată o prelungire dincolo de 31.12.2026** — deci expiră peste patru luni dacă nu intervine una.
+
+**Temei.** Cod fiscal art. 331; decizie a Consiliului UE de prelungire până la 31.12.2026. Reverificat la 21.08.2026.
+
+<sub>verificat pe surse publice la 21.08.2026 — confirmă sau corectează</sub>
+
+**Context.** Art. 331 alin. (6) limitează în timp o parte din categorii, iar Consiliul UE a prelungit derogarea succesiv. Nu se poate presupune prelungirea automată.
+
+**De ce contează.** F-402 (taxare inversă internă) și lista de categorii din documentul revizuit. Aplicarea taxării inverse după expirare înseamnă factură greșit întocmită.
+
+<sub>sursa: training 14.08.2026, întrebarea 7</sub>
+
+
+## Obligații de mediu
+
+### 27. Care este termenul curent de depunere a declarației la Fondul pentru Mediu — lunar sau trimestrial?
+
+**Răspuns.** **Lunar sau trimestrial**, după tipul de obligație, cu termen **25 a lunii următoare** perioadei de raportare. Depunerea se face exclusiv electronic, prin platforma AFM-Online, cu semnătură electronică calificată — de la 1 iulie 2022 nu se mai acceptă depunerea pe hârtie.
+
+**Temei.** Procedura de declarare la Fondul pentru mediu; depunere electronică obligatorie din 1.07.2022.
+
+<sub>verificat pe surse publice la 21.08.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele nu dădeau termenul, iar acesta s-a modificat de mai multe ori. La revizuire am scris „verifică termenul curent pe afm.ro”, ceea ce nu e un răspuns.
+
+**De ce contează.** F-310 (ambalaje și taxa AFM) și checklistul lunar. Un termen greșit produce penalități direct.
+
+<sub>sursa: training 14.08.2026, întrebarea 5</sub>
+
+
+## Plafoane de numerar și contul 455
+
+### 28. Care sunt valorile exacte ale plafoanelor din Legea 70/2015 în forma modificată prin Legea 296/2023, la data operațiunii?
+
+**Răspuns.** Între persoane juridice: **5.000 lei/zi și de persoană**. Magazine cash & carry: 5.000 lei de persoană, dar maximum **10.000 lei total pe zi**; plăți către ele, maximum 10.000 lei/zi. Avansuri spre decontare: **5.000 lei/zi** pentru fiecare persoană care a primit avansul. **Fragmentarea e interzisă expres** pentru facturi peste 5.000 lei, respectiv 10.000 la cash & carry. Legea 239/2025 **nu a modificat plafoanele** de la 1.01.2026, dar a eliminat pragul de 50.000 lei de la care era obligatorie acceptarea cardului și a introdus obligația unui cont de plăți deschis în România.
+
+**Temei.** Legea 70/2015, art. 3 și art. 4, în forma modificată prin Legea 296/2023 și Legea 239/2025.
+
+<sub>verificat pe surse publice la 21.08.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele rețin 5.000 lei B2B, 10.000 lei încasări de la persoane fizice și 50.000 lei între persoane fizice, plus un plafon separat pentru soldul casieriei la sfârșitul zilei. Sunt și plafoane totale zilnice, peste cele per persoană.
+
+**De ce contează.** Documentul „Control, documente și numerar”, secțiunea de plafoane. Un plafon greșit produce amendă direct, iar fragmentarea e interzisă expres — deci nici împărțirea pe tranșe nu e o ieșire.
+
+<sub>sursa: training 19.08.2026, punctul 1</sub>
+
+
+### 29. Care sunt exact operațiunile în numerar interzise pe contul 455 și care e temeiul legal?
+
+**Răspuns.** Nu e un plafon, e o **interdicție**. Din **11 noiembrie 2023**, încasările și plățile reprezentând împrumuturi — indiferent de sumă — de la sau către asociați, acționari, administratori și alte persoane fizice **nu se mai pot face în numerar**, ci doar prin instrumente de plată fără numerar. Înalta Curte a stabilit că amenda de 25% se calculează la **totalul operațiunilor**, nu la depășirea unui plafon.
+
+**Temei.** Legea 70/2015 modificată prin Legea 296/2023, în vigoare din 11.11.2023. Cuantumul amenzii — jurisprudența ÎCCJ.
+
+<sub>verificat pe surse publice la 21.08.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele spun doar că „plățile din 455 prin casierie nu mai sunt permise în condițiile anterioare”, fără să precizeze care condiții și din ce text.
+
+**De ce contează.** Foaia „Închideri periodice”, unde 455 e urmărit trimestrial fără flux în spate. Fără regula exactă, rândul rămâne gol declarat — nu se poate scrie o monografie pentru o restricție pe care n-o cunosc.
+
+<sub>sursa: training 19.08.2026, punctul 2</sub>
+
+
 ## Salarii — praguri și baze de calcul
 
-### 27. Care este salariul minim brut pe economie în vigoare, și de la ce dată?
+### 30. Care este salariul minim brut pe economie în vigoare, și de la ce dată?
+
+**Răspuns.** **4.325 lei** brut, de la **1 iulie 2026** (anterior 4.050 lei). Minimul se aplică proporțional cu norma: 2.162,50 lei la jumătate de normă, 1.081,25 la un sfert. Tot de la 1 iulie 2026 și până la 31.12.2026, suma neimpozabilă scade de la 300 la 200 lei/lună.
+
+**Temei.** HG 146/2026 (salariul minim). Suma neimpozabilă — Cod fiscal, cu aplicare 1.07–31.12.2026.
+
+<sub>verificat pe surse publice la 21.08.2026 — confirmă sau corectează</sub>
 
 **Context.** Notițele rețin 4.325 lei. Valoarea se schimbă prin hotărâre de guvern, uneori de mai multe ori pe an, iar verificarea normei parțiale se face contra ei.
 
 **De ce contează.** Verificarea lunară a statului de plată și corelația „minim proporțional cu norma”. Un prag depășit înseamnă contracte neconforme la toți salariații cu normă parțială, nu doar la unul.
 
-**Ce am presupus.** Am folosit 4.325 lei ca în notițe, marcat ❓ peste tot unde apare.
-
 <sub>sursa: training 21.08.2026, punctul 1</sub>
 
 
-### 28. Ce contribuții se datorează pentru indemnizația de concediu medical, și pe ce parte se rețin?
+### 31. Ce contribuții se datorează pentru indemnizația de concediu medical, și pe ce parte se rețin?
+
+**Răspuns.** Din indemnizație se rețin **CAS 25%** și **impozit 10%**. **CASS 10% se datorează începând cu veniturile lunii august 2026** — până atunci nu se datora. Fac excepție indemnizațiile pentru accidente de muncă și boli profesionale, care rămân scutite de CASS. **CAM 2,25% NU se datorează** pe partea suportată din FNUASS: angajatorul datorează CAM doar pe zilele pe care le suportă el. Baza de calcul e media veniturilor brute din ultimele 6 luni, plafonată la 12 salarii minime brute pe lună.
+
+**Temei.** CAS: Cod fiscal art. 139 alin. (1) lit. o) și art. 144. CASS: Legea 170/2026, aplicabilă veniturilor din august 2026. CAM: Cod fiscal art. 220^5. Baza: OUG 158/2005.
+
+<sub>verificat pe surse publice la 21.08.2026 — confirmă sau corectează</sub>
 
 **Context.** Notițele acoperă împărțirea indemnizației între angajator și FNUASS (6458 / 4382 = 423), dar nu și reținerile din ea. Regulile diferă de cele ale salariului.
 
 **De ce contează.** Fluxul de concedii medicale și MOD_SALARII. Fără regulă, monografia se oprește la împărțire și nu ajunge la restul de plată.
 
-**Ce am presupus.** N-am afirmat nimic: documentul spune explicit că tratamentul reținerilor nu era în notițe.
-
 <sub>sursa: training 21.08.2026, punctul 3</sub>
 
 
-### 29. Care e limita de reținere prin poprire pentru obligațiile de întreținere, față de treimea aplicabilă datoriilor obișnuite?
+### 32. Care e limita de reținere prin poprire pentru obligațiile de întreținere, față de treimea aplicabilă datoriilor obișnuite?
+
+**Răspuns.** Sunt **trei** reguli, nu una. **1/2** din venitul net lunar pentru obligații de întreținere sau alocații pentru copii; **1/3** pentru orice alte datorii. Când există mai multe popriri pe aceeași sumă, reținerea totală nu poate depăși **1/2**, indiferent de natura creanțelor. Iar dacă venitul e sub salariul minim net pe economie, se poate urmări doar partea care depășește **jumătate din salariul minim net** — prag de protecție pe care notițele nu-l aveau deloc.
+
+**Temei.** Codul de procedură civilă, art. 729 — Limitele urmăririi veniturilor bănești.
+
+<sub>verificat pe surse publice la 21.08.2026 — confirmă sau corectează</sub>
 
 **Context.** Notițele rețin 33,33% din salariul net. Codul de procedură civilă prevede o limită mai mare pentru pensii de întreținere, și reguli de cumul când există mai multe popriri.
 
 **De ce contează.** Fluxul de popriri (427). Un procent greșit înseamnă ori reținere insuficientă — firma răspunde față de executor — ori excesivă, față de salariat.
-
-**Ce am presupus.** Am folosit treimea, marcând limita specială ca deschisă.
 
 <sub>sursa: training 21.08.2026, punctul 4</sub>
 
 
 ## Microîntreprindere — prag și cotă
 
-### 30. Care sunt pragul de venituri și cota de impozit pentru microîntreprinderi, în vigoare la data operațiunii?
+### 33. Care sunt pragul de venituri și cota de impozit pentru microîntreprinderi, în vigoare la data operațiunii?
+
+**Răspuns.** Prag **100.000 EUR** venituri totale, din 2026 (era 250.000 în 2025 și 500.000 până în 2024). Cotă unică **1%** — cota de 3% pentru firmele fără salariat a fost **eliminată** de la 1 ianuarie 2026. Echivalentul în lei se determină la cursul de la închiderea exercițiului financiar anterior.
+
+**Temei.** Cod fiscal, Titlul IV — Impozitul pe veniturile microîntreprinderilor.
+
+<sub>verificat pe surse publice la 21.08.2026 — confirmă sau corectează</sub>
 
 **Context.** Notițele rețin 100.000 EUR și 1%. Pragul a fost coborât în trepte în anii anteriori, iar cota a avut două paliere. Ambele sunt din Codul fiscal, deci se pot schimba prin ordonanță.
 
 **De ce contează.** Fluxul de impozit micro (698 = 4418) și avertizarea clientului care se apropie de prag. Trecerea se face din trimestrul depășirii, deci un prag greșit înseamnă o declarație greșită, nu doar o estimare.
 
-**Ce am presupus.** Am folosit 100.000 EUR și 1% ca în notițe, marcate ❓.
-
 <sub>sursa: training 21.08.2026, punctul 2</sub>
-
-
-## Decontul de TVA și fișa de rol
-
-### 31. Ce rânduri din D300 sunt preluate în fișa de rol: 36 și 37, sau 44 și 45?
-
-**Context.** Notițele afirmă amândouă variantele, în două locuri diferite. Numerele de rând se schimbă între versiunile formularului, deci una dintre ele e dintr-o versiune anterioară.
-
-**De ce contează.** Corelația decont ↔ fișă de rol ↔ balanță. Fără numerele corecte, corelația nu se poate scrie ca formulă, ci doar descrie.
-
-**Ce am presupus.** Am scris corelația pe SOLD, care nu depinde de numerotarea rândurilor, și am marcat rândurile ca deschise.
-
-<sub>sursa: training 21.08.2026, punctul 5</sub>
-
-
-### 32. La declarațiile care admit rectificare, contează ordinea cronologică a înregistrării facturilor la redepunere?
-
-**Context.** Întrebarea era notată ca presupunere: dacă facturile nu sunt înregistrate cronologic, poate că redepunerea nu mai e posibilă și ar trebui altă metodă de corecție.
-
-**De ce contează.** Procedura de corecție după depunere, pe toate declarațiile care admit rectificativă. Decontul de TVA nu admite, deci acolo întrebarea nu se pune — dar la celelalte, da.
-
-**Ce am presupus.** N-am implementat nimic pe presupunerea asta.
-
-<sub>sursa: training 21.08.2026, punctul 6</sub>
-
-
-### 33. Care sunt corelațiile complete între D300 și fișa de rol la TVA?
-
-**Context.** Temă lăsată explicit la training. Notițele dau două fragmente: fișa preia rulajul lunii, nu soldul; și ANAF încarcă doar suma lunii, de unde greșeala de a omite TVA-ul neachitat din perioadele precedente.
-
-**De ce contează.** Corelațiile de control pe TVA. Ce avem acum se verifică pe sold; corelația pe rulaj, rând cu rând, are nevoie de structura exactă a fișei de rol.
-
-**Ce am presupus.** Am scris corelația pe sold și am lăsat-o pe cea pe rulaj ca gol declarat — n-am fișă de rol de citit.
-
-<sub>sursa: training 21.08.2026, punctul 7</sub>
 
 
 ---
 
-*33 de întrebări, 18 teme. Generat din notițele revizuite; fiecare întrebare se poate urmări înapoi la training și la numărul ei original.*
+*33 de întrebări în total: 11 deschise, 9 decizii de cabinet, 13 cu răspuns verificat. Fiecare se poate urmări înapoi la training și la numărul ei original.*

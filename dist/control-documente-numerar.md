@@ -207,22 +207,6 @@ verificate: ele n-au corespondent afară.
 
 Ce e încă provizoriu în documentul ăsta. Lista nu e scrisă aici: vine din `date/intrebari.py`, aceeași sursă cu foaia „Întrebări deschise” a workbook-ului și cu lista trimisibilă formatorului.
 
-**❓ Care sunt valorile exacte ale plafoanelor din Legea 70/2015 în forma modificată prin Legea 296/2023, la data operațiunii?**
-
-*Plafoane de numerar și contul 455 · training 19.08.2026, punctul 1*
-
-Notițele rețin 5.000 lei B2B, 10.000 lei încasări de la persoane fizice și 50.000 lei între persoane fizice, plus un plafon separat pentru soldul casieriei la sfârșitul zilei. Sunt și plafoane totale zilnice, peste cele per persoană.
-
-**Ce am presupus între timp:** Am păstrat cifrele din notițe, cu mențiunea explicită că trebuie confirmate în textul în vigoare la data operațiunii.
-
-**❓ Care sunt exact operațiunile în numerar interzise pe contul 455 și care e temeiul legal?**
-
-*Plafoane de numerar și contul 455 · training 19.08.2026, punctul 2*
-
-Notițele spun doar că „plățile din 455 prin casierie nu mai sunt permise în condițiile anterioare”, fără să precizeze care condiții și din ce text.
-
-**Ce am presupus între timp:** Am lăsat 455 fără flux, cu golul marcat ca atare în foaie.
-
 **❓ Programul de contabilitate extrage automat TVA-ul din diferența trecută pe 419 la o încasare mai mare decât factura, sau trebuie forțat manual?**
 
 *Comportamentul softului la încasarea în plus · training 19.08.2026, punctul 3*
@@ -247,6 +231,29 @@ Extrasă automat din textul documentului: sunt listate actele și articolele car
 **Articole citate**
 
 art. 25 alin. (1), art. 319
+
+
+---
+
+## Anexa G — Răspunsuri verificate pe surse publice
+
+Întrebări care erau deschise și la care am găsit răspuns în lege. Fiecare poartă actul normativ pe care se sprijină și data la care a fost confruntat cu sursele. **De confirmat cu formatorul** — nu pentru că răspunsul ar fi nesigur, ci pentru că practica poate adăuga ceva ce textul nu spune.
+
+**✅ Care sunt valorile exacte ale plafoanelor din Legea 70/2015 în forma modificată prin Legea 296/2023, la data operațiunii?**
+
+Între persoane juridice: **5.000 lei/zi și de persoană**. Magazine cash & carry: 5.000 lei de persoană, dar maximum **10.000 lei total pe zi**; plăți către ele, maximum 10.000 lei/zi. Avansuri spre decontare: **5.000 lei/zi** pentru fiecare persoană care a primit avansul. **Fragmentarea e interzisă expres** pentru facturi peste 5.000 lei, respectiv 10.000 la cash & carry. Legea 239/2025 **nu a modificat plafoanele** de la 1.01.2026, dar a eliminat pragul de 50.000 lei de la care era obligatorie acceptarea cardului și a introdus obligația unui cont de plăți deschis în România.
+
+*Temei:* Legea 70/2015, art. 3 și art. 4, în forma modificată prin Legea 296/2023 și Legea 239/2025.
+
+*Plafoane de numerar și contul 455 · training 19.08.2026, punctul 1 · verificat 21.08.2026*
+
+**✅ Care sunt exact operațiunile în numerar interzise pe contul 455 și care e temeiul legal?**
+
+Nu e un plafon, e o **interdicție**. Din **11 noiembrie 2023**, încasările și plățile reprezentând împrumuturi — indiferent de sumă — de la sau către asociați, acționari, administratori și alte persoane fizice **nu se mai pot face în numerar**, ci doar prin instrumente de plată fără numerar. Înalta Curte a stabilit că amenda de 25% se calculează la **totalul operațiunilor**, nu la depășirea unui plafon.
+
+*Temei:* Legea 70/2015 modificată prin Legea 296/2023, în vigoare din 11.11.2023. Cuantumul amenzii — jurisprudența ÎCCJ.
+
+*Plafoane de numerar și contul 455 · training 19.08.2026, punctul 2 · verificat 21.08.2026*
 
 
 ---

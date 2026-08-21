@@ -838,4 +838,35 @@ art. 11, art. 22 alin. (9), art. 25 alin. (1), art. 25 alin. (3), art. 28, art. 
 
 ---
 
+## Anexa G — Răspunsuri verificate pe surse publice
+
+Întrebări care erau deschise și la care am găsit răspuns în lege. Fiecare poartă actul normativ pe care se sprijină și data la care a fost confruntat cu sursele. **De confirmat cu formatorul** — nu pentru că răspunsul ar fi nesigur, ci pentru că practica poate adăuga ceva ce textul nu spune.
+
+**✅ Excepția de la cumulul cu profitul reinvestit (art. 22 alin. 9) acoperă doar amortizarea accelerată, sau și pe cea superaccelerată de 65%?**
+
+Regula: cine aplică scutirea de impozit a profitului reinvestit **nu poate opta pentru amortizarea accelerată** pentru activele respective — se amortizează liniar sau degresiv. Există însă o **excepție pentru 2026**: dacă scutirea se aplică pentru subgrupa 2.1 (echipamente tehnologice — mașini, utilaje și instalații de lucru) și pentru calculatoare și echipamente periferice, contribuabilul **poate** opta pentru amortizare accelerată.
+
+*Temei:* Cod fiscal art. 22 alin. (9), cu trimitere la art. 28 alin. (5) lit. b) pentru excepția din 2026.
+
+*Imobilizări — prag și amortizare · training 12.08.2026, întrebarea 2 · verificat 21.08.2026*
+
+**✅ Care este baza legală exactă pentru a trata ca nedeductibilă diferența dintre valoarea rămasă și prețul de vânzare, față de art. 28 alin. (17)?**
+
+**Nu există un asemenea temei — presupunerea din notițe e inversă.** La vânzarea unui mijloc fix la prețul pieței, valoarea rămasă neamortizată e cheltuială **deductibilă**, chiar dacă prețul e sub ea. Limitarea reală e alta și privește doar **autoturismele din categoria M1**: acolo valoarea rămasă e deductibilă în limita a **1.500 lei × numărul de luni rămase** de amortizat din durata normală de funcționare.
+
+*Temei:* Cod fiscal art. 28 alin. (17) și normele metodologice aferente (limitarea M1).
+
+*Imobilizări — ieșiri din gestiune · training 12.08.2026, întrebarea 3 · verificat 21.08.2026*
+
+**✅ La o casare din care nu rezultă nici deșeuri, nici piese reutilizabile, cum se justifică deductibilitatea valorii rămase neamortizate?**
+
+**Nu se cere nici deșeu, nici piesă reutilizabilă.** Cheltuielile înregistrate ca urmare a casării unui mijloc fix cu valoare fiscală incomplet amortizată sunt, prin lege, cheltuieli efectuate în scopul desfășurării activității economice — deci deductibile. Documentația de casare rămâne necesară ca probă a operațiunii, nu ca o condiție de deductibilitate.
+
+*Temei:* Cod fiscal art. 28 alin. (17).
+
+*Imobilizări — ieșiri din gestiune · training 12.08.2026, întrebarea 5 · verificat 21.08.2026*
+
+
+---
+
 *Secțiunea 18 (anticiparea sesiunii pe ajustări) rămâne în corp, nu în anexe: e conținut de continuare, nu material de referință.*

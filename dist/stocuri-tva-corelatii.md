@@ -1454,4 +1454,27 @@ originale.
 
 ---
 
+## Anexa G — Răspunsuri verificate pe surse publice
+
+Întrebări care erau deschise și la care am găsit răspuns în lege. Fiecare poartă actul normativ pe care se sprijină și data la care a fost confruntat cu sursele. **De confirmat cu formatorul** — nu pentru că răspunsul ar fi nesigur, ci pentru că practica poate adăuga ceva ce textul nu spune.
+
+**✅ Derogarea UE pentru taxarea inversă la cereale și electronice avea termen 31.12.2026 — a fost prelungită?**
+
+Derogarea e prelungită până la **31 decembrie 2026** și acoperă opt operațiuni: cereale și plante tehnice, certificate de emisii de gaze cu efect de seră, energie electrică și gaze naturale către comercianți persoane impozabile, certificate verzi, telefoane mobile, dispozitive cu circuite integrate, console de jocuri, tablete și laptopuri. Pentru ultimele patru categorii, taxarea inversă se aplică **doar dacă valoarea fără TVA de pe factură e cel puțin 22.500 lei**. La data verificării **nu e publicată o prelungire dincolo de 31.12.2026** — deci expiră peste patru luni dacă nu intervine una.
+
+*Temei:* Cod fiscal art. 331; decizie a Consiliului UE de prelungire până la 31.12.2026. Reverificat la 21.08.2026.
+
+*TVA — import, vamă, taxare inversă · training 14.08.2026, întrebarea 7 · verificat 21.08.2026*
+
+**✅ Care este termenul curent de depunere a declarației la Fondul pentru Mediu — lunar sau trimestrial?**
+
+**Lunar sau trimestrial**, după tipul de obligație, cu termen **25 a lunii următoare** perioadei de raportare. Depunerea se face exclusiv electronic, prin platforma AFM-Online, cu semnătură electronică calificată — de la 1 iulie 2022 nu se mai acceptă depunerea pe hârtie.
+
+*Temei:* Procedura de declarare la Fondul pentru mediu; depunere electronică obligatorie din 1.07.2022.
+
+*Obligații de mediu · training 14.08.2026, întrebarea 5 · verificat 21.08.2026*
+
+
+---
+
 *Singurul care avea deja anexele denumite. Primește Anexa F, care exista doar ca notă în foaia Legendă a workbook-ului.*

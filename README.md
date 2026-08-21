@@ -135,7 +135,7 @@ trimite în gol după dezarhivare ar fi mai rău decât niciunul. Judecata (ordi
 
 | Livrabil | Ce e |
 |---|---|
-| `dist/intrebari-formator.md` + `.html` | cele 21 de întrebări rămase deschise, grupate pe temă contabilă, cu context și cu ce s-a presupus între timp |
+| `dist/intrebari-formator.md` + `.html` | cele 33 de întrebări, rupte în trei: **rămase deschise** (ce se trimite), **decizii de cabinet** (ce nu se caută, se alege) și **răspunsuri verificate** pe surse publice, fiecare cu actul normativ citat și data verificării |
 | `dist/stocuri-tva-corelatii.md`, `imobilizari.md`, `capitaluri-credite-provizioane.md`, `control-documente-numerar.md` (+ `.docx` + `.html`) | cele patru documente revizuite, **titrate pe subiect, nu pe ziua de training** — un document care crește cu material din mai multe zile nu mai poate purta cinstit o dată |
 | `dist/parcurs-training-nou.md` | parcursul pe care trebuie să-l urmeze **următorul set de notițe** — vezi mai jos |
 
@@ -190,6 +190,24 @@ chiar tabelul de structură din foaia `Legendă`.
 Miezul lui e secțiunea **puncte de convergență**: cele 12 locuri unde un training nou
 poate rupe coerența. Opt sunt prinse de câte o poartă și sunt enumerate ca să nu te uiți
 degeaba după ele; **patru sunt goluri cunoscute**, marcate „nimic — verifică tu”.
+
+## Porțile de calitate
+
+### Răspunsuri verificate
+
+Treisprezece dintre întrebările deschise au primit răspuns căutat pe surse publice și
+citat: salariul minim (HG 146/2026), pragul micro, reținerile din concediul medical
+(inclusiv CASS-ul devenit datorat din august 2026 prin L. 170/2026), limitele popririi
+din art. 729 CPC, plafoanele de numerar, interdicția pe 455, deductibilitatea valorii
+rămase la casare și vânzare.
+
+Regula fișierului `date/intrebari.py`, verificată la import: **fără temei legal nu există
+răspuns.** O părere care arată ca un fapt e mai rea decât o întrebare deschisă.
+
+Două dintre răspunsuri au **contrazis presupunerea din notițe** și au schimbat monografii,
+nu doar marcaje — valoarea rămasă neamortizată e deductibilă la vânzarea la prețul pieței
+(limitarea reală privește doar autoturismele M1), iar TVA-ul nedeductibil de la leasing
+nu se capitalizează, cum se capitalizează la achiziția directă.
 
 ## Porțile de calitate
 

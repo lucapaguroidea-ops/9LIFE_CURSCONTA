@@ -544,7 +544,7 @@ def poarta_documente():
         for m, _ in ddoc.LEGENDA_TABEL:
             if f"| {m} |" not in text:
                 cade("13", f"{cfg['nume']}: lipsește marcajul {m} din legendă")
-        gasite = re.findall(r"^## Anexa ([A-F]) — (.+)$", text, flags=re.M)
+        gasite = re.findall(r"^## Anexa ([A-G]) — (.+)$", text, flags=re.M)
         for litera, den in gasite:
             asteptat = ddoc.ANEXE[litera]
             if not den.startswith(asteptat.split(" (")[0]):
@@ -751,8 +751,12 @@ def poarta_marcaje():
     Rândul de legendă (`| ❓ | Rămas deschis … |`) nu se numără: e definiția marcajului,
     nu o folosire a lui.
     """
+    # Doar întrebările DESCHISE cer marcaj: una la care s-a găsit răspuns nu mai e
+    # provizorie, iar ❓-ul ei a devenit ✅ în proză.
     cu_intrebari = {}
     for _, q in dintr.toate():
+        if q["raspuns"]:
+            continue
         d = dintr.documentul(q)
         if d:
             cu_intrebari.setdefault(d, []).append(q)

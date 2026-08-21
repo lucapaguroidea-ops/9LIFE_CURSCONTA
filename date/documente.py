@@ -40,6 +40,7 @@ ANEXE = {
     "D": "Rămase deschise",
     "E": "Baza legală citată",
     "F": "Erori din notițele brute, NEreintroduse",
+    "G": "Răspunsuri verificate pe surse publice",
 }
 
 #: Conținut adus din foaia Legendă a workbook-ului, ca documentul trainingului 4 să
@@ -112,7 +113,7 @@ DOCUMENTE = [
             "## 11. Checklist lunar / trimestrial rezultat din notițe": "B",
             "## 10. Listă de verificat / întrebări pentru trainer": "D",
         },
-        genereaza=["E"],
+        genereaza=["E", "G"],
         inlocuiri=[
             dict(text="- ❓ **Răspuns la (Q – ONRC):**",
                  devine="- ✅ **Răspuns la (Q – ONRC):**",
@@ -123,6 +124,20 @@ DOCUMENTE = [
             dict(text="### 3.4 ❓ Răspuns la întrebarea ta despre 1174",
                  devine="### 3.4 ✅ Răspuns la întrebarea ta despre 1174",
                  motiv="Același lucru: titlul anunță un răspuns, nu o întrebare deschisă."),
+
+            dict(text="**venituri totale sub 100.000 EUR** ❓, calculate la cursul de la "
+                      "închiderea\n   exercițiului anterior. Pragul e din Codul fiscal, "
+                      "nu din OMFP.",
+                 devine="**venituri totale sub 100.000 EUR** ✅, calculate la cursul de "
+                        "la închiderea\n   exercițiului anterior. Pragul e din Codul "
+                        "fiscal, nu din OMFP, și a coborât în trepte: 500.000 până în "
+                        "2024, 250.000 în 2025, **100.000 din 2026**.",
+                 motiv="Verificat pe surse publice la 21.08.2026: Cod fiscal, Titlul IV."),
+
+            dict(text="Cota este 1% ❓.",
+                 devine="✅ Cota este **1%**, unică: cota de 3% pentru firmele fără "
+                        "salariat a fost **eliminată de la 1 ianuarie 2026**.",
+                 motiv="Verificat pe surse publice la 21.08.2026: Cod fiscal, Titlul IV."),
         ],
         nota="Rolul Anexei C îl joacă secțiunea 0 (Sinteza corecțiilor), păstrată în "
              "față pentru că funcționează ca rezumat executiv al documentului.",
@@ -154,7 +169,7 @@ DOCUMENTE = [
             "## 16. Lista erorilor corectate din notițe": "C",
             "## 17. De clarificat / întrebări pentru mail": "D",
         },
-        genereaza=["E"],
+        genereaza=["E", "G"],
         nota="Secțiunea 18 (anticiparea sesiunii pe ajustări) rămâne în corp, nu în "
              "anexe: e conținut de continuare, nu material de referință.",
     ),
@@ -185,7 +200,7 @@ DOCUMENTE = [
         ],
         legenda_veche=[],          # are deja forma canonică
         anexe={},                  # anexele A–E sunt deja denumite corect
-        genereaza=["F"],
+        genereaza=["F", "G"],
         extinde_anexe={"C": CORECTII_SURSA_19_08},
         nota="Singurul care avea deja anexele denumite. Primește Anexa F, care exista "
              "doar ca notă în foaia Legendă a workbook-ului.",
@@ -201,9 +216,55 @@ DOCUMENTE = [
         subtitlu="Sursă: training 21.08.2026 — de la statul de plată la balanță, "
                  "cu verificările care se fac în secunda doi",
         legenda_veche=[],
+        inlocuiri=[
+            dict(text="Salariul minim brut pe economie este **4.325 lei** ❓.",
+                 devine="✅ Salariul minim brut pe economie este **4.325 lei**, de la "
+                        "**1 iulie 2026** (anterior 4.050 lei) — HG 146/2026. Tot de "
+                        "atunci și până la 31.12.2026, suma neimpozabilă lunară scade "
+                        "de la 300 la **200 lei**.",
+                 motiv="Verificat pe surse publice la 21.08.2026: HG 146/2026. Cifra "
+                       "din notițe era corectă, dar nedatată — iar un prag fără dată "
+                       "nu se poate aplica la o operațiune."),
+
+            dict(text="❓ Tratamentul exact al reținerilor din indemnizația de concediu "
+                      "medical — ce contribuții\n"
+                      "se datorează și pe ce parte — nu era "
+                      "în notițe și nu îl afirm aici.",
+                 devine="✅ **Reținerile din indemnizație.** Se rețin **CAS 25%** și "
+                        "**impozit 10%**. **CASS 10% se datorează începând cu "
+                        "veniturile lunii august 2026** (Legea 170/2026) — până atunci "
+                        "nu se datora; fac excepție indemnizațiile pentru accidente de "
+                        "muncă și boli profesionale. **CAM 2,25% NU se datorează** pe "
+                        "partea suportată din FNUASS (art. 220^5 Cod fiscal): "
+                        "angajatorul datorează CAM doar pe zilele pe care le suportă "
+                        "el. Baza de calcul e media veniturilor brute din ultimele 6 "
+                        "luni, plafonată la 12 salarii minime brute pe lună. "
+                        "*(art. 139 alin. (1) lit. o) și art. 144 Cod fiscal; "
+                        "OUG 158/2005 — verificat 21.08.2026)*",
+                 motiv="Verificat pe surse publice. Răspunsul e relevant imediat: "
+                       "notițele sunt din 21.08.2026, iar CASS-ul a devenit datorat "
+                       "chiar pe veniturile lunii august."),
+
+            dict(text="❓ Limita de o treime se aplică datoriilor obișnuite; pentru "
+                      "obligații de întreținere\nlegea prevede o limită mai mare. "
+                      "Procentul aplicabil pe caz concret — de confirmat.",
+                 devine="✅ **Sunt trei reguli, nu una** (art. 729 Cod procedură "
+                        "civilă): **1/2** din venitul net pentru obligații de "
+                        "întreținere sau alocații pentru copii · **1/3** pentru orice "
+                        "alte datorii · la mai multe popriri pe aceeași sumă, reținerea "
+                        "totală nu poate depăși **1/2**, indiferent de natura "
+                        "creanțelor. Iar dacă venitul e sub salariul minim net, se "
+                        "poate urmări doar partea care depășește **jumătate din "
+                        "salariul minim net** — prag de protecție pe care notițele "
+                        "nu-l aveau deloc. *(verificat 21.08.2026)*",
+                 motiv="Verificat pe surse publice. Notițele aveau o singură limită din "
+                       "trei, iar pragul de protecție sub salariul minim lipsea — "
+                       "exact cazul în care reținerea greșită îl păgubește pe salariat."),
+
+        ],
         anexe={"## 9. Checklist lunar rezultat din notițe": "B",
                "## 10. Lista erorilor corectate din notițe": "C"},
-        genereaza=["D", "E"],
+        genereaza=["D", "E", "G"],
         nota="Al cincilea document. Salariile sunt clasa 4, dar un document intitulat "
              "„Stocuri, TVA și corelații de balanță” nu le putea găzdui fără să mintă — "
              "iar materialul e coerent și mare cât să stea singur.",
@@ -228,7 +289,7 @@ DOCUMENTE = [
                  sectiune_noua="Cum se construiește o verificare"),
         ],
         anexe={"## 12. Erori frecvente și capcane": "B"},
-        genereaza=["D", "E"],
+        genereaza=["D", "E", "G"],
         inlocuiri=[
             dict(text="Vezi secțiunea 13 — punct de verificat în textul legal în vigoare.",
                  devine="❓ Punct de verificat în textul legal în vigoare — vezi Anexa D.",

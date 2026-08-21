@@ -265,7 +265,9 @@ def _anexa_d(cfg):
     `intrebari-formator.md`. Fiecare punct poartă ❓, ca legenda să spună adevărul.
     """
     ale_mele = [(t, q) for t, q in dintr.toate()
-                if dintr.documentul(q) == cfg["cheie"]]
+                if dintr.documentul(q) == cfg["cheie"] and not q["raspuns"]]
+    if not ale_mele:
+        return ""
     out = [f"## Anexa {litera_d} — {D.ANEXE['D']}", "",
            "Ce e încă provizoriu în documentul ăsta. Lista nu e scrisă aici: vine din "
            "`date/intrebari.py`, aceeași sursă cu foaia „Întrebări deschise” a "
@@ -303,6 +305,30 @@ def _aplica_inlocuiri(cfg, sectiuni):
     if negasite:
         raise SystemExit(f"{cfg['nume']}: înlocuiri fără țintă — {negasite}")
     return out
+
+
+def _anexa_g(cfg):
+    """Anexa G — întrebările documentului la care am găsit răspuns pe surse publice.
+
+    Nu înlocuiește formatorul: îi scurtează munca. În loc de „care e regula?”, întrebarea
+    devine „am citit bine?”. De aceea fiecare răspuns își poartă temeiul și data — un
+    prag ca salariul minim se schimbă, iar data spune de când încolo merită reverificat.
+    """
+    ale_mele = [(t, q) for t, q in dintr.toate()
+                if dintr.documentul(q) == cfg["cheie"] and q["raspuns"]]
+    if not ale_mele:
+        return ""
+    out = [f"## Anexa G — {D.ANEXE['G']}", "",
+           "Întrebări care erau deschise și la care am găsit răspuns în lege. Fiecare "
+           "poartă actul normativ pe care se sprijină și data la care a fost confruntat "
+           "cu sursele. **De confirmat cu formatorul** — nu pentru că răspunsul ar fi "
+           "nesigur, ci pentru că practica poate adăuga ceva ce textul nu spune.", ""]
+    for tema, q in ale_mele:
+        out += [f"**✅ {q['intrebare']}**", "",
+                q["raspuns"], "",
+                f"*Temei:* {q['temei']}", "",
+                f"*{tema} · {q['sursa']} · verificat {q['verificat']}*", ""]
+    return "\n".join(out)
 
 
 def armonizeaza(cfg):
@@ -354,6 +380,10 @@ def armonizeaza(cfg):
                       mutate[litera], ""]
         elif litera == "D":
             anexe += ["---", "", _anexa_d(cfg), ""]
+        elif litera == "G":
+            text = _anexa_g(cfg)
+            if text:
+                anexe += ["---", "", text, ""]
         elif litera == "E":
             anexe += ["---", "", _anexa_e(original), ""]
         elif litera == "F":

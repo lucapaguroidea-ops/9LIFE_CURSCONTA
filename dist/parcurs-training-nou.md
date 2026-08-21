@@ -124,6 +124,7 @@ Documentul revizuit are aceeași legendă de marcaje ca celelalte trei și anexe
 | **D** | Rămase deschise |
 | **E** | Baza legală citată |
 | **F** | Erori din notițele brute, NEreintroduse |
+| **G** | Răspunsuri verificate pe surse publice |
 
 Nu orice document are toate anexele — le are pe cele pentru care există conținut real. Vezi `date/documente.py` pentru ce anexă e servită de ce secțiune în fiecare document.
 

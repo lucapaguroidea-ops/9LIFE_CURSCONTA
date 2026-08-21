@@ -22,9 +22,20 @@ scrise o singură dată, în `DOC_EXPLICIT` de mai jos.
 """
 
 
-def q(sursa, intrebare, context, conteaza, presupunere=None):
+def q(sursa, intrebare, context, conteaza, presupunere=None,
+      raspuns=None, temei=None, verificat=None, decizie=False):
+    """O întrebare deschisă, eventual cu răspuns verificat pe surse publice.
+
+    `raspuns`   — formulat ca fapt, nu ca opinie
+    `temei`     — actul normativ și articolul. FĂRĂ TEMEI NU EXISTĂ RĂSPUNS: o părere
+                  care arată ca un fapt e mai rea decât o întrebare deschisă
+    `verificat` — data confruntării cu sursele; praguri ca salariul minim se schimbă
+    `decizie`   — nu e o întrebare de drept, ci o alegere a cabinetului. Nicio sursă
+                  nu poate răspunde la „ce standard folosim noi”, deci nu se caută
+    """
     return dict(sursa=sursa, intrebare=intrebare, context=context,
-                conteaza=conteaza, presupunere=presupunere)
+                conteaza=conteaza, presupunere=presupunere,
+                raspuns=raspuns, temei=temei, verificat=verificat, decizie=decizie)
 
 
 TEME = [
@@ -66,7 +77,10 @@ TEME = [
           "fără să pot cita actul care o face permanentă, nu doar valabilă pentru un an.",
           "Checklistul de închidere din documentele revizuite și calendarul din foaia "
           "Legendă. Un termen greșit aici se propagă la toți clienții.",
-          "Am scris 25 iunie, marcat ca „de reconfirmat”."),
+          "Am scris 25 iunie, marcat ca „de reconfirmat”.",
+          raspuns='Termenul de 25 iunie **nu a fost de la început permanent**: a venit prin **OUG 153/2020**, care l-a prelungit pentru perioada 2021–2025, odată cu bonificațiile pentru capital propriu pozitiv și în creștere. 2025 a fost ultimul an de aplicare a acelui mecanism, iar termenul uniform de 25 iunie a anului următor se aplică de la 2026. ❓ Actul care l-a permanentizat nu l-am putut identifica cu certitudine — surse îl descriu ca măsură adoptată în 2026, dar fără să-l numească. De confirmat înainte de a-l cita unui client.',
+          temei='OUG 153/2020, art. I — aplicabil 2021–2025. Permanentizarea: act neidentificat.',
+          verificat="21.08.2026"),
     ]),
 
     ("Corectarea erorilor din exerciții anterioare", [
@@ -103,7 +117,8 @@ TEME = [
           "netă peste 400.000 lei. Al doilea prag prinde firme existente, nu doar noi.",
           "F-101 (constituirea capitalului) și checklistul de deschidere de dosar. Dacă "
           "verificarea e sistematică, intră în checklistul lunar, nu în cel de deschidere.",
-          "Am pus-o în checklistul de deschidere a dosarului."),
+          "Am pus-o în checklistul de deschidere a dosarului.",
+          decizie=True),
     ]),
 
     ("Leasing și vehicule", [
@@ -118,7 +133,10 @@ TEME = [
           "toată durata contractului.",
           "Am făcut din ea o OPȚIUNE DE CONFIGURARE în modul (CAPITALIZEAZA / CHELTUIALA), "
           "cu implicit „capitalizează”, coerent cu tratamentul avansului. Nu am tranșat-o "
-          "ca regulă."),
+          "ca regulă.",
+          raspuns='**Cheltuială, nu capitalizare.** La leasing, tratamentul diferă de achiziția directă: la cumpărarea internă a unui autoturism, TVA-ul nedeductibil de 50% intră în costul de achiziție, dar la leasing **nu** intră în valoarea mijlocului fix. Se înregistrează pe cheltuială, defalcat după componenta ratei: `635 = 4426` pentru 50% din TVA aferent ratei de capital, `666 = 4426` pentru cel aferent dobânzii, `628 = 4426` pentru cel aferent comisionului.',
+          temei='Cod fiscal art. 298 (limitarea la 50%) coroborat cu OMFP 1802/2014 privind costul de achiziție; tratamentul distinct al leasingului față de achiziția directă.',
+          verificat="21.08.2026"),
     ]),
 
     ("Imobilizări — prag și amortizare", [
@@ -131,7 +149,8 @@ TEME = [
           "apar diferențe temporare de urmărit în registrul de evidență fiscală — un lucru "
           "pe care modulul nu îl tratează azi.",
           "Am folosit un singur prag, cel fiscal, și am semnalat în notițe că divergența "
-          "produce diferențe temporare."),
+          "produce diferențe temporare.",
+          decizie=True),
 
         q("training 12.08.2026, întrebarea 2",
           "Excepția de la cumulul cu profitul reinvestit (art. 22 alin. 9) acoperă doar "
@@ -141,7 +160,10 @@ TEME = [
           "de a calcula ce e mai avantajos.",
           "F-204 și MOD_IMOBILIZARI, la alegerea metodei de amortizare. Dacă excepția nu "
           "acoperă superaccelerata, calculul comparativ are altă concluzie.",
-          "Nu am implementat comparația. Modulul propune metoda, fără să optimizeze fiscal."),
+          "Nu am implementat comparația. Modulul propune metoda, fără să optimizeze fiscal.",
+          raspuns="Regula: cine aplică scutirea de impozit a profitului reinvestit **nu poate opta pentru amortizarea accelerată** pentru activele respective — se amortizează liniar sau degresiv. Există însă o **excepție pentru 2026**: dacă scutirea se aplică pentru subgrupa 2.1 (echipamente tehnologice — mașini, utilaje și instalații de lucru) și pentru calculatoare și echipamente periferice, contribuabilul **poate** opta pentru amortizare accelerată.",
+          temei="Cod fiscal art. 22 alin. (9), cu trimitere la art. 28 alin. (5) lit. b) pentru excepția din 2026.",
+          verificat="21.08.2026"),
     ]),
 
     ("Imobilizări — ieșiri din gestiune", [
@@ -155,7 +177,10 @@ TEME = [
           "F-211 și MOD_IESIRE_MF. E testul central al modulului: azi calculează diferența "
           "și cere documentul justificativ, dar nu poate cita articolul pe care se sprijină.",
           "Modulul semnalează riscul și cere documentarea prețului, invocând art. 11 "
-          "(reîncadrare) și art. 25 alin. (1) (scopul activității economice) — nu art. 28."),
+          "(reîncadrare) și art. 25 alin. (1) (scopul activității economice) — nu art. 28.",
+          raspuns="**Nu există un asemenea temei — presupunerea din notițe e inversă.** La vânzarea unui mijloc fix la prețul pieței, valoarea rămasă neamortizată e cheltuială **deductibilă**, chiar dacă prețul e sub ea. Limitarea reală e alta și privește doar **autoturismele din categoria M1**: acolo valoarea rămasă e deductibilă în limita a **1.500 lei × numărul de luni rămase** de amortizat din durata normală de funcționare.",
+          temei="Cod fiscal art. 28 alin. (17) și normele metodologice aferente (limitarea M1).",
+          verificat="21.08.2026"),
 
         q("training 12.08.2026, întrebarea 5",
           "La o casare din care nu rezultă nici deșeuri, nici piese reutilizabile, cum se "
@@ -166,7 +191,10 @@ TEME = [
           "zero. Fără răspuns, modulul nu poate spune dacă procesul-verbal de scoatere din "
           "funcțiune e suficient singur.",
           "Modulul acceptă valoarea zero a recuperărilor și lasă deductibilitatea "
-          "nejudecată, cu procesul-verbal ca singur document."),
+          "nejudecată, cu procesul-verbal ca singur document.",
+          raspuns="**Nu se cere nici deșeu, nici piesă reutilizabilă.** Cheltuielile înregistrate ca urmare a casării unui mijloc fix cu valoare fiscală incomplet amortizată sunt, prin lege, cheltuieli efectuate în scopul desfășurării activității economice — deci deductibile. Documentația de casare rămâne necesară ca probă a operațiunii, nu ca o condiție de deductibilitate.",
+          temei="Cod fiscal art. 28 alin. (17).",
+          verificat="21.08.2026"),
     ]),
 
     ("Imobilizări — control și raportare", [
@@ -190,7 +218,8 @@ TEME = [
           "contabile, descrie un control lunar. Azi se oprește la „dacă soldurile nu "
           "corespund”, fără pașii de rezolvare. C-15 depinde de aceeași procedură.",
           "Am scris pașii de identificare (listing, comparare pe perechi 21x↔28x, fișă de "
-          "cont), dar NU și pașii de corecție — aceia sunt procedura promisă."),
+          "cont), dar NU și pașii de corecție — aceia sunt procedura promisă.",
+          decizie=True),
     ]),
 
     ("Stocuri și producție", [
@@ -214,7 +243,8 @@ TEME = [
           "F-319 (import prin comisionar) și analiticul 446.VAMA din foaia Analitice. "
           "Contul ales determină unde apare soldul în bilanț: datorie la buget vs. datorie "
           "către un terț.",
-          "Am păstrat 446.VAMA, ca în notițe, și am notat 461/462 ca alternativă."),
+          "Am păstrat 446.VAMA, ca în notițe, și am notat 461/462 ca alternativă.",
+          decizie=True),
 
         q("training 14.08.2026, întrebarea 4",
           "Verificăm sistematic dacă clienții importatori îndeplinesc condițiile pentru "
@@ -224,7 +254,8 @@ TEME = [
           "adăugat eu la revizuire.",
           "F-320 (import cu plată directă) capătă o a treia variantă dacă certificatul "
           "există. Ar trebui să intre în checklistul de deschidere a dosarului.",
-          "L-am adăugat ca variantă în documentul revizuit, dar nu în checklist."),
+          "L-am adăugat ca variantă în documentul revizuit, dar nu în checklist.",
+          decizie=True),
 
         q("training 14.08.2026, întrebarea 7",
           "Derogarea UE pentru taxarea inversă la cereale și electronice avea termen "
@@ -233,7 +264,10 @@ TEME = [
           "prelungit derogarea succesiv. Nu se poate presupune prelungirea automată.",
           "F-402 (taxare inversă internă) și lista de categorii din documentul revizuit. "
           "Aplicarea taxării inverse după expirare înseamnă factură greșit întocmită.",
-          "Am marcat termenul în document cu avertisment de reverificare."),
+          "Am marcat termenul în document cu avertisment de reverificare.",
+          raspuns="Derogarea e prelungită până la **31 decembrie 2026** și acoperă opt operațiuni: cereale și plante tehnice, certificate de emisii de gaze cu efect de seră, energie electrică și gaze naturale către comercianți persoane impozabile, certificate verzi, telefoane mobile, dispozitive cu circuite integrate, console de jocuri, tablete și laptopuri. Pentru ultimele patru categorii, taxarea inversă se aplică **doar dacă valoarea fără TVA de pe factură e cel puțin 22.500 lei**. La data verificării **nu e publicată o prelungire dincolo de 31.12.2026** — deci expiră peste patru luni dacă nu intervine una.",
+          temei="Cod fiscal art. 331; decizie a Consiliului UE de prelungire până la 31.12.2026. Reverificat la 21.08.2026.",
+          verificat="21.08.2026"),
     ]),
 
     ("TVA — ajustări fără document", [
@@ -246,7 +280,8 @@ TEME = [
           "F-406 (înregistrări fără document) și corelațiile C-03 / C-04, unde ajustările "
           "care nu vin din facturi trebuie să apară în jurnale cu semnul corect. Cele două "
           "tratamente ating conturi diferite, deci și jurnale diferite.",
-          "Am descris toate patru situațiile, fără să declar una ca implicită."),
+          "Am descris toate patru situațiile, fără să declar una ca implicită.",
+          decizie=True),
     ]),
 
     ("Obligații de mediu", [
@@ -257,7 +292,10 @@ TEME = [
           "revizuire am scris „verifică termenul curent pe afm.ro”, ceea ce nu e un răspuns.",
           "F-310 (ambalaje și taxa AFM) și checklistul lunar. Un termen greșit produce "
           "penalități direct.",
-          "Am lăsat termenul nespecificat, cu trimitere la sursa oficială."),
+          "Am lăsat termenul nespecificat, cu trimitere la sursa oficială.",
+          raspuns="**Lunar sau trimestrial**, după tipul de obligație, cu termen **25 a lunii următoare** perioadei de raportare. Depunerea se face exclusiv electronic, prin platforma AFM-Online, cu semnătură electronică calificată — de la 1 iulie 2022 nu se mai acceptă depunerea pe hârtie.",
+          temei="Procedura de declarare la Fondul pentru mediu; depunere electronică obligatorie din 1.07.2022.",
+          verificat="21.08.2026"),
     ]),
 
     ("Material lipsă din notițe", [
@@ -283,7 +321,10 @@ TEME = [
           "greșit produce amendă direct, iar fragmentarea e interzisă expres — deci nici "
           "împărțirea pe tranșe nu e o ieșire.",
           "Am păstrat cifrele din notițe, cu mențiunea explicită că trebuie confirmate în "
-          "textul în vigoare la data operațiunii."),
+          "textul în vigoare la data operațiunii.",
+          raspuns="Între persoane juridice: **5.000 lei/zi și de persoană**. Magazine cash & carry: 5.000 lei de persoană, dar maximum **10.000 lei total pe zi**; plăți către ele, maximum 10.000 lei/zi. Avansuri spre decontare: **5.000 lei/zi** pentru fiecare persoană care a primit avansul. **Fragmentarea e interzisă expres** pentru facturi peste 5.000 lei, respectiv 10.000 la cash & carry. Legea 239/2025 **nu a modificat plafoanele** de la 1.01.2026, dar a eliminat pragul de 50.000 lei de la care era obligatorie acceptarea cardului și a introdus obligația unui cont de plăți deschis în România.",
+          temei="Legea 70/2015, art. 3 și art. 4, în forma modificată prin Legea 296/2023 și Legea 239/2025.",
+          verificat="21.08.2026"),
         q("training 19.08.2026, punctul 2",
           "Care sunt exact operațiunile în numerar interzise pe contul 455 și care e "
           "temeiul legal?",
@@ -292,7 +333,10 @@ TEME = [
           "Foaia „Închideri periodice”, unde 455 e urmărit trimestrial fără flux în spate. "
           "Fără regula exactă, rândul rămâne gol declarat — nu se poate scrie o monografie "
           "pentru o restricție pe care n-o cunosc.",
-          "Am lăsat 455 fără flux, cu golul marcat ca atare în foaie."),
+          "Am lăsat 455 fără flux, cu golul marcat ca atare în foaie.",
+          raspuns="Nu e un plafon, e o **interdicție**. Din **11 noiembrie 2023**, încasările și plățile reprezentând împrumuturi — indiferent de sumă — de la sau către asociați, acționari, administratori și alte persoane fizice **nu se mai pot face în numerar**, ci doar prin instrumente de plată fără numerar. Înalta Curte a stabilit că amenda de 25% se calculează la **totalul operațiunilor**, nu la depășirea unui plafon.",
+          temei="Legea 70/2015 modificată prin Legea 296/2023, în vigoare din 11.11.2023. Cuantumul amenzii — jurisprudența ÎCCJ.",
+          verificat="21.08.2026"),
     ]),
 
     ("Comportamentul softului la încasarea în plus", [
@@ -305,7 +349,8 @@ TEME = [
           "F-415 (încasare peste factură) și C-23. Notițele cer explicit contraverificarea "
           "lui 4427 după simulare — deci nici formatorul nu presupune că softul o face.",
           "Am scris fluxul cu extragerea explicită a TVA-ului, ca pas separat, tocmai ca "
-          "să nu depindă de comportamentul softului."),
+          "să nu depindă de comportamentul softului.",
+          decizie=True),
     ]),
 
     ("Convenții de analitic rămase de fixat", [
@@ -319,7 +364,8 @@ TEME = [
           "4428.AM (amănunt) și 4428.INC (la încasare); pentru avizul de intrare nu există "
           "convenție scrisă.",
           "Am folosit convenția existentă din training 4 și am lăsat avizul de intrare fără "
-          "analitic propriu — vizibil ca gol în foaia „Închideri periodice”."),
+          "analitic propriu — vizibil ca gol în foaia „Închideri periodice”.",
+          decizie=True),
         q("training 19.08.2026, punctul 5",
           "Facturile nesosite pentru imobilizări se țin pe 408 cu analitic sau direct pe "
           "404 cu analitic?",
@@ -330,7 +376,8 @@ TEME = [
           "cu cei de imobilizări în balanța analitică — adică dacă 401/404 mai pot fi "
           "verificate separat.",
           "Am păstrat 408 cu analitic, ca în exemplul din notițe, semnalând alternativa în "
-          "observația contului."),
+          "observația contului.",
+          decizie=True),
     ]),
 
     ("Salarii — praguri și baze de calcul", [
@@ -341,7 +388,10 @@ TEME = [
           "Verificarea lunară a statului de plată și corelația „minim proporțional cu "
           "norma”. Un prag depășit înseamnă contracte neconforme la toți salariații cu "
           "normă parțială, nu doar la unul.",
-          "Am folosit 4.325 lei ca în notițe, marcat ❓ peste tot unde apare."),
+          "Am folosit 4.325 lei ca în notițe, marcat ❓ peste tot unde apare.",
+          raspuns="**4.325 lei** brut, de la **1 iulie 2026** (anterior 4.050 lei). Minimul se aplică proporțional cu norma: 2.162,50 lei la jumătate de normă, 1.081,25 la un sfert. Tot de la 1 iulie 2026 și până la 31.12.2026, suma neimpozabilă scade de la 300 la 200 lei/lună.",
+          temei="HG 146/2026 (salariul minim). Suma neimpozabilă — Cod fiscal, cu aplicare 1.07–31.12.2026.",
+          verificat="21.08.2026"),
 
         q("training 21.08.2026, punctul 3",
           "Ce contribuții se datorează pentru indemnizația de concediu medical, și pe "
@@ -352,7 +402,10 @@ TEME = [
           "Fluxul de concedii medicale și MOD_SALARII. Fără regulă, monografia se "
           "oprește la împărțire și nu ajunge la restul de plată.",
           "N-am afirmat nimic: documentul spune explicit că tratamentul reținerilor nu "
-          "era în notițe."),
+          "era în notițe.",
+          raspuns="Din indemnizație se rețin **CAS 25%** și **impozit 10%**. **CASS 10% se datorează începând cu veniturile lunii august 2026** — până atunci nu se datora. Fac excepție indemnizațiile pentru accidente de muncă și boli profesionale, care rămân scutite de CASS. **CAM 2,25% NU se datorează** pe partea suportată din FNUASS: angajatorul datorează CAM doar pe zilele pe care le suportă el. Baza de calcul e media veniturilor brute din ultimele 6 luni, plafonată la 12 salarii minime brute pe lună.",
+          temei="CAS: Cod fiscal art. 139 alin. (1) lit. o) și art. 144. CASS: Legea 170/2026, aplicabilă veniturilor din august 2026. CAM: Cod fiscal art. 220^5. Baza: OUG 158/2005.",
+          verificat="21.08.2026"),
 
         q("training 21.08.2026, punctul 4",
           "Care e limita de reținere prin poprire pentru obligațiile de întreținere, "
@@ -362,7 +415,10 @@ TEME = [
           "mai multe popriri.",
           "Fluxul de popriri (427). Un procent greșit înseamnă ori reținere insuficientă "
           "— firma răspunde față de executor — ori excesivă, față de salariat.",
-          "Am folosit treimea, marcând limita specială ca deschisă."),
+          "Am folosit treimea, marcând limita specială ca deschisă.",
+          raspuns="Sunt **trei** reguli, nu una. **1/2** din venitul net lunar pentru obligații de întreținere sau alocații pentru copii; **1/3** pentru orice alte datorii. Când există mai multe popriri pe aceeași sumă, reținerea totală nu poate depăși **1/2**, indiferent de natura creanțelor. Iar dacă venitul e sub salariul minim net pe economie, se poate urmări doar partea care depășește **jumătate din salariul minim net** — prag de protecție pe care notițele nu-l aveau deloc.",
+          temei="Codul de procedură civilă, art. 729 — Limitele urmăririi veniturilor bănești.",
+          verificat="21.08.2026"),
     ]),
 
     ("Microîntreprindere — prag și cotă", [
@@ -375,7 +431,10 @@ TEME = [
           "Fluxul de impozit micro (698 = 4418) și avertizarea clientului care se apropie "
           "de prag. Trecerea se face din trimestrul depășirii, deci un prag greșit "
           "înseamnă o declarație greșită, nu doar o estimare.",
-          "Am folosit 100.000 EUR și 1% ca în notițe, marcate ❓."),
+          "Am folosit 100.000 EUR și 1% ca în notițe, marcate ❓.",
+          raspuns="Prag **100.000 EUR** venituri totale, din 2026 (era 250.000 în 2025 și 500.000 până în 2024). Cotă unică **1%** — cota de 3% pentru firmele fără salariat a fost **eliminată** de la 1 ianuarie 2026. Echivalentul în lei se determină la cursul de la închiderea exercițiului financiar anterior.",
+          temei="Cod fiscal, Titlul IV — Impozitul pe veniturile microîntreprinderilor.",
+          verificat="21.08.2026"),
     ]),
 
     ("Decontul de TVA și fișa de rol", [
@@ -463,3 +522,25 @@ def documentul(intrebare):
 def toate():
     """[(temă, întrebare)] — plate, în ordinea din fișier."""
     return [(tema, q) for tema, qs in TEME for q in qs]
+
+
+def deschise():
+    """Ce se trimite formatorului: fără răspuns verificat."""
+    return [(t, q) for t, q in toate() if not q["raspuns"]]
+
+
+def verificate():
+    """Ce am rezolvat singur, cu temei — formatorul confirmă sau infirmă."""
+    return [(t, q) for t, q in toate() if q["raspuns"]]
+
+
+def decizii():
+    """Alegeri de cabinet. Rămân deschise, dar nu pentru că n-am căutat."""
+    return [(t, q) for t, q in toate() if q["decizie"] and not q["raspuns"]]
+
+
+# Fără temei nu există răspuns — verificat la import, ca titlurile repetate din
+# `date/repartizare.py`. O regulă care se verifică singură nu se poate uita.
+_fara_temei = [q["sursa"] for _, q in toate() if q["raspuns"] and not q["temei"]]
+if _fara_temei:
+    raise SystemExit(f"date/intrebari.py: răspuns fără temei legal — {_fara_temei}")

@@ -50,9 +50,23 @@ def _antet():
 
 
 def _prioritare():
+    """Cele trei de pus primele — dintre CELE DESCHISE.
+
+    O întrebare care între timp și-a găsit răspuns n-are ce căuta în „dacă aveți timp
+    doar pentru trei”: ar consuma exact timpul pe care lista îl economisește. Dacă
+    lista declarată se golește, se completează cu primele deschise rămase.
+    """
     linii = ["---", "", "## Dacă aveți timp doar pentru trei", ""]
-    for cheie, motiv in PRIORITARE:
-        q = _gaseste(cheie)
+    alese = [_gaseste(cheie) for cheie, _ in PRIORITARE]
+    motive = {id(q): m for q, (_, m) in zip(alese, PRIORITARE)}
+    alese = [q for q in alese if not q["raspuns"]]
+    for _, q in I.toate():
+        if len(alese) >= 3:
+            break
+        if not q["raspuns"] and not q["decizie"] and q not in alese:
+            alese.append(q)
+    for q in alese[:3]:
+        motiv = motive.get(id(q), q["conteaza"].split(".")[0] + ".")
         linii += [f"- **{q['intrebare']}**  ", f"  {motiv}", ""]
     return linii
 
@@ -65,29 +79,72 @@ def _gaseste(fragment):
     raise SystemExit(f"Întrebare prioritară negăsită: {fragment!r}")
 
 
+def _bloc(nr, q, cu_raspuns):
+    out = [f"### {nr}. {q['intrebare']}", ""]
+    if cu_raspuns:
+        out += [f"**Răspuns.** {q['raspuns']}", "",
+                f"**Temei.** {q['temei']}", "",
+                f"<sub>verificat pe surse publice la {q['verificat']} — "
+                f"confirmă sau corectează</sub>", ""]
+    out += [f"**Context.** {q['context']}", "",
+            f"**De ce contează.** {q['conteaza']}", ""]
+    if q["presupunere"] and not cu_raspuns:
+        out += [f"**Ce am presupus.** {q['presupunere']}", ""]
+    return out + [f"<sub>sursa: {q['sursa']}</sub>", "", ""]
+
+
 def construieste():
+    """Lista se rupe în trei, pentru că cele trei feluri cer lucruri diferite.
+
+    Ce e deschis se trimite. Ce e verificat se confirmă sau se corectează — nu mai e
+    o întrebare, e o afirmație cu temei, care are nevoie de un ochi în plus. Ce e
+    decizie de cabinet nu are răspuns în lege: nicio sursă publică nu spune ce standard
+    folosim noi, deci nu se caută, se alege.
+    """
+    deschise = [(t, q) for t, q in I.toate() if not q["raspuns"] and not q["decizie"]]
+    decizii = I.decizii()
+    verificate = I.verificate()
+
     linii = _antet() + _prioritare() + ["---", ""]
     nr = 0
-    for tema, qs in I.TEME:
-        linii += [f"## {tema}", ""]
-        for q in qs:
-            nr += 1
-            linii += [
-                f"### {nr}. {q['intrebare']}",
-                "",
-                f"**Context.** {q['context']}",
-                "",
-                f"**De ce contează.** {q['conteaza']}",
-                "",
-            ]
-            if q["presupunere"]:
-                linii += [f"**Ce am presupus.** {q['presupunere']}", ""]
-            linii += [f"<sub>sursa: {q['sursa']}</sub>", "", ""]
+
+    def sectiune(titlu, intro, lot, cu_raspuns=False):
+        nonlocal nr
+        out = [f"# {titlu}", "", intro, "", "---", ""]
+        for tema in dict.fromkeys(t for t, _ in lot):
+            out += [f"## {tema}", ""]
+            for t, q in lot:
+                if t != tema:
+                    continue
+                nr += 1
+                out += _bloc(nr, q, cu_raspuns)
+        return out
+
+    linii += sectiune(
+        "Partea I — rămase deschise",
+        f"**{len(deschise)} întrebări de drept sau de practică la care n-am găsit "
+        "răspuns cu certitudine.** Astea sunt cele care se trimit.", deschise)
+
+    linii += sectiune(
+        "Partea a II-a — decizii de cabinet",
+        f"**{len(decizii)} întrebări la care nicio sursă publică nu poate răspunde.** "
+        "Nu sunt lucruri neaflate, sunt alegeri: ce cont folosim, ce prag intern "
+        "stabilim, ce documente cerem clientului. Răspunsul e o decizie, nu o "
+        "informație.", decizii)
+
+    linii += sectiune(
+        "Partea a III-a — răspunsuri verificate, de confirmat",
+        f"**{len(verificate)} întrebări la care am găsit răspuns pe surse publice**, "
+        "fiecare cu actul normativ citat și data verificării. Nu înlocuiesc "
+        "confirmarea — o scurtează: în loc de „care e regula?”, întrebarea devine "
+        "„am citit bine?”.", verificate, cu_raspuns=True)
+
     linii += [
         "---",
         "",
-        f"*{I.TOTAL} de întrebări, {len(I.TEME)} teme. Generat din notițele revizuite; "
-        "fiecare întrebare se poate urmări înapoi la training și la numărul ei original.*",
+        f"*{I.TOTAL} de întrebări în total: {len(deschise)} deschise, "
+        f"{len(decizii)} decizii de cabinet, {len(verificate)} cu răspuns verificat. "
+        "Fiecare se poate urmări înapoi la training și la numărul ei original.*",
         "",
     ]
     return "\n".join(linii)
@@ -99,7 +156,8 @@ def main():
         with open(cale, "w", encoding="utf-8") as f:
             f.write(text)
     print(f"scris: {os.path.relpath(IESIRE, RADACINA)} + .html  "
-          f"({I.TOTAL} întrebări, {len(I.TEME)} teme)")
+          f"({len(I.deschise())} deschise, {len(I.verificate())} verificate, "
+          f"{len(I.TEME)} teme)")
 
 
 

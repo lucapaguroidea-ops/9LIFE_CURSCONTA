@@ -22,7 +22,7 @@ greșit, nota contabilă e greșită, iar eroarea se vede abia la control.
 ### 1.1 Salariul minim și norma parțială
 
 
-Salariul minim brut pe economie este **4.325 lei** ❓. Verificarea care se face lunar,
+✅ Salariul minim brut pe economie este **4.325 lei**, de la **1 iulie 2026** (anterior 4.050 lei) — HG 146/2026. Tot de atunci și până la 31.12.2026, suma neimpozabilă lunară scade de la 300 la **200 lei**. Verificarea care se face lunar,
 și obligatoriu la fiecare modificare a minimului: fiecare salariat trebuie să fie plătit
 cel puțin la nivelul lui, **proporțional cu norma**.
 
@@ -185,8 +185,7 @@ Exemplu, indemnizație totală 1.000 lei, din care 250 lei suportați de angajat
 Contul **4382** „Alte creanțe sociale” este o **creanță**: banii urmează să vină de la
 FNUASS. Contul **6458** este cheltuiala proprie.
 
-❓ Tratamentul exact al reținerilor din indemnizația de concediu medical — ce contribuții
-se datorează și pe ce parte — nu era în notițe și nu îl afirm aici.
+✅ **Reținerile din indemnizație.** Se rețin **CAS 25%** și **impozit 10%**. **CASS 10% se datorează începând cu veniturile lunii august 2026** (Legea 170/2026) — până atunci nu se datora; fac excepție indemnizațiile pentru accidente de muncă și boli profesionale. **CAM 2,25% NU se datorează** pe partea suportată din FNUASS (art. 220^5 Cod fiscal): angajatorul datorează CAM doar pe zilele pe care le suportă el. Baza de calcul e media veniturilor brute din ultimele 6 luni, plafonată la 12 salarii minime brute pe lună. *(art. 139 alin. (1) lit. o) și art. 144 Cod fiscal; OUG 158/2005 — verificat 21.08.2026)*
 
 ---
 
@@ -205,8 +204,7 @@ reține din salariul angajatului și plătește terțului.
 Limita reținerii este de o treime din **salariul net** — 33,33% din 29.250 = 9.749,03.
 Se calculează din net, nu din brut, pentru că banii merg la executor, nu la stat.
 
-❓ Limita de o treime se aplică datoriilor obișnuite; pentru obligații de întreținere
-legea prevede o limită mai mare. Procentul aplicabil pe caz concret — de confirmat.
+✅ **Sunt trei reguli, nu una** (art. 729 Cod procedură civilă): **1/2** din venitul net pentru obligații de întreținere sau alocații pentru copii · **1/3** pentru orice alte datorii · la mai multe popriri pe aceeași sumă, reținerea totală nu poate depăși **1/2**, indiferent de natura creanțelor. Iar dacă venitul e sub salariul minim net, se poate urmări doar partea care depășește **jumătate din salariul minim net** — prag de protecție pe care notițele nu-l aveau deloc. *(verificat 21.08.2026)*
 
 **427 este contul cu cel mai mare risc penal din grupă.** Banii reținuți nu sunt ai
 firmei: sunt ai angajatului, opriți în beneficiul altcuiva. Dacă firma nu îi virează,
@@ -423,33 +421,6 @@ numele contului.
 
 ---
 
-## Anexa D — Rămase deschise
-
-Ce e încă provizoriu în documentul ăsta. Lista nu e scrisă aici: vine din `date/intrebari.py`, aceeași sursă cu foaia „Întrebări deschise” a workbook-ului și cu lista trimisibilă formatorului.
-
-**❓ Care este salariul minim brut pe economie în vigoare, și de la ce dată?**
-
-*Salarii — praguri și baze de calcul · training 21.08.2026, punctul 1*
-
-Notițele rețin 4.325 lei. Valoarea se schimbă prin hotărâre de guvern, uneori de mai multe ori pe an, iar verificarea normei parțiale se face contra ei.
-
-**Ce am presupus între timp:** Am folosit 4.325 lei ca în notițe, marcat ❓ peste tot unde apare.
-
-**❓ Ce contribuții se datorează pentru indemnizația de concediu medical, și pe ce parte se rețin?**
-
-*Salarii — praguri și baze de calcul · training 21.08.2026, punctul 3*
-
-Notițele acoperă împărțirea indemnizației între angajator și FNUASS (6458 / 4382 = 423), dar nu și reținerile din ea. Regulile diferă de cele ale salariului.
-
-**Ce am presupus între timp:** N-am afirmat nimic: documentul spune explicit că tratamentul reținerilor nu era în notițe.
-
-**❓ Care e limita de reținere prin poprire pentru obligațiile de întreținere, față de treimea aplicabilă datoriilor obișnuite?**
-
-*Salarii — praguri și baze de calcul · training 21.08.2026, punctul 4*
-
-Notițele rețin 33,33% din salariul net. Codul de procedură civilă prevede o limită mai mare pentru pensii de întreținere, și reguli de cumul când există mai multe popriri.
-
-**Ce am presupus între timp:** Am folosit treimea, marcând limita specială ca deschisă.
 
 
 ---
@@ -457,6 +428,37 @@ Notițele rețin 33,33% din salariul net. Codul de procedură civilă prevede o 
 ## Anexa E — Baza legală citată
 
 Extrasă automat din textul documentului: sunt listate actele și articolele care apar efectiv citate mai sus. Contextul fiecărei citări e în secțiunea unde apare.
+
+
+---
+
+## Anexa G — Răspunsuri verificate pe surse publice
+
+Întrebări care erau deschise și la care am găsit răspuns în lege. Fiecare poartă actul normativ pe care se sprijină și data la care a fost confruntat cu sursele. **De confirmat cu formatorul** — nu pentru că răspunsul ar fi nesigur, ci pentru că practica poate adăuga ceva ce textul nu spune.
+
+**✅ Care este salariul minim brut pe economie în vigoare, și de la ce dată?**
+
+**4.325 lei** brut, de la **1 iulie 2026** (anterior 4.050 lei). Minimul se aplică proporțional cu norma: 2.162,50 lei la jumătate de normă, 1.081,25 la un sfert. Tot de la 1 iulie 2026 și până la 31.12.2026, suma neimpozabilă scade de la 300 la 200 lei/lună.
+
+*Temei:* HG 146/2026 (salariul minim). Suma neimpozabilă — Cod fiscal, cu aplicare 1.07–31.12.2026.
+
+*Salarii — praguri și baze de calcul · training 21.08.2026, punctul 1 · verificat 21.08.2026*
+
+**✅ Ce contribuții se datorează pentru indemnizația de concediu medical, și pe ce parte se rețin?**
+
+Din indemnizație se rețin **CAS 25%** și **impozit 10%**. **CASS 10% se datorează începând cu veniturile lunii august 2026** — până atunci nu se datora. Fac excepție indemnizațiile pentru accidente de muncă și boli profesionale, care rămân scutite de CASS. **CAM 2,25% NU se datorează** pe partea suportată din FNUASS: angajatorul datorează CAM doar pe zilele pe care le suportă el. Baza de calcul e media veniturilor brute din ultimele 6 luni, plafonată la 12 salarii minime brute pe lună.
+
+*Temei:* CAS: Cod fiscal art. 139 alin. (1) lit. o) și art. 144. CASS: Legea 170/2026, aplicabilă veniturilor din august 2026. CAM: Cod fiscal art. 220^5. Baza: OUG 158/2005.
+
+*Salarii — praguri și baze de calcul · training 21.08.2026, punctul 3 · verificat 21.08.2026*
+
+**✅ Care e limita de reținere prin poprire pentru obligațiile de întreținere, față de treimea aplicabilă datoriilor obișnuite?**
+
+Sunt **trei** reguli, nu una. **1/2** din venitul net lunar pentru obligații de întreținere sau alocații pentru copii; **1/3** pentru orice alte datorii. Când există mai multe popriri pe aceeași sumă, reținerea totală nu poate depăși **1/2**, indiferent de natura creanțelor. Iar dacă venitul e sub salariul minim net pe economie, se poate urmări doar partea care depășește **jumătate din salariul minim net** — prag de protecție pe care notițele nu-l aveau deloc.
+
+*Temei:* Codul de procedură civilă, art. 729 — Limitele urmăririi veniturilor bănești.
+
+*Salarii — praguri și baze de calcul · training 21.08.2026, punctul 4 · verificat 21.08.2026*
 
 
 ---

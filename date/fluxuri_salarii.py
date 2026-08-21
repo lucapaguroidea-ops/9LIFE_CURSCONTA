@@ -16,54 +16,78 @@ from .comun import flux, pas
 
 FLUXURI_SALARII = [
 
-    flux("F-64", "Concediu medical (împărțire angajator / FNUASS)",
+    flux("F-64", "Concediu medical (împărțire angajator / FNUASS + rețineri)",
          didactic=True,
          roluri="Cheltuială proprie + Creanță socială + Datorie față de salariat",
-         conturi="6458, 4382, 423, 5121",
-         note="Zilele suportate de angajator depind de codul de boală; baza e media "
-              "ultimelor 6 luni, nu ultimul salariu. ❓ Reținerile din indemnizație — "
-              "de confirmat cu formatorul.",
+         conturi="6458, 4382, 423, 4315, 4316, 444, 646, 436, 5121",
+         note="Prima zi de concediu medical pentru boală obișnuită NU se plătește, "
+              "februarie 2026 – decembrie 2027; regula nu se aplică urgențelor, "
+              "accidentelor de muncă, sarcinii și carantinei. Baza: media veniturilor "
+              "brute din ultimele 6 luni, plafonată la 12 salarii minime brute.",
          pasi=[
              pas(1, "Certificat de concediu medical + stat de plată",
-                 "Indemnizație totală 1.000 lei. Primele zile le suportă angajatorul — "
-                 "aici 250 lei — restul vine de la casa de sănătate (FNUASS).",
+                 "Indemnizație brută 1.000 lei. Primele zile le suportă angajatorul — "
+                 "aici 250 lei — restul vine de la FNUASS. Numărul de zile suportate de "
+                 "angajator depinde de codul de indemnizație.",
                  dr=[("6458", 250), ("4382", 750)], cr=[("423", 1000)],
                  rol="Cheltuială proprie + Creanță de recuperat + Datorie"),
-             pas(2, "Extras de cont — plata indemnizației",
-                 "Salariatul primește indemnizația, indiferent cine o suportă în final.",
-                 dr=[("423", 1000)], cr=[("5121", 1000)],
+             pas(2, "Stat de plată — reținerile din indemnizație",
+                 "Din indemnizația brută se rețin CAS 25% = 250 și, ÎNCEPÂND CU "
+                 "VENITURILE LUNII AUGUST 2026, CASS 10% = 100 (Legea 170/2026 — până "
+                 "atunci CASS nu se datora). Impozitul de 10% se aplică pe ce rămâne: "
+                 "10% × 650 = 65.",
+                 dr=[("423", 415)],
+                 cr=[("4315", 250), ("4316", 100), ("444", 65)],
+                 rol="Contribuții și impozit reținute din indemnizație"),
+             pas(3, "Nota de contribuții — partea angajatorului",
+                 "ROLUL ÎMPĂRȚIRII se vede aici. CAM se calculează DOAR pe partea "
+                 "suportată de angajator: 2,25% × 250 = 5,63. Pe cele 750 de lei care "
+                 "vin din FNUASS nu se datorează CAM — nu sunt cheltuiala firmei, sunt "
+                 "bani avansați în numele casei.",
+                 dr=[("646", 5.63)], cr=[("436", 5.63)],
+                 rol="CAM doar pe partea proprie, nu pe indemnizația din fond",
+                 revelator=True),
+             pas(4, "Extras de cont — plata către salariat",
+                 "Netul: 1.000 − 250 − 100 − 65 = 585 lei.",
+                 dr=[("423", 585)], cr=[("5121", 585)],
                  rol="Stingerea datoriei față de salariat"),
-             pas(3, "Extras de cont — decontarea cu FNUASS",
-                 "Casa de sănătate rambursează partea ei. ROLUL LUI 4382 se vede aici: "
-                 "e o creanță, nu o cheltuială. Firma a avansat banii casei, nu i-a "
-                 "cheltuit — de aceea partea de 750 nu apare niciodată pe cheltuieli.",
+             pas(5, "Extras de cont — decontarea cu FNUASS",
+                 "Casa rambursează partea ei. 4382 e o CREANȚĂ: firma a avansat banii "
+                 "casei, nu i-a cheltuit — de aceea cele 750 nu apar niciodată pe "
+                 "cheltuieli, oricât ar trece prin datoria față de salariat.",
                  dr=[("5121", 750)], cr=[("4382", 750)],
-                 rol="Încasarea creanței sociale", revelator=True),
-             pas(4, "Verificare",
+                 rol="Încasarea creanței sociale"),
+             pas(6, "Verificare",
                  "Sold 423 = 0 și sold 4382 = 0 pe indemnizația decontată. Pe rezultat "
-                 "au rămas doar cele 250 suportate efectiv. Un sold 4382 care nu se "
-                 "stinge înseamnă indemnizații nerecuperate de la casă — bani ai firmei "
-                 "blocați, adesea din dosare incomplete.",
+                 "au rămas 250 (cheltuiala proprie) + 5,63 (CAM aferent ei). Un sold "
+                 "4382 care nu se stinge înseamnă indemnizații nerecuperate de la casă "
+                 "— bani ai firmei blocați, adesea din dosare incomplete.",
                  rol="Stare terminală: 423 și 4382 fără sold; pe cheltuieli doar partea "
-                     "angajatorului"),
+                     "angajatorului și CAM-ul aferent ei"),
          ],
-         principiu="Indemnizația de concediu medical trece integral prin datoria față de "
-                   "salariat, dar numai o parte din ea e cheltuiala firmei. Restul e o "
-                   "creanță față de FNUASS: bani avansați, nu bani cheltuiți. Cine "
+         principiu="Indemnizația trece integral prin datoria față de salariat, dar numai "
+                   "o parte din ea e cheltuiala firmei — iar linia de demarcație "
+                   "decide și baza CAM. Reținerile se fac pe TOATĂ indemnizația, "
+                   "indiferent cine o suportă; CAM-ul, doar pe partea proprie. Cine "
                    "trece toată indemnizația pe cheltuieli își subestimează rezultatul "
-                   "și pierde din vedere ce are de recuperat."),
+                   "și plătește CAM pe banii altcuiva."),
 
     flux("F-65", "Poprire pe salariu (rețineri datorate terților)",
          didactic=True,
          roluri="Intermediar / clarificare — firma reține pentru altcineva",
          conturi="421, 427, 5121",
-         note="Limita e o treime din NET pentru datorii obișnuite. ❓ Limita pentru "
-              "obligații de întreținere — de confirmat.",
+         note="Art. 729 Cod procedură civilă: 1/2 pentru obligații de întreținere sau "
+              "alocații pentru copii · 1/3 pentru alte datorii · la mai multe popriri, "
+              "maximum 1/2 în total. Sub salariul minim net se urmărește doar partea "
+              "care depășește jumătate din el.",
          pasi=[
              pas(1, "Adresă de înființare a popririi + stat de plată",
-                 "Din netul de 29.250 se reține treimea legală: 9.749,03 lei. "
-                 "Se calculează din NET, nu din brut — banii merg la executor, nu la "
-                 "stat, deci după ce statul și-a luat partea.",
+                 "Datorie obișnuită, deci limita e o treime: 33,33% din 29.250 = "
+                 "9.749,03 lei. Se calculează din NET, nu din brut — banii merg la "
+                 "executor, nu la stat, deci după ce statul și-a luat partea. La "
+                 "obligații de întreținere limita ar fi fost 1/2, iar la mai multe "
+                 "popriri pe aceeași sumă tot 1/2 e maximul, indiferent de natura "
+                 "creanțelor.",
                  dr=[("421", 9749.03)], cr=[("427", 9749.03)],
                  rol="Datoria față de salariat scade, apare o datorie față de terț"),
              pas(2, "Extras de cont — plata către executor",
@@ -75,7 +99,10 @@ FLUXURI_SALARII = [
              pas(3, "Verificare",
                  "Sold 427 = 0 după virare. Un sold creditor care persistă înseamnă bani "
                  "opriți din salariul cuiva și nevirați — firma nu are ce explica: "
-                 "trebuia fie să îi vireze, fie să nu îi rețină.",
+                 "trebuia fie să îi vireze, fie să nu îi rețină. Verificare în amonte: "
+                 "dacă venitul salariatului e sub salariul minim NET, se poate urmări "
+                 "doar partea care depășește jumătate din el — reținerea peste acest "
+                 "prag îl păgubește pe salariat, nu pe debitor.",
                  rol="Stare terminală: sold 427 = 0; rulaj creditor = sold creditor pe "
                      "luna curentă"),
          ],

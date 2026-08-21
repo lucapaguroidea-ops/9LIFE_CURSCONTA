@@ -560,10 +560,10 @@ Ambele trebuie îndeplinite:
 1. **cel puțin un salariat cu normă întreagă** — sau un contract de mandat, obligatoriu
    cel puțin la nivelul salariului minim. Contractul de mandat se încheie prin avocat și
    **nu se înregistrează în REGES**;
-2. **venituri totale sub 100.000 EUR** ❓, calculate la cursul de la închiderea
-   exercițiului anterior. Pragul e din Codul fiscal, nu din OMFP.
+2. **venituri totale sub 100.000 EUR** ✅, calculate la cursul de la închiderea
+   exercițiului anterior. Pragul e din Codul fiscal, nu din OMFP, și a coborât în trepte: 500.000 până în 2024, 250.000 în 2025, **100.000 din 2026**.
 
-Cota este 1% ❓.
+✅ Cota este **1%**, unică: cota de 3% pentru firmele fără salariat a fost **eliminată de la 1 ianuarie 2026**.
 
 ```
 698  = 4418                 (impozitul pe venitul microîntreprinderii)
@@ -645,6 +645,37 @@ Extrasă automat din textul documentului: sunt listate actele și articolele car
 **Articole citate**
 
 art. 6, art. 7, art. 16 alin. (5), art. 25 alin. (3), art. 26 alin. (1), art. 28 alin. (14), art. 42, art. 67 alin. (2), art. 67 alin. (5), art. 69, art. 183, art. 210 alin. (3), art. 298
+
+
+---
+
+## Anexa G — Răspunsuri verificate pe surse publice
+
+Întrebări care erau deschise și la care am găsit răspuns în lege. Fiecare poartă actul normativ pe care se sprijină și data la care a fost confruntat cu sursele. **De confirmat cu formatorul** — nu pentru că răspunsul ar fi nesigur, ci pentru că practica poate adăuga ceva ce textul nu spune.
+
+**✅ Care este actul normativ care a permanentizat termenul de 25 iunie pentru D101?**
+
+Termenul de 25 iunie **nu a fost de la început permanent**: a venit prin **OUG 153/2020**, care l-a prelungit pentru perioada 2021–2025, odată cu bonificațiile pentru capital propriu pozitiv și în creștere. 2025 a fost ultimul an de aplicare a acelui mecanism, iar termenul uniform de 25 iunie a anului următor se aplică de la 2026. ❓ Actul care l-a permanentizat nu l-am putut identifica cu certitudine — surse îl descriu ca măsură adoptată în 2026, dar fără să-l numească. De confirmat înainte de a-l cita unui client.
+
+*Temei:* OUG 153/2020, art. I — aplicabil 2021–2025. Permanentizarea: act neidentificat.
+
+*Repartizarea rezultatului și rezultatul reportat · training 07.08.2026, întrebarea 6 · verificat 21.08.2026*
+
+**✅ TVA nedeductibilă de pe rata de capital la leasingul financiar: se capitalizează în valoarea mijlocului fix (2133) sau se trece pe cheltuială (635 / 6588)?**
+
+**Cheltuială, nu capitalizare.** La leasing, tratamentul diferă de achiziția directă: la cumpărarea internă a unui autoturism, TVA-ul nedeductibil de 50% intră în costul de achiziție, dar la leasing **nu** intră în valoarea mijlocului fix. Se înregistrează pe cheltuială, defalcat după componenta ratei: `635 = 4426` pentru 50% din TVA aferent ratei de capital, `666 = 4426` pentru cel aferent dobânzii, `628 = 4426` pentru cel aferent comisionului.
+
+*Temei:* Cod fiscal art. 298 (limitarea la 50%) coroborat cu OMFP 1802/2014 privind costul de achiziție; tratamentul distinct al leasingului față de achiziția directă.
+
+*Leasing și vehicule · training 07.08.2026, întrebarea 3 · verificat 21.08.2026*
+
+**✅ Care sunt pragul de venituri și cota de impozit pentru microîntreprinderi, în vigoare la data operațiunii?**
+
+Prag **100.000 EUR** venituri totale, din 2026 (era 250.000 în 2025 și 500.000 până în 2024). Cotă unică **1%** — cota de 3% pentru firmele fără salariat a fost **eliminată** de la 1 ianuarie 2026. Echivalentul în lei se determină la cursul de la închiderea exercițiului financiar anterior.
+
+*Temei:* Cod fiscal, Titlul IV — Impozitul pe veniturile microîntreprinderilor.
+
+*Microîntreprindere — prag și cotă · training 21.08.2026, punctul 2 · verificat 21.08.2026*
 
 
 ---

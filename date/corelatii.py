@@ -213,7 +213,11 @@ CORELATII = [
         id="C-27",
         formula="2,25% × rulaj creditor 421 (brut realizat)\n= rulaj creditor 436",
         unde="Balanța lunii: rulajele 421 și 436",
-        legitim="Categorii cu cotă redusă sau scutire, dacă societatea are astfel de\n"
+        legitim="Luni cu concedii medicale: CAM NU se datorează pe partea suportată\n"
+                "  din FNUASS (art. 220^5 Cod fiscal), deci rulajul 436 e mai mic decât\n"
+                "  2,25% din rulajul 421. Diferența trebuie să fie exact 2,25% ×\n"
+                "  indemnizația din fond\n"
+                "Categorii cu cotă redusă sau scutire, dacă societatea are astfel de\n"
                 "  salariați — verificat pe D112, nu presupus",
         suspect="Bază de calcul incompletă: sporuri sau prime omise din fondul de salarii\n"
                 "Cotă aplicată greșit\n"
