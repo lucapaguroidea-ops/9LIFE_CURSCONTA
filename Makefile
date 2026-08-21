@@ -4,7 +4,7 @@ PY ?= python3
 
 # `parcurs` citește workbook-urile construite (harta de referință e chiar tabelul de
 # structură din Legendă), deci vine după `build`.
-tot: build documente intrebari parcurs pachet verifica
+tot: build documente intrebari parcurs pachet readme verifica
 
 build: plan module
 
@@ -26,6 +26,10 @@ parcurs:
 # `pachet` adună livrabilele de uz; are nevoie de .html-uri, deci după `documente`
 pachet:
 	$(PY) build/pachet.py
+
+# `readme` reface blocul de cifre; citește workbook-urile, deci după `build`
+readme:
+	$(PY) build/readme.py
 
 verifica:
 	$(PY) build/verifica.py

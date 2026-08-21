@@ -240,6 +240,9 @@ Un flux e util și fără modul: fluxul explică, modulul execută. Dacă adaugi
 | **17** | disciplina de închidere e ancorată în ambele sensuri: fiecare cont urmărit periodic e starea terminală a unui flux, iar fiecare cont cu rol în flux care se golește are o cadență — sau un motiv declarat pentru care nu are |
 | **18** | monografiile scrise în proză se echilibrează, iar aritmetica afirmată în text („5% din 250 = 12,50”) chiar se verifică — acolo unde poarta 1 nu ajunge |
 | **19** | marcajul ❓ e aplicat, nu doar definit: un document pe care o întrebare deschisă îl privește îl poartă, iar un document care îl poartă are întrebări deschise |
+| **20** | fiecare cont folosit într-un pas de flux există în „Plan de conturi” |
+| **21** | fiecare flux declarat de un modul în `CATALOG['fluxuri']` există cu adevărat |
+| **22** | blocul de cifre din README e exact cel pe care generatorul l-ar produce |
 
 Motivul fiecărei porți e scris în `build/verifica.py`, lângă ea. Când o poartă pică, acolo scrie de ce există.
 
@@ -261,11 +264,12 @@ cunoscute**: acolo trebuie să te uiți tu.
 | Suprascrierea unei celule care avea deja conținut | Conținut vechi pierdut tăcut. S-a întâmplat: 12 linii pierdute la o etapă anterioară. | poarta 9 |
 | Catalogul rămâne în urma monografiilor | Indexul nu mai cunoaște toate fluxurile. S-a întâmplat: 13 din 44 lipseau — de atunci catalogul se derivă din monografii. | poarta 10 |
 | Foaie nouă absentă din tabelul de structură al Legendei | Legenda nu-și mai cunoaște propriul fișier. | poarta 14 |
-| Cont folosit într-un flux dar absent din `Plan de conturi` | Navigarea cont → flux se rupe pentru contul acela. La trainingurile 2 și 3 erau 27 de conturi în situația asta; poarta 16 a mai scos la iveală șapte (6583, 7583, 6814, 7814, 5121, 2813, 4091), dar din întâmplare — pentru că sursa le enumera într-un tabel. Nimic nu face comparația sistematic. | **nimic — verifică tu** |
+| Cont folosit într-un flux dar absent din `Plan de conturi` | Navigarea cont → flux se rupe pentru contul acela. La trainingurile 2 și 3 erau 27 de conturi în situația asta. | poarta 20 |
 | Document cu întrebări deschise, dar fără niciun marcaj ❓ | Cititorul vede un document care pare tranșat, deși sistemul știe că nu e. Documentul de control chiar era așa: trei întrebări deschise, zero marcaje. | poarta 19 |
 | Marcaj ❓ într-un document fără întrebări deschise | Marcajul promite o anexă care nu-l explică. Mai rău decât lipsa lui. | poarta 19 |
 | Marcaj ❓ folosit cu alt înțeles decât cel din legendă | Poarta 19 verifică prezența marcajului pe document, nu înțelesul fiecărei apariții. Două ❓ marcau răspunsuri, nu întrebări — găsite prin citire și corectate ca reformulări declarate, nu de o poartă. | **nimic — verifică tu** |
-| Modul nou care nu declară fluxul în `CATALOG['fluxuri']` | Ancora modul nu se mai generează — nici pe flux, nici pe corelație, nici pe matrice. Legătura se pierde tăcut, pentru că derivarea nu are de unde ști. | **nimic — verifică tu** |
+| Modul care declară în `CATALOG['fluxuri']` un flux inexistent | Ancora nu se mai generează — nici pe flux, nici pe corelație, nici pe matrice. Nu produce eroare, produce o legătură lipsă. | poarta 21 |
+| Cifră scrisă de mână într-un fișier pe care nu-l reface build-ul | README-ul chiar rămăsese în urmă: 23 corelații când erau 29, și 58 de conturi Tier A când 87 sunt clasificate iar 39 detaliate. | poarta 22 |
 | Subsecțiune dintr-o sursă împărțită, rămasă nerepartizată | O sursă poate alimenta mai multe documente. Riscul nu e „nimeni n-a luat-o”, ci „am crezut că a luat-o celălalt”: fiecare document trece poarta 12 separat, în timp ce materialul cade între ele. | poarta 16 |
 | Material repartizat undeva, dar ajuns în altă parte | Verificarea pe reuniunea destinațiilor ar spune doar că textul există pe undeva — întrebarea greșită. Poarta compară cu destinația declarată. | poarta 16 |
 | Cont urmărit periodic fără flux care să-i demonstreze starea | Checklistul de închidere ar cere ceva ce sistemul nu arată nicăieri. Invers, un cont cu rol în flux care se golește și nu e urmărit dispare din disciplina lunară. | poarta 17 |
@@ -323,14 +327,10 @@ Lucruri care ar merita mecanizate și care azi cad în sarcina cititorului. Enum
 
 Poarta 18 citește acum monografiile din documente și verifică articolele compuse plus aritmetica afirmată în text. Articolul simplu îi scapă însă prin construcție: scris pe o linie, are o singură sumă, deci nu există nimic contra cui să fie verificat. Confruntarea cu totalurile afirmate în proză s-a dovedit prea nesigură — trei fals pozitive din șase la măsurare, pentru că „sold creditor de 4.000” e un rezultat net, nu o sumă de debite.
 
-**Conturile folosite în fluxuri dar absente din plan**
-
-Comparație mecanică între simbolurile din pașii fluxurilor și coloana Simbol a planului. Le-am găsit manual; o poartă le-ar găsi de fiecare dată.
-
 **Înțelesul fiecărui marcaj ❓ în parte**
 
 Poarta 19 leagă marcajele de întrebări la nivel de DOCUMENT: unul cu întrebări deschise îl poartă, unul care îl poartă are întrebări. Ce anume marchează fiecare apariție rămâne necontrolat — iar două chiar marcau răspunsuri, nu întrebări. Legarea unu-la-unu ar cere o ancoră de text pe fiecare întrebare, rescrisă la fiecare editare de frază: o hartă de mână care diverge, exact ce evită sistemul.
 
 ---
 
-*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 19 porți, 16 module, 68 fluxuri la data generării.*
+*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 22 porți, 16 module, 68 fluxuri la data generării.*

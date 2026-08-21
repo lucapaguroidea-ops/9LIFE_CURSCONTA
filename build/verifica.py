@@ -32,6 +32,9 @@ descris multă vreme nouă porți, cu poarta 9 în forma ei veche.
      („5% din 250 = 12,50”) chiar se verifică — acolo unde poarta 1 nu ajunge
  19. marcajul ❓ e aplicat, nu doar definit: un document pe care o întrebare deschisă
      îl privește îl poartă, iar un document care îl poartă are întrebări deschise
+ 20. fiecare cont folosit într-un pas de flux există în „Plan de conturi”
+ 21. fiecare flux declarat de un modul în `CATALOG['fluxuri']` există cu adevărat
+ 22. blocul de cifre din README e exact cel pe care generatorul l-ar produce
 
 Rulare:  python build/verifica.py
 """
@@ -55,6 +58,7 @@ from build import documente as bdoc  # noqa: E402
 from build import repartizare as brep  # noqa: E402
 from build import inchideri as binch  # noqa: E402
 from build import monografii as bmono  # noqa: E402
+from build import readme as breadme  # noqa: E402
 from date import documente as ddoc  # noqa: E402
 
 RADACINA = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -789,6 +793,103 @@ def poarta_marcaje():
                  f"întrebări deschise, {sum(poarta_marcaj.values())} marcaje în corp")
 
 
+# ------------------------------------------------------------------- porțile 20-22
+def poarta_conturi_in_plan(wb):
+    """Poarta 20 — contul folosit într-un pas de flux există în plan.
+
+    Un cont care apare într-o monografie dar lipsește din „Plan de conturi” rupe
+    navigarea cont → flux exact pentru contul acela: pleci din plan și nu-l găsești.
+
+    Două capcane, ambele întâlnite la măsurare:
+
+    - foaia are ANTETE REPETATE pe secțiuni, iar coloanele diferă între catalogul de
+      fluxuri și monografii. Prima măsurătoare a citit coloana „Sumă” drept „Cont C” și
+      a raportat 49 de conturi lipsă, toate false — erau sumele;
+    - analiticele se reduc la sintetic: `371.AM.21` se verifică drept `371`, pentru că
+      planul ține sinteticul, nu fiecare analitic imaginabil.
+    """
+    plan = set()
+    for r in wb["Plan de conturi"].iter_rows(min_col=1, max_col=1, values_only=True):
+        v = str(r[0] or "").strip()
+        if re.fullmatch(r"\d{3,4}([./]\d+)?", v):
+            plan.add(v)
+
+    re_cont = re.compile(r"\b(\d{3,4})(?:\.[A-Za-z0-9ĂÂÎȘȚăâîșț]+)*\b")
+    folosite, cap = {}, None
+    for r in wb["Fluxuri"].iter_rows(min_col=1, max_col=8, values_only=True):
+        v = [str(x or "") for x in r]
+        if v[0].strip() == "Flux ID":
+            cap = v
+            continue
+        fid = v[0].strip()
+        if not re.fullmatch(r"F-\d{3}", fid) or not cap or "Cont D" not in cap:
+            continue
+        for col in (cap.index("Cont D"), cap.index("Cont C")):
+            for m in re_cont.finditer(v[col]):
+                folosite.setdefault(m.group(1), set()).add(fid)
+
+    lipsa = {c: f for c, f in folosite.items() if c not in plan and c[:3] not in plan}
+    for cont, fl in sorted(lipsa.items()):
+        cade("20", f"contul {cont} apare în {', '.join(sorted(fl)[:4])} dar lipsește "
+                   f"din „Plan de conturi”")
+    if not lipsa:
+        ok("20", f"toate cele {len(folosite)} conturi din pașii fluxurilor există în plan")
+
+
+def poarta_module_declara(wb_plan):
+    """Poarta 21 — fluxurile declarate de module există cu adevărat.
+
+    Poarta 6 verifică sensul invers: fiecare token `MOD_*` referit există în catalog.
+    Golul e aici: `build/ancore.py` derivă TOATE ancorele din `CATALOG['fluxuri']`, deci
+    un ID greșit acolo nu produce o eroare — produce o ancoră lipsă, tăcut.
+    """
+    fluxuri = set()
+    for r in wb_plan["Fluxuri"].iter_rows(min_col=1, max_col=1, values_only=True):
+        m = re.match(r"^(F-\d{3})\b", str(r[0] or "").strip())
+        if m:
+            fluxuri.add(m.group(1))
+
+    rele = []
+    for m in dmod.MODULE:
+        for fid in re.findall(r"F-\d{2,3}", m.CATALOG.get("fluxuri", "")):
+            nou = O.HARTA.get(fid, fid)
+            if nou not in fluxuri:
+                rele.append((m.COD, fid, nou))
+    for cod, vechi, nou in rele:
+        cade("21", f"{cod} declară fluxul {vechi}"
+                   f"{'' if nou == vechi else f' (→ {nou})'}, care nu există")
+    if not rele:
+        ok("21", f"toate fluxurile declarate de cele {len(dmod.MODULE)} module există")
+
+
+def poarta_readme():
+    """Poarta 22 — blocul de cifre din README e cel pe care generatorul l-ar produce.
+
+    `make tot` îl reface oricum. Poarta prinde cazul în care README-ul a fost comis fără
+    build — adică exact cazul în care a și rămas în urmă: afirma 23 corelații când erau
+    29, și 58 de conturi Tier A când 87 sunt clasificate și 39 detaliate.
+    """
+    with open(breadme.CALE, encoding="utf-8") as f:
+        text = f.read()
+    if breadme.START not in text or breadme.STOP not in text:
+        cade("22", "README.md nu are marcajele blocului generat")
+        return
+    i, j = text.index(breadme.START), text.index(breadme.STOP) + len(breadme.STOP)
+    pe_disc, asteptat = text[i:j], breadme.bloc()
+    if pe_disc == asteptat:
+        ok("22", "blocul de cifre din README e la zi")
+        return
+    a = [l for l in pe_disc.split("\n") if l.strip()]
+    b = [l for l in asteptat.split("\n") if l.strip()]
+    for x, y in zip(a, b):
+        if x != y:
+            cade("22", f"README, blocul de cifre: „{x[:70]}” ar trebui să fie „{y[:70]}”")
+            break
+    else:
+        cade("22", f"README, blocul de cifre: {len(a)} rânduri pe disc vs. {len(b)} "
+                   f"generate — rulează `make readme`")
+
+
 def main():
     if not os.path.exists(PLAN):
         raise SystemExit("Rulează întâi `make build` — lipsește dist/Plan_de_conturi_...xlsx")
@@ -808,6 +909,9 @@ def main():
     poarta_inchideri(wb)
     poarta_monografii()
     poarta_marcaje()
+    poarta_conturi_in_plan(wb)
+    poarta_module_declara(wb)
+    poarta_readme()
 
     print("\n".join(note))
     if esecuri:

@@ -175,10 +175,8 @@ CONVERGENTA = [
      "Legenda nu-și mai cunoaște propriul fișier.", 14),
 
     ("Cont folosit într-un flux dar absent din `Plan de conturi`",
-     "Navigarea cont → flux se rupe pentru contul acela. La trainingurile 2 și 3 erau "
-     "27 de conturi în situația asta; poarta 16 a mai scos la iveală șapte (6583, "
-     "7583, 6814, 7814, 5121, 2813, 4091), dar din întâmplare — pentru că sursa le "
-     "enumera într-un tabel. Nimic nu face comparația sistematic.", None),
+     "Navigarea cont → flux se rupe pentru contul acela. La trainingurile 2 și 3 "
+     "erau 27 de conturi în situația asta.", 20),
 
     ("Document cu întrebări deschise, dar fără niciun marcaj ❓",
      "Cititorul vede un document care pare tranșat, deși sistemul știe că nu e. "
@@ -192,9 +190,13 @@ CONVERGENTA = [
      "apariții. Două ❓ marcau răspunsuri, nu întrebări — găsite prin citire și "
      "corectate ca reformulări declarate, nu de o poartă.", None),
 
-    ("Modul nou care nu declară fluxul în `CATALOG['fluxuri']`",
-     "Ancora modul nu se mai generează — nici pe flux, nici pe corelație, nici pe "
-     "matrice. Legătura se pierde tăcut, pentru că derivarea nu are de unde ști.", None),
+    ("Modul care declară în `CATALOG['fluxuri']` un flux inexistent",
+     "Ancora nu se mai generează — nici pe flux, nici pe corelație, nici pe matrice. "
+     "Nu produce eroare, produce o legătură lipsă.", 21),
+
+    ("Cifră scrisă de mână într-un fișier pe care nu-l reface build-ul",
+     "README-ul chiar rămăsese în urmă: 23 corelații când erau 29, și 58 de conturi "
+     "Tier A când 87 sunt clasificate iar 39 detaliate.", 22),
 
     ("Subsecțiune dintr-o sursă împărțită, rămasă nerepartizată",
      "O sursă poate alimenta mai multe documente. Riscul nu e „nimeni n-a luat-o”, ci "
@@ -282,10 +284,6 @@ GOLURI = [
      "verificat. Confruntarea cu totalurile afirmate în proză s-a dovedit prea "
      "nesigură — trei fals pozitive din șase la măsurare, pentru că „sold creditor de "
      "4.000” e un rezultat net, nu o sumă de debite."),
-
-    ("Conturile folosite în fluxuri dar absente din plan",
-     "Comparație mecanică între simbolurile din pașii fluxurilor și coloana Simbol a "
-     "planului. Le-am găsit manual; o poartă le-ar găsi de fiecare dată."),
 
     ("Înțelesul fiecărui marcaj ❓ în parte",
      "Poarta 19 leagă marcajele de întrebări la nivel de DOCUMENT: unul cu întrebări "

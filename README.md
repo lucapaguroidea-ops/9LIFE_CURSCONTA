@@ -43,7 +43,8 @@ de *ce o rupe suspect*.
 surse/         notițele fiecărui training (.txt brut + .md revizuit + .docx) și,
                pentru training 4, cele două xlsx originale — folosite ca bază („seed”)
 date/          CONȚINUTUL NOU, separat de cod (structuri Python, ușor de citit în diff)
-  fluxuri.py       F-45…F-62 (capitaluri + imobilizări)
+  fluxuri_capitaluri.py · fluxuri_imobilizari.py · fluxuri_control.py ·
+  fluxuri_salarii.py   monografiile, pe teritoriu contabil
   corelatii.py     C-13…C-22
   analitice.py     conturi clasa 1 și 2 promovate la Tier A
   plan.py          conturi noi / actualizări de coloană „Flux (pas)”
@@ -66,70 +67,48 @@ dist/          xlsx-urile, documentele și listele generate (commit-ate)
 ```sh
 make build      # generează dist/*.xlsx din surse/ + date/
 make verifica   # rulează porțile de calitate pe dist/*.xlsx
-make tot        # build + documente + întrebări + parcurs + verifica
+make tot        # build + documente + întrebări + parcurs + pachet + readme + verifica
 ```
 
 Necesită `openpyxl`, `formulas`, `numpy` (`pip install openpyxl formulas numpy`).
 
 ## Ce conține sistemul acum
 
-Sistemul e ordonat după **planul de conturi**, nu după ordinea în care au fost adăugate
-trainingurile. ID-ul unui flux codifică clasa contului principal, deci un flux adăugat
-peste un an primește următorul număr liber din clasa lui și stă fizic la locul lui.
+<!-- generat: cifre — nu edita între marcaje, se suprascrie la `make tot` -->
+
+**68 fluxuri** cu monografie pas cu pas, ordonate după planul de conturi. ID-ul codifică clasa contului principal, deci un flux adăugat peste un an primește următorul număr liber din clasa lui și stă fizic la locul lui.
 
 | Bloc | Conținut | Fluxuri |
 |---|---|---|
 | `F-1xx` | capitaluri, provizioane, împrumuturi, închiderea exercițiului, leasing | 8 |
-| `F-2xx` | imobilizări: intrare pe grupe → în curs → regie proprie → subvenții → ieșiri → control analitic↔sintetic | 14 |
+| `F-2xx` | imobilizări: intrare pe grupe → în curs → regie proprie → subvenții → ieșiri → control analitic ↔ sintetic | 14 |
 | `F-3xx` | stocuri și producție: aprovizionare, obiecte de inventar, producție, mărfuri, import | 20 |
 | `F-4xx` | terți, TVA, salarii: TVA la încasare, taxare inversă, închidere lunară, 408/418, salarii, medicale, popriri, impozit micro | 22 |
 | `F-5xx` | trezorerie | 2 |
 | `F-8xx` | conturi în afara bilanțului | 2 |
 
-**16 module declarative**, fiecare cu `Declarații → Reguli → Jurnale → NotaExport` și
-celule `Check`. Niciunul nu mai e „exemplu extern”: `MOD_LEASING_FIN`, `MOD_SALARII` și
+**16 module declarative** în 68 foi, fiecare cu `Declarații → Reguli → Jurnale → NotaExport` și celule `Check`.
+
+| Ce | Cât |
+|---|---|
+| Conturi în planul clasificat pe rol | 257 |
+| Conturi clasificate Tier A | 87 |
+| Dintre ele, cu rând detaliat de analitice | 39 |
+| Corelații de control | 29 |
+| Rânduri de cadență în „Închideri periodice” | 24 |
+| Foi în workbook-ul de referință | 12 |
+| Documente de studiu | 5 |
+| Întrebări: deschise / verificate / decizii de cabinet | 20 / 13 / 9 |
+| Porți de calitate | 22 |
+
+*Cifrele de mai sus se citesc din workbook-urile construite la fiecare `make tot`. Dacă nu corespund, blocul e vechi — nu fișierele.*
+
+<!-- /generat -->
+
+Niciunul nu mai e „exemplu extern”: `MOD_LEASING_FIN`, `MOD_SALARII` și
 `MOD_DECONT` au devenit interne, cu cifrele verificate contra fișierelor reale, iar
 `MOD_CREDIT_VALUTA`, `MOD_PROVIZION` și `MOD_SUBVENTIE` acoperă fluxurile care aveau
 monografie dar nu și motor executabil.
-
-23 corelații de control, 58 de conturi Tier A cu analitice justificate.
-
-### Foaia `Închideri periodice`
-
-Disciplina de închidere — ce cont, la ce cadență, cu ce stare terminală. Nu e o listă
-scrisă de mână: aserțiunile există deja în monografii, în pașii de verificare (`F-405`:
-„Sold 4426 = 0; sold 4427 = 0”, `F-501`: „Sold 581 = 0”), iar foaia le **citește** de
-acolo. De mână rămâne doar cadența — un flux spune ce stare atinge contul, nu cât de des
-te uiți la el.
-
-Poarta 17 leagă cele două sensuri. Sensul invers a găsit imediat două conturi de tranzit
-pe care notițele le omiseseră: `327` și `223`, ambele „în curs de aprovizionare”, ambele
-cu „sold = 0” declarat în monografie. Conturile fără flux în spate apar în foaie **fără
-ancoră**, cu motivul scris — un checklist care afirmă ceva ce sistemul nu demonstrează e
-mai rău decât unul incomplet.
-
-## Pachetul de lucru
-
-`make pachet` adună livrabilele de uz în `dist/pachet/` și `dist/pachet-9life.zip`,
-ordonate după **momentul în care ajungi la ele**, nu alfabetic și nu după data
-trainingului:
-
-| | |
-|---|---|
-| **Lucrezi** | `1` planul de conturi (referința) · `2` modulele declarative (execuția) |
-| **Studiezi** | `3` capitaluri · `4` imobilizări · `5` stocuri și TVA · `6` control și numerar — în ordinea planului de conturi |
-| **Întrebi** | `7` întrebările pentru formator |
-| **Adaugi** | `8` parcursul unui set nou de notițe |
-
-`0-CITESTE-INTAI.html` e prima pagină: pentru fiecare item spune **ce e**, **când îl
-deschizi** și **la ce să NU-l folosești**. Ultimul rând e cel mai util — patru documente
-de contabilitate arată interschimbabile, iar cine caută o regulă o caută în primul care-i
-cade sub mână.
-
-Indexul e generat: numerele din el se citesc din workbook-uri și din listele produse, iar
-legăturile se verifică **în arhivă**, nu în folder — un index care navighează local dar
-trimite în gol după dezarhivare ar fi mai rău decât niciunul. Judecata (ordinea, „când”,
-„la ce nu”) stă în `date/pachet.py`; restul se deduce.
 
 ## Ce mai produce repo-ul, pe lângă workbook-uri
 
@@ -209,9 +188,7 @@ nu doar marcaje — valoarea rămasă neamortizată e deductibilă la vânzarea 
 (limitarea reală privește doar autoturismele M1), iar TVA-ul nedeductibil de la leasing
 nu se capitalizează, cum se capitalizează la achiziția directă.
 
-## Porțile de calitate
-
-`make verifica` rulează 19 porți; toate trebuie verzi:
+`make verifica` rulează 22 de porți; toate trebuie verzi:
 
 1. ΣDebit = ΣCredit pe fiecare pas de flux cu sume
 2. fiecare flux se închide cu stare terminală declarată și un „Principiul:”
@@ -238,6 +215,9 @@ nu se capitalizează, cum se capitalizează la achiziția directă.
     („5% din 250 = 12,50”) chiar se verifică — acolo unde poarta 1 nu ajunge
 19. marcajul ❓ e **aplicat**, nu doar definit: un document pe care o întrebare deschisă
     îl privește îl poartă, iar un document care îl poartă are întrebări deschise
+20. fiecare cont folosit într-un pas de flux există în `Plan de conturi`
+21. fiecare flux declarat de un modul în `CATALOG['fluxuri']` există cu adevărat
+22. blocul de cifre din README e **exact** cel pe care generatorul l-ar produce
 
 ### Poarta de repartizare
 
