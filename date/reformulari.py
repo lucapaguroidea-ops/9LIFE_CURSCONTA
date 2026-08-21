@@ -312,6 +312,15 @@ INLOCUIRI = [
         devine="Închidere cls.6/7 pe 121; impozit; report 117",
     ),
     dict(
+        text="Declarații_TVA_INC, Jurnale_TVA_INC, NotaExport_TVA_INC",
+        motiv="Singurul modul unde `Index module` numea corect foile — dar tot îi lipsea "
+              "Reguli_, ca la toate celelalte. Se generează acum din cod. Sufixul "
+              "foilor (TVA_INC, nu TVA_INCASARE) se declară în CATALOG['sufix']: "
+              "redenumirea foilor ca să se potrivească cu codul ar rupe orice referință "
+              "existentă, pentru un simplu câștig de simetrie.",
+        devine="Declarații_TVA_INC, Reguli_TVA_INC, Jurnale_TVA_INC, NotaExport_TVA_INC",
+    ),
+    dict(
         text="Ilustrativ (sume descriptive)",
         motiv="Marcajul PARȚIAL de la 681/781 era corect când sumele erau descriptive. "
               "Acum 681 și 781 au cifre reale în F-50 (plafonul de 1.500 lei/lună) și "

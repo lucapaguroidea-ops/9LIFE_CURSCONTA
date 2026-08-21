@@ -24,3 +24,15 @@ def formula_activ(cod, activ="ACTIV", inactiv="INACTIV"):
     return (f'=IF(INDEX(CatalogModule!$A$1:$A${r},'
             f'MATCH("{cod}",CatalogModule!$B$1:$B${r},0))="DA",'
             f'"{activ}","{inactiv}")')
+
+
+def sufix(m):
+    """Sufixul foilor unui modul.
+
+    De obicei e codul fără prefix (MOD_SALARII → `Declarații_SALARII`), dar nu mereu:
+    MOD_TVA_INCASARE are foi `…_TVA_INC`, MOD_VANZ_AMANUNT are `…_AMANUNT`. Sufixul se
+    declară atunci în `CATALOG['sufix']`. Alternativa — redenumirea foilor ca să se
+    potrivească cu codul — ar rupe orice referință existentă la ele, pentru un câștig de
+    simetrie; portarea nu are voie să facă asta.
+    """
+    return m.CATALOG.get("sufix") or m.COD.removeprefix("MOD_")

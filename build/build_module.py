@@ -26,6 +26,7 @@ from build import stil  # noqa: E402
 from build.foaie import Foaie  # noqa: E402
 from build.recalc import recalc  # noqa: E402
 from date.module import MODULE, PARAMETRI_NOI  # noqa: E402
+from date.module.comun import sufix as sufix_modul  # noqa: E402
 from date import ordine as O  # noqa: E402
 from build import renumeroteaza  # noqa: E402
 
@@ -153,7 +154,7 @@ def scoate_foile_de_samanta(wb, module):
     veche, poarta 9 o numește. Portarea se verifică singură — nu pe încrederea că am
     transcris tot, ci pe mulțimea de text.
     """
-    coduri = {m.COD.removeprefix("MOD_") for m in module}
+    coduri = {sufix_modul(m) for m in module}
     scoase = [s for s in list(wb.sheetnames)
               if any(s.startswith(p) and s.removeprefix(p) in coduri for p in PREFIXE)]
     for s in scoase:

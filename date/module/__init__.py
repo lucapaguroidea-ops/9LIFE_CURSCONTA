@@ -7,8 +7,8 @@ Fiecare modul expune `COD`, `CATALOG` (rândul din CatalogModule) și
 from .comun import CATALOG_RANDURI, formula_activ  # noqa: F401
 from . import (aprov_tranzit, capitaluri, credit_valuta, decont, iesire_mf,
                imobilizari,
-               inchidere_ex, inchidere_lunara, inchidere_tva, intermediar,
-               leasing_fin,
+               inchidere_ex, tva_incasare, inchidere_lunara, inchidere_tva, intermediar,
+               leasing_fin, tva_incasare,
                provizion, salarii, subventie)
 
 # Ordinea = ordinea claselor de conturi, ca in restul sistemului: capitaluri, apoi
@@ -16,7 +16,7 @@ from . import (aprov_tranzit, capitaluri, credit_valuta, decont, iesire_mf,
 MODULE = [capitaluri, credit_valuta, provizion, leasing_fin,
           imobilizari, subventie, iesire_mf,
           salarii, decont, intermediar, inchidere_tva, aprov_tranzit,
-          inchidere_ex,
+          inchidere_ex, tva_incasare,
           # verificarea vine la urmă: se sprijină pe fluxurile de mai sus
           inchidere_lunara]
 
