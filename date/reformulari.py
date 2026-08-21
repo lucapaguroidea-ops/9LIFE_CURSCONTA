@@ -321,6 +321,13 @@ INLOCUIRI = [
         devine="Declarații_TVA_INC, Reguli_TVA_INC, Jurnale_TVA_INC, NotaExport_TVA_INC",
     ),
     dict(
+        text="Declarații_NEUT, Jurnale_NEUT, NotaExport_NEUT",
+        motiv="Foile se numesc Declarații_NEUTRALIZARE ș.a.m.d., iar Reguli_ lipsea din "
+              "listă. Se generează acum din codul modulului.",
+        devine="Declarații_NEUTRALIZARE, Reguli_NEUTRALIZARE, Jurnale_NEUTRALIZARE, "
+               "NotaExport_NEUTRALIZARE",
+    ),
+    dict(
         text="Ilustrativ (sume descriptive)",
         motiv="Marcajul PARȚIAL de la 681/781 era corect când sumele erau descriptive. "
               "Acum 681 și 781 au cifre reale în F-50 (plafonul de 1.500 lei/lună) și "
