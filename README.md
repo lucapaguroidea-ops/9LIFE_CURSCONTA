@@ -87,7 +87,7 @@ Necesită `openpyxl`, `formulas`, `numpy` (`pip install openpyxl formulas numpy`
 | `F-5xx` | trezorerie | 2 |
 | `F-8xx` | conturi în afara bilanțului | 2 |
 
-**16 module declarative** în 68 foi, fiecare cu `Declarații → Reguli → Jurnale → NotaExport` și celule `Check`.
+**17 module declarative** în 72 foi, fiecare cu `Declarații → Reguli → Jurnale → NotaExport` și celule `Check`.
 
 | Ce | Cât |
 |---|---|
@@ -109,6 +109,13 @@ Niciunul nu mai e „exemplu extern”: `MOD_LEASING_FIN`, `MOD_SALARII` și
 `MOD_DECONT` au devenit interne, cu cifrele verificate contra fișierelor reale, iar
 `MOD_CREDIT_VALUTA`, `MOD_PROVIZION` și `MOD_SUBVENTIE` acoperă fluxurile care aveau
 monografie dar nu și motor executabil.
+
+**`MOD_INCHIDERE_LUNARA`** e singurul care nu produce înregistrări: produce un verdict.
+Foaia `Închideri periodice` spune *ce* se verifică lunar; modulul *face* verificarea pe
+balanța clientului, pe cele 12 corelații ale familiei `C-24`…`C-29` plus conturile de
+tranzit care trebuie golite. Tiparul se adaptează în consecință — `Jurnale_` devine
+`Verificări_`, iar `NotaExport_` devine `Abateri_`: doar ce nu s-a potrivit, cu
+diferența și cu ce se face.
 
 ## Ce mai produce repo-ul, pe lângă workbook-uri
 

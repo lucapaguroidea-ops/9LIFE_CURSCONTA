@@ -216,6 +216,7 @@ Un flux e util și fără modul: fluxul explică, modulul execută. Dacă adaugi
 | `MOD_IMOBILIZARI` | F-203, F-205, F-207, F-214 |
 | `MOD_SUBVENTIE` | F-210 |
 | `MOD_IESIRE_MF` | F-211, F-212 |
+| `MOD_INCHIDERE_LUNARA` | F-422, F-413 |
 
 ### Ce verifică fiecare poartă *[generat]*
 
@@ -333,4 +334,4 @@ Poarta 19 leagă marcajele de întrebări la nivel de DOCUMENT: unul cu întreb�
 
 ---
 
-*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 22 porți, 16 module, 68 fluxuri la data generării.*
+*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 22 porți, 17 module, 68 fluxuri la data generării.*

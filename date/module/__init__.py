@@ -4,14 +4,17 @@ Fiecare modul expune `COD`, `CATALOG` (rândul din CatalogModule) și
 `construieste(F, P)`, unde F e fabrica de foi (build.foaie.Foaie legat de workbook)
 și P e dicționarul de referințe către parametrii globali.
 """
-from . import (capitaluri, credit_valuta, decont, iesire_mf, imobilizari, leasing_fin,
+from . import (capitaluri, credit_valuta, decont, iesire_mf, imobilizari,
+               inchidere_lunara, leasing_fin,
                provizion, salarii, subventie)
 
 # Ordinea = ordinea claselor de conturi, ca in restul sistemului: capitaluri, apoi
 # imobilizari, apoi terti. Foile din workbook apar in aceeasi ordine.
 MODULE = [capitaluri, credit_valuta, provizion, leasing_fin,
           imobilizari, subventie, iesire_mf,
-          salarii, decont]
+          salarii, decont,
+          # verificarea vine la urmă: se sprijină pe fluxurile de mai sus
+          inchidere_lunara]
 
 # Parametri globali adăugați în foaia `Parametri`: cheie, etichetă, valoare, notă.
 # Cheia se folosește în module ca P["cheie"] și se rezolvă la o referință de celulă.
