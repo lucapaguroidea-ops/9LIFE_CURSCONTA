@@ -277,6 +277,41 @@ INLOCUIRI = [
         devine="F-02",
     ),
     dict(
+        text='=IF(CatalogModule!A13="DA","ACTIV","INACTIV")',
+        motiv="Același rând absolut, la MOD_INCHIDERE_EX. Vezi motivul de la A14. Cu "
+              "asta se termină cele patru; nicio foaie de modul nu mai citește catalogul "
+              "pe rând, deci reordonarea lui devine sigură.",
+        devine="vezi date/module/comun.py:formula_activ",
+    ),
+    dict(
+        text="Declarații_EX, Jurnale_EX, NotaExport_EX",
+        motiv="Foile se numesc Declarații_INCHIDERE_EX ș.a.m.d., iar Reguli_ lipsea din "
+              "listă. Se generează acum din codul modulului.",
+        devine="Declarații_INCHIDERE_EX, Reguli_INCHIDERE_EX, Jurnale_INCHIDERE_EX, "
+               "NotaExport_INCHIDERE_EX",
+    ),
+    dict(
+        text="B1 Închidere 6xx; B2 Închidere 7xx; B3 Impozit; B4 Repartizare 129; "
+             "B5 Report 117",
+        motiv="Catalogul anunța cinci blocuri; jurnalele au patru. Blocul de repartizare "
+              "nu există și n-a existat niciodată: câmpul „Repartizare la rezerve / "
+              "dividende” se scade din rezultatul reportat, dar nicio înregistrare nu "
+              "mută suma nicăieri. Cu valoarea implicită 0 nu se vede; pusă pe 5.000, "
+              "nota ar ieși cu 5.000 de lei care dispar. Lista spune acum ce emite "
+              "modulul. Cine repartizează efectiv are MOD_CAPITALURI, construit pentru "
+              "asta (rezervă legală, dividende, 1171).",
+        devine="B1 Închidere 6xx; B2 Închidere 7xx; B3 Impozit; B4 Report 117",
+    ),
+    dict(
+        text="Închidere cls.6/7 pe 121; 711 cu PN",
+        motiv="A patra și ultima divergență Index ↔ Catalog. `Index module` dădea "
+              "MOD_INCHIDERE_EX drept acoperind și F-314 („711 cu PN”), `CatalogModule` "
+              "dădea doar F-104. Citit din foile reale, catalogul avea dreptate: modulul "
+              "închide totaluri de clasă 6 și 7 și nu atinge 711 nicăieri. Producția "
+              "neterminată la granița de exercițiu e MOD_NEUTRALIZARE.",
+        devine="Închidere cls.6/7 pe 121; impozit; report 117",
+    ),
+    dict(
         text="Ilustrativ (sume descriptive)",
         motiv="Marcajul PARȚIAL de la 681/781 era corect când sumele erau descriptive. "
               "Acum 681 și 781 au cifre reale în F-50 (plafonul de 1.500 lei/lună) și "
