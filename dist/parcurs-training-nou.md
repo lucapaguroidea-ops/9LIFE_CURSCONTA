@@ -201,7 +201,7 @@ Un flux e util și fără modul: fluxul explică, modulul execută. Dacă adaugi
 | Modul | Fluxuri acoperite |
 |---|---|
 | `MOD_INCHIDERE_TVA` | F-405 |
-| `MOD_APROV_TRANZIT` | F-302 (+408 simetric) |
+| `MOD_APROV_TRANZIT` | F-302 |
 | `MOD_SALARII` | F-413 |
 | `MOD_DECONT` | F-502 |
 | `MOD_LEASING_FIN` | F-108 |

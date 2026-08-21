@@ -243,6 +243,40 @@ INLOCUIRI = [
         devine="F-23, F-33, F-34",
     ),
     dict(
+        text='=IF(CatalogModule!A6="DA","ACTIV — jurnalele se generează",'
+             '"INACTIV — jurnalele rămân goale")',
+        motiv="Același rând absolut, la MOD_INCHIDERE_TVA. Vezi motivul de la A14.",
+        devine="vezi date/module/comun.py:formula_activ",
+    ),
+    dict(
+        text="Declarații_TVA, Jurnale_TVA, NotaExport_TVA",
+        motiv="Foile se numesc Declarații_INCHIDERE_TVA ș.a.m.d., iar Reguli_ lipsea "
+              "din listă. Se generează acum din codul modulului.",
+        devine="Declarații_INCHIDERE_TVA, Reguli_INCHIDERE_TVA, Jurnale_INCHIDERE_TVA, "
+               "NotaExport_INCHIDERE_TVA",
+    ),
+    dict(
+        text='=IF(CatalogModule!A7="DA","ACTIV","INACTIV")',
+        motiv="Același rând absolut, la MOD_APROV_TRANZIT. Vezi motivul de la A14.",
+        devine="vezi date/module/comun.py:formula_activ",
+    ),
+    dict(
+        text="Declarații_APROV, Jurnale_APROV, NotaExport_APROV",
+        motiv="Foile se numesc Declarații_APROV_TRANZIT ș.a.m.d., iar Reguli_ lipsea "
+              "din listă. Se generează acum din codul modulului.",
+        devine="Declarații_APROV_TRANZIT, Reguli_APROV_TRANZIT, Jurnale_APROV_TRANZIT, "
+               "NotaExport_APROV_TRANZIT",
+    ),
+    dict(
+        text="F-02 (+408 simetric)",
+        motiv="A doua divergență Index ↔ Catalog: `Index module` scria „F-302, F-304”, "
+              "`CatalogModule` scria „F-302 (+408 simetric)” — o paranteză în proză "
+              "într-un câmp pe care poarta 21 îl citește ca listă de ID-uri. Rămâne "
+              "F-302 curat; cazul simetric pe 408 e MOD_INTERMEDIAR și scrie asta în "
+              "Tabelul B al Regulilor, unde se și caută.",
+        devine="F-02",
+    ),
+    dict(
         text="Ilustrativ (sume descriptive)",
         motiv="Marcajul PARȚIAL de la 681/781 era corect când sumele erau descriptive. "
               "Acum 681 și 781 au cifre reale în F-50 (plafonul de 1.500 lei/lună) și "
