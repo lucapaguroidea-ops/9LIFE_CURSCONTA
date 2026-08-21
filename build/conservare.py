@@ -9,6 +9,11 @@ Ce NU e o pierdere:
   - renumerotarea fluxurilor (F-14 → F-316) — textul original e trecut prin harta
     de renumerotare înainte de căutare;
   - reformatarea spațiilor;
+  - restaurarea diacriticelor („Marfuri” → „Mărfuri”). Aceeași categorie cu
+    ghilimelele și cratimele de mai jos: forma se schimbă, conținutul nu. Fără
+    plierea asta ar trebui 649 de intrări în `date/reformulari.py`, care ar îneca
+    fișierul în care stau motivele reale. Concesia declarată: poarta nu mai
+    distinge două texte care diferă NUMAI prin diacritice;
   - fragmentele scurte (sub PRAG caractere): coduri de cont, sume, „DA”/„NU”, „—”.
     Acelea sunt acoperite de porțile de sume și de corelații.
 
@@ -22,12 +27,28 @@ import openpyxl
 #: Linii mai scurte de atât nu se verifică individual (coduri, sume, marcaje).
 PRAG = 12
 
+#: Diacriticele se pliază la baza lor înainte de comparație: „ă”→„a”, „ț”→„t”.
+#:
+#: E aceeași categorie cu ghilimelele și cratimele de mai jos — forma se schimbă,
+#: conținutul nu. Fără plierea asta, restaurarea diacriticelor pe cele două foi rămase
+#: în registrul vechi ar cere 279 de intrări în `date/reformulari.py`, care ar îneca
+#: fișierul în care stau motivele reale.
+#:
+#: Concesia, declarată: poarta nu mai distinge două texte care diferă NUMAI prin
+#: diacritice. E acceptabil pentru că harta din `date/diacritice.py` e explicită și
+#: verificată de poarta 26 — nu se ghicește nimic, deci n-are ce să se strecoare pe aici.
+_FARA_DIACRITICE = str.maketrans({
+    "ă": "a", "â": "a", "î": "i", "ș": "s", "ț": "t", "ş": "s", "ţ": "t",
+    "Ă": "A", "Â": "A", "Î": "I", "Ș": "S", "Ț": "T", "Ş": "S", "Ţ": "T",
+})
+
 
 def _normalizeaza(s):
-    """Spații uniforme, ghilimele uniforme — ca reformatarea să nu dea fals pozitiv."""
+    """Spații, ghilimele și diacritice uniforme — ca reformatarea să nu dea fals pozitiv."""
     s = str(s)
     s = s.replace(" ", " ").replace("„", '"').replace("”", '"')
     s = s.replace("’", "'").replace("‘", "'").replace("–", "-").replace("—", "-")
+    s = s.translate(_FARA_DIACRITICE)
     return re.sub(r"\s+", " ", s).strip()
 
 

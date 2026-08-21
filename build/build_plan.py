@@ -32,6 +32,7 @@ from date import module as dmodule  # noqa: E402
 from date.module.comun import foi as dfoi  # noqa: E402
 from build import ancore, foaie_intrebari, inchideri, istoric, renumeroteaza  # noqa: E402
 from build import cifre, reordoneaza, reordoneaza_foi  # noqa: E402
+from build import diacritice as bdiac  # noqa: E402
 from date.comun import ro  # noqa: E402
 
 RADACINA = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -459,6 +460,11 @@ def main():
     mutate_index = actualizeaza_index(wb, cifre.din_workbook(wb))
     orfane, dupl, schimbate, anc = ordoneaza_canonic(wb, mutate_extra=mutate_index)
 
+    # Diacriticele la FINAL: după renumerotare, ancore și reordonări, ca nicio etapă
+    # de mai sus să nu caute un text pe care tocmai l-am rescris.
+    dc, dw = bdiac.aplica(wb)
+    nemapate = bdiac.ramase(wb)
+
     os.makedirs(os.path.dirname(IESIRE), exist_ok=True)
     wb.save(IESIRE)
     recalc(IESIRE)
@@ -468,7 +474,10 @@ def main():
           f"mutate în Istoric\n"
           f"   ancore de modul: {anc['fluxuri']} fluxuri, {anc['corelatii']} corelații, "
           f"{anc['matrice']} rânduri de matrice\n"
-          f"   foaia Întrebări deschise + {anc['intrebari']} marcaje ❓")
+          f"   foaia Întrebări deschise + {anc['intrebari']} marcaje ❓\n"
+          f"   diacritice: {dw} cuvinte în {dc} celule; "
+          f"{len(nemapate)} cuvinte nemapate (niciunul nu cerea diacritice la ultima "
+          f"revizuire)")
 
 
 if __name__ == "__main__":

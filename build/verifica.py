@@ -38,6 +38,8 @@ descris multă vreme nouă porți, cu poarta 9 în forma ei veche.
  23. foile pe care catalogul le numește există, iar fiecare foaie de modul are exact
      o intrare de catalog — în ambele sensuri
  25. nicio foaie de modul nu mai vine din sămânță: fiecare are un generator în `date/`
+ 26. harta de diacritice e aplicată complet: niciun cuvânt din partea ei stângă nu mai
+     apare în foile pe care le acoperă, iar simbolurile de cont sunt neatinse
  24. nicio frază cu cifră din workbook-uri nu contrazice cifra reală („17 module
      declarative”, „68 fluxuri × pași”) — foaia Istoric e scutită, acolo cifrele
      vechi sunt chiar conținutul
@@ -66,6 +68,8 @@ from build import inchideri as binch  # noqa: E402
 from build import monografii as bmono  # noqa: E402
 from build import cifre as bcifre  # noqa: E402
 from date.module import comun as dmcomun  # noqa: E402
+from date import diacritice as ddiac  # noqa: E402
+from build import diacritice as bdiac  # noqa: E402
 from build import readme as breadme  # noqa: E402
 from date import documente as ddoc  # noqa: E402
 
@@ -1004,6 +1008,47 @@ def poarta_foi_de_modul(wb_plan):
                  f"din date/ — nicio foaie nu mai vine din sămânță")
 
 
+def poarta_diacritice(wb):
+    """Poarta 26 — harta de diacritice e aplicată complet.
+
+    Prinde harta aplicată pe jumătate: dacă un cuvânt din partea STÂNGĂ a hărții mai
+    apare în foile acoperite, ori aplicarea a fost sărită, ori o etapă de mai târziu a
+    rescris celula peste ea.
+
+    Verifică și partea care contează cel mai mult: niciun SIMBOL de cont n-a fost atins.
+    Cele două foi țin 257 de conturi, iar un simbol schimbat ar rupe tăcut navigarea
+    cont → flux și poarta 20.
+    """
+    gasite = []
+    for nume in ddiac.FOI:
+        ws = wb[nume]
+        col_simbol = {c.column for row in ws.iter_rows() for c in row
+                      if isinstance(c.value, str)
+                      and c.value.strip().lower() in ddiac.CAP_SIMBOL}
+        for row in ws.iter_rows():
+            for c in row:
+                if not isinstance(c.value, str) or c.column in col_simbol:
+                    continue
+                if bdiac.RE_CONT.match(c.value.strip()):
+                    continue
+                for w in bdiac._RE_CUVANT.findall(c.value):
+                    if w.lower() in ddiac.HARTA:
+                        gasite.append((nume, c.coordinate, w))
+
+    simboluri = sum(1 for nume in ddiac.FOI for row in wb[nume].iter_rows()
+                    for c in row[:1]
+                    if isinstance(c.value, str)
+                    and bdiac.RE_CONT.match(c.value.strip()))
+
+    if gasite:
+        for nume, coord, w in gasite[:5]:
+            cade("26", f"{nume}!{coord}: „{w}” e în hartă, dar n-a fost înlocuit")
+        return
+    ok("26", f"harta de diacritice ({len(ddiac.HARTA)} intrări, "
+             f"{len(ddiac.EXCEPTII)} omografe declarate) e aplicată complet pe cele "
+             f"{len(ddiac.FOI)} foi; {simboluri} simboluri de cont neatinse")
+
+
 def main():
     if not os.path.exists(PLAN):
         raise SystemExit("Rulează întâi `make build` — lipsește dist/Plan_de_conturi_...xlsx")
@@ -1028,6 +1073,7 @@ def main():
     poarta_readme()
     poarta_cifre_in_proza()
     poarta_foi_de_modul(wb)
+    poarta_diacritice(wb)
 
     print("\n".join(note))
     if esecuri:
