@@ -16,6 +16,7 @@ CATALOG = dict(
     variabile="Valoare de intrare, amortizare cumulată, preț de vânzare, tip ieșire, documente",
     porti="Test deductibilitate (valoare rămasă vs. venit); documentarea prețului",
     blocuri="B1 Descărcare amortizare; B2 Valoare rămasă; B3 Vânzare; B4 Piese recuperate",
+    activ="NU",
 )
 
 

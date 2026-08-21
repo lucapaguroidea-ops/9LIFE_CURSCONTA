@@ -24,6 +24,7 @@ CATALOG = dict(
     variabile="Sold valută, curs inițial, rată, dobândă, comision, curs plată, curs BNR",
     porti="Reevaluare lunară obligatorie; rata și dobânda se iau din scadențar, nu din extras",
     blocuri="B1 Rata + diferența la plată; B2 Dobânda; B3 Comisioane; B4 Reevaluarea soldului",
+    activ="NU",
 )
 
 

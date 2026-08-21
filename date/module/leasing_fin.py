@@ -28,6 +28,7 @@ CATALOG = dict(
     porti="MIXT 50% / EXCLUSIV 100% / EXCEPTAT; capitalizare vs. cheltuială pentru TVA nededusă",
     blocuri="B1 Avans; B2 TVA avans; B3 Intrare + 167; B4 Stingere avans; "
             "B5 Factura lunară; B6 Corecție TVA 50%; B7 Limitare 50% cheltuieli; B8 Amortizare",
+    activ="NU",
 )
 
 

@@ -35,6 +35,9 @@ descris multă vreme nouă porți, cu poarta 9 în forma ei veche.
  20. fiecare cont folosit într-un pas de flux există în „Plan de conturi”
  21. fiecare flux declarat de un modul în `CATALOG['fluxuri']` există cu adevărat
  22. blocul de cifre din README e exact cel pe care generatorul l-ar produce
+ 23. foile pe care catalogul le numește există, iar fiecare foaie de modul are exact
+     o intrare de catalog — în ambele sensuri
+ 25. nicio foaie de modul nu mai vine din sămânță: fiecare are un generator în `date/`
  24. nicio frază cu cifră din workbook-uri nu contrazice cifra reală („17 module
      declarative”, „68 fluxuri × pași”) — foaia Istoric e scutită, acolo cifrele
      vechi sunt chiar conținutul
@@ -62,6 +65,7 @@ from build import repartizare as brep  # noqa: E402
 from build import inchideri as binch  # noqa: E402
 from build import monografii as bmono  # noqa: E402
 from build import cifre as bcifre  # noqa: E402
+from date.module import comun as dmcomun  # noqa: E402
 from build import readme as breadme  # noqa: E402
 from date import documente as ddoc  # noqa: E402
 
@@ -916,6 +920,69 @@ def poarta_cifre_in_proza():
         cade("24", f"{fis} · {foaie}!{cel}: „{fraza}” — sunt {astept}, nu {gasit}")
 
 
+def poarta_foi_de_modul(wb_plan):
+    """Porțile 23 și 25 — foile de modul: numite corect, și toate generate.
+
+    **23** e împotriva clasei de erori „Declarații_TVA”: `Index module` numea, pentru
+    cele șapte module de sămânță, foi care nu existau (`Declarații_APROV`,
+    `Declarații_INTER`, `Declarații_EX`, `Declarații_NEUT`) și omitea `Reguli_`, pe care
+    modulele alea chiar le aveau — o instrucțiune de navigare greșită în foaia al cărei
+    singur rost e navigarea. Verificarea merge în ambele sensuri, pentru că doar una
+    n-ar fi de-ajuns: o foaie fără intrare de catalog e la fel de invizibilă ca o
+    intrare care trimite în gol.
+
+    **25** e poarta care ține câștigul portării. Fără ea, o sămânță viitoare ar putea
+    reintroduce foi întreținute de mână și nimeni n-ar observa până când n-ar diverge.
+    """
+    wbm = openpyxl.load_workbook(MODULE, read_only=True)
+    reale = set(wbm.sheetnames)
+    wbm.close()
+
+    # ---- 23a: fiecare foaie pe care catalogul o numește există cu adevărat
+    lipsa = []
+    for m in dmod.MODULE:
+        for nume in dmcomun.foi(m):
+            if nume not in reale:
+                lipsa.append((m.COD, nume))
+    # …iar coloana din `Index module` spune exact aceleași nume
+    coloana = {}
+    for r in wb_plan["Index module"].iter_rows(values_only=True):
+        cod = str(r[0] or "").strip()
+        if cod.startswith("MOD_") and len(r) > 4:
+            coloana[cod] = [x.strip() for x in str(r[4] or "").split(",") if x.strip()]
+    for m in dmod.MODULE:
+        scrise, asteptate = coloana.get(m.COD, []), dmcomun.foi(m)
+        if scrise != asteptate:
+            lipsa.append((m.COD, f"Index module scrie {scrise!r}, nu {asteptate!r}"))
+
+    # ---- 23b: fiecare foaie de modul are exact o intrare de catalog
+    declarate = {n for m in dmod.MODULE for n in dmcomun.foi(m)}
+    orfane = sorted(s for s in reale
+                    if any(s.startswith(p + "_") for p in
+                           dmcomun.PREFIXE_STANDARD + ("Verificări", "Abateri",
+                                                       "Registru"))
+                    and s not in declarate)
+
+    if lipsa or orfane:
+        for cod, ce in lipsa[:5]:
+            cade("23", f"{cod}: foaia declarată nu există — {ce}")
+        for s_ in orfane[:5]:
+            cade("23", f"foaia {s_!r} nu are nicio intrare de catalog")
+    else:
+        ok("23", f"toate cele {len(declarate)} foi de modul sunt numite corect în "
+                 f"catalog, în ambele sensuri")
+
+    # ---- 25: nicio foaie de modul nemaigenerată din `date/`
+    negenerate = sorted(reale - declarate - {"Instructiuni", "Parametri",
+                                             "CatalogModule"})
+    if negenerate:
+        for s_ in negenerate[:5]:
+            cade("25", f"foaia {s_!r} vine din sămânță — n-are generator în date/module")
+    else:
+        ok("25", f"toate cele {len(reale)} foi ale workbook-ului de module se generează "
+                 f"din date/ — nicio foaie nu mai vine din sămânță")
+
+
 def main():
     if not os.path.exists(PLAN):
         raise SystemExit("Rulează întâi `make build` — lipsește dist/Plan_de_conturi_...xlsx")
@@ -939,6 +1006,7 @@ def main():
     poarta_module_declara(wb)
     poarta_readme()
     poarta_cifre_in_proza()
+    poarta_foi_de_modul(wb)
 
     print("\n".join(note))
     if esecuri:

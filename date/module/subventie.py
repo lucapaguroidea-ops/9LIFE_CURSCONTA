@@ -21,6 +21,7 @@ CATALOG = dict(
     variabile="Valoare subvenție, valoare activ, durata de amortizare, luna curentă",
     porti="Cota de finanțare — eliberarea e proporțională dacă subvenția acoperă parțial",
     blocuri="B1 Încasarea subvenției; B2 Achiziția activului; B3 Amortizare + eliberare",
+    activ="NU",
 )
 
 

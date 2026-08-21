@@ -33,7 +33,7 @@ CATALOG = dict(
     blocuri="B1 Factură→4428.INC; B2 Plată/Încasare→4426/4427",
     ce_face="4428.INC: factură → plată/încasare → 4426/4427",
     cand="Când regimul e TVA la încasare",
-    activ="DA",
+    activ="NU",
 )
 
 #: pas, cont Dr, cont Cr, sumă (sursă), condiție, temei / observație

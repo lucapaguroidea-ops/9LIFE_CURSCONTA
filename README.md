@@ -99,7 +99,7 @@ Necesită `openpyxl`, `formulas`, `numpy` (`pip install openpyxl formulas numpy`
 | Foi în workbook-ul de referință | 12 |
 | Documente de studiu | 5 |
 | Întrebări: deschise / verificate / decizii de cabinet | 20 / 13 / 9 |
-| Porți de calitate | 23 |
+| Porți de calitate | 25 |
 
 *Cifrele de mai sus se citesc din workbook-urile construite la fiecare `make tot`. Dacă nu corespund, blocul e vechi — nu fișierele.*
 

@@ -25,6 +25,7 @@ CATALOG = dict(
     variabile="Tip provizion, sumă estimată, data constituirii, suma facturată efectiv",
     porti="Deductibilitatea depinde de TIP — art. 26 CF enumeră limitativ",
     blocuri="B1 Constituire; B2 Factura efectivă (independentă); B3 Reluare",
+    activ="NU",
 )
 
 #: cod, denumire, cont, deductibil, temei

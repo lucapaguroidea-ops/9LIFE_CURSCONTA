@@ -34,7 +34,7 @@ CATALOG = dict(
     blocuri="B1 Închidere 6xx; B2 Închidere 7xx; B3 Impozit; B4 Report 117",
     ce_face="Închidere cls.6/7 pe 121; impozit; report 117",
     cand="La 31.12",
-    activ="DA",
+    activ="NU",
 )
 
 #: pas, bloc, cont Dr, cont Cr, sumă, observație

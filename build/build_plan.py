@@ -28,7 +28,7 @@ from date import ANALITICE, CORELATII, FLUXURI, plan as dplan  # noqa: E402
 from date import reformulari as dreform  # noqa: E402
 from date import ordine as O  # noqa: E402
 from date import module as dmodule  # noqa: E402
-from date.module.comun import sufix as dsufix  # noqa: E402
+from date.module.comun import foi as dfoi  # noqa: E402
 from build import ancore, foaie_intrebari, inchideri, istoric, renumeroteaza  # noqa: E402
 from build import cifre, reordoneaza, reordoneaza_foi  # noqa: E402
 from date.comun import ro  # noqa: E402
@@ -338,8 +338,7 @@ def actualizeaza_index(wb):
     module = [
         (m.COD, m.CATALOG["fluxuri"],
          m.CATALOG.get("ce_face") or m.CATALOG["blocuri"], "IMPLEMENTAT",
-         ", ".join(f"{f}_{dsufix(m)}"
-                   for f in ("Declarații", "Reguli", "Jurnale", "NotaExport")),
+         ", ".join(dfoi(m)),
          m.CATALOG.get("cand") or m.CATALOG["tip"])
         for m in dmodule.MODULE
     ]

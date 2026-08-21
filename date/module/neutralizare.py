@@ -46,7 +46,7 @@ CATALOG = dict(
     blocuri="B1 Costuri→stoc; B2 Neutralizare; B3 Finalizare/livrare",
     ce_face="711/712/722: lanț complet producție / servicii / MF",
     cand="La producție / servicii în curs",
-    activ="DA",
+    activ="NU",
 )
 
 #: tip, cost →, stoc intermediar, venit neut., stoc final / livrare, descărcare

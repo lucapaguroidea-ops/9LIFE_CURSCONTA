@@ -35,6 +35,8 @@ CATALOG = dict(
     porti="Verifică solduri, nu documente — vezi Reguli, tabelul C",
     blocuri="V1 Obligații lunare (rulaj = sold); V2 Datoria față de salariați; "
             "V3 Conturi care trebuie golite; V4 Verificarea CAM pe cifre",
+    activ="DA",
+    prefixe=("Declarații", "Reguli", "Verificări", "Abateri"),
 )
 
 #: (cont, etichetă, rulaj debitor, rulaj creditor, sold) — luna-exemplu, iulie.

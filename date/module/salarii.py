@@ -32,6 +32,7 @@ CATALOG = dict(
     variabile="Brut, tichete, avans, pe angajat; cotele CAS/CASS/impozit/CAM",
     porti="Fără deducere personală și fără facilități sectoriale — vezi Reguli, tabelul C",
     blocuri="B1 Plata avansului; B2 Costurile lunii; B3 Plăți (net, taxe, CAM)",
+    activ="DA",
 )
 
 #: Angajații din fișierul-sursă, ca valori implicite verificabile.

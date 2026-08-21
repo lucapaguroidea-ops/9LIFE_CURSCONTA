@@ -25,7 +25,7 @@ CATALOG = dict(
     blocuri="B1 Factură→32x; B2 Recepție 30x=32x",
     ce_face="32x: factură înainte de marfă / NIR înainte de factură",
     cand="La aprovizionări incomplete",
-    activ="DA",
+    activ="NU",
 )
 
 #: pas, moment, cont Dr, cont Cr, sumă, temei / observație

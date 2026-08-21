@@ -18,6 +18,7 @@ CATALOG = dict(
     variabile="Valoare, regim TVA, cod clasificare, durată, dată PIF, taxe vamale, transport",
     porti="Prag 5.000 lei (MF vs. obiect de inventar); tranzit 223/224 dacă nu e recepționat",
     blocuri="B1 Intrare; B2 TVA pe regim; B3 Costuri capitalizate; B4 Amortizare lunară",
+    activ="NU",
 )
 
 REGIMURI = "INTERN / TAXARE_INVERSA / IMPORT"

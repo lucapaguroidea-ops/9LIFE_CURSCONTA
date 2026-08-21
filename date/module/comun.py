@@ -36,3 +36,23 @@ def sufix(m):
     simetrie; portarea nu are voie să facă asta.
     """
     return m.CATALOG.get("sufix") or m.COD.removeprefix("MOD_")
+
+
+#: Tiparul obișnuit: patru foi, în ordinea în care se folosesc.
+PREFIXE_STANDARD = ("Declarații", "Reguli", "Jurnale", "NotaExport")
+
+
+def foi(m):
+    """Numele foilor pe care modulul le construiește EFECTIV.
+
+    Nu toate modulele au cele patru foi standard. MOD_INCHIDERE_LUNARA produce un
+    verdict, nu o înregistrare, deci are `Verificări_` și `Abateri_` în locul lui
+    `Jurnale_` și `NotaExport_`; MOD_DECONT are în plus un `Registru_`. Cine deviază
+    își declară prefixele în `CATALOG['prefixe']`.
+
+    Coloana „Foile din modul” din `Index module` se generează de aici. Înainte lista era
+    presupusă — cele patru prefixe standard, pentru toată lumea — deci pentru
+    MOD_INCHIDERE_LUNARA trimitea la două foi care nu există. Aceeași clasă de greșeală
+    ca „Declarații_TVA” din sămânță, doar că de data asta produsă de generator.
+    """
+    return [f"{p}_{sufix(m)}" for p in (m.CATALOG.get("prefixe") or PREFIXE_STANDARD)]

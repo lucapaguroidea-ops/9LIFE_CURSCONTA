@@ -39,7 +39,7 @@ CATALOG = dict(
             "B5 Închidere TVA",
     ce_face="Gestiune amănunt: PVA, corelații, retur, vânzare parțială",
     cand="La operațiuni amănunt + închidere lună amănunt",
-    activ="DA",
+    activ="NU",
 )
 
 #: pas, cont Dr, cont Cr, sumă (sursă), condiție, temei / observație

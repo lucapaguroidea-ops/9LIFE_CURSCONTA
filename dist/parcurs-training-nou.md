@@ -244,6 +244,8 @@ Un flux e util și fără modul: fluxul explică, modulul execută. Dacă adaugi
 | **20** | fiecare cont folosit într-un pas de flux există în „Plan de conturi” |
 | **21** | fiecare flux declarat de un modul în `CATALOG['fluxuri']` există cu adevărat |
 | **22** | blocul de cifre din README e exact cel pe care generatorul l-ar produce |
+| **23** | foile pe care catalogul le numește există, iar fiecare foaie de modul are exact o intrare de catalog — în ambele sensuri |
+| **25** | nicio foaie de modul nu mai vine din sămânță: fiecare are un generator în `date/` |
 | **24** | nicio frază cu cifră din workbook-uri nu contrazice cifra reală („17 module declarative”, „68 fluxuri × pași”) — foaia Istoric e scutită, acolo cifrele vechi sunt chiar conținutul |
 
 Motivul fiecărei porți e scris în `build/verifica.py`, lângă ea. Când o poartă pică, acolo scrie de ce există.
@@ -335,4 +337,4 @@ Poarta 19 leagă marcajele de întrebări la nivel de DOCUMENT: unul cu întreb�
 
 ---
 
-*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 23 porți, 17 module, 68 fluxuri la data generării.*
+*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 25 porți, 17 module, 68 fluxuri la data generării.*

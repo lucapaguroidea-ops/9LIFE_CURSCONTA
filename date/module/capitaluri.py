@@ -17,6 +17,7 @@ CATALOG = dict(
     variabile="Sold 121, rulaj 691, capital vărsat 1012, sold 1061, pierdere reportată",
     porti="Dublu plafon rezervă legală; pierdere reportată de acoperit înainte de dividende",
     blocuri="B1 Rezervă legală; B2 Închidere 121; B3 Dividende; B4 Corecție 1174",
+    activ="NU",
 )
 
 

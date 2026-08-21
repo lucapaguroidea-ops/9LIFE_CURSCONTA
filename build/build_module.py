@@ -120,6 +120,12 @@ def extinde_catalog(wb, module):
         # rândurile de mai jos s-au deplasat
         existente = {c: (r + len(noi) + 1 if r >= rand else r) for c, r in existente.items()}
 
+    # Coloana `Activ` se scrie din `CATALOG['activ']`, pentru TOATE modulele — și cele
+    # care aveau deja rând în sămânță. Până acum steagul rămânea cum îl lăsase sămânța,
+    # iar împărțirea DA/NU ajunsese să însemne „livrat înainte / după etapa 4”: DA pe
+    # cele șapte moștenite, NU pe tot ce fusese portat, inclusiv pe MOD_INCHIDERE_LUNARA,
+    # singurul care chiar se rulează în fiecare lună. Acum DA înseamnă cadență lunară
+    # NECONDIȚIONATĂ — fără contract, activ sau eveniment declanșator.
     i = 0
     for m in module:
         cat = m.CATALOG
@@ -128,8 +134,10 @@ def extinde_catalog(wb, module):
         else:
             r = rand + i
             i += 1
-            stil.scrie(ws, r, 1, "NU", font=stil.F_INPUT, fill=stil.FILL_NU,
-                       align=stil.A_CENTER)
+        activ = cat.get("activ", "NU")
+        stil.scrie(ws, r, 1, activ, font=stil.F_INPUT,
+                   fill=stil.FILL_DA if activ == "DA" else stil.FILL_NU,
+                   align=stil.A_CENTER)
         for col, val in enumerate([m.COD, cat["fluxuri"], cat["tip"], cat["variabile"],
                                    cat["porti"], cat["blocuri"], "IMPLEMENTAT"], start=2):
             stil.scrie(ws, r, col, val, font=stil.F_NORMAL, fill=stil.FILL_DA,

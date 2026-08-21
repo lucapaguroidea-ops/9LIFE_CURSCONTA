@@ -28,6 +28,8 @@ CATALOG = dict(
     variabile="Linii de decont (furnizor, sumă, natură, tip document, CUI), avans, cote",
     porti="Plătitor de TVA; % deducere vehicule; matricea document × CUI",
     blocuri="B1 Avans; B2 Cheltuieli + TVA; B3 Regularizare avans; B4 Plată / restituire",
+    activ="NU",
+    prefixe=("Declarații", "Reguli", "Registru", "Jurnale", "NotaExport"),
 )
 
 #: Liniile reale din decontul-sursă, ca valori implicite verificabile.
