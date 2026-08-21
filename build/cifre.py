@@ -45,6 +45,7 @@ def din_cod():
     from date import documente as ddoc
     from date import inchideri as dinch
     from date import intrebari as dintr
+    from date import module as dmod
     from date import ordine as O
     from build import parcurs as bparc
 
@@ -58,6 +59,10 @@ def din_cod():
         pe_clasa.setdefault(nou[2], set()).add(nou)
 
     return dict(
+        # Modulele se numără din `date/module`, nu din foaia `Index module`. De când
+        # toate 17 sunt în cod, ăla e adevărul; iar `build_plan.py` are nevoie de număr
+        # ÎNAINTE să rescrie foaia, deci n-ar putea oricum s-o citească pe ea.
+        module=len(dmod.MODULE),
         fluxuri=len(O.ORDINE),
         pe_clasa={c: len(v) for c, v in sorted(pe_clasa.items())},
         cadente=len(dinch.CADENTA),
@@ -85,7 +90,6 @@ def din_workbook(wbp, wbm=None):
     corelatii = {v for v in _prima_coloana(wbp["Corelații de control"])
                  if RE_COREL.match(v)}
     rol_in_flux = {v for v in _prima_coloana(wbp["Doar rol în flux"]) if RE_CONT.match(v)}
-    module = {v for v in _prima_coloana(wbp["Index module"]) if RE_MODUL.match(v)}
 
     # Două cifre diferite, ambele adevărate, cu etichete care spun ce numără:
     # câte conturi sunt CLASIFICATE Tier A în plan, și câte au rând DETALIAT în foaia
@@ -109,7 +113,7 @@ def din_workbook(wbp, wbm=None):
 
     n = dict(
         conturi=len(conturi), corelatii=len(corelatii),
-        rol_in_flux=len(rol_in_flux), module=len(module),
+        rol_in_flux=len(rol_in_flux),
         tier_a=tier_a, tier_b=tier["B"], tier_c=tier["C"], detaliate=detaliate,
         foi=len(wbp.sheetnames),
     )

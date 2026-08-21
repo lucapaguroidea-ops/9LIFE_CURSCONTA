@@ -52,23 +52,37 @@ def reordoneaza_tabel(wb, nume, *, col_simbol=1, latime=7, titlu=None, nota=None
     ws = wb[nume]
     rows = R.citeste(ws)
 
-    antet, date = [], []
+    antet, date, mutate = [], [], []
     cap_gasit = False
     for r in rows:
         t = r.text(col_simbol).strip()
         v = r.valori()
-        e_data = bool(t) and bool(RE_DIGITE.search(t)) and len(t) < 22 \
+        # Lungimea se măsoară pe forma FĂRĂ spații. Cu spații, „444 / 4315 / 4316 / 436”
+        # are 23 de caractere și cădea peste prag, deci un rând de date era citit drept
+        # titlu — ajungea în antet, adică fizic DEASUPRA capului de tabel, într-o foaie
+        # care despre sine scrie „Ordonat pe simbol de cont”.
+        simbol_strans = re.sub(r"\s+", "", t)
+        e_data = bool(t) and bool(RE_DIGITE.search(t)) and len(simbol_strans) < 22 \
             and any(str(v.get(c, "") or "").strip() for c in v if c != col_simbol)
         if e_data and cap_gasit:
             date.append(r)
         else:
             if r.gol():
                 continue
-            if not cap_gasit and any(str(x or "").strip().lower() in ("simbol", "cont", "id")
-                                     for x in v.values()):
+            e_cap = any(str(x or "").strip().lower() in ("simbol", "cont", "id")
+                        for x in v.values())
+            if e_cap:
+                if cap_gasit:
+                    mutate.append(r)      # al doilea antet: rest de la o adăugire
+                    continue
                 cap_gasit = True
             # titlurile de secțiune „TRANȘA 4 …” dispar: ordinea nu mai e pe tranșe
             if "tranșa" in t.lower() or "tranşa" in t.lower():
+                continue
+            # narativul de etapă pleacă în Istoric, ca la Legendă
+            if any(p in t.lower() for p in ("din etapele anterioare", "etapa 4",
+                                            "tranșa anterioară")):
+                mutate.append(r)
                 continue
             antet.append(r)
 
@@ -87,13 +101,18 @@ def reordoneaza_tabel(wb, nume, *, col_simbol=1, latime=7, titlu=None, nota=None
                           stil_nou=dict(font=stil.F_NOTA, align=stil.A_WRAP_TOP)))
     out.extend(ordonate)
     R.inlocuieste_foaia(wb, nume, out)
-    return len(date) - len(ordonate)          # câte duplicate s-au contopit
+    # (duplicate contopite, rânduri de narativ scoase)
+    return len(date) - len(ordonate), mutate
 
 
 # --------------------------------------------------------------------- Legendă
+#: Rândul 3 al Legendei anunța „Arhitectură ETAPA 0 — Spec finală” într-o foaie de lucru
+#: din care restul narativului de etapă plecase de mult. A scăpat de două ori: are linie
+#: de dialog, nu două puncte ca „ETAPA 0:”, și nu ÎNCEPE cu „ETAPA” — potrivirea de aici
+#: e pe prefixul rândului, nu pe conținut.
 MUTA_DACA = (
-    "PROGRES IMPLEMENTARE", "ETAPA 0:", "ETAPA 1:", "ETAPA 2:", "ETAPA 3",
-    "Livrat 14.08.2026", "ETAPA 4 —",
+    "PROGRES IMPLEMENTARE", "ETAPA 0:", "ETAPA 0 —", "Arhitectură ETAPA 0",
+    "ETAPA 1:", "ETAPA 2:", "ETAPA 3", "Livrat 14.08.2026", "ETAPA 4 —",
 )
 HARTA_CLASE = [
     ("6. HARTA FLUXURILOR — pe clase de conturi", stil.F_CAP_TABEL),
@@ -285,5 +304,12 @@ def actualizeaza_cifre_in_foaie(wb, nume, n):
     dar rula numai pe `Legendă` — deci titlul catalogului rămăsese cu numărul din
     sămânță, la trei rânduri deasupra celor 68 de fluxuri pe care le anunța.
     """
-    randuri = [_actualizeaza_cifre(r, n) for r in R.citeste(wb[nume])]
+    from date import reformulari as dreform
+
+    def fn(v):
+        # înlocuirile declarate se aplică pe potrivire exactă, ca `date/reformulari.py`
+        # să rămână singurul loc unde scrie CE se schimbă și DE CE
+        return dreform.SUPRASCRIE.get(v.strip(), v)
+
+    randuri = [_actualizeaza_cifre(r.transformat(fn), n) for r in R.citeste(wb[nume])]
     R.inlocuieste_foaia(wb, nume, randuri)

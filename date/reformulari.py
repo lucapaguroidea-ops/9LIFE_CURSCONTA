@@ -345,6 +345,26 @@ INLOCUIRI = [
                "B5 Închidere TVA",
     ),
     dict(
+        text="2. Pe corelație: Corelații de control → C-01…C-12 → fluxuri + module "
+             "ancorate (calea către Module_Declarative…).",
+        motiv="C-01…C-12 era gama corelațiilor la 14.08.2026. Sunt 29. Instrucțiunea de "
+              "navigare trimitea la mai puțin de jumătate din ce există. Intervalul se "
+              "calculează acum la build.",
+        devine="2. Pe corelație: Corelații de control → C-01…C-29 → fluxuri + module "
+               "ancorate (calea către Module_Declarative…).",
+    ),
+    dict(
+        text="Cele marcate ★ sunt fluxuri DIDACTICE (construite special ca să demonstreze "
+             "un rol, cu pasul revelator identificat). Detaliile complete ale pașilor vor "
+             "fi completate în Etapele următoare; aici e catalogul + 3 exemple complete.",
+        motiv="A doua propoziție descria fișierul la 14.08.2026, când erau trei exemple "
+              "complete. Toate cele 68 de fluxuri sunt detaliate, iar „Etapele "
+              "următoare” s-au întâmplat. Prima propoziție rămâne — e definiția "
+              "marcajului ★, și e la fel de adevărată azi.",
+        devine="Cele marcate ★ sunt fluxuri DIDACTICE: construite special ca să "
+               "demonstreze un rol, cu pasul revelator identificat.",
+    ),
+    dict(
         text="Ilustrativ (sume descriptive)",
         motiv="Marcajul PARȚIAL de la 681/781 era corect când sumele erau descriptive. "
               "Acum 681 și 781 au cifre reale în F-50 (plafonul de 1.500 lei/lună) și "

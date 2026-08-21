@@ -216,10 +216,10 @@ def rescrie(wb, nume="Fluxuri"):
     statusuri = {}
     out = list(preambul)
     out.append(_nota(sablon,
-                     "Observație păstrată din gruparea veche, valabilă în continuare: fluxurile "
-                     "didactice grele „nu sunt liniare. Fiecare pornește dintr-o stare «murdară» "
-                     "sau produce intersecție între două roluri. Acolo apar erorile de cabinet.” "
-                     "Ele nu mai stau grupate la final, ci fiecare la clasa lui de conturi.", 9))
+                     "Fluxurile didactice grele nu sunt liniare: fiecare pornește dintr-o stare "
+                     "«murdară» sau produce intersecție între două roluri. Acolo apar erorile de "
+                     "cabinet. Stau fiecare la clasa lui de conturi, nu grupate la final — cauți "
+                     "o regulă pe clasa contului, nu pe ordinea în care a fost adăugată.", 9))
     out.append(gol)
 
     # ---- catalogul, derivat, grupat pe clase

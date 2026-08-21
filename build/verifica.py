@@ -325,8 +325,29 @@ def poarta_module():
     # #NAME?. Motorul de recalc nici măcar nu semnalează: nu poate parsa, deci nu
     # injectează valoare, deci celula rămâne tăcut stricată. Semnul distinctiv e spațiul
     # imediat după egal — nicio formulă reală nu arată așa.
+    #
+    # A doua formă, găsită la portare: text care arată ca o formulă PERFECT VALIDĂ, dar
+    # referă o foaie care nu există în workbook-ul ăsta. Foaia `Istoric` citează
+    # înlocuirile declarate, iar odată cu modulele portate au ajuns acolo formule
+    # „=IF(CatalogModule!A13=…)”. În workbook-ul de plan nu există CatalogModule, deci
+    # celula era stricată tăcut — recalcul se plângea, build-ul mergea mai departe.
+    # De-asta se verifică și că fiecare foaie referită de o formulă chiar există.
     proza = 0
     for cale in (PLAN, MODULE):
+        wbx = openpyxl.load_workbook(cale)
+        foi_reale = set(wbx.sheetnames)
+        for ws in wbx.worksheets:
+            for row in ws.iter_rows():
+                for c in row:
+                    if c.data_type != "f" or not isinstance(c.value, str):
+                        continue
+                    for foaie in set(re.findall(r"([A-Za-zĂÂÎȘȚăâîșț_][\w ĂÂÎȘȚăâîșț.]*)!",
+                                                c.value)):
+                        if foaie.strip("'") not in foi_reale:
+                            cade("8", f"{os.path.basename(cale)} {ws.title}!"
+                                      f"{c.coordinate}: formula referă foaia "
+                                      f"{foaie!r}, care nu există")
+                            proza += 1
         for ws in openpyxl.load_workbook(cale).worksheets:
             for row in ws.iter_rows():
                 for c in row:

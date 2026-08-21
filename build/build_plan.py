@@ -22,6 +22,7 @@ from openpyxl.utils import get_column_letter
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from build import randuri as R  # noqa: E402
 from build import stil  # noqa: E402
 from build.recalc import recalc  # noqa: E402
 from date import ANALITICE, CORELATII, FLUXURI, plan as dplan  # noqa: E402
@@ -326,43 +327,74 @@ def actualizeaza_legenda(wb):
         rand += 1
 
 
-def actualizeaza_index(wb):
+def actualizeaza_index(wb, n):
+    """Rescrie `Index module` ca UN SINGUR tabel, în ordinea claselor de conturi.
+
+    Foaia avea două tabele: cele nouă module „originale”, apoi un banner „MODULE
+    ADĂUGATE ÎN ETAPA 4” cu al doilea rând de antet și restul. Grupare după momentul
+    livrării, nu după înțeles — exact decizia pe care depozitul a luat-o invers peste
+    tot altundeva („logica integralității contabile, nu logica adăugirii la fișier”).
+    Bannerul și antetul duplicat pleacă în `Istoric`, unde stă cronologia.
+
+    Rândurile de modul nu se mai actualizează în loc, ci se regenerează toate: de când
+    fiecare modul e în `date/`, tabelul e o proiecție a lui `MODULE`, nu un fișier care
+    se întreține. Ordinea e ordinea din `MODULE`, adică a claselor de conturi.
+
+    Întoarce rândurile scoase, ca să ajungă în `Istoric`.
+    """
     ws = wb["Index module"]
-    rand = _primul_rand_liber(ws) + 1
-    rand = _titlu_sectiune(ws, rand, "MODULE ADĂUGATE ÎN ETAPA 4", 6)
-    rand = _cap_tabel(ws, rand, ["Cod modul", "Fluxuri acoperite", "Ce face", "Status",
-                                 "Foile din modul", "Când îl rulezi"], alb=True)
-    # derivat din date/module — altfel indexul rămâne în urma modulelor reale, exact
-    # cum s-a întâmplat cu MOD_LEASING_FIN, care figura și „EXEMPLU EXTERN”, și
-    # „IMPLEMENTAT”, în două rânduri care se contraziceau
-    module = [
-        (m.COD, m.CATALOG["fluxuri"],
-         m.CATALOG.get("ce_face") or m.CATALOG["blocuri"], "IMPLEMENTAT",
-         ", ".join(dfoi(m)),
-         m.CATALOG.get("cand") or m.CATALOG["tip"])
+    rows = R.citeste(ws)
+
+    cap = ["Cod modul", "Fluxuri acoperite", "Ce face", "Status", "Foile din modul",
+           "Când îl rulezi"]
+    randuri_modul = [
+        R.Rand([(k, v, None) for k, v in enumerate(
+            [m.COD, m.CATALOG["fluxuri"],
+             m.CATALOG.get("ce_face") or m.CATALOG["blocuri"], "IMPLEMENTAT",
+             ", ".join(dfoi(m)),
+             m.CATALOG.get("cand") or m.CATALOG["tip"]], start=1)],
+            stil_nou=dict(font=stil.F_NORMAL, align=stil.A_WRAP))
         for m in dmodule.MODULE
     ]
-    # modulele care există deja în index se actualizează în loc — un modul are un
-    # singur rând, altfel indexul se contrazice singur (MOD_LEASING_FIN apărea de
-    # două ori: „EXEMPLU EXTERN” și „IMPLEMENTAT”)
-    existente = {}
-    for r in range(1, ws.max_row + 1):
-        cod = str(ws.cell(row=r, column=1).value or "").strip()
-        if cod.startswith("MOD_"):
-            existente[cod] = r
-    for m in module:
-        r = existente.get(m[0], rand)
-        for col, val in enumerate(m, start=1):
-            stil.scrie(ws, r, col, val, font=stil.F_NORMAL, align=stil.A_WRAP)
-        if m[0] not in existente:
-            rand += 1
-    rand += 1
-    _nota(ws, rand,
-          "MOD_CAPITALURI nu dublează MOD_INCHIDERE_EX: acela închide clasele 6 și 7 pe 121, "
-          "acesta repartizează rezultatul obținut (129/1061/1171).", 6)
+
+    mutate, pastrate = [], []
+    pus = False
+    for r in rows:
+        t = r.text().strip()
+        if t.startswith("MOD_"):
+            continue                                  # se regenerează, toate
+        if t.startswith("MODULE ADĂUGATE ÎN ETAPA"):
+            mutate.append(r)
+            continue
+        if t == cap[0] and pus:
+            mutate.append(r)                          # al doilea antet
+            continue
+        if r.gol():
+            continue
+        pastrate.append(_corecteaza_trimiteri(r, n))
+        if t == cap[0]:
+            pastrate.extend(randuri_modul)
+            pastrate.append(R.Rand([]))
+            pus = True
+
+    pastrate.append(R.Rand([]))
+    pastrate.append(R.Rand(
+        [(1, "MOD_CAPITALURI nu dublează MOD_INCHIDERE_EX: acela închide clasele 6 și 7 "
+             "pe 121, acesta repartizează rezultatul obținut (129/1061/1171).", None)],
+        span=(1, 6), stil_nou=dict(font=stil.F_NOTA, align=stil.A_WRAP_TOP)))
+
+    R.inlocuieste_foaia(wb, "Index module", pastrate)
+    return mutate
 
 
-def ordoneaza_canonic(wb):
+#: Trimiterile din proza foii care citau un interval încremenit.
+def _corecteaza_trimiteri(rand, n):
+    """`C-01…C-12` era gama corelațiilor la 14.08.2026. Sunt 29."""
+    ultima = f"C-{n['corelatii']:02d}"
+    return rand.transformat(lambda v: v.replace("C-01…C-12", f"C-01…{ultima}"))
+
+
+def ordoneaza_canonic(wb, mutate_extra=()):
     """Faza finală: din ordinea adăugirii în ordinea planului de conturi.
 
     Ordinea contează. Istoricul se construiește ÎNAINTE de renumerotare, iar
@@ -370,11 +402,11 @@ def ordoneaza_canonic(wb):
     """
     orfane, resturi, absorbite, statusuri = reordoneaza.rescrie(wb)
 
-    dupl = reordoneaza_foi.reordoneaza_tabel(
+    dupl, mutate_tab = reordoneaza_foi.reordoneaza_tabel(
         wb, "Analitice (Tier A)", latime=7,
         nota="Ordonat pe simbol de cont, ca planul de conturi. Rândurile duplicate "
              "apărute la extinderi succesive au fost contopite, fără pierdere de text.")
-    dupl += reordoneaza_foi.reordoneaza_tabel(
+    d2, m2 = reordoneaza_foi.reordoneaza_tabel(
         wb, "Matrice acoperire", latime=6,
         nota="Ordonat pe simbol de cont. PARȚIAL rămâne doar unde acoperirea chiar "
              "este parțială — vezi GOLURI_ACCEPTATE în date/plan.py.")
@@ -384,7 +416,7 @@ def ordoneaza_canonic(wb):
     # numărul de module e cel real, nu unul presupus.
     n = cifre.din_workbook(wb)
     reordoneaza_foi.actualizeaza_cifre_in_foaie(wb, "Fluxuri", n)
-    mutate = reordoneaza_foi.curata_legenda(wb, n=n)
+    mutate = list(mutate_extra) + mutate_tab + reordoneaza_foi.curata_legenda(wb, n=n)
 
     istoric.construieste(wb, mutate=mutate, orfane=orfane,
                          reformulari=dreform.INLOCUIRI,
@@ -422,8 +454,10 @@ def main():
     extinde_corelatii(wb)
     extinde_matrice(wb)
     actualizeaza_legenda(wb)
-    actualizeaza_index(wb)
-    orfane, dupl, schimbate, anc = ordoneaza_canonic(wb)
+    # Cifrele se citesc după extinderi, ca `Index module` să-și poată corecta
+    # trimiterile („C-01…C-12” era gama de la 14.08.2026).
+    mutate_index = actualizeaza_index(wb, cifre.din_workbook(wb))
+    orfane, dupl, schimbate, anc = ordoneaza_canonic(wb, mutate_extra=mutate_index)
 
     os.makedirs(os.path.dirname(IESIRE), exist_ok=True)
     wb.save(IESIRE)

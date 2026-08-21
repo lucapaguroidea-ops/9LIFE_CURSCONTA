@@ -29,8 +29,10 @@ def _cap(capete):
 
 
 def _rand(valori):
+    # `text=True`: tabelul de înlocuiri conține formule citate ca text („=IF(…)”), iar
+    # fără asta ajung formule live într-un workbook care n-are foile pe care le referă.
     return R.Rand([(i, v, None) for i, v in enumerate(valori, start=1)],
-                  stil_nou=dict(font=stil.F_NORMAL, align=stil.A_WRAP))
+                  stil_nou=dict(font=stil.F_NORMAL, align=stil.A_WRAP, text=True))
 
 
 def construieste(wb, *, mutate, orfane, reformulari, resturi=(), absorbite=None,

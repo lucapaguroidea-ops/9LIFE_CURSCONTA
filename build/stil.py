@@ -61,9 +61,21 @@ _thin = Side(style="thin", color="BFBFBF")
 BORDER_SUBTIRE = Border(left=_thin, right=_thin, top=_thin, bottom=_thin)
 
 
-def scrie(ws, row, col, value, *, font=None, fill=None, align=None, border=None):
-    """Scrie o celulă cu stil, întorcând obiectul celulă."""
+def scrie(ws, row, col, value, *, font=None, fill=None, align=None, border=None,
+          text=False):
+    """Scrie o celulă cu stil, întorcând obiectul celulă.
+
+    `text=True` forțează celula să fie TEXT chiar dacă valoarea începe cu „=”.
+
+    E nevoie de asta oriunde se documentează o formulă. Foaia `Istoric` listează
+    înlocuirile declarate din `date/reformulari.py`, iar de când portarea modulelor a
+    adus acolo formule („=IF(CatalogModule!A13=…)”), openpyxl le scria drept FORMULE
+    live — care apoi refereau o foaie inexistentă în workbook-ul de plan. Motorul de
+    recalcul se plângea, dar build-ul mergea mai departe, iar celula rămânea stricată.
+    """
     c = ws.cell(row=row, column=col, value=value)
+    if text and isinstance(value, str) and value.startswith("="):
+        c.data_type = "s"
     if font is not None:
         c.font = font
     if fill is not None:
