@@ -121,19 +121,18 @@ def blocuri(dest):
     Un bloc e o secțiune `##` împreună cu subsecțiunile ei care merg în ACEEAȘI
     destinație. §2.6 nu vine cu §2: e repartizat la capitaluri, și pleacă acolo.
     """
-    cale = os.path.join(RADACINA, drep.SURSA)
-    if not os.path.exists(cale):
-        return {}
-    with open(cale, encoding="utf-8") as f:
-        sectiuni_sursa = brep.sectiuni(f.read())
-
     grupe, curent = {}, None
-    for titlu, linii in sectiuni_sursa:
-        if titlu.startswith("## "):
-            curent = titlu
-            grupe[curent] = dict(intro=linii, sub=[])
-        elif titlu.startswith("### ") and curent:
-            grupe[curent]["sub"].append((titlu, linii))
+    for sursa in drep.SURSE:
+        cale = os.path.join(RADACINA, sursa["cale"])
+        if not os.path.exists(cale):
+            continue
+        with open(cale, encoding="utf-8") as f:
+            for titlu, linii in brep.sectiuni(f.read()):
+                if titlu.startswith("## "):
+                    curent = titlu
+                    grupe[curent] = dict(intro=linii, sub=[])
+                elif titlu.startswith("### ") and curent:
+                    grupe[curent]["sub"].append((titlu, linii))
 
     out = {}
     for titlu, g in grupe.items():
@@ -230,9 +229,16 @@ def _din_repartizare(cfg):
     disponibile = blocuri(cfg["cheie"])
     sectiuni, bucati = [], []
     if drep.UNDE.get(brep.PREAMBUL) == cfg["cheie"]:
-        cale = os.path.join(RADACINA, drep.SURSA)
-        with open(cale, encoding="utf-8") as f:
-            pre = next((l for t, l in brep.sectiuni(f.read()) if t == brep.PREAMBUL), [])
+        pre = []
+        for sursa in drep.SURSE:
+            cale = os.path.join(RADACINA, sursa["cale"])
+            if not os.path.exists(cale):
+                continue
+            with open(cale, encoding="utf-8") as f:
+                p = next((l for t, l in brep.sectiuni(f.read()) if t == brep.PREAMBUL), [])
+            if p:
+                pre = p
+                break
         text = "\n".join(l.rstrip() for l in pre
                           if not l.startswith("# ") and l.strip() != "---").strip("\n")
         if text:

@@ -10,12 +10,12 @@ Ordinea nu e alfabetică și nu e cronologică. E ordinea în care ajungi la ele
     lucrezi → studiezi → întrebi → adaugi
 
 Iar înăuntrul studiului, ordinea e a planului de conturi, nu a zilelor de training:
-clasa 1, clasa 2, clasele 3–4, apoi transversalul. Aceeași decizie ca la reordonarea
+clasa 1, clasa 2, clasele 3–4, salariile, apoi transversalul. Aceeași decizie ca la reordonarea
 Excel-ului și la retitrarea documentelor — „logica integralității contabile, nu logica
 adăugirii la fișier”.
 
-Câmpul `nu` e cel care face pachetul util. Fără el, patru documente de contabilitate
-arată interschimbabile, iar cine caută o regulă o caută în primul care-i cade sub mână.
+Câmpul `nu` e cel care face pachetul util. Fără el, documentele de contabilitate arată
+interschimbabile, iar cine caută o regulă o caută în primul care-i cade sub mână.
 """
 
 #: (etapă, explicație scurtă) — cele patru momente de uz.
@@ -68,6 +68,13 @@ ITEME = [
      "Nu e material de citit din scoarță-n scoarță. Se intră prin cuprins, pe subiectul "
      "care te interesează."),
 
+    ("Studiezi", "doc:salarii", "salarii-contributii-retineri",
+     "Statul de plată, contribuțiile, medicalele, popririle — și verificările care se "
+     "fac în secunda doi, pentru că documentul de control există deja. Aici stau și "
+     "interfețele cu HR: REGES, D112, pontajul, fișa de plătitor din SPV.",
+     "Nu conține impozitul pe profit sau pe venit — acela ține de rezultatul "
+     "exercițiului și stă la capitaluri, chiar dacă a fost predat în aceeași zi."),
+
     ("Studiezi", "doc:control", "control-documente-numerar",
      "Transversal, și cel mai practic: cum se citește un cont și ce înseamnă un sold "
      "contrar naturii lui, ce cere legea de la un document, plafoanele de numerar, "
@@ -103,9 +110,9 @@ nu după data trainingului. Numerele din nume dau ordinea; nu le schimba, pentru
 legăturile din pagina asta le urmează.
 
 Materialul de studiu e în ordinea planului de conturi — clasa 1, clasa 2, clasele 3 și
-4, apoi transversalul. Cauți o regulă pe clasa contului, nu pe ziua când s-a predat.
+4, salariile, apoi transversalul. Cauți o regulă pe clasa contului, nu pe ziua când s-a predat.
 
-Rândul **„nu”** de sub fiecare item e partea de care e nevoie cel mai des: patru
+Rândul **„nu”** de sub fiecare item e partea de care e nevoie cel mai des: cinci
 documente de contabilitate arată interschimbabile, iar cine caută o regulă o caută în
 primul care-i cade sub mână.\
 """

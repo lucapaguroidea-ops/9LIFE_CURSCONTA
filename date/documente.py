@@ -97,6 +97,10 @@ DOCUMENTE = [
             # stocuri. Sursa le ține sub §2, „mărfuri” — aici se rup de acolo.
             dict(bloc="## 2. Mărfuri la preț cu amănuntul (371)",
                  in_sectiune="## 2. Pierderea contabilă vs. pierderea fiscală"),
+            # Impozitarea rezultatului (21.08) adâncește F-104. Documentul n-avea
+            # secțiune despre regimul de impozitare — e un gol de subiect, nu o tranșă.
+            dict(bloc="## 6. Impozit pe profit sau impozit pe venit",
+                 sectiune_noua="Impozit pe profit sau impozit pe venit (micro)"),
         ],
         # rândurile de legendă vechi, înlocuite de tabelul canonic
         legenda_veche=[
@@ -165,6 +169,9 @@ DOCUMENTE = [
                  "stocuri (clasa 3), TVA și corelații de balanță, versiune revizuită",
         adaugiri=[
             dict(bloc="## 4. Mecanica TVA", in_sectiune="## 7. Conturile de TVA"),
+            # Decontul și D300 (21.08) adâncesc F-405 și F-407 — aceeași secțiune de TVA
+            dict(bloc="## 7. Decontul de TVA și D300",
+                 in_sectiune="## 7. Conturile de TVA"),
             dict(bloc="## 2. Mărfuri la preț cu amănuntul (371)",
                  in_sectiune="## 8. Mărfuri (371)"),
             dict(bloc="## 3. Ajustări pentru deprecierea stocurilor",
@@ -184,6 +191,24 @@ DOCUMENTE = [
              "doar ca notă în foaia Legendă a workbook-ului.",
     ),
     dict(
+        cheie="doc:salarii",
+        nume="salarii",
+        zi=None,   # sursa din 21.08 se împarte la patru documente, ca cea din 19.08
+        repartizat=True,
+        sursa=None,
+        iesire="dist/salarii-contributii-retineri.md",
+        titlu="Salarii, contribuții și rețineri",
+        subtitlu="Sursă: training 21.08.2026 — de la statul de plată la balanță, "
+                 "cu verificările care se fac în secunda doi",
+        legenda_veche=[],
+        anexe={"## 9. Checklist lunar rezultat din notițe": "B",
+               "## 10. Lista erorilor corectate din notițe": "C"},
+        genereaza=["D", "E"],
+        nota="Al cincilea document. Salariile sunt clasa 4, dar un document intitulat "
+             "„Stocuri, TVA și corelații de balanță” nu le putea găzdui fără să mintă — "
+             "iar materialul e coerent și mare cât să stea singur.",
+    ),
+    dict(
         # Construit integral din secțiunile pe care `date/repartizare.py` i le dă.
         # Materialul lui nu e monografie: plafoane, reguli de document, practică de
         # control. De-asta n-avea unde să intre în celelalte trei — sistemul e făcut
@@ -198,6 +223,10 @@ DOCUMENTE = [
         subtitlu="Sursă: training 19.08.2026 — cum se citește un cont, ce cere legea de "
                  "la un document și unde se rupe disciplina de casă",
         legenda_veche=[],
+        adaugiri=[
+            dict(bloc="## 8. Răspunsuri la întrebările din notițe",
+                 sectiune_noua="Cum se construiește o verificare"),
+        ],
         anexe={"## 12. Erori frecvente și capcane": "B"},
         genereaza=["D", "E"],
         inlocuiri=[

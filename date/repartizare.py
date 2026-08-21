@@ -20,8 +20,9 @@ dinăuntru: §2 e despre mărfuri la preț cu amănuntul, dar §2.6–2.7 sunt �
 exercițiului și impozitul pe profit — capitaluri, nu stocuri.
 """
 
-#: Sursa care se împarte. Fișierul din `surse/` nu se modifică niciodată.
-SURSA = "surse/training-5-2026-08-19/ghid-contabilitate.md"
+# Fișierele din `surse/` nu se modifică niciodată. Structura pe surse e mai jos, în
+# `SURSE`: fiecare cu harta ei, pentru că două surse pot avea secțiuni cu același titlu
+# („## 1. …”), iar o hartă comună le-ar confunda între ele.
 
 # ---------------------------------------------------------------------------
 # Destinațiile
@@ -39,6 +40,7 @@ DESTINATII = {
     "doc:imobilizari":  ("dist/imobilizari.md", "fisier"),
     "doc:stocuri-tva":  ("dist/stocuri-tva-corelatii.md", "fisier"),
     "doc:control":      ("dist/control-documente-numerar.md", "fisier"),
+    "doc:salarii":      ("dist/salarii-contributii-retineri.md", "fisier"),
     "date:plan":        ("Plan de conturi", "foaie"),
     "foaie:inchideri":  ("Închideri periodice", "foaie"),
     "date:intrebari":   ("dist/intrebari-formator.md", "fisier"),
@@ -52,7 +54,7 @@ DESTINATII = {
 # să fie lângă decizie, nu în capul cuiva.
 # ---------------------------------------------------------------------------
 
-REPARTIZARE = [
+REPARTIZARE_19_08 = [
     ("(preambul)", "doc:control",
      "Titlul și convenția de notare `cont debitor = cont creditor · sumă`. Convenția "
      "intră în documentul nou, care e singurul construit de la zero din sursa asta."),
@@ -173,11 +175,6 @@ REPARTIZARE = [
      "celelalte 21 — de unde ies singure în foaie, în .md și ca marcaje ❓ pe fluxuri."),
 ]
 
-#: titlu → destinație
-UNDE = {titlu: dest for titlu, dest, _ in REPARTIZARE}
-
-#: titlu → motiv
-DE_CE = {titlu: motiv for titlu, _, motiv in REPARTIZARE}
 
 
 # ---------------------------------------------------------------------------
@@ -193,7 +190,7 @@ DE_CE = {titlu: motiv for titlu, _, motiv in REPARTIZARE}
 # retitrarea pe subiect a eliminat-o.
 # ---------------------------------------------------------------------------
 
-ABSORBITE = {
+ABSORBITE_19_08 = {
     "# Ghid de contabilitate — mărfuri, TVA neexigibilă și clasa 4":
         "Titlul sursei. Documentele poartă acum titluri pe subiect, iar materialul "
         "sursei s-a împărțit la patru: un singur titlu nu-l mai poate acoperi.",
@@ -242,3 +239,149 @@ ABSORBITE = {
         "Blocul s-a rupt în trei destinații, deci titlul lui n-are ce acoperi: §7.1 e "
         "la imobilizări, restul la control.",
 }
+
+
+# ===========================================================================
+# Sursa din 21.08.2026 — salarii, impozit pe venit, D300
+#
+# A doua sursă care se împarte, și prima care sosește BRUTĂ. Faza A a produs
+# `notite-revizuit.md` alături de `.txt`-ul neatins; repartizarea lucrează pe cea
+# revizuită, ca la trainingurile 2, 3 și 4.
+#
+# Se împarte la patru destinații, dintre care una nouă: salariile sunt clasa 4, dar un
+# document intitulat „Stocuri, TVA și corelații de balanță” nu le poate găzdui fără să
+# mintă. Materialul e coerent și mare cât să stea singur.
+# ===========================================================================
+
+REPARTIZARE_21_08 = [
+    ("## 1. Înainte de înregistrare: de unde vine statul de plată", "doc:salarii",
+     "Interfața cu HR — de unde vine documentul pe care contabilitatea îl ia de bun."),
+    ("### 1.1 Salariul minim și norma parțială", "doc:salarii",
+     "Minimul proporțional cu norma: verificarea care se uită cel mai des în practică."),
+    ("### 1.2 REGES, D112 și pontajul", "doc:salarii",
+     "Cele trei surse care trebuie să spună același lucru."),
+    ("### 1.3 Fișa de plătitor din SPV", "doc:salarii",
+     "Lanțul stat → D112 → fișă de plătitor → balanță, și nota rectificativă."),
+
+    ("## 2. Monografia salariilor", "doc:salarii",
+     "Adâncește F-413: brutul realizat, reținerile, CAM, restul de plată."),
+    ("### 2.1 Salariul brut și reținerile", "doc:salarii",
+     "Corectează acronimele CAS/CASS inversate în notiță."),
+    ("### 2.2 Singura contribuție a angajatorului", "doc:salarii",
+     "Corectează sensul CAM: notița scria `436 - 646`, adică invers."),
+    ("### 2.3 Restul de plată", "doc:salarii",
+     "Închiderea obligațiilor, ca articol compus."),
+    ("### 2.4 Tichetele de masă", "doc:salarii",
+     "Corectează contul: 642, nu 423."),
+
+    ("## 3. Concediile medicale", "doc:salarii",
+     "Flux nou: împărțirea indemnizației între angajator (6458) și FNUASS (4382)."),
+
+    ("## 4. Rețineri, avansuri și datorii reciproce", "doc:salarii",
+     "Grupa 42x în afara salariului propriu-zis."),
+    ("### 4.1 Popriri — contul 427", "doc:salarii",
+     "Flux nou, cu cel mai mare risc penal din grupă."),
+    ("### 4.2 Drepturi de personal neridicate — contul 426", "doc:salarii",
+     "Flux nou: datoria nu dispare, își schimbă natura."),
+    ("### 4.3 Creanțe față de personal la plecare — contul 4282", "doc:salarii",
+     "Flux nou. Corectează 4428 → 4282: notița folosea contul de TVA neexigibilă."),
+    ("### 4.4 Avansul", "doc:salarii",
+     "425 și închiderea lui la statul de lichidare."),
+
+    ("## 5. Corelațiile de balanță pe salarii", "doc:salarii",
+     "Miezul practic: verificarea în secunda doi, pentru că statul există deja."),
+    ("### 5.1 Regula generală: rulaj creditor = sold creditor", "doc:salarii",
+     "Regula se demonstrează pe conturile de salarii, deci stă lângă ele. "
+     "Generalizarea trăiește în foaia „Închideri periodice” și în corelații."),
+    ("### 5.2 Corelația cu statul de plată", "doc:salarii",
+     "421 + 423 = restul de plată. Corelația cea mai ieftină din contabilitate."),
+    ("### 5.3 Verificarea CAM pe cifre", "doc:salarii",
+     "2,25% × brut = rulaj creditor 436."),
+    ("### 5.4 Solduri cu semn contrar naturii contului", "doc:salarii",
+     "Aplicarea lui C-23 pe grupa 42x, cu 4282 ca exemplu."),
+
+    ("## 6. Impozit pe profit sau impozit pe venit", "doc:capitaluri",
+     "Impozitarea rezultatului adâncește F-104, închiderea exercițiului — capitaluri, "
+     "nu salarii, chiar dacă a fost predat în aceeași zi."),
+    ("### 6.1 Impozitul pe profit", "doc:capitaluri", "Cota de 16% și `691 = 441`."),
+    ("### 6.2 Condițiile pentru microîntreprindere", "doc:capitaluri",
+     "Flux nou. Corectează 6918 → 698: contul din notiță nu există."),
+    ("### 6.3 Depășirea pragului", "doc:capitaluri",
+     "Trecerea la 16% din trimestrul depășirii, nu din următorul."),
+    ("### 6.4 Ce sold trebuie să aibă", "doc:capitaluri",
+     "441 și 4418 sunt pasive: soldul normal e creditor."),
+
+    ("## 7. Decontul de TVA și D300", "doc:stocuri-tva",
+     "Adâncește F-405 și F-407 — teritoriul TVA al documentului de stocuri."),
+    ("### 7.1 Decontul nu are variantă rectificativă", "doc:stocuri-tva",
+     "Consecința: corecțiile merg pe regularizări."),
+    ("### 7.2 Regularizări — cazul cotei schimbate", "doc:stocuri-tva",
+     "Avans la 19%, factură la 21% — tranziția de cotă."),
+    ("### 7.3 Deciziile de impunere ANAF", "doc:stocuri-tva",
+     "Analitic distinct pe 4423, ca să nu ajungă în decont."),
+    ("### 7.4 Corelația cu fișa de rol", "doc:stocuri-tva",
+     "Rulajul lunii, nu soldul. Contradicția din notiță pe numerele de rând."),
+    ("### 7.5 Corelația sfântă a TVA-ului", "doc:stocuri-tva",
+     "Soldul din decont = soldul din balanță."),
+
+    ("## 8. Răspunsuri la întrebările din notițe", "doc:salarii",
+     "Întrebările marcate în notițe, care se răspund din logica înregistrării."),
+    ("### 8.1 Cum se leagă rulajul debit/credit cu soldul, la 421 și 423", "doc:salarii",
+     "Răspuns conceptual, pe conturile de salarii."),
+    ("### 8.2 De ce creanța față de un fost salariat e cont de activ", "doc:salarii",
+     "Răspuns conceptual + corecția 4428 → 4282."),
+    ("### 8.3 De ce nu trebuie solduri creditoare pe conturi de activ", "doc:salarii",
+     "Răspuns conceptual, legat de C-23."),
+    ("### 8.4 Ce alte corelații se pot face din balanță", "doc:control",
+     "Tiparul „ce document extern conține aceeași informație” e transversal: e despre "
+     "cum se construiește o verificare, nu despre salarii."),
+
+    ("## 9. Checklist lunar rezultat din notițe", "doc:salarii", "Devine Anexa B."),
+    ("## 10. Lista erorilor corectate din notițe", "doc:salarii", "Devine Anexa C."),
+]
+
+ABSORBITE_21_08 = {
+    "*Versiune revizuită. Sursa: notițele brute din 21.08.2026.*":
+        "Rândul de versiune al sursei. Fiecare document primește propriul subtitlu din "
+        "`date/documente.py`, cu ziua-sursă în el.",
+    "## 7. Decontul de TVA și D300":
+        "Absorbit în „## 7. Conturile de TVA” din documentul de stocuri: decontul e "
+        "capătul mecanicii TVA, nu un subiect paralel.",
+    "# Salarii, contribuții și rețineri — notițe training 21.08.2026":
+        "Titlul sursei. Documentul de salarii îl primește din `date/documente.py`, "
+        "iar restul materialului pleacă la alte trei documente cu titlurile lor.",
+}
+
+
+# ===========================================================================
+# Vederile derivate
+# ===========================================================================
+
+#: Fiecare sursă cu harta ei. Hărțile NU se contopesc înainte de verificare: două surse
+#: pot avea secțiuni cu același titlu („## 1. …”), iar o hartă comună le-ar confunda.
+SURSE = [
+    dict(cheie="19.08.2026",
+         cale="surse/training-5-2026-08-19/ghid-contabilitate.md",
+         repartizare=REPARTIZARE_19_08,
+         absorbite=ABSORBITE_19_08),
+    dict(cheie="21.08.2026",
+         cale="surse/training-6-2026-08-21/notite-revizuit.md",
+         repartizare=REPARTIZARE_21_08,
+         absorbite=ABSORBITE_21_08),
+]
+
+#: Toate intrările, pentru numărători și pentru parcurgerea în ordine.
+REPARTIZARE = [e for s in SURSE for e in s["repartizare"]]
+
+#: titlu → destinație. Valabil global pentru că titlurile chiar nu se repetă azi;
+#: verificarea de mai jos pică zgomotos dacă vreodată se repetă.
+UNDE = {titlu: dest for titlu, dest, _ in REPARTIZARE}
+DE_CE = {titlu: motiv for titlu, _, motiv in REPARTIZARE}
+ABSORBITE = {k: v for s in SURSE for k, v in s["absorbite"].items()}
+
+_toate = [t for t, _, _ in REPARTIZARE]
+if len(_toate) != len(set(_toate)):
+    _dubluri = sorted({t for t in _toate if _toate.count(t) > 1})
+    raise SystemExit(f"date/repartizare.py: titluri repetate între surse — {_dubluri}. "
+                     f"Harta globală `UNDE` nu le mai poate distinge; repartizarea "
+                     f"trebuie făcută pe sursă.")

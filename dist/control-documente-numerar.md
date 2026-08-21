@@ -146,6 +146,29 @@ Programele au ecrane cu o structură în spate care generează notele contabile 
 
 ---
 
+## 6. Răspunsuri la întrebările din notițe
+### 6.1 Ce alte corelații se pot face din balanță
+
+
+Sunt în secțiunea 5. Tiparul e același de fiecare dată și se poate aplica oricărui cont
+nou: **întreabă ce document extern conține aceeași informație**, apoi compară.
+
+| Cont | Documentul care îl confirmă |
+|---|---|
+| 421 + 423 | statul de plată |
+| 444, 4315, 4316, 436 | D112 și fișa de plătitor |
+| 427 | adresa de înființare a popririi |
+| 4423 / 4424 | decontul de TVA și fișa de rol |
+| 4426 / 4427 | jurnalele de cumpărări și vânzări |
+| 5121 | extrasul de cont |
+| 5311 | registrul de casă |
+
+Un cont fără document extern care să-l confirme e un cont pe care nu îl poți verifica
+decât intern — și de aceea conturile de tranzit (473, 581) trebuie să ajungă la zero, nu
+verificate: ele n-au corespondent afară.
+
+---
+
 ---
 
 ## Anexa B — Checklist practic

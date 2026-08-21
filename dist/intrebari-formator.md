@@ -337,6 +337,89 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 19.08.2026, punctul 5</sub>
 
 
+## Salarii — praguri și baze de calcul
+
+### 27. Care este salariul minim brut pe economie în vigoare, și de la ce dată?
+
+**Context.** Notițele rețin 4.325 lei. Valoarea se schimbă prin hotărâre de guvern, uneori de mai multe ori pe an, iar verificarea normei parțiale se face contra ei.
+
+**De ce contează.** Verificarea lunară a statului de plată și corelația „minim proporțional cu norma”. Un prag depășit înseamnă contracte neconforme la toți salariații cu normă parțială, nu doar la unul.
+
+**Ce am presupus.** Am folosit 4.325 lei ca în notițe, marcat ❓ peste tot unde apare.
+
+<sub>sursa: training 21.08.2026, punctul 1</sub>
+
+
+### 28. Ce contribuții se datorează pentru indemnizația de concediu medical, și pe ce parte se rețin?
+
+**Context.** Notițele acoperă împărțirea indemnizației între angajator și FNUASS (6458 / 4382 = 423), dar nu și reținerile din ea. Regulile diferă de cele ale salariului.
+
+**De ce contează.** Fluxul de concedii medicale și MOD_SALARII. Fără regulă, monografia se oprește la împărțire și nu ajunge la restul de plată.
+
+**Ce am presupus.** N-am afirmat nimic: documentul spune explicit că tratamentul reținerilor nu era în notițe.
+
+<sub>sursa: training 21.08.2026, punctul 3</sub>
+
+
+### 29. Care e limita de reținere prin poprire pentru obligațiile de întreținere, față de treimea aplicabilă datoriilor obișnuite?
+
+**Context.** Notițele rețin 33,33% din salariul net. Codul de procedură civilă prevede o limită mai mare pentru pensii de întreținere, și reguli de cumul când există mai multe popriri.
+
+**De ce contează.** Fluxul de popriri (427). Un procent greșit înseamnă ori reținere insuficientă — firma răspunde față de executor — ori excesivă, față de salariat.
+
+**Ce am presupus.** Am folosit treimea, marcând limita specială ca deschisă.
+
+<sub>sursa: training 21.08.2026, punctul 4</sub>
+
+
+## Microîntreprindere — prag și cotă
+
+### 30. Care sunt pragul de venituri și cota de impozit pentru microîntreprinderi, în vigoare la data operațiunii?
+
+**Context.** Notițele rețin 100.000 EUR și 1%. Pragul a fost coborât în trepte în anii anteriori, iar cota a avut două paliere. Ambele sunt din Codul fiscal, deci se pot schimba prin ordonanță.
+
+**De ce contează.** Fluxul de impozit micro (698 = 4418) și avertizarea clientului care se apropie de prag. Trecerea se face din trimestrul depășirii, deci un prag greșit înseamnă o declarație greșită, nu doar o estimare.
+
+**Ce am presupus.** Am folosit 100.000 EUR și 1% ca în notițe, marcate ❓.
+
+<sub>sursa: training 21.08.2026, punctul 2</sub>
+
+
+## Decontul de TVA și fișa de rol
+
+### 31. Ce rânduri din D300 sunt preluate în fișa de rol: 36 și 37, sau 44 și 45?
+
+**Context.** Notițele afirmă amândouă variantele, în două locuri diferite. Numerele de rând se schimbă între versiunile formularului, deci una dintre ele e dintr-o versiune anterioară.
+
+**De ce contează.** Corelația decont ↔ fișă de rol ↔ balanță. Fără numerele corecte, corelația nu se poate scrie ca formulă, ci doar descrie.
+
+**Ce am presupus.** Am scris corelația pe SOLD, care nu depinde de numerotarea rândurilor, și am marcat rândurile ca deschise.
+
+<sub>sursa: training 21.08.2026, punctul 5</sub>
+
+
+### 32. La declarațiile care admit rectificare, contează ordinea cronologică a înregistrării facturilor la redepunere?
+
+**Context.** Întrebarea era notată ca presupunere: dacă facturile nu sunt înregistrate cronologic, poate că redepunerea nu mai e posibilă și ar trebui altă metodă de corecție.
+
+**De ce contează.** Procedura de corecție după depunere, pe toate declarațiile care admit rectificativă. Decontul de TVA nu admite, deci acolo întrebarea nu se pune — dar la celelalte, da.
+
+**Ce am presupus.** N-am implementat nimic pe presupunerea asta.
+
+<sub>sursa: training 21.08.2026, punctul 6</sub>
+
+
+### 33. Care sunt corelațiile complete între D300 și fișa de rol la TVA?
+
+**Context.** Temă lăsată explicit la training. Notițele dau două fragmente: fișa preia rulajul lunii, nu soldul; și ANAF încarcă doar suma lunii, de unde greșeala de a omite TVA-ul neachitat din perioadele precedente.
+
+**De ce contează.** Corelațiile de control pe TVA. Ce avem acum se verifică pe sold; corelația pe rulaj, rând cu rând, are nevoie de structura exactă a fișei de rol.
+
+**Ce am presupus.** Am scris corelația pe sold și am lăsat-o pe cea pe rulaj ca gol declarat — n-am fișă de rol de citit.
+
+<sub>sursa: training 21.08.2026, punctul 7</sub>
+
+
 ---
 
-*26 de întrebări, 15 teme. Generat din notițele revizuite; fiecare întrebare se poate urmări înapoi la training și la numărul ei original.*
+*33 de întrebări, 18 teme. Generat din notițele revizuite; fiecare întrebare se poate urmări înapoi la training și la numărul ei original.*

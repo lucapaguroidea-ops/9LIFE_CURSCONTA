@@ -541,6 +541,59 @@ Cele două scopuri distincte (✅ notița):
 
 ---
 
+## 12. Impozit pe profit sau impozit pe venit (micro)
+### 12.1 Impozitul pe profit
+
+
+Cota este 16%, aplicată la baza impozabilă:
+
+```
+691  = 441                  (cheltuiala cu impozitul pe profit)
+```
+
+
+### 12.2 Condițiile pentru microîntreprindere
+
+
+Ambele trebuie îndeplinite:
+
+1. **cel puțin un salariat cu normă întreagă** — sau un contract de mandat, obligatoriu
+   cel puțin la nivelul salariului minim. Contractul de mandat se încheie prin avocat și
+   **nu se înregistrează în REGES**;
+2. **venituri totale sub 100.000 EUR** ❓, calculate la cursul de la închiderea
+   exercițiului anterior. Pragul e din Codul fiscal, nu din OMFP.
+
+Cota este 1% ❓.
+
+```
+698  = 4418                 (impozitul pe venitul microîntreprinderii)
+```
+
+⚠️ **Notița scria `6918`.** Contul nu există. Corect este **698**, „Cheltuieli cu
+impozitul pe venit și cu alte impozite care nu apar în elementele de mai sus”. Nu poate
+fi un analitic al lui 691: 691 este impozit pe **profit**, iar microul e impozit pe
+**venit** — ar fi o clasificare greșită, nu doar o notație.
+
+
+### 12.3 Depășirea pragului
+
+
+Dacă în cursul anului veniturile depășesc pragul, societatea devine plătitoare de impozit
+pe profit **începând cu trimestrul în care s-a depășit**, nu cu următorul.
+
+➕ Consecința practică: clientul care se apropie de prag trebuie anunțat înainte, nu
+după. Declarațiile devin **D100 trimestrial** și **D101 anual**.
+
+
+### 12.4 Ce sold trebuie să aibă
+
+
+**441** (impozit pe profit) și **4418** (impozit pe venit) sunt conturi de pasiv, deci
+soldul lor normal este **creditor**. Un sold debitor înseamnă că s-a plătit mai mult
+decât se datorează — de verificat, nu de ignorat.
+
+---
+
 ---
 
 ## Anexa B — Checklist practic

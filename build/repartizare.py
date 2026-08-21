@@ -118,9 +118,20 @@ def verifica(foi):
     lipsa         — [(titlu, destinație, fragment)] care nu s-au regăsit acolo (16b)
     fara_artefact — destinații al căror fișier nu există încă
     """
-    cale = os.path.join(RADACINA, drep.SURSA)
+    orfane, lipsa, fara_artefact = [], [], []
+    for sursa in drep.SURSE:
+        _verifica_o_sursa(sursa, foi, orfane, lipsa, fara_artefact)
+    return orfane, lipsa, fara_artefact
+
+
+def _verifica_o_sursa(sursa, foi, orfane, lipsa, fara_artefact):
+    """O sursă, harta ei. Hărțile nu se contopesc: două surse pot avea „## 1. …”."""
+    cale = os.path.join(RADACINA, sursa["cale"])
+    if not os.path.exists(cale):
+        return
     with open(cale, encoding="utf-8") as f:
         text = f.read()
+    unde = {titlu: dest for titlu, dest, _ in sursa["repartizare"]}
     # Sursa trece prin înlocuirile declarate ale documentelor înainte de comparație.
     # Declararea singură n-ar ajunge: înlocuirea prinde un FRAGMENT de linie, iar
     # poarta compară linii și celule întregi. Aplicată unde nu apare, e un no-op.
@@ -131,26 +142,38 @@ def verifica(foi):
     declarate = {_norm(t) for t in dreform.DECLARATE}
     # titlurile de bloc absorbite într-o secțiune-gazdă: dispariția lor e o
     # decizie de repartizare, declarată cu gazda ei în date/repartizare.py
-    declarate |= {_norm(t) for t in drep.ABSORBITE}
-    declarate |= {cheie_titlu(t) for t in drep.ABSORBITE if t.startswith("#")}
+    declarate |= {_norm(t) for t in sursa["absorbite"]}
+    declarate |= {cheie_titlu(t) for t in sursa["absorbite"] if t.startswith("#")}
     # Un text înlocuit declarat într-un document e declarat pentru TOATE porțile de
     # conservare, nu doar pentru cea care l-a văzut prima. Altfel aceeași decizie ar
     # trebui scrisă de două ori, iar cele două copii ar începe să difere.
     for cfg in ddoc.DOCUMENTE:
         for i in cfg.get("inlocuiri") or []:
             declarate.add(_norm(i["text"]))
-    cunoscute = {cheie_titlu(t) for t in drep.UNDE}
+    # O secțiune redenumită în anexă („## 9. Checklist…” → „## Anexa B — …”) e o
+    # transformare declarată în `date/documente.py`, la fel de legitimă ca absorbirea.
+    # Fără asta, poarta ar cere titlul vechi într-un document care l-a redenumit.
+    for cfg in ddoc.DOCUMENTE:
+        declarate |= {_norm(t) for t in cfg["anexe"]}
+        declarate |= {cheie_titlu(t) for t in cfg["anexe"] if t.startswith("#")}
+    cunoscute = {cheie_titlu(t) for t in unde}
 
-    orfane, lipsa, fara_artefact = [], [], []
     cache = {}
     for titlu, linii in sectiuni(text):
         cheie = cheie_titlu(titlu) if titlu != PREAMBUL else PREAMBUL
         if cheie not in cunoscute and titlu != PREAMBUL:
             orfane.append(titlu)
             continue
-        dest = next((d for t, d in drep.UNDE.items()
+        dest = next((d for t, d in unde.items()
                      if (cheie_titlu(t) if t != PREAMBUL else PREAMBUL) == cheie), None)
         if dest is None:
+            # Un preambul din care TOT e declarat absorbit n-are ce destinație să
+            # primească: titlul și rândul de versiune se rescriu oricum la armonizare.
+            # Fără excepția asta, 16a ar cere o destinație pentru text care nu ajunge,
+            # prin decizie, în niciun document.
+            if titlu == PREAMBUL and all(
+                    n in declarate for n, _ in fragmente(linii)):
+                continue
             orfane.append(titlu)
             continue
         if dest not in cache:

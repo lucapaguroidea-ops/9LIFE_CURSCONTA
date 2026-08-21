@@ -640,6 +640,62 @@ Același raționament se aplică lui **408** și **418**: sunt bifuncționale ș
 
 ---
 
+### 7.9 Decontul nu are variantă rectificativă
+
+
+Decontul de TVA este **singura declarație care nu se rectifică**. Corecțiile se fac pe
+rândurile de **regularizări** ale decontului următor.
+
+Consecința: facturile înregistrate **după** depunerea decontului nu mai pot fi „puse la
+locul lor” retroactiv — decontul nu se mai potrivește cu balanța până la regularizare.
+
+
+### 7.10 Regularizări — cazul cotei schimbate
+
+
+Avansuri primite și stornate cu **19%**, iar factura finală emisă cu **21%**. Diferența
+nu mai poate fi corectată prin decont de corecții materiale — se înscrie pe rândurile de
+regularizări.
+
+
+### 7.11 Deciziile de impunere ANAF
+
+
+Sumele stabilite de ANAF prin decizie de impunere la control **nu se trec niciodată în
+decont**. Ele se înregistrează în **4423 cu analitic distinct**, tocmai ca să nu ajungă
+din greșeală în decontul lunii următoare.
+
+➕ Analiticul nu e o preferință de organizare: e singurul lucru care împiedică o eroare
+care altfel se face singură.
+
+
+### 7.12 Corelația cu fișa de rol
+
+
+Fișa de rol nu preia soldul decontului, ci **rulajul lunii** — suma de plată sau de
+rambursat a lunii respective.
+
+❓ Notițele indică rânduri diferite în două locuri: un pasaj spune rândurile 36 și 37,
+altul rândurile 44 și 45. Numerele de rând se schimbă între versiunile formularului, iar
+cele două afirmații nu pot fi ambele adevărate.
+
+Greșeala întâlnită în practică: ANAF încarcă doar suma lunii, iar cine completează
+decontul uită **TVA-ul neachitat din perioadele precedente**. La finanțe soldul pare în
+regulă, dar decontul e greșit.
+
+
+### 7.13 Corelația sfântă a TVA-ului
+
+
+> **soldul din decontul de TVA = soldul din balanță**
+
+Pe **sold**, nu pe rulajul lunii. La rambursare, atenția se duce pe **soldul cu care
+pleci**: dacă el e greșit, tot ce urmează e greșit.
+
+❓ **Temă lăsată de formator:** corelațiile complete între D300 și fișa de rol la TVA.
+
+---
+
 ## 8. Mărfuri (371)
 
 ### 8.1 Prima decizie: ce tip de gestiune creezi

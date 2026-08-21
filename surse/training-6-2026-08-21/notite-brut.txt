@@ -1,0 +1,309 @@
+
+
+
+salarii
+
+
+salariu minim pe economie 4325 lei 
+
+daca am angajati cu salariu minim, trebuie sa vad ca sunt platiti macar salariul minim 
+
+daca am cu 4 ore -> norma mea e la jumatate din timpul de 8 ore => pe stat trebuie sa am 4325 / 2 = 2163
+
+
+2 ore = 4325 / 4 = 1081
+
+noi trebuie sa verificam lucrurile astea <=> nu din rea vointa, dar pentru ca uneori nu se aduce la zi <=> greseli frecvente in practica <=> cazuri cand nu se ajusteaza toti salariatii - mai ales cand norma difera  => pentru care e nevoie de stat, pe care e bine sa-l solicitam - cel putin la modificarea salariului minim 
+
+trebuie sa contraverificam si REGES (fostul regisal) => site-ul pus la dispo de statul roman, un se inregisteraza toate contractele de munca, concediile medical (fiecare concediu medical in parte) => din REGES, cand pleaca salariatul, cat a fost angajat, cat a fost in medical, cat a fost in cocediu de plata = necesar pentru vechimea in munca - o mare responsablitate pentru cei de la HR, sa inregistreze toate modificarile la personal, care intervin luna de luna, zi de zi 
+
+daca putem facem cel putin la modificarea salariului minim, ce avem pe stat vs ce avem in REGES 
+
+sa verificam CNP-urile
+
+D112 - intocmit de HR; un .xml unde sunt inregistrate toate contractele si fluctuatiile de munca -> in baza caruia se platesc contributiile la stat; 
+
+
+acces la SPV, pentru fisele de platitor => trebuie sa contraverifcam ca se incarca in D112 = ce inregistram noi in nota contabila => cazuri in care se intocmesc rectificative - au uitat sa aduca un medical - si ei proceseaza un rectificativ la Mai - si noi suntem la nota pentru Iunie => trebuie sa primim de la resurse umane, ce anume s-a modificat - modificandu-se statul, si se depunde un nou D112 <=> ca fisa pe platitor sa se potriveasca cu nota contabila, trebuie sa inregistram o nota rectificativa <=> corelatii: balanta - D112 - ANAF; statul care pleaca de la HR, impreuna cu D112 - trebuie sa ne fie adus la cunostinta - ceea ce s-a intamplat la resurse umane;
+
+inregistrarea contabila:
+
+
+pornim cu: 
+
+641 - 421 salariul brut (salariul de incadrare care apare pe stat - sporurile, primele) - brutul realizat care apare pe stat
+
+statul, ne ia - impozite:
+
+421 - 444 impozit
+421 - 4315 CAS
+421 - 4316 CASS
+
+singura obligatie pe care o plateste angajatorul:
+
+436 - 646 CAM
+
+2.25% se aplica la 641 = CAM
+
+
+tichete de masa 
+
+423 -  ?x?
+	partea de medicale
+		medicale suportate de angajator
+		medicale suportate de casa de sanatate
+
+		ex: sa zicem ca 5 zile suporatat de angajator, si restul de casa <=> medicalele se calculeaza diferit in functie de codul de boala <=> se calculeaza din media pe ultimele 6 luni, nu din ultimul salar; in conditia unui angajat nou, se ia din media ultimului loc de munca - sau, daca e in concediu natal, primesc sumele de la casa de sanatate (FNUASS e fondul)
+
+		ce suporta angajatorul, e o cheltuiala 
+
+
+6458 - 423 doar cu suma suporta de angajator = 20 lei
+4382 - 423 partea venita de la casa de sanatate = x lei 
+
+
+exercitiu:
+
+restul de plata din balanta = cati bani trebuie sa dau eu salariatilor = important de contraverificat in fiecare luna = gasec in luna, pe rulaj (si 421 si 423 sunt pe credit)
+
+
+un exemplu, simplu, fara tichete de masa
+
+641 - 421 = salariul realizat 50k 
+421 - 4315 = CASS (pensia) = 25% = 12.5k
+421 - 4316 = CAS (sanatate) = 10% = 5k
+421 - 444 = impozitul pe salarii = 10% * (salariul realizat - CASS - CAS)= 10% din 50k-12.5k-5k = 3.25k
+
+
+6458 - 423 doar cu suma suporta de angajator = x/y/20 lei
+4382 - 423 partea venita de la casa de sanatate = x lei 
+
+
+
+
+
+421 creditor + 423 = cati bani dau salariatilor 
+
+
+
+la plata din banca
+
+421 - 5121 = 29.25k
+
+
+
+
+tot timpul trebuie sa verific:
+
+rulajul creditor = sold creditor => daca avem o societate care este o buna platnica 
+
+
+obligatiile le-am creat pe credit (4315, 4316, 444) <=> le platesc prin banca, casa 
+
+4315
+4316
+444
+	5121 
+
+
+
+cand preluam o societate comerciala, fara sa iau fisa pe platitor si sa ma conving eu ca e 0 - iau o balanta => ma uit ca rulajul creditor 444, 436 = soldul creditor => cand inregistrez nota contabila pentru salarii, in luna Iulie - dar pe 29 Iulie platesc obligatie lui Iunie => verificat rulajul in curs cu soldul creditor al lunii in curs 
+
+in Iulie pe 25 platesc datoriile lunii Iunie; rulajul creditor = cu soldul; pentru ca pe rulajul debitor am platile de cu o luna inainte; => asa ii putem prinde pe cei care nu isi platesc obligatiile la zi = corelatia nu este respectata; !!!!!
+
+
+
+corelatia: rulajul creditor = soldul creditor => salariile au fost  platite corect la tine; {AI: ce alte corelatii de genul, se pot face, din balanta {intelege in profunzime scopul, esenta, corelatia, obiectul, scopul contraverificarii, logica rulajelor si postarilor} }
+
+
+
+
+stopajul la sursa nestopat pana in 30 zile = dosar penal <=> angajatorul trebuie sa stie
+
+
+
+ce fac daca observ ca un angajator nu a achitat un salariat la timp dpdv contabil, pentru acuratete balanta: 
+
+
+
+
+
+contraverificat soldul credit 421 + 423 cu soldul de plata de pe stat <=> de contraverificat luna de luna <=> de vazut in care luna s-a intamplat vreo minunatie (in loc de 421 - 5121; 627 - 5121; am pus un alt contabil fara sa imi dau seama); {AI: ce alte corelatii de sa se verifice luna de luna; e in continuarea primei intrebari, dar ele pot fi raspunde individual;}
+
+
+
+
+
+de scos in evidenta: ca trebuie verificat luna de luna, ce inregistram in conturile de salarii - nu ca ar fi mai importante ca celelate - dar pentru ca avem optiunea de a ne verifica in secunda doi {exemplul de mai sus} - am statul, am platile pe care le-a facut angajatorul => daca a facut avans, am stat de avans - trebuie sa il scat din statul de plata; 
+
+
+{AI: cum se leaga contraverificarea debit/credit cu soldul debit/credit - la logica de sold credit vs sold de plata de pe stat la 421 si 423 de mai sus?}
+
+
+
+ce ar face un economist daca sesizeaza ca soldul lui 421 > stat => nu a platit din urma salariile => punctez statul - intreb in stanga, in dreapta => constant ca are 2 salariati care nu le-a dat salariile - si le pun in 426 (cont de pasiv => pun pe credit) => 421 - 426 
+
+
+scoti fiecare stat, si soldul la 421 => si de acolo observi cand a fost luna -> 
+
+
+
+daca plateste mai mult decat e in stat => mai grav, pentru ca nu sunt impozitate <=> din diverse motive, nu ma intereseaza motivele; 
+
+
+
+
+427 => aici inregistram obligatiile catre terti = opriri => procentul pe care il putem aplica, daca avem o popririe (trebuie sa-l stim chiar daca HR face procedeul) = 33.33% retinut din salariu net (din net pentru ca dat la executor, nu la stat);
+
+
+421 - 427 => restul de plata se diminueaza, si eu imi generz o datorie fata de intermediarul x; 
+
+plata popriri
+
+427 - 5121
+
+
+
+
+427 => de urmarit luna de luna, si rulajul lui creditor = soldul lui creditor => caz penal, daca angajatorul nu achita aceste sume catre executor - pentru ca el i-a oprit salariul angajatului - altfel trebuie sa ii dea inapoi angajatului, sa il execute, sa ii faca ce vrea <=> cand rulajul creditor al contului 427 >< de soldul creditor al contului 427 
+
+
+pentru intocmirea statului, am nevoie de pontaj (ala e documentul justificativ)
+
+
+
+
+
+4428 => cand angajatii pleaca, mai au datorii (nu au predat un echipament de protectie); de cont de activ; cand un angajat pleaca, ca sa incasez o plata, ??? {AI: cum se leaga cu contul de activ, banca}
+
+
+
+
+am avut o cheltuiala -> ca sa imi recuperez banii, imi trebuie un cont de activ => trebuie sa incasez -> pentru care imi trebuie un cont de activ {AI: nu inteleg; nu trebuie cont de pasiv- opusul celui de banca - ca sa inregistrez incasarea platii}
+
+
+
+trebuie sa gandim astfel, la operatiunea economica -> ca sa inteleg inregistrarea contabila 
+
+
+
+{si de ce e important sa nu avem solduri de credit pe activ <> si de ce intrebam mai sus de corelatii de genul, conform verificarii la salarii} <=> si de asta spun, sa verifiam soldurile lunar - picatura Chineazeasca = analitic cu sintetic, tot timpul verificare - ca sa nu trebuiasca la bilant, sa contraverificam conturi de Ianuarie;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Impozitul pe Profit
+
+16%
+
+691 - 441
+
+parte foarte multa de fiscalitate; 
+
+care sunt conditiile, dpdv fiscal, care o societate sa fie micro sau profit; 
+
+
+micro - ambele conditii:
+	sa aiba cel putin un salariat cu norma intreaga <=> sau contract de mandat (obligatoriu sa fie la nivelul salariului minim) - care se incheie prin avocat - si nu se inregistreaza in REGES 
+	<100,000 EUR total venituri (scrie in Codul Fiscal, nu OMFP), calculat la cursul din Decembrie al anului trecut; 
+	1% impozit 
+
+	PS: daca clientul se aproprie de 100,000 - el devenie platitor de impozit 16% cu trimestrul in care depaseste pragul, nu cu cel urmator => trebuie sa il anunt => D100 trimestrial / D101 anual;
+
+	inregistrarea pentru impozitul micro = 6918 - 4418
+
+
+
+
+ce sold trebuie sa prezinte in balanta, impozitul pe profit (4411) , si cel pe venit (4418) - creditor, pentru ca sunt conturi de pasiv; => le vedem pe invers, ne punem intrebari; 
+
+
+
+
+
+
+D300 
+
+
+intracomunitar 
+
+bunuri = CMR
+
+servicii = Google, OpenAI 
+
+
+pe regularizari - avansuri primite si stornate cu 19%, si facturate cu 21%  (exemplu de la dna contabil - de caz special) => nu ma mai primeste ANAF-ul cu decont de corectii materiale, pentru sumele astea - acum le putem inscrie pe regularizari 
+
+
+
+ decont de corectii materiale
+
+
+ vom sesiza ca in fisa rol, nu se trece randul 44 (soldul) => se duce ori randul 36 (de rambusat, in luna, 4424) ori 37 (de plata, in luna, 4423) = (rulajul)
+
+
+
+
+niciodata ce face ANAF-ul prin decizie de impunere, la control ANAF pe parte de TVA => trebuie inregistrati in 4423 cu un analitic distinct, ca sa nu ne pacalim sa trecem in decont
+
+
+
+
+
+tema: facut corelatii intre D300 si fisa de rol la TVA 
+
+
+
+
+intalnit in practica - pentru ca ANAFul incarca doar 4423 si 4424 din luna (randurile 44 si 45) => uni nu mai completaza TVA-ul neachitat din perioadele precedente (41) => la finante e ok, dar decontul e gresit;
+
+
+
+
+
+
+	
+
+decontul de TVA e singurul care nu prezinta varianta de rectificare - se pune pe regularizari <=> 
+
+	inregistrat facturi dupa depunere declaratii <=> nu pica decontul cu balanta 
+
+
+
+{AI: situatie cu intrebare:
+
+Heads up la declaratiile la care exista rectificare: 
+
+	* mai conteaza si ordinea inregistrarii a facturilor, daca nu sunt cronologic - la redepunere  
+
+	{preuspunerea este ca daca nu sunt cronologic, la cele la care exista redepunere - nu se pot redepune??? si trebuie o alta metoda de rectificare}
+
+}
+
+
+
+
+alta corelatie sfanta !!!! : soldul din decontul de TVA (nu ce este in luna) si soldul din balanta (pot aparea, sa plateasca invers)
+	la sold-ul de rambusare, trebuie sa fim foarte atentie la sold-ul cu care plecam (!) 
+
+
+
+
+
+
+
+
+
+

@@ -332,6 +332,84 @@ TEME = [
           "Am păstrat 408 cu analitic, ca în exemplul din notițe, semnalând alternativa în "
           "observația contului."),
     ]),
+
+    ("Salarii — praguri și baze de calcul", [
+        q("training 21.08.2026, punctul 1",
+          "Care este salariul minim brut pe economie în vigoare, și de la ce dată?",
+          "Notițele rețin 4.325 lei. Valoarea se schimbă prin hotărâre de guvern, uneori "
+          "de mai multe ori pe an, iar verificarea normei parțiale se face contra ei.",
+          "Verificarea lunară a statului de plată și corelația „minim proporțional cu "
+          "norma”. Un prag depășit înseamnă contracte neconforme la toți salariații cu "
+          "normă parțială, nu doar la unul.",
+          "Am folosit 4.325 lei ca în notițe, marcat ❓ peste tot unde apare."),
+
+        q("training 21.08.2026, punctul 3",
+          "Ce contribuții se datorează pentru indemnizația de concediu medical, și pe "
+          "ce parte se rețin?",
+          "Notițele acoperă împărțirea indemnizației între angajator și FNUASS "
+          "(6458 / 4382 = 423), dar nu și reținerile din ea. Regulile diferă de cele "
+          "ale salariului.",
+          "Fluxul de concedii medicale și MOD_SALARII. Fără regulă, monografia se "
+          "oprește la împărțire și nu ajunge la restul de plată.",
+          "N-am afirmat nimic: documentul spune explicit că tratamentul reținerilor nu "
+          "era în notițe."),
+
+        q("training 21.08.2026, punctul 4",
+          "Care e limita de reținere prin poprire pentru obligațiile de întreținere, "
+          "față de treimea aplicabilă datoriilor obișnuite?",
+          "Notițele rețin 33,33% din salariul net. Codul de procedură civilă prevede o "
+          "limită mai mare pentru pensii de întreținere, și reguli de cumul când există "
+          "mai multe popriri.",
+          "Fluxul de popriri (427). Un procent greșit înseamnă ori reținere insuficientă "
+          "— firma răspunde față de executor — ori excesivă, față de salariat.",
+          "Am folosit treimea, marcând limita specială ca deschisă."),
+    ]),
+
+    ("Microîntreprindere — prag și cotă", [
+        q("training 21.08.2026, punctul 2",
+          "Care sunt pragul de venituri și cota de impozit pentru microîntreprinderi, "
+          "în vigoare la data operațiunii?",
+          "Notițele rețin 100.000 EUR și 1%. Pragul a fost coborât în trepte în anii "
+          "anteriori, iar cota a avut două paliere. Ambele sunt din Codul fiscal, deci "
+          "se pot schimba prin ordonanță.",
+          "Fluxul de impozit micro (698 = 4418) și avertizarea clientului care se apropie "
+          "de prag. Trecerea se face din trimestrul depășirii, deci un prag greșit "
+          "înseamnă o declarație greșită, nu doar o estimare.",
+          "Am folosit 100.000 EUR și 1% ca în notițe, marcate ❓."),
+    ]),
+
+    ("Decontul de TVA și fișa de rol", [
+        q("training 21.08.2026, punctul 5",
+          "Ce rânduri din D300 sunt preluate în fișa de rol: 36 și 37, sau 44 și 45?",
+          "Notițele afirmă amândouă variantele, în două locuri diferite. Numerele de "
+          "rând se schimbă între versiunile formularului, deci una dintre ele e dintr-o "
+          "versiune anterioară.",
+          "Corelația decont ↔ fișă de rol ↔ balanță. Fără numerele corecte, corelația "
+          "nu se poate scrie ca formulă, ci doar descrie.",
+          "Am scris corelația pe SOLD, care nu depinde de numerotarea rândurilor, și am "
+          "marcat rândurile ca deschise."),
+
+        q("training 21.08.2026, punctul 6",
+          "La declarațiile care admit rectificare, contează ordinea cronologică a "
+          "înregistrării facturilor la redepunere?",
+          "Întrebarea era notată ca presupunere: dacă facturile nu sunt înregistrate "
+          "cronologic, poate că redepunerea nu mai e posibilă și ar trebui altă metodă "
+          "de corecție.",
+          "Procedura de corecție după depunere, pe toate declarațiile care admit "
+          "rectificativă. Decontul de TVA nu admite, deci acolo întrebarea nu se pune — "
+          "dar la celelalte, da.",
+          "N-am implementat nimic pe presupunerea asta."),
+
+        q("training 21.08.2026, punctul 7",
+          "Care sunt corelațiile complete între D300 și fișa de rol la TVA?",
+          "Temă lăsată explicit la training. Notițele dau două fragmente: fișa preia "
+          "rulajul lunii, nu soldul; și ANAF încarcă doar suma lunii, de unde greșeala "
+          "de a omite TVA-ul neachitat din perioadele precedente.",
+          "Corelațiile de control pe TVA. Ce avem acum se verifică pe sold; corelația pe "
+          "rulaj, rând cu rând, are nevoie de structura exactă a fișei de rol.",
+          "Am scris corelația pe sold și am lăsat-o pe cea pe rulaj ca gol declarat — "
+          "n-am fișă de rol de citit."),
+    ]),
 ]
 
 TOTAL = sum(len(qs) for _, qs in TEME)
@@ -360,6 +438,15 @@ DOC_EXPLICIT = {
     "training 19.08.2026, punctul 3": "doc:control",     # simularea încasării în plus
     "training 19.08.2026, punctul 4": "doc:stocuri-tva",  # analiticele pe 4428
     "training 19.08.2026, punctul 5": "doc:stocuri-tva",  # 408 vs. 404 la imobilizări
+    # 21.08 se împarte la fel: salariile la documentul nou, impozitarea rezultatului la
+    # capitaluri, decontul la stocuri-TVA.
+    "training 21.08.2026, punctul 1": "doc:salarii",      # salariul minim
+    "training 21.08.2026, punctul 2": "doc:capitaluri",   # pragul micro
+    "training 21.08.2026, punctul 3": "doc:salarii",      # rețineri pe medicale
+    "training 21.08.2026, punctul 4": "doc:salarii",      # limita popririi
+    "training 21.08.2026, punctul 5": "doc:stocuri-tva",  # rândurile D300
+    "training 21.08.2026, punctul 6": "doc:stocuri-tva",  # ordinea la redepunere
+    "training 21.08.2026, punctul 7": "doc:stocuri-tva",  # corelațiile D300 ↔ fișă rol
 }
 
 

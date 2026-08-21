@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ro"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salarii, contribuții și rețineri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F8F9F7; --surface:#FFFFFF; --sunk:#F1F4F1;
+  --ink:#1A2421; --ink-2:#3D4A45; --muted:#6B7671;
+  --accent:#1B5E44; --accent-soft:#E6EFEA; --accent-line:#B9D2C6;
+  --storno:#A6342B;
+  --rule:#DDE2DE; --rule-soft:#EAEEEB;
+  --shadow:0 1px 2px rgba(26,36,33,.05), 0 8px 24px -12px rgba(26,36,33,.14);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+    --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+    --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+    --storno:#E08278;
+    --rule:#2A3430; --rule-soft:#222B27;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+  --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+  --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+  --storno:#E08278;
+  --rule:#2A3430; --rule-soft:#222B27;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased}
+.masthead{border-bottom:1px solid var(--rule); background:var(--surface); padding:56px 28px 40px}
+.mast-in{max-width:1180px; margin:0 auto; display:flex; flex-direction:column; gap:16px}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0}
+h1{font-family:Spectral,Georgia,"Times New Roman",serif; font-weight:600;
+  font-size:clamp(2rem,4.6vw,3.15rem); line-height:1.12; letter-spacing:-.015em;
+  margin:0; text-wrap:balance; max-width:22ch}
+.lede{color:var(--muted); font-size:1.02rem; margin:0; max-width:66ch}
+.wrap{max-width:1180px; margin:0 auto; padding:0 28px; display:grid;
+  grid-template-columns:232px minmax(0,1fr); gap:56px; align-items:start}
+nav.rail{position:sticky; top:24px; padding:36px 0 40px; max-height:100vh; overflow-y:auto}
+.rail-h{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.66rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+  margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--rule)}
+.rail ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px}
+.rail a{display:grid; grid-template-columns:24px 1fr; gap:8px; align-items:baseline;
+  text-decoration:none; color:var(--ink-2); padding:6px 8px; border-radius:5px;
+  font-size:.845rem; line-height:1.35; transition:background .12s,color .12s}
+.rail a:hover{background:var(--sunk); color:var(--accent)}
+.rail a:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+.tnum{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  color:var(--muted); font-variant-numeric:tabular-nums}
+main{padding:36px 0 96px; min-width:0; max-width:74ch}
+h2{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.62rem; line-height:1.22;
+  letter-spacing:-.01em; margin:44px 0 18px; text-wrap:balance;
+  padding-top:20px; border-top:1px solid var(--rule-soft); scroll-margin-top:20px}
+h3{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.14rem;
+  margin:30px 0 10px; scroll-margin-top:20px}
+h4{font-size:1rem; margin:22px 0 8px; scroll-margin-top:20px}
+p{margin:0 0 14px; max-width:72ch}
+ul,ol{margin:0 0 16px; padding-left:1.2rem; max-width:72ch}
+li{margin-bottom:7px}
+li::marker{color:var(--muted)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.875em;
+  background:var(--sunk); border:1px solid var(--rule-soft); border-radius:4px;
+  padding:1px 5px; color:var(--ink)}
+hr{border:0; border-top:1px solid var(--rule); margin:32px 0}
+pre.cod{background:var(--sunk); border:1px solid var(--rule); border-radius:7px;
+  padding:14px 16px; overflow-x:auto; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; color:var(--ink-2)}
+.ledger{margin:0 0 20px; border:1px solid var(--rule); border-left:3px solid var(--accent);
+  border-radius:0 7px 7px 0; background:var(--surface); overflow-x:auto; box-shadow:var(--shadow)}
+.led-row{display:grid; grid-template-columns:6.5em 1.2em 6.5em 8.5em 1fr; gap:10px;
+  align-items:baseline; padding:8px 16px; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; white-space:nowrap; scroll-margin-top:20px}
+.led-row+.led-row{border-top:1px solid var(--rule-soft)}
+.led-row:target{background:var(--accent-soft)}
+.led-d,.led-c{color:var(--ink); font-weight:500}
+.led-eq{color:var(--muted)}
+.led-amt{text-align:right; font-variant-numeric:tabular-nums; color:var(--accent); font-weight:500}
+.led-amt.neg{color:var(--storno)}
+.led-note{color:var(--muted); font-size:.9em; white-space:normal;
+  font-family:"IBM Plex Sans",sans-serif}
+.note{border-left:3px solid var(--accent-line); background:var(--sunk);
+  padding:13px 18px; border-radius:0 6px 6px 0; margin:0 0 20px; max-width:72ch}
+.note p{margin:0; color:var(--ink-2); font-size:.94rem}
+.tw{overflow-x:auto; margin:0 0 22px; border:1px solid var(--rule); border-radius:7px;
+  background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem}
+thead th{text-align:left; font-family:"IBM Plex Mono",ui-monospace,monospace; font-weight:500;
+  font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; color:var(--muted);
+  padding:11px 14px; border-bottom:1px solid var(--rule); background:var(--sunk)}
+tbody td{padding:10px 14px; border-bottom:1px solid var(--rule-soft);
+  vertical-align:top; color:var(--ink-2)}
+tbody tr:nth-child(even){background:var(--accent-soft)}
+tbody tr:last-child td{border-bottom:none}
+tbody td code{background:transparent; border:none; padding:0}
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr; gap:0; padding:0 22px}
+  nav.rail{position:static; max-height:none; padding:28px 0 8px; border-bottom:1px solid var(--rule)}
+  .rail ol{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:2px}
+  main{padding-top:26px}
+  .masthead{padding:40px 22px 30px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style></head><body>
+<header class="masthead"><div class="mast-in">
+<p class="eyebrow">Notițe de curs · contabilitate</p>
+<h1>Salarii, contribuții și rețineri</h1>
+<p class="lede">Sursă: training 21.08.2026 — de la statul de plată la balanță, cu verificările care se fac în secunda doi</p>
+</div></header>
+<div class="wrap">
+<nav class="rail" aria-label="Cuprins"><p class="rail-h">Cuprins</p><ol><li><a href="#cum-cite-ti-acest-document"><span class="tnum">1</span><span>Cum citești acest document</span></a></li><li><a href="#1-nainte-de-nregistrare-de-unde-vine-statul-de-p"><span class="tnum">2</span><span>1. Înainte de înregistrare: de unde vine statul de plată</span></a></li><li><a href="#2-monografia-salariilor"><span class="tnum">3</span><span>2. Monografia salariilor</span></a></li><li><a href="#3-concediile-medicale"><span class="tnum">4</span><span>3. Concediile medicale</span></a></li><li><a href="#4-re-ineri-avansuri-i-datorii-reciproce"><span class="tnum">5</span><span>4. Rețineri, avansuri și datorii reciproce</span></a></li><li><a href="#5-corela-iile-de-balan-pe-salarii"><span class="tnum">6</span><span>5. Corelațiile de balanță pe salarii</span></a></li><li><a href="#6-r-spunsuri-la-ntreb-rile-din-noti-e"><span class="tnum">7</span><span>6. Răspunsuri la întrebările din notițe</span></a></li><li><a href="#anexa-b-checklist-practic"><span class="tnum">8</span><span>Anexa B — Checklist practic</span></a></li><li><a href="#anexa-c-ce-am-corectat-fa-de-noti-ele-originale"><span class="tnum">9</span><span>Anexa C — Ce am corectat față de notițele originale</span></a></li><li><a href="#anexa-d-r-mase-deschise"><span class="tnum">10</span><span>Anexa D — Rămase deschise</span></a></li><li><a href="#anexa-e-baza-legal-citat"><span class="tnum">11</span><span>Anexa E — Baza legală citată</span></a></li></ol></nav>
+<main>
+<h3 id="surs-training-21-08-2026-de-la-statul-de-plat-la">Sursă: training 21.08.2026 — de la statul de plată la balanță, cu verificările care se fac în secunda doi</h3>
+<hr>
+<h2 id="cum-cite-ti-acest-document">Cum citești acest document</h2>
+<div class="tw"><table><thead><tr><th>Marcaj</th><th>Semnificație</th></tr></thead><tbody><tr><td>✅</td><td>Notița originală era corectă — doar reformulată/completată</td></tr><tr><td>⚠️</td><td><strong>Eroare în notița originală</strong> — corectată aici, cu explicație</td></tr><tr><td>➕</td><td>Completare (lucru care lipsea, dar era necesar ca raționamentul să stea în picioare)</td></tr><tr><td>❓</td><td>Rămas deschis — de clarificat cu formatorul (vezi Anexa D)</td></tr></tbody></table></div>
+<hr>
+<h2 id="1-nainte-de-nregistrare-de-unde-vine-statul-de-p">1. Înainte de înregistrare: de unde vine statul de plată</h2>
+<p>Contabilitatea primește statul de plată gata făcut. Asta e și riscul: dacă statul e</p>
+<p>greșit, nota contabilă e greșită, iar eroarea se vede abia la control.</p>
+<h3 id="1-1-salariul-minim-i-norma-par-ial">1.1 Salariul minim și norma parțială</h3>
+<p>Salariul minim brut pe economie este <strong>4.325 lei</strong> ❓. Verificarea care se face lunar,</p>
+<p>și obligatoriu la fiecare modificare a minimului: fiecare salariat trebuie să fie plătit</p>
+<p>cel puțin la nivelul lui, <strong>proporțional cu norma</strong>.</p>
+<div class="tw"><table><thead><tr><th>Normă</th><th>Ore</th><th>Minim pe stat</th></tr></thead><tbody><tr><td>Întreagă</td><td>8</td><td>4.325 lei</td></tr><tr><td>Jumătate</td><td>4</td><td>50% din 4.325 = 2.162,50 lei</td></tr><tr><td>Un sfert</td><td>2</td><td>25% din 4.325 = 1.081,25 lei</td></tr></tbody></table></div>
+<p>➕ Notița rotunjea la 2.163 și 1.081. Cifra exactă contează: sub minimul proporțional,</p>
+<p>contractul e neconform, indiferent cu cât.</p>
+<p>Greșeala frecventă în practică nu e reaua-credință, ci <strong>neactualizarea</strong>: la creșterea</p>
+<p>minimului se ajustează salariații cu normă întreagă și se uită cei cu normă parțială.</p>
+<p>De aceea statul se cere, nu se presupune — cel puțin la fiecare modificare a minimului.</p>
+<h3 id="1-2-reges-d112-i-pontajul">1.2 REGES, D112 și pontajul</h3>
+<p>Trei surse care trebuie să spună același lucru:</p>
+<ul><li><strong>REGES</strong> (fostul Revisal) — registrul în care se înregistrează contractele de muncă,</li></ul>
+<p>modificările și <strong>fiecare concediu medical în parte</strong>. De acolo iese, la plecarea</p>
+<p>salariatului, cât a fost angajat, cât în medical, cât în concediu plătit — necesar</p>
+<p>pentru vechimea în muncă. Responsabilitatea e a HR-ului, dar consecința e a tuturor.</p>
+<ul><li><strong>D112</strong> — declarația în baza căreia se plătesc contribuțiile. Un <code>.xml</code> întocmit de</li></ul>
+<p>HR, cu toate contractele și fluctuațiile lunii.</p>
+<ul><li><strong>Pontajul</strong> — documentul justificativ pentru întocmirea statului. Fără el, statul nu</li></ul>
+<p>are bază.</p>
+<p>➕ <strong>Verificarea minimă:</strong> la fiecare modificare a salariului minim, se confruntă ce e pe</p>
+<p>stat cu ce e în REGES. Și se verifică CNP-urile — o cifră greșită înseamnă un salariat</p>
+<p>care, pentru stat, nu există.</p>
+<h3 id="1-3-fi-a-de-pl-titor-din-spv">1.3 Fișa de plătitor din SPV</h3>
+<p>Cu acces la Spațiul Privat Virtual se ia <strong>fișa pe plătitor</strong> și se confruntă cu nota</p>
+<p>contabilă. Cazul care apare lunar: HR-ul a uitat un concediu medical, procesează o</p>
+<p><strong>rectificativă pe mai</strong>, iar contabilitatea e deja la nota pe iunie.</p>
+<p>Dacă statul s-a modificat și s-a depus un D112 nou, **trebuie înregistrată o notă</p>
+<p>rectificativă** — altfel fișa de plătitor și balanța nu se mai potrivesc. Lanțul e:</p>
+<div class="note"><p>statul de plată → D112 → fișa de plătitor ANAF → balanță</p></div>
+<p>Nu e opțional ca HR să comunice ce s-a modificat. Fără asta, corelația se rupe și nu se</p>
+<p>vede până la control.</p>
+<hr>
+<h2 id="2-monografia-salariilor">2. Monografia salariilor</h2>
+<h3 id="2-1-salariul-brut-i-re-inerile">2.1 Salariul brut și reținerile</h3>
+<p>Se pornește de la <strong>brutul realizat de pe stat</strong> — salariul de încadrare plus sporuri și</p>
+<p>prime, nu salariul de încadrare.</p>
+<p>Exemplu, salariu brut realizat 50.000 lei:</p>
+<div class="ledger"><div class="led-row" id="m1-a1"><span class="led-d">641</span><span class="led-eq">=</span><span class="led-c">421</span><span class="led-amt">50.000</span><span class="led-note">(cheltuiala cu salariile — brutul realizat)</span></div></div>
+<p>Din brut, statul reține trei lucruri, toate din banii salariatului:</p>
+<div class="ledger"><div class="led-row" id="m2-a1"><span class="led-d">421</span><span class="led-eq">=</span><span class="led-c">4315</span><span class="led-amt">12.500</span><span class="led-note">(CAS — contribuția de asigurări sociale, pensii)</span></div><div class="led-row" id="m2-a2"><span class="led-d">421</span><span class="led-eq">=</span><span class="led-c">4316</span><span class="led-amt">5.000</span><span class="led-note">(CASS — asigurări sociale de sănătate)</span></div><div class="led-row" id="m2-a3"><span class="led-d">421</span><span class="led-eq">=</span><span class="led-c">444</span><span class="led-amt">3.250</span><span class="led-note">(impozit pe venituri de natura salariilor)</span></div></div>
+<p>Cotele și baza:</p>
+<ul><li>CAS: 25% × 50.000 = 12.500</li><li>CASS: 10% × 50.000 = 5.000</li><li>impozit: 10% din baza rămasă, adică 10% × 32.500 = 3.250</li></ul>
+<p>⚠️ <strong>Notița inversa acronimele.</strong> Scria „4315 = CASS (pensia) = 25%” și „4316 = CAS</p>
+<p>(sănătate) = 10%”. Conturile erau corecte, denumirile schimbate între ele — iar notița se</p>
+<p>contrazicea singură, pentru că într-un bloc anterior le avea corect. Corect este:</p>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Acronim</th><th>Ce este</th><th>Cotă</th></tr></thead><tbody><tr><td><strong>4315</strong></td><td><strong>CAS</strong></td><td>contribuția de asigurări sociale — <strong>pensii</strong></td><td>25%</td></tr><tr><td><strong>4316</strong></td><td><strong>CASS</strong></td><td>contribuția de asigurări sociale de <strong>sănătate</strong></td><td>10%</td></tr></tbody></table></div>
+<h3 id="2-2-singura-contribu-ie-a-angajatorului">2.2 Singura contribuție a angajatorului</h3>
+<div class="ledger"><div class="led-row" id="m3-a1"><span class="led-d">646</span><span class="led-eq">=</span><span class="led-c">436</span><span class="led-amt">1.125</span><span class="led-note">(CAM — contribuția asiguratorie pentru muncă)</span></div></div>
+<p>Cota este 2,25% aplicată la fondul de salarii: 2,25% × 50.000 = 1.125.</p>
+<p>⚠️ <strong>Notița scria <code>436 - 646</code>, adică invers.</strong> În convenția ei proprie — `debit -</p>
+<p>credit` — asta ar însemna debit 436 și credit 646: o datorie care scade și un venit care</p>
+<p>apare. CAM este o <strong>cheltuială</strong> a angajatorului: debit 646, credit 436.</p>
+<p>Contul 646 este „Cheltuieli privind contribuția asiguratorie pentru muncă”, 436 este</p>
+<p>datoria. Toate celelalte contribuții sunt reținute din salariul angajatului; asta e</p>
+<p>singura suportată de firmă.</p>
+<h3 id="2-3-restul-de-plat">2.3 Restul de plată</h3>
+<div class="ledger"><div class="led-row" id="m4-a1"><span class="led-d">421</span><span class="led-eq">=</span><span class="led-c">5121</span><span class="led-amt">29.250</span><span class="led-note">(plata prin bancă)</span></div></div>
+<p>50.000 − 12.500 − 5.000 − 3.250 = 29.250.</p>
+<p>Iar obligațiile create pe credit se sting la termen, tot prin bancă:</p>
+<div class="ledger"><div class="led-row" id="m5-a1-1"><span class="led-d">%</span><span class="led-eq">=</span><span class="led-c">5121</span><span class="led-amt">20.750</span><span class="led-note"></span></div><div class="led-row" id="m5-a1-2"><span class="led-d">4315</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">12.500</span><span class="led-note"></span></div><div class="led-row" id="m5-a1-3"><span class="led-d">4316</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">5.000</span><span class="led-note"></span></div><div class="led-row" id="m5-a1-4"><span class="led-d">444</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">3.250</span><span class="led-note"></span></div></div>
+<p>Plus CAM, separat: <code>436 = 5121 · 1.125</code>.</p>
+<h3 id="2-4-tichetele-de-mas">2.4 Tichetele de masă</h3>
+<p>⚠️ Notița pusese tichetele de masă sub contul <strong>423</strong>. Nu acolo stau: 423 este „Personal</p>
+<p>— ajutoare materiale datorate”, corect pentru concediile medicale din secțiunea</p>
+<p>următoare, dar nu pentru tichete.</p>
+<p>Tichetele de masă merg pe <strong>642</strong> — „Cheltuieli cu avantajele în natură și tichetele</p>
+<p>acordate salariaților”.</p>
+<hr>
+<h2 id="3-concediile-medicale">3. Concediile medicale</h2>
+<p>Indemnizația de concediu medical se împarte între doi plătitori: primele zile le suportă</p>
+<p><strong>angajatorul</strong>, restul <strong>casa de sănătate</strong> (fondul FNUASS).</p>
+<p>Regulile de calcul, care nu sunt cele ale salariului:</p>
+<ul><li>numărul de zile suportate de angajator <strong>depinde de codul de boală</strong>;</li><li>baza de calcul este <strong>media ultimelor 6 luni</strong>, nu ultimul salariu;</li><li>la un angajat nou se ia media de la locul de muncă anterior;</li><li>indemnizațiile de risc maternal și cele asimilate vin integral de la casă.</li></ul>
+<p>Exemplu, indemnizație totală 1.000 lei, din care 250 lei suportați de angajator:</p>
+<div class="ledger"><div class="led-row" id="m6-a1"><span class="led-d">6458</span><span class="led-eq">=</span><span class="led-c">423</span><span class="led-amt">250</span><span class="led-note">(partea suportată de angajator — cheltuială)</span></div><div class="led-row" id="m6-a2"><span class="led-d">4382</span><span class="led-eq">=</span><span class="led-c">423</span><span class="led-amt">750</span><span class="led-note">(partea de recuperat de la casa de sănătate — creanță)</span></div></div>
+<p>Contul <strong>4382</strong> „Alte creanțe sociale” este o <strong>creanță</strong>: banii urmează să vină de la</p>
+<p>FNUASS. Contul <strong>6458</strong> este cheltuiala proprie.</p>
+<p>❓ Tratamentul exact al reținerilor din indemnizația de concediu medical — ce contribuții</p>
+<p>se datorează și pe ce parte — nu era în notițe și nu îl afirm aici.</p>
+<hr>
+<h2 id="4-re-ineri-avansuri-i-datorii-reciproce">4. Rețineri, avansuri și datorii reciproce</h2>
+<h3 id="4-1-popriri-contul-427">4.1 Popriri — contul 427</h3>
+<p>Când un executor judecătoresc instituie poprire pe salariu, firma devine <strong>intermediar</strong>:</p>
+<p>reține din salariul angajatului și plătește terțului.</p>
+<div class="ledger"><div class="led-row" id="m7-a1"><span class="led-d">421</span><span class="led-eq">=</span><span class="led-c">427</span><span class="led-amt">9.749,03</span><span class="led-note">(reținerea din net)</span></div><div class="led-row" id="m7-a2"><span class="led-d">427</span><span class="led-eq">=</span><span class="led-c">5121</span><span class="led-amt">9.749,03</span><span class="led-note">(plata către executor)</span></div></div>
+<p>Limita reținerii este de o treime din <strong>salariul net</strong> — 33,33% din 29.250 = 9.749,03.</p>
+<p>Se calculează din net, nu din brut, pentru că banii merg la executor, nu la stat.</p>
+<p>❓ Limita de o treime se aplică datoriilor obișnuite; pentru obligații de întreținere</p>
+<p>legea prevede o limită mai mare. Procentul aplicabil pe caz concret — de confirmat.</p>
+<p><strong>427 este contul cu cel mai mare risc penal din grupă.</strong> Banii reținuți nu sunt ai</p>
+<p>firmei: sunt ai angajatului, opriți în beneficiul altcuiva. Dacă firma nu îi virează,</p>
+<p>nu are ce explica — trebuia fie să îi vireze, fie să nu îi rețină.</p>
+<h3 id="4-2-drepturi-de-personal-neridicate-contul-426">4.2 Drepturi de personal neridicate — contul 426</h3>
+<p>Dacă salariul nu ajunge la salariat, datoria nu dispare, doar își schimbă natura:</p>
+<div class="ledger"><div class="led-row" id="m8-a1"><span class="led-d">421</span><span class="led-eq">=</span><span class="led-c">426</span><span class="led-amt"></span><span class="led-note">(drepturi neridicate)</span></div></div>
+<p>426 rămâne un cont de pasiv: datoria există în continuare, doar că nu mai e „salariu de</p>
+<p>plătit luna asta”, ci „bani pe care îi datorăm cuiva care nu i-a luat”.</p>
+<p>Cazul practic din notițe: soldul lui 421 este mai mare decât restul de plată de pe stat.</p>
+<p>Se scot statele lună de lună, se compară cu soldul, și se găsește luna în care s-a rupt.</p>
+<p>Dacă explicația e „doi salariați nu și-au luat banii”, suma trece la 426.</p>
+<p><strong>Situația inversă e mai gravă:</strong> dacă s-a plătit mai mult decât e pe stat, diferența e</p>
+<p>un venit neimpozitat. Motivele nu contează contabil — tratamentul, da.</p>
+<h3 id="4-3-crean-e-fa-de-personal-la-plecare-contul-428">4.3 Creanțe față de personal la plecare — contul 4282</h3>
+<p>Când un salariat pleacă și rămâne dator firmei — un echipament de protecție nepredat, un</p>
+<p>avans nejustificat — firma are o <strong>creanță</strong>:</p>
+<div class="ledger"><div class="led-row" id="m9-a1"><span class="led-d">4282</span><span class="led-eq">=</span><span class="led-c">7588</span><span class="led-amt">400</span><span class="led-note">(creanța față de fostul salariat)</span></div><div class="led-row" id="m9-a2"><span class="led-d">5311</span><span class="led-eq">=</span><span class="led-c">4282</span><span class="led-amt">400</span><span class="led-note">(încasarea)</span></div></div>
+<p>⚠️ <strong>Notița scria <code>4428</code>.</strong> Contul 4428 este <em>TVA neexigibilă</em> și n-are nicio legătură cu</p>
+<p>personalul. Contul corect este <strong>4282</strong>, „Alte creanțe în legătură cu personalul”.</p>
+<h3 id="4-4-avansul">4.4 Avansul</h3>
+<p>Dacă s-a plătit avans în cursul lunii, el se scade din restul de plată de pe statul</p>
+<p>final. Avansul stă pe <strong>425</strong> „Avansuri acordate personalului”, iar la statul de lichidare</p>
+<p>se închide <code>421 = 425</code>. Fără pasul ăsta, restul de plată din balanță nu se potrivește cu</p>
+<p>statul.</p>
+<hr>
+<h2 id="5-corela-iile-de-balan-pe-salarii">5. Corelațiile de balanță pe salarii</h2>
+<p>Aici e miezul practic al trainingului. Conturile de salarii se pot verifica **în secunda</p>
+<p>doi**, pentru că documentul de control există deja: statul de plată.</p>
+<h3 id="5-1-regula-general-rulaj-creditor-sold-creditor">5.1 Regula generală: rulaj creditor = sold creditor</h3>
+<p>Pentru orice datorie <strong>constituită lunar și achitată în luna următoare</strong>, la sfârșitul</p>
+<p>lunii:</p>
+<div class="note"><p><strong>sold creditor = rulaj creditor al lunii</strong></p></div>
+<p>Motivul e mecanic. În iulie se înregistrează obligația lunii iulie (pe credit) și se</p>
+<p>plătește, pe 25, obligația lunii iunie (pe debit). Ce rămâne pe credit la 31 iulie este</p>
+<p>exact obligația lunii iulie — adică rulajul creditor al lunii.</p>
+<p><strong>Dacă soldul creditor este mai mare decât rulajul creditor, există restanță.</strong> Firma nu</p>
+<p>și-a plătit obligațiile la zi, iar diferența arată de cât timp.</p>
+<p>Regula se aplică la:</p>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Ce verifică</th><th>Ce înseamnă abaterea</th></tr></thead><tbody><tr><td><strong>444</strong></td><td>impozitul pe salarii</td><td>stopaj la sursă nevirat</td></tr><tr><td><strong>4315 / 4316</strong> (prin 431)</td><td>CAS și CASS</td><td>contribuții restante</td></tr><tr><td><strong>436</strong></td><td>CAM</td><td>contribuție restantă</td></tr><tr><td><strong>427</strong></td><td>rețineri către terți</td><td><strong>risc penal</strong> — bani opriți și nevirați</td></tr><tr><td><strong>4423</strong></td><td>TVA de plată</td><td>TVA restantă</td></tr></tbody></table></div>
+<p>➕ <strong>Stopajul la sursă nevirat în 30 de zile atrage răspundere penală.</strong> Angajatorul</p>
+<p>trebuie să știe asta, iar contabilul trebuie să i-o spună — corelația de mai sus e</p>
+<p>instrumentul prin care se vede la timp.</p>
+<p><strong>Ce o rupe LEGITIM:</strong> un decalaj de scadență (obligația lunii se plătește în luna</p>
+<p>următoare — asta <em>este</em> corelația), o plată în avans, o rectificativă care schimbă</p>
+<p>obligația unei luni anterioare.</p>
+<p><strong>Ce o rupe SUSPECT:</strong> sold creditor mai mare decât rulajul, constant, pe mai multe luni.</p>
+<h3 id="5-2-corela-ia-cu-statul-de-plat">5.2 Corelația cu statul de plată</h3>
+<div class="note"><p><strong>sold creditor 421 + sold creditor 423 = restul de plată din statul de plată</strong></p></div>
+<p>Se verifică lună de lună, și e cea mai ieftină verificare din toată contabilitatea:</p>
+<p>statul există, soldul există, comparația durează secunde.</p>
+<p>Când nu se potrivește, se caută luna în care s-a rupt, scoțând statele pe rând. Cazul</p>
+<p>tipic: o plată înregistrată pe alt cont decât 421 — <code>627 = 5121</code> în loc de <code>421 = 5121</code>.</p>
+<h3 id="5-3-verificarea-cam-pe-cifre">5.3 Verificarea CAM pe cifre</h3>
+<div class="note"><p><strong>2,25% × rulaj creditor 421 (brut) = rulaj creditor 436</strong></p></div>
+<p>Dacă nu se potrivește, ori baza de calcul e greșită, ori s-a omis o parte din fondul de</p>
+<p>salarii.</p>
+<h3 id="5-4-solduri-cu-semn-contrar-naturii-contului">5.4 Solduri cu semn contrar naturii contului</h3>
+<p>Un cont de activ cu sold creditor — sau invers — este aproape întotdeauna o eroare.</p>
+<ul><li><strong>4282</strong> (creanță față de personal) cu sold creditor: ori s-a încasat de două ori, ori</li></ul>
+<p>înregistrarea inițială era pe partea greșită.</p>
+<ul><li><strong>421</strong> cu sold debitor: s-a plătit mai mult decât s-a datorat.</li></ul>
+<p>De aceea soldurile se verifică <strong>lunar</strong>, nu la bilanț. Verificarea lunară e picătura</p>
+<p>chinezească: puțin, des, și cu analiticul confruntat cu sinteticul. Alternativa e să</p>
+<p>contraverifici în martie conturi din ianuarie, când nimeni nu mai ține minte ce s-a</p>
+<p>întâmplat.</p>
+<hr>
+<h2 id="6-r-spunsuri-la-ntreb-rile-din-noti-e">6. Răspunsuri la întrebările din notițe</h2>
+<p>Întrebările de mai jos erau notate în text ca lucruri de lămurit. Nu sunt întrebări</p>
+<p>pentru formator — sunt lucruri care se pot răspunde din logica înregistrării.</p>
+<h3 id="6-1-cum-se-leag-rulajul-debit-credit-cu-soldul-l">6.1 Cum se leagă rulajul debit/credit cu soldul, la 421 și 423</h3>
+<p>Rulajul este <strong>mișcarea perioadei</strong>; soldul este <strong>ce a rămas</strong>. Pe un cont de pasiv:</p>
+<div class="note"><p>sold creditor final = sold inițial + rulaj creditor − rulaj debitor</p></div>
+<p>La 421, rulajul creditor al lunii este brutul datorat, iar rulajul debitor conține</p>
+<p>reținerile și plata. Ce rămâne pe credit este exact ce mai ai de dat — deci se compară cu</p>
+<p>restul de plată de pe stat.</p>
+<p>Diferența față de regula „rulaj = sold” de la 444 sau 436 este că acolo soldul inițial e</p>
+<p>zero la începutul fiecărei luni, pentru că obligația lunii precedente s-a stins. La 421,</p>
+<p>dacă soldul inițial nu e zero, ai deja o restanță din trecut — și corelația îți spune</p>
+<p>asta înainte să o caute altcineva.</p>
+<h3 id="6-2-de-ce-crean-a-fa-de-un-fost-salariat-e-cont-">6.2 De ce creanța față de un fost salariat e cont de activ</h3>
+<p>Un <strong>activ</strong> este ceva ce ai sau ai de primit. O <strong>datorie</strong> este ceva ce ai de dat.</p>
+<p>Când fostul salariat îți datorează bani, tu ai <em>de primit</em> — deci creanță, deci activ:</p>
+<ol><li>La încasare, nu îți trebuie un cont de pasiv „opus băncii”: pur și simplu **crește</li></ol>
+<p>un activ și scade altul**.</p>
+<div class="ledger"><div class="led-row" id="m10-a1"><span class="led-d">5311</span><span class="led-eq">=</span><span class="led-c">4282</span><span class="led-amt">400</span><span class="led-note"></span></div></div>
+<p>Banca crește pe debit (activ care crește), creanța scade pe credit (activ care scade).</p>
+<p>Bilanțul rămâne echilibrat pentru că totalul activelor nu s-a schimbat — doar forma lor.</p>
+<p>Regula generală, care rezolvă toate cazurile de genul: **întreabă întâi ce s-a întâmplat</p>
+<p>economic**, apoi caută conturile. Nu invers.</p>
+<h3 id="6-3-de-ce-nu-trebuie-solduri-creditoare-pe-contu">6.3 De ce nu trebuie solduri creditoare pe conturi de activ</h3>
+<p>Pentru că ar afirma ceva imposibil: „am o creanță negativă”. În practică înseamnă</p>
+<p>întotdeauna una din trei — s-a înregistrat pe partea greșită, s-a încasat de două ori,</p>
+<p>sau s-a încasat ceva ce nu era înregistrat ca datorat.</p>
+<p>Bilanțul prezintă activele pe o parte și pasivele pe alta. Un activ cu sold creditor ori</p>
+<p>se prezintă greșit, ori trebuie reclasificat ca datorie — și atunci nu mai e ce spune</p>
+<p>numele contului.</p>
+<hr>
+<h2 id="anexa-b-checklist-practic">Anexa B — Checklist practic</h2>
+<ol><li>Statul de plată primit de la HR, cu pontajul în spate.</li><li>Salariații cu normă parțială — verificat minimul proporțional.</li><li><code>sold 421 + sold 423</code> = restul de plată de pe stat.</li><li><code>rulaj creditor = sold creditor</code> pe 444, 431, 436, 427.</li><li><code>2,25% × brut = rulaj creditor 436</code>.</li><li>Fișa de plătitor din SPV confruntată cu balanța.</li><li>Rectificativele de la HR — nota rectificativă înregistrată în aceeași lună.</li><li>Conturi de activ cu sold creditor, sau invers — investigate, nu reportate.</li><li><code>sold 4423 / 4424</code> din balanță = soldul din decontul de TVA.</li><li>Sumele din decizii de impunere — pe analitic distinct, în afara decontului.</li></ol>
+<hr>
+<hr>
+<h2 id="anexa-c-ce-am-corectat-fa-de-noti-ele-originale">Anexa C — Ce am corectat față de notițele originale</h2>
+<div class="tw"><table><thead><tr><th>Notița</th><th>Corect</th><th>Unde</th></tr></thead><tbody><tr><td><code>436 - 646</code> pentru CAM</td><td><code>646 = 436</code></td><td>2.2</td></tr><tr><td><code>4428</code> pentru datoria fostului salariat</td><td><code>4282</code></td><td>4.3</td></tr><tr><td><code>6918</code> pentru impozitul micro</td><td><code>698</code></td><td>6.2</td></tr><tr><td><code>4315 = CASS (pensia)</code>, <code>4316 = CAS (sănătate)</code></td><td>4315 = CAS = pensii · 4316 = CASS = sănătate</td><td>2.1</td></tr><tr><td>Tichetele de masă sub 423</td><td>642</td><td>2.4</td></tr><tr><td>Minimul proporțional rotunjit la 2.163 / 1.081</td><td>2.162,50 / 1.081,25</td><td>1.1</td></tr></tbody></table></div>
+<hr>
+<hr>
+<h2 id="anexa-d-r-mase-deschise">Anexa D — Rămase deschise</h2>
+<p>Ce e încă provizoriu în documentul ăsta. Lista nu e scrisă aici: vine din <code>date/intrebari.py</code>, aceeași sursă cu foaia „Întrebări deschise” a workbook-ului și cu lista trimisibilă formatorului.</p>
+<p><strong>❓ Care este salariul minim brut pe economie în vigoare, și de la ce dată?</strong></p>
+<p><em>Salarii — praguri și baze de calcul · training 21.08.2026, punctul 1</em></p>
+<p>Notițele rețin 4.325 lei. Valoarea se schimbă prin hotărâre de guvern, uneori de mai multe ori pe an, iar verificarea normei parțiale se face contra ei.</p>
+<p><strong>Ce am presupus între timp:</strong> Am folosit 4.325 lei ca în notițe, marcat ❓ peste tot unde apare.</p>
+<p><strong>❓ Ce contribuții se datorează pentru indemnizația de concediu medical, și pe ce parte se rețin?</strong></p>
+<p><em>Salarii — praguri și baze de calcul · training 21.08.2026, punctul 3</em></p>
+<p>Notițele acoperă împărțirea indemnizației între angajator și FNUASS (6458 / 4382 = 423), dar nu și reținerile din ea. Regulile diferă de cele ale salariului.</p>
+<p><strong>Ce am presupus între timp:</strong> N-am afirmat nimic: documentul spune explicit că tratamentul reținerilor nu era în notițe.</p>
+<p><strong>❓ Care e limita de reținere prin poprire pentru obligațiile de întreținere, față de treimea aplicabilă datoriilor obișnuite?</strong></p>
+<p><em>Salarii — praguri și baze de calcul · training 21.08.2026, punctul 4</em></p>
+<p>Notițele rețin 33,33% din salariul net. Codul de procedură civilă prevede o limită mai mare pentru pensii de întreținere, și reguli de cumul când există mai multe popriri.</p>
+<p><strong>Ce am presupus între timp:</strong> Am folosit treimea, marcând limita specială ca deschisă.</p>
+<hr>
+<h2 id="anexa-e-baza-legal-citat">Anexa E — Baza legală citată</h2>
+<p>Extrasă automat din textul documentului: sunt listate actele și articolele care apar efectiv citate mai sus. Contextul fiecărei citări e în secțiunea unde apare.</p>
+<hr>
+<p><em>Al cincilea document. Salariile sunt clasa 4, dar un document intitulat „Stocuri, TVA și corelații de balanță” nu le putea găzdui fără să mintă — iar materialul e coerent și mare cât să stea singur.</em></p>
+</main></div></body></html>
