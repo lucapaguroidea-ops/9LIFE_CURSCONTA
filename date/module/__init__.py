@@ -9,13 +9,13 @@ from . import (aprov_tranzit, capitaluri, credit_valuta, decont, iesire_mf,
                imobilizari,
                inchidere_ex, tva_incasare, neutralizare, vanz_amanunt, inchidere_lunara, inchidere_tva, intermediar,
                leasing_fin, neutralizare, tva_incasare, vanz_amanunt,
-               provizion, salarii, subventie)
+               provizion, salarii, salarii_evenimente, subventie)
 
 # Ordinea = ordinea claselor de conturi, ca in restul sistemului: capitaluri, apoi
 # imobilizari, apoi terti. Foile din workbook apar in aceeasi ordine.
 MODULE = [capitaluri, credit_valuta, provizion, leasing_fin,
           imobilizari, subventie, iesire_mf,
-          salarii, decont, intermediar, inchidere_tva, aprov_tranzit,
+          salarii, salarii_evenimente, decont, intermediar, inchidere_tva, aprov_tranzit,
           inchidere_ex, tva_incasare, neutralizare, vanz_amanunt,
           # verificarea vine la urmă: se sprijină pe fluxurile de mai sus
           inchidere_lunara]

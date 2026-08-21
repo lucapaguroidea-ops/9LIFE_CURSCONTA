@@ -82,19 +82,21 @@ FLUXURI_SALARII = [
               "care depășește jumătate din el.",
          pasi=[
              pas(1, "Adresă de înființare a popririi + stat de plată",
-                 "Datorie obișnuită, deci limita e o treime: 33,33% din 29.250 = "
-                 "9.749,03 lei. Se calculează din NET, nu din brut — banii merg la "
+                 "Datorie obișnuită, deci limita e o treime: 29.250 / 3 = "
+                 "9.750,00 lei. Fracția e o TREIME, nu „33,33%” — aproximarea zecimală "
+                 "dă alt număr, iar limita e un prag legal, nu o estimare. "
+                 "Se calculează din NET, nu din brut — banii merg la "
                  "executor, nu la stat, deci după ce statul și-a luat partea. La "
                  "obligații de întreținere limita ar fi fost 1/2, iar la mai multe "
                  "popriri pe aceeași sumă tot 1/2 e maximul, indiferent de natura "
                  "creanțelor.",
-                 dr=[("421", 9749.03)], cr=[("427", 9749.03)],
+                 dr=[("421", 9750.00)], cr=[("427", 9750.00)],
                  rol="Datoria față de salariat scade, apare o datorie față de terț"),
              pas(2, "Extras de cont — plata către executor",
                  "ROLUL LUI 427 se vede aici: firma nu a câștigat și nu a cheltuit "
                  "nimic. A fost doar conductă între salariat și creditorul lui. Contul "
                  "intră și iese cu aceeași sumă, iar pe rezultat nu apare nimic.",
-                 dr=[("427", 9749.03)], cr=[("5121", 9749.03)],
+                 dr=[("427", 9750.00)], cr=[("5121", 9750.00)],
                  rol="Stingerea datoriei față de terț", revelator=True),
              pas(3, "Verificare",
                  "Sold 427 = 0 după virare. Un sold creditor care persistă înseamnă bani "

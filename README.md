@@ -87,7 +87,7 @@ Necesită `openpyxl`, `formulas`, `numpy` (`pip install openpyxl formulas numpy`
 | `F-5xx` | trezorerie | 2 |
 | `F-8xx` | conturi în afara bilanțului | 2 |
 
-**17 module declarative** în 72 foi, fiecare cu `Declarații → Reguli → Jurnale → NotaExport` și celule `Check`.
+**18 module declarative** în 76 foi, fiecare cu `Declarații → Reguli → Jurnale → NotaExport` și celule `Check`.
 
 | Ce | Cât |
 |---|---|
