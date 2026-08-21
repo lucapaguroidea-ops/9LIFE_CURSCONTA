@@ -25,6 +25,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from date import documente as ddoc  # noqa: E402
 from date import ordine as O  # noqa: E402
 from date import parcurs as P  # noqa: E402
+from build import html_out  # noqa: E402
 
 RADACINA = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PLAN = os.path.join(RADACINA, "dist", "Plan_de_conturi_ROL_Analitice_Fluxuri_SAGA.xlsx")
@@ -209,7 +210,11 @@ def main():
     os.makedirs(os.path.dirname(IESIRE), exist_ok=True)
     with open(IESIRE, "w", encoding="utf-8") as f:
         f.write(text)
-    print(f"scris: {os.path.relpath(IESIRE, RADACINA)}  "
+    # și ca pagină: e livrabil de citit, ca documentele, nu sursă ca `.md`-urile lor
+    html_out.converteste(text, IESIRE.replace(".md", ".html"),
+                         titlu="Parcursul unui set nou de notițe",
+                         subtitlu="Document de îndrumare. Nu explică sistemul — îl indică.")
+    print(f"scris: {os.path.relpath(IESIRE, RADACINA)} + .html  "
           f"({len(porti())} porți, {len(module())} module, "
           f"{len(P.CONVERGENTA)} puncte de convergență)")
 

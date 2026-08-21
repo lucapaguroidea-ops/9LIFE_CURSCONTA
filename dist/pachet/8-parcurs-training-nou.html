@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="ro"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parcursul unui set nou de notițe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F8F9F7; --surface:#FFFFFF; --sunk:#F1F4F1;
+  --ink:#1A2421; --ink-2:#3D4A45; --muted:#6B7671;
+  --accent:#1B5E44; --accent-soft:#E6EFEA; --accent-line:#B9D2C6;
+  --storno:#A6342B;
+  --rule:#DDE2DE; --rule-soft:#EAEEEB;
+  --shadow:0 1px 2px rgba(26,36,33,.05), 0 8px 24px -12px rgba(26,36,33,.14);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+    --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+    --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+    --storno:#E08278;
+    --rule:#2A3430; --rule-soft:#222B27;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+  --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+  --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+  --storno:#E08278;
+  --rule:#2A3430; --rule-soft:#222B27;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased}
+.masthead{border-bottom:1px solid var(--rule); background:var(--surface); padding:56px 28px 40px}
+.mast-in{max-width:1180px; margin:0 auto; display:flex; flex-direction:column; gap:16px}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0}
+h1{font-family:Spectral,Georgia,"Times New Roman",serif; font-weight:600;
+  font-size:clamp(2rem,4.6vw,3.15rem); line-height:1.12; letter-spacing:-.015em;
+  margin:0; text-wrap:balance; max-width:22ch}
+.lede{color:var(--muted); font-size:1.02rem; margin:0; max-width:66ch}
+.wrap{max-width:1180px; margin:0 auto; padding:0 28px; display:grid;
+  grid-template-columns:232px minmax(0,1fr); gap:56px; align-items:start}
+nav.rail{position:sticky; top:24px; padding:36px 0 40px; max-height:100vh; overflow-y:auto}
+.rail-h{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.66rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+  margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--rule)}
+.rail ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px}
+.rail a{display:grid; grid-template-columns:24px 1fr; gap:8px; align-items:baseline;
+  text-decoration:none; color:var(--ink-2); padding:6px 8px; border-radius:5px;
+  font-size:.845rem; line-height:1.35; transition:background .12s,color .12s}
+.rail a:hover{background:var(--sunk); color:var(--accent)}
+.rail a:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+.tnum{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  color:var(--muted); font-variant-numeric:tabular-nums}
+main{padding:36px 0 96px; min-width:0; max-width:74ch}
+h2{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.62rem; line-height:1.22;
+  letter-spacing:-.01em; margin:44px 0 18px; text-wrap:balance;
+  padding-top:20px; border-top:1px solid var(--rule-soft); scroll-margin-top:20px}
+h3{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.14rem;
+  margin:30px 0 10px; scroll-margin-top:20px}
+h4{font-size:1rem; margin:22px 0 8px; scroll-margin-top:20px}
+p{margin:0 0 14px; max-width:72ch}
+ul,ol{margin:0 0 16px; padding-left:1.2rem; max-width:72ch}
+li{margin-bottom:7px}
+li::marker{color:var(--muted)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.875em;
+  background:var(--sunk); border:1px solid var(--rule-soft); border-radius:4px;
+  padding:1px 5px; color:var(--ink)}
+hr{border:0; border-top:1px solid var(--rule); margin:32px 0}
+pre.cod{background:var(--sunk); border:1px solid var(--rule); border-radius:7px;
+  padding:14px 16px; overflow-x:auto; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; color:var(--ink-2)}
+.ledger{margin:0 0 20px; border:1px solid var(--rule); border-left:3px solid var(--accent);
+  border-radius:0 7px 7px 0; background:var(--surface); overflow-x:auto; box-shadow:var(--shadow)}
+.led-row{display:grid; grid-template-columns:6.5em 1.2em 6.5em 8.5em 1fr; gap:10px;
+  align-items:baseline; padding:8px 16px; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; white-space:nowrap; scroll-margin-top:20px}
+.led-row+.led-row{border-top:1px solid var(--rule-soft)}
+.led-row:target{background:var(--accent-soft)}
+.led-d,.led-c{color:var(--ink); font-weight:500}
+.led-eq{color:var(--muted)}
+.led-amt{text-align:right; font-variant-numeric:tabular-nums; color:var(--accent); font-weight:500}
+.led-amt.neg{color:var(--storno)}
+.led-note{color:var(--muted); font-size:.9em; white-space:normal;
+  font-family:"IBM Plex Sans",sans-serif}
+.note{border-left:3px solid var(--accent-line); background:var(--sunk);
+  padding:13px 18px; border-radius:0 6px 6px 0; margin:0 0 20px; max-width:72ch}
+.note p{margin:0; color:var(--ink-2); font-size:.94rem}
+.tw{overflow-x:auto; margin:0 0 22px; border:1px solid var(--rule); border-radius:7px;
+  background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem}
+thead th{text-align:left; font-family:"IBM Plex Mono",ui-monospace,monospace; font-weight:500;
+  font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; color:var(--muted);
+  padding:11px 14px; border-bottom:1px solid var(--rule); background:var(--sunk)}
+tbody td{padding:10px 14px; border-bottom:1px solid var(--rule-soft);
+  vertical-align:top; color:var(--ink-2)}
+tbody tr:nth-child(even){background:var(--accent-soft)}
+tbody tr:last-child td{border-bottom:none}
+tbody td code{background:transparent; border:none; padding:0}
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr; gap:0; padding:0 22px}
+  nav.rail{position:static; max-height:none; padding:28px 0 8px; border-bottom:1px solid var(--rule)}
+  .rail ol{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:2px}
+  main{padding-top:26px}
+  .masthead{padding:40px 22px 30px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style></head><body>
+<header class="masthead"><div class="mast-in">
+<p class="eyebrow">Notițe de curs · contabilitate</p>
+<h1>Parcursul unui set nou de notițe</h1>
+<p class="lede">Document de îndrumare. Nu explică sistemul — îl indică.</p>
+</div></header>
+<div class="wrap">
+<nav class="rail" aria-label="Cuprins"><p class="rail-h">Cuprins</p><ol><li><a href="#0-cum-se-folose-te"><span class="tnum">1</span><span>0. Cum se folosește</span></a></li><li><a href="#1-unde-se-uit-generat"><span class="tnum">2</span><span>1. Unde se uită [generat]</span></a></li><li><a href="#2-faza-a-noti-e-brute-document-revizuit"><span class="tnum">3</span><span>2. Faza A — notițe brute → document revizuit</span></a></li><li><a href="#3-faza-b-document-revizuit-excel"><span class="tnum">4</span><span>3. Faza B — document revizuit → Excel</span></a></li><li><a href="#4-puncte-de-convergen"><span class="tnum">5</span><span>4. Puncte de convergență</span></a></li><li><a href="#5-traseul-trainingului-3-pas-cu-pas"><span class="tnum">6</span><span>5. Traseul trainingului 3, pas cu pas</span></a></li><li><a href="#6-goluri-cunoscute"><span class="tnum">7</span><span>6. Goluri cunoscute</span></a></li></ol></nav>
+<main>
+<p><em>Document de îndrumare. Nu explică sistemul — îl indică.</em></p>
+<hr>
+<h2 id="0-cum-se-folose-te">0. Cum se folosește</h2>
+<p>Documentul ăsta nu explică sistemul. Îl <strong>indică</strong>.</p>
+<p>Suprafața de referință e mare — două workbook-uri, patru documente revizuite, o listă de</p>
+<p>întrebări deschise — și fiecare are logica lui internă. O parafrază a lor s-ar citi mai</p>
+<p>ușor decât originalul, deci ar fi crezută în locul lui. Exact asta trebuie evitat.</p>
+<p>Ce găsești aici: <strong>ce întrebări trebuie puse</strong>, <strong>unde se scrie fiecare lucru</strong> și</p>
+<p><strong>unde se pierde coerența fără ca vreo poartă să observe</strong>. Regulile contabile nu sunt</p>
+<p>aici; sunt în documentele pe care le indică fiecare secțiune.</p>
+<p>Parcursul are două faze, de naturi diferite. Faza A e judecată și aproape nimic din ea nu</p>
+<p>se poate verifica automat. Faza B e mecanică și e acoperită aproape integral de porți.</p>
+<div class="note"><p><strong>Testul aplicat fiecărui paragraf:</strong> dacă documentul de referință s-ar schimba mâine, paragraful ăsta ar deveni fals? Dacă da, e parafrază, nu îndrumare — și nu are ce căuta aici.</p></div>
+<p>Secțiunile marcate <em>[generat]</em> se recitesc din cod și din workbook-uri la fiecare <code>make tot</code>. Nu le edita: se suprascriu.</p>
+<hr>
+<h2 id="1-unde-se-uit-generat">1. Unde se uită <em>[generat]</em></h2>
+<p>Tabelul de mai jos nu e scris aici: e citit din foaia <code>Legendă</code>, secțiunea „STRUCTURA FINALĂ A WORKBOOK-ULUI”, pe care poarta 14 o ține completă. Dacă apare o foaie nouă în workbook, apare și aici.</p>
+<div class="tw"><table><thead><tr><th>Foaie</th><th>Ce ține</th></tr></thead><tbody><tr><td>Legendă</td><td>Taxonomia rolurilor + tipologia factorilor + convenția de analitic + tierizare + TVA confirmat</td></tr><tr><td>Plan de conturi</td><td>270+ rânduri, cu 3 coloane noi: Analitice recomandate · Factor · Flux (pas)</td></tr><tr><td>Doar rol în flux</td><td>81 conturi de serviciu, grupate pe rol</td></tr><tr><td>Analitice (Tier A)</td><td>Detaliu pe conturile Tier A: structură, factor, ce se rupe și de ce</td></tr><tr><td>Fluxuri</td><td>61 fluxuri × pași, tabelar cu note complete + coloană Declarativ</td></tr><tr><td>Matrice acoperire</td><td>Cont → flux(uri) → pas revelator; arată golurile</td></tr><tr><td>Index module</td><td>Legătura cu Module_Declarative_Fluxuri.xlsx: ce modul acoperă ce flux, cu ce foi și când se rulează</td></tr><tr><td>Arbore analitice</td><td>Arborele de decizie pentru analitice (3 întrebări) + contra-regula: când analiticul e o greșeală</td></tr><tr><td>Corelații de control</td><td>Formulă · unde se verifică · ce o rupe LEGITIM vs. SUSPECT · fluxul și modulul legat</td></tr><tr><td>Întrebări deschise</td><td>Ce e încă provizoriu în workbook: întrebările la care sistemul așteaptă răspuns. Fluxurile atinse poartă ❓</td></tr><tr><td>Închideri periodice</td><td>Disciplina de închidere: ce cont, la ce cadență, cu ce stare terminală declarată în flux. Rândurile fără flux sunt goluri cunoscute, marcate ca atare</td></tr><tr><td>Istoric</td><td>Echivalența de numerotare veche → nouă, contopirile, defectele reparate, textul mutat la deduplicare</td></tr></tbody></table></div>
+<p><strong>Documente conexe:</strong> cele trei <code>.md</code>/<code>.docx</code> revizuite (structura lor canonică e în <code>date/documente.py</code>) și <code>intrebari-formator.md</code> — lista întrebărilor deschise, aceeași sursă cu foaia <code>Întrebări deschise</code>.</p>
+<hr>
+<h2 id="2-faza-a-noti-e-brute-document-revizuit">2. Faza A — notițe brute → document revizuit</h2>
+<p>Nu e o listă de pași, ci de întrebări. Documentul revizuit e bun când răspunde la toate</p>
+<p>— nu când urmează o procedură.</p>
+<p>Porțile 12 și 13 verifică <strong>forma</strong> rezultatului (nimic pierdut, legendă și anexe</p>
+<p>canonice). Nu verifică nimic din ce urmează: acolo nu există automatizare, doar citire</p>
+<p>atentă.</p>
+<p><strong>1. Ce spunea notița, cuvânt cu cuvânt?</strong></p>
+<p>Notița brută rămâne sursa. Documentul revizuit o citează înainte de a o corecta, altfel corecția nu se poate judeca — și nici reface, dacă se dovedește greșită.</p>
+<p>↳ <code>surse/training-*/notite-brut.txt</code> rămân în repo, neatinse, exact pentru asta</p>
+<p><strong>2. Care afirmații sunt verificabile în lege și care sunt practică de cabinet?</strong></p>
+<p>Sunt două feluri de adevăr, iar amestecul lor e cea mai frecventă sursă de eroare. Primul se verifică; al doilea se întreabă.</p>
+<p>↳ practica se marchează ❓ și ajunge în <code>date/intrebari.py</code> — vezi cele 21 existente</p>
+<p><strong>3. Pentru fiecare corecție ⚠️: care e temeiul, cu articol?</strong></p>
+<p>O corecție fără temei e o opinie. Cu temei, se poate contesta — și e exact ce vrei să se poată face.</p>
+<p>↳ Anexa E a fiecărui document revizuit adună actele citate; se generează din text</p>
+<p><strong>4. Cifrele din exemplele în proză se leagă?</strong></p>
+<p>Poarta 1 verifică ΣD=ΣC doar pentru fluxurile din <code>date/</code>, NU pentru monografiile scrise în document. Exemplul rezervei legale din trainingul 2 nu se lega — 5% din 250 nu dau 125 — și a fost prins de citire, nu de o poartă. Recalculează fiecare exemplu cu creionul.</p>
+<p>↳ gol cunoscut, candidat de automatizare — vezi secțiunea de goluri</p>
+<p><strong>5. Conturile citate există, cu denumirea aia?</strong></p>
+<p>Notițele brute conțineau <code>7815</code>, <code>2114</code>, <code>1067</code>, <code>4424</code> — conturi inexistente sau confundate. Fiecare simbol se confruntă cu planul de conturi înainte de a intra în document.</p>
+<p>↳ foaia <code>Plan de conturi</code>; erorile deja prinse sunt în Anexa F a trainingului 4</p>
+<p><strong>6. Cotele, pragurile și termenele sunt cele în vigoare LA DATA trainingului?</strong></p>
+<p>Se schimbă prin OUG peste noapte. Un prag corect acum poate fi fals la aplicare, iar documentul trebuie să spună la ce dată a fost verificat.</p>
+<p>↳ secțiunea de verificare legislativă din foaia <code>Legendă</code>, cu data ei</p>
+<p><strong>7. Ce lipsea din raționament ca să stea în picioare?</strong></p>
+<p>Completările ➕ sunt partea care transformă notițele în material utilizabil. Trebuie însă marcate ca atare: cititorul are dreptul să știe ce a spus formatorul și ce am adăugat eu.</p>
+<p>↳ legenda de marcaje, identică în toate documentele (poarta 13)</p>
+<p><strong>8. Ce a rămas ambiguu?</strong></p>
+<p>Ambiguitatea nu se rezolvă prin ghicit. Se marchează ❓, se scrie ce am presupus ca să pot merge mai departe, și intră în lista pentru formator.</p>
+<p>↳ <code>date/intrebari.py</code> → documentul, pagina publicată ȘI foaia <code>Întrebări deschise</code></p>
+<p><strong>9. Ce erori din notițele brute NU trebuie reintroduse?</strong></p>
+<p>Cine reia notițele originale peste un an va relua și erorile. Lista lor explicită e singura apărare.</p>
+<p>↳ Anexa F — vezi <code>date/documente.py</code>, <code>ANEXA_F_TRAINING_4</code></p>
+<h3 id="forma-rezultatului-generat">Forma rezultatului <em>[generat]</em></h3>
+<p>Documentul revizuit are aceeași legendă de marcaje ca celelalte trei și anexele denumite canonic. Poarta 13 verifică asta.</p>
+<div class="tw"><table><thead><tr><th>Anexa</th><th>Conținut</th></tr></thead><tbody><tr><td><strong>A</strong></td><td>Recapitulare: conturi și perechile lor</td></tr><tr><td><strong>B</strong></td><td>Checklist practic</td></tr><tr><td><strong>C</strong></td><td>Ce am corectat față de notițele originale</td></tr><tr><td><strong>D</strong></td><td>Rămase deschise</td></tr><tr><td><strong>E</strong></td><td>Baza legală citată</td></tr><tr><td><strong>F</strong></td><td>Erori din notițele brute, NEreintroduse</td></tr></tbody></table></div>
+<p>Nu orice document are toate anexele — le are pe cele pentru care există conținut real. Vezi <code>date/documente.py</code> pentru ce anexă e servită de ce secțiune în fiecare document.</p>
+<hr>
+<h2 id="3-faza-b-document-revizuit-excel">3. Faza B — document revizuit → Excel</h2>
+<p>Aici lucrurile sunt mecanice și acoperite de porți. Regula de aur: **nu edita</p>
+<p>workbook-urile direct.** Se scrie în <code>date/</code>, se rulează <code>make tot</code>, iar workbook-urile</p>
+<p>se regenerează. O modificare făcută în Excel se pierde la următorul build.</p>
+<p><strong>1. Alege clasa fiecărui flux nou</strong></p>
+<p>Clasa contului principal decide ID-ul și poziția fizică. Nu se adaugă la coadă: <code>ordine.urmatorul_liber(clasa)</code> dă următorul număr liber, iar fluxul se pune la locul lui contabil în lista clasei.</p>
+<p><strong>2. Scrie monografia</strong></p>
+<p>Un flux = catalog + pași + „Principiul:”. Ultimul pas e verificare, fără sume, și declară starea terminală. Fluxurile didactice au exact un pas revelator. Porțile 1, 2 și 3 verifică toate astea.</p>
+<p><strong>3. Completează planul cu conturile pe care le folosești</strong></p>
+<p>Dacă un flux folosește un cont absent din plan, navigarea cont → flux se rupe. Nicio poartă nu prinde asta încă — la trainingurile 2 și 3 au fost 27 de conturi lipsă, găsite prin comparație manuală.</p>
+<p><strong>4. Adaugă analiticele și corelațiile</strong></p>
+<p>Fiecare analitic are un factor și spune ce se rupe fără el (poarta 5). Fiecare corelație spune ce o rupe LEGITIM și ce o rupe SUSPECT — fără coloana asta, corelația nu ajută pe nimeni la închiderea lunii.</p>
+<p><strong>5. Rulează <code>make tot</code></strong></p>
+<p>Regenerează ambele workbook-uri, documentele și lista de întrebări, apoi rulează toate porțile. Nimic nu se consideră gata până nu sunt toate verzi.</p>
+<p><strong>6. Când o poartă pică, nu o ocoli</strong></p>
+<p>Fiecare poartă are un motiv scris în <code>build/verifica.py</code>. Dacă un text chiar trebuie înlocuit, se declară în <code>date/reformulari.py</code> CU MOTIV — nu se șterge poarta.</p>
+<h3 id="unde-se-scrie-fiecare-lucru-generat">Unde se scrie fiecare lucru <em>[generat]</em></h3>
+<div class="tw"><table><thead><tr><th>Fișier</th><th>Ce ține</th></tr></thead><tbody><tr><td><code>date/analitice.py</code></td><td>Conturi din clasele 1 și 2 promovate la Tier A, cu structura analitică justificată.</td></tr><tr><td><code>date/corelatii.py</code></td><td>Corelațiile de control C-13…C-22 (capitaluri și imobilizări).</td></tr><tr><td><code>date/documente.py</code></td><td>Planul de armonizare a celor trei documente revizuite.</td></tr><tr><td><code>date/fluxuri_capitaluri.py</code></td><td>Fluxurile F-45…F-51 — capitaluri, credite, leasing, provizioane.</td></tr><tr><td><code>date/fluxuri_control.py</code></td><td>Fluxul F-63 (→ F-415) — încasare mai mare decât factura.</td></tr><tr><td><code>date/fluxuri_imobilizari.py</code></td><td>Fluxurile F-52…F-62 — imobilizări necorporale, corporale, în curs, ieșiri, financiare.</td></tr><tr><td><code>date/inchideri.py</code></td><td>Cadența de urmărire a conturilor — partea care NU se poate deduce din fluxuri.</td></tr><tr><td><code>date/intrebari.py</code></td><td>Cele 21 de întrebări deschise, grupate pe temă contabilă.</td></tr><tr><td><code>date/monografii.py</code></td><td>Excepțiile porții 18 — blocuri de monografie care NU trebuie să se echilibreze.</td></tr><tr><td><code>date/ordine.py</code></td><td>Ordinea canonică a sistemului — singura sursă de adevăr pentru poziții și ID-uri.</td></tr><tr><td><code>date/pachet.py</code></td><td>Ordinea de uz a livrabilelor — partea scrisă de mână a pachetului.</td></tr><tr><td><code>date/parcurs.py</code></td><td>Partea SCRISĂ DE MÂNĂ a documentului de parcurs.</td></tr><tr><td><code>date/plan.py</code></td><td>Actualizări pe foaia <code>Plan de conturi</code> + conturi sintetice lipsă + rânduri de matrice.</td></tr><tr><td><code>date/reformulari.py</code></td><td>Textele din originalul training 4 care au voie să dispară, fiecare cu motiv.</td></tr><tr><td><code>date/repartizare.py</code></td><td>Unde merge fiecare subsecțiune a unei surse care alimentează mai multe destinații.</td></tr></tbody></table></div>
+<h3 id="clasele-de-fluxuri-generat">Clasele de fluxuri <em>[generat]</em></h3>
+<p>ID-ul codifică clasa contului principal. Un flux nou primește următorul număr liber din clasa lui — <code>ordine.urmatorul_liber(clasa)</code> — și stă fizic la locul lui.</p>
+<div class="tw"><table><thead><tr><th>Bloc</th><th>Clasa</th><th>Fluxuri acum</th><th>Următorul liber</th></tr></thead><tbody><tr><td><code>F-1xx</code></td><td>CAPITALURI, PROVIZIOANE, ÎMPRUMUTURI</td><td>8</td><td><code>F-109</code></td></tr><tr><td><code>F-2xx</code></td><td>IMOBILIZĂRI</td><td>14</td><td><code>F-215</code></td></tr><tr><td><code>F-3xx</code></td><td>STOCURI ȘI PRODUCȚIE</td><td>20</td><td><code>F-321</code></td></tr><tr><td><code>F-4xx</code></td><td>TERȚI, TVA, DECONTĂRI</td><td>15</td><td><code>F-416</code></td></tr><tr><td><code>F-5xx</code></td><td>TREZORERIE</td><td>2</td><td><code>F-503</code></td></tr><tr><td><code>F-8xx</code></td><td>CONTURI ÎN AFARA BILANȚULUI</td><td>2</td><td><code>F-803</code></td></tr></tbody></table></div>
+<h3 id="modulele-existente-generat">Modulele existente <em>[generat]</em></h3>
+<p>Un flux e util și fără modul: fluxul explică, modulul execută. Dacă adaugi un modul, declară fluxurile în <code>CATALOG[&#x27;fluxuri&#x27;]</code> — de acolo se derivă toate ancorele.</p>
+<div class="tw"><table><thead><tr><th>Modul</th><th>Fluxuri acoperite</th></tr></thead><tbody><tr><td><code>MOD_INCHIDERE_TVA</code></td><td>F-405</td></tr><tr><td><code>MOD_APROV_TRANZIT</code></td><td>F-302 (+408 simetric)</td></tr><tr><td><code>MOD_SALARII</code></td><td>F-413</td></tr><tr><td><code>MOD_DECONT</code></td><td>F-502</td></tr><tr><td><code>MOD_LEASING_FIN</code></td><td>F-108</td></tr><tr><td><code>MOD_VANZ_AMANUNT</code></td><td>F-316</td></tr><tr><td><code>MOD_TVA_INCASARE</code></td><td>F-401</td></tr><tr><td><code>MOD_INCHIDERE_EX</code></td><td>F-104</td></tr><tr><td><code>MOD_INTERMEDIAR</code></td><td>F-408, F-501, F-411</td></tr><tr><td><code>MOD_NEUTRALIZARE</code></td><td>F-311, F-312, F-209</td></tr><tr><td><code>MOD_CAPITALURI</code></td><td>F-103, F-105</td></tr><tr><td><code>MOD_CREDIT_VALUTA</code></td><td>F-107</td></tr><tr><td><code>MOD_PROVIZION</code></td><td>F-106</td></tr><tr><td><code>MOD_IMOBILIZARI</code></td><td>F-203, F-205, F-207, F-214</td></tr><tr><td><code>MOD_SUBVENTIE</code></td><td>F-210</td></tr><tr><td><code>MOD_IESIRE_MF</code></td><td>F-211, F-212</td></tr></tbody></table></div>
+<h3 id="ce-verific-fiecare-poart-generat">Ce verifică fiecare poartă <em>[generat]</em></h3>
+<div class="tw"><table><thead><tr><th>Poarta</th><th>Verifică</th></tr></thead><tbody><tr><td><strong>1</strong></td><td>ΣDebit = ΣCredit pe fiecare pas de flux care are sume</td></tr><tr><td><strong>2</strong></td><td>fiecare flux se închide cu un pas de verificare, o stare terminală și „Principiul:”</td></tr><tr><td><strong>3</strong></td><td>fiecare flux didactic ★ are exact un pas revelator</td></tr><tr><td><strong>4</strong></td><td>matricea nu are goluri nedeclarate, iar fiecare flux nou e referit în ea</td></tr><tr><td><strong>5</strong></td><td>fiecare analitic Tier A are un factor din D/N/C/F/B/V/O și spune ce se rupe fără el</td></tr><tr><td><strong>6</strong></td><td>fiecare token MOD_* referit există în CatalogModule (verificare între fișiere)</td></tr><tr><td><strong>7</strong></td><td>corelațiile se verifică pe cifrele fluxurilor, nu declarativ</td></tr><tr><td><strong>8</strong></td><td>formule echilibrate, niciun text scris din greșeală ca formulă, zero erori după recalc, toate celulele Check = OK</td></tr><tr><td><strong>9</strong></td><td>conservare: fiecare linie din workbook-urile originale se regăsește în cele generate; înlocuirile intenționate se declară în <code>date/reformulari.py</code>, cu motiv</td></tr><tr><td><strong>10</strong></td><td>catalogul de fluxuri acoperă fix monografiile — nici mai mult, nici mai puțin</td></tr><tr><td><strong>11</strong></td><td>zero nume definite rupte</td></tr><tr><td><strong>12</strong></td><td>conservare pe documentele revizuite: nicio linie pierdută la armonizare</td></tr><tr><td><strong>13</strong></td><td>documentele au aceeași legendă, anexe canonice în ordine, și toate trei formatele: .md, .docx, .html</td></tr><tr><td><strong>14</strong></td><td>tabelul de structură din foaia Legendă cunoaște toate foile workbook-ului</td></tr><tr><td><strong>15</strong></td><td>documentul de parcurs nu citează foi, fișiere sau porți care nu există</td></tr><tr><td><strong>16</strong></td><td>o sursă împărțită pe mai multe destinații nu pierde nimic în cusătură: fiecare subsecțiune are destinație declarată și ajunge exact acolo</td></tr><tr><td><strong>17</strong></td><td>disciplina de închidere e ancorată în ambele sensuri: fiecare cont urmărit periodic e starea terminală a unui flux, iar fiecare cont cu rol în flux care se golește are o cadență — sau un motiv declarat pentru care nu are</td></tr><tr><td><strong>18</strong></td><td>monografiile scrise în proză se echilibrează, iar aritmetica afirmată în text („5% din 250 = 12,50”) chiar se verifică — acolo unde poarta 1 nu ajunge</td></tr><tr><td><strong>19</strong></td><td>marcajul ❓ e aplicat, nu doar definit: un document pe care o întrebare deschisă îl privește îl poartă, iar un document care îl poartă are întrebări deschise</td></tr></tbody></table></div>
+<p>Motivul fiecărei porți e scris în <code>build/verifica.py</code>, lângă ea. Când o poartă pică, acolo scrie de ce există.</p>
+<hr>
+<h2 id="4-puncte-de-convergen">4. Puncte de convergență</h2>
+<p>Locurile unde un training nou poate rupe coerența. Unele sunt prinse de o poartă — pe</p>
+<p>alea le enumăr ca să știi că nu trebuie să te uiți după ele. Restul sunt **goluri</p>
+<p>cunoscute**: acolo trebuie să te uiți tu.</p>
+<div class="tw"><table><thead><tr><th>Ce se poate rupe</th><th>Ce se pierde</th><th>Prins de</th></tr></thead><tbody><tr><td>Analitic nou fără factor</td><td>Recomandarea de analitic devine „de frumusețe” — exact ce interzice foaia <code>Arbore analitice</code>.</td><td>poarta 5</td></tr><tr><td>Flux nou care nu apare în matricea de acoperire</td><td>Contul pare neacoperit, deși are flux.</td><td>poarta 4</td></tr><tr><td>Pas de flux cu sumele dezechilibrate</td><td>Monografia nu se poate înregistra.</td><td>poarta 1</td></tr><tr><td>Flux fără stare terminală sau fără „Principiul:”</td><td>Cititorul nu știe când s-a terminat și de ce contează.</td><td>poarta 2</td></tr><tr><td>Text de tabel scris din greșeală ca formulă</td><td>Excel afișează #NAME?, iar recalc-ul nu semnalează.</td><td>poarta 8</td></tr><tr><td>Suprascrierea unei celule care avea deja conținut</td><td>Conținut vechi pierdut tăcut. S-a întâmplat: 12 linii pierdute la o etapă anterioară.</td><td>poarta 9</td></tr><tr><td>Catalogul rămâne în urma monografiilor</td><td>Indexul nu mai cunoaște toate fluxurile. S-a întâmplat: 13 din 44 lipseau — de atunci catalogul se derivă din monografii.</td><td>poarta 10</td></tr><tr><td>Foaie nouă absentă din tabelul de structură al Legendei</td><td>Legenda nu-și mai cunoaște propriul fișier.</td><td>poarta 14</td></tr><tr><td>Cont folosit într-un flux dar absent din <code>Plan de conturi</code></td><td>Navigarea cont → flux se rupe pentru contul acela. La trainingurile 2 și 3 erau 27 de conturi în situația asta; poarta 16 a mai scos la iveală șapte (6583, 7583, 6814, 7814, 5121, 2813, 4091), dar din întâmplare — pentru că sursa le enumera într-un tabel. Nimic nu face comparația sistematic.</td><td><strong>nimic — verifică tu</strong></td></tr><tr><td>Document cu întrebări deschise, dar fără niciun marcaj ❓</td><td>Cititorul vede un document care pare tranșat, deși sistemul știe că nu e. Documentul de control chiar era așa: trei întrebări deschise, zero marcaje.</td><td>poarta 19</td></tr><tr><td>Marcaj ❓ într-un document fără întrebări deschise</td><td>Marcajul promite o anexă care nu-l explică. Mai rău decât lipsa lui.</td><td>poarta 19</td></tr><tr><td>Marcaj ❓ folosit cu alt înțeles decât cel din legendă</td><td>Poarta 19 verifică prezența marcajului pe document, nu înțelesul fiecărei apariții. Două ❓ marcau răspunsuri, nu întrebări — găsite prin citire și corectate ca reformulări declarate, nu de o poartă.</td><td><strong>nimic — verifică tu</strong></td></tr><tr><td>Modul nou care nu declară fluxul în <code>CATALOG[&#x27;fluxuri&#x27;]</code></td><td>Ancora modul nu se mai generează — nici pe flux, nici pe corelație, nici pe matrice. Legătura se pierde tăcut, pentru că derivarea nu are de unde ști.</td><td><strong>nimic — verifică tu</strong></td></tr><tr><td>Subsecțiune dintr-o sursă împărțită, rămasă nerepartizată</td><td>O sursă poate alimenta mai multe documente. Riscul nu e „nimeni n-a luat-o”, ci „am crezut că a luat-o celălalt”: fiecare document trece poarta 12 separat, în timp ce materialul cade între ele.</td><td>poarta 16</td></tr><tr><td>Material repartizat undeva, dar ajuns în altă parte</td><td>Verificarea pe reuniunea destinațiilor ar spune doar că textul există pe undeva — întrebarea greșită. Poarta compară cu destinația declarată.</td><td>poarta 16</td></tr><tr><td>Cont urmărit periodic fără flux care să-i demonstreze starea</td><td>Checklistul de închidere ar cere ceva ce sistemul nu arată nicăieri. Invers, un cont cu rol în flux care se golește și nu e urmărit dispare din disciplina lunară.</td><td>poarta 17</td></tr><tr><td>Articol compus în proză cu totalul greșit</td><td>Liniile de continuare nu însumează totalul de pe rândul de cap — exact forma erorii avansului din 19.08.</td><td>poarta 18</td></tr><tr><td>Aritmetică falsă afirmată în text („5% din 250 = 125”)</td><td>Articolul se echilibrează, deci poarta de echilibru nu vede nimic. Eroarea rezervei legale din trainingul 2 era exact asta.</td><td>poarta 18</td></tr><tr><td>Sumă greșită într-un articol SIMPLU, scris pe o linie</td><td>Un articol pe o linie are o singură sumă, deci nu se poate dezechilibra: nu există nimic contra cui să fie verificată. Poarta 18 nu ajunge aici, iar totalurile afirmate în proză s-au dovedit prea variate ca să fie potrivite mecanic — trei fals pozitive din șase la măsurare.</td><td><strong>nimic — verifică tu</strong></td></tr></tbody></table></div>
+<hr>
+<h2 id="5-traseul-trainingului-3-pas-cu-pas">5. Traseul trainingului 3, pas cu pas</h2>
+<p>Cum a intrat efectiv trainingul 3 (imobilizări, 12.08.2026). Nu e o reconstituire — e</p>
+<p>ce s-a întâmplat, verificabil în istoricul git. Un traseu real spune mai mult decât o</p>
+<p>procedură abstractă, pentru că include și ce a mers prost.</p>
+<p><strong>1.</strong> Notițele brute au intrat neatinse în <code>surse/training-3-2026-08-12/</code></p>
+<p>Fișierele din <code>surse/</code> nu se modifică niciodată. Sunt referința contra căreia verifică poarta de conservare.</p>
+<p><strong>2.</strong> Documentul revizuit exista deja — a trecut doar prin faza B</p>
+<p>Trainingurile 2 și 3 aveau deja <code>.md</code>-urile revizuite. Un training nou va trece prin ambele faze.</p>
+<p><strong>3.</strong> Monografiile au fost scrise în <code>date/fluxuri_imobilizari.py</code> — 423 de rânduri</p>
+<p>Unsprezece fluxuri, fiecare cu pași, sume structurate, rol revelat și principiu.</p>
+<p><strong>4.</strong> Planul, analiticele și corelațiile, în paralel</p>
+<p><code>date/plan.py</code> (conturile lipsă și corecția lui 235), <code>date/analitice.py</code> (conturile Tier A din clasa 2), <code>date/corelatii.py</code> (C-13…C-22).</p>
+<p><strong>5.</strong> Prima rulare a picat pe corecția contului 235</p>
+<p>Generatorul refuză să suprascrie o denumire dacă cea din fișier nu e cea așteptată. Era protecția care funcționa: 235 purta denumirea lui 233, iar 233 lipsea complet din plan.</p>
+<p><strong>6.</strong> A doua rulare a picat pe poarta 4</p>
+<p>Fluxurile noi nu apăreau în matricea de acoperire. Matricea a fost completată, iar marcajele PARȚIAL promise ca rezolvate au fost verificate că sunt chiar „NU”.</p>
+<p><strong>7.</strong> Modulele au venit după fluxuri, nu odată cu ele</p>
+<p>Un flux e util și fără modul — explică. Modulul îl execută. Ordinea asta permite livrare parțială fără să rămână nimic pe jumătate.</p>
+<p><strong>8.</strong> La final, <code>make tot</code> de la zero</p>
+<p>Nu build incremental. Un sistem care nu se reconstruiește din nimic nu e reproductibil, iar reproductibilitatea e singura garanție că <code>date/</code> chiar e sursa adevărului.</p>
+<hr>
+<h2 id="6-goluri-cunoscute">6. Goluri cunoscute</h2>
+<p>Lucruri care ar merita mecanizate și care azi cad în sarcina cititorului. Enumerate ca să nu fie confundate cu ceva acoperit.</p>
+<p><strong>Suma dintr-un articol simplu scris în proză</strong></p>
+<p>Poarta 18 citește acum monografiile din documente și verifică articolele compuse plus aritmetica afirmată în text. Articolul simplu îi scapă însă prin construcție: scris pe o linie, are o singură sumă, deci nu există nimic contra cui să fie verificat. Confruntarea cu totalurile afirmate în proză s-a dovedit prea nesigură — trei fals pozitive din șase la măsurare, pentru că „sold creditor de 4.000” e un rezultat net, nu o sumă de debite.</p>
+<p><strong>Conturile folosite în fluxuri dar absente din plan</strong></p>
+<p>Comparație mecanică între simbolurile din pașii fluxurilor și coloana Simbol a planului. Le-am găsit manual; o poartă le-ar găsi de fiecare dată.</p>
+<p><strong>Înțelesul fiecărui marcaj ❓ în parte</strong></p>
+<p>Poarta 19 leagă marcajele de întrebări la nivel de DOCUMENT: unul cu întrebări deschise îl poartă, unul care îl poartă are întrebări. Ce anume marchează fiecare apariție rămâne necontrolat — iar două chiar marcau răspunsuri, nu întrebări. Legarea unu-la-unu ar cere o ancoră de text pe fiecare întrebare, rescrisă la fiecare editare de frază: o hartă de mână care diverge, exact ce evită sistemul.</p>
+<hr>
+<p><em>Secțiunile [generat] provin din <code>build/verifica.py</code>, <code>date/ordine.py</code>, <code>date/documente.py</code> și din workbook-urile construite. 19 porți, 16 module, 61 fluxuri la data generării.</em></p>
+</main></div></body></html>

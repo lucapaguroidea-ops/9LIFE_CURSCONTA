@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="ro"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Imobilizări</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F8F9F7; --surface:#FFFFFF; --sunk:#F1F4F1;
+  --ink:#1A2421; --ink-2:#3D4A45; --muted:#6B7671;
+  --accent:#1B5E44; --accent-soft:#E6EFEA; --accent-line:#B9D2C6;
+  --storno:#A6342B;
+  --rule:#DDE2DE; --rule-soft:#EAEEEB;
+  --shadow:0 1px 2px rgba(26,36,33,.05), 0 8px 24px -12px rgba(26,36,33,.14);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+    --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+    --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+    --storno:#E08278;
+    --rule:#2A3430; --rule-soft:#222B27;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+  --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+  --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+  --storno:#E08278;
+  --rule:#2A3430; --rule-soft:#222B27;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased}
+.masthead{border-bottom:1px solid var(--rule); background:var(--surface); padding:56px 28px 40px}
+.mast-in{max-width:1180px; margin:0 auto; display:flex; flex-direction:column; gap:16px}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0}
+h1{font-family:Spectral,Georgia,"Times New Roman",serif; font-weight:600;
+  font-size:clamp(2rem,4.6vw,3.15rem); line-height:1.12; letter-spacing:-.015em;
+  margin:0; text-wrap:balance; max-width:22ch}
+.lede{color:var(--muted); font-size:1.02rem; margin:0; max-width:66ch}
+.wrap{max-width:1180px; margin:0 auto; padding:0 28px; display:grid;
+  grid-template-columns:232px minmax(0,1fr); gap:56px; align-items:start}
+nav.rail{position:sticky; top:24px; padding:36px 0 40px; max-height:100vh; overflow-y:auto}
+.rail-h{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.66rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+  margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--rule)}
+.rail ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px}
+.rail a{display:grid; grid-template-columns:24px 1fr; gap:8px; align-items:baseline;
+  text-decoration:none; color:var(--ink-2); padding:6px 8px; border-radius:5px;
+  font-size:.845rem; line-height:1.35; transition:background .12s,color .12s}
+.rail a:hover{background:var(--sunk); color:var(--accent)}
+.rail a:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+.tnum{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  color:var(--muted); font-variant-numeric:tabular-nums}
+main{padding:36px 0 96px; min-width:0; max-width:74ch}
+h2{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.62rem; line-height:1.22;
+  letter-spacing:-.01em; margin:44px 0 18px; text-wrap:balance;
+  padding-top:20px; border-top:1px solid var(--rule-soft); scroll-margin-top:20px}
+h3{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.14rem;
+  margin:30px 0 10px; scroll-margin-top:20px}
+h4{font-size:1rem; margin:22px 0 8px; scroll-margin-top:20px}
+p{margin:0 0 14px; max-width:72ch}
+ul,ol{margin:0 0 16px; padding-left:1.2rem; max-width:72ch}
+li{margin-bottom:7px}
+li::marker{color:var(--muted)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.875em;
+  background:var(--sunk); border:1px solid var(--rule-soft); border-radius:4px;
+  padding:1px 5px; color:var(--ink)}
+hr{border:0; border-top:1px solid var(--rule); margin:32px 0}
+pre.cod{background:var(--sunk); border:1px solid var(--rule); border-radius:7px;
+  padding:14px 16px; overflow-x:auto; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; color:var(--ink-2)}
+.ledger{margin:0 0 20px; border:1px solid var(--rule); border-left:3px solid var(--accent);
+  border-radius:0 7px 7px 0; background:var(--surface); overflow-x:auto; box-shadow:var(--shadow)}
+.led-row{display:grid; grid-template-columns:6.5em 1.2em 6.5em 8.5em 1fr; gap:10px;
+  align-items:baseline; padding:8px 16px; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; white-space:nowrap; scroll-margin-top:20px}
+.led-row+.led-row{border-top:1px solid var(--rule-soft)}
+.led-row:target{background:var(--accent-soft)}
+.led-d,.led-c{color:var(--ink); font-weight:500}
+.led-eq{color:var(--muted)}
+.led-amt{text-align:right; font-variant-numeric:tabular-nums; color:var(--accent); font-weight:500}
+.led-amt.neg{color:var(--storno)}
+.led-note{color:var(--muted); font-size:.9em; white-space:normal;
+  font-family:"IBM Plex Sans",sans-serif}
+.note{border-left:3px solid var(--accent-line); background:var(--sunk);
+  padding:13px 18px; border-radius:0 6px 6px 0; margin:0 0 20px; max-width:72ch}
+.note p{margin:0; color:var(--ink-2); font-size:.94rem}
+.tw{overflow-x:auto; margin:0 0 22px; border:1px solid var(--rule); border-radius:7px;
+  background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem}
+thead th{text-align:left; font-family:"IBM Plex Mono",ui-monospace,monospace; font-weight:500;
+  font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; color:var(--muted);
+  padding:11px 14px; border-bottom:1px solid var(--rule); background:var(--sunk)}
+tbody td{padding:10px 14px; border-bottom:1px solid var(--rule-soft);
+  vertical-align:top; color:var(--ink-2)}
+tbody tr:nth-child(even){background:var(--accent-soft)}
+tbody tr:last-child td{border-bottom:none}
+tbody td code{background:transparent; border:none; padding:0}
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr; gap:0; padding:0 22px}
+  nav.rail{position:static; max-height:none; padding:28px 0 8px; border-bottom:1px solid var(--rule)}
+  .rail ol{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:2px}
+  main{padding-top:26px}
+  .masthead{padding:40px 22px 30px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style></head><body>
+<header class="masthead"><div class="mast-in">
+<p class="eyebrow">Notițe de curs · contabilitate</p>
+<h1>Imobilizări</h1>
+<p class="lede">Surse: training 12.08.2026 · adâncit cu 19.08.2026 — versiune revizuită, reorganizată și contraverificată</p>
+</div></header>
+<div class="wrap">
+<nav class="rail" aria-label="Cuprins"><p class="rail-h">Cuprins</p><ol><li><a href="#cum-cite-ti-acest-document"><span class="tnum">1</span><span>Cum citești acest document</span></a></li><li><a href="#cuprins"><span class="tnum">2</span><span>Cuprins</span></a></li><li><a href="#1-cadrul-general"><span class="tnum">3</span><span>1. Cadrul general</span></a></li><li><a href="#2-imobiliz-ri-necorporale-20x"><span class="tnum">4</span><span>2. Imobilizări necorporale (20x)</span></a></li><li><a href="#3-imobiliz-ri-corporale-reguli-comune"><span class="tnum">5</span><span>3. Imobilizări corporale — reguli comune</span></a></li><li><a href="#4-terenuri-i-amenaj-ri-de-terenuri-211"><span class="tnum">6</span><span>4. Terenuri și amenajări de terenuri (211)</span></a></li><li><a href="#5-construc-ii-212"><span class="tnum">7</span><span>5. Construcții (212)</span></a></li><li><a href="#6-instala-ii-tehnice-i-mijloace-de-transport-213"><span class="tnum">8</span><span>6. Instalații tehnice și mijloace de transport (213)</span></a></li><li><a href="#7-mobilier-aparatur-birotic-214"><span class="tnum">9</span><span>7. Mobilier, aparatură birotică (214)</span></a></li><li><a href="#8-investi-ii-imobiliare-215"><span class="tnum">10</span><span>8. Investiții imobiliare (215)</span></a></li><li><a href="#9-achizi-ii-facturate-dar-nesosite-223-224"><span class="tnum">11</span><span>9. Achiziții facturate dar nesosite (223/224)</span></a></li><li><a href="#10-imobiliz-ri-n-curs-de-execu-ie-231-233"><span class="tnum">12</span><span>10. Imobilizări în curs de execuție (231, 233)</span></a></li><li><a href="#11-ie-iri-din-gestiune"><span class="tnum">13</span><span>11. Ieșiri din gestiune</span></a></li><li><a href="#12-imobiliz-ri-financiare-26x"><span class="tnum">14</span><span>12. Imobilizări financiare (26x)</span></a></li><li><a href="#13-procedura-lunar-de-control-analitic-sintetic"><span class="tnum">15</span><span>13. Procedura lunară de control (analitic ↔ sintetic)</span></a></li><li><a href="#15-raport-ri-i-declara-ii"><span class="tnum">16</span><span>15. Raportări și declarații</span></a></li><li><a href="#18-anticipare-pentru-sesiunea-urm-toare-ajust-ri"><span class="tnum">17</span><span>18. Anticipare pentru sesiunea următoare: ajustări</span></a></li><li><a href="#anexa-a-recapitulare-conturi-i-perechile-lor"><span class="tnum">18</span><span>Anexa A — Recapitulare: conturi și perechile lor</span></a></li><li><a href="#anexa-c-ce-am-corectat-fa-de-noti-ele-originale"><span class="tnum">19</span><span>Anexa C — Ce am corectat față de notițele originale</span></a></li><li><a href="#anexa-d-r-mase-deschise"><span class="tnum">20</span><span>Anexa D — Rămase deschise</span></a></li><li><a href="#anexa-e-baza-legal-citat"><span class="tnum">21</span><span>Anexa E — Baza legală citată</span></a></li></ol></nav>
+<main>
+<h3 id="surse-training-12-08-2026-ad-ncit-cu-19-08-2026-">Surse: training 12.08.2026 · adâncit cu 19.08.2026 — versiune revizuită, reorganizată și contraverificată</h3>
+<hr>
+<h2 id="cum-cite-ti-acest-document">Cum citești acest document</h2>
+<div class="tw"><table><thead><tr><th>Marcaj</th><th>Semnificație</th></tr></thead><tbody><tr><td>✅</td><td>Notița originală era corectă — doar reformulată/completată</td></tr><tr><td>⚠️</td><td><strong>Eroare în notița originală</strong> — corectată aici, cu explicație</td></tr><tr><td>➕</td><td>Completare (lucru care lipsea, dar era necesar ca raționamentul să stea în picioare)</td></tr><tr><td>❓</td><td>Rămas deschis — de clarificat cu formatorul (vezi Anexa D)</td></tr></tbody></table></div>
+<p><em>Versiune revizuită, reorganizată și contraverificată</em></p>
+<div class="note"><p><strong>Atenție — cea mai importantă corecție:</strong> notițele lucrează implicit cu pragul vechi de mijloc fix. Din <strong>25.02.2026</strong> pragul fiscal este <strong>5.000 lei</strong>, nu 2.500 lei (OUG nr. 8/2026, M.Of. 147/25.02.2026). Vezi secțiunea 1.  Documentul reflectă legislația așa cum am putut-o verifica la <strong>12.08.2026</strong>. Fiind zonă cu modificări dese (OUG 8/2026, Legea 239/2025), verifică textul în vigoare înainte de a aplica pe o speță reală.</p></div>
+<hr>
+<h2 id="cuprins">Cuprins</h2>
+<ol><li>[Cadrul general — praguri, durate, baza legală](#1-cadrul-general)</li><li>[Imobilizări necorporale (20x)](#2-imobilizări-necorporale-20x)</li><li>[Imobilizări corporale — reguli comune](#3-imobilizări-corporale--reguli-comune)</li><li>[Terenuri și amenajări (211)](#4-terenuri-și-amenajări-de-terenuri-211)</li><li>[Construcții (212)](#5-construcții-212)</li><li>[Instalații tehnice și mijloace de transport (213)](#6-instalații-tehnice-și-mijloace-de-transport-213)</li><li>[Mobilier, birotică (214)](#7-mobilier-aparatură-birotică-214)</li><li>[Investiții imobiliare (215)](#8-investiții-imobiliare-215)</li><li>[Achiziții facturate dar nesosite (223/224)](#9-achiziții-facturate-dar-nesosite-223224)</li><li>[Imobilizări în curs (231, 233)](#10-imobilizări-în-curs-de-execuție-231-233)</li><li>[Ieșiri: vânzare, casare, dezmembrare](#11-ieșiri-din-gestiune)</li><li>[Imobilizări financiare (26x)](#12-imobilizări-financiare-26x)</li><li>[Procedura lunară de control](#13-procedura-lunară-de-control-analitic--sintetic)</li><li>[Tabel corespondențe 21x ↔ 28x](#14-tabel-corespondențe-cont-de-activ--cont-de-amortizare)</li><li>[Raportări și declarații](#15-raportări-și-declarații)</li><li>[Lista completă a erorilor corectate](#16-lista-erorilor-corectate-din-notițe)</li><li>[De clarificat cu formatorul](#17-de-clarificat--întrebări-pentru-mail)</li></ol>
+<hr>
+<h2 id="1-cadrul-general">1. Cadrul general</h2>
+<h3 id="1-1-pragul-de-recunoa-tere">1.1 Pragul de recunoaștere ⚠️➕</h3>
+<p>Notițele nu menționează pragul. Este esențial și <strong>tocmai s-a schimbat</strong>:</p>
+<div class="tw"><table><thead><tr><th></th><th>Fiscal (Cod fiscal, art. 28 alin. 2)</th><th>Contabil (OMFP 1802/2014)</th></tr></thead><tbody><tr><td>Prag valoric</td><td><strong>≥ 5.000 lei</strong> de la 25.02.2026 (era 2.500 lei)</td><td><strong>Nu există prag legal</strong> — se stabilește prin politici contabile</td></tr><tr><td>Durată</td><td>&gt; 1 an</td><td>&gt; 1 an</td></tr></tbody></table></div>
+<p>Consecințe practice:</p>
+<ul><li>Un bun sub 5.000 lei achiziționat după 25.02.2026 → <strong>cheltuială deductibilă integral</strong> fiscal; contabil poate fi obiect de inventar sau imobilizare, după politica firmei.</li><li>Bunurile deja înregistrate ca mijloace fixe cu valoare 2.500–5.000 lei <strong>rămân</strong> în amortizare până la final (regulă tranzitorie).</li><li>➕ <strong>Recomandare:</strong> aliniază pragul din politicile contabile la 5.000 lei, ca să nu generezi diferențe temporare inutile (impozit amânat, muncă în plus).</li><li>➕ Pentru contribuabilii cu <strong>an fiscal modificat</strong>, noul prag se aplică de la primul an fiscal modificat care începe în 2026.</li></ul>
+<h3 id="1-2-amortizare-contabil-vs-amortizare-fiscal">1.2 Amortizare contabilă vs. amortizare fiscală ✅</h3>
+<ul><li><strong>Contabilă</strong> — durata de utilizare economică estimată de entitate (OMFP 1802/2014). Merge în contul de profit și pierdere.</li><li><strong>Fiscală</strong> — durata din <strong>Catalogul de clasificare (HG 2139/2004)</strong>, intervalul minim–maxim. Merge în calculul impozitului pe profit.</li><li>Cele două pot să difere → diferență la D101.</li></ul>
+<p>⚠️ În notițe apare „Legea 15&quot; ca „documentul de căpătâi&quot;. În practica de azi, baza legală efectivă este:</p>
+<ul><li><strong>HG 2139/2004</strong> — Catalogul privind clasificarea și duratele normale de funcționare</li><li><strong>Legea 227/2015, art. 28</strong> — amortizarea fiscală</li><li><strong>OMFP 1802/2014</strong> — amortizarea contabilă</li><li>Legea 15/1994 mai există formal, dar nu ea determină tratamentul fiscal curent.</li></ul>
+<h3 id="1-3-metode-de-amortizare-art-28-alin-5">1.3 Metode de amortizare (art. 28 alin. 5) ✅⚠️</h3>
+<div class="tw"><table><thead><tr><th>Categorie</th><th>Metode permise</th></tr></thead><tbody><tr><td><strong>Construcții</strong></td><td>Doar <strong>liniară</strong> ✅ (confirmă notița)</td></tr><tr><td>Echipamente tehnologice (mașini, unelte, instalații de lucru) + computere și echipamente periferice</td><td>Liniară, degresivă sau <strong>accelerată</strong></td></tr><tr><td>Orice alt mijloc fix (inclusiv <strong>mijloace de transport</strong>, mobilier)</td><td>Liniară sau degresivă — <strong>NU accelerată</strong> ➕</td></tr></tbody></table></div>
+<p><strong>Amortizare accelerată</strong> ⚠️ — notița spune „50% în primul an, diferența în următorii 2 ani&quot;. Corect:</p>
+<ul><li>an 1: <strong>maximum 50%</strong> din valoarea fiscală de intrare;</li><li>anii următori: valoarea rămasă <strong>/ durata normală de utilizare rămasă</strong> (nu „2 ani&quot;).</li></ul>
+<p>➕ <strong>Nou în 2026 — amortizare SUPERACCELERATĂ (art. 28 alin. 8¹):</strong></p>
+<ul><li><strong>65%</strong> în primul an, restul pe durata normală rămasă;</li><li>doar pentru <strong>active noi</strong> din <strong>subgrupa 2.1</strong> (echipamente tehnologice, mașini, unelte, instalații de lucru) și <strong>subgrupa 2.4</strong> (animale și plantații);</li><li>doar pentru achiziții/producții <strong>puse în funcțiune între 01.01.2026 și 31.12.2026</strong>.</li></ul>
+<h3 id="1-4-accelerat-vs-profit-reinvestit-nuan-importan">1.4 Accelerat vs. profit reinvestit ⚠️ (nuanță importantă)</h3>
+<p>Notița: „nu poate să mai fie aplicată o altă facilitate fiscală = reducere pentru profitul reinvestit → de făcut un calcul, ce este mai avantajos.&quot;</p>
+<ul><li><strong>Regula generală (art. 22 alin. 9):</strong> cine aplică scutirea de impozit pe profitul reinvestit <strong>nu poate opta</strong> pentru amortizare accelerată/superaccelerată pe acele active. ✅</li><li>⚠️ <strong>Excepție pentru anul 2026:</strong> dacă scutirea se aplică în 2026 pentru <strong>subgrupa 2.1</strong> și pentru <strong>computere și echipamente periferice</strong>, contribuabilul <strong>poate</strong> opta pentru amortizarea <strong>accelerată</strong> (art. 28 alin. 5 lit. b).</li><li>❓ Excepția pare formulată strict pe <em>accelerat</em>, nu și pe <em>superaccelerat</em> (alin. 8¹). Am văzut și surse care susțin cumulul cu 65% — <strong>de verificat pe textul legii înainte de a consilia un client</strong>.</li></ul>
+<p><strong>Concluzia formatorului rămâne validă:</strong> se face un calcul comparativ. Doar că în 2026 al treilea scenariu (cumul) poate fi pe masă.</p>
+<h3 id="1-5-momentul-nceperii-amortiz-rii">1.5 Momentul începerii amortizării ⚠️</h3>
+<p>Notița: „cu luna următoare / luna punerii în funcțiune (la utilaje)&quot; — ambiguu.</p>
+<p><strong>Regulă unică, fără excepții pe categorii:</strong> amortizarea se calculează <strong>începând cu luna următoare</strong> celei în care mijlocul fix se pune în funcțiune (art. 28 alin. 12). Se aplică identic la clădiri, utilaje, birotică.</p>
+<p>➕ Documentul care fixează data: <strong>proces-verbal de punere în funcțiune / recepție</strong>.</p>
+<hr>
+<h2 id="2-imobiliz-ri-necorporale-20x">2. Imobilizări necorporale (20x)</h2>
+<h3 id="2-1-achizi-ie">2.1 Achiziție</h3>
+<div class="tw"><table><thead><tr><th>Situație</th><th>Cont</th><th>Notă</th></tr></thead><tbody><tr><td>Mărci, brevete, licențe, concesiuni</td><td><strong>205</strong></td><td>✅ mărcile se înregistrează pe <strong>10 ani</strong> (durata protecției, reînnoibilă)</td></tr><tr><td>Programe informatice achiziționate (soft de contabilitate)</td><td><strong>208</strong></td><td>✅ „Alte imobilizări necorporale&quot;</td></tr></tbody></table></div>
+<p><strong>Monografie achiziție soft:</strong></p>
+<div class="ledger"><div class="led-row" id="m1-a1"><span class="led-d">%</span><span class="led-eq">=</span><span class="led-c">404</span><span class="led-amt">0</span><span class="led-note">Furnizori de imobilizări</span></div></div>
+<p>⚠️ Notița scrie „208 – 404&quot; corect, dar apoi „achiziționare program de contabilitate / partea de amortizare&quot; fără să detalieze: amortizarea se face pe <strong>durata contractului de licență</strong>, iar dacă nu e specificată, pe durata estimată de utilizare (uzual 3 ani pentru software).</p>
+<h3 id="2-2-soft-dezvoltat-intern-aici-erau-dou-erori">2.2 Soft dezvoltat intern ⚠️⚠️ (aici erau două erori)</h3>
+<p>Notițele:</p>
+<div class="ledger"><div class="led-row" id="m2-a1"><span class="led-d">641</span><span class="led-eq">=</span><span class="led-c">241</span><span class="led-amt"></span><span class="led-note">=&gt; cu fondul de salarii     ❌</span></div><div class="led-row" id="m2-a2"><span class="led-d">641</span><span class="led-eq">=</span><span class="led-c">436</span><span class="led-amt"></span><span class="led-note">=&gt; CAM                       ❌</span></div></div>
+<p><strong>Corect:</strong></p>
+<div class="ledger"><div class="led-row" id="m3-a1"><span class="led-d">641</span><span class="led-eq">=</span><span class="led-c">421</span><span class="led-amt"></span><span class="led-note">Cheltuieli cu salariile = Personal – salarii datorate</span></div><div class="led-row" id="m3-a2"><span class="led-d">646</span><span class="led-eq">=</span><span class="led-c">436</span><span class="led-amt"></span><span class="led-note">Cheltuieli privind CAM = Contribuția asiguratorie pentru muncă</span></div></div>
+<p><strong>La sfârșitul lunii — capitalizarea costurilor:</strong> ✅ ideea din notițe e corectă („înregistrez această cheltuială → pe venit&quot;), dar contul lipsea:</p>
+<div class="ledger"><div class="led-row" id="m4-a1"><span class="led-d">233</span><span class="led-eq">=</span><span class="led-c">721</span><span class="led-amt"></span><span class="led-note">Imobilizări necorporale în curs = Venituri din producția</span></div></div>
+<p><strong>La finalizare:</strong></p>
+<div class="ledger"><div class="led-row" id="m5-a1"><span class="led-d">208</span><span class="led-eq">=</span><span class="led-c">233</span><span class="led-amt"></span><span class="led-note">✅ exact cum e în notițe</span></div></div>
+<p>➕ Contul <strong>203 „Cheltuieli de dezvoltare&quot;</strong> (menționat în notițe cu semnul întrebării) se folosește când costurile de dezvoltare îndeplinesc criteriile de capitalizare din OMFP 1802/2014. Faza de <strong>cercetare</strong> merge obligatoriu pe cheltuieli (614/628), nu se capitalizează. Distincția cercetare/dezvoltare trebuie documentată.</p>
+<p>➕ Laptopurile și licențele folosite în proiect <strong>nu</strong> intră în 233 — ele sunt imobilizări separate, iar în 233 intră doar <strong>amortizarea lor</strong> aferentă perioadei de dezvoltare (exemplul cu „6811 = 2805, să zicem 100 lei&quot; din notițe).</p>
+<h3 id="2-3-amortizarea-necorporalelor">2.3 Amortizarea necorporalelor ⚠️</h3>
+<p>Notița: <code>7815 - 2805/2808</code> — <strong>contul 7815 nu există.</strong></p>
+<p><strong>Corect:</strong></p>
+<div class="ledger"><div class="led-row" id="m6-a1"><span class="led-d">6811</span><span class="led-eq">=</span><span class="led-c">2805</span><span class="led-amt"></span><span class="led-note">Amortizarea concesiunilor, brevetelor, licențelor, mărcilor</span></div><div class="led-row" id="m6-a2"><span class="led-d">6811</span><span class="led-eq">=</span><span class="led-c">2808</span><span class="led-amt"></span><span class="led-note">Amortizarea altor imobilizări necorporale</span></div></div>
+<p>✅ „face programul, lună de lună&quot; — corect, dar vezi secțiunea 13: <strong>trebuie verificat manual</strong>, nu presupus.</p>
+<p>➕ Contul <strong>7813</strong> (nu 7815) există și este „Venituri din ajustări pentru deprecierea imobilizărilor&quot; — probabil de aici confuzia. Este subiectul sesiunii următoare (ajustări).</p>
+<hr>
+<h2 id="3-imobiliz-ri-corporale-reguli-comune">3. Imobilizări corporale — reguli comune</h2>
+<h3 id="3-1-furnizorul-este-404-nu-401">3.1 Furnizorul este 404, nu 401 ✅</h3>
+<pre class="cod">21x = 404    Furnizori de imobilizări</pre>
+<p>Se aplică la <strong>toate</strong> grupele de imobilizări, inclusiv la serviciile aferente construirii unui activ (vezi secțiunea 10).</p>
+<h3 id="3-2-regimuri-de-tva-la-achizi-ie-se-aplic-la-fie">3.2 Regimuri de TVA la achiziție — se aplică la <strong>fiecare</strong> grupă ✅</h3>
+<p>Notița spune corect: „partea de TVA și taxare inversă poate să fie valabilă la fiecare grupă de mijloace fixe... e valabilă la toată grupa.&quot;</p>
+<div class="tw"><table><thead><tr><th>Situație</th><th>Tratament</th></tr></thead><tbody><tr><td>Achiziție internă standard</td><td>TVA deductibil la cota standard <strong>21%</strong></td></tr><tr><td>Achiziție de la persoană fizică</td><td>Fără TVA (persoana fizică nu e impozabilă)</td></tr><tr><td>Achiziție de la neplătitor de TVA</td><td>Fără TVA</td></tr><tr><td><strong>Taxare inversă</strong> (art. 331)</td><td><code>4426 = 4427</code> — se preia simultan pe deductibil și pe colectat</td></tr><tr><td><strong>Achiziție intracomunitară</strong></td><td><code>4426 = 4427</code> cu cota din România</td></tr><tr><td><strong>Import</strong></td><td>TVA se plătește în vamă (sau taxare inversă cu certificat de amânare)</td></tr></tbody></table></div>
+<p>➕ <strong>Cota standard de TVA este 21%</strong> (majorată de la 19%). ✅ notițele o folosesc corect.</p>
+<h3 id="3-3-codul-de-clasificare-de-ce-conteaz-clarifica">3.3 Codul de clasificare — de ce contează ✅ + clarificare ⚠️</h3>
+<p>Notița: „codul de clasificare... trebuie trecut în contabilitate (în modulul de mijloace fixe × 12 luni)... pentru că merge în <strong>406</strong>.&quot;</p>
+<p>⚠️ Clarificare: <strong>406 = D406 SAF-T, secțiunea Active</strong>, nu un cont contabil (nu există cont 406).</p>
+<ul><li>Se depune <strong>anual</strong>, cu termen = termenul de depunere a situațiilor financiare.</li><li>Necesită <strong>toate cele 12 luni calculate în modulul de mijloace fixe</strong> — de aici „× 12 luni&quot;.</li><li>Conține codul de clasificare, amortizările, intrările și ieșirile din tot anul fiscal.</li><li>ANAF a publicat în schema SAF-T catalogul de clasificare, inclusiv pentru terenuri și necorporale.</li></ul>
+<p><strong>Dacă încadrarea în catalog e greșită → durata e greșită → amortizarea e greșită → impozitul pe profit e greșit → SAF-T e greșit.</strong> ✅ Exact punctul formatorului.</p>
+<h3 id="3-4-impozite-locale-noti-a-e-prea-larg">3.4 Impozite locale ⚠️ (notița e prea largă)</h3>
+<p>Notița: „toată grupa trebuie declarată la primărie în 30 zile.&quot;</p>
+<p><strong>Corect — se declară la primărie doar:</strong></p>
+<ul><li><strong>clădirile</strong> (art. 461 Cod fiscal)</li><li><strong>terenurile</strong> (art. 466)</li><li><strong>mijloacele de transport</strong> (art. 471)</li></ul>
+<p>Utilajele, birotica, mobilierul <strong>nu</strong> se declară la primărie.</p>
+<p><strong>Termen:</strong> 30 de zile de la dobândire/construire. ✅</p>
+<p>⚠️ <strong>Nuanță asupra plății:</strong> notița spune „impozitul se plătește pe tot anul&quot;. Corect și complet:</p>
+<ul><li>La dobândirea în cursul anului, se datorează impozit <strong>începând cu 1 ianuarie a anului următor</strong> (art. 461 alin. 2).</li><li>Odată datorat, impozitul e datorat <strong>pentru întregul an</strong> de cel care deține clădirea la <strong>31 decembrie a anului anterior</strong> (art. 461 alin. 1 și 5).</li><li>✅ Deci: dacă vinzi în cursul anului, <strong>primăria nu restituie</strong> nimic proporțional. Formatorul are dreptate pe concluzie.</li></ul>
+<p>➕ Legea 239/2025 a modificat impozitele locale pentru 2026. Impozitarea la valoarea de piață (grila notarilor) a fost <strong>amânată pentru 2027</strong>; pentru 2026 rămâne sistemul bazat pe valoarea impozabilă.</p>
+<hr>
+<h2 id="4-terenuri-i-amenaj-ri-de-terenuri-211">4. Terenuri și amenajări de terenuri (211)</h2>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Denumire</th><th>Se amortizează?</th></tr></thead><tbody><tr><td><strong>2111</strong></td><td>Terenuri</td><td><strong>NU</strong> ❌</td></tr><tr><td><strong>2112</strong></td><td>Amenajări de terenuri</td><td><strong>DA</strong> — 10 ani ✅</td></tr></tbody></table></div>
+<p>✅ Notița e corectă: „terenurile nu se amortizează&quot;, „amenajările de terenuri se amortizează pe 10 ani&quot;.</p>
+<p>⚠️ Notița are o formulare confuză: „se amortizează terenurile pe terenuri&quot;. Corect: <strong>se amortizează doar amenajarea, pe cont separat (2112), nu terenul (2111)</strong>.</p>
+<p>✅ <strong>De înregistrat cât mai analitic</strong> — motivul dat de formator e corect: tratamentul fiscal la vânzare diferă în funcție de categorie:</p>
+<ul><li>teren <strong>construibil</strong> → taxabil obligatoriu</li><li>teren <strong>neconstruibil</strong> / arabil → scutit, cu drept de opțiune pentru taxare (art. 292 alin. 3)</li><li>teren cu construcție → depinde dacă construcția e nouă sau veche</li></ul>
+<p>➕ Sugestie de analitice: <code>2111.01 arabil</code>, <code>2111.02 construibil intravilan</code>, <code>2111.03 aferent construcțiilor</code>, <code>2111.04 în curs de construcție</code>.</p>
+<p>✅ Exemple de amenajări amortizabile: tasare, nivelare, împrejmuire, drumuri de acces, racorduri utilități, sistematizare verticală.</p>
+<hr>
+<h2 id="5-construc-ii-212">5. Construcții (212)</h2>
+<div class="ledger"><div class="led-row" id="m8-a1"><span class="led-d">212</span><span class="led-eq">=</span><span class="led-c">404</span><span class="led-amt"></span><span class="led-note">Furnizori de imobilizări (NU 401) ✅</span></div></div>
+<h3 id="5-1-ncadrarea-n-catalog">5.1 Încadrarea în catalog ✅</h3>
+<p>De verificat <strong>ce fel de clădire</strong> este, pentru că durata diferă semnificativ:</p>
+<div class="tw"><table><thead><tr><th>Tip</th><th>Durată orientativă</th></tr></thead><tbody><tr><td>Clădire administrativă / de birouri</td><td>40–60 ani</td></tr><tr><td>Hală industrială</td><td>32–48 ani</td></tr><tr><td>Șopron, construcție ușoară</td><td>~16 ani</td></tr></tbody></table></div>
+<p>⚠️ Notița dă „administrativă 30–40 ani&quot;. <strong>De verificat direct în HG 2139/2004</strong> — duratele diferă pe subgrupe, iar catalogul dă interval min–max, nu o valoare unică.</p>
+<h3 id="5-2-metoda">5.2 Metoda ✅</h3>
+<p><strong>Clădirile se amortizează obligatoriu LINIAR.</strong> Confirmat de art. 28 alin. 5 lit. a). Fără excepție, fără accelerat, fără superaccelerat.</p>
+<h3 id="5-3-regimuri-de-tva-la-achizi-ia-de-cl-diri">5.3 Regimuri de TVA la achiziția de clădiri</h3>
+<div class="tw"><table><thead><tr><th>Caz</th><th>Tratament</th></tr></thead><tbody><tr><td>Achiziție de la persoană juridică plătitoare, taxabilă</td><td>TVA 21% deductibil</td></tr><tr><td>Achiziție de la persoană fizică</td><td>Fără TVA</td></tr><tr><td><strong>Taxare inversă</strong> (art. 331 alin. 2 lit. g)</td><td><code>4426 = 4427</code> la 21%</td></tr></tbody></table></div>
+<p><strong>Condiții pentru taxare inversă la imobile:</strong> ✅</p>
+<ul><li>atât furnizorul, <strong>cât și</strong> beneficiarul înregistrați în scopuri de TVA în România;</li><li>livrarea este <strong>taxabilă</strong> — fie prin efectul legii (construcție nouă, teren construibil), fie <strong>prin opțiune</strong> (art. 292 alin. 3, notificare depusă).</li></ul>
+<p>➕ <strong>Nu se aplică taxare inversă</strong> la vânzarea unei construcții <strong>nefinalizate</strong> (sold 231) — aceea e livrare de bun nefinalizat, cu <strong>regim normal de taxare, TVA 21% colectat</strong>.</p>
+<h3 id="5-4-codul-27-n-d394-confirmat">5.4 Codul 27 în D394 ✅ (confirmat)</h3>
+<p>Notița: „dacă nu trec un cod 27, decontul / 394 nu va recunoaște operația ca taxare inversă.&quot;</p>
+<p><strong>Confirmat: codul 27 = „Construcții/terenuri&quot;</strong> în nomenclatorul de coduri pentru taxare inversă din D394. Fără el, declarația dă eroare la validare.</p>
+<p>➕ Atenție și la <strong>tipul partenerului</strong> din D394 — o combinație greșită cod produs / tip partener dă eroare de validare chiar dacă codul 27 e corect.</p>
+<p>⚠️ Nu improviza cu alt cod ca să treacă validarea (am văzut pe forumuri sugestii de genul „pune 22 deșeuri, că validează&quot;). Este declarație incorectă.</p>
+<hr>
+<h2 id="6-instala-ii-tehnice-i-mijloace-de-transport-213">6. Instalații tehnice și mijloace de transport (213)</h2>
+<p>⚠️ Notița scrie <code>2101/2102/2103</code> — <strong>conturi inexistente</strong>. Corect:</p>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Denumire</th></tr></thead><tbody><tr><td><strong>2131</strong></td><td>Echipamente tehnologice (mașini, utilaje și instalații de lucru)</td></tr><tr><td><strong>2132</strong></td><td>Aparate și instalații de măsurare, control și reglare</td></tr><tr><td><strong>2133</strong></td><td>Mijloace de transport</td></tr><tr><td><strong>2134</strong></td><td>Animale și plantații</td></tr></tbody></table></div>
+<h3 id="6-1-achizi-ie-intracomunitar">6.1 Achiziție intracomunitară ✅</h3>
+<div class="ledger"><div class="led-row" id="m9-a1"><span class="led-d">2131</span><span class="led-eq">=</span><span class="led-c">404</span><span class="led-amt">100.000</span><span class="led-note"></span></div><div class="led-row" id="m9-a2"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">21.000</span><span class="led-note">(cota din România, 21%)</span></div></div>
+<p><strong>Condiții:</strong> ✅</p>
+<ul><li>înregistrare în <strong>VIES</strong> + cod valid de TVA (al ambelor părți);</li><li><strong>dovada transportului</strong> din spațiul UE în România (CMR, documente de transport).</li></ul>
+<p>➕ <strong>Obligație declarativă suplimentară pe care notițele nu o menționează:</strong> achiziția intracomunitară se declară în <strong>D390 (Declarația recapitulativă)</strong>, nu în D394. D394 acoperă doar operațiunile pe teritoriul național.</p>
+<h3 id="6-2-import-din-afara-ue">6.2 Import din afara UE</h3>
+<p><strong>Document de bază:</strong> ✅ <strong>declarația vamală de import (DVI)</strong> — nu factura furnizorului.</p>
+<div class="ledger"><div class="led-row" id="m10-a1"><span class="led-d">2131</span><span class="led-eq">=</span><span class="led-c">404</span><span class="led-amt"></span><span class="led-note">valoarea din declarația vamală</span></div><div class="led-row" id="m10-a2"><span class="led-d">2131</span><span class="led-eq">=</span><span class="led-c">446/5121</span><span class="led-amt"></span><span class="led-note">TAXELE VAMALE — se CAPITALIZEAZĂ  ⚠️</span></div><div class="led-row" id="m10-a3"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">5121</span><span class="led-amt"></span><span class="led-note">TVA plătit în vamă  ✅</span></div></div>
+<p>⚠️ <strong>Corecție importantă:</strong> notița scrie <code>635 = 5121</code> pentru taxele vamale, apoi imediat spune „e obligatoriu — introducerea în prețul de achiziție a transportului și a taxelor vamale&quot;. <strong>Cele două afirmații se contrazic.</strong> Corectă este a doua: conform OMFP 1802/2014, <strong>taxele vamale nerecuperabile și transportul fac parte din costul de achiziție</strong> al imobilizării. Contul 635 ar trece taxa direct pe cheltuială — greșit.</p>
+<p>✅ <strong>Atenție la diferențele de curs valutar</strong> — punct valid din notițe. Valoarea de intrare se fixează la cursul din DVI; unele sisteme recalculează la plată, ceea ce alterează valoarea de amortizat. <strong>De verificat setarea în soft.</strong></p>
+<p>➕ Cine are <strong>certificat de amânare de la plata TVA în vamă</strong> aplică <code>4426 = 4427</code> în loc de plată efectivă.</p>
+<h3 id="6-3-ncadrarea-n-catalog">6.3 Încadrarea în catalog ✅</h3>
+<p>Exemplul din notițe:</p>
+<div class="note"><p><code>2.1.16.4.1. Compresoare cu piston, stabile — 8-12 ani</code></p></div>
+<p>✅ Punctul formatorului e esențial: <strong>„nu numai că trebuie să știu date tehnice, ca să pot încadra mijlocul fix&quot;</strong> — încadrarea corectă presupune fișa tehnică a echipamentului, nu doar denumirea de pe factură. Cere fișa tehnică furnizorului sau clientului.</p>
+<h3 id="6-4-autoturisme-limit-ri-fiscale-lipsesc-din-not">6.4 ➕ Autoturisme — limitări fiscale (lipsesc din notițe)</h3>
+<p>Pentru vehiculele rutiere motorizate ≤ 3.500 kg și ≤ 9 locuri, neutilizate exclusiv în scopul activității:</p>
+<ul><li><strong>TVA deductibil 50%</strong> (art. 298) — 50% nedeductibil intră în valoarea de intrare a mijlocului fix;</li><li><strong>cheltuielile aferente deductibile 50%</strong> (art. 25 alin. 3 lit. l), inclusiv <strong>amortizarea</strong>;</li><li>excepțiile (100% deductibil): taxi, școli de șoferi, închiriere, curierat, agenți de vânzări cu foaie de parcurs completă.</li></ul>
+<hr>
+<h2 id="7-mobilier-aparatur-birotic-214">7. Mobilier, aparatură birotică (214)</h2>
+<div class="ledger"><div class="led-row" id="m11-a1"><span class="led-d">214</span><span class="led-eq">=</span><span class="led-c">404</span><span class="led-amt"></span><span class="led-note">✅</span></div></div>
+<p>Cont complet: <strong>214 „Mobilier, aparatură birotică, echipamente de protecție a valorilor umane și materiale și alte active corporale&quot;</strong>.</p>
+<p>✅ Confirmat punctul din notițe: regimurile de TVA (inclusiv scutirea la achiziția de la persoană fizică) sunt valabile <strong>la toate grupele</strong>, nu doar la clădiri.</p>
+<p>➕ <strong>Impact direct al noului prag de 5.000 lei:</strong> cea mai mare parte din birotică (laptopuri, imprimante, telefoane, scaune) intră acum <strong>sub prag</strong> → cheltuială deductibilă integral fiscal în anul achiziției. Aici se simte cel mai puternic modificarea din OUG 8/2026.</p>
+<hr>
+<h2 id="8-investi-ii-imobiliare-215">8. Investiții imobiliare (215)</h2>
+<p>✅ Ideea din notițe e corectă ca definiție: clădiri/terenuri deținute pentru obținerea de chirii sau pentru creșterea valorii capitalului, nu pentru utilizare în producție sau administrativ.</p>
+<p>⚠️ <strong>Dar formularea „rămâne la valoarea pe document&quot; (adică nu se amortizează) este incorectă:</strong></p>
+<ul><li><strong>Terenul</strong> din investiția imobiliară — nu se amortizează;</li><li><strong>Construcția</strong> din investiția imobiliară — <strong>se amortizează</strong>, pe contul <strong>2815 „Amortizarea investițiilor imobiliare&quot;</strong>.</li></ul>
+<p>Contul 2815 există exact pentru asta. Sub OMFP 1802/2014, investiția imobiliară se evaluează la cost minus amortizare cumulată minus ajustări.</p>
+<h3 id="8-1-documente-necesare-la-achizi-ia-de-imobile">8.1 Documente necesare la achiziția de imobile ✅</h3>
+<p>Pe lângă factură:</p>
+<ul><li><strong>contractul autentificat notarial</strong> (tranzacțiile se derulează prin notariat);</li><li>notarul comunică oricum tranzacția către primărie → vine solicitare de la primărie.</li></ul>
+<p>✅ <strong>De verificat obligatoriu: valoarea de pe factură = valoarea din contractul notarial.</strong></p>
+<h3 id="8-2-defalcarea-teren-construc-ie-punct-foarte-bu">8.2 Defalcarea teren / construcție ✅ (punct foarte bun din notițe)</h3>
+<p>Situație: primesc un act notarial de 120.000 lei, fără defalcare.</p>
+<p><strong>Nu am voie să estimez singur.</strong> Am nevoie de una din:</p>
+<ol><li><strong>Încheiere / act adițional notarial</strong> care defalcă valoarea terenului și valoarea construcției; sau</li><li><strong>Raport de evaluare</strong> întocmit de un evaluator autorizat (ANEVAR).</li></ol>
+<p><strong>De ce e obligatoriu:</strong></p>
+<ul><li>terenul nu se amortizează, construcția da → fără defalcare nu pot calcula corect amortizarea;</li><li>declarațiile la primărie sunt separate (impozit pe clădiri vs. impozit pe teren);</li><li>la o eventuală vânzare, regimul de TVA diferă pe cele două componente.</li></ul>
+<hr>
+<h2 id="9-achizi-ii-facturate-dar-nesosite-223-224">9. Achiziții facturate dar nesosite (223/224)</h2>
+<p>⚠️ Notița scrie <code>231/233 la 223</code> — inversat și amestecat cu conturi de imobilizări în curs de <em>execuție</em>, care sunt altceva.</p>
+<p><strong>Conturile corecte („în curs de aprovizionare&quot;):</strong></p>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Denumire</th></tr></thead><tbody><tr><td><strong>223</strong></td><td>Instalații tehnice, mijloace de transport, animale și plantații <strong>în curs de aprovizionare</strong></td></tr><tr><td><strong>224</strong></td><td>Mobilier, aparatură birotică... <strong>în curs de aprovizionare</strong></td></tr></tbody></table></div>
+<p><strong>Monografie corectă:</strong></p>
+<div class="ledger"><div class="led-row" id="m12-a1"><span class="led-d">%</span><span class="led-eq">=</span><span class="led-c">404</span><span class="led-amt">0</span><span class="led-note"></span></div><div class="led-row" id="m12-a2"><span class="led-d">2131</span><span class="led-eq">=</span><span class="led-c">223</span><span class="led-amt"></span><span class="led-note"></span></div></div>
+<p>⚠️ <strong>De reținut distincția:</strong></p>
+<ul><li><strong>223/224</strong> = cumpărat, facturat, <strong>nesosit</strong></li><li><strong>231/233</strong> = <strong>în curs de execuție</strong> (construiesc / produc eu activul)</li></ul>
+<p>Sunt situații complet diferite.</p>
+<hr>
+<h2 id="10-imobiliz-ri-n-curs-de-execu-ie-231-233">10. Imobilizări în curs de execuție (231, 233)</h2>
+<h3 id="10-1-ce-intr-n-231">10.1 Ce intră în 231 ✅</h3>
+<p>Toate costurile aferente realizării activului, <strong>inclusiv</strong> cele care în mod normal ar fi cheltuieli:</p>
+<ul><li>lucrări executate de terți (contracte cu situații de lucrări);</li><li><strong>servicii de arhitectură, proiectare, dirigenție de șantier</strong> — ✅ punctul formatorului: <strong>nu merg pe 628</strong>, merg în 231;</li><li>materiale;</li><li>salarii ale angajaților proprii alocați proiectului;</li><li>dobânzi capitalizabile (dacă e cazul).</li></ul>
+<div class="ledger"><div class="led-row" id="m13-a1"><span class="led-d">231</span><span class="led-eq">=</span><span class="led-c">404</span><span class="led-amt"></span><span class="led-note">⚠️ preferabil 404 (furnizor de imobilizări), nu 401 cum apare în notițe</span></div></div>
+<p>➕ <strong>Statul solicită contractul de prestări servicii</strong> — ✅ confirmat în notițe. Ține dosarul complet: contract, situații de lucrări, procese-verbale de recepție parțială, autorizație de construire.</p>
+<h3 id="10-2-salariile-proprii-capitalizate-aici-era-ero">10.2 Salariile proprii capitalizate ⚠️ (aici era eroarea)</h3>
+<p>Notița:</p>
+<div class="ledger"><div class="led-row" id="m14-a1"><span class="led-d">231</span><span class="led-eq">=</span><span class="led-c">711</span><span class="led-amt"></span><span class="led-note">=&gt; pentru partea de cheltuieli cu salariile    ❌</span></div></div>
+<p><strong>Contul 711 este „Venituri aferente costurilor stocurilor de produse&quot; — nu are legătură cu imobilizările.</strong></p>
+<p><strong>Corect:</strong></p>
+<div class="ledger"><div class="led-row" id="m15-a1"><span class="led-d">231</span><span class="led-eq">=</span><span class="led-c">722</span><span class="led-amt"></span><span class="led-note">Venituri din producția de imobilizări CORPORALE</span></div><div class="led-row" id="m15-a2"><span class="led-d">233</span><span class="led-eq">=</span><span class="led-c">721</span><span class="led-amt"></span><span class="led-note">Venituri din producția de imobilizări NECORPORALE</span></div><div class="led-row" id="m15-a3"><span class="led-d">235</span><span class="led-eq">=</span><span class="led-c">725</span><span class="led-amt"></span><span class="led-note">Venituri din producția de investiții imobiliare</span></div></div>
+<p>✅ Restul raționamentului din notițe este corect: cheltuielile cu salariile rămân pe clasa 6 (641, 645, 646), iar prin contul de venit din clasa 7 se neutralizează efectul pe rezultat și se capitalizează costul.</p>
+<p>✅ <strong>Notificare internă obligatorie</strong> — punctul din notițe e foarte bun: trebuie un document intern (decizie/notă internă) care atestă că salariații X, Y, Z au lucrat la proiectul respectiv, cu <strong>pontaj/fișe de alocare a timpului</strong>. Fără asta, capitalizarea nu e justificabilă la control.</p>
+<h3 id="10-3-analitice-pe-231">10.3 Analitice pe 231 ✅</h3>
+<p>Punctul formatorului e foarte practic: dacă la sfârșit de an am 1.000.000 lei în 231, <strong>trebuie să știu din ce e compus</strong>, pentru că administratorul întreabă.</p>
+<p>➕ Structură recomandată: <code>231.&lt;cod proiect&gt;.&lt;natura cost&gt;</code> — de ex. <code>231.HALA1.MAT</code>, <code>231.HALA1.MANOPERA</code>, <code>231.HALA1.PROIECTARE</code>.</p>
+<h3 id="10-4-punerea-n-func-iune">10.4 Punerea în funcțiune ✅</h3>
+<p><strong>Document:</strong> proces-verbal de punere în funcțiune / recepție finală.</p>
+<div class="ledger"><div class="led-row" id="m16-a1"><span class="led-d">212</span><span class="led-eq">=</span><span class="led-c">231</span><span class="led-amt"></span><span class="led-note"></span></div></div>
+<p>Rezultat: <strong>231 = 0</strong>, valoarea integrală trecută pe 212, iar amortizarea începe cu <strong>luna următoare</strong>.</p>
+<p>✅ „Urmărim cursul apei în natură&quot; — exact: fiecare leu trebuie să poată fi urmărit de la factură până în valoarea de inventar.</p>
+<hr>
+<h2 id="11-ie-iri-din-gestiune">11. Ieșiri din gestiune</h2>
+<h3 id="11-1-principiul-de-baz">11.1 Principiul de bază ✅</h3>
+<p>Notițele au ideea corectă, dar prezentarea era fragmentată. Monografia completă:</p>
+<p><strong>Date:</strong> clădire cu valoare de inventar 100.000 lei (212), amortizare cumulată 30.000 lei (2812), valoare rămasă 70.000 lei.</p>
+<p><strong>Pasul 1 — scoaterea din evidență:</strong></p>
+<div class="ledger"><div class="led-row" id="m17-a1-1"><span class="led-d">%</span><span class="led-eq">=</span><span class="led-c">212</span><span class="led-amt">100.000</span><span class="led-note"></span></div><div class="led-row" id="m17-a1-2"><span class="led-d">2812</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">30.000</span><span class="led-note"></span></div><div class="led-row" id="m17-a1-3"><span class="led-d">6583</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">70.000</span><span class="led-note"></span></div></div>
+<div class="note"><p><code>6583</code> = „Cheltuieli privind activele cedate și alte operații de capital&quot;</p></div>
+<p><strong>Pasul 2 — vânzarea (ex. la 120.000 lei):</strong></p>
+<div class="ledger"><div class="led-row" id="m18-a1-1"><span class="led-d">461</span><span class="led-eq">=</span><span class="led-c">%</span><span class="led-amt">145.200</span><span class="led-note"></span></div><div class="led-row" id="m18-a1-2"><span class="led-d"></span><span class="led-eq"></span><span class="led-c">7583</span><span class="led-amt">120.000</span><span class="led-note"></span></div><div class="led-row" id="m18-a1-3"><span class="led-d"></span><span class="led-eq"></span><span class="led-c">4427</span><span class="led-amt">25.200</span><span class="led-note"></span></div></div>
+<p>⚠️ Notița scrie <code>7853</code> — <strong>cont inexistent</strong>. Corect: <strong>7583 „Venituri din vânzarea activelor și alte operații de capital&quot;</strong>.</p>
+<h3 id="11-2-v-nzarea-sub-valoarea-r-mas-aspectul-fiscal">11.2 Vânzarea sub valoarea rămasă — aspectul fiscal ❓</h3>
+<p>Exemplul din notițe: valoare rămasă 70.000, vânzare la 50.000 → formatorul spune 50.000 deductibil, 20.000 nedeductibil fără documente justificative.</p>
+<p><strong>Ce spune textul legii (art. 28 alin. 17):</strong> câștigurile sau pierderile din vânzarea ori scoaterea din funcțiune se calculează pe baza valorii fiscale diminuate cu amortizarea fiscală — ceea ce, citit strict, <strong>include pierderea în rezultatul fiscal</strong>.</p>
+<p><strong>Poziția prudentă a formatorului</strong> se bazează, în opinia mea, pe alt risc, real și mai important:</p>
+<ul><li><strong>art. 11 Cod fiscal</strong> — reîncadrarea tranzacțiilor fără scop economic;</li><li><strong>art. 25 alin. 1</strong> — cheltuiala trebuie efectuată în scopul activității economice;</li><li>vânzarea semnificativ sub piață, nedocumentată, este exact tipul de tranzacție reîncadrată la control.</li></ul>
+<p><strong>Concluzia practică e aceeași și e cea care contează:</strong> ✅ <strong>prețul trebuie documentat.</strong> Fie raport de evaluare, fie referință de piață (Autovit/OLX pentru auto), fie deviz de service care atestă deteriorarea. <strong>Fără document, ai un risc pe care trebuie să-l comunici clientului în scris.</strong></p>
+<p>❓ <strong>De cerut formatorului baza legală exactă</strong> pe care se sprijină tratarea diferenței ca nedeductibilă — merită clarificat, pentru că afectează consilierea.</p>
+<p>✅ Notița e corectă și pe partea de valorificare minimă: nu poți vinde un autoturism amortizat integral cu 100 EUR „pentru că e amortizat&quot; — reperul minim e <strong>valoarea de piață</strong> sau <strong>valoarea de fier vechi</strong>, documentat.</p>
+<h3 id="11-3-cazul-1-v-nzarea-unui-autoturism">11.3 Cazul 1: vânzarea unui autoturism</h3>
+<div class="ledger"><div class="led-row" id="m19-a1"><span class="led-d">2813</span><span class="led-eq">=</span><span class="led-c">2133</span><span class="led-amt"></span><span class="led-note">(partea amortizată)</span></div><div class="led-row" id="m19-a2"><span class="led-d">6583</span><span class="led-eq">=</span><span class="led-c">2133</span><span class="led-amt"></span><span class="led-note">(valoarea rămasă)</span></div></div>
+<p>Apoi vânzarea prin 461 / 7583 / 4427.</p>
+<p>⚠️ <strong>Punct critic din notițe, foarte bine surprins:</strong> dacă pe factură <strong>trec seria de șasiu</strong>, cumpărătorul poate înmatricula → <strong>vinzi un autoturism</strong>, cu valoarea de piață ca reper.</p>
+<p>Dacă vinzi <strong>doar piese</strong>, ai nevoie de dosar complet:</p>
+<ul><li><strong>deviz de la service</strong> care atestă gradul de deteriorare (ex. 60%);</li><li><strong>comisie tehnică internă</strong> care întocmește lista de piese recuperabile (volan, scaune, motor etc.);</li><li>proces-verbal de dezmembrare.</li></ul>
+<div class="ledger"><div class="led-row" id="m20-a1"><span class="led-d">2813</span><span class="led-eq">=</span><span class="led-c">2133</span><span class="led-amt">50.000</span><span class="led-note"></span></div><div class="led-row" id="m20-a2"><span class="led-d">6583</span><span class="led-eq">=</span><span class="led-c">2133</span><span class="led-amt"></span><span class="led-note">(valoarea rămasă, dacă există)</span></div><div class="led-row" id="m20-a3"><span class="led-d">3024</span><span class="led-eq">=</span><span class="led-c">7588</span><span class="led-amt"></span><span class="led-note">Piese de schimb = Alte venituri din exploatare  ✅</span></div><div class="led-row" id="m20-a4"><span class="led-d">461</span><span class="led-eq">=</span><span class="led-c">%</span><span class="led-amt">0</span><span class="led-note"></span></div><div class="led-row" id="m20-a5"><span class="led-d">6024</span><span class="led-eq">=</span><span class="led-c">3024</span><span class="led-amt"></span><span class="led-note">descărcarea de gestiune</span></div></div>
+<p>✅ Conturile 3024 și 7588 din notițe sunt corecte.</p>
+<p>➕ Deșeurile rezultate din casare pot merge pe <strong>346 „Produse reziduale&quot;</strong> = 7588. Atenție: vânzarea de deșeuri feroase/neferoase are <strong>taxare inversă</strong> proprie (cod distinct în D394).</p>
+<h3 id="11-4-cazul-2-casarea-uzur-moral-defect">11.4 Cazul 2: casarea (uzură morală, defect) ✅</h3>
+<p><strong>Document obligatoriu: proces-verbal de scoatere din funcțiune</strong>, aprobat de o comisie.</p>
+<p>Ce rezultă din casare: <strong>deșeuri</strong> și/sau <strong>piese componente reutilizabile</strong> — ambele se înregistrează pe stoc prin 7588. Nu poți casa „în gol&quot;, fără să înregistrezi ce a rezultat.</p>
+<h3 id="11-5-regula-de-aur-din-noti-e-schimbarea-st-rii-">11.5 ✅✅ Regula de aur din notițe — schimbarea stării în modul</h3>
+<div class="note"><p><strong>„Când scoatem un mijloc fix din gestiune, să îi schimbăm starea.&quot;</strong></p></div>
+<p>Acesta este cel mai valoros punct practic din toată secțiunea. Detaliat:</p>
+<ul><li>în modulul de imobilizări, mijlocul fix are o <strong>stare</strong> (în amortizare / vândut / casat / în conservare);</li><li>dacă nota contabilă de ieșire e făcută dar <strong>starea nu e schimbată</strong>, softul continuă să calculeze amortizare pentru un bun care nu mai e al societății;</li><li><strong>ieșirea din nota contabilă trebuie corelată cu modulul de imobilizări</strong> — altfel balanța și registrul mijloacelor fixe divergează;</li><li>critic mai ales la sistemele care fac amortizarea automat.</li></ul>
+<p>➕ Consecință de care trebuie să fie conștient clientul: <strong>dacă e casat, bunul nu mai este al societății</strong> — nu poate fi „ținut de rezervă&quot; în evidență.</p>
+<hr>
+<h3 id="11-6-v-nzarea-unui-mijloc-fix">11.6 Vânzarea unui mijloc fix</h3>
+<p>Preț de vânzare 60.000 lei, TVA 21%.</p>
+<p><strong>Facturarea:</strong></p>
+<div class="ledger"><div class="led-row" id="m21-a1"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">7583</span><span class="led-amt">60.000</span><span class="led-note">(venituri din vânzarea activelor)</span></div><div class="led-row" id="m21-a2"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">12.600</span><span class="led-note"></span></div></div>
+<p>Raționamentul de control: conturile de clasa 6 stau pe <strong>debit</strong>, cele de clasa 7 stau pe <strong>credit</strong>. Deci contul de venit (7583) merge pe credit, iar clientul (4111) pe debit. TVA-ul colectat, fiind un cont de pasiv care crește, merge tot pe <strong>credit</strong>.</p>
+<p><strong>Scoaterea din evidență a mijlocului fix</strong> — pasul pe care nu trebuie să-l uiți. Presupunem valoare de intrare 50.000, amortizare cumulată 38.000:</p>
+<div class="ledger"><div class="led-row" id="m22-a1"><span class="led-d">2813</span><span class="led-eq">=</span><span class="led-c">213</span><span class="led-amt">38.000</span><span class="led-note">(amortizarea cumulată)</span></div><div class="led-row" id="m22-a2"><span class="led-d">6583</span><span class="led-eq">=</span><span class="led-c">213</span><span class="led-amt">12.000</span><span class="led-note">(valoarea rămasă neamortizată)</span></div></div>
+<p><strong>Închiderea TVA colectată</strong> (dacă nu există deductibil în luna respectivă):</p>
+<div class="ledger"><div class="led-row" id="m23-a1"><span class="led-d">4427</span><span class="led-eq">=</span><span class="led-c">4423</span><span class="led-amt">12.600</span><span class="led-note"></span></div></div>
+<h2 id="12-imobiliz-ri-financiare-26x">12. Imobilizări financiare (26x)</h2>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Utilizare</th></tr></thead><tbody><tr><td><strong>261</strong></td><td>Acțiuni deținute la entități afiliate ✅</td></tr><tr><td>262</td><td>Acțiuni deținute la entități asociate ➕</td></tr><tr><td>263</td><td>Acțiuni deținute la entități controlate în comun ➕</td></tr><tr><td>265</td><td>Alte titluri imobilizate ➕</td></tr><tr><td><strong>267</strong></td><td>Creanțe imobilizate — <strong>garanții</strong> de licitație, de chirii ✅</td></tr><tr><td>269</td><td>Vărsăminte de efectuat pentru imobilizări financiare ➕</td></tr></tbody></table></div>
+<div class="ledger"><div class="led-row" id="m24-a1"><span class="led-d">261</span><span class="led-eq">=</span><span class="led-c">5121/5124</span><span class="led-amt"></span><span class="led-note">achiziția de titluri  ✅</span></div><div class="led-row" id="m24-a2"><span class="led-d">267</span><span class="led-eq">=</span><span class="led-c">5121</span><span class="led-amt"></span><span class="led-note">constituirea garanției  ✅</span></div><div class="led-row" id="m24-a3"><span class="led-d">5121</span><span class="led-eq">=</span><span class="led-c">267</span><span class="led-amt"></span><span class="led-note">recuperarea garanției la finalul contractului  ✅</span></div></div>
+<p>➕ <strong>Imobilizările financiare NU se amortizează</strong>, dar se pot deprecia:</p>
+<div class="ledger"><div class="led-row" id="m25-a1"><span class="led-d">6863</span><span class="led-eq">=</span><span class="led-c">296</span><span class="led-amt"></span><span class="led-note">Ajustări pentru pierderea de valoare a imobilizărilor financiare</span></div><div class="led-row" id="m25-a2"><span class="led-d">296</span><span class="led-eq">=</span><span class="led-c">7863</span><span class="led-amt"></span><span class="led-note">Reluarea ajustării</span></div></div>
+<h3 id="12-1-punctul-despre-analitice-foarte-bun">12.1 ✅ Punctul despre analitice — foarte bun</h3>
+<div class="note"><p>„Să țină minte softul, că de aia e soft, cât mai multe analitice — să nu stăm să scoatem fișe de cont pe 3, pe 4, pe 5 ani.&quot;</p></div>
+<p>Pentru garanții, structura minimă: <strong>tip partener + contract + dată scadență</strong>, ca să identifici soldul fără să scoți fișe istorice.</p>
+<p>✅ Și avertismentul despre preluări: <strong>preluarea unei societăți care are totul înregistrat global, fără analitice, este periculoasă pentru o firmă de contabilitate.</strong> De pus în oferta/contractul de preluare o etapă de audit al soldurilor.</p>
+<hr>
+<h2 id="13-procedura-lunar-de-control-analitic-sintetic">13. Procedura lunară de control (analitic ↔ sintetic)</h2>
+<p>Aceasta e partea cea mai valoroasă din notițe. Am transformat-o în procedură pas cu pas.</p>
+<h3 id="13-1-de-ce-lunar">13.1 De ce lunar ✅</h3>
+<div class="note"><p>„Amortizarea nefăcându-se automat, verificarea analitic cu sintetic trebuie făcută lunar.&quot;</p></div>
+<p>Consecința neverificării, exact cum e în notițe: dacă mijloacele fixe <strong>nu ajung în modulul de imobilizări</strong> → nu se înregistrează amortizarea → la calculul impozitului pe profit <strong>plătești mai mult</strong>.</p>
+<h3 id="13-2-procedura-lunar">13.2 Procedura lunară</h3>
+<div class="tw"><table><thead><tr><th>Pas</th><th>Acțiune</th><th>Ce urmăresc</th></tr></thead><tbody><tr><td>1</td><td>Listez <strong>balanța de mijloace fixe</strong> din modulul de imobilizări</td><td>Total pe fiecare cont 21x / 20x</td></tr><tr><td>2</td><td>Listez <strong>balanța contabilă</strong></td><td>Solduri analitice pe aceleași conturi</td></tr><tr><td>3</td><td><strong>Compar sumă cu sumă</strong>, pe fiecare analitic</td><td>Diferența trebuie să fie <strong>0</strong></td></tr><tr><td>4</td><td>Dacă e diferență → listez <strong>fișa de cont</strong></td><td>Identific în ce cont nu s-a înregistrat amortizarea</td></tr><tr><td>5</td><td>Verific conturile 28x față de 21x</td><td>28x nu poate depăși 21x (vezi 13.4)</td></tr><tr><td>6</td><td>Verific stările mijloacelor fixe ieșite în lună</td><td>Vândut / casat, nu „în amortizare&quot;</td></tr></tbody></table></div>
+<p>➕ Documente de suport de listat: <strong>fișa mijlocului fix</strong>, <strong>registrul numerelor de inventar</strong>, <strong>registrul mijloacelor fixe</strong>.</p>
+<h3 id="13-3-verificarea-din-prima-lun-excelent-punct">13.3 ✅ Verificarea din prima lună (excelent punct)</h3>
+<div class="note"><p>„În prima lună în care facem amortizarea — să vedem nota contabilă pentru amortizare.&quot;</p></div>
+<p>Motiv: dacă softul nu știe să facă automat corespondența <code>212 → 2812</code>, o descoperi în luna 1, nu în luna 12.</p>
+<p><strong>Fă asta la fiecare mijloc fix nou dintr-o categorie nouă</strong>, nu doar la prima implementare a softului.</p>
+<h3 id="13-4-reguli-de-validare">13.4 Reguli de validare ✅</h3>
+<p><strong>Regula 1:</strong> conturile 28x nu pot avea sold mai mare decât conturile 21x corespondente. Amortizarea cumulată nu poate depăși valoarea de intrare.</p>
+<p><strong>Regula 2:</strong> conturile de activ au sold <strong>debitor</strong> ✅ („bogăția firmei&quot;); pasivul reprezintă datorie ✅.</p>
+<pre class="cod">Dr  mijlocul fix (21x)
+Cr  amortizarea (28x — cont rectificativ de activ)</pre>
+<p><strong>Regula 3:</strong> conturile de cheltuieli și venituri <strong>nu prezintă niciodată sold</strong> ✅ — se închid prin 121 la sfârșitul perioadei.</p>
+<p>⚠️ Nuanță la regula 2: contul <strong>2813 deservește mai multe conturi din grupa 213</strong> (nu „clasa 1&quot; cum apare în notițe). Verificarea se face <strong>pe total 213 vs. total 2813</strong>, sau — mai bine — <strong>pe analitice perechi</strong>, altfel un sold corect pe total poate ascunde două erori care se compensează.</p>
+<h3 id="13-5-c-nd-soldurile-nu-torn">13.5 Când soldurile nu tornă ✅</h3>
+<p>Notița identifică bine cele două cauze posibile:</p>
+<ol><li><strong>înregistrarea este eronată</strong> (nota contabilă);</li><li><strong>planul de conturi al societății are contul setat greșit</strong> — bifat bifuncțional sau cu sens invers.</li></ol>
+<p>➕ A treia cauză frecventă: mijlocul fix a fost înregistrat în contabilitate <strong>dar nu a fost introdus în modulul de imobilizări</strong> (sau invers).</p>
+<hr>
+<h2 id="15-raport-ri-i-declara-ii">15. Raportări și declarații</h2>
+<p>⚠️ Notița: „declarația mijloacelor fixe se depune o singură dată (LA BILANȚ?) — și trebuie să fie corectă, altfel dă eroare la bilanț.&quot;</p>
+<p><strong>Sunt de fapt două raportări anuale distincte:</strong></p>
+<h3 id="15-1-d406-saf-t-sec-iunea-active">15.1 D406 SAF-T — secțiunea Active</h3>
+<ul><li>Se depune <strong>anual</strong>, termen = termenul de depunere a situațiilor financiare;</li><li>Se depune <strong>chiar dacă nu ai active de raportat</strong> (secțiunile obligatorii se transmit, zonele goale rămân necompletate);</li><li>Conține: mijloacele fixe, codurile de clasificare, amortizările pe tot anul, intrările, ieșirile, reevaluările;</li><li><strong>Necesită toate cele 12 luni calculate în modulul de mijloace fixe</strong>;</li><li>❓ Include și imobilizările în curs (231) și financiare (261)? — de verificat pe schema ANAF actuală, sunt spețe cu răspunsuri diferite.</li></ul>
+<h3 id="15-2-situa-ia-activelor-imobilizate">15.2 Situația activelor imobilizate</h3>
+<p>Anexă la situațiile financiare anuale, cu mișcarea pe valori brute și amortizări. <strong>Aici apar erorile de validare la bilanț</strong> dacă soldurile nu tornă — probabil la asta se referea formatorul.</p>
+<h3 id="15-3-alte-declara-ii-atinse-de-imobiliz-ri">15.3 ➕ Alte declarații atinse de imobilizări</h3>
+<div class="tw"><table><thead><tr><th>Declarație</th><th>Când</th></tr></thead><tbody><tr><td><strong>D394</strong></td><td>Achiziții/livrări interne, inclusiv taxare inversă (cod 27 pentru construcții/terenuri)</td></tr><tr><td><strong>D390</strong></td><td>Achiziții și livrări intracomunitare</td></tr><tr><td><strong>D101</strong></td><td>Amortizarea fiscală, diferența față de cea contabilă, profit reinvestit</td></tr><tr><td><strong>Declarații la primărie</strong></td><td>Clădiri, terenuri, mijloace de transport — 30 zile</td></tr><tr><td><strong>RO e-Factura</strong></td><td>Facturile de achiziție imobilizări între persoane impozabile din România</td></tr></tbody></table></div>
+<hr>
+<h2 id="18-anticipare-pentru-sesiunea-urm-toare-ajust-ri">18. Anticipare pentru sesiunea următoare: ajustări</h2>
+<p>Ca să vii pregătit la cele 10 minute de ajustări:</p>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Denumire</th></tr></thead><tbody><tr><td>290</td><td>Ajustări pentru deprecierea imobilizărilor necorporale</td></tr><tr><td><strong>291</strong></td><td>Ajustări pentru deprecierea imobilizărilor corporale</td></tr><tr><td>293</td><td>Ajustări pentru deprecierea imobilizărilor în curs</td></tr><tr><td><strong>296</strong></td><td>Ajustări pentru pierderea de valoare a imobilizărilor financiare</td></tr></tbody></table></div>
+<pre class="cod">Constituire:  6813 = 291
+Reluare:      291  = 7813</pre>
+<p><strong>Distincția-cheie de reținut:</strong> amortizarea = consum sistematic, previzibil, planificat. Ajustarea = pierdere de valoare, neplanificată, reversibilă. Ajustările pentru depreciere sunt, ca regulă, <strong>nedeductibile fiscal</strong> pentru imobilizări.</p>
+<hr>
+<h2 id="anexa-a-recapitulare-conturi-i-perechile-lor">Anexa A — Recapitulare: conturi și perechile lor</h2>
+<p>⚠️ Notițele aveau <code>2114 ↔ 2814</code>. Contul 2114 nu există; corect este <strong>214</strong>.</p>
+<div class="tw"><table><thead><tr><th>Cont imobilizare</th><th>Denumire</th><th>Cont amortizare</th></tr></thead><tbody><tr><td>203</td><td>Cheltuieli de dezvoltare</td><td>2803 ➕</td></tr><tr><td>205</td><td>Concesiuni, brevete, licențe, mărci</td><td><strong>2805</strong> ✅</td></tr><tr><td>208</td><td>Alte imobilizări necorporale</td><td><strong>2808</strong> ✅</td></tr><tr><td>2111</td><td>Terenuri</td><td>— (nu se amortizează) ✅</td></tr><tr><td>2112</td><td>Amenajări de terenuri</td><td><strong>2811</strong> ➕</td></tr><tr><td>212</td><td>Construcții</td><td><strong>2812</strong> ✅</td></tr><tr><td>2131</td><td>Echipamente tehnologice</td><td><strong>2813</strong> ✅</td></tr><tr><td>2132</td><td>Aparate de măsurare, control, reglare</td><td><strong>2813</strong> ✅</td></tr><tr><td>2133</td><td>Mijloace de transport</td><td><strong>2813</strong> ✅</td></tr><tr><td>2134</td><td>Animale și plantații</td><td>2813 ➕</td></tr><tr><td><strong>214</strong></td><td>Mobilier, birotică, alte active corporale</td><td><strong>2814</strong> ⚠️ (era „2114&quot;)</td></tr><tr><td>215</td><td>Investiții imobiliare</td><td><strong>2815</strong> ➕</td></tr><tr><td>217</td><td>Active biologice productive</td><td>2817 ➕</td></tr></tbody></table></div>
+<hr>
+<hr>
+<h2 id="anexa-c-ce-am-corectat-fa-de-noti-ele-originale">Anexa C — Ce am corectat față de notițele originale</h2>
+<p>Rezumat pentru verificare rapidă:</p>
+<div class="tw"><table><thead><tr><th>#</th><th>În notițe</th><th>Corect</th><th>Secțiune</th></tr></thead><tbody><tr><td>1</td><td><code>641 - 241</code></td><td><code>641 = 421</code> (241 nu există)</td><td>2.2</td></tr><tr><td>2</td><td><code>641 - 436</code> pentru CAM</td><td><code>646 = 436</code></td><td>2.2</td></tr><tr><td>3</td><td><code>7815 - 2805/2808</code></td><td><code>6811 = 2805 / 2808</code> (7815 nu există)</td><td>2.3</td></tr><tr><td>4</td><td><code>2101/2102/2103</code></td><td><code>2131 / 2132 / 2133</code></td><td>6</td></tr><tr><td>5</td><td><code>231 - 711</code> pentru salarii capitalizate</td><td><code>231 = 722</code> (711 e pentru stocuri)</td><td>10.2</td></tr><tr><td>6</td><td><code>635 - 5121</code> pentru taxe vamale</td><td>Se <strong>capitalizează</strong> în valoarea activului</td><td>6.2</td></tr><tr><td>7</td><td><code>231/233 la 223</code></td><td><code>223 = 404</code>, apoi <code>2131 = 223</code></td><td>9</td></tr><tr><td>8</td><td><code>Cr 7853</code> la vânzare</td><td><code>7583</code></td><td>11.1</td></tr><tr><td>9</td><td><code>2114 în oglindă cu 2814</code></td><td><code>214 ↔ 2814</code></td><td>14</td></tr><tr><td>10</td><td>„2813 deservește mai multe conturi de <strong>clasa 1</strong>&quot;</td><td>mai multe conturi din <strong>grupa 213</strong></td><td>13.4</td></tr><tr><td>11</td><td>Accelerat: „50% + diferența în următorii 2 ani&quot;</td><td>50% an 1, restul / durata rămasă</td><td>1.3</td></tr><tr><td>12</td><td>„Toată grupa se declară la primărie&quot;</td><td>Doar clădiri, terenuri, mijloace de transport</td><td>3.4</td></tr><tr><td>13</td><td>Investiții imobiliare „rămân la valoarea pe document&quot;</td><td>Construcțiile <strong>se amortizează</strong> (2815)</td><td>8</td></tr><tr><td>14</td><td><code>231 - 401</code></td><td>Preferabil <code>231 = 404</code></td><td>10.1</td></tr><tr><td>15</td><td>„amortizarea cu luna următoare / luna punerii în funcțiune&quot;</td><td>Întotdeauna <strong>luna următoare</strong></td><td>1.5</td></tr><tr><td>16</td><td>„merge în 406&quot; (cont)</td><td><strong>D406 SAF-T</strong>, secțiunea Active</td><td>3.3</td></tr><tr><td>17</td><td>Prag mijloc fix — lipsea</td><td><strong>5.000 lei</strong> din 25.02.2026</td><td>1.1</td></tr><tr><td>18</td><td>„Legea 15&quot; ca bază de calcul</td><td>Art. 28 Cod fiscal + HG 2139/2004 + OMFP 1802/2014</td><td>1.2</td></tr><tr><td>19</td><td>Profit reinvestit incompatibil cu accelerat</td><td>Regula generală da, <strong>dar excepție în 2026</strong></td><td>1.4</td></tr></tbody></table></div>
+<hr>
+<hr>
+<h2 id="anexa-d-r-mase-deschise">Anexa D — Rămase deschise</h2>
+<p>Formatorul a spus: <em>„întrebări pe mail&quot;</em> și <em>„10 min pentru ajustări, data viitoare&quot;</em>. Propuneri de întrebări:</p>
+<ol><li><strong>Prag 5.000 lei</strong> — recomandați alinierea pragului contabil la cel fiscal, sau menținerea unui prag intern mai mic pentru control de gestiune?</li><li><strong>Cumul superaccelerat 65% + profit reinvestit în 2026</strong> — excepția din art. 22 alin. (9) acoperă doar accelerat sau și superaccelerat?</li><li><strong>Vânzare sub valoarea rămasă</strong> — care e baza legală exactă pentru tratarea diferenței ca nedeductibilă, față de art. 28 alin. (17)?</li><li><strong>D406 Active</strong> — se raportează și 231 (investiții neterminate) și 261 (imobilizări financiare)?</li><li><strong>Casare fără valorificare</strong> — dacă nu rezultă nici deșeuri, nici piese, cum se justifică deductibilitatea valorii rămase?</li><li><strong>Procedura promisă la final:</strong> <em>„am verificat analiticul cu sinteticul → am verificat firma X, avem în 212 x lei, dar în balanța contabilă / imobilizări am x, y, z → să vedem o procedură, ce e de făcut.&quot;</em> — <strong>de cerut procedura scrisă de reconciliere a diferențelor</strong>, era ultimul punct din notițe și a rămas nefinalizat.</li></ol>
+<hr>
+<hr>
+<h2 id="anexa-e-baza-legal-citat">Anexa E — Baza legală citată</h2>
+<p>Extrasă automat din textul documentului: sunt listate actele și articolele care apar efectiv citate mai sus. Contextul fiecărei citări e în secțiunea unde apare.</p>
+<p><strong>Acte normative citate</strong></p>
+<ul><li>Legea 239/2025</li><li>Legea 227/2015</li><li>Legea 15/1994</li><li>OMFP 1802/2014</li><li>OUG 8/2026</li><li>HG 2139/2004</li><li>Codul fiscal</li></ul>
+<p><strong>Articole citate</strong></p>
+<p>art. 11, art. 22 alin. (9), art. 25 alin. (1), art. 25 alin. (3), art. 28, art. 28 alin. (2), art. 28 alin. (5), art. 28 alin. (8), art. 28 alin. (12), art. 28 alin. (17), art. 292 alin. (3), art. 298, art. 331, art. 331 alin. (2), art. 461, art. 461 alin. (1), art. 461 alin. (2), art. 466, art. 471</p>
+<hr>
+<p><em>Secțiunea 18 (anticiparea sesiunii pe ajustări) rămâne în corp, nu în anexe: e conținut de continuare, nu material de referință.</em></p>
+</main></div></body></html>

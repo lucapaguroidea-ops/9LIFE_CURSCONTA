@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="ro"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stocuri, TVA și corelații de balanță</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F8F9F7; --surface:#FFFFFF; --sunk:#F1F4F1;
+  --ink:#1A2421; --ink-2:#3D4A45; --muted:#6B7671;
+  --accent:#1B5E44; --accent-soft:#E6EFEA; --accent-line:#B9D2C6;
+  --storno:#A6342B;
+  --rule:#DDE2DE; --rule-soft:#EAEEEB;
+  --shadow:0 1px 2px rgba(26,36,33,.05), 0 8px 24px -12px rgba(26,36,33,.14);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+    --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+    --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+    --storno:#E08278;
+    --rule:#2A3430; --rule-soft:#222B27;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+  --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+  --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+  --storno:#E08278;
+  --rule:#2A3430; --rule-soft:#222B27;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased}
+.masthead{border-bottom:1px solid var(--rule); background:var(--surface); padding:56px 28px 40px}
+.mast-in{max-width:1180px; margin:0 auto; display:flex; flex-direction:column; gap:16px}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0}
+h1{font-family:Spectral,Georgia,"Times New Roman",serif; font-weight:600;
+  font-size:clamp(2rem,4.6vw,3.15rem); line-height:1.12; letter-spacing:-.015em;
+  margin:0; text-wrap:balance; max-width:22ch}
+.lede{color:var(--muted); font-size:1.02rem; margin:0; max-width:66ch}
+.wrap{max-width:1180px; margin:0 auto; padding:0 28px; display:grid;
+  grid-template-columns:232px minmax(0,1fr); gap:56px; align-items:start}
+nav.rail{position:sticky; top:24px; padding:36px 0 40px; max-height:100vh; overflow-y:auto}
+.rail-h{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.66rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+  margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--rule)}
+.rail ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px}
+.rail a{display:grid; grid-template-columns:24px 1fr; gap:8px; align-items:baseline;
+  text-decoration:none; color:var(--ink-2); padding:6px 8px; border-radius:5px;
+  font-size:.845rem; line-height:1.35; transition:background .12s,color .12s}
+.rail a:hover{background:var(--sunk); color:var(--accent)}
+.rail a:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+.tnum{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  color:var(--muted); font-variant-numeric:tabular-nums}
+main{padding:36px 0 96px; min-width:0; max-width:74ch}
+h2{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.62rem; line-height:1.22;
+  letter-spacing:-.01em; margin:44px 0 18px; text-wrap:balance;
+  padding-top:20px; border-top:1px solid var(--rule-soft); scroll-margin-top:20px}
+h3{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.14rem;
+  margin:30px 0 10px; scroll-margin-top:20px}
+h4{font-size:1rem; margin:22px 0 8px; scroll-margin-top:20px}
+p{margin:0 0 14px; max-width:72ch}
+ul,ol{margin:0 0 16px; padding-left:1.2rem; max-width:72ch}
+li{margin-bottom:7px}
+li::marker{color:var(--muted)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.875em;
+  background:var(--sunk); border:1px solid var(--rule-soft); border-radius:4px;
+  padding:1px 5px; color:var(--ink)}
+hr{border:0; border-top:1px solid var(--rule); margin:32px 0}
+pre.cod{background:var(--sunk); border:1px solid var(--rule); border-radius:7px;
+  padding:14px 16px; overflow-x:auto; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; color:var(--ink-2)}
+.ledger{margin:0 0 20px; border:1px solid var(--rule); border-left:3px solid var(--accent);
+  border-radius:0 7px 7px 0; background:var(--surface); overflow-x:auto; box-shadow:var(--shadow)}
+.led-row{display:grid; grid-template-columns:6.5em 1.2em 6.5em 8.5em 1fr; gap:10px;
+  align-items:baseline; padding:8px 16px; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; white-space:nowrap; scroll-margin-top:20px}
+.led-row+.led-row{border-top:1px solid var(--rule-soft)}
+.led-row:target{background:var(--accent-soft)}
+.led-d,.led-c{color:var(--ink); font-weight:500}
+.led-eq{color:var(--muted)}
+.led-amt{text-align:right; font-variant-numeric:tabular-nums; color:var(--accent); font-weight:500}
+.led-amt.neg{color:var(--storno)}
+.led-note{color:var(--muted); font-size:.9em; white-space:normal;
+  font-family:"IBM Plex Sans",sans-serif}
+.note{border-left:3px solid var(--accent-line); background:var(--sunk);
+  padding:13px 18px; border-radius:0 6px 6px 0; margin:0 0 20px; max-width:72ch}
+.note p{margin:0; color:var(--ink-2); font-size:.94rem}
+.tw{overflow-x:auto; margin:0 0 22px; border:1px solid var(--rule); border-radius:7px;
+  background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem}
+thead th{text-align:left; font-family:"IBM Plex Mono",ui-monospace,monospace; font-weight:500;
+  font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; color:var(--muted);
+  padding:11px 14px; border-bottom:1px solid var(--rule); background:var(--sunk)}
+tbody td{padding:10px 14px; border-bottom:1px solid var(--rule-soft);
+  vertical-align:top; color:var(--ink-2)}
+tbody tr:nth-child(even){background:var(--accent-soft)}
+tbody tr:last-child td{border-bottom:none}
+tbody td code{background:transparent; border:none; padding:0}
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr; gap:0; padding:0 22px}
+  nav.rail{position:static; max-height:none; padding:28px 0 8px; border-bottom:1px solid var(--rule)}
+  .rail ol{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:2px}
+  main{padding-top:26px}
+  .masthead{padding:40px 22px 30px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style></head><body>
+<header class="masthead"><div class="mast-in">
+<p class="eyebrow">Notițe de curs · contabilitate</p>
+<h1>Stocuri, TVA și corelații de balanță</h1>
+<p class="lede">Surse: training 14.08.2026 · adâncit cu 19.08.2026 — stocuri (clasa 3), TVA și corelații de balanță, versiune revizuită</p>
+</div></header>
+<div class="wrap">
+<nav class="rail" aria-label="Cuprins"><p class="rail-h">Cuprins</p><ol><li><a href="#cum-cite-ti-acest-document"><span class="tnum">1</span><span>Cum citești acest document</span></a></li><li><a href="#0-harta-subiectelor"><span class="tnum">2</span><span>0. Harta subiectelor</span></a></li><li><a href="#1-clasa-3-cadrul-general"><span class="tnum">3</span><span>1. Clasa 3 — cadrul general</span></a></li><li><a href="#2-achizi-ia-de-stocuri-i-regimul-de-tva"><span class="tnum">4</span><span>2. Achiziția de stocuri și regimul de TVA</span></a></li><li><a href="#3-materiale-consumabile-302-i-obiecte-de-inventa"><span class="tnum">5</span><span>3. Materiale consumabile (302) și obiecte de inventar (303)</span></a></li><li><a href="#4-stocuri-n-curs-de-aprovizionare-32x"><span class="tnum">6</span><span>4. Stocuri în curs de aprovizionare (32x)</span></a></li><li><a href="#5-taxarea-invers-pe-teritoriul-rom-niei-art-331-"><span class="tnum">7</span><span>5. Taxarea inversă pe teritoriul României (art. 331 Cod fiscal)</span></a></li><li><a href="#6-produc-ia-33x-34x-i-conturile-711-712"><span class="tnum">8</span><span>6. Producția: 33x, 34x și conturile 711/712</span></a></li><li><a href="#7-conturile-de-tva"><span class="tnum">9</span><span>7. Conturile de TVA</span></a></li><li><a href="#8-m-rfuri-371"><span class="tnum">10</span><span>8. Mărfuri (371)</span></a></li><li><a href="#9-ambalaje-i-obliga-iile-de-mediu"><span class="tnum">11</span><span>9. Ambalaje și obligațiile de mediu</span></a></li><li><a href="#10-atitudinea-profesional-nu-e-o-not-filozofic"><span class="tnum">12</span><span>10. Atitudinea profesională — nu e o notă filozofică</span></a></li><li><a href="#11-furnizori-i-clien-i-clasele-40-i-41"><span class="tnum">13</span><span>11. Furnizori și clienți — clasele 40 și 41</span></a></li><li><a href="#anexa-a-recapitulare-conturi-i-perechile-lor"><span class="tnum">14</span><span>Anexa A — Recapitulare: conturi și perechile lor</span></a></li><li><a href="#anexa-b-checklist-practic-de-rulat-la-fiecare-cl"><span class="tnum">15</span><span>Anexa B — Checklist practic (de rulat la fiecare client)</span></a></li><li><a href="#anexa-c-ce-am-corectat-fa-de-noti-ele-originale"><span class="tnum">16</span><span>Anexa C — Ce am corectat față de notițele originale</span></a></li><li><a href="#anexa-d-r-mase-deschise"><span class="tnum">17</span><span>Anexa D — Rămase deschise</span></a></li><li><a href="#anexa-e-baza-legal-citat"><span class="tnum">18</span><span>Anexa E — Baza legală citată</span></a></li><li><a href="#anexa-f-erori-din-noti-ele-brute-nereintroduse"><span class="tnum">19</span><span>Anexa F — Erori din notițele brute, NEreintroduse</span></a></li></ol></nav>
+<main>
+<h3 id="surse-training-14-08-2026-ad-ncit-cu-19-08-2026-">Surse: training 14.08.2026 · adâncit cu 19.08.2026 — stocuri (clasa 3), TVA și corelații de balanță, versiune revizuită</h3>
+<hr>
+<hr>
+<h2 id="cum-cite-ti-acest-document">Cum citești acest document</h2>
+<div class="tw"><table><thead><tr><th>Marcaj</th><th>Semnificație</th></tr></thead><tbody><tr><td>✅</td><td>Notița originală era corectă — doar reformulată/completată</td></tr><tr><td>⚠️</td><td><strong>Eroare în notița originală</strong> — corectată aici, cu explicație</td></tr><tr><td>➕</td><td>Completare (lucru care lipsea, dar era necesar ca raționamentul să stea în picioare)</td></tr><tr><td>❓</td><td>Rămas deschis — de clarificat cu formatorul (vezi Anexa D)</td></tr></tbody></table></div>
+<p><strong>Cote de TVA folosite peste tot:</strong> 21% standard / 11% redusă (Legea 141/2025, în vigoare de la 01.08.2025). Regim tranzitoriu 9% pentru locuințe doar până la 31.07.2026.</p>
+<p><strong>Atenție generală:</strong> cifrele fiscale din acest document (praguri, cote, contribuții) sunt valabile la data trainingului. Sunt exact genul de lucruri care se schimbă prin OUG peste noapte — reverifică înainte să le aplici la un client.</p>
+<hr>
+<h2 id="0-harta-subiectelor">0. Harta subiectelor</h2>
+<pre class="cod">CLASA 3 (stocuri)
+│
+├── 30x  Materii prime / materiale / obiecte de inventar
+│         └── legătura cu 60x și cu 8035
+├── 32x  Stocuri în curs de aprovizionare
+├── 33x  Producție în curs de execuție ──┐
+├── 34x  Produse (finite, reziduale)  ───┤── legătura cu 711/712
+├── 37x  Mărfuri ────────────────────────┘   și cu 378 / 4428
+└── 38x  Ambalaje ── obligații de mediu (AFM)
+
+TRANSVERSAL: regimul de TVA (4426 / 4427 / 4428 / 4423 / 4424)
+             + jurnalele de cumpărări și vânzări</pre>
+<hr>
+<h2 id="1-clasa-3-cadrul-general">1. Clasa 3 — cadrul general</h2>
+<p>✅ Conturile de clasa 3 sunt, în principiu, <strong>conturi de activ</strong>: cresc în debit la intrare, scad în credit la ieșire.</p>
+<p>⚠️ <strong>Nuanță care lipsea:</strong> nu toate. În clasa 3 există și conturi <strong>rectificative</strong>, cu funcție de pasiv:</p>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Denumire</th><th>Funcție</th></tr></thead><tbody><tr><td>378</td><td>Diferențe de preț la mărfuri (adaos comercial)</td><td>rectificativ, sold <strong>creditor</strong></td></tr><tr><td>388</td><td>Diferențe de preț la ambalaje</td><td>rectificativ, sold creditor</td></tr><tr><td>348</td><td>Diferențe de preț la produse</td><td>bifuncțional</td></tr><tr><td>39x</td><td>Ajustări pentru deprecierea stocurilor</td><td>rectificativ, sold creditor</td></tr></tbody></table></div>
+<p>Deci: <strong>371 (activ) – 378 (rectificativ) – 4428 (rectificativ) = valoarea reală a mărfii la cost de achiziție.</strong> Ține minte formula asta, e coloana vertebrală a capitolului despre gestiunea cu amănuntul (cap. 8).</p>
+<hr>
+<h2 id="2-achizi-ia-de-stocuri-i-regimul-de-tva">2. Achiziția de stocuri și regimul de TVA</h2>
+<p>Contul-pereche standard: <strong>301 „Materii prime&quot; ↔ 401 „Furnizori&quot;</strong>.</p>
+<h3 id="2-1-cele-trei-regimuri-formulele-complete">2.1 Cele trei regimuri — formulele complete</h3>
+<p>⚠️ În notițe formulele erau scrise incomplet (lipsea 4426, iar la taxare inversă 4427 apărea greșit „sub&quot; 401). Forma corectă:</p>
+<p><strong>a) Achiziție internă, cu TVA (furnizor român, plătitor):</strong></p>
+<div class="ledger"><div class="led-row" id="m2-a1-1"><span class="led-d">%</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">121.000</span><span class="led-note"></span></div><div class="led-row" id="m2-a1-2"><span class="led-d">301</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">100.000</span><span class="led-note"></span></div><div class="led-row" id="m2-a1-3"><span class="led-d">4426</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">21.000</span><span class="led-note"></span></div></div>
+<p><strong>b) Achiziție intracomunitară / taxare inversă:</strong></p>
+<div class="ledger"><div class="led-row" id="m3-a1"><span class="led-d">301</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">100.000</span><span class="led-note">(factura vine fără TVA)</span></div><div class="led-row" id="m3-a2"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">21.000</span><span class="led-note">(cota din România)</span></div></div>
+<p>➕ Efectul net în decontul de TVA este <strong>zero</strong>. Asta e ideea măsurii de simplificare: nici tu nu deduci efectiv, nici furnizorul nu colectează, deci nu există bani de recuperat de la stat pe operațiunea asta.</p>
+<p>⚠️ Formularea din notițe „<em>cel care livrează și cel care achiziționează nu mai deduc</em>&quot; este imprecisă. Corect: <strong>furnizorul nu colectează</strong>, iar <strong>beneficiarul înregistrează simultan și colectat, și deductibil</strong>. Beneficiarul chiar deduce — dar deducerea e anulată de colectare.</p>
+<p><strong>c) Scutire (export, livrare intracomunitară, alte scutiri):</strong></p>
+<div class="ledger"><div class="led-row" id="m4-a1"><span class="led-d">301</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">100.000</span><span class="led-note">(fără TVA deloc)</span></div></div>
+<h3 id="2-2-verificarea-partenerului-de-ce-conteaz">2.2 Verificarea partenerului — de ce contează</h3>
+<p>O firmă poate să <strong>emită în continuare facturi cu TVA înscris pe ele deși codul de TVA i-a fost anulat</strong>. Tu, ca beneficiar, <strong>nu ai drept de deducere</strong> pe acel TVA (art. 11 Cod fiscal). Paguba e a ta, nu a lui.</p>
+<p>⚠️ <strong>Corecție importantă:</strong> notițele spun că ANAF anulează codul dacă nu s-au depus deconturi <strong>2 luni consecutive</strong>. Fals. Conform art. 316 alin. (11) lit. d) Cod fiscal, termenul este:</p>
+<ul><li><strong>6 luni consecutive</strong> — pentru cei cu perioadă fiscală luna;</li><li><strong>2 trimestre consecutive</strong> — pentru cei cu perioadă fiscală trimestrul.</li></ul>
+<p>(Confuzia vine probabil de la varianta trimestrială, unde „două perioade&quot; înseamnă două trimestre.)</p>
+<p>✅ Celelalte cauze de anulare din oficiu menționate sunt corecte. Lista completă (art. 316 alin. 11):</p>
+<div class="tw"><table><thead><tr><th>Lit.</th><th>Cauză</th></tr></thead><tbody><tr><td>a)</td><td>societatea e declarată inactivă fiscal</td></tr><tr><td>b)</td><td>inactivitate temporară înscrisă la Registrul Comerțului</td></tr><tr><td>c)</td><td>asociații/administratorii au fapte înscrise în <strong>cazierul fiscal</strong></td></tr><tr><td>d)</td><td><strong>nedepunerea niciunui decont</strong> 6 luni / 2 trimestre</td></tr><tr><td>e)</td><td>deconturi depuse, dar <strong>fără nicio operațiune</strong> 6 luni / 2 trimestre</td></tr><tr><td>f)</td><td>societatea nu era obligată și nici nu avea dreptul să se înregistreze</td></tr><tr><td>g)</td><td>risc fiscal ridicat</td></tr></tbody></table></div>
+<p>⚠️ <strong>Nu verificăm „pe Google&quot;.</strong> Verificăm în registrele oficiale ANAF:</p>
+<div class="tw"><table><thead><tr><th>Ce verifici</th><th>Unde</th></tr></thead><tbody><tr><td>Este partenerul înregistrat în scopuri de TVA?</td><td>Registrul persoanelor impozabile înregistrate în scopuri de TVA</td></tr><tr><td>I-a fost anulat codul?</td><td>Registrul persoanelor cu cod de TVA anulat</td></tr><tr><td>Aplică TVA la încasare?</td><td>Registrul persoanelor care aplică TVA la încasare</td></tr><tr><td>Este inactiv fiscal?</td><td>Registrul contribuabililor inactivi/reactivați</td></tr><tr><td>Partener UE — cod valid?</td><td><strong>VIES</strong> (obligatoriu pentru scutirea la livrarea intracomunitară)</td></tr></tbody></table></div>
+<p>✅ Softurile bune fac verificarea automată la ANAF, inclusiv atributul de TVA la încasare — dar <strong>verifică tu că funcția e activată și că rulează la închiderea lunii</strong>, nu doar la introducerea facturii.</p>
+<p>➕ <strong>Regulă practică:</strong> furnizor nou = verificare obligatorie <em>înainte</em> de prima plată, nu la închidere. Salvează dovada verificării (printscreen/PDF) la dosarul lunii — la inspecție ți se cere.</p>
+<h3 id="2-3-unde-ajunge-informa-ia">2.3 Unde ajunge informația</h3>
+<div class="tw"><table><thead><tr><th>Declarație</th><th>Ce conține</th><th>Termen</th></tr></thead><tbody><tr><td><strong>D300</strong> — decont de TVA</td><td>toate operațiunile perioadei</td><td>25 a lunii următoare perioadei fiscale</td></tr><tr><td><strong>D394</strong> — declarație informativă</td><td>tranzacții <strong>pe teritoriul național</strong>, defalcate pe parteneri</td><td>30 a lunii următoare perioadei fiscale</td></tr><tr><td><strong>D390</strong> — declarație recapitulativă</td><td>operațiuni <strong>intracomunitare</strong></td><td>25 a lunii următoare</td></tr></tbody></table></div>
+<p>✅ Observația din notițe despre D394 este corectă și importantă: declarația are <strong>casete separate</strong> pentru operațiunile cu persoane înregistrate în scopuri de TVA și pentru cele cu neînregistrate. Softul repartizează pe baza <strong>atributului fiscal al CUI-ului</strong> (prefixul „RO&quot;).</p>
+<p>➕ Consecință practică: când un client trece de la neplătitor la plătitor de TVA, trebuie să actualizezi atributul în nomenclatorul de parteneri <strong>la data efectivă a înregistrării</strong>, nu retroactiv pe toată fișa. Altfel D394 iese greșit și primești notificare de conformare.</p>
+<p>⚠️ Notițele întreabă „unde se mai duce informația, în afară de D300?&quot;. Răspuns complet: <strong>D394</strong> (pentru tranzacțiile interne), <strong>D390</strong> (dacă sunt operațiuni intracomunitare), <strong>RO e-Factura</strong> (raportarea facturii propriu-zise) și <strong>D406/SAF-T</strong> (fișierul standard de audit). Nu doar D394.</p>
+<h3 id="2-4-leg-tura-cu-produc-ia">2.4 Legătura cu producția</h3>
+<p>✅ Contul 301 se folosește cel mai des în <strong>producție</strong>. Din punct de vedere al tratamentului contabil, este cuplat cu:</p>
+<ul><li><strong>601</strong> „Cheltuieli cu materiile prime&quot; — la consum;</li><li><strong>711</strong> „Venituri aferente costurilor stocurilor de produse&quot; — la obținerea produsului;</li><li><strong>7015</strong> „Venituri din vânzarea produselor finite&quot; — la vânzare.</li></ul>
+<p>⚠️ Notița originală zicea „<em>cuplat cu 704 și 7015</em>&quot;. <strong>704</strong> este „Venituri din servicii prestate&quot; — nu are legătură cu materiile prime consumate în producția de bunuri. 704 apare când vinzi manoperă/servicii, nu produse. Corect este <strong>7015</strong> (+ 711 pe traseu).</p>
+<hr>
+<h2 id="3-materiale-consumabile-302-i-obiecte-de-inventa">3. Materiale consumabile (302) și obiecte de inventar (303)</h2>
+<h3 id="3-1-structura-analitic-a-lui-302">3.1 Structura analitică a lui 302</h3>
+<p>➕ Notițele lăsaseră doar „302 / 3021 / etc&quot;. Lista completă:</p>
+<div class="tw"><table><thead><tr><th>Cont stoc</th><th>Denumire</th><th>Cont cheltuială pereche</th></tr></thead><tbody><tr><td>3021</td><td>Materiale auxiliare</td><td>6021</td></tr><tr><td>3022</td><td>Combustibili</td><td>6022</td></tr><tr><td>3023</td><td>Materiale pentru ambalat</td><td>6023</td></tr><tr><td>3024</td><td>Piese de schimb</td><td>6024</td></tr><tr><td>3025</td><td>Semințe și materiale de plantat</td><td>6025</td></tr><tr><td>3026</td><td>Furaje</td><td>6026</td></tr><tr><td>3028</td><td>Alte materiale consumabile</td><td>6028</td></tr></tbody></table></div>
+<p>Perechea e 1:1. Dacă vezi un 602x fără 302x corespondent în balanță, ai o problemă.</p>
+<h3 id="3-2-regula-nu-treci-niciodat-direct-pe-cheltuial">3.2 REGULA: nu treci niciodată direct pe cheltuială</h3>
+<div class="note"><p>❌ <code>6021 / 6024 / 6028 = 401</code> ✅ <code>3021 / 3024 / 3028 = 401</code>, apoi <code>6021 / 6024 / 6028 = 302x</code> pe bon de consum</p></div>
+<p><strong>De ce — argumentul de audit</strong> (⚠️ reformulat, notița originală amestecase conturile):</p>
+<p>Auditorul care verifică situațiile financiare cere <strong>balanța analitică a conturilor de stoc</strong>, nu a lui 401. Pe un cont 302x el citește instantaneu:</p>
+<ul><li><strong>rulaj debitor</strong> = ce a intrat în gestiune pe parcursul anului (achiziții);</li><li><strong>rulaj creditor</strong> = ce s-a consumat efectiv (bonuri de consum);</li><li><strong>sold final</strong> = ce ar trebui să existe fizic la inventariere.</li></ul>
+<p>Dacă tu treci direct pe 6021, contul de stoc e gol, corelația dispare, iar auditorul nu are cu ce să confrunte inventarul faptic. La 401 ai altceva: credit = facturi primite, debit = plăți. Alt tip de informație.</p>
+<p>➕ <strong>Excepție de reținut:</strong> OMFP 1802/2014 permite și metoda <strong>inventarului intermitent</strong>, unde achizițiile chiar se trec direct pe cheltuială, iar la sfârșitul perioadei se stornează stocul rămas. E o opțiune de politică contabilă, nu o scuză. Dacă nu ai declarat explicit metoda intermitentă în politicile contabile ale clientului, <strong>regula de mai sus e obligatorie</strong>.</p>
+<h3 id="3-3-transferul-spre-m-rfuri">3.3 Transferul spre mărfuri</h3>
+<p>✅ Corect în notițe: dacă piesele de schimb cumpărate pentru consum propriu ajung să fie <strong>revândute</strong>, se schimbă destinația bunului, deci și contul:</p>
+<div class="ledger"><div class="led-row" id="m5-a1"><span class="led-d">371</span><span class="led-eq">=</span><span class="led-c">3024</span><span class="led-amt"></span><span class="led-note">(transfer la valoarea de intrare)</span></div><div class="led-row" id="m5-a2"><span class="led-d">371</span><span class="led-eq">=</span><span class="led-c">378</span><span class="led-amt"></span><span class="led-note">(adaosul comercial, dacă vinzi cu amănuntul)</span></div><div class="led-row" id="m5-a3"><span class="led-d">371</span><span class="led-eq">=</span><span class="led-c">4428</span><span class="led-amt"></span><span class="led-note">(TVA neexigibilă, dacă vinzi cu amănuntul)</span></div></div>
+<p>➕ Documentul justificativ: <strong>notă de transfer între gestiuni</strong>, aprobată. Nu se face „din pix&quot; în contabilitate.</p>
+<h3 id="3-4-obiect-de-inventar-vs-mijloc-fix-pragul">3.4 Obiect de inventar vs. mijloc fix — pragul</h3>
+<p>⚠️ <strong>Aici notițele au două probleme.</strong></p>
+<p><strong>Problema 1 — pragul.</strong> Notițele zic „5.000&quot;. Este corect <strong>acum</strong>, dar merită știut de când și de ce: prin <strong>OUG nr. 8/2026</strong> (M.Of. nr. 147 din 25.02.2026) pragul fiscal a crescut de la 2.500 lei la 5.000 lei, după 12 ani de stagnare (fusese fixat prin HG 276/2013).</p>
+<p>Consecințe:</p>
+<ul><li><strong>Achiziții din 2026:</strong> bun sub 5.000 lei → deductibil integral la punerea în funcțiune, fără amortizare.</li><li><strong>Bunuri deja în patrimoniu la 31.12.2025 cu valoare între 2.500 și 5.000 lei:</strong> rămân mijloace fixe, se amortizează în continuare pe durata rămasă. <strong>Nu se reclasifică retroactiv.</strong></li><li>Pragul urmează să fie actualizat anual în funcție de inflație.</li></ul>
+<p>➕ <strong>Nuanță de reținut, pe care mulți o ratează:</strong> pragul de 5.000 lei este <strong>fiscal</strong>, nu contabil. Din punct de vedere contabil, entitatea își poate stabili prin politici contabile un alt prag de recunoaștere ca imobilizare. Dacă cele două diferă, apar diferențe temporare între rezultatul contabil și cel fiscal — de urmărit în registrul de evidență fiscală.</p>
+<p><strong>Problema 2 — criteriile.</strong> Notița spune: „<em>&gt;1 an durată de utilizare, chiar dacă &lt;5.000 ⟺ mijloc fix</em>&quot;. <strong>Fals.</strong> Cele două condiții sunt <strong>cumulative</strong>, nu alternative (art. 28 alin. 2 Cod fiscal):</p>
+<div class="tw"><table><thead><tr><th>Condiție</th><th></th></tr></thead><tbody><tr><td>deținut și utilizat în producție, prestare de servicii, închiriere sau scopuri administrative</td><td>ȘI</td></tr><tr><td>valoare fiscală de intrare <strong>≥ 5.000 lei</strong></td><td>ȘI</td></tr><tr><td>durată normală de utilizare <strong>&gt; 1 an</strong></td><td></td></tr></tbody></table></div>
+<p>Deci: laptop de 4.000 lei folosit 4 ani → <strong>obiect de inventar</strong> (303), nu mijloc fix. Exact invers față de ce zicea notița.</p>
+<p>✅ Observația că majoritatea societăților <em>preferă</em> obiectele de inventar este corectă și e chiar motivul economic al majorării pragului: deducere imediată, avantaj de cash-flow, mai puțină birocrație (fără registru de mijloace fixe, fără calcul lunar de amortizare).</p>
+<h3 id="3-5-darea-n-folosin-i-contul-8035">3.5 Darea în folosință și contul 8035</h3>
+<div class="ledger"><div class="led-row" id="m6-a1"><span class="led-d">603</span><span class="led-eq">=</span><span class="led-c">303</span><span class="led-amt"></span><span class="led-note">(darea în consum/folosință)</span></div></div>
+<p>La casare sau vânzare a obiectului de inventar:</p>
+<pre class="cod">Credit 8035</pre>
+<p><strong>8035 „Stocuri de natura obiectelor de inventar date în folosință&quot;</strong> — cont în afara bilanțului.</p>
+<p>✅ Raționamentul din notițe este corect și merită subliniat: prin darea în folosință, obiectele de inventar <strong>dispar din balanță</strong> (603 se închide la 121, deci devine 0). Fără 8035 nu mai ai nicio evidență contabilă a bunurilor care fizic există și sunt folosite în societate.</p>
+<p>➕ De aceea 303→603 și 8035 se fac <strong>concomitent</strong>. Un soft bun le generează automat din același document. Dacă nu o face, e o slăbiciune reală, nu un moft.</p>
+<p>❓ <strong>Întrebarea de pus către furnizorul de soft</strong> (era formulată în notițe, o păstrez ca sarcină concretă):</p>
+<div class="note"><p><em>„La inventariere, îmi puteți lista separat obiectele de inventar date în folosință, cu valoare și loc de folosință, ca să pot confrunta valoarea scriptică (8035) cu cea faptică de pe teren?&quot;</em></p></div>
+<p>Fără lista asta, inventarierea obiectelor de inventar nu se poate face — și e o constatare frecventă la audit.</p>
+<hr>
+<h2 id="4-stocuri-n-curs-de-aprovizionare-32x">4. Stocuri în curs de aprovizionare (32x)</h2>
+<p><strong>Situația:</strong> ai factura (o vezi în SPV / e-Factura), proprietatea a trecut la tine conform condiției de livrare, dar <strong>marfa nu a ajuns fizic în gestiune</strong>. Clasic la sfârșit de lună: factura e din 30, marfa ajunge pe 2–3.</p>
+<p>Legiuitorul a prevăzut asta prin conturile 32x. Fără ele ai fi forțat fie să înregistrezi un stoc care nu există fizic, fie să nu înregistrezi factura — ambele greșite.</p>
+<h3 id="4-1-nomenclatorul-complet">4.1 Nomenclatorul complet</h3>
+<p>⚠️ Notițele aveau corespondențele parțial amestecate. Forma corectă:</p>
+<div class="tw"><table><thead><tr><th>În curs de aprovizionare</th><th>Se transferă în</th><th>Denumire destinație</th></tr></thead><tbody><tr><td><strong>321</strong></td><td><strong>301</strong></td><td>Materii prime</td></tr><tr><td><strong>322</strong></td><td><strong>302</strong></td><td>Materiale consumabile</td></tr><tr><td><strong>323</strong></td><td><strong>303</strong></td><td>Materiale de natura obiectelor de inventar</td></tr><tr><td><strong>326</strong></td><td><strong>361</strong></td><td>Active biologice de natura stocurilor</td></tr><tr><td><strong>327</strong></td><td><strong>371</strong></td><td>Mărfuri</td></tr><tr><td><strong>328</strong></td><td><strong>381</strong></td><td>Ambalaje</td></tr></tbody></table></div>
+<p>(În notițe apărea „303 = 323&quot; — corect — dar și „371 = 327&quot; scris ca „371 - 327&quot;, corect ca sens, doar notat inconsistent. <code>302 = 322</code> lipsea complet.)</p>
+<h3 id="4-2-fluxul-complet">4.2 Fluxul complet</h3>
+<p><strong>Luna 1 — primesc factura, marfa e pe drum:</strong></p>
+<div class="ledger"><div class="led-row" id="m8-a1"><span class="led-d">321</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">100.000</span><span class="led-note"></span></div><div class="led-row" id="m8-a2"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">21.000</span><span class="led-note">(achiziție internă)</span></div><div class="led-row" id="m8-a3"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">21.000</span><span class="led-note">(achiziție intracomunitară)</span></div></div>
+<p><strong>Luna 2 — marfa ajunge în curte, gestionarul confirmă recepția (NIR):</strong></p>
+<div class="ledger"><div class="led-row" id="m9-a1"><span class="led-d">301</span><span class="led-eq">=</span><span class="led-c">321</span><span class="led-amt">100.000</span><span class="led-note"></span></div></div>
+<p><strong>Luna 2 sau ulterior — consum, pe bon de consum:</strong></p>
+<div class="ledger"><div class="led-row" id="m10-a1"><span class="led-d">601</span><span class="led-eq">=</span><span class="led-c">301</span><span class="led-amt">100.000</span><span class="led-note"></span></div></div>
+<p>➕ <strong>Documentul care declanșează pasul 2 este NIR-ul semnat de gestionar.</strong> Nu confirmarea verbală. Dacă gestionarul nu semnează, marfa rămâne în 32x — și atunci ai o discuție de purtat cu clientul despre de ce.</p>
+<hr>
+<h2 id="5-taxarea-invers-pe-teritoriul-rom-niei-art-331-">5. Taxarea inversă pe teritoriul României (art. 331 Cod fiscal)</h2>
+<h3 id="5-1-condi-ia-obligatorie-de-re-inut-pe-de-rost">5.1 Condiția obligatorie — de reținut pe de rost</h3>
+<div class="note"><p><strong>AMBII PARTENERI trebuie să fie înregistrați în scopuri de TVA conform art. 316.</strong></p></div>
+<p>✅ Notița are dreptate să o marcheze cu semnul exclamării. Este singura condiție de fond, și e cea care se ratează cel mai des.</p>
+<p><strong>Regulă practică:</strong> când vezi mențiunea „taxare inversă&quot; pe o factură primită, primul lucru pe care îl faci este să verifici <strong>codul de TVA al furnizorului la data facturii</strong> — nu la data la care înregistrezi tu.</p>
+<p>⚠️ <strong>Consecința nerespectării, care nu era în notițe și e importantă:</strong> dacă furnizorul emite greșit factură <strong>cu TVA</strong> pentru o operațiune care intra la taxare inversă, iar tu deduci acel TVA, <strong>pierzi dreptul de deducere</strong> pe acea achiziție. Condițiile de fond ale taxării inverse nu au fost respectate, iar factura e greșit întocmită. Nu te salvează faptul că ai plătit TVA-ul furnizorului. Se cere factură corectată.</p>
+<h3 id="5-2-logica-economic">5.2 Logica economică</h3>
+<p>România are categorii de produse cu <strong>risc fiscal ridicat</strong> (fraudă de tip carusel, firme fantomă). Statul zice, în esență: <em>nu mai deduci tu TVA-ul, pentru că nu am garanția că celălalt îl colectează și îl varsă</em>. Prin taxare inversă, banii nu mai circulă între parteneri, deci nu mai există ce să dispară.</p>
+<h3 id="5-3-categoriile-art-331-alin-2">5.3 Categoriile (art. 331 alin. 2)</h3>
+<p>⚠️ Notițele listau doar „cheresteaua, imobile noi, x&quot;. Lista principalelor categorii:</p>
+<div class="tw"><table><thead><tr><th>Categorie</th><th>Observații</th></tr></thead><tbody><tr><td>Deșeuri feroase și neferoase, rebuturi, semifabricate rezultate din prelucrarea lor</td><td></td></tr><tr><td>Reziduuri și alte materiale reciclabile (hârtie, carton, textile, cauciuc, plastic, sticlă)</td><td></td></tr><tr><td>Deșeuri de materiale feroase/neferoase și aliaje</td><td></td></tr><tr><td><strong>Masă lemnoasă și materiale lemnoase</strong> (Codul silvic, L. 46/2008)</td><td><strong>cheresteaua intră aici</strong></td></tr><tr><td>Cereale și plante tehnice, semințe oleaginoase, sfeclă de zahăr</td><td>pe coduri NC din norme</td></tr><tr><td>Transferul de certificate de emisii de gaze cu efect de seră</td><td></td></tr><tr><td>Energia electrică către un comerciant persoană impozabilă</td><td>condiție: consum propriu neglijabil, declarat</td></tr><tr><td>Certificate verzi</td><td></td></tr><tr><td><strong>Construcții, părți de construcții și terenuri</strong></td><td>vezi mai jos</td></tr><tr><td>Telefoane mobile, dispozitive cu circuite integrate, console de jocuri, tablete, laptopuri</td><td>doar dacă valoarea <strong>fără TVA pe factură ≥ 22.500 lei</strong></td></tr><tr><td>Aur de investiții / materii prime din aur</td><td></td></tr></tbody></table></div>
+<p>⚠️ <strong>Corecție la „imobile noi&quot;:</strong> formularea legală nu este „imobile noi vândute între societăți&quot;. Textul acoperă construcțiile, părțile de construcție și terenurile <strong>pentru a căror livrare se aplică regimul de taxare — fie prin efectul legii, fie prin opțiune</strong>. Adică:</p>
+<ul><li>construcție nouă (taxabilă prin lege) vândută între doi plătitori → taxare inversă;</li><li>construcție veche (scutită prin lege) pentru care vânzătorul a <strong>depus notificarea de opțiune de taxare</strong> → tot taxare inversă.</li></ul>
+<p>Diferența contează: dacă vânzătorul nu a depus notificarea de opțiune, operațiunea rămâne scutită și taxarea inversă nu se aplică.</p>
+<p>⚠️ <strong>De verificat periodic:</strong> o parte din categoriile de mai sus se aplică în baza unei derogări UE cu <strong>termen limită (31.12.2026)</strong>, prelungită succesiv de Consiliul UE. Înainte de a aplica taxarea inversă pe cereale sau pe electronice, verifică textul în vigoare al art. 331 alin. (6). Nu presupune că e prelungită automat.</p>
+<h3 id="5-4-men-iunea-obligatorie-pe-factur">5.4 Mențiunea obligatorie pe factură</h3>
+<p>✅ Notița are dreptate, o formalizez:</p>
+<div class="note"><p><strong>Dacă nu aplici cota standard de 21% (sau 11%), ești obligat să înscrii pe factură temeiul legal.</strong></p></div>
+<p>Art. 319 alin. (20) Cod fiscal:</p>
+<ul><li><strong>lit. n)</strong> — pentru operațiuni <strong>scutite</strong>: o referire la dispoziția aplicabilă din Codul fiscal sau din Directiva 2006/112/CE, ori orice mențiune că livrarea e scutită;</li><li><strong>lit. o)</strong> — pentru operațiuni cu taxare inversă: mențiunea <strong>„taxare inversă&quot;</strong>.</li></ul>
+<p>Exemple de formulări corecte:</p>
+<div class="tw"><table><thead><tr><th>Operațiune</th><th>Mențiune pe factură</th></tr></thead><tbody><tr><td>Livrare intracomunitară de bunuri</td><td>„Scutit cu drept de deducere, art. 294 alin. (2) lit. a) Cod fiscal&quot;</td></tr><tr><td>Export</td><td>„Scutit cu drept de deducere, art. 294 alin. (1) lit. a) Cod fiscal&quot;</td></tr><tr><td>Cherestea către plătitor de TVA</td><td>„Taxare inversă, art. 331 alin. (2) lit. b) Cod fiscal&quot;</td></tr><tr><td>Servicii B2B către firmă UE</td><td>„Taxare inversă, art. 278 alin. (2) Cod fiscal / art. 44 Directiva 2006/112/CE&quot;</td></tr></tbody></table></div>
+<p>➕ Lipsa mențiunii = factură incompletă = risc de refuz al scutirii la inspecție. Este cel mai ieftin risc de eliminat din toată lista asta: se rezolvă cu o setare în softul de facturare.</p>
+<hr>
+<h2 id="6-produc-ia-33x-34x-i-conturile-711-712">6. Producția: 33x, 34x și conturile 711/712</h2>
+<h3 id="6-1-principiul-de-ce-exist-contul-331">6.1 Principiul — de ce există contul 331</h3>
+<div class="note"><p><strong>Nu poți avea o cheltuială fără să ai un venit corespondent în aceeași perioadă.</strong></p></div>
+<p>Este principiul <strong>conectării cheltuielilor la venituri</strong> (independența exercițiului). Dacă în luna 1 consumi materie primă de 50.000 lei dar nu livrezi niciun produs, ai o cheltuială fără venit → rezultat artificial negativ → bază de impozitare distorsionată.</p>
+<p>Legiuitorul îți dă soluția: înregistrezi <strong>producția în curs de execuție</strong> printr-un venit de aceeași mărime.</p>
+<div class="tw"><table><thead><tr><th>Cont producție în curs</th><th>Cont de venit pereche</th></tr></thead><tbody><tr><td><strong>331</strong> Produse în curs de execuție</td><td><strong>711</strong> Venituri aferente costurilor stocurilor de produse</td></tr><tr><td><strong>332</strong> Servicii în curs de execuție</td><td><strong>712</strong> Venituri aferente costurilor serviciilor în curs de execuție</td></tr></tbody></table></div>
+<p>⚠️ <strong>Corecție:</strong> notițele scriau „331/332 cu 711/722&quot;. <strong>722</strong> este „Venituri din producția de imobilizări corporale&quot; — cu totul altceva (vezi 6.5). Perechea lui 332 este <strong>712</strong>.</p>
+<h3 id="6-2-contul-711-cum-func-ioneaz-efectiv">6.2 Contul 711 — cum funcționează efectiv</h3>
+<p>711 nu este un venit „real&quot; din vânzare. Este contul de <strong>variație a stocurilor de produse</strong>. E bifuncțional:</p>
+<div class="tw"><table><thead><tr><th></th><th>Când</th><th>Sens</th></tr></thead><tbody><tr><td><strong>Credit 711</strong></td><td>obții produse (în curs, semifabricate, finite, reziduale)</td><td>crește stocul → „venit&quot;</td></tr><tr><td><strong>Debit 711</strong></td><td>scoți produse din stoc (vânzare, reluare producție în curs)</td><td>scade stocul → „cheltuială&quot;</td></tr></tbody></table></div>
+<p>✅ Formularea din notițe este corectă și merită păstrată ca atare:</p>
+<div class="note"><p><em>„Când am un produs în societate, îl înregistrez pe 711, indiferent în ce etapă e.&quot;</em></p></div>
+<h3 id="6-3-exemplu-complet-geam-termopan">6.3 Exemplu complet — geam termopan</h3>
+<p>Notițele porneau exemplul dar îl lăsau neterminat (și cu o eroare de sens). Îl reconstruiesc integral, cu cifre.</p>
+<p>⚠️ <strong>Eroarea:</strong> notița scria <code>301 - 601 50k</code> pentru achiziția sticlei. Sensul e inversat și contul e greșit — achiziția nu se face niciodată din contul de cheltuială.</p>
+<p><strong>LUNA 1</strong></p>
+<p><em>(1) Achiziția sticlei — 50.000 lei + TVA 21%</em></p>
+<div class="ledger"><div class="led-row" id="m11-a1-1"><span class="led-d">%</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">60.500</span><span class="led-note"></span></div><div class="led-row" id="m11-a1-2"><span class="led-d">301</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">50.000</span><span class="led-note"></span></div><div class="led-row" id="m11-a1-3"><span class="led-d">4426</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">10.500</span><span class="led-note"></span></div></div>
+<p><em>(2) Consumul — bon de consum, am tăiat sticla</em></p>
+<div class="ledger"><div class="led-row" id="m12-a1"><span class="led-d">601</span><span class="led-eq">=</span><span class="led-c">301</span><span class="led-amt">50.000</span><span class="led-note"></span></div></div>
+<p><em>(3) La 31 ale lunii, produsul nu e finalizat — nu pot livra</em></p>
+<div class="ledger"><div class="led-row" id="m13-a1"><span class="led-d">331</span><span class="led-eq">=</span><span class="led-c">711</span><span class="led-amt">50.000</span><span class="led-note"></span></div></div>
+<p>➕ <strong>Atenție la evaluare:</strong> 331 se înregistrează la <strong>cost de producție</strong>, nu doar la valoarea materialelor. Costul include: materii prime consumate + manoperă directă (641, 6451) + amortizarea utilajelor de producție (6811) + cota de regie de producție. Dacă înregistrezi doar materialul, subevaluezi stocul și tot rămâi cu cheltuieli neacoperite.</p>
+<p><strong>Rezultatul lunii 1:</strong> cheltuieli 50.000 (601) − venituri 50.000 (711) = <strong>0</strong>.</p>
+<p>✅ Exact asta observa notița: <em>„când am avut și cheltuială și venit, nu am afectat contul de impozit pe profit&quot;</em>.</p>
+<p>➕ <strong>Evidența pe comenzi:</strong> trebuie să știi <strong>pentru ce comandă</strong> ai făcut producția. OMFP 1802/2014 permite mai multe metode de calculație a costurilor; <strong>metoda pe comenzi</strong> este cea mai utilizată în producția la comandă (exact cazul termopanelor, unde fiecare geam are dimensiuni proprii). Gestiunea lui 331 se ține analitic, pe comandă.</p>
+<p><strong>LUNA 2</strong></p>
+<p><em>(4) Anulez producția în curs (reiau soldul)</em></p>
+<div class="ledger"><div class="led-row" id="m14-a1"><span class="led-d">711</span><span class="led-eq">=</span><span class="led-c">331</span><span class="led-amt">50.000</span><span class="led-note"></span></div></div>
+<p><em>(5) Obțin produsul finit — cost complet 62.000 (50.000 materiale + 12.000 manoperă și regie)</em></p>
+<div class="ledger"><div class="led-row" id="m15-a1"><span class="led-d">345</span><span class="led-eq">=</span><span class="led-c">711</span><span class="led-amt">62.000</span><span class="led-note"></span></div></div>
+<p><em>(6) Vânzarea — preț 80.000 lei + TVA 21%</em></p>
+<p>⚠️ Notița se oprea la <code>4111 - ?</code>. Răspunsul complet sunt <strong>două</strong> înregistrări, nu una:</p>
+<div class="ledger"><div class="led-row" id="m16-a1-1"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">%</span><span class="led-amt">96.800</span><span class="led-note"></span></div><div class="led-row" id="m16-a1-2"><span class="led-d"></span><span class="led-eq"></span><span class="led-c">7015</span><span class="led-amt">80.000</span><span class="led-note"></span></div><div class="led-row" id="m16-a1-3"><span class="led-d"></span><span class="led-eq"></span><span class="led-c">4427</span><span class="led-amt">16.800</span><span class="led-note"></span></div></div>
+<p><em>(7) și descărcarea de gestiune — fără ea, stocul rămâne umflat</em></p>
+<div class="ledger"><div class="led-row" id="m17-a1"><span class="led-d">711</span><span class="led-eq">=</span><span class="led-c">345</span><span class="led-amt">62.000</span><span class="led-note"></span></div></div>
+<p><strong>Verificare pe ansamblul celor două luni:</strong></p>
+<div class="tw"><table><thead><tr><th>Rulaj creditor 711</th><th>50.000 + 62.000 = 112.000</th></tr></thead><tbody><tr><td>Rulaj debitor 711</td><td>50.000 + 62.000 = 112.000</td></tr><tr><td><strong>Sold 711</strong></td><td><strong>0</strong> ✅</td></tr><tr><td>Cheltuieli totale</td><td>50.000 (601) + 12.000 (641/6451/6811) = 62.000</td></tr><tr><td>Venituri din vânzare</td><td>80.000 (7015)</td></tr><tr><td><strong>Rezultat</strong></td><td><strong>18.000</strong></td></tr></tbody></table></div>
+<p>Marja apare integral în luna în care s-a produs vânzarea. Asta e tot rostul mecanismului.</p>
+<h3 id="6-4-produse-reziduale-contul-346">6.4 Produse reziduale — contul 346</h3>
+<p>✅ <strong>346 „Produse reziduale&quot;</strong> — deșeurile rezultate din procesul de producție (în cazul termopanelor: cioburi, profil tăiat, rumeguș la mobilă).</p>
+<p><em>(1) Obținerea deșeului, la valoarea negociată în contractul cu colectorul:</em></p>
+<div class="ledger"><div class="led-row" id="m18-a1"><span class="led-d">346</span><span class="led-eq">=</span><span class="led-c">711</span><span class="led-amt">3.000</span><span class="led-note"></span></div></div>
+<p>➕ <em>(2) Facturarea către colectorul de deșeuri:</em></p>
+<div class="ledger"><div class="led-row" id="m19-a1-1"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">%</span><span class="led-amt">3.000</span><span class="led-note"></span></div><div class="led-row" id="m19-a1-2"><span class="led-d"></span><span class="led-eq"></span><span class="led-c">703</span><span class="led-amt">3.000</span><span class="led-note"></span></div></div>
+<p><em>(3) Descărcarea de gestiune:</em></p>
+<div class="ledger"><div class="led-row" id="m20-a1"><span class="led-d">711</span><span class="led-eq">=</span><span class="led-c">346</span><span class="led-amt">3.000</span><span class="led-note"></span></div></div>
+<p>⚠️ <strong>Capcană pe care notițele o ratau, deși aveau ambele piese pe masă:</strong> livrarea de deșeuri feroase/neferoase și de reziduuri reciclabile este pe <strong>lista de taxare inversă</strong> (art. 331). Dacă și tu și colectorul sunteți plătitori de TVA, factura se emite <strong>fără TVA</strong>, cu mențiunea „taxare inversă&quot;. Deci în înregistrarea (2) nu apare 4427 la tine, ci autolichidarea o face colectorul.</p>
+<h3 id="6-5-produc-ia-de-imobiliz-ri-produc-ia-n-curs-de">6.5 Producția de imobilizări ≠ producția în curs de execuție</h3>
+<p>⚠️ Notița menționa „<em>soft făcut cu salariații societății</em>&quot; în dreptul lui 331/332. Greșit. Softul dezvoltat intern este o <strong>imobilizare necorporală</strong>, nu un stoc:</p>
+<div class="tw"><table><thead><tr><th>Ce produci intern</th><th>Cont în curs</th><th>Cont de venit</th><th>Cont final</th></tr></thead><tbody><tr><td><strong>Software, brevete</strong> (dezvoltate intern)</td><td>233 Imobilizări necorporale în curs</td><td><strong>721</strong> Venituri din producția de imobilizări necorporale</td><td>203 / 208</td></tr><tr><td><strong>Hală, utilaj</strong> (construit în regie proprie)</td><td>231 Imobilizări corporale în curs</td><td><strong>722</strong> Venituri din producția de imobilizări corporale</td><td>212 / 213</td></tr><tr><td><strong>Produse pentru vânzare</strong></td><td>331 Produse în curs</td><td><strong>711</strong></td><td>345</td></tr><tr><td><strong>Servicii nefinalizate</strong></td><td>332 Servicii în curs</td><td><strong>712</strong></td><td>—</td></tr></tbody></table></div>
+<p>Diferența e de fond: imobilizarea se <strong>amortizează</strong> pe ani, stocul se <strong>descarcă</strong> la vânzare. Dacă înregistrezi softul intern pe 331, ai și cont greșit, și tratament fiscal greșit.</p>
+<hr>
+<h2 id="7-conturile-de-tva">7. Conturile de TVA</h2>
+<h3 id="7-1-nomenclator">7.1 Nomenclator</h3>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Denumire oficială</th><th>Funcție</th></tr></thead><tbody><tr><td><strong>4423</strong></td><td>TVA de plată</td><td>pasiv — datorie la buget</td></tr><tr><td><strong>4424</strong></td><td><strong>TVA de recuperat</strong> ⚠️</td><td>activ — creanță asupra bugetului</td></tr><tr><td><strong>4426</strong></td><td>TVA deductibilă</td><td>achiziții, contrapartidă 401 → <strong>jurnalul de cumpărări</strong></td></tr><tr><td><strong>4427</strong></td><td>TVA colectată</td><td>vânzări, contrapartidă 4111 → <strong>jurnalul de vânzări</strong></td></tr><tr><td><strong>4428</strong></td><td>TVA neexigibilă</td><td>bifuncțional</td></tr></tbody></table></div>
+<p>⚠️ Notița scria „4424 — de rambursat&quot;. Denumirea oficială din planul de conturi este <strong>„TVA de recuperat&quot;</strong>. Nuanța contează: soldul lui 4424 poate fi <em>recuperat</em> (reportat, compensat) sau <em>rambursat efectiv</em> (prin cerere de rambursare, D300 cu opțiunea bifată) — sunt lucruri diferite.</p>
+<h3 id="7-2-conturi-f-r-sold-n-balan">7.2 Conturi fără sold în balanță</h3>
+<p>✅ Corect în notițe, cu o precizare de formulare:</p>
+<p><strong>Clasa 6 și clasa 7</strong> — nu au sold <strong>după închiderea</strong> lor la 121. În balanța lunară, înainte de închidere, au sold (cumulat de la începutul anului). În bilanț nu apar deloc.</p>
+<p><strong>4426 și 4427</strong> — se <strong>regularizează</strong> la sfârșitul fiecărei perioade fiscale în 4423 sau 4424:</p>
+<div class="ledger"><div class="led-row" id="m21-a1"><span class="led-d">4427</span><span class="led-eq">=</span><span class="led-c">%</span><span class="led-amt">0</span><span class="led-note"></span></div><div class="led-row" id="m21-a2"><span class="led-d">%</span><span class="led-eq">=</span><span class="led-c">4426</span><span class="led-amt">0</span><span class="led-note"></span></div></div>
+<p>⚠️ Notița adăuga „excluzând 711&quot; la conturile care ar avea sold. Nu e corect: <strong>711 se închide la 121 exact ca orice alt cont de clasa 7</strong>. Ce e adevărat despre 711 e altceva — că are rulaje <em>în ambele sensuri</em> în cursul perioadei, ceea ce îl face să arate diferit de restul clasei 7. Soldul lui însă se închide.</p>
+<p>➕ <strong>Excepții reale la regula „4426/4427 fără sold&quot;:</strong></p>
+<ul><li>entitățile cu <strong>pro-rată</strong> de deducere (deducere parțială);</li><li>entitățile cu <strong>TVA la încasare</strong> — unde partea neexigibilă stă în 4428.</li></ul>
+<h3 id="7-3-jurnalele-corela-ia-obligatorie">7.3 Jurnalele — corelația obligatorie</h3>
+<pre class="cod">Rulaj 4426  ⟺  Total TVA din jurnalul de cumpărări
+Rulaj 4427  ⟺  Total TVA din jurnalul de vânzări
+Decontul D300 se construiește DIN cele două jurnale</pre>
+<p>✅ La inspecție ANAF ți se cer exact trei lucruri împreună: <strong>jurnalul de cumpărări, jurnalul de vânzări și decontul de TVA</strong>. Dacă cele trei nu se leagă, discuția devine foarte lungă.</p>
+<h3 id="7-4-nregistr-ri-care-nu-vin-dintr-o-factur">7.4 Înregistrări care NU vin dintr-o factură ⚠️</h3>
+<p>Punctul cel mai valoros din toată secțiunea, formalizat. Există operațiuni cu impact în TVA care <strong>nu au un document de tip factură în spate</strong> și pe care softul <strong>nu le duce automat în jurnale</strong>:</p>
+<p><strong>a) TVA nedeductibilă 50% la autoturisme</strong> (art. 298 Cod fiscal)</p>
+<p>Pentru vehicule care nu sunt utilizate exclusiv în scopul activității economice, dreptul de deducere e limitat la 50%.</p>
+<div class="ledger"><div class="led-row" id="m23-a1"><span class="led-d">%</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">0</span><span class="led-note"></span></div></div>
+<p>➕ Se aplică și limitarea de 50% la <strong>cheltuielile aferente</strong> (combustibil, reparații, întreținere) — art. 25 alin. (3) lit. l) Cod fiscal, la calculul impozitului pe profit.</p>
+<p>⚠️ Trebuie să te asiguri că ajustarea apare <strong>cu semnul minus în jurnalul de cumpărări</strong>, altfel jurnalul nu se mai leagă cu 4426.</p>
+<p><strong>b) Lipsă la inventar</strong></p>
+<p>Pe lângă cheltuiala nedeductibilă, apare și un efect de TVA. ⚠️ <strong>Atenție la formulare</strong> — notița zicea simplu „trebuie să colectez TVA&quot;, dar tratamentul diferă:</p>
+<div class="tw"><table><thead><tr><th>Situație</th><th>Tratament TVA</th></tr></thead><tbody><tr><td>Lipsă <strong>imputabilă</strong> (se recuperează de la o persoană)</td><td>operațiune asimilată unei livrări → <strong>colectare TVA</strong> (4427)</td></tr><tr><td>Lipsă <strong>neimputabilă</strong>, nejustificată</td><td><strong>ajustarea dreptului de deducere</strong> (art. 304/305)</td></tr><tr><td>Bunuri distruse/degradate calitativ, <strong>cu documente justificative</strong> (proces-verbal, condiții de la art. 304 alin. 2)</td><td><strong>fără ajustare</strong></td></tr><tr><td>Perisabilități în limitele legale</td><td>fără ajustare</td></tr></tbody></table></div>
+<p>❓ De confirmat cu formatorul care dintre variante se practică în cabinet ca default și ce documentație se cere.</p>
+<p><strong>c) Alte cazuri de același tip:</strong> autofacturare, ajustări de TVA la bunuri de capital, TVA la achiziții pentru care s-a schimbat destinația.</p>
+<p>➕ <strong>Regulă de lucru:</strong> la închiderea fiecărei luni, listează diferența dintre TVA din balanță și TVA din jurnale. Dacă e diferență, cauza e aproape întotdeauna una dintre înregistrările de mai sus.</p>
+<h3 id="7-5-contul-4428-dou-utiliz-ri-complet-diferite">7.5 Contul 4428 — două utilizări complet diferite</h3>
+<p>✅ Notița observa corect că 4428 „poate fi și de activ și de pasiv&quot;. Motivul: sunt două mecanisme distincte care folosesc același cont.</p>
+<p><strong>Utilizarea 1 — TVA la încasare</strong> (cont de tranzit)</p>
+<p>Pentru entitățile care aplică sistemul TVA la încasare, exigibilitatea se amână până la încasare/plată:</p>
+<pre class="cod">La primirea facturii:      4428  =  401         (nu am plătit → nu deduc încă)
+La plata facturii:         4426  =  4428        (acum deduc)
+
+La emiterea facturii:      4111  =  4428        (nu am încasat → nu colectez încă)
+La încasare:               4428  =  4427        (acum colectez)</pre>
+<p>➕ <strong>Analitic obligatoriu:</strong> <code>4428.1 TVA neexigibilă la cumpărări</code> / <code>4428.2 TVA neexigibilă la vânzări</code>. Fără separare, soldul e ilizibil și nu poți justifica nimic la control.</p>
+<p><strong>Utilizarea 2 — gestiunea cu amănuntul</strong> (TVA „în așteptare&quot; în preț)</p>
+<p>Când marfa e ținută în gestiune la <strong>preț de vânzare cu amănuntul</strong>, prețul include deja TVA-ul. Acel TVA stă în 4428 până la vânzarea efectivă.</p>
+<p>⚠️ <strong>Corecție de raționament:</strong> notița explica 4428 în gestiunea cu amănuntul ca „TVA pe care îl dau la stat când îl primesc și eu de la clienți&quot;. <strong>Nu e același lucru cu TVA la încasare.</strong> Aici TVA-ul devine exigibil la <strong>momentul vânzării</strong> (bon fiscal emis), indiferent dacă ai încasat sau nu. 4428 e „neexigibil&quot; pentru că <strong>marfa nu s-a vândut încă</strong>, nu pentru că nu ai încasat.</p>
+<p>Confuzia asta produce erori reale în decont. Ține-le separate.</p>
+<hr>
+<h3 id="7-6-conturile">7.6 Conturile</h3>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Denumire</th><th>Natură</th><th>Când apare</th></tr></thead><tbody><tr><td><strong>4426</strong></td><td>TVA deductibilă</td><td>activ</td><td>la achiziții, pe baza facturii</td></tr><tr><td><strong>4427</strong></td><td>TVA colectată</td><td>pasiv</td><td>la livrări/prestări, pe baza facturii</td></tr><tr><td><strong>4423</strong></td><td>TVA de plată</td><td>pasiv</td><td>la închidere, dacă colectat &gt; deductibil</td></tr><tr><td><strong>4424</strong></td><td>TVA de recuperat</td><td>activ</td><td>la închidere, dacă deductibil &gt; colectat</td></tr><tr><td><strong>4428</strong></td><td>TVA neexigibilă</td><td><strong>bifuncțional</strong></td><td>aviz, facturi nesosite, mărfuri la preț cu amănuntul</td></tr></tbody></table></div>
+<h3 id="7-7-taxarea-invers">7.7 Taxarea inversă</h3>
+<p>La achiziții intracomunitare și la operațiunile supuse măsurilor de simplificare, TVA se auto-lichidează:</p>
+<div class="ledger"><div class="led-row" id="m25-a1"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt"></span><span class="led-note"></span></div></div>
+<p>Efectul pe trezorerie este zero — se colectează și se deduce simultan.</p>
+<p><strong>Nuanță importantă:</strong> un <strong>avans</strong> plătit pentru o <strong>achiziție intracomunitară de bunuri</strong> nu generează exigibilitatea TVA. Faptul generator intervine la emiterea facturii sau cel târziu în a 15-a zi a lunii următoare livrării. La serviciile intracomunitare regula diferă.</p>
+<h3 id="7-8-de-ce-are-4428-nevoie-de-analitice">7.8 De ce are 4428 nevoie de analitice</h3>
+<p>4428 este bifuncțional și apare în trei situații diferite, cu sensuri diferite:</p>
+<div class="tw"><table><thead><tr><th>Situație</th><th>Înregistrare</th><th>Sensul lui 4428</th></tr></thead><tbody><tr><td><strong>Achiziție pe aviz</strong> (facturi nesosite)</td><td><code>4428 = 408</code></td><td><strong>debitor</strong></td></tr><tr><td><strong>Livrare pe aviz</strong> (facturi de întocmit)</td><td><code>418 = 4428</code></td><td><strong>creditor</strong></td></tr><tr><td><strong>Mărfuri la preț cu amănuntul</strong></td><td><code>371 = 4428</code></td><td><strong>creditor</strong></td></tr></tbody></table></div>
+<p>Fără analitice distincte — pe fiecare situație <strong>și pe fiecare cotă de TVA</strong> — programul nu va ști să facă distincția la descărcarea de gestiune și va amesteca sumele.</p>
+<p>Regula practică: <strong>dacă firma are mărfuri și aprovizionare prin aviz, analiticele pe 4428 nu sunt opționale.</strong></p>
+<p>Același raționament se aplică lui <strong>408</strong> și <strong>418</strong>: sunt bifuncționale și trebuie urmărite.</p>
+<hr>
+<h2 id="8-m-rfuri-371">8. Mărfuri (371)</h2>
+<h3 id="8-1-prima-decizie-ce-tip-de-gestiune-creezi">8.1 Prima decizie: ce tip de gestiune creezi</h3>
+<div class="tw"><table><thead><tr><th></th><th><strong>En gros</strong></th><th><strong>Cu amănuntul</strong></th></tr></thead><tbody><tr><td>Gestiunea se ține la</td><td><strong>preț de achiziție</strong></td><td><strong>preț de vânzare cu amănuntul (cu TVA)</strong></td></tr><tr><td>Conturi implicate</td><td>371, 401</td><td>371, 401, <strong>378</strong>, <strong>4428</strong></td></tr><tr><td>De ce</td><td>poți avea prețuri preferențiale pe client; urmărirea și descărcarea de gestiune sunt simple</td><td>vinzi la preț unic afișat; nu poți urmări fiecare bon</td></tr></tbody></table></div>
+<p>✅ Argumentul din notițe e corect: la en gros ții la preț de achiziție tocmai <strong>pentru că prețul de vânzare variază de la client la client</strong>. Dacă ai ține la preț de vânzare, ar trebui să reevaluezi gestiunea la fiecare contract.</p>
+<p><strong>Achiziția en gros:</strong></p>
+<div class="ledger"><div class="led-row" id="m26-a1"><span class="led-d">371</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">20.000</span><span class="led-note"></span></div><div class="led-row" id="m26-a2"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">4.200</span><span class="led-note">(intern)</span></div></div>
+<h3 id="8-2-regula-de-aur-a-analiticelor">8.2 Regula de aur a analiticelor</h3>
+<div class="note"><p><strong>Fiecare gestiune de marfă se ține separat pe analiticul ei. Nu amesteci niciodată:</strong> - gestiune cu 11% și gestiune cu 21% - gestiune en gros și gestiune cu amănuntul</p></div>
+<p>✅ <strong>De ce:</strong> pentru că verificarea lui 4428 se face aplicând cota pe soldul gestiunii (vezi 8.6). Dacă amesteci cotele, corelația devine imposibil de verificat și nu mai poți spune dacă ai o eroare sau doar un mix de cote.</p>
+<h3 id="8-3-importul-tva-n-vam-taxe-vamale-transport">8.3 Importul — TVA în vamă, taxe vamale, transport</h3>
+<p><strong>Varianta A — plătești TVA-ul direct în vamă, prin bancă:</strong></p>
+<div class="ledger"><div class="led-row" id="m27-a1"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">5121</span><span class="led-amt"></span><span class="led-note">(TVA deductibil, plătit efectiv)</span></div></div>
+<p><strong>Varianta B — prin comisionar vamal:</strong></p>
+<div class="ledger"><div class="led-row" id="m28-a1"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">446</span><span class="led-amt"></span><span class="led-note">(TVA-ul achitat de comisionar în numele tău)</span></div><div class="led-row" id="m28-a2"><span class="led-d">446</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt"></span><span class="led-note">(îl datorezi comisionarului)</span></div></div>
+<p>➕ Notița observa că a doua înregistrare „e puțin forțată, pentru că 446 e cont de pasiv&quot;. Corect — <strong>446 „Alte impozite, taxe și vărsăminte asimilate&quot;</strong> funcționează aici ca un cont de tranzit. Alternativ, unele cabinete folosesc 461/462 pentru decontarea cu comisionarul. Ce contează e să fie <strong>consecvent</strong> și documentat în politici.</p>
+<p>➕ <strong>Varianta C, care lipsea:</strong> societățile cu <strong>certificat de amânare de la plata TVA în vamă</strong> nu plătesc TVA-ul efectiv, ci aplică taxare inversă: <code>4426 = 4427</code>. Merită verificat dacă clientul îndeplinește condițiile — e un avantaj mare de cash-flow.</p>
+<p><strong>Taxele vamale și transportul intră în costul mărfii</strong> (OMFP 1802/2014 — costul de achiziție include taxele nerecuperabile, transportul, manipularea):</p>
+<div class="ledger"><div class="led-row" id="m29-a1"><span class="led-d">371</span><span class="led-eq">=</span><span class="led-c">446</span><span class="led-amt"></span><span class="led-note">(taxe vamale)</span></div><div class="led-row" id="m29-a2"><span class="led-d">371</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt"></span><span class="led-note">(transport pe factură separată)</span></div></div>
+<h3 id="8-4-capcana-major-gestiunea-contabilitatea">8.4 Capcana majoră: gestiunea ≠ contabilitatea</h3>
+<p><strong>Situația reală descrisă în notițe, formalizată:</strong></p>
+<p>Softul de gestiune al clientului ia prețul din <strong>invoice</strong> (fără taxe vamale, fără transport). Contabilitatea înregistrează costul complet (<strong>cu</strong> taxe vamale și transport). Rezultat: <strong>valoarea scriptică din contabilitate e mai mare decât cea din gestiune</strong>. La inventariere, diferența iese la suprafață — și e prea târziu.</p>
+<p>Efectele:</p>
+<ol><li>Valoare de inventar necorelată;</li><li><strong>Descărcare de gestiune greșită</strong> — înregistrezi o cheltuială (607) diferită de cea reală;</li><li>Marja pe produs e falsă, deci și deciziile comerciale ale clientului.</li></ol>
+<div class="note"><p>⚠️ <strong>Regula:</strong> valoarea la care înregistrezi în 371 trebuie să fie <strong>identică</strong> cu valoarea din softul de gestiune din care clientul emite facturile către clienții lui.</p></div>
+<p><strong>Exemplul din notițe:</strong></p>
+<pre class="cod">Factura furnizor:  100 lei
+NIR:               130 lei</pre>
+<p>Nu accepți diferența, ci <strong>întrebi</strong>: de unde ies cei 30 lei? Răspunsul tipic: „am inclus taxe vamale + transport&quot;. Bine — atunci NIR-ul e corect, iar factura de transport <strong>nu se mai înregistrează separat pe 624</strong>, pentru că valoarea ei e deja în 371. Altfel dublezi cheltuiala și umfli prețul mărfii.</p>
+<p>➕ <strong>Cine își asumă ce:</strong> dacă gestionarul face NIR-ul cu taxe vamale și transport incluse, el își asumă calculul. Rolul cabinetului e să valideze metoda, nu să o refacă. Dar metoda trebuie <strong>stabilită în scris, la începutul colaborării</strong>, nu descoperită în decembrie.</p>
+<p>➕ Există sisteme care fac automat preluarea taxelor vamale și a transportului în prețul mărfii (repartizare pe cantitate sau pe valoare). Merită întrebat furnizorul de soft — economisește ore de reconciliere.</p>
+<h3 id="8-5-nc-rcarea-gestiunii-cu-am-nuntul-exemple">8.5 Încărcarea gestiunii cu amănuntul — exemple</h3>
+<p><strong>Exemplul 1 — cotă 21%</strong></p>
+<p>Marfă 20.000 lei | adaos 20% | TVA 21%</p>
+<div class="ledger"><div class="led-row" id="m31-a1-1"><span class="led-d">371</span><span class="led-eq">=</span><span class="led-c">%</span><span class="led-amt">29.040</span><span class="led-note"></span></div><div class="led-row" id="m31-a1-2"><span class="led-d"></span><span class="led-eq"></span><span class="led-c">401</span><span class="led-amt">20.000</span><span class="led-note"></span></div><div class="led-row" id="m31-a1-3"><span class="led-d"></span><span class="led-eq"></span><span class="led-c">378</span><span class="led-amt">4.000</span><span class="led-note"></span></div><div class="led-row" id="m31-a1-4"><span class="led-d"></span><span class="led-eq"></span><span class="led-c">4428</span><span class="led-amt">5.040</span><span class="led-note"></span></div></div>
+<div class="note"><p>⚠️ <strong>TVA-ul se aplică la preț + adaos, nu doar la preț.</strong> Statul încasează TVA și pe marja ta comercială.</p></div>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Sumă</th></tr></thead><tbody><tr><td>371 (debit)</td><td><strong>29.040</strong></td></tr><tr><td>401</td><td>20.000</td></tr><tr><td>378</td><td>4.000</td></tr><tr><td>4428</td><td>5.040</td></tr></tbody></table></div>
+<p><strong>Exemplul 2 — cotă 11%</strong> ⚠️ <strong>corectat</strong></p>
+<p>Marfă 20.000 lei | adaos 20% | TVA 11%</p>
+<div class="ledger"><div class="led-row" id="m32-a1-1"><span class="led-d">371</span><span class="led-eq">=</span><span class="led-c">%</span><span class="led-amt">26.640</span><span class="led-note"></span></div><div class="led-row" id="m32-a1-2"><span class="led-d"></span><span class="led-eq"></span><span class="led-c">401</span><span class="led-amt">20.000</span><span class="led-note"></span></div><div class="led-row" id="m32-a1-3"><span class="led-d"></span><span class="led-eq"></span><span class="led-c">378</span><span class="led-amt">4.000</span><span class="led-note"></span></div><div class="led-row" id="m32-a1-4"><span class="led-d"></span><span class="led-eq"></span><span class="led-c">4428</span><span class="led-amt">2.640</span><span class="led-note"></span></div></div>
+<p>⚠️ În notițe scria <code>4428 = 0,44</code> și total <code>371 = 29,04k</code>. <strong>Ambele greșite.</strong> 11% din 24.000 = <strong>2.640</strong>, iar totalul lui 371 = 20.000 + 4.000 + 2.640 = <strong>26.640</strong>. (Valoarea de 29.040 era copiată din exemplul cu 21%.)</p>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Sumă</th></tr></thead><tbody><tr><td>371 (debit)</td><td><strong>26.640</strong></td></tr><tr><td>401</td><td>20.000</td></tr><tr><td>378</td><td>4.000</td></tr><tr><td>4428</td><td>2.640</td></tr></tbody></table></div>
+<h3 id="8-6-v-nzarea-i-desc-rcarea-de-gestiune-r-spunsul">8.6 Vânzarea și descărcarea de gestiune — răspunsul la <code>???</code></h3>
+<p>Notițele se opreau la <em>„să presupunem că vindem integral această marfă — ???&quot;</em>. Pe exemplul 1 (21%):</p>
+<p><strong>(1) Vânzarea — încasare prin casierie:</strong></p>
+<div class="ledger"><div class="led-row" id="m33-a1-1"><span class="led-d">5311</span><span class="led-eq">=</span><span class="led-c">%</span><span class="led-amt">29.040</span><span class="led-note"></span></div><div class="led-row" id="m33-a1-2"><span class="led-d"></span><span class="led-eq"></span><span class="led-c">707</span><span class="led-amt">24.000</span><span class="led-note"></span></div><div class="led-row" id="m33-a1-3"><span class="led-d"></span><span class="led-eq"></span><span class="led-c">4427</span><span class="led-amt">5.040</span><span class="led-note"></span></div></div>
+<p><strong>(2) Descărcarea de gestiune — trei componente:</strong></p>
+<div class="ledger"><div class="led-row" id="m34-a1-1"><span class="led-d">%</span><span class="led-eq">=</span><span class="led-c">371</span><span class="led-amt">29.040</span><span class="led-note"></span></div><div class="led-row" id="m34-a1-2"><span class="led-d">607</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">20.000</span><span class="led-note"></span></div><div class="led-row" id="m34-a1-3"><span class="led-d">378</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">4.000</span><span class="led-note"></span></div><div class="led-row" id="m34-a1-4"><span class="led-d">4428</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">5.040</span><span class="led-note"></span></div></div>
+<p><strong>Verificare:</strong></p>
+<div class="tw"><table><thead><tr><th>Sold 371</th><th>29.040 − 29.040 = <strong>0</strong> ✅</th></tr></thead><tbody><tr><td>Sold 378</td><td>4.000 − 4.000 = <strong>0</strong> ✅</td></tr><tr><td>Sold 4428</td><td>5.040 − 5.040 = <strong>0</strong> ✅</td></tr><tr><td>Marja</td><td>707 − 607 = 24.000 − 20.000 = <strong>4.000</strong> = rulajul debitor 378 ✅</td></tr></tbody></table></div>
+<h3 id="8-7-corela-iile-sfinte">8.7 Corelațiile „sfinte&quot;</h3>
+<p>Cele două verificări pe care le faci pe orice balanță cu gestiune cu amănuntul:</p>
+<div class="note"><p><strong>CORELAȚIA 1</strong> ``<code> Rulaj creditor 707 − Rulaj debitor 607 = Rulaj debitor 378 </code>`` Marja realizată din vânzări trebuie să fie exact adaosul descărcat din gestiune.</p></div>
+<div class="note"><p><strong>CORELAȚIA 2</strong> ``<code> Sold 371 × 21 / 121 = Sold 4428        (gestiune cu cotă 21%) Sold 371 × 11 / 111 = Sold 4428        (gestiune cu cotă 11%) </code>`` TVA-ul conținut în stocul evaluat la preț de vânzare trebuie să fie exact soldul lui 4428.</p></div>
+<p>⚠️ <strong>Limitele corelației 1</strong>, care nu erau menționate: nu se verifică dacă în cursul perioadei au existat reduceri comerciale primite/acordate ulterior facturării (609/709), diferențe de inventar, retururi sau transferuri între gestiuni. În aceste cazuri trebuie ajustată — nu concluziona automat că ai o eroare.</p>
+<p>✅ <strong>Și acesta este exact motivul pentru care gestiunile se separă pe cote.</strong> Corelația 2 nu poate fi calculată pe o gestiune mixtă.</p>
+<h3 id="8-8-coeficientul-de-repartizare-a-adaosului-k">8.8 Coeficientul de repartizare a adaosului (K)</h3>
+<p>➕ <strong>Completare necesară.</strong> În practică, la sfârșit de lună nu știi direct care e adaosul aferent mărfurilor vândute (vinzi bon cu bon, nu pe loturi). Se calculează prin coeficientul K:</p>
+<pre class="cod">              Si 378 + Rc 378
+K = ─────────────────────────────────────────────
+     (Si 371 − Si 4428) + (Rd 371 − Rc 4428)</pre>
+<p><em>(numitorul = valoarea mărfurilor la preț de vânzare, fără TVA)</em></p>
+<pre class="cod">Adaos aferent mărfurilor vândute = K × Rulaj creditor 707</pre>
+<p><strong>Verificare pe exemplul 1:</strong></p>
+<pre class="cod">K = 4.000 / (0 + 29.040 − 5.040) = 4.000 / 24.000 = 0,1667
+Adaos aferent vânzărilor = 0,1667 × 24.000 = 4.000   ✅</pre>
+<hr>
+<p>Metoda prețului cu amănuntul: marfa stă în gestiune la <strong>prețul de vânzare cu TVA</strong>, nu la cost. Diferența dintre cost și prețul de raft se ține în două conturi <strong>rectificative</strong> ale lui 371:</p>
+<ul><li><strong>378</strong> Diferențe de preț la mărfuri (adaosul comercial)</li><li><strong>4428</strong> TVA neexigibilă</li></ul>
+<h3 id="8-9-achizi-ia">8.9 Achiziția</h3>
+<p>Cost de achiziție 20.000 lei, TVA 11%, adaos comercial 20%.</p>
+<div class="ledger"><div class="led-row" id="m38-a1"><span class="led-d">371</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">20.000</span><span class="led-note">(costul de achiziție)</span></div><div class="led-row" id="m38-a2"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">2.200</span><span class="led-note">(TVA deductibilă, 11% × 20.000)</span></div><div class="led-row" id="m38-a3"><span class="led-d">371</span><span class="led-eq">=</span><span class="led-c">378</span><span class="led-amt">4.000</span><span class="led-note">(adaos comercial, 20% × 20.000)</span></div><div class="led-row" id="m38-a4"><span class="led-d">371</span><span class="led-eq">=</span><span class="led-c">4428</span><span class="led-amt">2.640</span><span class="led-note">(TVA neexigibilă, 11% × 24.000)</span></div></div>
+<p>Atenție la baza TVA-ului neexigibil: se aplică la <strong>marfă + adaos</strong> (20.000 + 4.000 = 24.000), nu doar la cost.</p>
+<p>Soldul lui 371 devine <strong>26.640</strong> = 20.000 + 4.000 + 2.640, adică exact prețul de raft cu TVA.</p>
+<h3 id="8-10-v-nzarea-prin-casierie">8.10 Vânzarea prin casierie</h3>
+<div class="ledger"><div class="led-row" id="m39-a1"><span class="led-d">5311</span><span class="led-eq">=</span><span class="led-c">707</span><span class="led-amt">24.000</span><span class="led-note">(venitul din vânzarea mărfurilor)</span></div><div class="led-row" id="m39-a2"><span class="led-d">5311</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">2.640</span><span class="led-note">(TVA colectată)</span></div></div>
+<h3 id="8-11-desc-rcarea-de-gestiune">8.11 Descărcarea de gestiune</h3>
+<p>Se scot cele trei componente cu care a intrat marfa:</p>
+<div class="ledger"><div class="led-row" id="m40-a1"><span class="led-d">607</span><span class="led-eq">=</span><span class="led-c">371</span><span class="led-amt">20.000</span><span class="led-note">(cheltuiala — costul de achiziție, fără adaos)</span></div><div class="led-row" id="m40-a2"><span class="led-d">378</span><span class="led-eq">=</span><span class="led-c">371</span><span class="led-amt">4.000</span><span class="led-note">(anularea adaosului)</span></div><div class="led-row" id="m40-a3"><span class="led-d">4428</span><span class="led-eq">=</span><span class="led-c">371</span><span class="led-amt">2.640</span><span class="led-note">(TVA devine exigibilă)</span></div></div>
+<p>Total scos din 371: 26.640 — gestiunea se închide exact.</p>
+<p>În practică se face ca articol contabil compus: <code>% = 371 · 26.640</code>.</p>
+<h3 id="8-12-nchiderea-tva-la-sf-r-itul-lunii">8.12 Închiderea TVA la sfârșitul lunii</h3>
+<p>Situația conturilor înainte de închidere:</p>
+<ul><li>4426 TVA deductibilă → <strong>2.200</strong> debitor</li><li>4427 TVA colectată → <strong>2.640</strong> creditor</li></ul>
+<div class="ledger"><div class="led-row" id="m41-a1"><span class="led-d">4427</span><span class="led-eq">=</span><span class="led-c">4426</span><span class="led-amt">2.200</span><span class="led-note">(se compensează partea comună)</span></div><div class="led-row" id="m41-a2"><span class="led-d">4427</span><span class="led-eq">=</span><span class="led-c">4423</span><span class="led-amt">440</span><span class="led-note">(diferența rămasă = TVA de plată)</span></div></div>
+<p>Dacă deductibilul ar fi fost mai mare decât colectatul, diferența mergea invers, în <strong>4424 TVA de recuperat</strong>: <code>4424 = 4426</code>.</p>
+<h3 id="8-13-plata-tva">8.13 Plata TVA</h3>
+<div class="ledger"><div class="led-row" id="m42-a1"><span class="led-d">4423</span><span class="led-eq">=</span><span class="led-c">5121</span><span class="led-amt">440</span><span class="led-note"></span></div></div>
+<p><strong>5121</strong> este contul de bancă, indiferent de instrumentul folosit (ordin de plată, internet banking, mandat). Nu confunda: <strong>5311</strong> este casa în lei, iar <strong>5111</strong> este <em>Cecuri de încasat</em> — un cont de <strong>încasări</strong>, care nu are ce căuta într-o plată de TVA.</p>
+<p>Dacă ai TVA de recuperat din luna anterioară (sold debitor pe 4424) și TVA de plată în luna curentă, se pot compensa:</p>
+<div class="ledger"><div class="led-row" id="m43-a1"><span class="led-d">4423</span><span class="led-eq">=</span><span class="led-c">4424</span><span class="led-amt"></span><span class="led-note"></span></div></div>
+<p>Când marfa se depreciază (expiră, se demodează, se degradează), deprecierea nu se estimează după ureche: se <strong>întrunește o comisie tehnică</strong>, se face inventarierea, iar procentul (20%, 15%, 50% — după caz) se stabilește de comun acord și ajunge în contabilitate printr-un <strong>proces-verbal</strong>.</p>
+<p>Ajustarea se înregistrează la valoarea din gestiune / prețul de achiziție.</p>
+<h3 id="8-14-nregistrarea-deprecierii">8.14 Înregistrarea deprecierii</h3>
+<p>Cost de achiziție 20 lei, depreciere stabilită 30% → 6 lei.</p>
+<div class="ledger"><div class="led-row" id="m44-a1"><span class="led-d">6814</span><span class="led-eq">=</span><span class="led-c">391</span><span class="led-amt">6</span><span class="led-note">(cheltuiala cu ajustarea)</span></div></div>
+<h3 id="8-15-reluarea-la-venituri-la-valorificarea-bunul">8.15 Reluarea la venituri, la valorificarea bunului</h3>
+<p>Vine un cumpărător și dă 10 lei pe bun. În momentul în care bunul iese din gestiune, ajustarea nu mai are obiect și <strong>legea obligă la reluarea ei la venituri</strong>:</p>
+<div class="ledger"><div class="led-row" id="m45-a1"><span class="led-d">391</span><span class="led-eq">=</span><span class="led-c">7814</span><span class="led-amt">6</span><span class="led-note"></span></div></div>
+<p>Conturile de ajustare funcționează <strong>în oglindă</strong>: <code>6814 ↔ 7814</code>.</p>
+<p><strong>Logica, pe scurt:</strong> la vânzarea bunului din gestiune, ajustarea se mută de pe 39* într-un cont de venit, ca să compenseze cheltuiala deja înregistrată în luna în care s-a constituit ajustarea. Efectul pe rezultat: −20 (descărcare) +10 (venit din vânzare) +6 (reluarea ajustării) = <strong>−4 lei</strong>.</p>
+<h3 id="8-16-regimul-fiscal-aten-ie">8.16 Regimul fiscal — atenție</h3>
+<p>Ajustările pentru deprecierea <strong>stocurilor</strong> sunt <strong>nedeductibile fiscal</strong>. Art. 26 din Codul fiscal enumeră limitativ provizioanele și ajustările deductibile, iar deprecierea stocurilor nu se regăsește acolo.</p>
+<p>Corespunzător, <strong>venitul din reluarea lor este neimpozabil</strong> (art. 23 lit. d — veniturile din anularea cheltuielilor pentru care nu s-a acordat deducere). Cele două se neutralizează fiscal.</p>
+<p>Deductibile — condiționat — sunt ajustările pentru deprecierea <strong>creanțelor</strong> (491, 496), în limitele și condițiile art. 26. Nu confunda cele două regimuri.</p>
+<h3 id="8-17-inventarierea-nota-de-practic">8.17 Inventarierea — nota de practică</h3>
+<p>De partea de inventariere răspunde <strong>administratorul</strong>, deci e la latitudinea lui. Dar un economist bun punctează aceste lucruri clientului, indiferent de mărimea firmei: pentru fiecare proprietar, afacerea lui este cea mai importantă, iar clientul trebuie să simtă că ai un interes real față de business-ul lui.</p>
+<hr>
+<h2 id="9-ambalaje-i-obliga-iile-de-mediu">9. Ambalaje și obligațiile de mediu</h2>
+<h3 id="9-1-conturile">9.1 Conturile</h3>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Denumire</th></tr></thead><tbody><tr><td><strong>381</strong></td><td>Ambalaje</td></tr><tr><td><strong>388</strong></td><td>Diferențe de preț la ambalaje</td></tr><tr><td><strong>358</strong></td><td>Ambalaje aflate la terți</td></tr><tr><td><strong>3023</strong></td><td>Materiale pentru ambalat</td></tr><tr><td><strong>608</strong></td><td>Cheltuieli privind ambalajele</td></tr><tr><td><strong>652</strong></td><td><strong>Cheltuieli cu protecția mediului înconjurător</strong></td></tr></tbody></table></div>
+<h3 id="9-2-tipurile-de-ambalaj">9.2 Tipurile de ambalaj</h3>
+<p>✅ Corect în notițe, completez al treilea nivel:</p>
+<div class="tw"><table><thead><tr><th>Tip</th><th>Definiție</th><th>Exemplu (vopsea)</th></tr></thead><tbody><tr><td><strong>Primar</strong></td><td>în contact direct cu produsul</td><td>cutia metalică de vopsea</td></tr><tr><td><strong>Secundar</strong></td><td>grupează mai multe unități</td><td>cutia de carton cu 6 bucăți</td></tr><tr><td><strong>Terțiar</strong> (de transport)</td><td>pentru manipulare și transport</td><td><strong>paletul, folia stretch</strong></td></tr></tbody></table></div>
+<p>➕ Greșeala clasică: se declară doar primarul și secundarul și se uită <strong>terțiarul</strong> (paleții, folia). La import și achiziții intracomunitare, tocmai terțiarul e cel mai greu.</p>
+<h3 id="9-3-contribu-ia-la-fondul-pentru-mediu">9.3 Contribuția la Fondul pentru Mediu</h3>
+<p>⚠️ <strong>Corecție importantă de fond.</strong> Notița spune „<em>2 lei/kg pentru cantitățile de ambalaje</em>&quot;. Nu se plătesc 2 lei pe fiecare kilogram introdus pe piață. Contribuția de <strong>2 lei/kg</strong> se datorează <strong>doar pentru diferența</strong> dintre:</p>
+<ul><li>cantitatea de deșeuri corespunzătoare <strong>obiectivului minim de reciclare/valorificare</strong>, și</li><li>cantitatea efectiv reciclată/valorificată.</li></ul>
+<p>Dacă îți atingi obiectivul, contribuția este <strong>zero</strong>.</p>
+<p><strong>Două variante de conformare:</strong></p>
+<div class="tw"><table><thead><tr><th>Variantă</th><th>Cum funcționează</th></tr></thead><tbody><tr><td><strong>Individual</strong></td><td>îndeplinești singur obiectivele, raportezi și plătești diferența la AFM</td></tr><tr><td><strong>Prin OIREP/OTR</strong></td><td>transferi responsabilitatea unei organizații autorizate, plătești tarif lunar, ea îți furnizează raportul de reciclare</td></tr></tbody></table></div>
+<p>A doua e varianta uzuală și de regulă mai ieftină.</p>
+<p><strong>Declarația privind obligațiile la Fondul pentru mediu</strong> se depune la AFM (evidența ambalajelor se ține lunar; raportarea/plata urmează calendarul AFM în vigoare — <strong>verifică termenul curent pe afm.ro</strong>, s-a modificat de mai multe ori).</p>
+<p><strong>Înregistrare când găsești o plată către AFM în extras:</strong></p>
+<div class="ledger"><div class="led-row" id="m46-a1"><span class="led-d">652</span><span class="led-eq">=</span><span class="led-c">5121</span><span class="led-amt"></span><span class="led-note"></span></div></div>
+<p>⚠️ Dar nu o înregistrezi mecanic. <strong>Întrebi întâi: pentru ce s-a plătit?</strong> Ambalaje? Ecotaxă pentru pungi? Anvelope? EEE? Fiecare are declarație și evidență proprie. O plată către AFM înseamnă că există o obligație declarativă în spate — și de multe ori clientul nu știe că o are.</p>
+<h3 id="9-4-becule-ul-care-trebuie-s-se-aprind">9.4 Beculețul care trebuie să se aprindă</h3>
+<p>✅ Cea mai utilă observație practică din notițe, formalizată:</p>
+<div class="note"><p><strong>Ai o tranzacție intracomunitară sau un import? Uită-te pe CMR / factură la diferența dintre greutatea netă și cea brută. Diferența = ambalaj introdus pe piața din România = posibilă obligație la AFM.</strong></p></div>
+<p>Exemplul din notițe: firmă care aduce PAL și MDF din Austria — a ajuns să plătească pentru paleții aduși pe teritoriul României. Controalele în vamă sunt frecvente exact pentru că autoritatea are informația brut/net direct pe documentele de transport.</p>
+<p>➕ <strong>Trei întrebări de pus clientului la deschiderea dosarului:</strong></p>
+<ol><li>Aveți contract cu un OIREP pentru transferul responsabilității?</li><li>Cine ține evidența ambalajelor introduse pe piață, pe tip de material?</li><li>Cine depune declarația la AFM și de când?</li></ol>
+<hr>
+<h2 id="10-atitudinea-profesional-nu-e-o-not-filozofic">10. Atitudinea profesională — nu e o notă filozofică</h2>
+<p>⚠️ Abordarea „<em>nu mă interesează mediul / statistica / resursele umane</em>&quot; este descurajată explicit — și are un motiv practic, nu moral.</p>
+<p><strong>Motivul:</strong> clientul nu are cum să știe ce nu știe. Ai la dispoziție, în munca ta zilnică, informația care declanșează obligația:</p>
+<ul><li>vezi CMR-ul → știi că are ambalaje de declarat;</li><li>vezi extrasul → știi că a plătit la AFM;</li><li>vezi factura de import → știi că are taxe vamale de inclus în cost.</li></ul>
+<p><strong>Cine altcineva are toate aceste informații într-un singur loc? Nimeni.</strong></p>
+<p>Reacția clasică a clientului la o amendă este <em>„nu mi-a spus contabilul&quot;</em>. Fie că e drept sau nu, asta e percepția — iar bariera pe care o ridici („nu e treaba mea&quot;) nu te protejează, ci doar amână discuția.</p>
+<p><strong>Consecința operațională:</strong> dacă în cabinet ai informația, transmite-o mai departe — colegilor și clientului. În scris. Un e-mail de trei rânduri care semnalează o obligație valorează mai mult decât orice clauză contractuală.</p>
+<hr>
+<h2 id="11-furnizori-i-clien-i-clasele-40-i-41">11. Furnizori și clienți — clasele 40 și 41</h2>
+<h3 id="11-1-contul-408-furnizori-facturi-nesosite">11.1 Contul 408 — Furnizori, facturi nesosite</h3>
+<p>Se folosește când <strong>prestația s-a produs, dar factura nu a sosit</strong> — tipic serviciile din decembrie facturate în ianuarie (principiul independenței exercițiului / <em>accrual</em>). La mărfuri și materii prime, echivalentul este intrarea <strong>pe aviz</strong>.</p>
+<p>Legal, marfa livrată pe aviz poate fi facturată <strong>până pe data de 15 a lunii următoare</strong> celei în care a avut loc faptul generator.</p>
+<p><strong>Recepție de materii prime pe aviz:</strong></p>
+<div class="ledger"><div class="led-row" id="m47-a1"><span class="led-d">301</span><span class="led-eq">=</span><span class="led-c">408</span><span class="led-amt"></span><span class="led-note">(în baza avizului)</span></div></div>
+<p>Problema practică: de cele mai multe ori, <strong>avizul nu conține prețul</strong>. Legea nu obligă furnizorul să îl treacă. Ca să poți face înregistrarea la o valoare corectă, îți trebuie <strong>contractul</strong>. Dacă factura vine ulterior cu alt preț, se fac ajustări — sau, în practică, se convine un discount / se facturează la valoarea pusă pe 408.</p>
+<p><strong>La primirea facturii:</strong></p>
+<div class="ledger"><div class="led-row" id="m48-a1"><span class="led-d">408</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt"></span><span class="led-note">(se închide provizionul de factură)</span></div></div>
+<h3 id="11-2-varianta-complet-cu-tva">11.2 Varianta completă, cu TVA</h3>
+<p>Recepție în valoare de 10.000 lei, TVA 21%.</p>
+<p><strong>Pasul 1 — la recepție, în baza avizului:</strong></p>
+<div class="ledger"><div class="led-row" id="m49-a1"><span class="led-d">231</span><span class="led-eq">=</span><span class="led-c">408</span><span class="led-amt">10.000</span><span class="led-note"></span></div><div class="led-row" id="m49-a2"><span class="led-d">4428</span><span class="led-eq">=</span><span class="led-c">408</span><span class="led-amt">2.100</span><span class="led-note">(TVA neexigibilă)</span></div></div>
+<p><strong>Pasul 2 — la primirea facturii:</strong></p>
+<div class="ledger"><div class="led-row" id="m50-a1"><span class="led-d">408</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">10.000</span><span class="led-note"></span></div><div class="led-row" id="m50-a2"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">2.100</span><span class="led-note">(TVA devine deductibilă)</span></div></div>
+<p><strong>Pasul 3 — închiderea TVA-ului neexigibil:</strong></p>
+<div class="ledger"><div class="led-row" id="m51-a1"><span class="led-d">408</span><span class="led-eq">=</span><span class="led-c">4428</span><span class="led-amt">2.100</span><span class="led-note"></span></div></div>
+<p>După pasul 3 atât 408, cât și 4428 rămân cu sold zero pe operațiunea respectivă. Pasul 3 este <strong>corect și necesar</strong> — fără el, cele două conturi rămân umflate reciproc.</p>
+<p>Pentru 4428 provenit din 408 se folosesc <strong>analitice distincte</strong>.</p>
+<div class="note"><p>Notă: 231 este <em>Imobilizări corporale în curs</em>, iar furnizorul de imobilizări este <strong>404</strong>. Când se lucrează cu imobilizări, folosește analitice dedicate pe 408 sau direct 404, ca să nu amesteci furnizorii de exploatare cu cei de imobilizări.</p></div>
+<h3 id="11-3-de-ce-408-este-un-cont-periculos">11.3 De ce 408 este un cont periculos</h3>
+<p>Când livrezi cu aviz, legea cere ca <strong>factura să menționeze numărul avizului</strong>. Dacă cel care a întocmit factura nu a fost atent și factura nu se împerechează cu avizul — iar tu nu sesizezi — înregistrezi materii prime a doua oară și <strong>dublezi gestiunea</strong>.</p>
+<p>Contabilitatea primește documente fără să aibă legătură cu ce se întâmplă pe teren. De aceea:</p>
+<ul><li>trebuie să știi permanent <strong>ce facturi sunt înregistrate pentru ce avize</strong>;</li><li>închiderea facturilor pe furnizori prin 408 se urmărește activ;</li><li>la orice dubiu, se sună clientul. El știe cel mai bine ce se întâmplă în curtea lui și clarifică în câteva secunde ceea ce ție ți-ar lua ore.</li></ul>
+<h3 id="11-4-contul-409-furnizori-debitori-avansuri-pl-t">11.4 Contul 409 — Furnizori-debitori (avansuri plătite)</h3>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Pentru ce</th><th>Furnizor asociat</th></tr></thead><tbody><tr><td><strong>4091</strong></td><td>avansuri pentru stocuri / mărfuri</td><td>401</td></tr><tr><td><strong>4092</strong></td><td>avansuri pentru prestări de servicii</td><td>401</td></tr><tr><td><strong>4093</strong></td><td>avansuri pentru imobilizări corporale</td><td><strong>404</strong></td></tr><tr><td><strong>4094</strong></td><td>avansuri pentru imobilizări necorporale</td><td><strong>404</strong></td></tr></tbody></table></div>
+<p><strong>La plata avansului (factura de avans), 50.000 lei + TVA 21%:</strong></p>
+<div class="ledger"><div class="led-row" id="m52-a1"><span class="led-d">4091</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">50.000</span><span class="led-note"></span></div><div class="led-row" id="m52-a2"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">10.500</span><span class="led-note"></span></div></div>
+<p><strong>La primirea facturii finale</strong>, factura conține două poziții — stornarea avansului și produsele efectiv facturate:</p>
+<div class="ledger"><div class="led-row" id="m53-a1"><span class="led-d">4091</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt neg">−30.000</span><span class="led-note">(storno avans, în roșu; parțial dacă avansul a fost parțial)</span></div></div>
+<p>Legea cere ca stornarea să se facă <strong>și pe 4091, și pe 401</strong> — pentru că efectul net trebuie să fie zero: 401 apare pe debit, 4091 pe credit, se anulează reciproc.</p>
+<p>Factura finală poate avea sold zero sau orice sold, în funcție de cât a acoperit avansul.</p>
+<p><strong>Avansurile în valută:</strong> pe avansuri <strong>nu</strong> se calculează diferențe de curs valutar. Stornarea avansului se face la <strong>cursul de la data înregistrării avansului</strong>. Avansurile sunt elemente nemonetare și nu se reevaluează.</p>
+<h3 id="11-5-regula-general-pe-clasa-40">11.5 Regula generală pe clasa 40</h3>
+<p>La toate înregistrările care țin de furnizori (40*) avem <strong>TVA deductibilă (4426)</strong> — și putem avea și <strong>taxare inversă</strong>.</p>
+<hr>
+<h3 id="11-6-contul-411-i-leg-tura-cu-veniturile">11.6 Contul 411 și legătura cu veniturile</h3>
+<p>411 intră în legătură fie cu conturi de <strong>venituri (70*)</strong>, fie cu <strong>venituri în avans (472)</strong>.</p>
+<p><strong>Care e diferența?</strong></p>
+<div class="tw"><table><thead><tr><th></th><th><strong>70*</strong> Venituri</th><th><strong>472</strong> Venituri în avans</th><th><strong>419</strong> Clienți-creditori</th></tr></thead><tbody><tr><td>Natură</td><td>cont de venit</td><td><strong>pasiv</strong> (datorie)</td><td><strong>pasiv</strong> (datorie)</td></tr><tr><td>Când</td><td>prestația <strong>este</strong> realizată, în perioada curentă</td><td>sumă facturată/încasată care privește <strong>perioade viitoare</strong></td><td><strong>avans</strong> încasat <strong>înainte</strong> de livrare/prestare</td></tr><tr><td>Exemplu</td><td>vânzare de marfă în luna curentă</td><td>chirie încasată anticipat pe 12 luni, abonamente</td><td>30% avans la o lucrare care nu a început</td></tr><tr><td>Cum dispare</td><td>se închide la 121</td><td><code>472 = 70*</code> pe măsura trecerii timpului</td><td>se stornează la factura finală</td></tr><tr><td>TVA</td><td>colectată la faptul generator</td><td>urmează regulile de exigibilitate</td><td><strong>colectată la încasarea avansului</strong></td></tr></tbody></table></div>
+<p>Conturi <strong>în oglindă</strong>:</p>
+<ul><li><code>409</code> (furnizori-debitori) ↔ <code>419</code> (clienți-creditori)</li><li><code>471</code> (cheltuieli în avans) ↔ <code>472</code> (venituri în avans)</li></ul>
+<p>O cheltuială financiară care se întinde pe 2 ani se înregistrează pe <strong>471</strong> și se reia eșalonat.</p>
+<h3 id="11-7-contul-418-clien-i-facturi-de-ntocmit">11.7 Contul 418 — Clienți, facturi de întocmit</h3>
+<p>Oglinda lui 408, pentru situația în care <strong>noi</strong> livrăm marfă pe aviz.</p>
+<p><strong>La livrarea pe aviz</strong> — marfă de 10.000 lei, TVA 21%:</p>
+<div class="ledger"><div class="led-row" id="m54-a1"><span class="led-d">418</span><span class="led-eq">=</span><span class="led-c">707</span><span class="led-amt">10.000</span><span class="led-note">(venitul)</span></div><div class="led-row" id="m54-a2"><span class="led-d">418</span><span class="led-eq">=</span><span class="led-c">4428</span><span class="led-amt">2.100</span><span class="led-note">(TVA neexigibilă)</span></div></div>
+<p>Creanța totală pe 418 este <strong>12.100</strong> lei.</p>
+<p><strong>La emiterea facturii finale:</strong></p>
+<div class="ledger"><div class="led-row" id="m55-a1"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">418</span><span class="led-amt">12.100</span><span class="led-note">(creanța trece pe client)</span></div><div class="led-row" id="m55-a2"><span class="led-d">4428</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">2.100</span><span class="led-note">(TVA devine exigibilă)</span></div></div>
+<p>Observă sensul: TVA-ul <strong>iese</strong> din 4428 (care era creditor) și <strong>intră</strong> în 4427. Nu invers.</p>
+<p>După aceste înregistrări, 418 și 4428 rămân cu sold zero pe operațiune, iar creanța reală de încasat este 12.100 lei pe 4111.</p>
+<h3 id="11-8-avans-ncasat-de-la-client">11.8 Avans încasat de la client</h3>
+<p>Lucrare de 100.000 lei, avans 30%, TVA 21%.</p>
+<p><strong>La încasarea avansului:</strong></p>
+<div class="ledger"><div class="led-row" id="m56-a1"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">419</span><span class="led-amt">30.000</span><span class="led-note"></span></div><div class="led-row" id="m56-a2"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">6.300</span><span class="led-note">(TVA se colectează la avans)</span></div></div>
+<p><strong>La livrarea produsului finit — storno avans:</strong></p>
+<div class="ledger"><div class="led-row" id="m57-a1"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">419</span><span class="led-amt neg">−30.000</span><span class="led-note"></span></div><div class="led-row" id="m57-a2"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt neg">−6.300</span><span class="led-note"></span></div></div>
+<p><strong>Produsul finit facturat:</strong></p>
+<div class="ledger"><div class="led-row" id="m58-a1"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">7015</span><span class="led-amt">100.000</span><span class="led-note"></span></div><div class="led-row" id="m58-a2"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">21.000</span><span class="led-note"></span></div></div>
+<p><strong>Factura finală de încasat:</strong> 121.000 − 36.300 = <strong>84.700 lei</strong>.</p>
+<div class="ledger"><div class="led-row" id="m59-a1"><span class="led-d">5121</span><span class="led-eq">=</span><span class="led-c">4111</span><span class="led-amt">84.700</span><span class="led-note">(încasarea prin bancă)</span></div></div>
+<hr>
+<h2 id="anexa-a-recapitulare-conturi-i-perechile-lor">Anexa A — Recapitulare: conturi și perechile lor</h2>
+<h3 id="stocuri-i-cheltuieli">Stocuri și cheltuieli</h3>
+<div class="tw"><table><thead><tr><th>Stoc</th><th>Cheltuială</th><th>Observație</th></tr></thead><tbody><tr><td>301 Materii prime</td><td>601</td><td>producție</td></tr><tr><td>3021 Materiale auxiliare</td><td>6021</td><td></td></tr><tr><td>3022 Combustibili</td><td>6022</td><td></td></tr><tr><td>3023 Materiale pentru ambalat</td><td>6023</td><td></td></tr><tr><td>3024 Piese de schimb</td><td>6024</td><td>poate fi transferat în 371 dacă se revinde</td></tr><tr><td>3028 Alte materiale consumabile</td><td>6028</td><td></td></tr><tr><td>303 Obiecte de inventar</td><td>603</td><td><strong>+ Debit 8035 simultan</strong></td></tr><tr><td>371 Mărfuri</td><td>607</td><td></td></tr><tr><td>381 Ambalaje</td><td>608</td><td></td></tr></tbody></table></div>
+<h3 id="produc-ie-i-venituri">Producție și venituri</h3>
+<div class="tw"><table><thead><tr><th>Stoc produs</th><th>Venit variație</th><th>Venit vânzare</th></tr></thead><tbody><tr><td>331 Produse în curs</td><td>711</td><td>—</td></tr><tr><td>332 Servicii în curs</td><td>712</td><td>—</td></tr><tr><td>341 Semifabricate</td><td>711</td><td>702</td></tr><tr><td>345 Produse finite</td><td>711</td><td><strong>7015</strong></td></tr><tr><td>346 Produse reziduale</td><td>711</td><td>703</td></tr><tr><td>347 Produse agricole</td><td>711</td><td>7017</td></tr></tbody></table></div>
+<h3 id="n-curs-de-aprovizionare">În curs de aprovizionare</h3>
+<div class="ledger"><div class="led-row" id="m60-a1"><span class="led-d">321</span><span class="led-eq">=</span><span class="led-c">301</span><span class="led-amt">322</span><span class="led-note">→ 302      323 → 303</span></div><div class="led-row" id="m60-a2"><span class="led-d">326</span><span class="led-eq">=</span><span class="led-c">361</span><span class="led-amt">327</span><span class="led-note">→ 371      328 → 381</span></div></div>
+<h3 id="tva">TVA</h3>
+<pre class="cod">4423  TVA de plată            4426  TVA deductibilă      4428  TVA neexigibilă
+4424  TVA de recuperat        4427  TVA colectată</pre>
+<h3 id="extrabilan-iere">Extrabilanțiere</h3>
+<pre class="cod">8035  Stocuri de natura obiectelor de inventar date în folosință</pre>
+<hr>
+<h2 id="anexa-b-checklist-practic-de-rulat-la-fiecare-cl">Anexa B — Checklist practic (de rulat la fiecare client)</h2>
+<p><strong>La deschiderea dosarului</strong></p>
+<ul><li>[ ] Metoda de evidență a stocurilor (permanent / intermitent) e stabilită și scrisă în politicile contabile?</li><li>[ ] Gestiunile sunt separate pe: cotă de TVA (11 / 21) și tip (en gros / amănuntul)?</li><li>[ ] Valoarea de înregistrare în 371 = valoarea din softul de gestiune al clientului? (taxe vamale, transport)</li><li>[ ] Clientul are contract cu un OIREP pentru ambalaje? Cine depune declarația la AFM?</li><li>[ ] Softul listează obiectele de inventar date în folosință (8035) pentru inventariere?</li><li>[ ] Softul verifică automat codul de TVA al partenerilor la ANAF? Și TVA la încasare, la închidere?</li></ul>
+<p><strong>La fiecare factură de la furnizor nou</strong></p>
+<ul><li>[ ] Partener înregistrat în scopuri de TVA la <strong>data facturii</strong>? (registru ANAF, nu Google)</li><li>[ ] Partener UE — cod valid în VIES?</li><li>[ ] Dacă apare „taxare inversă&quot;: ambii parteneri sunt plătitori de TVA?</li><li>[ ] Dacă nu e cota standard: e înscris articolul de lege pe factură?</li><li>[ ] Import: taxele vamale și transportul sunt incluse în costul mărfii?</li></ul>
+<p><strong>La închiderea lunii</strong></p>
+<ul><li>[ ] Rulaj 4426 = TVA din jurnalul de cumpărări?</li><li>[ ] Rulaj 4427 = TVA din jurnalul de vânzări?</li><li>[ ] Ajustările fără document (50% auto, lipsă la inventar) apar în jurnale?</li><li>[ ] <code>707 − 607 = Rd 378</code>?</li><li>[ ] <code>Sold 371 × cotă/(100+cotă) = Sold 4428</code>, pe fiecare gestiune?</li><li>[ ] 4426 și 4427 s-au regularizat în 4423/4424?</li><li>[ ] 331 e evaluat la cost de producție complet (nu doar materiale)?</li><li>[ ] Există 602x fără 302x corespondent? (semn că s-a trecut direct pe cheltuială)</li></ul>
+<hr>
+<h2 id="anexa-c-ce-am-corectat-fa-de-noti-ele-originale">Anexa C — Ce am corectat față de notițele originale</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>Notița originală</th><th>Corecția</th></tr></thead><tbody><tr><td>1</td><td><code>301 = 401</code> cu TVA, fără 4426</td><td>formula compusă: <code>% = 401</code> cu 301 și 4426</td></tr><tr><td>2</td><td>Taxare inversă: <code>301 = 401 + 4427</code></td><td><code>301 = 401</code> <strong>și separat</strong> <code>4426 = 4427</code></td></tr><tr><td>3</td><td>„nedepunere D300 <strong>2 luni</strong> consecutive&quot;</td><td><strong>6 luni</strong> consecutive / 2 trimestre (art. 316 alin. 11 lit. d)</td></tr><tr><td>4</td><td>„verificăm pe Google&quot;</td><td>registrele oficiale ANAF + VIES</td></tr><tr><td>5</td><td>„301 cuplat cu <strong>704</strong> și 7015&quot;</td><td>704 = servicii prestate; corect <strong>7015</strong> și 711</td></tr><tr><td>6</td><td>„&gt;1 an durată, chiar dacă &lt;5.000 ⟹ mijloc fix&quot;</td><td>condițiile sunt <strong>cumulative</strong>; sub prag = obiect de inventar</td></tr><tr><td>7</td><td>prag 5.000 fără context</td><td>OUG 8/2026, de la 25.02.2026, <strong>prag fiscal</strong>, cu regim tranzitoriu</td></tr><tr><td>8</td><td>audit: „balanța analitică la <strong>401</strong> — debit achiziții, credit consum&quot;</td><td>corelația debit=intrări / credit=consum e la <strong>conturile de stoc 3xx</strong></td></tr><tr><td>9</td><td>lipsea <code>302 = 322</code> din corespondențele 32x</td><td>tabel complet 321–328</td></tr><tr><td>10</td><td>„taxare inversă: și furnizorul și cumpărătorul nu mai deduc&quot;</td><td>furnizorul <strong>nu colectează</strong>; beneficiarul înregistrează <strong>și</strong> 4426 <strong>și</strong> 4427</td></tr><tr><td>11</td><td>„imobile noi vândute între societăți&quot;</td><td>construcții/terenuri taxabile <strong>prin lege sau prin opțiune</strong></td></tr><tr><td>12</td><td><code>331/332</code> cu <code>711/<strong>722</strong></code></td><td>perechea lui 332 este <strong>712</strong>; 722 = producția de imobilizări corporale</td></tr><tr><td>13</td><td>„soft făcut cu salariații&quot; la 331/332</td><td>software intern = <strong>233 → 721 → 203/208</strong>, nu stoc</td></tr><tr><td>14</td><td><code>sticlă: 301 = 601 50k</code></td><td>achiziția e <code>301 = 401</code>; consumul e <code>601 = 301</code></td></tr><tr><td>15</td><td><code>4111 = ?</code> la vânzarea produsului finit</td><td><code>4111 = % (7015 + 4427)</code> <strong>plus</strong> <code>711 = 345</code></td></tr><tr><td>16</td><td>4424 „de rambursat&quot;</td><td>denumire oficială: <strong>TVA de recuperat</strong></td></tr><tr><td>17</td><td>„clasa 6 și 7 fără sold, <strong>excluzând 711</strong>&quot;</td><td>711 se închide la 121 ca oricare; particularitatea e că are rulaje bidirecționale</td></tr><tr><td>18</td><td>lipsă la inventar: „colectez TVA&quot;</td><td>depinde: imputabilă → colectare; neimputabilă → <strong>ajustare</strong></td></tr><tr><td>19</td><td>4428 la amănuntul explicat ca „dau TVA când încasez&quot;</td><td>exigibilitatea e <strong>la vânzare</strong>, nu la încasare — altceva decât TVA la încasare</td></tr><tr><td>20</td><td>Ex. 2 (11%): <code>4428 = 0,44</code> și <code>371 = 29,04k</code></td><td><code>4428 = 2.640</code>, <code>371 = <strong>26.640</strong></code></td></tr><tr><td>21</td><td>„2 lei/kg pentru cantitățile de ambalaje&quot;</td><td>2 lei/kg <strong>doar pe diferența</strong> neatinsă față de obiectivul de reciclare</td></tr><tr><td>22</td><td>346 „mai departe trebuie să fac factură&quot;</td><td>factura către colectorul de deșeuri intră la <strong>taxare inversă</strong></td></tr><tr><td>23</td><td>„să vindem integral marfa — ???&quot;</td><td>rezolvat integral în 8.6</td></tr></tbody></table></div>
+<hr>
+<h3 id="corec-ii-la-materialul-din-19-08-2026">Corecții la materialul din 19.08.2026</h3>
+<p>Cifrele fiecărui exemplu din sursă au fost refăcute. Cinci din șase se leagă exact:</p>
+<p>gestiunea la preț cu amănuntul (26.640 la intrare și la descărcare), avansul de client</p>
+<p>(121.000 − 36.300 = 84.700), vânzarea mijlocului fix (38.000 + 12.000 = valoarea de</p>
+<p>intrare), supraîncasarea (4.132,23 + 867,77 = 5.000) și închiderea 408/4428 la zero.</p>
+<p>Mai jos, ce nu s-a legat.</p>
+<div class="tw"><table><thead><tr><th>#</th><th>În sursă scria</th><th>Corect</th><th>De ce contează</th></tr></thead><tbody><tr><td>1</td><td><code>391</code> — „Ajustări pentru deprecierea mărfurilor”</td><td><strong><code>397</code></strong></td><td>În OMFP 1802/2014, <code>391</code> e pentru materii prime, iar <code>397</code> pentru mărfuri. Planul nostru le are pe amândouă, denumite corect, iar F-307 folosea deja <code>397</code>. Simbolul din sursă intra în coliziune directă cu ce aveam.</td></tr><tr><td>2</td><td>avans furnizor 50.000, stornat cu <code>4091 = 401 · −30.000</code></td><td>storno pe suma avansului, <strong>plus <code>4426 = 401 · −10.500</code></strong></td><td>Sursa sare de la 50.000 la 30.000 fără explicație, iar stornarea TVA lipsește cu totul. Fără ea rămâne TVA dedusă pe un avans anulat.</td></tr><tr><td>3</td><td>„La încasarea avansului” urmat doar de <code>4111 = 419</code> și <code>4111 = 4427</code></td><td>plus <strong><code>5121 = 4111 · 36.300</code></strong></td><td>Titlul spune încasare, dar dedesubt sunt doar înregistrările de facturare. Fără pasul de încasare, 4111 rămâne cu sold și fluxul nu are stare terminală — ceea ce poarta 2 refuză.</td></tr><tr><td>4</td><td><code>408</code> și <code>418</code> — „bifuncționale”</td><td><code>408</code> = <strong>P</strong>, <code>418</code> = <strong>A</strong></td><td>Observația practică e corectă: pot ajunge cu sold contrar. Dar ce descrie sursa nu e <em>funcțiunea</em> contului, e <strong>rolul în flux</strong> — intermediar/clarificare. Distincția e chiar grila acestui sistem, iar amestecarea lor face 408 să pară că are voie să stea oricum.</td></tr><tr><td>5</td><td>§2 la cota de <strong>11%</strong>, restul materialului la <strong>21%</strong></td><td>ambele corecte, dar motivul lipsea</td><td>Fără explicație, cititorul poate lua 11% drept „cota la mărfuri”. 11% e cota redusă (alimente, cărți, medicamente), 21% cea standard — L. 141/2025.</td></tr><tr><td>6</td><td>„Efectul pe rezultat: −20 +10 +6 = <strong>−4 lei</strong>”</td><td>−4 e efectul <strong>lunii vânzării</strong></td><td>Cumulat, pierderea reală e −10: bun cumpărat cu 20, vândut cu 10. Cei 6 lei ai ajustării au lovit rezultatul în luna constituirii. Afirmația nu e greșită, e neterminată — și fără precizare pare că pierderea totală ar fi 4.</td></tr></tbody></table></div>
+<p>Punctele 1–3 sunt erori de conținut. Punctul 4 e o confuzie de vocabular cu efect real</p>
+<p>asupra controlului. Punctele 5–6 sunt afirmații incomplete, nu greșite.</p>
+<h2 id="anexa-d-r-mase-deschise">Anexa D — Rămase deschise</h2>
+<ol><li><strong>Metoda de calculație a costurilor</strong> — notița menționa „metoda pe comenzi&quot; ca fiind des utilizată. De clarificat: care sunt celelalte metode acceptate de OMFP 1802/2014 și în ce situații se alege fiecare (pe faze, pe produs, standard-cost)?</li><li><strong>Lipsă la inventar</strong> — care e practica default în cabinet: colectare sau ajustare? Ce set de documente se cere clientului (proces-verbal, decizie de imputare, notă de constatare)?</li><li><strong>446 vs. 462 la comisionarul vamal</strong> — care variantă e standardul cabinetului și de ce?</li><li><strong>Certificat de amânare la plata TVA în vamă</strong> — se verifică sistematic dacă clienții importatori îndeplinesc condițiile?</li><li><strong>Termenul curent de depunere a declarației la AFM</strong> — s-a modificat de mai multe ori (lunar / trimestrial). De confirmat forma în vigoare.</li><li><strong>Notița „Fișierul atașat arată corelații importante între conturi&quot;</strong> și marcajul <strong>„task&quot;</strong> — au rămas fără conținut în notițele originale. De recuperat de la formator ce fișier / ce sarcină era.</li><li><strong>Durata de aplicare a taxării inverse</strong> pentru cereale și electronice — derogarea UE avea termen 31.12.2026. De verificat dacă a fost prelungită.</li></ol>
+<hr>
+<h2 id="anexa-e-baza-legal-citat">Anexa E — Baza legală citată</h2>
+<div class="tw"><table><thead><tr><th>Act</th><th>Ce reglementează</th></tr></thead><tbody><tr><td>Legea 227/2015 — Codul fiscal</td><td>art. 28 (amortizare), 270 (livrări asimilate), 292 (scutiri imobile), 294 (scutiri LIC/export), 298 (limitare 50% auto), 304–305 (ajustări), 316 (înregistrare/anulare TVA), 319 (facturare), <strong>331 (taxare inversă)</strong></td></tr><tr><td><strong>OUG 8/2026</strong> (M.Of. 147/25.02.2026)</td><td>majorarea pragului mijloacelor fixe la 5.000 lei</td></tr><tr><td><strong>Legea 141/2025</strong> (M.Of. 699/25.07.2025)</td><td>cotele de TVA 21% / 11%, de la 01.08.2025</td></tr><tr><td>OMFP 1802/2014</td><td>reglementările contabile, planul de conturi, costul de achiziție și de producție</td></tr><tr><td>OUG 196/2005 + Legea 249/2015</td><td>Fondul pentru mediu, ambalaje, contribuția de 2 lei/kg</td></tr><tr><td>Ordinul 3769/2015</td><td>formularul D394</td></tr></tbody></table></div>
+<hr>
+<p><em>Document revizuit pe baza notițelor din 14.08.2026. Verificările legislative au fost făcute la data revizuirii — reconfirmă orice prag sau cotă înainte de aplicare la un caz concret.</em></p>
+<hr>
+<h2 id="anexa-f-erori-din-noti-ele-brute-nereintroduse">Anexa F — Erori din notițele brute, NEreintroduse</h2>
+<p>Erorile de mai jos existau în notițele brute și au fost corectate</p>
+<p>la revizuire. Sunt enumerate aici ca să nu fie reintroduse dacă cineva reia notițele</p>
+<p>originale.</p>
+<div class="tw"><table><thead><tr><th>Eroare în notițele brute</th><th>Corect</th></tr></thead><tbody><tr><td><code>7815</code> ca reluare a amortizării</td><td>Contul nu există. Amortizarea se înregistrează <code>6811 = 2805/2808</code></td></tr><tr><td>Taxele vamale pe <code>635</code></td><td>Se capitalizează în costul bunului (OMFP 1802/2014)</td></tr><tr><td>Softul dezvoltat intern prin <code>711</code></td><td>Imobilizare necorporală: <code>233 → 721 → 203/208</code></td></tr><tr><td>Salariile capitalizate în <code>231</code> prin <code>711</code></td><td>Prin <code>722</code> — producție de imobilizări corporale</td></tr><tr><td><code>2114</code> ca mobilier</td><td>Contul este <code>214</code></td></tr><tr><td>CASCO nedeductibil pe <code>615</code></td><td>Pe <code>613.NED</code> — partea nedeductibilă a asigurării</td></tr><tr><td><code>1067</code> la leasing</td><td>Contul este <code>167</code></td></tr><tr><td><code>4424</code> la corecția TVA nedeductibilă</td><td>Contul este <code>4426</code></td></tr></tbody></table></div>
+<hr>
+<p><em>Singurul care avea deja anexele denumite. Primește Anexa F, care exista doar ca notă în foaia Legendă a workbook-ului.</em></p>
+</main></div></body></html>

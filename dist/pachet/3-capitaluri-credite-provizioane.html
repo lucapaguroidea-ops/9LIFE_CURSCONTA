@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ro"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capitaluri, credite, leasing și provizioane</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F8F9F7; --surface:#FFFFFF; --sunk:#F1F4F1;
+  --ink:#1A2421; --ink-2:#3D4A45; --muted:#6B7671;
+  --accent:#1B5E44; --accent-soft:#E6EFEA; --accent-line:#B9D2C6;
+  --storno:#A6342B;
+  --rule:#DDE2DE; --rule-soft:#EAEEEB;
+  --shadow:0 1px 2px rgba(26,36,33,.05), 0 8px 24px -12px rgba(26,36,33,.14);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+    --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+    --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+    --storno:#E08278;
+    --rule:#2A3430; --rule-soft:#222B27;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+  --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+  --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+  --storno:#E08278;
+  --rule:#2A3430; --rule-soft:#222B27;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased}
+.masthead{border-bottom:1px solid var(--rule); background:var(--surface); padding:56px 28px 40px}
+.mast-in{max-width:1180px; margin:0 auto; display:flex; flex-direction:column; gap:16px}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0}
+h1{font-family:Spectral,Georgia,"Times New Roman",serif; font-weight:600;
+  font-size:clamp(2rem,4.6vw,3.15rem); line-height:1.12; letter-spacing:-.015em;
+  margin:0; text-wrap:balance; max-width:22ch}
+.lede{color:var(--muted); font-size:1.02rem; margin:0; max-width:66ch}
+.wrap{max-width:1180px; margin:0 auto; padding:0 28px; display:grid;
+  grid-template-columns:232px minmax(0,1fr); gap:56px; align-items:start}
+nav.rail{position:sticky; top:24px; padding:36px 0 40px; max-height:100vh; overflow-y:auto}
+.rail-h{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.66rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+  margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--rule)}
+.rail ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px}
+.rail a{display:grid; grid-template-columns:24px 1fr; gap:8px; align-items:baseline;
+  text-decoration:none; color:var(--ink-2); padding:6px 8px; border-radius:5px;
+  font-size:.845rem; line-height:1.35; transition:background .12s,color .12s}
+.rail a:hover{background:var(--sunk); color:var(--accent)}
+.rail a:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+.tnum{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  color:var(--muted); font-variant-numeric:tabular-nums}
+main{padding:36px 0 96px; min-width:0; max-width:74ch}
+h2{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.62rem; line-height:1.22;
+  letter-spacing:-.01em; margin:44px 0 18px; text-wrap:balance;
+  padding-top:20px; border-top:1px solid var(--rule-soft); scroll-margin-top:20px}
+h3{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.14rem;
+  margin:30px 0 10px; scroll-margin-top:20px}
+h4{font-size:1rem; margin:22px 0 8px; scroll-margin-top:20px}
+p{margin:0 0 14px; max-width:72ch}
+ul,ol{margin:0 0 16px; padding-left:1.2rem; max-width:72ch}
+li{margin-bottom:7px}
+li::marker{color:var(--muted)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.875em;
+  background:var(--sunk); border:1px solid var(--rule-soft); border-radius:4px;
+  padding:1px 5px; color:var(--ink)}
+hr{border:0; border-top:1px solid var(--rule); margin:32px 0}
+pre.cod{background:var(--sunk); border:1px solid var(--rule); border-radius:7px;
+  padding:14px 16px; overflow-x:auto; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; color:var(--ink-2)}
+.ledger{margin:0 0 20px; border:1px solid var(--rule); border-left:3px solid var(--accent);
+  border-radius:0 7px 7px 0; background:var(--surface); overflow-x:auto; box-shadow:var(--shadow)}
+.led-row{display:grid; grid-template-columns:6.5em 1.2em 6.5em 8.5em 1fr; gap:10px;
+  align-items:baseline; padding:8px 16px; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; white-space:nowrap; scroll-margin-top:20px}
+.led-row+.led-row{border-top:1px solid var(--rule-soft)}
+.led-row:target{background:var(--accent-soft)}
+.led-d,.led-c{color:var(--ink); font-weight:500}
+.led-eq{color:var(--muted)}
+.led-amt{text-align:right; font-variant-numeric:tabular-nums; color:var(--accent); font-weight:500}
+.led-amt.neg{color:var(--storno)}
+.led-note{color:var(--muted); font-size:.9em; white-space:normal;
+  font-family:"IBM Plex Sans",sans-serif}
+.note{border-left:3px solid var(--accent-line); background:var(--sunk);
+  padding:13px 18px; border-radius:0 6px 6px 0; margin:0 0 20px; max-width:72ch}
+.note p{margin:0; color:var(--ink-2); font-size:.94rem}
+.tw{overflow-x:auto; margin:0 0 22px; border:1px solid var(--rule); border-radius:7px;
+  background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem}
+thead th{text-align:left; font-family:"IBM Plex Mono",ui-monospace,monospace; font-weight:500;
+  font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; color:var(--muted);
+  padding:11px 14px; border-bottom:1px solid var(--rule); background:var(--sunk)}
+tbody td{padding:10px 14px; border-bottom:1px solid var(--rule-soft);
+  vertical-align:top; color:var(--ink-2)}
+tbody tr:nth-child(even){background:var(--accent-soft)}
+tbody tr:last-child td{border-bottom:none}
+tbody td code{background:transparent; border:none; padding:0}
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr; gap:0; padding:0 22px}
+  nav.rail{position:static; max-height:none; padding:28px 0 8px; border-bottom:1px solid var(--rule)}
+  .rail ol{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:2px}
+  main{padding-top:26px}
+  .masthead{padding:40px 22px 30px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style></head><body>
+<header class="masthead"><div class="mast-in">
+<p class="eyebrow">Notițe de curs · contabilitate</p>
+<h1>Capitaluri, credite, leasing și provizioane</h1>
+<p class="lede">Surse: training 07.08.2026 · adâncit cu 19.08.2026 — versiune revizuită</p>
+</div></header>
+<div class="wrap">
+<nav class="rail" aria-label="Cuprins"><p class="rail-h">Cuprins</p><ol><li><a href="#cum-cite-ti-acest-document"><span class="tnum">1</span><span>Cum citești acest document</span></a></li><li><a href="#0-sinteza-corec-iilor-importante"><span class="tnum">2</span><span>0. Sinteza corecțiilor importante</span></a></li><li><a href="#1-capitaluri-proprii-clasa-10"><span class="tnum">3</span><span>1. Capitaluri proprii – clasa 10</span></a></li><li><a href="#2-pierderea-contabil-vs-pierderea-fiscal"><span class="tnum">4</span><span>2. Pierderea contabilă vs. pierderea fiscală</span></a></li><li><a href="#3-documente-justificative-i-corectarea-erorilor"><span class="tnum">5</span><span>3. Documente justificative și corectarea erorilor</span></a></li><li><a href="#4-termene-de-depunere-aten-ie-s-a-schimbat"><span class="tnum">6</span><span>4. Termene de depunere ⚠️ ATENȚIE – S-A SCHIMBAT</span></a></li><li><a href="#5-credite-bancare-n-valut-162x"><span class="tnum">7</span><span>5. Credite bancare în valută (162x)</span></a></li><li><a href="#6-provizioane-151x"><span class="tnum">8</span><span>6. Provizioane (151x)</span></a></li><li><a href="#7-leasing"><span class="tnum">9</span><span>7. Leasing</span></a></li><li><a href="#8-an-fiscal-modificat"><span class="tnum">10</span><span>8. An fiscal modificat</span></a></li><li><a href="#9-principii-de-lucru-partea-final-din-noti-e"><span class="tnum">11</span><span>9. Principii de lucru (partea finală din notițe) ✅</span></a></li><li><a href="#anexa-b-checklist-practic"><span class="tnum">12</span><span>Anexa B — Checklist practic</span></a></li><li><a href="#anexa-d-r-mase-deschise"><span class="tnum">13</span><span>Anexa D — Rămase deschise</span></a></li><li><a href="#anexa-e-baza-legal-citat"><span class="tnum">14</span><span>Anexa E — Baza legală citată</span></a></li></ol></nav>
+<main>
+<h3 id="surse-training-07-08-2026-ad-ncit-cu-19-08-2026-">Surse: training 07.08.2026 · adâncit cu 19.08.2026 — versiune revizuită</h3>
+<hr>
+<h2 id="cum-cite-ti-acest-document">Cum citești acest document</h2>
+<div class="tw"><table><thead><tr><th>Marcaj</th><th>Semnificație</th></tr></thead><tbody><tr><td>✅</td><td>Notița originală era corectă — doar reformulată/completată</td></tr><tr><td>⚠️</td><td><strong>Eroare în notița originală</strong> — corectată aici, cu explicație</td></tr><tr><td>➕</td><td>Completare (lucru care lipsea, dar era necesar ca raționamentul să stea în picioare)</td></tr><tr><td>❓</td><td>Rămas deschis — de clarificat cu formatorul (vezi Anexa D)</td></tr></tbody></table></div>
+<div class="note"><p><strong>Notă de metodă:</strong> verificările s-au făcut față de OMFP 1802/2014, Legea contabilității 82/1991, Legea societăților 31/1990 (cu modificările din Legea 239/2025) și Codul fiscal la zi (Legea 141/2025, Legea 239/2025, OUG 8/2026). Punctele marcate <code>❓</code> sunt cele unde notița e ambiguă sau unde practica diferă – merită reluate la training.</p></div>
+<hr>
+<h2 id="0-sinteza-corec-iilor-importante">0. Sinteza corecțiilor importante</h2>
+<div class="tw"><table><thead><tr><th>#</th><th>În notiță</th><th>Corect / de reținut</th></tr></thead><tbody><tr><td>1</td><td>„2027 depuneri: 101 în Martie&quot;</td><td>⚠️ <strong>Termenul de 25 iunie a fost permanentizat</strong> pentru majoritatea plătitorilor de impozit pe profit. Pentru anul fiscal 2026 → <strong>25 iunie 2027</strong>, nu martie.</td></tr><tr><td>2</td><td><code>129 = 1171</code> (închiderea repartizării)</td><td>⚠️ Corect este <strong><code>121 = 129</code></strong>.</td></tr><tr><td>3</td><td>„121 = 250 lei; 129 = 1061 → 125 lei&quot;</td><td>⚠️ 5% din 250 = 12,50 lei. Cifrele se leagă doar dacă <strong>profitul era 2.500 lei</strong>.</td></tr><tr><td>4</td><td>„când vine factura de la avocat, o înregistrez pe 151&quot;</td><td>⚠️ <strong>Nu.</strong> Factura se înregistrează normal pe cheltuială (628 = 401), iar provizionul se <strong>reia separat</strong> (1511 = 7812).</td></tr><tr><td>5</td><td>„1067 – banii datorați firmei de leasing&quot;</td><td>⚠️ Typo: <strong>167</strong>. (1067 nici nu mai există în planul de conturi actual.)</td></tr><tr><td>6</td><td>„4426 = 4424 (de roșu)&quot;</td><td>⚠️ Typo: contrapartida e <strong>404</strong>, nu 4424. Sau, mai simplu: <code>635/6588 = 4426</code>.</td></tr><tr><td>7</td><td>„615 neded&quot; pentru CASCO</td><td>⚠️ 615 = <em>Cheltuieli cu pregătirea personalului</em>. Corect: <strong>613 analitic nedeductibil</strong> (sau 6588).</td></tr><tr><td>8</td><td>CASCO: „50% din 100 lei&quot;</td><td>⚠️ În exemplu CASCO era <strong>20 lei</strong> → nedeductibil 10 lei, nu 50.</td></tr><tr><td>9</td><td>„unii reduc avansul cu 231&quot;</td><td>⚠️ 231 = imobilizări <strong>în curs de execuție</strong>. Avansul pentru imobilizări corporale = <strong>4093</strong>.</td></tr><tr><td>10</td><td>„lunar / obligatoriu la 3 luni&quot; (reevaluare valută)</td><td>⚠️ Reevaluarea elementelor monetare în valută este <strong>lunară</strong>, obligatoriu (OMFP 1802/2014). Trimestrial e prea rar.</td></tr><tr><td>11</td><td>secțiunea „leasing operațional&quot;</td><td>⚠️ Descrierea din notiță (bun la mijloace fixe, 167, amortizare) este de fapt <strong>leasing financiar</strong>. Vezi cap. 7.</td></tr><tr><td>12</td><td>—</td><td>➕ <strong>Lipsește complet</strong> limita de amortizare de <strong>1.500 lei/lună</strong> pentru autoturismele M1 (art. 28 alin. (14) CF) – are impact direct pe impozitul pe profit.</td></tr><tr><td>13</td><td>„capitaluri proprii &gt; 50% din capital social&quot;</td><td>✅ Corect, dar temeiul s-a schimbat: <strong>Legea 239/2025</strong> (art. 67 alin. (2³) și art. 69¹ din L31/1990), în vigoare din 18.12.2025. Vezi cap. 1.2.</td></tr><tr><td>14</td><td>1175</td><td>✅ <strong>Corect</strong> – 1175 este contul valabil din 2015 (a înlocuit 1065).</td></tr></tbody></table></div>
+<hr>
+<h2 id="1-capitaluri-proprii-clasa-10">1. Capitaluri proprii – clasa 10</h2>
+<h3 id="1-1-capital-social-subscriere-v-rsare">1.1 Capital social: subscriere → vărsare</h3>
+<div class="ledger"><div class="led-row" id="m1-a1"><span class="led-d">456</span><span class="led-eq">=</span><span class="led-c">1011</span><span class="led-amt"></span><span class="led-note">subscrierea (creanța față de asociați)</span></div><div class="led-row" id="m1-a2"><span class="led-d">5121</span><span class="led-eq">=</span><span class="led-c">456</span><span class="led-amt"></span><span class="led-note">vărsarea efectivă</span></div><div class="led-row" id="m1-a3"><span class="led-d">1011</span><span class="led-eq">=</span><span class="led-c">1012</span><span class="led-amt"></span><span class="led-note">trecerea la „subscris și vărsat&quot;</span></div></div>
+<ul><li>✅ <strong>Analitice distincte pe fiecare asociat</strong> la 456 – bună practică obligatorie în practică (altfel nu poți justifica cine ce datorează).</li><li>✅ <strong>Răspuns la (Q – ONRC):</strong> momentul <code>1011 → 1012</code> este <strong>vărsarea efectivă</strong>, nu înregistrarea la ONRC. Înregistrarea la Registrul Comerțului validează juridic majorarea/constituirea (deci naște creanța 456), dar transformarea în „vărsat&quot; urmează depunerii efective a banilor. Ordinea practică la o majorare: hotărâre AGA → depunere ONRC → <code>456 = 1011</code> → încasare → <code>5121 = 456</code> + <code>1011 = 1012</code>.</li></ul>
+<h3 id="1-1-bis-capital-social-minim-reguli-noi-din-2026">➕ 1.1.bis Capital social minim – reguli noi din 2026 (aici era „5k cat (Q)&quot;)</h3>
+<p>Legea 239/2025 (în vigoare 18.12.2025) a reintrodus praguri minime:</p>
+<div class="tw"><table><thead><tr><th>Situație</th><th>Capital social minim</th><th>Termen</th></tr></thead><tbody><tr><td>Firmă nou-înființată (din 2026)</td><td><strong>500 lei</strong></td><td>la înființare</td></tr><tr><td>Firmă existentă, CA netă <strong>&gt; 400.000 lei</strong></td><td><strong>5.000 lei</strong></td><td>~decembrie 2027</td></tr><tr><td>Firmă existentă, CA netă ≤ 400.000 lei</td><td>fără obligație expresă deocamdată</td><td>–</td></tr><tr><td>Depășire prag în cursul unui an</td><td>5.000 lei</td><td>finalul exercițiului următor</td></tr></tbody></table></div>
+<ul><li>Sancțiune pentru neconformare: risc de <strong>dizolvare judiciară</strong>; se discută și riscul de inactivare / anulare cod TVA.</li><li>➕ Există mecanism de „clichet&quot;: capitalul nu mai poate fi redus sub minimul legal.</li><li>💡 Recomandare practică: fă o listă cu clienții care au depășit 400.000 lei la 31.12.2025 și programează majorările – nu lăsa pe ultima sută de metri (act constitutiv + hotărâre AGA + ONRC + <strong>vărsare efectivă în cont</strong>).</li></ul>
+<h3 id="1-2-corela-ia-activ-net-capital-social-reguli-no">1.2 Corelația activ net ↔ capital social ⚠️ REGULI NOI</h3>
+<p>Aici era întrebarea din notiță („(Q – creditare de societate, dividende / dividende interimare)&quot;). Răspunsul e <strong>Legea 239/2025</strong>, care a modificat Legea 31/1990:</p>
+<p><strong>Când activul net (= capitaluri proprii) &lt; ½ din capitalul social subscris:</strong></p>
+<ol><li><strong>Nu se pot distribui dividende</strong> (nici anuale, nici interimare) până la reîntregirea activului net.</li><li><strong>Nu se pot restitui împrumuturile</strong> primite de la asociați / alte finanțări de la persoane afiliate. → Acesta e răspunsul la „creditare de societate&quot;.</li><li>Societatea are <strong>obligația de reconstituire</strong> a activului net până la cel puțin ½ din capitalul social, <strong>până la încheierea exercițiului financiar ulterior</strong> celui în care s-au constatat pierderile.</li><li>Contravenții: amenzi în paliere (ordin de mărime <strong>10.000 – 300.000 lei</strong>, în funcție de faptă). Asociatul căruia i s-au restituit împrumuturi poate răspunde <strong>solidar</strong> cu societatea pentru obligațiile fiscale restante, în limita sumelor restituite.</li></ol>
+<p><strong>Chiar dacă activul net e OK</strong>, dividendele din profitul curent se pot distribui doar <strong>după</strong>:</p>
+<ul><li>constituirea rezervei legale,</li><li><strong>acoperirea integrală a pierderii contabile reportate</strong>,</li><li>îndeplinirea cerințelor statutare.</li></ul>
+<div class="note"><p>⚠️ Practic: „am profit + am cash&quot; <strong>nu mai e suficient</strong>. Verificarea se face pe bilanț, nu pe cont. ANAF a anunțat (mai 2026) verificări etapizate începând cu situațiile financiare pe 2025.</p></div>
+<p><code>❓</code> De clarificat la training: cum se documentează concret „reîntregirea activului net&quot; (conversie creanță asociat în capital social? aport nou? renunțare la creanță – atenție, venit impozabil).</p>
+<h3 id="1-3-rezerve-din-reevaluare-105-i-surplusul-reali">1.3 Rezerve din reevaluare (105) și surplusul realizat (1175)</h3>
+<p>✅ Notița e corectă – 1175 e contul valabil (a înlocuit 1065 de la 01.01.2015, prin OMFP 1802/2014).</p>
+<div class="ledger"><div class="led-row" id="m2-a1"><span class="led-d">105</span><span class="led-eq">=</span><span class="led-c">1175</span><span class="led-amt"></span><span class="led-note">transferul surplusului realizat</span></div></div>
+<p>Surplusul se consideră realizat:</p>
+<ul><li><strong>integral</strong>, la scoaterea din evidență a activului; sau</li><li><strong>treptat, pe măsura amortizării</strong> – cu suma = amortizarea pe valoarea reevaluată <strong>minus</strong> amortizarea pe costul inițial.</li></ul>
+<p><strong>Fiscal (era nota „cheltuiala cu amortizarea deductibilă&quot;):</strong> amortizarea aferentă reevaluării <strong>este deductibilă</strong>, dar rezerva din reevaluare <strong>se impozitează concomitent</strong> cu deducerea amortizării fiscale (respectiv la scoaterea din gestiune). Practic e o operațiune neutră – dar trebuie urmărită, altfel apar diferențe la D101.</p>
+<ul><li>✅ <strong>1175 cu analitice</strong> – pe fiecare activ / fiecare reevaluare. Fără asta nu poți proba nici impozitarea corelată, nici ce sumă e distribuibilă.</li><li>➕ Restricție: sumele din 1175 <strong>nu pot majora capitalul social</strong> (art. 210 alin. (3) L31/1990). Pot însă acoperi pierderi contabile.</li></ul>
+<h3 id="1-4-rezerva-legal-1061">1.4 Rezerva legală (1061)</h3>
+<p><strong>Regula juridică</strong> (art. 183 L31/1990): minimum 5% din profit anual, până la <strong>1/5 (20%) din capitalul social</strong>.</p>
+<p><strong>Regula fiscală</strong> (art. 26 alin. (1) lit. a) CF): deductibilă în limita a <strong>5% din profitul contabil brut</strong>, adică:</p>
+<pre class="cod">bază = sold creditor 121 + rulaj 691 (cheltuiala cu impozitul pe profit)</pre>
+<p>⚠️ Plafon: <strong>20% din capitalul social subscris ȘI VĂRSAT</strong> (nu doar „subscris&quot;). Dacă mai ai capital nevărsat în 1011, nu intră în plafon.</p>
+<p><strong>Înregistrare:</strong></p>
+<pre class="cod">31.12.N      129  = 1061      constituirea rezervei legale</pre>
+<p>⚠️ <strong>Exemplul din notiță nu se leagă.</strong> Pentru profit 250 lei, 5% = 12,50 lei. Cifra de 125 lei corespunde unui <strong>profit de 2.500 lei</strong>. Presupun că asta a fost în exemplu – reia calculul așa:</p>
+<div class="tw"><table><thead><tr><th>Profit contabil brut (121 + 691)</th><th>2.500 lei</th></tr></thead><tbody><tr><td>Rezerva legală 5%</td><td><strong>125 lei</strong></td></tr><tr><td>Rămas de repartizat</td><td>2.375 lei</td></tr></tbody></table></div>
+<h3 id="1-5-nchiderea-121-i-129">1.5 Închiderea 121 și 129 ⚠️</h3>
+<div class="ledger"><div class="led-row" id="m5-a1"><span class="led-d">121</span><span class="led-eq">=</span><span class="led-c">129</span><span class="led-amt">125</span><span class="led-note">(partea repartizată la rezerve)   ⚠️ NU 129 = 1171</span></div><div class="led-row" id="m5-a2"><span class="led-d">121</span><span class="led-eq">=</span><span class="led-c">1171</span><span class="led-amt">2.375</span><span class="led-note">(profitul rămas nerepartizat)</span></div></div>
+<ul><li>⚠️ În notiță apare <code>129 = 1171</code>. Sensul e invers: 129 are sold <strong>debitor</strong>, deci se închide <strong>prin creditare</strong>, iar 121 (sold creditor) se închide prin debitare → <code>121 = 129</code>.</li><li>➕ Notă: dacă faci <code>121 = 1171</code> cu tot profitul (2.500) și apoi <code>1171 = 129</code> (125), ajungi la același sold 1171 = 2.375. Rezultatul e identic, dar varianta conformă cu reglementarea e <code>121 = 129</code>.</li><li>✅ Închiderea se face <strong>la începutul exercițiului următor</strong>, nu se așteaptă AGA. AGA decide ce se întâmplă <strong>ulterior</strong> cu soldul lui 1171 (dividende, 1068, acoperire pierdere).</li></ul>
+<h3 id="1-6-repartiz-ri-din-1171-dup-hot-r-rea-aga">1.6 Repartizări din 1171 (după hotărârea AGA)</h3>
+<div class="ledger"><div class="led-row" id="m6-a1"><span class="led-d">1171</span><span class="led-eq">=</span><span class="led-c">457</span><span class="led-amt"></span><span class="led-note">dividende</span></div><div class="led-row" id="m6-a2"><span class="led-d">1171</span><span class="led-eq">=</span><span class="led-c">1068</span><span class="led-amt"></span><span class="led-note">alte rezerve</span></div><div class="led-row" id="m6-a3"><span class="led-d">1171</span><span class="led-eq">=</span><span class="led-c">1171</span><span class="led-amt"></span><span class="led-note">acoperire pierdere reportată (pe analitice)</span></div></div>
+<ul><li>✅ <strong>1171 cu analitic pe an</strong> – esențial. E bifuncțional și preia soldul lui 121.</li><li>❓ „în curs de 3 ani&quot; – <strong>nu am găsit un termen legal de 3 ani</strong> pentru a decide destinația profitului reportat. Posibile surse ale confuziei: prescripția de 3 ani a acțiunii în restituirea dividendelor (art. 67 alin. (5) L31/1990) sau prescripția generală. <strong>De întrebat trainerul care e temeiul.</strong></li><li>➕ <strong>Fiscal, din 2026:</strong> impozitul pe dividende este <strong>16%</strong> (Legea 141/2025), pentru dividende <strong>distribuite</strong> începând cu 01.01.2026 – inclusiv cele din profitul 2025 aprobate în 2026. Excepție: dividendele interimare distribuite în baza situațiilor interimare din 2025 rămân la 10%, <strong>fără recalculare</strong> la regularizare. Cota urmează <strong>data distribuirii</strong> (hotărârea AGA), nu data plății.</li></ul>
+<h3 id="1-7-cele-trei-conturi-care-se-implic-schema-comp">➕ 1.7 Cele trei conturi care „se implică&quot; – schema completă</h3>
+<div class="ledger"><div class="led-row" id="m7-a1"><span class="led-d">129</span><span class="led-eq">=</span><span class="led-c">1061</span><span class="led-amt"></span><span class="led-note">│               │</span></div></div>
+<p><strong>Reguli de control (lunar / cel puțin trimestrial):</strong></p>
+<ul><li><code>Σ clasa 7 − Σ clasa 6 = sold 121</code> → dacă nu se verifică, cel mai probabil <strong>nu ai închis 121 din anul precedent</strong>.</li><li>129 trebuie închis după repartizarea rezervelor.</li><li>121 trebuie închis pentru corelația cu anul următor.</li><li>⚠️ Nu există automatism ca la TVA – <strong>se face manual</strong>. Pune-ți un control fix în ianuarie și încă unul înainte de fiecare calcul de impozit pe profit.</li></ul>
+<hr>
+<h2 id="2-pierderea-contabil-vs-pierderea-fiscal">2. Pierderea contabilă vs. pierderea fiscală</h2>
+<p>Sunt <strong>două lucruri diferite</strong> și notița le amestecă un pic. De ținut separat:</p>
+<div class="tw"><table><thead><tr><th></th><th>Pierdere contabilă</th><th>Pierdere fiscală</th></tr></thead><tbody><tr><td>Unde stă</td><td>1171 (sold debitor)</td><td>D101, rândurile de pierdere; nu are cont</td></tr><tr><td>Cum se acoperă</td><td>rezerve, prime, capital, profit viitor (hotărâre AGA)</td><td>din profitul impozabil viitor</td></tr><tr><td>Regula</td><td>fără termen</td><td><strong>70% din profitul impozabil, în 5 ani consecutivi</strong> (pierderi din 2024 încolo)</td></tr></tbody></table></div>
+<p>➕ <strong>Regim tranzitoriu:</strong> pierderile rămase de recuperat la 31.12.2023 se recuperează tot în limita a <strong>70%</strong> din profitul impozabil, dar pe <strong>perioada rămasă din cei 7 ani</strong> inițiali, în ordinea înregistrării.</p>
+<h3 id="la-firmele-preluate-bun-practic-din-noti-extins">La firmele preluate (✅ bună practică din notiță, extinsă)</h3>
+<ol><li>Scoate din SPV <strong>duplicatele D101</strong> pentru toți anii din termenul de prescripție. Urmărește rândurile de pierdere și <strong>pierderea rămasă de recuperat</strong>.</li><li>Reconciliază cu <strong>fișa pe plătitor</strong> și cu balanțele preluate.</li><li>⚠️ Dacă <strong>1171 nu reflectă pierderea</strong> care apare în D101 → contul nu e constituit la valoarea reală. Consecință: baza de calcul a impozitului pe profit e greșită și, mai grav, <strong>plafonul de dividende distribuibile e supraevaluat</strong> (cu riscurile din cap. 1.2).</li><li>Ține <strong>analitice pe 1171 pe ani</strong>, cu marcaj Debitor/Creditor – fără asta nu poți urmări recuperarea pe 5 ani.</li></ol>
+<p><code>❓</code> „sunt anumite pierderi care nu sunt deductibile fiscal – astea se înregistrează într-un cont separat&quot;: contabil, pierderea e pierdere; <strong>nu există un cont sintetic distinct</strong> pentru pierderea nedeductibilă fiscal. Ce se face în practică este un <strong>analitic de gestiune</strong> (ex. <code>1171.01</code> recuperabilă fiscal / <code>1171.02</code> nerecuperabilă). De confirmat că asta a fost intenția.</p>
+<hr>
+<h3 id="2-1-nchiderea-conturilor-de-cheltuieli-i-venitur">2.1 Închiderea conturilor de cheltuieli și venituri</h3>
+<div class="ledger"><div class="led-row" id="m8-a1"><span class="led-d">121</span><span class="led-eq">=</span><span class="led-c">607</span><span class="led-amt">20.000</span><span class="led-note"></span></div><div class="led-row" id="m8-a2"><span class="led-d">707</span><span class="led-eq">=</span><span class="led-c">121</span><span class="led-amt">24.000</span><span class="led-note"></span></div></div>
+<p>Rezultatul contabil: 121 are sold <strong>creditor de 4.000</strong> lei — profitul pe care se calculează impozitul.</p>
+<h3 id="2-2-impozitul-pe-profit">2.2 Impozitul pe profit</h3>
+<p>Cota este <strong>16%</strong>, aplicată la baza impozabilă. Cei 4.000 lei sunt <strong>baza</strong>, nu impozitul:</p>
+<div class="note"><p>16% × 4.000 = <strong>640 lei</strong></p></div>
+<div class="ledger"><div class="led-row" id="m9-a1"><span class="led-d">691</span><span class="led-eq">=</span><span class="led-c">4411</span><span class="led-amt">640</span><span class="led-note">(cheltuiala cu impozitul pe profit)</span></div><div class="led-row" id="m9-a2"><span class="led-d">121</span><span class="led-eq">=</span><span class="led-c">691</span><span class="led-amt">640</span><span class="led-note">(închiderea contului de cheltuială)</span></div></div>
+<p>Profitul net rămâne 4.000 − 640 = <strong>3.360 lei</strong>.</p>
+<div class="note"><p>Contul sintetic este <strong>441</strong> <em>Impozitul pe profit și alte impozite</em>; pentru impozitul pe profit se folosește analiticul <strong>4411</strong>.</p></div>
+<hr>
+<h2 id="3-documente-justificative-i-corectarea-erorilor">3. Documente justificative și corectarea erorilor</h2>
+<h3 id="3-1-principiul">3.1 Principiul</h3>
+<p>✅ „Fiecare notă contabilă să aibă un document&quot; – <strong>Legea 82/1991, art. 6</strong>: orice operațiune se consemnează într-un document care devine document justificativ. Detaliile de formă: <strong>OMFP 2634/2015</strong>.</p>
+<h3 id="3-2-pragul-de-semnifica-ie">3.2 Pragul de semnificație</h3>
+<ul><li>➕ Trebuie <strong>definit expres în politicile contabile</strong>, aprobat de administrator, aplicat <strong>consecvent</strong> (ex.: X% din CA / din total active / din rezultat, cu o valoare absolută minimă).</li><li>Fără el, nu poți justifica alegerea între „corectez pe 6xx&quot; și „corectez pe 1174&quot;.</li></ul>
+<h3 id="3-3-arbore-de-decizie-factur-lips-nregistrat-gre">3.3 Arbore de decizie – factură lipsă / înregistrată greșit</h3>
+<p><strong>A. Factură a exercițiului CURENT, descoperită în același an</strong></p>
+<p>→ înregistrare normală pe cheltuială în luna constatării; TVA se deduce în decontul curent (drept de deducere păstrat 5 ani). Nicio rectificare.</p>
+<p><strong>B. Factură care NU era a mea, constatată în același an</strong></p>
+<div class="ledger"><div class="led-row" id="m10-a1"><span class="led-d">628</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt"></span><span class="led-note">cu minus (storno)</span></div><div class="led-row" id="m10-a2"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt"></span><span class="led-note">cu minus</span></div></div>
+<ul><li>Efect net: 0 pe cheltuială, 0 pe furnizor, 0 pe TVA. ✅ Exact cum e în notiță.</li><li>Dacă factura a fost <strong>achitată</strong> → discuție separată (recuperare/compensare cu furnizorul).</li><li><strong>Impozit pe profit:</strong> dacă D100 a fost depus cu profit denaturat → <strong>formular 710</strong> (D100 nu are bifă de rectificativă, spre deosebire de D112). ✅ Notița e corectă aici. Dacă rezultă impozit suplimentar → <strong>accesorii</strong> (dobânzi + penalități de întârziere; eventual penalitate de nedeclarare dacă o stabilește organul fiscal). <strong>Discuția cu administratorul se poartă înainte</strong>, nu după.</li><li><strong>TVA:</strong> ⚠️ nuanță importantă – sumele din corectarea erorilor de înregistrare în evidențele de TVA se înscriu la <strong>rândurile de regularizări din decontul lunii curente</strong>. Decontul de TVA <strong>nu se rectifică</strong> prin depunerea unuia nou. „Cererea de corectare a erorilor materiale&quot; (OMEF 179/2007) e pentru erori <strong>de completare</strong> (căsuțe, tastare), nu pentru sume rezultate din evidență.</li></ul>
+<p><strong>C. Factură a exercițiului ANTERIOR, eroare SEMNIFICATIVĂ</strong></p>
+<div class="ledger"><div class="led-row" id="m11-a1"><span class="led-d">1174</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt"></span><span class="led-note">cheltuiala (fără TVA)</span></div><div class="led-row" id="m11-a2"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt"></span><span class="led-note">TVA</span></div></div>
+<ul><li>⚠️ <strong>Nu se mai trece prin 628.</strong> ✅ Notița e corectă.</li><li>TVA se deduce în <strong>decontul curent</strong>.</li><li><strong>Obligatoriu: D101 rectificativ</strong> pentru anul afectat (bifa „Declarație rectificativă&quot; există pe formularul 101 – spre deosebire de D100).</li><li>Ulterior, 1174 se închide prin 1171 (după hotărârea AGA).</li></ul>
+<p><strong>D. Eroare NESEMNIFICATIVĂ (sub prag)</strong></p>
+<p>→ se corectează pe contul de profit și pierdere <strong>curent</strong> (6xx).</p>
+<p>→ ⚠️ Risc fiscal: cheltuiala nu e aferentă exercițiului curent, deci poate fi considerată nedeductibilă. Documentează decizia (nota de prag).</p>
+<h3 id="3-4-r-spuns-la-ntrebarea-ta-despre-1174">3.4 ✅ Răspuns la întrebarea ta despre 1174</h3>
+<div class="note"><p><em>„Dacă scopul lui 1174 era să nu denatureze profitul anilor precedenți, când închidem 1174 în 1171 nu denaturăm profitul anilor precedenți?&quot;</em></p></div>
+<p>Întrebarea e bună și răspunsul e că <strong>1174 nu protejează „profitul anilor precedenți&quot;, ci două alte lucruri:</strong></p>
+<ol><li><strong>Rezultatul anului CURENT (contul 121).</strong> O cheltuială din 2025 nu are ce căuta în P&amp;L-ul lui 2026. Dacă ai trece factura pe 628 în 2026, ai denatura rezultatul lui 2026 – și, implicit, impozitul pe profit al lui 2026. 1174 ocolește complet contul de profit și pierdere.</li><li><strong>Trasabilitatea corecției.</strong> 1174 este un „compartiment cu etichetă&quot;: arată explicit <em>cât</em> din capitalurile proprii provine dintr-o corecție de eroare, nu din profit efectiv realizat și raportat. Situațiile financiare ale anilor trecuți <strong>nu se retratează</strong> (asta e regula din OMFP 1802/2014) – deci 1174 e singurul loc unde se vede că bilanțul aprobat atunci era greșit.</li></ol>
+<p>Odată ce corecția e stabilită, D101-ul rectificativ depus și AGA a luat act, suma <strong>este</strong> parte din rezultatul acumulat – deci transferul în 1171 nu „re-denaturează&quot; nimic, ci doar închide un cont tranzitoriu. Denaturarea ar fi fost să treacă prin 121.</p>
+<p>⚠️ <strong>Partea sensibilă, exact cum spune notița:</strong> dacă 1171 nu mai are sold (proprietarul a luat deja dividendele), transferul îl duce <strong>pe debitor</strong> → pierdere reportată neacoperită. Din 2026 asta declanșează restricțiile Legii 239/2025 (blocaj dividende + blocaj restituire împrumuturi asociați + obligație de reîntregire). <strong>Deci ordinea corectă e: corectezi întâi, distribui după.</strong></p>
+<h3 id="3-5-controlul-preventiv-care-evit-tot-ce-e-mai-s">➕ 3.5 Controlul preventiv care evită tot ce e mai sus</h3>
+<p>Reconciliază <strong>lunar registrul RO e-Factura din SPV</strong> cu jurnalul de cumpărări. Cazul din notiță („clientul nu a încărcat un document în SPV / s-a încărcat eronat&quot;) se prinde în luna respectivă, nu peste un an. Ăsta e cel mai ieftin control din toată lista.</p>
+<hr>
+<h2 id="4-termene-de-depunere-aten-ie-s-a-schimbat">4. Termene de depunere ⚠️ ATENȚIE – S-A SCHIMBAT</h2>
+<div class="tw"><table><thead><tr><th>Declarație</th><th>An fiscal 2025 (depus 2026)</th><th>An fiscal 2026 (depus 2027)</th></tr></thead><tbody><tr><td><strong>D101</strong> impozit pe profit</td><td>25 iunie 2026</td><td>⚠️ <strong>25 iunie 2027</strong> (termenul a fost <strong>permanentizat</strong>)</td></tr><tr><td><strong>D100</strong> impozit micro T4</td><td>25 iunie 2026</td><td>⚠️ revine la <strong>25 ianuarie 2027</strong></td></tr><tr><td><strong>Situații financiare anuale</strong> (societăți)</td><td>~30 mai 2026</td><td><strong>150 de zile</strong> de la 31.12.2026 → <strong>~30 mai 2027</strong> ✅</td></tr></tbody></table></div>
+<ul><li>⚠️ Notița spune „101 în Martie&quot; pentru 2027. <strong>Este depășit.</strong> Termenul standard din art. 42 CF era 25 martie, derogarea din OUG 153/2020 l-a mutat la 25 iunie timp de 5 ani (2022–2026), iar în martie 2026 Guvernul l-a făcut <strong>permanent</strong> pentru majoritatea plătitorilor de impozit pe profit.</li><li>Excepții care rămân la termene proprii: ONG-uri și contribuabilii cu venituri majoritare din cereale/plante tehnice (25 februarie), situații speciale (fuziuni, lichidare), an fiscal modificat (25 a lunii a 6-a).</li><li>➕ Entități fără activitate: declarație de inactivitate, <strong>60 de zile</strong>.</li><li><code>❓</code> <strong>De verificat actul normativ exact</strong> care a permanentizat termenul (adoptat ~martie 2026) înainte de a-l comunica clienților.</li><li>✅ Punctul din notiță rămâne valabil ca risc: în intervalul ianuarie–iunie se uită frecvent închiderea soldului lui 121.</li></ul>
+<hr>
+<h2 id="5-credite-bancare-n-valut-162x">5. Credite bancare în valută (162x)</h2>
+<h3 id="5-1-structura-conturilor">5.1 Structura conturilor</h3>
+<p>⚠️ Precizare: <code>1621</code> și <code>162x</code> <strong>nu sunt același lucru la nivel de analitic</strong> – sunt sintetice distincte:</p>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Conținut</th></tr></thead><tbody><tr><td>1621</td><td>Credite bancare pe termen lung</td></tr><tr><td>1622</td><td>Credite bancare pe termen lung nerambursate la scadență</td></tr><tr><td>1623–1627</td><td>Credite externe guvernamentale / garantate de stat / de bănci / trezorerie</td></tr><tr><td><strong>1682</strong></td><td>➕ Dobânzi aferente creditelor bancare pe termen lung (dobânda <strong>calculată și neajunsă la scadență</strong>)</td></tr></tbody></table></div>
+<h3 id="5-2-monografia-lunar">5.2 Monografia lunară</h3>
+<div class="ledger"><div class="led-row" id="m12-a1"><span class="led-d">1621</span><span class="led-eq">=</span><span class="led-c">5121/5124</span><span class="led-amt"></span><span class="led-note">rata de capital</span></div><div class="led-row" id="m12-a2"><span class="led-d">666</span><span class="led-eq">=</span><span class="led-c">5121/5124</span><span class="led-amt"></span><span class="led-note">dobânda</span></div><div class="led-row" id="m12-a3"><span class="led-d">627</span><span class="led-eq">=</span><span class="led-c">5121</span><span class="led-amt"></span><span class="led-note">comisioane bancare (dacă e cazul)</span></div></div>
+<p>⚠️ <strong>Capcana din notiță:</strong> extrasul arată deseori rata și dobânda <strong>cumulat</strong>. Mergi întotdeauna la <strong>scadențar</strong> și desparte-le. Altfel ajungi cu 1621 pe debit (sau invers, cu sold rămas la finalul creditului) și <strong>ai trecut pe cheltuială mai mult decât trebuia</strong> → impact direct pe impozitul pe profit și pe baza de dividende.</p>
+<h3 id="5-3-diferen-e-de-curs">5.3 Diferențe de curs ⚠️</h3>
+<p>✅ Notița e corectă că sunt <strong>două momente</strong>:</p>
+<ol><li><strong>La plată</strong> – diferența între cursul de la înregistrare și cursul plății → 665 / 765.</li><li><strong>La sfârșitul lunii</strong> – reevaluarea soldului la cursul BNR din <strong>ultima zi bancară a lunii</strong> → 665 / 765.</li></ol>
+<p>⚠️ <strong>Reevaluarea este LUNARĂ, obligatoriu</strong> (OMFP 1802/2014), nu „la 3 luni&quot;. Trimestrial e insuficient. Verificarea suplimentară la calculul impozitului pe profit e o bună practică peste obligație, nu un substitut.</p>
+<p>➕ Verifică <strong>soldul în valută</strong>, nu doar în lei: <code>sold valută × curs BNR = sold lei</code>. Dacă nu dă, ai o problemă de curs sau de rată.</p>
+<p>➕ Reclasificarea porțiunii curente (scadentă în ≤ 12 luni) trebuie făcută pentru bilanț – prin analitic sau prin cont dedicat.</p>
+<p>✅ „Unde am lei, treaba trebuie să fie foarte simplă&quot; – exact, tot efortul se duce pe valută.</p>
+<hr>
+<h2 id="6-provizioane-151x">6. Provizioane (151x)</h2>
+<h3 id="6-1-conceptul">6.1 Conceptul ✅</h3>
+<p>Un provizion se recunoaște când există o <strong>obligație actuală</strong> rezultată dintr-un eveniment trecut, e <strong>probabilă</strong> o ieșire de resurse și suma poate fi <strong>estimată credibil</strong>. Exemplul din notiță (litigiu în curs → cheltuieli previzibile cu avocatul) e corect ca raționament: obligația s-a născut în exercițiul curent, chiar dacă plata vine anul următor.</p>
+<h3 id="6-2-monografie-aici-e-eroarea">6.2 Monografie ⚠️ AICI E EROAREA</h3>
+<div class="ledger"><div class="led-row" id="m13-a1"><span class="led-d">6812</span><span class="led-eq">=</span><span class="led-c">1511</span><span class="led-amt"></span><span class="led-note">Cheltuieli de exploatare privind provizioanele</span></div><div class="led-row" id="m13-a2"><span class="led-d">628</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt"></span><span class="led-note">← factura, ÎNREGISTRARE NORMALĂ</span></div><div class="led-row" id="m13-a3"><span class="led-d">1511</span><span class="led-eq">=</span><span class="led-c">7812</span><span class="led-amt"></span><span class="led-note">← RELUAREA provizionului, operațiune SEPARATĂ</span></div></div>
+<p>⚠️ <strong>Factura nu se înregistrează „pe 151&quot;.</strong> Provizionul nu e un cont de datorii față de furnizor. Cele două operațiuni sunt independente; efectul net pe rezultatul lui 2027 este ~zero, ceea ce e chiar scopul provizionului.</p>
+<p>➕ Provizionul se revizuiește la fiecare dată a bilanțului și <strong>nu poate fi utilizat pentru altă cheltuială</strong> decât cea pentru care a fost constituit (OMFP 1802/2014).</p>
+<h3 id="6-3-tratamentul-fiscal-lipsea-complet">6.3 ➕ Tratamentul fiscal (lipsea complet)</h3>
+<ul><li><strong>Provizioanele pentru litigii sunt NEDEDUCTIBILE</strong> fiscal. Art. 26 CF enumeră limitativ ce e deductibil (rezerva legală, provizioanele pentru garanții de bună execuție, ajustările pentru creanțe în anumite condiții etc.) – litigiile nu sunt pe listă.</li><li>Prin simetrie, <strong>reluarea (7812) este venit neimpozabil</strong>.</li><li>⚠️ Consecință practică: provizionul <strong>nu îți scade impozitul pe profit</strong> în anul constituirii. Nu-l vinde clientului ca optimizare fiscală – e o măsură de imagine fidelă a bilanțului.</li></ul>
+<p>Subconturi utile: 1511 litigii · 1512 garanții clienți · 1514 restructurare · 1516 impozite · 1518 alte provizioane.</p>
+<hr>
+<h2 id="7-leasing">7. Leasing</h2>
+<h3 id="7-1-opera-ional-vs-financiar-noti-a-le-amestec">7.1 ⚠️ Operațional vs. financiar – notița le amestecă</h3>
+<p>Secțiunea din notiță începe cu „operațional&quot; dar descrie imediat 167, mijloc fix, avans 4093 – <strong>acesta e leasing financiar</strong>.</p>
+<div class="tw"><table><thead><tr><th></th><th><strong>Operațional</strong></th><th><strong>Financiar</strong></th></tr></thead><tbody><tr><td>Bunul în bilanț</td><td><strong>NU</strong> (rămâne la locator)</td><td><strong>DA</strong> – 2133</td></tr><tr><td>Datoria</td><td>nu</td><td><strong>167</strong></td></tr><tr><td>Cheltuiala lunară</td><td><strong>612</strong> (chirie)</td><td><strong>666</strong> dobândă + amortizare</td></tr><tr><td>Evidență extrabilanțieră</td><td><strong>8036</strong></td><td>–</td></tr><tr><td>Impozit local mijloc de transport</td><td>plătit de <strong>locator</strong></td><td>plătit de <strong>locatar</strong>, pe toată durata contractului</td></tr><tr><td>Valoarea reziduală la final</td><td><strong>achiziție nouă</strong> → intră ca mijloc fix la acea valoare</td><td>deja capitalizată; ultima factură doar închide 167</td></tr></tbody></table></div>
+<p>Criteriile de clasificare: OG 51/1997 + art. 7 pct. 7–8 CF (transferul riscurilor/beneficiilor, opțiune de cumpărare, durata ≥ 80% din durata de viață, valoarea actualizată a plăților ≈ valoarea bunului).</p>
+<div class="note"><p>✅ Astfel se citește corect fraza din notiță: „la sfârșitul contractului, valoarea reziduală, când pot achiziționa acel bun&quot; + „merg la primărie în 30 de zile&quot; → asta e scenariul de <strong>leasing operațional</strong>, unde abia atunci apare mijlocul fix.</p></div>
+<h3 id="7-2-regula-de-aur-din-noti">7.2 ✅ Regula de aur din notiță</h3>
+<div class="note"><p><strong>167 este 1-la-1 cu contractul de leasing</strong> – indiferent câte bunuri conține contractul – și pe <strong>tip de valută</strong>.</p></div>
+<p>Motivul: la reevaluarea soldului în valută trebuie să știi <strong>exact la ce rată din scadențar</strong> te raportezi. Fără analitic pe contract, nu poți face reevaluarea corect.</p>
+<p>Cele două scopuri distincte (✅ notița):</p>
+<ul><li><strong>167</strong> = ce datorez firmei de leasing, conform scadențarului (sold curent);</li><li><strong>2133</strong> = mijlocul fix, la valoarea de intrare.</li></ul>
+<p>⚠️ În notiță apare „1067&quot; – e typo pentru <strong>167</strong>.</p>
+<h3 id="7-3-regimul-fiscal-al-autoturismelor-m1-3-500-kg">7.3 ➕ Regimul fiscal al autoturismelor (M1, ≤ 3.500 kg, ≤ 9 locuri)</h3>
+<p><strong>Trei limitări diferite, care se aplică simultan dar pe baze diferite:</strong></p>
+<div class="tw"><table><thead><tr><th>Limitare</th><th>Bază</th><th>Temei</th></tr></thead><tbody><tr><td><strong>TVA deductibilă 50%</strong></td><td>TVA de pe toate facturile aferente vehiculului</td><td>art. 298 CF</td></tr><tr><td><strong>Cheltuieli deductibile 50%</strong></td><td>combustibil, întreținere, piese, chirii, asigurări, <strong>dobânzi</strong>, <strong>comisioane</strong>, diferențe de curs, <strong>inclusiv TVA nedeductibilă</strong></td><td>art. 25 alin. (3) lit. l) CF</td></tr><tr><td><strong>Amortizare max. 1.500 lei/lună</strong></td><td>amortizarea contabilă a fiecărui autoturism</td><td>art. 28 alin. (14) CF</td></tr></tbody></table></div>
+<p>⚠️ <strong>Foarte important:</strong> amortizarea <strong>NU intră</strong> sub limitarea de 50% – are propria plafonare de 1.500 lei/lună. Cele două nu se cumulează.</p>
+<p>➕ Art. 25 alin. (3) lit. m): deductibilitate limitată la <strong>un singur autoturism</strong> pentru fiecare persoană cu funcție de conducere/administrare.</p>
+<p>➕ Excepțiile (100% deductibil, TVA integral): urgență/pază/curierat, agenți de vânzări și achiziții, taxi, închiriere, școli de șoferi, transport de persoane cu plată. Fără documentație (foi de parcurs, decizie internă), <strong>regimul prudent și conform este 50%</strong>.</p>
+<h3 id="7-3-bis-nout-i-2026-relevante-pentru-mijloace-fi">➕ 7.3.bis Noutăți 2026 relevante pentru mijloace fixe</h3>
+<ul><li><strong>OUG 8/2026</strong> (în vigoare 25.02.2026): pragul fiscal al mijloacelor fixe a crescut de la <strong>2.500 lei la 5.000 lei</strong>; se actualizează anual cu inflația.</li><li>Bunurile între 2.500 și 5.000 lei existente la 31.12.2025 <strong>continuă</strong> amortizarea pe durata rămasă (nu se trec retroactiv pe cheltuieli).</li><li><strong>Amortizare superaccelerată 65% în primul an</strong> – exclusiv pentru 2026, doar pentru <strong>active noi</strong> din subgrupele 2.1 (echipamente tehnologice) și 2.4 (animale și plantații), puse în funcțiune în 2026. <strong>Nu se aplică autoturismelor.</strong> Cumulabilă cu scutirea pentru profit reinvestit.</li><li>⚠️ Pragul de 5.000 lei este <strong>fiscal</strong>, nu contabil – contabil, politicile firmei pot stabili alt prag.</li></ul>
+<h3 id="7-4-monografie-leasing-financiar-autoturism-cu-d">7.4 Monografie – leasing financiar autoturism cu deductibilitate 50%</h3>
+<p><strong>Date:</strong> valoare de intrare 150.000 lei · avans 50.000 lei · TVA 21% · rate capital 100.000 lei + dobândă + comisioane + CASCO</p>
+<h4 id="pasul-1-factura-de-avans">Pasul 1 – factura de avans</h4>
+<div class="ledger"><div class="led-row" id="m14-a1-1"><span class="led-d">%</span><span class="led-eq">=</span><span class="led-c">404</span><span class="led-amt">60.500</span><span class="led-note"></span></div><div class="led-row" id="m14-a1-2"><span class="led-d">4093</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">50.000</span><span class="led-note"></span></div><div class="led-row" id="m14-a1-3"><span class="led-d">4426</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">10.500</span><span class="led-note"></span></div></div>
+<h4 id="pasul-2-tva-nedeductibil-pe-avans-capitalizat">Pasul 2 – TVA nedeductibilă pe avans, capitalizată</h4>
+<div class="ledger"><div class="led-row" id="m15-a1"><span class="led-d">2133</span><span class="led-eq">=</span><span class="led-c">4426</span><span class="led-amt">5.250</span><span class="led-note">(50% × 10.500)</span></div></div>
+<div class="note"><p>Varianta din notiță (<code>4426 = 404</code> de roșu + <code>2133 = 404</code> de negru) dă exact același rezultat. Temeiul: taxele nerecuperabile intră în <strong>costul de achiziție</strong> (OMFP 1802/2014).</p></div>
+<h4 id="pasul-3-recep-ia-bunului">Pasul 3 – recepția bunului</h4>
+<div class="ledger"><div class="led-row" id="m16-a1"><span class="led-d">2133</span><span class="led-eq">=</span><span class="led-c">167</span><span class="led-amt">150.000</span><span class="led-note"></span></div><div class="led-row" id="m16-a2"><span class="led-d">167</span><span class="led-eq">=</span><span class="led-c">4093</span><span class="led-amt">50.000</span><span class="led-note">(închiderea avansului)</span></div></div>
+<h4 id="valoarea-de-intrare-a-mijlocului-fix-155-250-lei">✅ Valoarea de intrare a mijlocului fix: <strong>155.250 lei</strong></h4>
+<div class="tw"><table><thead><tr><th>Amortizare contabilă (60 luni)</th><th>2.587,50 lei/lună</th></tr></thead><tbody><tr><td><strong>Amortizare fiscal deductibilă</strong></td><td><strong>1.500,00 lei/lună</strong></td></tr><tr><td><strong>Nedeductibil lunar</strong></td><td><strong>1.087,50 lei/lună</strong></td></tr></tbody></table></div>
+<p>⚠️ Acesta e elementul care lipsea complet din notiță și care are <strong>cel mai mare impact</strong> pe impozitul pe profit.</p>
+<h4 id="pasul-4-factura-lunar-de-leasing-la-valoarea-ei-">Pasul 4 – factura lunară de leasing (la valoarea ei, fără split ✅)</h4>
+<div class="ledger"><div class="led-row" id="m17-a1-1"><span class="led-d">%</span><span class="led-eq">=</span><span class="led-c">404</span><span class="led-amt">3.166</span><span class="led-note"></span></div><div class="led-row" id="m17-a1-2"><span class="led-d">167</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">2.000</span><span class="led-note"></span></div><div class="led-row" id="m17-a1-3"><span class="led-d">666</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">500</span><span class="led-note"></span></div><div class="led-row" id="m17-a1-4"><span class="led-d">628</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">100</span><span class="led-note"></span></div><div class="led-row" id="m17-a1-5"><span class="led-d">613</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">20</span><span class="led-note"></span></div><div class="led-row" id="m17-a1-6"><span class="led-d">4426</span><span class="led-eq"></span><span class="led-c"></span><span class="led-amt">546</span><span class="led-note"></span></div></div>
+<div class="note"><p>➕ Comisionul poate fi și pe <strong>627</strong> – aliniază-te la politica firmei și fii consecvent.</p></div>
+<h4 id="pasul-5-corec-ia-tva-nedeductibil-50">Pasul 5 – corecția TVA nedeductibilă (50%)</h4>
+<div class="tw"><table><thead><tr><th>Element</th><th>TVA total</th><th>Nedeductibil</th></tr></thead><tbody><tr><td>Rata de capital</td><td>420,00</td><td><strong>210,00</strong></td></tr><tr><td>Dobândă</td><td>105,00</td><td><strong>52,50</strong></td></tr><tr><td>Comision</td><td>21,00</td><td><strong>10,50</strong></td></tr><tr><td><strong>Total</strong></td><td>546,00</td><td><strong>273,00</strong></td></tr></tbody></table></div>
+<div class="ledger"><div class="led-row" id="m18-a1"><span class="led-d">666</span><span class="led-eq">=</span><span class="led-c">4426</span><span class="led-amt">52,50</span><span class="led-note"></span></div><div class="led-row" id="m18-a2"><span class="led-d">628</span><span class="led-eq">=</span><span class="led-c">4426</span><span class="led-amt">10,50</span><span class="led-note"></span></div></div>
+<div class="note"><p>⚠️ În notiță apare <code>4426 = 4424</code> – <strong>typo</strong>, contrapartida corectă e 404 (în varianta cu storno) sau direct 4426 (în varianta simplă de mai sus). Rezultatul e identic; varianta de mai sus e mai curată.  💡 Și mai simplu: înregistrează direct doar 50% pe 4426, iar restul pe destinația finală. Eviți complet notele în roșu.</p></div>
+<p><code>❓</code> <strong>De clarificat cu trainerul:</strong> TVA nedeductibilă aferentă <strong>ratei de capital</strong> (210 lei) – se capitalizează în 2133 (coerent cu tratamentul avansului, pct. 75 OMFP 1802) sau se trece pe cheltuială (635/6588)? Practica e împărțită. Capitalizarea e mai coerentă conceptual, dar impune ajustarea valorii și a amortizării în fiecare lună. Dacă se trece pe cheltuială, e integral nedeductibilă (<strong>nu se mai aplică încă o dată 50%</strong> – ar fi dublă limitare).</p>
+<h4 id="pasul-6-limitarea-de-50-a-cheltuielilor">Pasul 6 – limitarea de 50% a cheltuielilor</h4>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Rulaj după corecția TVA</th><th>Nedeductibil (50%)</th></tr></thead><tbody><tr><td>666 dobândă</td><td>500,00 + 52,50 = <strong>552,50</strong></td><td><strong>276,25</strong></td></tr><tr><td>628 comision</td><td>100,00 + 10,50 = <strong>110,50</strong></td><td><strong>55,25</strong></td></tr><tr><td>613 CASCO</td><td><strong>20,00</strong></td><td><strong>10,00</strong> ⚠️ (nu 50 – în notiță CASCO era 20 lei, nu 100)</td></tr></tbody></table></div>
+<div class="ledger"><div class="led-row" id="m19-a1"><span class="led-d">666</span><span class="led-eq">=</span><span class="led-c">404</span><span class="led-amt">276,25</span><span class="led-note">(de roșu)</span></div><div class="led-row" id="m19-a2"><span class="led-d">666.NED</span><span class="led-eq">=</span><span class="led-c">404</span><span class="led-amt">276,25</span><span class="led-note">(de negru)</span></div><div class="led-row" id="m19-a3"><span class="led-d">628</span><span class="led-eq">=</span><span class="led-c">404</span><span class="led-amt">55,25</span><span class="led-note">(de roșu)</span></div><div class="led-row" id="m19-a4"><span class="led-d">628.NED</span><span class="led-eq">=</span><span class="led-c">404</span><span class="led-amt">55,25</span><span class="led-note">(de negru)</span></div><div class="led-row" id="m19-a5"><span class="led-d">613</span><span class="led-eq">=</span><span class="led-c">404</span><span class="led-amt">10</span><span class="led-note">(de roșu)</span></div><div class="led-row" id="m19-a6"><span class="led-d">613.NED</span><span class="led-eq">=</span><span class="led-c">404</span><span class="led-amt">10</span><span class="led-note">(de negru)     ⚠️ NU 615 (= pregătirea personalului)</span></div></div>
+<p>➕ <strong>Nu uita diferențele de curs valutar</strong> dacă leasingul e în EUR: intră și ele în baza limitării de 50%.</p>
+<h3 id="7-5-obliga-ii-conexe">7.5 Obligații conexe</h3>
+<ul><li><strong>Impozit local pe mijlocul de transport:</strong> declarație la primărie în <strong>30 de zile</strong>. La leasing financiar, îl datorează <strong>locatarul pe toată durata contractului</strong>. La finalul contractului, când se transferă proprietatea, se depune declarație nouă.</li><li>Verifică pe fiecare factură <strong>rata de schimb comunicată de firma de leasing</strong> și corelează cu rata din scadențar – altfel reevaluarea soldului 167 se face la curs greșit.</li></ul>
+<hr>
+<h2 id="8-an-fiscal-modificat">8. An fiscal modificat</h2>
+<p>✅ Corect: se poate opta pentru un exercițiu financiar diferit de anul calendaristic, tipic pentru alinierea la raportarea firmei-mamă.</p>
+<ul><li>Temei contabil: OMFP 1802/2014 (filiale ale unor societăți străine cu exercițiu diferit).</li><li>Temei fiscal: <strong>art. 16 alin. (5) Cod fiscal</strong> – anul fiscal poate urma exercițiul financiar.</li><li>➕ <strong>Formular 014</strong> „Notificare privind modificarea anului fiscal&quot;, depus la ANAF în <strong>15 zile</strong> de la începutul anului fiscal modificat sau de la începutul anului calendaristic, care intervine primul.</li><li>➕ Termenul D101 devine <strong>25 a lunii a 6-a</strong> de la închiderea anului fiscal modificat.</li><li>⚠️ Atenție la perioada de tranziție (anul „scurt&quot;) – reguli specifice de calcul și de recuperare a pierderii.</li></ul>
+<hr>
+<h2 id="9-principii-de-lucru-partea-final-din-noti-e">9. Principii de lucru (partea finală din notițe) ✅</h2>
+<div class="note"><p><strong>juridic → economic → contabil</strong></p></div>
+<ul><li>Coerența între cele trei straturi e testul de bază. Dacă înregistrarea contabilă nu are corespondent economic și suport juridic, e greșită indiferent cât de bine arată în balanță.</li><li>Când întâlnești o operațiune pe care nu ai mai văzut-o: <strong>nu trage linie repede</strong>. Caută dintr-un articol în altul, adună câteva opinii, documentează raționamentul în scris.</li><li>➕ Adaug: <strong>pune raționamentul pe hârtie în dosarul permanent</strong> al clientului. Peste doi ani, la un control sau la o preluare, nota ta e singurul lucru care explică de ce ai făcut ce ai făcut.</li><li>➕ Și: <strong>discuția cu administratorul se poartă înainte de a face corecția</strong>, nu după ce vin accesoriile.</li></ul>
+<hr>
+<hr>
+<h2 id="anexa-b-checklist-practic">Anexa B — Checklist practic</h2>
+<ul><li>[ ] Σ clasa 7 − Σ clasa 6 = sold 121</li><li>[ ] 121 din anul precedent este închis (121 = 129 și 121 = 1171)</li><li>[ ] 129 închis după repartizarea rezervelor</li><li>[ ] Reevaluare <strong>lunară</strong> a tuturor soldurilor în valută (162x, 167, 401, 411, 5124)</li><li>[ ] Sold valută × curs BNR = sold lei, pe fiecare contract în parte</li><li>[ ] Rata vs. dobândă separate conform scadențarului (nu conform extrasului)</li><li>[ ] Registrul RO e-Factura din SPV reconciliat cu jurnalul de cumpărări</li><li>[ ] Amortizare autoturisme: partea peste 1.500 lei/lună marcată ca nedeductibilă</li><li>[ ] Cheltuieli auto: 50% nedeductibil calculat <strong>după</strong> includerea TVA nedeductibile</li><li>[ ] Analitice: 456 pe asociat · 1171 pe an · 1175 pe activ · 167 pe contract și valută</li></ul>
+<hr>
+<h2 id="anexa-d-r-mase-deschise">Anexa D — Rămase deschise</h2>
+<ol><li>❓ „1171 → decis în curs de 3 ani ce se face cu diferența&quot; – care e temeiul legal al celor 3 ani?</li><li>❓ Exemplul cu rezerva legală: profitul era 250 sau 2.500 lei?</li><li>❓ TVA nedeductibilă pe rata de capital la leasing: capitalizare în 2133 sau cheltuială 635/6588? Care e poziția firmei?</li><li>❓ „pierderi nedeductibile fiscal – cont separat&quot;: analitic pe 1171 sau altceva?</li><li>❓ „facturi neînregistrate aferente exercițiului anterior&quot; – întrebarea rămăsese deschisă în notițe; vezi cap. 3.3 lit. C și D pentru propunerea de tratament.</li><li>⚠️ Termenul D101 pentru 2027 – <strong>confirmă actul normativ</strong> care a permanentizat 25 iunie.</li><li>➕ De discutat: cum se documentează reîntregirea activului net (Legea 239/2025) – conversie creanță asociat în capital vs. aport nou.</li><li>➕ De adăugat în checklist-ul de închidere: verificarea capitalului social minim (500 / 5.000 lei) pentru portofoliul de clienți.</li></ol>
+<hr>
+<hr>
+<h2 id="anexa-e-baza-legal-citat">Anexa E — Baza legală citată</h2>
+<p>Extrasă automat din textul documentului: sunt listate actele și articolele care apar efectiv citate mai sus. Contextul fiecărei citări e în secțiunea unde apare.</p>
+<p><strong>Acte normative citate</strong></p>
+<ul><li>Legea 239/2025</li><li>Legea 141/2025</li><li>Legea 31/1990</li><li>Legea 82/1991</li><li>OMFP 1802/2014</li><li>OMFP 2634/2015</li><li>OUG 8/2026</li><li>OUG 153/2020</li><li>Codul fiscal</li></ul>
+<p><strong>Articole citate</strong></p>
+<p>art. 6, art. 7, art. 16 alin. (5), art. 25 alin. (3), art. 26 alin. (1), art. 28 alin. (14), art. 42, art. 67 alin. (2), art. 67 alin. (5), art. 69, art. 183, art. 210 alin. (3), art. 298</p>
+<hr>
+<p><em>Rolul Anexei C îl joacă secțiunea 0 (Sinteza corecțiilor), păstrată în față pentru că funcționează ca rezumat executiv al documentului.</em></p>
+</main></div></body></html>

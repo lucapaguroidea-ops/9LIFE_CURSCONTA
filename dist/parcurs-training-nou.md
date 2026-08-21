@@ -173,6 +173,7 @@ Fiecare poartă are un motiv scris în `build/verifica.py`. Dacă un text chiar 
 | `date/intrebari.py` | Cele 21 de întrebări deschise, grupate pe temă contabilă. |
 | `date/monografii.py` | Excepțiile porții 18 — blocuri de monografie care NU trebuie să se echilibreze. |
 | `date/ordine.py` | Ordinea canonică a sistemului — singura sursă de adevăr pentru poziții și ID-uri. |
+| `date/pachet.py` | Ordinea de uz a livrabilelor — partea scrisă de mână a pachetului. |
 | `date/parcurs.py` | Partea SCRISĂ DE MÂNĂ a documentului de parcurs. |
 | `date/plan.py` | Actualizări pe foaia `Plan de conturi` + conturi sintetice lipsă + rânduri de matrice. |
 | `date/reformulari.py` | Textele din originalul training 4 care au voie să dispară, fiecare cu motiv. |

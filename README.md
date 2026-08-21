@@ -108,6 +108,29 @@ cu „sold = 0” declarat în monografie. Conturile fără flux în spate apar 
 ancoră**, cu motivul scris — un checklist care afirmă ceva ce sistemul nu demonstrează e
 mai rău decât unul incomplet.
 
+## Pachetul de lucru
+
+`make pachet` adună livrabilele de uz în `dist/pachet/` și `dist/pachet-9life.zip`,
+ordonate după **momentul în care ajungi la ele**, nu alfabetic și nu după data
+trainingului:
+
+| | |
+|---|---|
+| **Lucrezi** | `1` planul de conturi (referința) · `2` modulele declarative (execuția) |
+| **Studiezi** | `3` capitaluri · `4` imobilizări · `5` stocuri și TVA · `6` control și numerar — în ordinea planului de conturi |
+| **Întrebi** | `7` întrebările pentru formator |
+| **Adaugi** | `8` parcursul unui set nou de notițe |
+
+`0-CITESTE-INTAI.html` e prima pagină: pentru fiecare item spune **ce e**, **când îl
+deschizi** și **la ce să NU-l folosești**. Ultimul rând e cel mai util — patru documente
+de contabilitate arată interschimbabile, iar cine caută o regulă o caută în primul care-i
+cade sub mână.
+
+Indexul e generat: numerele din el se citesc din workbook-uri și din listele produse, iar
+legăturile se verifică **în arhivă**, nu în folder — un index care navighează local dar
+trimite în gol după dezarhivare ar fi mai rău decât niciunul. Judecata (ordinea, „când”,
+„la ce nu”) stă în `date/pachet.py`; restul se deduce.
+
 ## Ce mai produce repo-ul, pe lângă workbook-uri
 
 | Livrabil | Ce e |
