@@ -170,6 +170,79 @@ def scoate_foile_de_samanta(wb, module):
     return scoase
 
 
+def rescrie_instructiuni(wb, module):
+    """Refac foaia `Instructiuni` din catalog. Întoarce rândurile vechi, pentru declarare.
+
+    Foaia era încă scrisă pentru un fișier cu UN modul: „Cum se folosește
+    MOD_INCHIDERE_TVA (primul modul implementat)”, cu SALARII / DECONT / LEASING_FIN
+    date drept „EXEMPLU EXTERN” când sunt interne de mult. Descria tiparul ca
+    `Declarații → Jurnale → NotaExport`, fără `Reguli`, și nu pomenea deloc varianta
+    `Verificări_` / `Abateri_`.
+
+    Avea și un defect viu: lista „Fluxuri corectate” ajunsese „F-311,06,07,14,15,…” —
+    renumerotarea potrivește token-uri întregi, deci a prefăcut doar primul element al
+    unei enumerări scrise prescurtat, lăsând restul în numerotarea veche. O listă
+    jumătate-tradusă e mai rea decât una netradusă: arată actualizată.
+    """
+    ws = wb["Instructiuni"]
+    vechi = [str(c.value).strip() for r in ws.iter_rows() for c in r
+             if isinstance(c.value, str) and c.value.strip()]
+
+    lunare = [m for m in module if m.CATALOG.get("activ") == "DA"]
+    linii = [
+        ("MODULE DECLARATIVE — instrucțiuni de utilizare", stil.F_TITLU),
+        ("", None),
+        ("Ce este acest fișier", stil.F_TITLU_BLOC),
+        (f"Cele {len(module)} module declarative care execută fluxurile din "
+         "„Plan de conturi”. Fluxul explică de ce; modulul face înregistrarea. "
+         "Completezi câteva variabile într-o foaie de input și ies jurnalele și nota "
+         "de export.", stil.F_NORMAL),
+        ("Toate foile se generează din depozit, la fiecare build. Nu se editează "
+         "structura aici: o modificare făcută în fișier se pierde la următorul `make`.",
+         stil.F_NOTA),
+        ("", None),
+        ("Cum se folosește ORICE modul", stil.F_TITLU_BLOC),
+        ("1. CatalogModule — pune Activ=DA pe modulele de care ai nevoie luna asta.",
+         stil.F_NORMAL),
+        ("2. Declarații_<MODUL> — completează doar celulele galbene cu scris albastru. "
+         "Restul sunt formule.", stil.F_NORMAL),
+        ("3. Reguli_<MODUL> — nu se completează. E regula contabilă sau fiscală, cu "
+         "temeiul ei, plus ce anume rupe corelațiile. Se citește când rezultatul te "
+         "surprinde.", stil.F_NORMAL),
+        ("4. Jurnale_<MODUL> — verifică fiecare celulă Check. Trebuie OK înainte de a "
+         "lua rezultatul de bun.", stil.F_NORMAL),
+        ("5. NotaExport_<MODUL> — filtrează Include=DA și înregistrează în program.",
+         stil.F_NORMAL),
+        ("", None),
+        ("Două tipare de foi", stil.F_TITLU_BLOC),
+        ("Declarații → Reguli → Jurnale → NotaExport — tiparul obișnuit, pentru modulele "
+         "care produc înregistrări.", stil.F_NORMAL),
+        ("Declarații → Reguli → Verificări → Abateri — pentru modulul care produce un "
+         "VERDICT, nu o înregistrare (MOD_INCHIDERE_LUNARA): confruntă balanța cu "
+         "corelațiile lunii și listează doar ce nu se potrivește.", stil.F_NORMAL),
+        ("MOD_DECONT are în plus un Registru_, pentru liniile decontului.", stil.F_NOTA),
+        ("", None),
+        ("Ce înseamnă Activ=DA", stil.F_TITLU_BLOC),
+        ("Cadență lunară NECONDIȚIONATĂ: modulul se rulează în fiecare lună la o firmă "
+         "obișnuită, fără să fie nevoie de un contract, un activ sau un eveniment "
+         "declanșator. Restul se activează când ai cazul pe masă.", stil.F_NORMAL),
+        (f"Implicit DA: {', '.join(m.COD for m in lunare)}.", stil.F_NORMAL),
+        ("", None),
+        ("Principiu de design", stil.F_TITLU_BLOC),
+        ("Modulul nu inventează conturi. Folosește doar conturile din politica declarată "
+         "+ rolurile din Plan de conturi. Porțile de calitate (ΣDr=ΣCr, stare terminală, "
+         "pas revelator) rămân aceleași ca în foaia Fluxuri.", stil.F_NORMAL),
+    ]
+
+    for r in range(ws.max_row, 0, -1):
+        ws.delete_rows(r)
+    ws.column_dimensions["A"].width = 110
+    for i, (text, font) in enumerate(linii, start=1):
+        if text:
+            stil.scrie(ws, i, 1, text, font=font, align=stil.A_WRAP_TOP)
+    return vechi
+
+
 def main():
     if not os.path.exists(SEED):
         raise SystemExit(f"Lipsește fișierul-sămânță: {SEED}")
@@ -185,6 +258,7 @@ def main():
         m.construieste(fabrica, P)
 
     extinde_catalog(wb, MODULE)
+    rescrie_instructiuni(wb, MODULE)
 
     # `date/` foloseste numerotarea VECHE a fluxurilor; renumerotarea e o singura
     # trecere finala, ca in workbook-ul de plan. Fara ea, catalogul de module ar arata

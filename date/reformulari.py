@@ -373,8 +373,40 @@ INLOCUIRI = [
     ),
 ]
 
+#: Foaia `Instructiuni` din workbook-ul de module, regenerată din catalog.
+#:
+#: Un singur motiv pentru toate cele treisprezece rânduri, de-asta stau grupate: foaia
+#: era încă scrisă pentru un fișier cu UN modul. „Cum se folosește MOD_INCHIDERE_TVA
+#: (primul modul implementat)” era tot ghidul de utilizare, pentru 17 module. SALARII,
+#: DECONT și LEASING_FIN figurau drept „EXEMPLU EXTERN” când sunt interne de mult.
+#: Tiparul era descris `Declarații → Jurnale → NotaExport`, fără `Reguli`, iar varianta
+#: `Verificări_` / `Abateri_` nu era pomenită deloc.
+#:
+#: Avea și un defect viu: lista „Fluxuri corectate” ajunsese „F-311,06,07,14,15,…”.
+#: Renumerotarea potrivește token-uri ÎNTREGI, deci a prefăcut doar primul element al
+#: unei enumerări scrise prescurtat și a lăsat restul în numerotarea veche. O listă
+#: jumătate-tradusă e mai rea decât una netradusă: arată actualizată.
+#:
+#: Workbook-ul de module n-are foaie `Istoric`, deci textul vechi nu are unde să se mute.
+#: Se declară aici — locul unde oricum stă motivul.
+INSTRUCTIUNI_VECHI = [
+    'Primul pas concret către organizarea fluxurilor din Plan de conturi pe rol ca module declarative care se „sumonează” dintr-un catalog.',
+    'Structura urmează exact pattern-ul din template-urile tale (Salarii, Leasing, Deconturi): Declarații → Reguli → Jurnale → NotaExport.',
+    'Cum se folosește MOD_INCHIDERE_TVA (primul modul implementat)',
+    '1. Deschide CatalogModule — verifică că Activ=DA pe MOD_INCHIDERE_TVA.',
+    '2. Deschide Declarații_INCHIDERE_TVA — completează celulele galbene (rulaje 4426/4427 din balanță sau jurnale SAGA).',
+    '3. Deschide Jurnale_INCHIDERE_TVA — verifică Check=0 (OK — nota se închide).',
+    '4. Deschide NotaExport_INCHIDERE_TVA — filtrează Include=DA, copiază/înregistrează în program.',
+    '5. După înregistrare: sold 4426=0, sold 4427=0, sold 4423 sau 4424 = diferența.',
+    'Ce urmează (ordine recomandată)',
+    '• Module IMPLEMENTATE: INCHIDERE_TVA, APROV_TRANZIT, INTERMEDIAR, INCHIDERE_EX, NEUTRALIZARE, VANZ_AMANUNT, TVA_INCASARE',
+    '• Module EXEMPLU EXTERN (deja declarative, aliniate în catalog): SALARII, DECONT, LEASING_FIN',
+    '• Fluxuri corectate/clarificate în Plan de conturi: F-05,06,07,14,15,16,22,24,25,28',
+    '• CatalogModule = punctul unic de sumonare. Activ=DA doar pe ce e nevoie luna curentă.',
+]
+
 #: Doar textele, pentru poartă.
-DECLARATE = [d["text"] for d in INLOCUIRI]
+DECLARATE = [d["text"] for d in INLOCUIRI] + INSTRUCTIUNI_VECHI
 
 #: text original -> textul care îl înlocuiește (folosit de auto-merge ca să știe
 #: că nu trebuie să contopească, ci să suprascrie).
