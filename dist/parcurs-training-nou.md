@@ -205,7 +205,7 @@ Un flux e util și fără modul: fluxul explică, modulul execută. Dacă adaugi
 | `MOD_SALARII` | F-413 |
 | `MOD_DECONT` | F-502 |
 | `MOD_LEASING_FIN` | F-108 |
-| `MOD_VANZ_AMANUNT` | F-316 |
+| `MOD_VANZ_AMANUNT` | F-316, F-318, F-317 |
 | `MOD_TVA_INCASARE` | F-401 |
 | `MOD_INCHIDERE_EX` | F-104 |
 | `MOD_INTERMEDIAR` | F-408, F-501, F-411 |

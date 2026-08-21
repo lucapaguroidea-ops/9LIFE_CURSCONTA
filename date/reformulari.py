@@ -328,6 +328,23 @@ INLOCUIRI = [
                "NotaExport_NEUTRALIZARE",
     ),
     dict(
+        text="Declarații_AMANUNT, Jurnale_AMANUNT, NotaExport_AMANUNT",
+        motiv="Ultima coloană „Foile din modul” la care lipsea Reguli_. Se generează "
+              "acum din cod, ca toate celelalte.",
+        devine="Declarații_AMANUNT, Reguli_AMANUNT, Jurnale_AMANUNT, NotaExport_AMANUNT",
+    ),
+    dict(
+        text="B1 Aprovizionare PVA; B2 TVA ded.; B3 Descărcare; B4 Venit; "
+             "B5 Corelații; B6 Închidere TVA",
+        motiv="Catalogul anunța șase blocuri și le numea greșit: jurnalul are cinci, iar "
+              "al cincilea e închiderea de TVA, nu corelațiile. Corelațiile nu sunt un "
+              "bloc de înregistrări — sunt două verificări pe cifre, în foaia de "
+              "Declarații, reluate la finalul jurnalului. Lista spune acum ce emite "
+              "modulul.",
+        devine="B1 Aprovizionare PVA; B2 TVA ded.; B3 Descărcare; B4 Venit; "
+               "B5 Închidere TVA",
+    ),
+    dict(
         text="Ilustrativ (sume descriptive)",
         motiv="Marcajul PARȚIAL de la 681/781 era corect când sumele erau descriptive. "
               "Acum 681 și 781 au cifre reale în F-50 (plafonul de 1.500 lei/lună) și "
