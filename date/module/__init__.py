@@ -5,11 +5,11 @@ Fiecare modul expune `COD`, `CATALOG` (rândul din CatalogModule) și
 și P e dicționarul de referințe către parametrii globali.
 """
 from .comun import CATALOG_RANDURI, formula_activ  # noqa: F401
-from . import (aprov_tranzit, capitaluri, credit_valuta, decont, fara_document,
+from . import (aprov_tranzit, avansuri, capitaluri, credit_valuta, decont, fara_document,
                iesire_mf, import_vamal,
                imobilizari,
                import_vamal, inchidere_ex, tva_incasare, taxare_inversa,
-          fara_document,
+          fara_document, avansuri,
           neutralizare,
           vanz_amanunt, inchidere_lunara, inchidere_tva, intermediar,
                leasing_fin, neutralizare, tva_incasare, vanz_amanunt,
@@ -22,7 +22,7 @@ MODULE = [capitaluri, credit_valuta, provizion, leasing_fin,
           imobilizari, subventie, iesire_mf,
           salarii, salarii_evenimente, decont, intermediar, inchidere_tva, aprov_tranzit,
           import_vamal, inchidere_ex, tva_incasare, taxare_inversa,
-          fara_document,
+          fara_document, avansuri,
           neutralizare,
           vanz_amanunt,
           # verificarea vine la urmă: se sprijină pe fluxurile de mai sus
