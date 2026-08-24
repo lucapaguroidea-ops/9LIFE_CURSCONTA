@@ -37,6 +37,9 @@ CATALOG = dict(
             "V3 Conturi care trebuie golite; V4 Verificarea CAM pe cifre",
     activ="DA",
     prefixe=("Declarații", "Reguli", "Verificări", "Abateri"),
+    # Verifică soldurile produse de celelalte module, deci stă la coadă
+    # indiferent de clasa fluxurilor lui.
+    ordine="final",
 )
 
 #: (cont, etichetă, rulaj debitor, rulaj creditor, sold) — luna-exemplu, iulie.

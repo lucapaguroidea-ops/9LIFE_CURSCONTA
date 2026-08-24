@@ -56,3 +56,34 @@ def foi(m):
     ca „Declarații_TVA” din sămânță, doar că de data asta produsă de generator.
     """
     return [f"{p}_{sufix(m)}" for p in (m.CATALOG.get("prefixe") or PREFIXE_STANDARD)]
+
+
+#: Modulele care stau la coadă indiferent de clasa fluxurilor lor.
+FINAL = "final"
+
+
+def cheie_ordine(m):
+    """Cheia de sortare a unui modul: (clasa minimă acoperită, cel mai mic ID de flux).
+
+    Ordinea documentului e ordinea planului de conturi — clasa 1 → 5 — nu ordinea în
+    care au fost adăugate modulele. Până acum poziția se scria de mână în `MODULE`, iar
+    asta a derapat exact cum derapează orice listă întreținută manual: după opt commituri
+    de adăugiri, 12 module din 22 stăteau în afara ordinii pe care fișierul o declara în
+    propriul docstring — MOD_INCHIDERE_EX, care acoperă un flux de clasa 1, ajunsese pe
+    poziția 15, după clasa 5.
+
+    Aici se calculează. Nimeni nu mai alege poziția, deci nimeni n-o mai poate greși.
+
+    `CATALOG['ordine'] = "final"` scoate modulul din regulă și îl trimite la coadă —
+    pentru cele care VERIFICĂ rezultatul celorlalte, nu produc înregistrări proprii.
+    """
+    from date import ordine as O
+
+    if m.CATALOG.get("ordine") == FINAL:
+        return (9, "")
+
+    fluxuri = [O.HARTA.get(f.strip(), f.strip())
+               for f in str(m.CATALOG["fluxuri"]).replace(";", ",").split(",")
+               if f.strip().startswith("F-")]
+    clase = [int(f[2]) for f in fluxuri if len(f) > 2 and f[2].isdigit()]
+    return (min(clase) if clase else 8, min(fluxuri) if fluxuri else "")

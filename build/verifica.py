@@ -38,6 +38,8 @@ descris multă vreme nouă porți, cu poarta 9 în forma ei veche.
  23. foile pe care catalogul le numește există, iar fiecare foaie de modul are exact
      o intrare de catalog — în ambele sensuri
  25. nicio foaie de modul nu mai vine din sămânță: fiecare are un generator în `date/`
+ 27. lista de module e ordonată cum pretinde: pe clasa de conturi a fluxurilor
+     acoperite, nu pe ordinea în care au fost adăugate
  26. harta de diacritice e aplicată complet: niciun cuvânt din partea ei stângă nu mai
      apare în foile pe care le acoperă, iar simbolurile de cont sunt neatinse
  24. nicio frază cu cifră din workbook-uri nu contrazice cifra reală („17 module
@@ -1049,6 +1051,35 @@ def poarta_diacritice(wb):
              f"{len(ddiac.FOI)} foi; {simboluri} simboluri de cont neatinse")
 
 
+def poarta_ordine_module():
+    """Poarta 27 — `MODULE` e sortată pe clasa de conturi, cum spune docstringul ei.
+
+    Ordinea comandă 92 de taburi, `Index module` și `CatalogModule`. Scrisă de mână, a
+    derapat: după opt commituri de adăugiri, 12 module din 22 stăteau în afara ordinii
+    pe care `date/module/__init__.py` o declara în propriul docstring —
+    MOD_INCHIDERE_EX, cu un flux de clasa 1, ajunsese pe poziția 15, după clasa 5.
+    Adică logica adăugirii la fișier, exact ce depozitul respinge peste tot.
+
+    Acum ordinea se derivă din `CATALOG['fluxuri']`. Poarta verifică faptul că lista
+    chiar e sortată — dacă cineva o rescrie de mână, se vede.
+    """
+    asteptat = sorted(dmod.MODULE, key=dmcomun.cheie_ordine)
+    if [m.COD for m in dmod.MODULE] == [m.COD for m in asteptat]:
+        clase = {}
+        for m in dmod.MODULE:
+            clase.setdefault(dmcomun.cheie_ordine(m)[0], []).append(m.COD)
+        rez = " · ".join(f"clasa {c}: {len(v)}" for c, v in sorted(clase.items())
+                         if c < 8)
+        ok("27", f"cele {len(dmod.MODULE)} module sunt ordonate pe clasa de conturi "
+                 f"({rez}; {len(clase.get(9, []))} la final, declarat)")
+        return
+    for i, (a, b) in enumerate(zip(dmod.MODULE, asteptat), start=1):
+        if a.COD != b.COD:
+            cade("27", f"ordinea modulelor: pe poziția {i} stă {a.COD}, dar clasa "
+                       f"fluxurilor cere {b.COD}")
+            return
+
+
 def main():
     if not os.path.exists(PLAN):
         raise SystemExit("Rulează întâi `make build` — lipsește dist/Plan_de_conturi_...xlsx")
@@ -1074,6 +1105,7 @@ def main():
     poarta_cifre_in_proza()
     poarta_foi_de_modul(wb)
     poarta_diacritice(wb)
+    poarta_ordine_module()
 
     print("\n".join(note))
     if esecuri:

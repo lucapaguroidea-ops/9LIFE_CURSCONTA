@@ -212,16 +212,16 @@ Un flux e util și fără modul: fluxul explică, modulul execută. Dacă adaugi
 | `MOD_INTERMEDIAR` | F-408, F-501, F-411 |
 | `MOD_NEUTRALIZARE` | F-311, F-312, F-209 |
 | `MOD_CAPITALURI` | F-103, F-105 |
-| `MOD_CREDIT_VALUTA` | F-107 |
 | `MOD_PROVIZION` | F-106 |
+| `MOD_CREDIT_VALUTA` | F-107 |
 | `MOD_IMOBILIZARI` | F-203, F-205, F-207, F-214 |
 | `MOD_SUBVENTIE` | F-210 |
 | `MOD_IESIRE_MF` | F-211, F-212 |
-| `MOD_SALARII_EVENIMENTE` | F-416, F-417, F-418, F-419 |
-| `MOD_IMPORT` | F-319, F-320 |
 | `MOD_TAXARE_INVERSA` | F-303, F-402 |
+| `MOD_IMPORT` | F-319, F-320 |
 | `MOD_FARA_DOCUMENT` | F-406 |
 | `MOD_AVANSURI` | F-410, F-415 |
+| `MOD_SALARII_EVENIMENTE` | F-416, F-417, F-418, F-419 |
 | `MOD_INCHIDERE_LUNARA` | F-422, F-413 |
 
 ### Ce verifică fiecare poartă *[generat]*
@@ -252,6 +252,7 @@ Un flux e util și fără modul: fluxul explică, modulul execută. Dacă adaugi
 | **22** | blocul de cifre din README e exact cel pe care generatorul l-ar produce |
 | **23** | foile pe care catalogul le numește există, iar fiecare foaie de modul are exact o intrare de catalog — în ambele sensuri |
 | **25** | nicio foaie de modul nu mai vine din sămânță: fiecare are un generator în `date/` |
+| **27** | lista de module e ordonată cum pretinde: pe clasa de conturi a fluxurilor acoperite, nu pe ordinea în care au fost adăugate |
 | **26** | harta de diacritice e aplicată complet: niciun cuvânt din partea ei stângă nu mai apare în foile pe care le acoperă, iar simbolurile de cont sunt neatinse |
 | **24** | nicio frază cu cifră din workbook-uri nu contrazice cifra reală („17 module declarative”, „68 fluxuri × pași”) — foaia Istoric e scutită, acolo cifrele vechi sunt chiar conținutul |
 
@@ -344,4 +345,4 @@ Poarta 19 leagă marcajele de întrebări la nivel de DOCUMENT: unul cu întreb�
 
 ---
 
-*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 26 porți, 22 module, 68 fluxuri la data generării.*
+*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 27 porți, 22 module, 68 fluxuri la data generării.*

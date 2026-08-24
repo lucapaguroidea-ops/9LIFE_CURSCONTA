@@ -1,32 +1,31 @@
-"""Modulele declarative adăugate în Etapa 4.
+"""Modulele declarative: fiecare execută unul sau mai multe fluxuri din planul de conturi.
 
 Fiecare modul expune `COD`, `CATALOG` (rândul din CatalogModule) și
 `construieste(F, P)`, unde F e fabrica de foi (build.foaie.Foaie legat de workbook)
 și P e dicționarul de referințe către parametrii globali.
-"""
-from .comun import CATALOG_RANDURI, formula_activ  # noqa: F401
-from . import (aprov_tranzit, avansuri, capitaluri, credit_valuta, decont, fara_document,
-               iesire_mf, import_vamal,
-               imobilizari,
-               import_vamal, inchidere_ex, tva_incasare, taxare_inversa,
-          fara_document, avansuri,
-          neutralizare,
-          vanz_amanunt, inchidere_lunara, inchidere_tva, intermediar,
-               leasing_fin, neutralizare, tva_incasare, vanz_amanunt,
-               provizion, salarii, salarii_evenimente, subventie,
-               taxare_inversa)
 
-# Ordinea = ordinea claselor de conturi, ca in restul sistemului: capitaluri, apoi
-# imobilizari, apoi terti. Foile din workbook apar in aceeasi ordine.
-MODULE = [capitaluri, credit_valuta, provizion, leasing_fin,
-          imobilizari, subventie, iesire_mf,
-          salarii, salarii_evenimente, decont, intermediar, inchidere_tva, aprov_tranzit,
-          import_vamal, inchidere_ex, tva_incasare, taxare_inversa,
-          fara_document, avansuri,
-          neutralizare,
-          vanz_amanunt,
-          # verificarea vine la urmă: se sprijină pe fluxurile de mai sus
-          inchidere_lunara]
+**Ordinea nu se scrie aici, se calculează.** `MODULE` e lista importurilor sortată cu
+`comun.cheie_ordine`, adică pe clasa de conturi a fluxurilor acoperite. Scrisă de mână,
+ordinea a derapat: după opt commituri de adăugiri, 12 module din 22 stăteau în afara
+ordinii pe care acest fișier o declara în propriul docstring. Lista de mai jos e
+alfabetică — poziția în workbook nu depinde de ea.
+"""
+from .comun import CATALOG_RANDURI, cheie_ordine, formula_activ  # noqa: F401
+from . import (aprov_tranzit, avansuri, capitaluri, credit_valuta, decont,
+               fara_document, iesire_mf, imobilizari, import_vamal, inchidere_ex,
+               inchidere_lunara, inchidere_tva, intermediar, leasing_fin,
+               neutralizare, provizion, salarii, salarii_evenimente, subventie,
+               taxare_inversa, tva_incasare, vanz_amanunt)
+
+#: Toate modulele, în ordine alfabetică. Ordinea de aici NU contează.
+_TOATE = [aprov_tranzit, avansuri, capitaluri, credit_valuta, decont, fara_document,
+          iesire_mf, imobilizari, import_vamal, inchidere_ex, inchidere_lunara,
+          inchidere_tva, intermediar, leasing_fin, neutralizare, provizion, salarii,
+          salarii_evenimente, subventie, taxare_inversa, tva_incasare, vanz_amanunt]
+
+#: Ordinea reală: pe clasa de conturi, derivată din fluxurile acoperite. Foile din
+#: workbook, `Index module` și `CatalogModule` o urmează pe asta.
+MODULE = sorted(_TOATE, key=cheie_ordine)
 
 # Parametri globali adăugați în foaia `Parametri`: cheie, etichetă, valoare, notă.
 # Cheia se folosește în module ca P["cheie"] și se rezolvă la o referință de celulă.
@@ -58,4 +57,4 @@ PARAMETRI_NOI = [
 STATUS_INLOCUIT = ["MOD_LEASING_FIN"]
 
 __all__ = ["MODULE", "PARAMETRI_NOI", "STATUS_INLOCUIT", "formula_activ",
-           "CATALOG_RANDURI"]
+           "CATALOG_RANDURI", "cheie_ordine"]
