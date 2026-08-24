@@ -25,6 +25,8 @@ ar fi roșii la build, iar poarta 8 ar pica pe un modul livrat cu erori.
     care să le declare starea, iar golul e declarat în `date/inchideri.py:GOLURI`.
 """
 
+from .comun import sectiune_temei
+
 COD = "MOD_INCHIDERE_LUNARA"
 
 CATALOG = dict(
@@ -59,6 +61,17 @@ GOLIRE = [
     ("581", "Viramente interne", 0),
     ("542", "Avansuri de trezorerie", 0),
     ("4382", "Alte creanțe sociale (de recuperat de la FNUASS)", 0),
+]
+
+
+#: (ce se sprijină pe el, temei) — secțiunea finală din `Reguli`.
+TEMEI_LEGAL = [
+    ('Perioada fiscală pentru TVA e luna calendaristică, cu excepțiile prevăzute',
+     'art. 322 Cod fiscal'),
+    ('Contribuțiile reținute și cele datorate de angajator se declară lunar',
+     'art. 147 Cod fiscal — termenul de 25 al lunii următoare'),
+    ('Corelațiile verificate aici sunt cele din foaia „Corelații de control”',
+     'sursă internă: C-24…C-29, derivate din monografii'),
 ]
 
 
@@ -177,6 +190,8 @@ def construieste(F, P):
          "comparând mai multe luni. Aici se vede CĂ există, nu de când."),
     ]:
         g.rand([a, b])
+
+    sectiune_temei(g, TEMEI_LEGAL)
 
     # --------------------------------------------------------------- Verificări
     v = F("Verificări_INCHIDERE_LUNARA",

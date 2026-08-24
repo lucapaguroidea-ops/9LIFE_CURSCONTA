@@ -29,7 +29,7 @@ lui pe factura transportatorului — și îl deduce de două ori.
 comisionarul a avansat TVA-ul și nu i s-a stins datoria — bani datorați cuiva care i-a
 scos din buzunar.
 """
-from .comun import formula_activ
+from .comun import formula_activ, sectiune_temei
 
 COD = "MOD_IMPORT"
 
@@ -69,6 +69,17 @@ CAI = [
     ("Plată directă în vamă", "Firma, din contul propriu",
      "Fără intermediar — direct 4426 = 512",
      "401.EXT rămâne doar cu valoarea mărfii"),
+]
+
+
+#: (ce se sprijină pe el, temei) — secțiunea finală din `Reguli`.
+TEMEI_LEGAL = [
+    ('Baza de impozitare la import = valoarea în vamă + taxele vamale datorate',
+     'art. 289 Cod fiscal'),
+    ('Taxele vamale intră în costul de achiziție al stocului',
+     'OMFP 1802/2014, pct. 8 — costul include taxele nerecuperabile'),
+    ('Transportul intern e cost de achiziție, dar nu intră în baza vamală',
+     'art. 289 CF (baza vamală) coroborat cu OMFP 1802/2014, pct. 8 (costul)'),
 ]
 
 
@@ -183,6 +194,8 @@ def construieste(F, P):
         "MOD_INCHIDERE_TVA); nu intră niciodată în costul stocului",
     ]:
         g.nota(linie)
+
+    sectiune_temei(g, TEMEI_LEGAL)
 
     # ------------------------------------------------------------------ Jurnale
     j = F("Jurnale_IMPORT",

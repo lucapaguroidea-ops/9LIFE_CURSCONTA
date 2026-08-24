@@ -36,6 +36,8 @@ valoare, și rămâne ca atare: portarea reproduce, nu rescrie.
 Modulul era una din cele șapte foi rămase din sămânța de 14.08.2026.
 """
 
+from .comun import sectiune_temei
+
 COD = "MOD_NEUTRALIZARE"
 
 CATALOG = dict(
@@ -55,6 +57,17 @@ LANT = [
     ("SERVICII", "641/601=…", "332=712", "712=332", "(nu e stoc final)",
      "712 stins la livrare"),
     ("MF", "601=301, 641=421", "231=722", "—", "213=231", "(nu e vânzare — e activ)"),
+]
+
+
+#: (ce se sprijină pe el, temei) — secțiunea finală din `Reguli`.
+TEMEI_LEGAL = [
+    ('Producția de imobilizări în regie proprie se evidențiază prin 722',
+     'OMFP 1802/2014 — funcțiunea contului 722'),
+    ('Variația stocurilor de produse și producție în curs, prin 711',
+     'OMFP 1802/2014 — funcțiunea contului 711'),
+    ('Costul de producție cuprinde materiile, manopera și cota de cheltuieli indirecte',
+     'OMFP 1802/2014, pct. 9'),
 ]
 
 
@@ -163,6 +176,8 @@ def construieste(F, P):
         "• „711 sau 712” la servicii — pentru servicii e strict 712",
     ]:
         g.nota(linie)
+
+    sectiune_temei(g, TEMEI_LEGAL)
 
     # ------------------------------------------------------------------ Jurnale
     j = F("Jurnale_NEUTRALIZARE",

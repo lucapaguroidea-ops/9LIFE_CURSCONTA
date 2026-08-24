@@ -22,7 +22,7 @@ Golul vine din sămânță și e lăsat aici NESCHIMBAT, ca portarea să rămân
 are de repartizat efectiv folosește MOD_CAPITALURI, care face exact asta (rezervă legală,
 dividende, 1171) și e construit pentru ea.
 """
-from .comun import formula_activ
+from .comun import formula_activ, sectiune_temei
 
 COD = "MOD_INCHIDERE_EX"
 
@@ -68,6 +68,17 @@ CONTURI = [
     ("441", "Impozit pe profit", "Patrimonial — Datorie", "Datorie către buget"),
     ("4417", "Impozit pe venit micro / alte impozite", "Patrimonial — Datorie",
      "Conform OMF actualizat"),
+]
+
+
+#: (ce se sprijină pe el, temei) — secțiunea finală din `Reguli`.
+TEMEI_LEGAL = [
+    ('Veniturile și cheltuielile se închid prin 121 la sfârșitul exercițiului',
+     'OMFP 1802/2014 — funcțiunea contului 121'),
+    ('Cota de impozit pe profit',
+     'art. 17 Cod fiscal'),
+    ('Rezultatul rămas se reportează pe 117 până la repartizare sau acoperire',
+     'OMFP 1802/2014 — funcțiunea contului 117'),
 ]
 
 
@@ -156,6 +167,8 @@ def construieste(F, P):
         "contabilă",
     ]:
         g.nota(linie)
+
+    sectiune_temei(g, TEMEI_LEGAL)
 
     # ------------------------------------------------------------------ Jurnale
     j = F("Jurnale_INCHIDERE_EX",

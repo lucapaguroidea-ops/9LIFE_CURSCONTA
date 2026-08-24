@@ -87,3 +87,21 @@ def cheie_ordine(m):
                if f.strip().startswith("F-")]
     clase = [int(f[2]) for f in fluxuri if len(f) > 2 and f[2].isdigit()]
     return (min(clase) if clase else 8, min(fluxuri) if fluxuri else "")
+
+
+def sectiune_temei(g, randuri):
+    """Secțiunea „Temei legal” de la finalul unei foi `Reguli_`.
+
+    Depozitul își impune regula asta singur: `date/intrebari.py` refuză la import un
+    răspuns fără temei. Foile de reguli scăpaseră de sub ea — opt module din 22 nu
+    citau nicio bază legală, patru dintre ele scrise recent. O regulă fără temeiul ei
+    nu se poate verifica: rămâne o afirmație pe care o crezi sau n-o crezi.
+
+    Cele 14 module care aveau deja o coloană `Temei` în tabelele lor nu primesc secțiunea
+    asta — temeiul e deja lângă regula pe care o susține, ceea ce e mai bine.
+    """
+    g.gol()
+    g.sectiune("Temei legal")
+    g.cap(["Ce se sprijină pe el", "Temei"])
+    for afirmatie, temei in randuri:
+        g.rand([afirmatie, temei])

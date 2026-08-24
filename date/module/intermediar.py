@@ -61,7 +61,18 @@ TIPURI = [
 ]
 
 
-from .comun import formula_activ  # noqa: E402
+from .comun import formula_activ, sectiune_temei  # noqa: E402
+
+
+#: (ce se sprijină pe el, temei) — secțiunea finală din `Reguli`.
+TEMEI_LEGAL = [
+    ('408 / 418 — datorii și creanțe pentru care documentul n-a sosit',
+     'OMFP 1802/2014 — funcțiunea conturilor de facturi nesosite / de întocmit'),
+    ('473 — operațiuni în curs de clarificare, cu sold nul la închiderea exercițiului',
+     'OMFP 1802/2014 — funcțiunea contului 473; soldul la 31.12 e semnalat la audit'),
+    ('581 — viramente interne, evită dubla înregistrare între conturi de trezorerie',
+     'OMFP 1802/2014 — funcțiunea contului 581'),
+]
 
 
 def construieste(F, P):
@@ -155,6 +166,8 @@ def construieste(F, P):
         "• Modulul nu amestecă tipurile — un set de Declarații = un tip + o operațiune",
     ]:
         g.nota(linie)
+
+    sectiune_temei(g, TEMEI_LEGAL)
 
     # ------------------------------------------------------------------ Jurnale
     j = F("Jurnale_INTERMEDIAR",

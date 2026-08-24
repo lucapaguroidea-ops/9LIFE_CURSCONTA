@@ -29,7 +29,7 @@ baza unei derogări acordate de Consiliul UE, prelungite succesiv, iar cea în v
 dincolo de data asta. Nu se presupune prelungirea automată — se reverifică înainte de
 prima factură din 2027.
 """
-from .comun import formula_activ
+from .comun import formula_activ, sectiune_temei
 
 COD = "MOD_TAXARE_INVERSA"
 
@@ -66,6 +66,17 @@ LISTA_331 = [
      "doar dacă valoarea fără TVA de pe factură ≥ 22.500 lei"),
     ("Console de jocuri", "doar dacă valoarea fără TVA de pe factură ≥ 22.500 lei"),
     ("Tablete și laptopuri", "doar dacă valoarea fără TVA de pe factură ≥ 22.500 lei"),
+]
+
+
+#: (ce se sprijină pe el, temei) — secțiunea finală din `Reguli`.
+TEMEI_LEGAL = [
+    ('Taxare inversă la achiziții intracomunitare de bunuri',
+     'art. 307 alin. (2) Cod fiscal — persoana obligată la plată e beneficiarul'),
+    ('Taxare inversă internă, pe lista limitativă de operațiuni',
+     'art. 331 Cod fiscal — pe baza derogării UE, valabilă până la 31.12.2026'),
+    ('Declarația recapitulativă pentru operațiunile intracomunitare',
+     'art. 325 Cod fiscal — D390'),
 ]
 
 
@@ -182,6 +193,8 @@ def construieste(F, P):
         "anulează reciproc — vezi MOD_INCHIDERE_TVA",
     ]:
         g.nota(linie)
+
+    sectiune_temei(g, TEMEI_LEGAL)
 
     # ------------------------------------------------------------------ Jurnale
     j = F("Jurnale_TAXARE_INVERSA",

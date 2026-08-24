@@ -38,6 +38,8 @@ descris multă vreme nouă porți, cu poarta 9 în forma ei veche.
  23. foile pe care catalogul le numește există, iar fiecare foaie de modul are exact
      o intrare de catalog — în ambele sensuri
  25. nicio foaie de modul nu mai vine din sămânță: fiecare are un generator în `date/`
+ 28. fiecare foaie `Reguli_` își citează temeiul: o coloană `Temei` lângă regulă
+     sau o secțiune „Temei legal” la final
  27. lista de module e ordonată cum pretinde: pe clasa de conturi a fluxurilor
      acoperite, nu pe ordinea în care au fost adăugate
  26. harta de diacritice e aplicată complet: niciun cuvânt din partea ei stângă nu mai
@@ -1080,6 +1082,35 @@ def poarta_ordine_module():
             return
 
 
+def poarta_temei_reguli():
+    """Poarta 28 — nicio foaie `Reguli_` fără temeiul ei.
+
+    Depozitul își impune regula asta singur în altă parte: `date/intrebari.py` refuză
+    la import un răspuns fără temei legal. Foile de reguli scăpaseră de sub ea — opt
+    module din 22 nu citau nicio bază, patru dintre ele scrise recent. O regulă fără
+    temei nu se poate verifica: rămâne o afirmație pe care o crezi sau n-o crezi.
+
+    Se acceptă ambele forme: o coloană `Temei` lângă regula pe care o susține (mai bine,
+    fiindcă stă unde se caută) sau o secțiune „Temei legal” la finalul foii.
+    """
+    wbm = openpyxl.load_workbook(MODULE, read_only=True)
+    fara = []
+    for nume in wbm.sheetnames:
+        if not nume.startswith("Reguli_"):
+            continue
+        text = " ".join(str(c) for r in wbm[nume].iter_rows(values_only=True)
+                        for c in r if c)
+        if "emei" not in text:
+            fara.append(nume)
+    total = sum(1 for n in wbm.sheetnames if n.startswith("Reguli_"))
+    wbm.close()
+    if fara:
+        for n in fara[:5]:
+            cade("28", f"{n}: nicio regulă nu-și citează temeiul")
+        return
+    ok("28", f"toate cele {total} foi de reguli își citează temeiul legal")
+
+
 def main():
     if not os.path.exists(PLAN):
         raise SystemExit("Rulează întâi `make build` — lipsește dist/Plan_de_conturi_...xlsx")
@@ -1106,6 +1137,7 @@ def main():
     poarta_foi_de_modul(wb)
     poarta_diacritice(wb)
     poarta_ordine_module()
+    poarta_temei_reguli()
 
     print("\n".join(note))
     if esecuri:

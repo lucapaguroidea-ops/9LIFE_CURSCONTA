@@ -13,6 +13,8 @@ lunare. Modulul calculează cota și arată explicit cât din amortizare rămân
 proprie a firmei.
 """
 
+from .comun import sectiune_temei
+
 COD = "MOD_SUBVENTIE"
 
 CATALOG = dict(
@@ -23,6 +25,17 @@ CATALOG = dict(
     blocuri="B1 Încasarea subvenției; B2 Achiziția activului; B3 Amortizare + eliberare",
     activ="NU",
 )
+
+
+#: (ce se sprijină pe el, temei) — secțiunea finală din `Reguli`.
+TEMEI_LEGAL = [
+    ('Subvenția pentru investiții se înregistrează ca venit amânat, nu ca venit al lunii',
+     'OMFP 1802/2014, pct. 397–404 — conturile 475x'),
+    ('Se eliberează la venit pe măsura amortizării activului finanțat',
+     'OMFP 1802/2014, pct. 400 — simetrie cu cheltuiala pe care o compensează'),
+    ('Cota de finanțare: dacă subvenția acoperă doar o parte, eliberarea e proporțională',
+     'OMFP 1802/2014, pct. 401'),
+]
 
 
 def construieste(F, P):
@@ -160,6 +173,8 @@ def construieste(F, P):
          "Subvenția se epuizează înainte sau după activ"),
     ]:
         g.rand(list(row))
+
+    sectiune_temei(g, TEMEI_LEGAL)
 
     # ------------------------------------------------------------------- Jurnale
     j = F("Jurnale_SUBVENTIE", {"A": 8, "B": 14, "C": 14, "D": 48, "E": 14, "F": 14,

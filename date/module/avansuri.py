@@ -33,7 +33,7 @@ Două lucruri se greșesc aici, amândouă din același reflex:
 TVA-ul se colectează chiar dacă banii se returnează luna următoare. Dacă încasarea și
 restituirea se închid în aceeași lună, situația se neutralizează singură.
 """
-from .comun import formula_activ
+from .comun import formula_activ, sectiune_temei
 
 COD = "MOD_AVANSURI"
 
@@ -62,6 +62,17 @@ UNDE_MERGE = [
      "Un cont de activ cu sold contrar naturii lui = avans neînregistrat (C-23)."),
     ("TVA din suma încasată peste factură", "se extrage: sumă ÷ (1 + cotă)",
      "Suma virată e TVA-inclusivă. Pusă integral pe 419, TVA rămâne necolectată."),
+]
+
+
+#: (ce se sprijină pe el, temei) — secțiunea finală din `Reguli`.
+TEMEI_LEGAL = [
+    ('TVA devine exigibilă la data încasării avansului, înainte de livrare',
+     'art. 282 alin. (2) lit. b) Cod fiscal'),
+    ('La factura finală se regularizează avansul facturat anterior',
+     'art. 330 alin. (1) lit. c) Cod fiscal — corectarea facturii'),
+    ('Sumele încasate peste valoarea facturii sunt datorie față de client, nu venit',
+     'OMFP 1802/2014 — funcțiunea contului 419'),
 ]
 
 
@@ -225,6 +236,8 @@ def construieste(F, P):
         "MOD_TVA_INCASARE",
     ]:
         g.nota(linie)
+
+    sectiune_temei(g, TEMEI_LEGAL)
 
     # ------------------------------------------------------------------ Jurnale
     j = F("Jurnale_AVANSURI",
