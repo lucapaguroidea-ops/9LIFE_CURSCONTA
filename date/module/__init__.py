@@ -12,14 +12,16 @@ alfabetică — poziția în workbook nu depinde de ea.
 """
 from .comun import CATALOG_RANDURI, cheie_ordine, formula_activ  # noqa: F401
 from . import (aprov_tranzit, avansuri, capitaluri, credit_valuta, decont,
-               fara_document, iesire_mf, imobilizari, import_vamal, inchidere_ex,
+               dividende, fara_document, iesire_mf, imobilizari, import_vamal,
+               inchidere_ex,
                inchidere_lunara, inchidere_tva, intermediar, leasing_fin,
                neutralizare, provizion, salarii, salarii_evenimente, subventie,
                taxare_inversa, tva_incasare, vanz_amanunt)
 
 #: Toate modulele, în ordine alfabetică. Ordinea de aici NU contează.
-_TOATE = [aprov_tranzit, avansuri, capitaluri, credit_valuta, decont, fara_document,
-          iesire_mf, imobilizari, import_vamal, inchidere_ex, inchidere_lunara,
+_TOATE = [aprov_tranzit, avansuri, capitaluri, credit_valuta, decont, dividende,
+          fara_document, iesire_mf, imobilizari, import_vamal, inchidere_ex,
+          inchidere_lunara,
           inchidere_tva, intermediar, leasing_fin, neutralizare, provizion, salarii,
           salarii_evenimente, subventie, taxare_inversa, tva_incasare, vanz_amanunt]
 
@@ -49,6 +51,11 @@ PARAMETRI_NOI = [
      "art. 220^3 CF — cheltuiala angajatorului, nu reținere"),
     ("cota_impozit_profit", "Impozit pe profit", 0.16,
      "art. 17 CF — folosit la cuantificarea efectului unei cheltuieli nedeductibile"),
+    # Aceeași valoare ca impozitul pe profit, dar alt temei și alt istoric: dividendele
+    # au trecut de la 8% la 10% și apoi la 16% pentru distribuirile de la 01.01.2026.
+    # Un parametru comun ar lega două cote care se schimbă independent.
+    ("cota_impozit_dividend", "Impozit pe dividende", 0.16,
+     "art. 43 CF, modificat prin L. 141/2025 — cota urmează data DISTRIBUIRII"),
 ]
 
 # Module care existau în CatalogModule ca „EXEMPLU EXTERN” și sunt acum implementate.

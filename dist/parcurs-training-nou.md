@@ -214,6 +214,7 @@ Un flux e util și fără modul: fluxul explică, modulul execută. Dacă adaugi
 | `MOD_CAPITALURI` | F-103, F-105 |
 | `MOD_PROVIZION` | F-106 |
 | `MOD_CREDIT_VALUTA` | F-107 |
+| `MOD_DIVIDENDE` | F-109, F-110 |
 | `MOD_IMOBILIZARI` | F-203, F-205, F-207, F-214 |
 | `MOD_SUBVENTIE` | F-210 |
 | `MOD_IESIRE_MF` | F-211, F-212 |
@@ -347,4 +348,4 @@ Poarta 19 leagă marcajele de întrebări la nivel de DOCUMENT: unul cu întreb�
 
 ---
 
-*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 29 porți, 22 module, 80 fluxuri la data generării.*
+*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 29 porți, 23 module, 80 fluxuri la data generării.*
