@@ -92,7 +92,7 @@ DOCUMENTE = [
         sursa="surse/training-2-2026-08-07/notite-revizuit.md",
         iesire="dist/capitaluri-credite-provizioane.md",
         titlu="Capitaluri, credite, leasing și provizioane",
-        subtitlu="Surse: training 07.08.2026 · adâncit cu 19.08.2026 — versiune revizuită",
+        subtitlu="Surse: training 07.08.2026 · adâncit cu 19.08.2026, 21.08.2026 și 26.08.2026 — versiune revizuită",
         adaugiri=[
             # Închiderea lui 121 și impozitul pe profit sunt F-104: capitaluri, nu
             # stocuri. Sursa le ține sub §2, „mărfuri” — aici se rup de acolo.
@@ -102,6 +102,22 @@ DOCUMENTE = [
             # secțiune despre regimul de impozitare — e un gol de subiect, nu o tranșă.
             dict(bloc="## 6. Impozit pe profit sau impozit pe venit",
                  sectiune_noua="Impozit pe profit sau impozit pe venit (micro)"),
+            # Dividendele au deja un fir în §1 (restricțiile L. 239/2025) și în §1.3
+            # (cota de 16%), dar acolo e vorba de CÂND se POATE distribui. Materialul
+            # din 26.08 e despre CUM se face — cotele din 1012, impozitul, interimarele,
+            # regularizarea — și e destul cât să stea singur, nu îngropat în §1.
+            dict(bloc="## 2. Dividende",
+                 sectiune_noua="Dividende: repartizare, impozit și interimare"),
+            # Creditarea e datorie față de asociat, nu capital propriu: 455 stă lângă
+            # capitaluri pentru că e finanțare de la același om, nu pentru că ar fi
+            # aceeași natură. De aceea secțiune proprie, nu subsecțiune în §1.
+            #
+            # Simbolul de cont se pune la COADA titlului, nu în mijloc. Poarta 16
+            # acceptă un titlu îmbogățit prin containment — „Dividende” se regăsește în
+            # „Dividende: repartizare, impozit și interimare” — dar o inserție la mijloc
+            # rupe potrivirea, și chiar asta s-a întâmplat la prima încercare.
+            dict(bloc="## 3. Creditarea de societate și relațiile cu asociații",
+                 sectiune_noua="Creditarea de societate și relațiile cu asociații (455)"),
         ],
         # rândurile de legendă vechi, înlocuite de tabelul canonic
         legenda_veche=[
@@ -149,11 +165,16 @@ DOCUMENTE = [
         sursa="surse/training-3-2026-08-12/notite-revizuit.md",
         iesire="dist/imobilizari.md",
         titlu="Imobilizări",
-        subtitlu="Surse: training 12.08.2026 · adâncit cu 19.08.2026 — "
+        subtitlu="Surse: training 12.08.2026 · adâncit cu 19.08.2026 și 26.08.2026 — "
                  "versiune revizuită, reorganizată și contraverificată",
         adaugiri=[
             dict(bloc="## 7. Operațiuni speciale",
                  in_sectiune="## 11. Ieșiri din gestiune"),
+            # Subvenția pentru investiții e despre un ACTIV pe toată durata lui de
+            # amortizare: fără imobilizare n-are ce relua la venit. Documentul n-avea
+            # secțiune pe subiect, deși F-210 exista — e un gol de temă, nu o tranșă.
+            dict(bloc="## 1. Subvenții pentru investiții și fonduri europene",
+                 sectiune_noua="Subvenții pentru investiții și fonduri europene"),
         ],
         legenda_veche=[
             "**Legendă folosită în document:**",

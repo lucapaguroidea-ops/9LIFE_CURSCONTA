@@ -55,10 +55,11 @@ Aici e tot rostul mecanismului. Clădirea din proiect se amortizează pe 40 de a
 100.000 ÷ 40 ani ÷ 12 luni = 208,33 lei amortizare lunară
 ```
 
-În aceeași lună, subvenția se reia la venit **în cota de finanțare**:
+În aceeași lună, subvenția se reia la venit **în cota de finanțare**. Reluarea se
+calculează pe valoarea SUBVENȚIONATĂ, nu pe amortizarea deja rotunjită:
 
 ```
-208,33 × 80 % = 166,67 lei
+80.000 ÷ 480 luni = 166,67 lei
 ```
 
 Nota lunară, cu ambele jumătăți la vedere:
@@ -68,11 +69,15 @@ Nota lunară, cu ambele jumătăți la vedere:
 4758 = 7584       166,67     reluarea subvenției, doar pe cota finanțată
 ```
 
-Efectul net pe rezultat e **41,66 lei pe lună** — adică exact amortizarea aportului
-propriu (20 % × 208,33). Timp de 40 de ani: cheltuială, venit, cheltuială, venit.
+Efectul net contabil e **41,66 lei pe lună** (208,33 − 166,67), iar cota teoretică a
+aportului propriu e **41,67** (20.000 ÷ 480). Banul de diferență e reziduu de rotunjire:
+cele trei mărimi se rotunjesc fiecare independent, iar la ultima lună se regularizează.
+Timp de 40 de ani: cheltuială, venit, cheltuială, venit.
 
 ⚠️ Notița scria reluarea ca **166,40**, calculată pe amortizarea rotunjită (208 × 80 %).
-Cifra corectă e 166,67, pe amortizarea reală de 208,33. Diferența e mică lunar, dar
+Cifra corectă e **166,67**. Atenție și la varianta intermediară: 208,33 × 80 % dă 166,66,
+tot greșit, cu un ban. Ordinea corectă e împărțirea valorii subvenționate la durată, nu
+aplicarea cotei peste o amortizare deja rotunjită. Diferența e mică lunar, dar
 sistematică: pe 480 de luni se acumulează.
 
 ➕ Concluzia formatorului, formulată ca regulă de verificare: **dacă am o cheltuială din
@@ -85,12 +90,18 @@ Un plus constatat la inventar la imobilizări se înregistrează tot prin grupa 
 amânat, nu direct la venit:
 
 ```
-4458 = 4754
+2131 = 4754        la valoarea justă din raportul de evaluare
 ```
 
 Motivul e același: o imobilizare are drept cheltuială **amortizarea**, iar venitul
 trebuie să apară în același ritm. Recunoașterea imediată la venit ar concentra într-o
 lună un venit care acoperă o cheltuială întinsă pe toată durata de viață.
+
+⚠️ Notița scria debitul ca `4458`. Contul corect e cel de **imobilizare** (2131, 212,
+214 — după natura bunului găsit). 4458 e o CREANȚĂ: „alte sume primite cu caracter de
+subvenții”, adică bani de încasat de la cineva. La un plus de inventar nu ai de primit
+nimic de la nimeni — ai găsit bunul. Înregistrat pe 4458, în balanță ar apărea o sumă de
+încasat care nu există și pe care nimeni n-ar putea-o stinge vreodată.
 
 ❓ Notița indică `7584 / 7588` fără să tranșeze care se folosește la plusul de inventar.
 Cele două nu sunt echivalente: 7584 e „venituri din subvenții pentru investiții", 7588 e

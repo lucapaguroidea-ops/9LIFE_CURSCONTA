@@ -1,5 +1,5 @@
 # Imobilizări
-### Surse: training 12.08.2026 · adâncit cu 19.08.2026 — versiune revizuită, reorganizată și contraverificată
+### Surse: training 12.08.2026 · adâncit cu 19.08.2026 și 26.08.2026 — versiune revizuită, reorganizată și contraverificată
 
 ---
 
@@ -745,6 +745,120 @@ Reluare:      291  = 7813
 ```
 
 **Distincția-cheie de reținut:** amortizarea = consum sistematic, previzibil, planificat. Ajustarea = pierdere de valoare, neplanificată, reversibilă. Ajustările pentru depreciere sunt, ca regulă, **nedeductibile fiscal** pentru imobilizări.
+
+## 19. Subvenții pentru investiții și fonduri europene
+### 19.1 Corespondența 445 ↔ 475
+
+
+Grupa 445 ține **creanța** față de finanțator; grupa 475 ține **venitul amânat** care
+urmează să fie recunoscut pe măsura amortizării. Se folosesc în pereche:
+
+| Creanță | Venit amânat | Ce finanțează |
+|---|---|---|
+| 4451 | 4751 | Subvenții guvernamentale pentru investiții |
+| 4452 | 4752 | Împrumuturi nerambursabile cu caracter de subvenții |
+| 4458 | 4753 / 4754 / 4758 | Alte sume primite cu caracter de subvenții |
+
+➕ Corespondența nu e mnemotehnică: fiecare pereche păstrează separat *de la cine ai de
+primit* și *cât din venit nu ți se cuvine încă*. Confundate, subvenția ajunge venit în
+luna încasării, ceea ce umflă rezultatul cu bani care acoperă o cheltuială viitoare.
+
+
+### 19.2 Când se înregistrează un proiect european
+
+
+Un proiect pe fonduri europene se înregistrează în contabilitate **când primesc
+aprobarea de la autoritate** — nu când primesc banii, nu la semnarea contractului de
+consultanță.
+
+⚠️ Momentul contează: creanța și venitul amânat se nasc la aprobare. Înregistrat la
+încasare, tot mecanismul de reluare la venit pornește cu întârziere, iar corelația dintre
+amortizare și venit se rupe pentru lunile dintre aprobare și încasare.
+
+
+### 19.3 Aportul propriu și TVA-ul nedecontat
+
+
+Societatea vine cu un **aport de 10 / 20 / 30 %**, în funcție de proiect și de ramura în
+care se încadrează. Restul e subvenție.
+
+Valorile din proiect sunt **fără TVA**: TVA-ul nu se decontează și nu face parte dintr-un
+proiect european.
+
+Exemplu: proiect de **100.000 lei**, subvenție **80 %**.
+
+```
+4452 = 4758        80.000     creanța și venitul amânat, la aprobare
+5121 = 4452        80.000     încasarea fondurilor
+```
+
+➕ Între cele două înregistrări, creanța poate sta „latentă" oricât: nimic nu se reia la
+venit până nu apare prima cheltuială cu activul finanțat.
+
+
+### 19.4 Amortizarea și reluarea la venit merg împreună
+
+
+Aici e tot rostul mecanismului. Clădirea din proiect se amortizează pe 40 de ani:
+
+```
+100.000 ÷ 40 ani ÷ 12 luni = 208,33 lei amortizare lunară
+```
+
+În aceeași lună, subvenția se reia la venit **în cota de finanțare**. Reluarea se
+calculează pe valoarea SUBVENȚIONATĂ, nu pe amortizarea deja rotunjită:
+
+```
+80.000 ÷ 480 luni = 166,67 lei
+```
+
+Nota lunară, cu ambele jumătăți la vedere:
+
+```
+6811 = 2812       208,33     cheltuiala cu amortizarea, pe toată valoarea
+4758 = 7584       166,67     reluarea subvenției, doar pe cota finanțată
+```
+
+Efectul net contabil e **41,66 lei pe lună** (208,33 − 166,67), iar cota teoretică a
+aportului propriu e **41,67** (20.000 ÷ 480). Banul de diferență e reziduu de rotunjire:
+cele trei mărimi se rotunjesc fiecare independent, iar la ultima lună se regularizează.
+Timp de 40 de ani: cheltuială, venit, cheltuială, venit.
+
+⚠️ Notița scria reluarea ca **166,40**, calculată pe amortizarea rotunjită (208 × 80 %).
+Cifra corectă e **166,67**. Atenție și la varianta intermediară: 208,33 × 80 % dă 166,66,
+tot greșit, cu un ban. Ordinea corectă e împărțirea valorii subvenționate la durată, nu
+aplicarea cotei peste o amortizare deja rotunjită. Diferența e mică lunar, dar
+sistematică: pe 480 de luni se acumulează.
+
+➕ Concluzia formatorului, formulată ca regulă de verificare: **dacă am o cheltuială din
+proiect, trebuie să am și un venit în aceeași lună.** O lună cu amortizare și fără
+reluare e o eroare, nu o opțiune.
+
+
+### 19.5 Plusuri la inventar la imobilizări
+
+
+Un plus constatat la inventar la imobilizări se înregistrează tot prin grupa venitului
+amânat, nu direct la venit:
+
+```
+2131 = 4754        la valoarea justă din raportul de evaluare
+```
+
+Motivul e același: o imobilizare are drept cheltuială **amortizarea**, iar venitul
+trebuie să apară în același ritm. Recunoașterea imediată la venit ar concentra într-o
+lună un venit care acoperă o cheltuială întinsă pe toată durata de viață.
+
+⚠️ Notița scria debitul ca `4458`. Contul corect e cel de **imobilizare** (2131, 212,
+214 — după natura bunului găsit). 4458 e o CREANȚĂ: „alte sume primite cu caracter de
+subvenții”, adică bani de încasat de la cineva. La un plus de inventar nu ai de primit
+nimic de la nimeni — ai găsit bunul. Înregistrat pe 4458, în balanță ar apărea o sumă de
+încasat care nu există și pe care nimeni n-ar putea-o stinge vreodată.
+
+❓ Notița indică `7584 / 7588` fără să tranșeze care se folosește la plusul de inventar.
+Cele două nu sunt echivalente: 7584 e „venituri din subvenții pentru investiții", 7588 e
+„alte venituri din exploatare". Presupun **7584**, prin simetrie cu 475x, dar rămâne de
+confirmat.
 
 ---
 

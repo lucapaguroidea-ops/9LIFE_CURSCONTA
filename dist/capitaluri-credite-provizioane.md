@@ -1,5 +1,5 @@
 # Capitaluri, credite, leasing și provizioane
-### Surse: training 07.08.2026 · adâncit cu 19.08.2026 — versiune revizuită
+### Surse: training 07.08.2026 · adâncit cu 19.08.2026, 21.08.2026 și 26.08.2026 — versiune revizuită
 
 ---
 
@@ -593,6 +593,247 @@ soldul lor normal este **creditor**. Un sold debitor înseamnă că s-a plătit 
 decât se datorează — de verificat, nu de ignorat.
 
 ---
+
+## 13. Dividende: repartizare, impozit și interimare
+### 13.1 Analiticele pe 1012 — cotele de participare
+
+
+**1012 se ține pe analitic, pe asociat**, iar denumirea analiticului poartă procentul:
+
+```
+1012.1 = Ionescu 33,3 %
+1012.2 = Popescu 33,3 %
+1012.3 = Xulescu 33,3 %
+```
+
+➕ Rostul: balanța trebuie să vorbească de la sine. Când vine hotărârea AGA, verifici
+direct în balanță ce cotă are fiecare, fără să deschizi actul constitutiv.
+
+La o firmă nouă cu 1012 „la grămadă", cota de participare se ia de la ONRC și se creează
+analiticele.
+
+⚠️ Cazuri ajunse la comisia de disciplină la ANAF — la fuziuni și cedări de părți sociale
+— pentru că experții contabili nu obținuseră procentele pe analitice. Consecința nu e doar
+a firmei: afectează și persoana în cauză, la ce poate ridica din societate.
+
+
+### 13.2 Hotărârea AGA e documentul de bază
+
+
+Documentul de bază pentru distribuirea dividendelor este **hotărârea AGA**, întocmită
+statutar și semnată. Repartizarea se face în funcție de participarea la capitalul social.
+
+⚠️ **Nu se înregistrează dividende fără hotărârea AGA.** Formatorul citează cazuri de
+experți contabili ajunși la comisia de disciplină exact pentru asta.
+
+Ordinea de lucru: se ia balanța de la început, se verifică în 1012 cota fiecăruia, apoi
+se contraverifică ce scrie în AGA.
+
+
+### 13.3 Dividende certe din rezultatul reportat
+
+
+Contul **1171** ține profitul nerepartizat din anii anteriori, pe analitic **pe an**.
+Poate avea sold debitor (pierdere) sau creditor (profit).
+
+Repartizarea a câte 10.000 lei către trei asociați:
+
+```
+1171 = 457.1      10.000
+1171 = 457.2      10.000
+1171 = 457.3      10.000
+```
+
+**457** se ține pe analitic pe persoană, conform procentelor din 1012.
+
+Cele două feluri de dividende:
+
+| Tip | Cont | Când |
+|---|---|---|
+| Interimare | 456 | distribuite în cursul anului curent |
+| Certe | 457 | repartizate din rezultatul unui exercițiu încheiat |
+
+
+### 13.4 Impozitul pe dividende
+
+
+Cota este **16 %**. Dacă firma alege să plătească impozitul înainte de ridicare:
+
+```
+457.1 = 446       1.600      16 % × 10.000
+457.2 = 446       1.600
+457.3 = 446       1.600
+```
+
+Rămâne pe fiecare analitic de 457 un rest de plată de **8.400 lei**.
+
+Plățile:
+
+```
+457.1 = 5121      8.400      dividendul net
+446   = 5121      1.600      impozitul
+```
+
+
+### 13.5 Declarațiile: D100, D205, Declarația Unică
+
+
+- **D100** — ori de câte ori am impozit de plată. La completare, atenție la distincția
+  persoane fizice / persoane juridice: există rubrică separată pentru impozitul pe
+  dividende la persoane fizice.
+- **D205** — declarație informativă, o dată pe an, cumulativ. Acoperă și alte surse
+  (chirii, dividende), cu două rubrici distincte: **dividende distribuite** și
+  **dividende ridicate**.
+- **Declarația Unică** — la dividendele **ridicate** se plătește sănătate, nu la cele
+  distribuite. ❓
+
+**Termenul care surprinde:** impozitul pe dividende se plătește cel târziu la **25.01 a
+anului următor repartizării, chiar dacă dividendele nu au fost ridicate.** Obligația e
+față de buget, nu față de asociat.
+
+➕ **Verificarea încrucișată:** D205 trebuie corelat cu D100. La întocmire se cere fișa
+pe plătitor (sau fișa simplificată) și se confruntă cu fișa contului 446 din balanță —
+cazul care se caută e o plată făcută fără declarație.
+
+
+### 13.6 Dividende interimare — contul 463
+
+
+Dividendele interimare se distribuie **din profitul anului curent**, tot în baza AGA, dar
+legea cere în plus **inventariere** și **bilanț interimar**. Se acordă doar trimestrial.
+
+Exemplu: la iulie, după închiderea a 6 luni și după înregistrarea impozitului, soldul lui
+121 e **80.000 lei**. Administratorul vrea să ridice 100.000 — nu poate: plafonul e
+profitul realizat.
+
+```
+463 = 456        80.000      maximul e soldul contului 121
+456 = 446        12.800      impozitul, 16 %
+456 = 5121       67.200      plata către administrator
+```
+
+➕ Din 100.000 pe care îi vedea în bancă, ajunge să ridice 67.200.
+
+**Calendarul, care nu e intuitiv:** hotărârea AGA se face în **iulie** (are nevoie de
+balanța închisă), dar înregistrarea contabilă se face în **iunie**, luna bilanțului
+interimar — pentru că bilanțul interimar are rubrică separată pentru 463, deci ANAF vede
+ce s-a repartizat interimar. Bilanțul se depune până la **31 iulie**.
+
+
+### 13.7 Regularizarea la 31.12 și rectificativa D710
+
+
+Contul 463 rămâne cu sold debitor până la închiderea anului. Atunci se compară cu 121:
+
+Dacă profitul final e mai mic — să zicem **70.000** față de 80.000 repartizați:
+
+```
+463 = 456       −10.000      storno, pentru diferența nerealizată
+456 = 446         1.600      storno impozit, 16 % × 10.000
+```
+
+Se depune **rectificativă la D100 — formularul D710** — în care apare suma plătită
+inițial și suma corectată. Rămâne plătit în plus la ANAF, sumă pentru care se poate face
+cerere de compensare sau de restituire. Iar asociatul trebuie să aducă banii înapoi.
+
+În anul următor, la AGA:
+
+```
+121  = 1171      70.000      rezultatul trece la reportat
+1171 = 463       70.000      se soldează dividendele interimare
+```
+
+⚠️ Notița scria stornarea ca `453 - 456`. Contul este **463**; 453 nu are legătură cu
+dividendele.
+
+➕ **Concluzia practică:** la dividendele interimare trebuie mers în limita lui 121 și,
+în practică, sub ea — nu se știe ce prognoză există până la sfârșitul anului. Corecția e
+un proces lung, cu bani care trebuie dați înapoi.
+
+**Condiție prealabilă:** nu se pot acorda dividende, nici interimare, nici certe, dacă
+există pierderi din anii anteriori neacoperite (sold debitor pe 1171).
+
+## 14. Creditarea de societate și relațiile cu asociații (455)
+### 14.1 Contul 455 — reguli de fier
+
+
+**455 este cont de pasiv și trebuie să apară doar pe credit.** Un sold debitor înseamnă
+ori înregistrare greșită, ori că asociatul a ridicat mai mulți bani decât a pus.
+
+```
+5121 = 4551       încasez creditarea
+4551 = 5121       restitui
+```
+
+Regulile pe care formatorul le repetă:
+
+- **Contract pentru fiecare creditare.** Nu trebuie să fie complicat, dar trebuie să
+  existe — înregistrarea din bancă nu e suficientă. Se poate genera din softul de
+  contabilitate și doar semnat. Alternativ, un contract pe lună, pe totalul fișei.
+- **Analitic pe fiecare asociat.** Trei asociați, trei analitice de 455.
+- **Nu se compensează între asociați.** Creditarea unui asociat nu poate stinge ridicarea
+  altuia, decât cu o înțelegere notarială — nu pe cuvânt și nu pe mesaj.
+- **Se ajunge la sold 0.**
+
+➕ 455 funcționează ca 451, dar pe persoană fizică, nu între entități.
+
+⚠️ Administratorul nu ține minte cât a creditat și cât a ridicat. De aceea contul se
+urmărește pe analitic, în ambele sensuri — altfel se descoperă târziu și greu.
+
+
+### 14.2 Majorarea capitalului social din creditare
+
+
+Creditarea se poate transforma în capital social:
+
+```
+455.1 = 456       5.000      capital subscris nevărsat
+456   = 1011      5.000      constituirea capitalului
+1011  = 1012      5.000      după înregistrarea la ONRC
+```
+
+Cele două înregistrări se fac în baza a două documente: **hotărârea AGA** și **expertiza
+contabilă**, care atestă că sumele sunt *certe, lichide și exigibile* — adică au existat
+în realitate, au fost virate și există contract.
+
+➕ Distincția pe care formatorul o subliniază: **acționarii** creditează societatea,
+**asociații** constituie capitalul social.
+
+
+### 14.3 Remiterea de datorie
+
+
+Societățile ajunse în impas primesc uneori sugestia de a renunța la creditare. Actul se
+numește **remitere de datorie** și se face **prin notariat**, în baza acelorași două
+documente (AGA + expertiză contabilă).
+
+```
+4551 = 7582       suma la care se renunță devine venit
+7582 = 121        se închide în rezultat
+```
+
+Exemplu: pierdere de 100.000, renunțare la creditare de 120.000 → profit de 20.000.
+
+⚠️ Profitul rezultat **nu e din exploatare**. Din două înregistrări societatea trece pe
+profit, dar natura lui trebuie citită corect la analiza rezultatului.
+
+
+### 14.4 Decontări între entități afiliate — 451
+
+
+Entități afiliate = cele cu **peste 25 % acționari comuni**. Împrumuturile între ele se
+fac pe bază de contract, iar înregistrările sunt **în oglindă** la cele două societăți.
+
+
+### 14.5 Operațiuni în participație — 458
+
+
+Două sau mai multe societăți încheie un **contract de participațiune** pentru un obiectiv
+comun: una vine cu utilajele, alta cu angajații. O parte din venituri și cheltuieli se
+transferă între ele, astfel încât fiecare să plătească impozit pe profit **doar pe
+activitatea proprie**.
+
+458 e contul de decontare al acestor transferuri.
 
 ---
 
