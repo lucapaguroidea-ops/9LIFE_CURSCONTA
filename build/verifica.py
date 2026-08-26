@@ -47,6 +47,8 @@ descris multă vreme nouă porți, cu poarta 9 în forma ei veche.
  24. nicio frază cu cifră din workbook-uri nu contrazice cifra reală („17 module
      declarative”, „68 fluxuri × pași”) — foaia Istoric e scutită, acolo cifrele
      vechi sunt chiar conținutul
+ 29. contul de 4 cifre folosit într-un pas de flux, al cărui sintetic e BIFUNCȚIONAL,
+     există ca rând propriu în plan — acolo unde rezerva porții 20 dă un răspuns fals
 
 Rulare:  python build/verifica.py
 """
@@ -873,6 +875,57 @@ def poarta_conturi_in_plan(wb):
         ok("20", f"toate cele {len(folosite)} conturi din pașii fluxurilor există în plan")
 
 
+def poarta_analitice_bifunctionale(wb):
+    """Poarta 29 — un analitic al unui cont bifuncțional nu se poate sprijini pe el.
+
+    Poarta 20 acceptă `4481` pe baza rândului lui `448`, prin rezerva `c[:3] in plan`.
+    Rezerva e corectă în principiu: planul se ține la nivel SINTETIC, iar 371.AM.21 n-are
+    de ce să aibă rând propriu.
+
+    Dar răspunde la întrebarea greșită când sinteticul e bifuncțional. Cine pleacă din
+    plan ca să afle ce sold trebuie să aibă 4481 găsește rândul lui 448, care spune
+    „A/P” — adică exact non-răspunsul. 4481 e datorie, 4482 e creanță, iar sinteticul
+    lor nu poate spune asta pentru niciunul. La fel 445 (4451/4452/4458, toate creanțe)
+    și 117 (1171, în oricare sens).
+
+    Deci poarta nu strânge poarta 20, ci acoperă fâșia în care rezerva ei minte: dacă
+    monografia scrie patru cifre ȘI sinteticul e A/P, contul de patru cifre are nevoie
+    de rând propriu. Un sintetic univoc rămâne un răspuns bun pentru analiticele lui.
+    """
+    plan, fct = set(), {}
+    ws = wb["Plan de conturi"]
+    for r in range(1, ws.max_row + 1):
+        v = str(ws.cell(row=r, column=1).value or "").strip()
+        if re.fullmatch(r"\d{3,4}([./]\d+)?", v):
+            plan.add(v)
+            fct[v] = str(ws.cell(row=r, column=3).value or "").strip().upper()
+
+    #: Formele sub care planul scrie „bifuncțional”. Nu se ghicește din denumire.
+    BIFUNCTIONAL = {"A/P", "B", "A/P (B)"}
+
+    lipsa = {}
+    for f in FLUXURI:
+        for p in f["pasi"]:
+            for cont, _ in list(p["dr"]) + list(p["cr"]):
+                simbol = re.match(r"\d+", str(cont))
+                if not simbol:
+                    continue
+                simbol = simbol.group(0)
+                if len(simbol) != 4 or simbol in plan:
+                    continue
+                if fct.get(simbol[:3]) in BIFUNCTIONAL:
+                    lipsa.setdefault(simbol, set()).add(O.HARTA.get(f["id"], f["id"]))
+
+    for simbol, fl in sorted(lipsa.items()):
+        cade("29", f"{simbol} apare în {', '.join(sorted(fl)[:4])}, iar sinteticul "
+                   f"{simbol[:3]} e bifuncțional ({fct.get(simbol[:3])}) — nu poate "
+                   f"spune ce sold trebuie să aibă analiticul; îi trebuie rând propriu")
+    if not lipsa:
+        n = sum(1 for c in plan if len(c) == 4 and fct.get(c[:3]) in BIFUNCTIONAL)
+        ok("29", f"toate analiticele de sub sintetice bifuncționale folosite în "
+                 f"monografii au rând propriu în plan ({n} conturi)")
+
+
 def poarta_module_declara(wb_plan):
     """Poarta 21 — fluxurile declarate de module există cu adevărat.
 
@@ -1131,6 +1184,7 @@ def main():
     poarta_monografii()
     poarta_marcaje()
     poarta_conturi_in_plan(wb)
+    poarta_analitice_bifunctionale(wb)
     poarta_module_declara(wb)
     poarta_readme()
     poarta_cifre_in_proza()

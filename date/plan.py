@@ -303,6 +303,49 @@ CONTURI_NOI = [
                     "21.08 spun invers — 4423 cu analitic distinct; contradicția e "
                     "deschisă cu formatorul.",
          analitice="4481 pe decizie de impunere", factor="F", flux="F-424", tier="A"),
+    # ------------------------------------------------------------------
+    # Cele cinci de mai jos NU vin din sursa 26.08 — le-a găsit poarta 29 la prima ei
+    # rulare, în fluxuri scrise la trainingurile 2, 3 și 6. Sunt exact cazul pentru care
+    # a fost scrisă: fiecare stă sub un sintetic bifuncțional, deci rândul sinteticului
+    # nu poate spune ce sold trebuie să aibă analiticul. 117 e A/P și acoperea trei
+    # analitice cu regimuri diferite; 441 e A/P și acoperea impozitul micro; 512 e A/P
+    # și acoperea contul de valută.
+    # ------------------------------------------------------------------
+    dict(simbol="1174",
+         denumire="Rezultatul reportat provenit din corectarea erorilor contabile",
+         fct="A/P", natura="Patrimonial (real)", subtip="Capital propriu",
+         observatie="Corecțiile de erori din exerciții anterioare ocolesc 121 și trec "
+                    "pe aici. Poate avea oricare sens, ca 1171 — dar spre deosebire de "
+                    "el, arată cât din capitalurile proprii vine dintr-o CORECȚIE, nu "
+                    "din profit realizat. Se transferă apoi în 1171.",
+         analitice="1174 pe an de proveniență a erorii", factor="N F", flux="F-105",
+         tier="A"),
+    dict(simbol="1175",
+         denumire="Rezultatul reportat reprezentând surplusul realizat din rezerve din reevaluare",
+         fct="P", natura="Patrimonial (real)", subtip="Capital propriu",
+         observatie="Partea din rezerva de reevaluare devenită realizată pe măsura "
+                    "amortizării activului reevaluat. Sold creditor: e o rezervă "
+                    "realizată, nu un rezultat de repartizat direct.",
+         analitice="1175 pe activ reevaluat", factor="C F", flux="F-102", tier="A"),
+    dict(simbol="4382", denumire="Alte creanțe sociale", fct="A",
+         natura="Patrimonial (real)", subtip="Creanță",
+         observatie="Partea din indemnizația de concediu medical suportată de FNUASS și "
+                    "avansată de firmă. E CREANȚĂ față de casă, nu cheltuială — "
+                    "cheltuiala e doar partea angajatorului, pe 6458. Sold creditor = "
+                    "contrar naturii (C-23).",
+         analitice="4382 pe lună de recuperare", factor="C", flux="F-416", tier="A"),
+    dict(simbol="4418", denumire="Impozitul pe venit", fct="P",
+         natura="Patrimonial (real)", subtip="Datorie",
+         observatie="Impozitul microîntreprinderii. E impozit pe VENIT, nu pe profit — "
+                    "de aceea nu poate sta pe un analitic al lui 4411, iar cheltuiala "
+                    "corespondentă e 698, nu 691. Sold normal: creditor.",
+         analitice="4418 pe trimestru", factor="F", flux="F-420", tier="A"),
+    dict(simbol="5124", denumire="Conturi la bănci în valută", fct="A",
+         natura="Patrimonial (real)", subtip="Trezorerie",
+         observatie="Contul de valută, ținut pe fiecare monedă. Se reevaluează la curs "
+                    "la fiecare închidere, cu diferențele pe 765/665 — spre deosebire "
+                    "de 5121, care nu are ce reevalua.",
+         analitice="5124 pe bancă ȘI pe valută", factor="V O", flux="F-107", tier="A"),
     dict(simbol="4482", denumire="Alte creanțe privind bugetul statului", fct="A",
          natura="Rol in flux", subtip="Intermediar / clarificare",
          observatie="Sumele plătite eronat către buget, până la lămurire: cifre "

@@ -354,6 +354,112 @@ ABSORBITE_21_08 = {
 
 
 # ===========================================================================
+# Sursa din 26.08.2026 — subvenții europene, dividende, conturile-coș
+#
+# A treia sursă care se împarte, și cea care se împarte cel mai curat: trei teme mari,
+# trei destinații, fără nicio secțiune care să se rupă pe dinăuntru. Motivul e că
+# trainingul a fost ținut pe teme, nu pe conturi.
+#
+# Gruparea din §4 nu e a mea, e a sursei, și merită spus de ce ține: 446, 4481, 4482 și
+# 461 sunt patru răspunsuri la aceeași întrebare — **cum ții rulajele curente curate**.
+# Documentul de control e exact despre cum vezi că un cont arată greșit, deci le
+# primește împreună. Împărțite pe conturi (446 la TVA, 4481 la control, 461 la terți),
+# fiecare ar fi rămas o regulă izolată, iar întrebarea comună ar fi dispărut.
+# ===========================================================================
+
+REPARTIZARE_26_08 = [
+    # --- §1 subvenții: în întregime la imobilizări -------------------------
+    ("## 1. Subvenții pentru investiții și fonduri europene", "doc:imobilizari",
+     "Subvenția pentru investiții trăiește pe durata de amortizare a activului "
+     "finanțat: fără imobilizare n-are ce relua la venit. Adâncește F-58."),
+    ("### 1.1 Corespondența 445 ↔ 475", "doc:imobilizari",
+     "Tabelul perechilor creanță ↔ venit amânat. Conturile intră și în plan, prin "
+     "faza 1; aici stă raționamentul care le leagă două câte două."),
+    ("### 1.2 Când se înregistrează un proiect european", "doc:imobilizari",
+     "Momentul nașterii creanței — la aprobare, nu la încasare. E o stare inițială de "
+     "flux, deci stă lângă monografia lui."),
+    ("### 1.3 Aportul propriu și TVA-ul nedecontat", "doc:imobilizari",
+     "Cota de finanțare și excluderea TVA din proiect: exemplul numeric pe care se "
+     "sprijină tot mecanismul de reluare."),
+    ("### 1.4 Amortizarea și reluarea la venit merg împreună", "doc:imobilizari",
+     "Pasul revelator al lui F-215. Aici stă și corecția 166,40 → 166,67, verificată "
+     "de poarta 18 pe aritmetica afirmată."),
+    ("### 1.5 Plusuri la inventar la imobilizări", "doc:imobilizari",
+     "Plusul la imobilizări urmează același ritm ca subvenția — 4458 → 4754, apoi la "
+     "venit pe măsura amortizării. F-216."),
+
+    # --- §2 dividende: capitaluri -----------------------------------------
+    ("## 2. Dividende", "doc:capitaluri",
+     "Repartizarea rezultatului e capătul lui F-104: ce se întâmplă cu profitul după "
+     "ce 121 s-a închis."),
+    ("### 2.1 Analiticele pe 1012 — cotele de participare", "doc:capitaluri",
+     "Analiticele pe asociat sunt condiția prealabilă a oricărei repartizări. F-114 le "
+     "face procedură de control."),
+    ("### 2.2 Hotărârea AGA e documentul de bază", "doc:capitaluri",
+     "Documentul justificativ al repartizării. Stă lângă dividende, nu la documente în "
+     "general: fără AGA nu există înregistrarea, nu doar dosarul."),
+    ("### 2.3 Dividende certe din rezultatul reportat", "doc:capitaluri",
+     "F-109: 1171 → 457 pe analitic, plus distincția 456 / 457."),
+    ("### 2.4 Impozitul pe dividende", "doc:capitaluri",
+     "Cota de 16 % și rețineriea prin 446 — al doilea bloc din MOD_DIVIDENDE."),
+    ("### 2.5 Declarațiile: D100, D205, Declarația Unică", "doc:capitaluri",
+     "Declarațiile care ies din aceleași cifre. Termenul de 25.01 și corelația D205 ↔ "
+     "D100 ↔ fișa lui 446 aparțin temei, nu unui capitol de declarații."),
+    ("### 2.6 Dividende interimare — contul 463", "doc:capitaluri",
+     "F-110: plafonul soldului lui 121 și calendarul iulie/iunie."),
+    ("### 2.7 Regularizarea la 31.12 și rectificativa D710", "doc:capitaluri",
+     "Închiderea lui 463 și stornarea. Aici stă corecția 453 → 463."),
+
+    # --- §3 creditare: capitaluri -----------------------------------------
+    ("## 3. Creditarea de societate și relațiile cu asociații", "doc:capitaluri",
+     "Creditarea e sursă de finanțare de la asociat — vecina capitalului social, nu a "
+     "datoriilor comerciale."),
+    ("### 3.1 Contul 455 — reguli de fier", "doc:capitaluri",
+     "F-111. Regula „455 niciodată debitor” devine și corelație de balanță, dar "
+     "monografia și contractul stau aici."),
+    ("### 3.2 Majorarea capitalului social din creditare", "doc:capitaluri",
+     "F-112: 4551 → 456 → 1011, iar 1011 → 1012 abia la ONRC."),
+    ("### 3.3 Remiterea de datorie", "doc:capitaluri",
+     "F-113: creditarea la care se renunță devine venit, deci profit fără exploatare."),
+    ("### 3.4 Decontări între entități afiliate — 451", "doc:capitaluri",
+     "Pragul de 25 % și oglinda dintre cele două societăți. Ține de relația cu "
+     "acționariatul, ca 455."),
+    ("### 3.5 Operațiuni în participație — 458", "doc:capitaluri",
+     "F-426: transferul de venituri și cheltuieli, ca fiecare să plătească impozit pe "
+     "activitatea proprie. Impozitarea rezultatului e teritoriul capitalurilor."),
+
+    # --- §4–§5 conturile-coș și verificarea: control ----------------------
+    ("## 4. Conturile care țin rulajele curate", "doc:control",
+     "Titlul grupării. 446, 4481, 4482 și 461 sunt răspunsuri la aceeași întrebare — "
+     "cum ții rulajele curente curate — iar documentul de control e cel despre cum "
+     "vezi că un cont arată greșit."),
+    ("### 4.1 Taxele locale prin 446, nu direct pe cheltuială", "doc:control",
+     "F-423: taxa nu intră direct pe cheltuială. 471 la perioade lungi, direct la sume "
+     "mici — pragul e o decizie de disciplină, nu de fiscalitate."),
+    ("### 4.2 Contul 4481 — datorii din acte de control", "doc:control",
+     "Revizuiește F-421, nu naște flux nou: aceeași decizie de impunere, aceeași stare "
+     "terminală, alt cont. Plus contradicția declarată cu notițele din 21.08. "
+     "Contradicția stă în document, nu doar în listă: cititorul trebuie s-o vadă unde "
+     "ar aplica regula."),
+    ("### 4.3 Contul 4482 — plăți eronate către buget", "doc:control",
+     "F-424: soldul în așteptare păstrează corelațiile nealterate până la lămurire."),
+    ("### 4.4 Conturile 461 / 462 — coșul firmei", "doc:control",
+     "F-425: vânzarea de mijloc fix și imputația. Aici stă corecția 121 → 461."),
+    ("## 5. Verificarea care încheie ședința", "doc:control",
+     "Soldul contrar naturii contului, aplicat pe conturile ședinței. E C-23 văzut din "
+     "partea cealaltă — de la cont către eroare."),
+]
+
+ABSORBITE_26_08 = {
+    "# Subvenții, dividende și conturile care devin coșuri — notițe training 26.08.2026":
+        "Titlul sursei. Materialul se împarte la trei documente cu titluri pe subiect; "
+        "un singur titlu nu-l mai poate acoperi.",
+    "*Versiune revizuită. Sursa: notițele brute din 26.08.2026.*":
+        "Rândul de versiune al sursei. Fiecare document își primește subtitlul din "
+        "`date/documente.py`, cu zilele-sursă din care e făcut.",
+}
+
+# ===========================================================================
 # Vederile derivate
 # ===========================================================================
 
@@ -368,6 +474,10 @@ SURSE = [
          cale="surse/training-6-2026-08-21/notite-revizuit.md",
          repartizare=REPARTIZARE_21_08,
          absorbite=ABSORBITE_21_08),
+    dict(cheie="26.08.2026",
+         cale="surse/training-7-2026-08-26/notite-revizuit.md",
+         repartizare=REPARTIZARE_26_08,
+         absorbite=ABSORBITE_26_08),
 ]
 
 #: Toate intrările, pentru numărători și pentru parcurgerea în ordine.
