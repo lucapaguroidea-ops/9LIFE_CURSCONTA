@@ -175,6 +175,141 @@ CONTURI_NOI = [
                     "4093/4094 au furnizor 404, nu 401. Stornarea la factura finală se "
                     "face și pe 4091, și pe 401, ca efectul net să fie zero.",
          analitice="4091 – 4094 pe destinație", factor="C O", flux="F-410", tier="A"),
+
+    # ------------------------------------------------------------------
+    # Conturile cerute de sursa 26.08: subvenții, dividende, conturile-coș
+    #
+    # Toate cele 17 au sinteticul de trei cifre în plan, deci **poarta 20 nu le-ar fi
+    # cerut**: ea acceptă `4481` pe baza rândului lui `448`. Rezerva aia e corectă în
+    # principiu — planul se ține sintetic — dar pentru șase dintre ele minte, și minte
+    # exact acolo unde e miezul lecției:
+    #
+    #     448 e A/P, iar 4481 e datorie și 4482 e creanță;
+    #     445 e A/P, iar 4451/4452/4458 sunt toate creanțe;
+    #     117 e A/P, iar 1171 poate fi în oricare sens.
+    #
+    # Un cont bifuncțional nu poate răspunde în locul analiticului lui la întrebarea
+    # „ce sold trebuie să aibă”. Poarta 29 formalizează exact granița asta.
+    #
+    # Restul de unsprezece se adaugă din același motiv ca 6583/7583 mai sus: sunt
+    # FOLOSITE în monografii, iar navigarea cont → flux se rupea pentru ele.
+    # ------------------------------------------------------------------
+    # ---- creanțele din subvenții (grupa 445) ---------------------------
+    dict(simbol="4451", denumire="Subvenții guvernamentale", fct="A",
+         natura="Patrimonial (real)", subtip="Creanță",
+         observatie="Creanța față de finanțatorul public, născută la APROBARE, nu la "
+                    "încasare. Perechea ei de venit amânat e 4751: separat se țin „de "
+                    "la cine am de primit” și „cât din venit nu mi se cuvine încă”.",
+         analitice="4451 pe proiect / program de finanțare", factor="C O",
+         flux="F-210, F-215", tier="A"),
+    dict(simbol="4452", denumire="Împrumuturi nerambursabile cu caracter de subvenții",
+         fct="A", natura="Patrimonial (real)", subtip="Creanță",
+         observatie="Fondurile europene nerambursabile. Perechea de venit amânat e 4752 "
+                    "(sau 4758 la „alte sume”). Valorile din proiect sunt FĂRĂ TVA: "
+                    "TVA-ul nu se decontează din proiect.",
+         analitice="4452 pe proiect", factor="C O", flux="F-215", tier="A"),
+    dict(simbol="4458", denumire="Alte sume primite cu caracter de subvenții", fct="A",
+         natura="Patrimonial (real)", subtip="Creanță",
+         observatie="Creanța la plusurile de inventar de natura imobilizărilor și la "
+                    "celelalte sume asimilate. Perechea: 4753 / 4754 / 4758.",
+         analitice="4458 pe sursă", factor="C O", flux="F-215, F-216", tier="A"),
+    # ---- veniturile amânate (grupa 475) --------------------------------
+    dict(simbol="4751", denumire="Subvenții guvernamentale pentru investiții", fct="P",
+         natura="Rol in flux", subtip="Regularizare temporală",
+         observatie="Venitul care nu ți se cuvine încă. Se reia la 7584 pe măsura "
+                    "amortizării activului finanțat, în COTA de finanțare.",
+         analitice="4751 pe proiect", factor="C O", flux="F-210, F-215", tier="A"),
+    dict(simbol="4752",
+         denumire="Împrumuturi nerambursabile cu caracter de subvenții pentru investiții",
+         fct="P", natura="Rol in flux", subtip="Regularizare temporală",
+         observatie="Venitul amânat al fondurilor europene. Poate sta „latent” oricât "
+                    "între aprobare și prima cheltuială cu activul: nimic nu se reia la "
+                    "venit până nu începe amortizarea.",
+         analitice="4752 pe proiect", factor="C O", flux="F-215", tier="A"),
+    dict(simbol="4753", denumire="Donații pentru investiții", fct="P",
+         natura="Rol in flux", subtip="Regularizare temporală",
+         observatie="Aceeași mecanică, altă sursă: donația de imobilizare nu e venit al "
+                    "lunii primirii.",
+         analitice="4753 pe donator", factor="C O", flux="F-215", tier="B"),
+    dict(simbol="4754", denumire="Plusuri de inventar de natura imobilizărilor", fct="P",
+         natura="Rol in flux", subtip="Regularizare temporală",
+         observatie="Plusul constatat la inventar la imobilizări NU se recunoaște direct "
+                    "la venit: o imobilizare are drept cheltuială amortizarea, iar "
+                    "venitul trebuie să apară în același ritm.",
+         analitice="4754 pe mijloc fix", factor="C O", flux="F-216", tier="A"),
+    dict(simbol="4758", denumire="Alte sume primite cu caracter de subvenții pentru investiții",
+         fct="P", natura="Rol in flux", subtip="Regularizare temporală",
+         observatie="Perechea folosită în monografia proiectului european din 26.08 "
+                    "(4452 = 4758, apoi 4758 = 7584 lunar).",
+         analitice="4758 pe proiect", factor="C O", flux="F-215", tier="A"),
+    # ---- veniturile din reluare (grupa 758) ----------------------------
+    dict(simbol="7584", denumire="Venituri din subvenții pentru investiții", fct="P",
+         natura="Patrimonial (real)", subtip="Venit",
+         observatie="Reluarea subvenției la venit, lună de lună, în cota de finanțare. "
+                    "Regula de verificare a formatorului: dacă am o cheltuială din "
+                    "proiect, trebuie să am și un venit în aceeași lună.",
+         analitice="7584 pe proiect", factor="C O", flux="F-210, F-215, F-216", tier="A"),
+    dict(simbol="7582", denumire="Venituri din donații primite", fct="P",
+         natura="Patrimonial (real)", subtip="Venit",
+         observatie="Contul pe care îl primește remiterea de datorie: creditarea la care "
+                    "asociatul renunță prin act notarial devine venit. ⚠️ Formal E venit "
+                    "din exploatare — grupa 758 stă în partea de exploatare a contului "
+                    "de profit. Ce nu e „din exploatare” e SUBSTANȚA: profitul vine "
+                    "dintr-o renunțare, nu din activitate.",
+         analitice="7582 pe asociat", factor="F O", flux="F-113", tier="A"),
+    dict(simbol="7588", denumire="Alte venituri din exploatare", fct="P",
+         natura="Patrimonial (real)", subtip="Venit",
+         observatie="Contul de venit folosit când nu există unul asociat direct — cum e "
+                    "707 pentru marfă. La imputația către salariat: 461 = 7588 pentru "
+                    "bază și 461 = 4427 pentru TVA.",
+         analitice="7588 pe natura operațiunii", factor="F", flux="F-426", tier="B"),
+    # ---- asociați și capital -------------------------------------------
+    dict(simbol="4551", denumire="Acționari/asociați — conturi curente", fct="P",
+         natura="Patrimonial (real)", subtip="Datorie",
+         observatie="Creditarea de societate. **Nu are niciodată sold debitor**: dacă "
+                    "are, ori înregistrarea e greșită, ori asociatul a ridicat mai mult "
+                    "decât a pus. Analitic pe fiecare asociat, fără compensare între ei "
+                    "decât prin act notarial. Contract pentru fiecare creditare.",
+         analitice="4551 pe fiecare ASOCIAT", factor="O", flux="F-111, F-112, F-113",
+         tier="A"),
+    dict(simbol="1011", denumire="Capital subscris nevărsat", fct="P",
+         natura="Rol in flux", subtip="Regularizare temporală",
+         observatie="Etapa dintre subscriere și vărsare. Trece în 1012 abia DUPĂ "
+                    "înregistrarea la ONRC — nu la virarea banilor.",
+         analitice="1011 pe asociat", factor="O", flux="F-101, F-112", tier="A"),
+    dict(simbol="1012", denumire="Capital subscris vărsat", fct="P",
+         natura="Patrimonial (real)", subtip="Capital propriu",
+         observatie="Se ține pe analitic PE ASOCIAT, iar denumirea analiticului poartă "
+                    "procentul de participare. Rostul: balanța spune singură cine cât "
+                    "deține, fără actul constitutiv, în ziua în care vine hotărârea AGA.",
+         analitice="1012 pe fiecare ASOCIAT, cu procentul în denumire", factor="O",
+         flux="F-101, F-112, F-114", tier="A"),
+    dict(simbol="1171",
+         denumire="Rezultatul reportat reprezentând profitul nerepartizat sau pierderea neacoperită",
+         fct="A/P", natura="Patrimonial (real)", subtip="Capital propriu",
+         observatie="Profitul nerepartizat al anilor anteriori, pe analitic PE AN. Sold "
+                    "creditor = profit repartizabil; sold debitor = pierdere. Cât timp "
+                    "are sold debitor NU se pot acorda dividende, nici certe, nici "
+                    "interimare.",
+         analitice="1171 PE AN (sens D/C)", factor="N F", flux="F-104, F-109, F-110",
+         tier="A"),
+    # ---- conturile care țin rulajele curate ----------------------------
+    dict(simbol="4481", denumire="Alte datorii față de bugetul statului", fct="P",
+         natura="Rol in flux", subtip="Intermediar / clarificare",
+         observatie="Dobânzi, penalități și sume stabilite prin acte de control, "
+                    "inclusiv pentru perioade anterioare. Ține impunerea ÎN AFARA "
+                    "rulajului curent: trecută prin 4423, ar denatura decontul lunii. "
+                    "Cheltuiala corespondentă (6588) e nedeductibilă. ❓ Notițele din "
+                    "21.08 spun invers — 4423 cu analitic distinct; contradicția e "
+                    "deschisă cu formatorul.",
+         analitice="4481 pe decizie de impunere", factor="F", flux="F-424", tier="A"),
+    dict(simbol="4482", denumire="Alte creanțe privind bugetul statului", fct="A",
+         natura="Rol in flux", subtip="Intermediar / clarificare",
+         observatie="Sumele plătite eronat către buget, până la lămurire: cifre "
+                    "inversate pe ordinul de plată, sau plată făcută cu alt CUI de "
+                    "plătitor. Sold în așteptare care se disecă — nu se lasă de la un an "
+                    "la altul.",
+         analitice="4482 pe plată în așteptare", factor="O", flux="F-425", tier="A"),
 ]
 
 # --------------------------------------------------------------------------
@@ -194,6 +329,34 @@ CORECTII = [
 # 4. Rânduri noi pentru foaia `Matrice acoperire`
 # --------------------------------------------------------------------------
 MATRICE = [
+    # ---- subvenții, dividende, conturile-coș (sursa 26.08) -----------------
+    ("1012", "Capital subscris vărsat — analitice pe asociat", "A", "F-76, F-74",
+     "F-76 pas 3: cotele se citesc din balanță, fără actul constitutiv", "NU"),
+    ("1171", "Rezultat reportat — analitic pe an", "A", "F-71, F-72",
+     "F-71 pas 1: cu sold debitor pe 1171 nu se distribuie dividende", "NU"),
+    ("457", "Dividende de plată — analitic pe asociat", "A", "F-71",
+     "F-71 pas 2: repartizarea urmează cotele din 1012, nu invers", "NU"),
+    ("463", "Creanțe din dividende interimare", "A", "F-72",
+     "F-72 pas 2: plafonul e soldul lui 121, nu disponibilul din bancă", "NU"),
+    ("4551", "Acționari/asociați — conturi curente", "A", "F-73, F-74, F-75",
+     "F-73 pas 3: analiticele nu se compensează între asociați", "NU"),
+    ("7582", "Venituri din donații primite (remitere de datorie)", "A", "F-75",
+     "F-75 pas 2: datoria stinsă fără plată e venit, dar nu din activitate", "NU"),
+    ("4452 / 4758", "Fonduri europene — creanță și venit amânat", "A", "F-77",
+     "F-77 pas 4: amortizarea și reluarea la venit, în aceeași notă", "NU"),
+    ("7584", "Venituri din subvenții pentru investiții", "A", "F-77, F-78",
+     "F-77 pas 5: lună cu amortizare din proiect și fără reluare = eroare", "NU"),
+    ("4754", "Plusuri de inventar de natura imobilizărilor", "A", "F-78",
+     "F-78 pas 3: reluarea urmează ritmul amortizării, nu luna constatării", "NU"),
+    ("446", "Alte impozite și taxe — punct de trecere", "A", "F-79",
+     "F-79 pas 2: taxa nu intră direct pe cheltuială", "NU"),
+    ("4482", "Alte creanțe privind bugetul statului", "A", "F-80",
+     "F-80 pas 1: diferența plătită în plus stă în așteptare, nu pe 444", "NU"),
+    ("461 / 462", "Debitori și creditori diverși", "A", "F-81",
+     "F-81 pas 1: cumpărătorul unui mijloc fix nu e client", "NU"),
+    ("458", "Decontări din operațiuni în participație", "A", "F-82",
+     "F-82 pas 3: venitul se redistribuie, ca impozitul să urmeze activitatea", "NU"),
+
     # ---- salarii și rețineri (sursa 21.08) ---------------------------------
     ("423", "Personal — ajutoare materiale datorate", "A", "F-64",
      "F-64 pas 3: indemnizația trece prin datorie, dar numai o parte e cheltuială", "NU"),
@@ -213,8 +376,8 @@ MATRICE = [
      "F-68 pas 1: baza e VENITUL, nu profitul — de aceea 698, nu 691", "NU"),
     ("444 / 4315 / 4316 / 436", "Obligații salariale ale lunii", "A", "F-70",
      "F-70 pas 3: rulajul creditor al lunii = soldul creditor la finalul ei", "NU"),
-    ("4423.ANAF", "TVA de plată din decizie de impunere", "A", "F-69",
-     "F-69 pas 3: analiticul ține decizia în afara circuitului declarativ", "NU"),
+    ("4481", "Datorii din acte de control (decizii de impunere)", "A", "F-69",
+     "F-69 pas 4: decizia stă în afara contului pe care îl reconciliază decontul", "NU"),
 
     # ---- supraîncasare (sursa 19.08) ---------------------------------------
     ("419", "Clienți-creditori (avansuri încasate)", "A", "F-25, F-63",

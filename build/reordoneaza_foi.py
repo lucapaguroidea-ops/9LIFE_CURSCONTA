@@ -264,34 +264,41 @@ def curata_legenda(wb, *, n):
 def _actualizeaza_cifre(rand, n):
     """Numerele care descriau starea veche a fișierului devin cele reale.
 
-    Fiecare intrare are DOUĂ chei pentru aceeași țintă: textul din sămânță și forma
-    intermediară pe care `date/reformulari.py` o pusese în loc. Motivul e că cele două
-    mecanisme ating aceleași celule, și oricare rulează primul, rezultatul final trebuie
-    să fie cifra derivată — nu una scrisă de mână acum un an în `devine`.
+    Două mecanisme ating aceleași celule: `date/reformulari.py` (potrivire exactă, cu
+    motivul scris) și cel de aici. Oricare rulează primul, rezultatul final trebuie să
+    fie cifra DERIVATĂ — nu una scrisă de mână în `devine`.
+
+    Ca să țină asta, tiparele care poartă un număr sunt REGEX-uri peste cifre, nu șiruri
+    fixe. Varianta cu șiruri cerea câte două chei pentru fiecare țintă — textul din
+    sămânță plus forma intermediară pusă de `reformulari` — iar una lipsea:
+    „LISTA FLUXURILOR (68” n-avea pereche, deci numărul scris de mână în `devine` îi
+    supraviețuia celui derivat. N-a deranjat pe nimeni cât timp 68 era și numărul
+    adevărat; a ieșit la iveală la primul flux al 69-lea, prin poarta 24. Un tipar peste
+    `\(~?\d+` prinde ambele forme și orice valoare viitoare, deci clasa asta de scăpări
+    dispare, nu se mută mai încolo.
     """
-    inlocuiri = [
-        ("LISTA FLUXURILOR (~38", f"LISTA FLUXURILOR ({n['fluxuri']}"),
-        ("~38 fluxuri × pași", f"{n['fluxuri']} fluxuri × pași"),
-        ("60 fluxuri × pași", f"{n['fluxuri']} fluxuri × pași"),
-        ("~38 fluxuri", f"{n['fluxuri']} fluxuri"),
-        ("Catalog 38 fluxuri", f"Catalog {n['fluxuri']} fluxuri"),
-        ("Fluxuri: 38/38 detaliate", f"Fluxuri: {n['fluxuri']}/{n['fluxuri']} detaliate"),
-        ("Fluxuri: 60/60 detaliate", f"Fluxuri: {n['fluxuri']}/{n['fluxuri']} detaliate"),
-        ("245+ rânduri", f"{n['conturi']} conturi"),
-        ("270+ rânduri", f"{n['conturi']} conturi"),
-        ("81 conturi de serviciu", f"{n['rol_in_flux']} conturi de serviciu"),
+    tipare = [
+        (r"LISTA FLUXURILOR \(~?\d+", f"LISTA FLUXURILOR ({n['fluxuri']}"),
+        (r"~?\d+ fluxuri × pași", f"{n['fluxuri']} fluxuri × pași"),
+        (r"Catalog ~?\d+ fluxuri", f"Catalog {n['fluxuri']} fluxuri"),
+        (r"Fluxuri: ~?\d+/~?\d+ detaliate",
+         f"Fluxuri: {n['fluxuri']}/{n['fluxuri']} detaliate"),
+        (r"~?\d+ fluxuri", f"{n['fluxuri']} fluxuri"),
+        (r"~?\d+\+ rânduri", f"{n['conturi']} conturi"),
+        (r"~?\d+ conturi de serviciu", f"{n['rol_in_flux']} conturi de serviciu"),
         # Tierizarea: trei aproximări, toate greșite. Tier C era dat „~80” când sunt 36 —
         # eroarea nu era de rotunjire, era de peste dublu.
-        ("Tier A (~55)", f"Tier A ({n['tier_a']}, din care {n['detaliate']} cu rând "
-                         f"detaliat de analitice)"),
-        ("Tier B (~110)", f"Tier B ({n['tier_b']})"),
-        ("Tier C (~80)", f"Tier C ({n['tier_c']})"),
+        (r"Tier A \(~?\d+[^)]*\)",
+         f"Tier A ({n['tier_a']}, din care {n['detaliate']} cu rând detaliat de analitice)"),
+        (r"Tier B \(~?\d+[^)]*\)", f"Tier B ({n['tier_b']})"),
+        (r"Tier C \(~?\d+[^)]*\)", f"Tier C ({n['tier_c']})"),
     ]
 
     def fn(v):
-        for a, b in inlocuiri:
-            if a in v:
-                v = v.replace(a, b)
+        for tipar, valoare in tipare:
+            # lambda, nu șir: valorile pot conține „\” sau „\g”, iar re.sub le-ar citi
+            # ca referințe de grup
+            v = re.sub(tipar, lambda _m, x=valoare: x, v)
         return v
 
     return rand.transformat(fn)

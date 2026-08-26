@@ -301,4 +301,271 @@ FLUXURI = [
                 rol="Stare terminală: 1511 = 0, efect fiscal neutru", declarativ="D101"),
         ],
     ),
+    # ==================================================================
+    # Trainingul 26.08.2026 — dividende și creditarea de societate
+    #
+    # Toate șase pleacă din același loc: ce se întâmplă cu rezultatul DUPĂ ce F-104
+    # l-a închis, și cu banii pe care asociatul îi bagă sau îi scoate. Sunt clasa 1
+    # pentru că patrimoniul lor e capitalul propriu, chiar dacă decontarea trece
+    # prin conturi de clasa 4 (455, 456, 457, 463).
+    # ==================================================================
+    # ------------------------------------------------------------------ F-71
+    flux(
+        "F-71", "Dividende certe din rezultatul reportat (1171 → 457)", didactic=True,
+        roluri="Capital propriu → Datorie față de asociați",
+        conturi="1171, 457, 446, 1012, 5121",
+        note="Impozit 16%. Termen de plată: 25.01 a anului următor repartizării, CHIAR "
+             "DACĂ dividendele nu au fost ridicate. D100 + D205",
+        principiu="Hotărârea AGA e documentul repartizării, nu SURSA cotelor. Cotele "
+                  "vin din analiticele lui 1012, iar ordinea de lucru e: mai întâi "
+                  "balanța, apoi actul. Fără hotărâre AGA nu se înregistrează nimic — "
+                  "e cel mai frecvent caz ajuns la comisia de disciplină.",
+        pasi=[
+            pas(1, "Balanță la 31.12 + certificat constatator ONRC",
+                "1171.2025 are sold creditor 30.000 lei, iar 1012 e spart pe trei "
+                "analitice de câte 33,33%. Condiție prealabilă: 1171 NU are sold "
+                "debitor pe niciun an — cu pierdere neacoperită nu se distribuie nimic, "
+                "nici cert, nici interimar.",
+                rol="Verificarea prealabilă: sursa există și e repartizabilă"),
+            pas(2, "Hotărâre AGA",
+                "Repartizarea a câte 10.000 lei către fiecare asociat, în cotele din "
+                "1012. 457 se ține pe analitic pe persoană, în oglindă cu 1012 — altfel "
+                "nu poți spune cui i-ai plătit și cui nu.",
+                dr=[("1171.2025", 30000)],
+                cr=[("457.1", 10000), ("457.2", 10000), ("457.3", 10000)],
+                rol="Pas revelator: cotele se citesc din 1012, nu se inventează în AGA",
+                revelator=True, declarativ="D100 (impozit dividende)"),
+            pas(3, "Notă contabilă — reținerea impozitului",
+                "16% × 10.000 = 1.600 lei pe fiecare asociat. Pe fiecare analitic de "
+                "457 rămâne un rest de plată de 8.400 lei.",
+                dr=[("457.1", 1600), ("457.2", 1600), ("457.3", 1600)],
+                cr=[("446.dividende", 4800)],
+                rol="Datorie față de asociat → datorie față de buget"),
+            pas(4, "Ordin de plată — impozitul",
+                "Se plătește până la 25.01 a anului următor, indiferent dacă asociatul "
+                "a ridicat sau nu banii. Obligația e față de buget, nu față de asociat.",
+                dr=[("446.dividende", 4800)], cr=[("5121", 4800)],
+                rol="Stingerea datoriei fiscale", declarativ="D100"),
+            pas(5, "Ordin de plată — dividendele nete",
+                "8.400 lei × 3. Poate rămâne neridicat: atunci soldul lui 457 persistă, "
+                "iar impozitul e deja plătit.",
+                dr=[("457.1", 8400), ("457.2", 8400), ("457.3", 8400)],
+                cr=[("5121", 25200)],
+                rol="Plata către asociați"),
+            pas(6, "Verificare",
+                "Sold 1171.2025 = 0, sold 446.dividende = 0, sold 457 = 0 pe fiecare "
+                "analitic (dacă s-a ridicat tot). Verificarea încrucișată de la sfârșit "
+                "de an: D205 se confruntă cu D100 și cu fișa contului 446 din balanță — "
+                "cazul căutat e o plată făcută fără declarație.",
+                rol="Stare terminală: 1171 repartizat integral, 446 = 0, 457 = 0",
+                declarativ="D205 (informativă, anuală)"),
+        ],
+    ),
+    # ------------------------------------------------------------------ F-72
+    flux(
+        "F-72", "Dividende interimare (463) cu plafonul soldului lui 121", didactic=True,
+        roluri="Creanță temporară față de asociat + Colectare rezultat",
+        conturi="463, 456, 446, 121, 1171, 5121",
+        note="Cer inventariere ȘI bilanț interimar; se acordă doar trimestrial. "
+             "Bilanțul interimar se depune până la 31 iulie.",
+        principiu="Soldul debitor al lui 463 e o CREANȚĂ până la 31.12, nu o cheltuială "
+                  "consumată: banii au plecat pe seama unui profit care încă nu s-a "
+                  "realizat. Plafonul nu e o recomandare — e soldul lui 121 la data "
+                  "bilanțului interimar, iar în practică se stă sub el, pentru că "
+                  "nimeni nu știe cum arată decembrie.",
+        pasi=[
+            pas(1, "Inventariere + bilanț interimar la 30.06",
+                "După închiderea a șase luni și după înregistrarea impozitului, 121 are "
+                "sold creditor 80.000 lei. Administratorul vrea să ridice 100.000 — nu "
+                "poate: plafonul e profitul realizat, nu disponibilul din bancă.",
+                rol="Sursa plafonului: soldul lui 121, nu extrasul de cont"),
+            pas(2, "Hotărâre AGA (iulie) — înregistrare în iunie",
+                "Calendarul care nu e intuitiv: hotărârea se ia în iulie, pentru că are "
+                "nevoie de balanța închisă, dar înregistrarea se face în IUNIE, luna "
+                "bilanțului interimar — acolo are bilanțul rubrică separată pentru 463, "
+                "deci acolo vede ANAF ce s-a repartizat.",
+                dr=[("463", 80000)], cr=[("456.administrator", 80000)],
+                rol="Pas revelator: maximul repartizabil e soldul lui 121",
+                revelator=True),
+            pas(3, "Notă contabilă — impozitul",
+                "16% × 80.000 = 12.800 lei.",
+                dr=[("456.administrator", 12800)], cr=[("446.dividende", 12800)],
+                rol="Datorie fiscală", declarativ="D100"),
+            pas(4, "Ordin de plată",
+                "Din 100.000 pe care îi vedea în bancă, administratorul ridică 67.200.",
+                dr=[("456.administrator", 67200)], cr=[("5121", 67200)],
+                rol="Plata efectivă"),
+            pas(5, "Verificare",
+                "Sold 456 = 0. Sold 463 = 80.000 DEBITOR și rămâne așa până la 31.12, "
+                "când se compară cu 121 — vezi pașii de regularizare din același flux la "
+                "F-110 în varianta cu profit mai mic. Corelația de urmărit: sold 463 ≤ "
+                "sold 121 la orice moment.",
+                rol="Stare terminală: 456 = 0, 463 = 80.000 D în așteptarea lui 31.12"),
+        ],
+    ),
+    # ------------------------------------------------------------------ F-73
+    flux(
+        "F-73", "Creditarea de societate (4551) — analitic pe asociat", didactic=True,
+        roluri="Datorie față de asociat",
+        conturi="4551, 5121",
+        note="Contract pentru fiecare creditare (sau unul pe lună, pe totalul fișei). "
+             "Restricții de numerar: vezi plafoanele din L. 70/2015.",
+        principiu="4551 e cont de PASIV și trebuie să apară doar pe credit. Un sold "
+                  "debitor înseamnă ori înregistrare greșită, ori că asociatul a ridicat "
+                  "mai mult decât a pus. Analiticele nu se compensează între ele: "
+                  "creditarea unui asociat nu poate stinge ridicarea altuia decât prin "
+                  "act notarial — nu pe cuvânt și nu pe mesaj.",
+        pasi=[
+            pas(1, "Contract de creditare + extras de cont",
+                "Asociatul A creditează societatea cu 20.000 lei. Contractul nu trebuie "
+                "să fie complicat, dar trebuie să existe: înregistrarea din bancă nu e "
+                "document justificativ. Se poate genera din soft și doar semnat.",
+                dr=[("5121", 20000)], cr=[("4551.A", 20000)],
+                rol="Naște datoria față de asociat"),
+            pas(2, "Extras de cont",
+                "Asociatul B ridică 15.000 lei, deși 4551.B are sold zero. Contul lui "
+                "trece pe DEBIT — un cont de pasiv cu sold contrar naturii, adică "
+                "semnalul din C-23 aplicat aici.",
+                dr=[("4551.B", 15000)], cr=[("5121", 15000)],
+                rol="Sold debitor pe un cont de pasiv: semnal, nu curiozitate"),
+            pas(3, "Notă contabilă RESPINSĂ",
+                "Tentația e `4551.B = 4551.A` pe 15.000, ca soldul debitor să dispară. "
+                "Nu se poate: sunt doi asociați diferiți, iar compensarea are nevoie de "
+                "o înțelegere notarială. Fără ea, soldul debitor rămâne la vedere și se "
+                "lămurește — ori B restituie, ori suma se documentează ca dividend, "
+                "avans de trezorerie sau împrumut, fiecare cu contul lui.",
+                rol="Pas revelator: analiticele nu se compensează între ele",
+                revelator=True),
+            pas(4, "Extras de cont",
+                "B restituie. Administratorul nu ține minte cât a creditat și cât a "
+                "ridicat — de aceea contul se urmărește pe analitic, în ambele sensuri.",
+                dr=[("5121", 15000)], cr=[("4551.B", 15000)],
+                rol="Stingerea soldului debitor"),
+            pas(5, "Verificare",
+                "Sold 4551.A = 20.000 creditor, sold 4551.B = 0. Niciun analitic cu sold "
+                "debitor. Ținta finală a contului e soldul 0 pe fiecare asociat.",
+                rol="Stare terminală: 4551 fără sold debitor pe niciun analitic"),
+        ],
+    ),
+    # ------------------------------------------------------------------ F-74
+    flux(
+        "F-74", "Majorarea capitalului social din creditare (4551 → 456 → 1011 → 1012)",
+        didactic=True,
+        roluri="Datorie față de asociat → Capital propriu",
+        conturi="4551, 456, 1011, 1012",
+        note="Două documente obligatorii: hotărârea AGA și expertiza contabilă care "
+             "atestă că sumele sunt certe, lichide și exigibile.",
+        principiu="Trecerea 1011 → 1012 se face DUPĂ înregistrarea la ONRC, nu la data "
+                  "hotărârii: până atunci capitalul e subscris, nu vărsat. Expertiza "
+                  "contabilă nu e formalitate — ea atestă că banii au existat cu "
+                  "adevărat, au fost virați și au contract în spate.",
+        pasi=[
+            pas(1, "Hotărâre AGA + expertiză contabilă",
+                "Asociatul renunță la 5.000 lei din creditare, care devin aport. "
+                "Expertiza atestă că sumele sunt certe, lichide și exigibile — adică "
+                "exact ce demonstrează contractele cerute la F-73.",
+                dr=[("4551.A", 5000)], cr=[("456.A", 5000)],
+                rol="Datoria față de asociat devine aport subscris"),
+            pas(2, "Notă contabilă",
+                "Constituirea capitalului subscris nevărsat.",
+                dr=[("456.A", 5000)], cr=[("1011", 5000)],
+                rol="Capital subscris nevărsat"),
+            pas(3, "Certificat de înregistrare a mențiunii la ONRC",
+                "Abia acum capitalul e „vărsat”. Distincția pe care formatorul o "
+                "subliniază: ACȚIONARII creditează societatea, ASOCIAȚII constituie "
+                "capitalul social.",
+                dr=[("1011", 5000)], cr=[("1012.A", 5000)],
+                rol="Pas revelator: 1011 → 1012 la ONRC, nu la hotărâre",
+                revelator=True),
+            pas(4, "Verificare",
+                "Sold 456 = 0, sold 1011 = 0, 1012.A crescut cu 5.000, iar 4551.A scăzut "
+                "cu aceeași sumă. Cotele din denumirile analiticelor lui 1012 se "
+                "recalculează — altfel F-114 pică la prima hotărâre AGA.",
+                rol="Stare terminală: 456 = 0, 1011 = 0, cotele din 1012 recalculate"),
+        ],
+    ),
+    # ------------------------------------------------------------------ F-75
+    flux(
+        "F-75", "Remiterea de datorie (4551 → 7582)", didactic=True,
+        roluri="Datorie față de asociat → Venit",
+        conturi="4551, 7582, 121",
+        note="Act notarial, în baza acelorași două documente ca la majorarea de capital: "
+             "hotărârea AGA și expertiza contabilă.",
+        principiu="Din două înregistrări, o societate în pierdere trece pe profit. "
+                  "Rezultatul e real și impozabil, dar SUBSTANȚA lui nu e activitatea: "
+                  "vine dintr-o renunțare. Formal, 7582 e venit din exploatare — grupa "
+                  "758 stă în partea de exploatare a contului de profit și pierdere — "
+                  "deci cine citește doar linia „rezultat din exploatare” nu vede "
+                  "diferența. De aceea contul se ține pe analitic pe asociat.",
+        pasi=[
+            pas(1, "Balanță",
+                "Societatea are pierdere de 100.000 lei și o creditare de 120.000 lei de "
+                "la asociat. Sugestia care circulă la firmele în impas: renunțarea la "
+                "creditare.",
+                rol="Starea inițială: pierdere și datorie față de asociat"),
+            pas(2, "Act de remitere de datorie (notarial) + AGA + expertiză",
+                "Suma la care asociatul renunță devine venit. Actul se face prin "
+                "notariat — nu printr-o declarație pe proprie răspundere.",
+                dr=[("4551.A", 120000)], cr=[("7582", 120000)],
+                rol="Pas revelator: datoria stinsă fără plată este venit",
+                revelator=True),
+            pas(3, "Notă de închidere (F-104)",
+                "Venitul se închide în rezultat, ca orice cont de clasa 7.",
+                dr=[("7582", 120000)], cr=[("121", 120000)],
+                rol="Colectare rezultat"),
+            pas(4, "Verificare",
+                "Sold 4551.A = 0, sold 7582 = 0 după închidere, iar 121 trece de la "
+                "−100.000 la +20.000. Profit de 20.000 lei fără nicio operațiune de "
+                "exploatare — de citit ca atare la analiza rezultatului și la calculul "
+                "impozitului.",
+                rol="Stare terminală: 4551 = 0, rezultatul pe profit din remitere"),
+        ],
+    ),
+    # ------------------------------------------------------------------ F-76
+    flux(
+        "F-76", "Analiticele pe 1012 = cotele de participare (procedură de control)",
+        didactic=True,
+        roluri="Procedură de control — balanța ca sursă unică",
+        conturi="1012, 457, 456",
+        note="Fără sume: e o procedură de verificare, ca F-214. Se rulează înainte de "
+             "ORICE hotărâre AGA de repartizare.",
+        principiu="Balanța trebuie să vorbească de la sine. Când vine hotărârea AGA, "
+                  "verifici direct în balanță ce cotă are fiecare asociat, fără să "
+                  "deschizi actul constitutiv — iar dacă cele două nu spun același "
+                  "lucru, afli înainte de a înregistra, nu după.",
+        pasi=[
+            pas(1, "Sursa 1 — certificat constatator ONRC / act constitutiv",
+                "Cotele de participare, așa cum sunt înregistrate juridic. La firmele "
+                "noi luate în lucru, ele sunt singura sursă disponibilă.",
+                rol="Sursa juridică a cotelor"),
+            pas(2, "Sursa 2 — balanța, contul 1012",
+                "1012 se ține pe analitic PE ASOCIAT, iar denumirea analiticului poartă "
+                "procentul: `1012.1 = Ionescu 33,3%`, `1012.2 = Popescu 33,3%`, "
+                "`1012.3 = Xulescu 33,3%`.",
+                rol="Sursa contabilă a cotelor"),
+            pas(3, "Confruntarea",
+                "Σ analitice 1012 = soldul sintetic al lui 1012, iar Σ procente din "
+                "denumiri = 100%. Amândouă trebuie să țină simultan: prima spune că nu "
+                "s-a pierdut nimic, a doua că nu s-a inventat nimic.",
+                rol="Pas revelator: balanța răspunde singură la „cine cât deține”",
+                revelator=True),
+            pas(4, "Firma nouă cu 1012 „la grămadă”",
+                "Procedura de spargere: se ia cota de la ONRC și se creează analiticele, "
+                "înainte de prima repartizare. Nu se amână până la AGA — atunci e prea "
+                "târziu ca să mai fie o verificare.",
+                rol="Procedura de remediere"),
+            pas(5, "Ce rupe corelația",
+                "Fuziunile și cedările de părți sociale: cotele se schimbă, analiticele "
+                "rămân. Exact cazurile ajunse la comisia de disciplină la ANAF, pentru "
+                "că experții contabili nu obținuseră procentele pe analitice. "
+                "Consecința nu e doar a firmei — afectează și persoana, la ce poate "
+                "ridica din societate.",
+                rol="Momentele în care corelația cedează"),
+            pas(6, "Verificare",
+                "1012 spart pe asociați, Σ analitice = sintetic, Σ procente = 100%, iar "
+                "repartizarea din orice hotărâre AGA se poate contraverifica din balanță "
+                "în două minute.",
+                rol="Stare terminală: cotele sunt citibile din balanță, fără acte"),
+        ],
+    ),
 ]

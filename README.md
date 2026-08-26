@@ -76,14 +76,14 @@ Necesită `openpyxl`, `formulas`, `numpy` (`pip install openpyxl formulas numpy`
 
 <!-- generat: cifre — nu edita între marcaje, se suprascrie la `make tot` -->
 
-**68 fluxuri** cu monografie pas cu pas, ordonate după planul de conturi. ID-ul codifică clasa contului principal, deci un flux adăugat peste un an primește următorul număr liber din clasa lui și stă fizic la locul lui.
+**80 fluxuri** cu monografie pas cu pas, ordonate după planul de conturi. ID-ul codifică clasa contului principal, deci un flux adăugat peste un an primește următorul număr liber din clasa lui și stă fizic la locul lui.
 
 | Bloc | Conținut | Fluxuri |
 |---|---|---|
-| `F-1xx` | capitaluri, provizioane, împrumuturi, închiderea exercițiului, leasing | 8 |
-| `F-2xx` | imobilizări: intrare pe grupe → în curs → regie proprie → subvenții → ieșiri → control analitic ↔ sintetic | 14 |
+| `F-1xx` | capitaluri, provizioane, împrumuturi, închiderea exercițiului, leasing | 14 |
+| `F-2xx` | imobilizări: intrare pe grupe → în curs → regie proprie → subvenții → ieșiri → control analitic ↔ sintetic | 16 |
 | `F-3xx` | stocuri și producție: aprovizionare, obiecte de inventar, producție, mărfuri, import | 20 |
-| `F-4xx` | terți, TVA, salarii: TVA la încasare, taxare inversă, închidere lunară, 408/418, salarii, medicale, popriri, impozit micro | 22 |
+| `F-4xx` | terți, TVA, salarii: TVA la încasare, taxare inversă, închidere lunară, 408/418, salarii, medicale, popriri, impozit micro | 26 |
 | `F-5xx` | trezorerie | 2 |
 | `F-8xx` | conturi în afara bilanțului | 2 |
 
@@ -91,11 +91,11 @@ Necesită `openpyxl`, `formulas`, `numpy` (`pip install openpyxl formulas numpy`
 
 | Ce | Cât |
 |---|---|
-| Conturi în planul clasificat pe rol | 257 |
-| Conturi clasificate Tier A | 87 |
+| Conturi în planul clasificat pe rol | 274 |
+| Conturi clasificate Tier A | 102 |
 | Dintre ele, cu rând detaliat de analitice | 39 |
 | Corelații de control | 29 |
-| Rânduri de cadență în „Închideri periodice” | 24 |
+| Rânduri de cadență în „Închideri periodice” | 27 |
 | Foi în workbook-ul de referință | 12 |
 | Documente de studiu | 5 |
 | Întrebări: deschise / verificate / decizii de cabinet | 20 / 13 / 9 |

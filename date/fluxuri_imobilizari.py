@@ -420,4 +420,105 @@ FLUXURI = [
                 rol="Stare terminală: sold 267 = listă identificabilă"),
         ],
     ),
+    # ==================================================================
+    # Trainingul 26.08.2026 — subvenții europene și plusuri la inventar
+    #
+    # Amândouă se sprijină pe același mecanism ca F-210 (subvenția pentru investiții),
+    # dar îl duc mai departe: F-215 arată cazul PARȚIAL FINANȚAT, unde reluarea la
+    # venit se face în cota de finanțare, iar F-216 arată că un venit constatat, nu
+    # primit, urmează exact aceeași disciplină.
+    # ==================================================================
+    # ------------------------------------------------------------------ F-77
+    flux(
+        "F-77", "Subvenție din fonduri europene (4452 → 4758 → 7584)", didactic=True,
+        roluri="Creanță + Venit amânat + Rectificativ prin amortizare",
+        conturi="4452, 4758, 7584, 212, 2812, 6811, 404, 4426, 5121",
+        note="Valorile din proiect sunt FĂRĂ TVA: TVA-ul nu se decontează și nu face "
+             "parte dintr-un proiect european. Aportul propriu e de 10 / 20 / 30%, după "
+             "proiect și ramură.",
+        principiu="Amortizarea și reluarea la venit merg ÎMPREUNĂ, în aceeași lună: "
+                  "dacă am o cheltuială din proiect, trebuie să am și un venit. O lună "
+                  "cu amortizare și fără reluare e o eroare, nu o opțiune. Iar "
+                  "momentul nașterii creanței e APROBAREA, nu încasarea — înregistrat "
+                  "la încasare, tot mecanismul pornește cu întârziere.",
+        pasi=[
+            pas(1, "Decizie de aprobare a finanțării",
+                "Proiect de 100.000 lei, subvenție 80%. Creanța și venitul amânat se "
+                "nasc ACUM, la aprobare — nu la semnarea contractului de consultanță și "
+                "nu la primirea banilor. Restul de 20.000 e aportul propriu al firmei.",
+                dr=[("4452.proiect", 80000)], cr=[("4758.proiect", 80000)],
+                rol="Creanță față de finanțator + Venit amânat"),
+            pas(2, "Extras de cont",
+                "Încasarea fondurilor. Între aprobare și încasare creanța poate sta "
+                "„latentă” oricât: nimic nu se reia la venit până nu apare prima "
+                "cheltuială cu activul finanțat.",
+                dr=[("5121", 80000)], cr=[("4452.proiect", 80000)],
+                rol="Stingerea creanței"),
+            pas(3, "Factură + proces-verbal de recepție",
+                "Clădirea intră în patrimoniu la 100.000 lei — valoarea din proiect, "
+                "fără TVA. TVA-ul de 21.000 lei se deduce pe circuitul obișnuit, dar NU "
+                "e cheltuială eligibilă și nu intră în baza de calcul a subvenției.",
+                dr=[("212", 100000), ("4426", 21000)], cr=[("404", 121000)],
+                rol="Activul finanțat, la valoarea din proiect"),
+            pas(4, "Notă contabilă lunară",
+                "Clădirea se amortizează pe 40 de ani: 100.000 ÷ 480 luni = 208,33 lei. "
+                "În ACEEAȘI lună, subvenția se reia la venit în cota de finanțare: "
+                "80.000 ÷ 480 = 166,67 lei. Cele două jumătăți se scriu împreună, ca "
+                "nota să arate singură că merg în pereche. ⚠ Reluarea se calculează pe "
+                "valoarea SUBVENȚIONATĂ împărțită la durată, nu ca 80% din amortizarea "
+                "deja rotunjită: 208,33 × 80% ar da 166,66, cu un ban mai puțin.",
+                dr=[("6811", 208.33), ("4758.proiect", 166.67)],
+                cr=[("2812", 208.33), ("7584", 166.67)],
+                rol="Pas revelator: amortizarea și reluarea în aceeași notă",
+                revelator=True),
+            pas(5, "Verificare",
+                "Efectul net pe rezultat: 208,33 − 166,67 = 41,66 lei pe lună, adică "
+                "amortizarea aportului propriu (20.000 ÷ 480 = 41,67 — diferența de un "
+                "ban e reziduu de rotunjire, care se regularizează în ultima lună). "
+                "După 480 de luni: 4758 = 0, 2812 = 100.000, iar suma veniturilor din "
+                "7584 = 80.000. Corelația de urmărit lunar: rulaj 7584 ≠ 0 în orice "
+                "lună în care 6811 are rulaj pe activul finanțat.",
+                rol="Stare terminală: 4758 = 0 la capătul duratei, cheltuiala netă = "
+                    "aportul propriu"),
+        ],
+    ),
+    # ------------------------------------------------------------------ F-78
+    flux(
+        "F-78", "Plus la inventar la imobilizări (21x → 4754)", didactic=True,
+        roluri="Venit amânat pe durata de amortizare",
+        conturi="2131, 4754, 7584, 2813, 6811",
+        note="⚠ Notițele scriau `4458 = 4754`. Debitul e contul de imobilizare: un plus "
+             "constatat la inventar nu naște nicio creanță — nu ai de primit nimic de "
+             "la nimeni, ai găsit bunul.",
+        principiu="Un plus de inventar la imobilizări NU se recunoaște direct la venit. "
+                  "O imobilizare are drept cheltuială amortizarea, deci venitul trebuie "
+                  "să apară în același ritm; recunoscut imediat, ar concentra într-o "
+                  "singură lună un venit care acoperă o cheltuială întinsă pe toată "
+                  "durata de viață.",
+        pasi=[
+            pas(1, "Proces-verbal de inventariere + raport de evaluare",
+                "La inventar se găsește un utilaj neînregistrat, evaluat la 24.000 lei, "
+                "cu durată rămasă de utilizare de 5 ani. ⚠ Debitul e 2131, nu 4458: "
+                "4458 e o CREANȚĂ, iar aici nu ai de primit nimic de la nimeni.",
+                dr=[("2131", 24000)], cr=[("4754", 24000)],
+                rol="Activ + Venit amânat (nu venit al lunii)"),
+            pas(2, "Notă contabilă lunară — amortizarea",
+                "24.000 ÷ 60 luni = 400 lei.",
+                dr=[("6811", 400)], cr=[("2813", 400)],
+                rol="Cheltuiala cu amortizarea"),
+            pas(3, "Notă contabilă lunară — reluarea",
+                "Aici finanțarea e de 100%, nu parțială ca la F-215: nu firma a plătit "
+                "utilajul, deci se reia integral. Efectul net pe rezultat e ZERO în "
+                "fiecare lună — exact ce trebuie, pentru că firma n-a suportat nimic.",
+                dr=[("4754", 400)], cr=[("7584", 400)],
+                rol="Pas revelator: reluarea urmează ritmul amortizării, în cota de "
+                    "finanțare — aici 100%",
+                revelator=True),
+            pas(4, "Verificare",
+                "După 60 de luni: sold 4754 = 0, sold 2813 = 24.000, Σ7584 = 24.000 = "
+                "Σ6811 pe utilajul respectiv. Testul rapid: dacă 4754 mai are sold după "
+                "ce activul e complet amortizat, reluarea s-a oprit pe drum.",
+                rol="Stare terminală: 4754 = 0, efect net pe rezultat nul lună de lună"),
+        ],
+    ),
 ]

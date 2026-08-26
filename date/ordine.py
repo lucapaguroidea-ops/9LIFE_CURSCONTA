@@ -33,6 +33,12 @@ CLASA_1 = [
     ("F-106", "F-51", "Provizioane pentru litigii (151x)"),
     ("F-107", "F-49", "Credit bancar în valută (162x)"),
     ("F-108", "F-50", "Leasing financiar autoturism cu deductibilitate 50%"),
+    ("F-109", "F-71", "Dividende certe din rezultatul reportat (1171 → 457)"),
+    ("F-110", "F-72", "Dividende interimare (463) cu plafonul lui 121"),
+    ("F-111", "F-73", "Creditarea de societate (4551)"),
+    ("F-112", "F-74", "Majorarea capitalului social din creditare"),
+    ("F-113", "F-75", "Remiterea de datorie (4551 → 7582)"),
+    ("F-114", "F-76", "Analiticele pe 1012 = cotele de participare"),
 ]
 
 CLASA_2 = [
@@ -49,7 +55,9 @@ CLASA_2 = [
     ("F-211", "F-59", "Vânzarea unui mijloc fix și testul valorii rămase"),
     ("F-212", "F-60", "Casarea unui mijloc fix și piesele recuperate"),
     ("F-213", "F-62", "Imobilizări financiare (26x)"),
-    ("F-214", "F-61", "Controlul lunar analitic ↔ sintetic la imobilizări"),
+    ("F-214", "F-61", "Controlul lunar analitic ↔ sintetic la imobilizări"),    ("F-215", "F-77", "Subvenție din fonduri europene (4452 → 4758 → 7584)"),
+    ("F-216", "F-78", "Plus la inventar la imobilizări (21x → 4754)"),
+
 ]
 
 CLASA_3 = [
@@ -96,8 +104,12 @@ CLASA_4 = [
     ("F-418", "F-66", "Drepturi de personal neridicate (421 → 426)"),
     ("F-419", "F-67", "Creanță față de un fost salariat (4282)"),
     ("F-420", "F-68", "Impozitul pe venitul microîntreprinderii (698 → 4418)"),
-    ("F-421", "F-69", "Decizie de impunere ANAF pe TVA (analitic distinct)"),
+    ("F-421", "F-69", "Decizie de impunere ANAF prin 4481 (în afara rulajului curent)"),
     ("F-422", "F-70", "Închiderea lunară a obligațiilor salariale (rulaj = sold)"),
+    ("F-423", "F-79", "Taxe locale prin 446, cu 471 la perioade lungi"),
+    ("F-424", "F-80", "Plată eronată către buget (4482)"),
+    ("F-425", "F-81", "Debitori diverși 461 (mijloc fix vândut și imputație)"),
+    ("F-426", "F-82", "Decontări din operațiuni în participație (458)"),
 ]
 
 CLASA_5 = [

@@ -197,40 +197,53 @@ FLUXURI_SALARII = [
                    "impozit pe profit din TRIMESTRUL depășirii, nu din următorul: "
                    "clientul care se apropie de prag trebuie anunțat înainte, nu după."),
 
-    flux("F-69", "Decizie de impunere ANAF pe TVA (analitic în afara decontului)",
+    flux("F-69", "Decizie de impunere ANAF prin 4481 (în afara rulajului curent)",
          didactic=True,
          roluri="Datorie fiscală izolată de circuitul declarativ",
-         conturi="4423.ANAF, 635, 5121",
-         note="Sumele stabilite prin decizie de impunere NU se trec niciodată în "
-              "decontul de TVA. Analiticul e singurul lucru care împiedică eroarea.",
+         conturi="4481, 6588, 6581, 5121",
+         note="Sumele stabilite prin decizie de impunere NU ajung niciodată în decontul "
+              "de TVA. ❓ Notițele din 21.08 spun „4423 cu analitic distinct”, cele din "
+              "26.08 spun 4481 — vezi principiul și întrebarea din listă.",
          pasi=[
              pas(1, "Decizie de impunere după inspecție fiscală",
-                 "ANAF stabilește TVA suplimentar de plată 18.000 lei. Suma e o datorie "
-                 "reală, dar nu provine din operațiunile lunii.",
-                 dr=[("635", 18000)], cr=[("4423.ANAF", 18000)],
-                 rol="Cheltuială cu alte impozite + Datorie fiscală pe analitic distinct"),
-             pas(2, "Extras de cont — plata deciziei",
+                 "ANAF stabilește TVA suplimentar de plată 18.000 lei, pentru perioade "
+                 "anterioare. Suma e o datorie reală, dar nu provine din operațiunile "
+                 "lunii — și nici din vreo lună pe care decontul curent o acoperă. "
+                 "Cheltuiala e nedeductibilă fiscal.",
+                 dr=[("6588", 18000)], cr=[("4481.decizie", 18000)],
+                 rol="Cheltuială nedeductibilă + Datorie din act de control"),
+             pas(2, "Aceeași decizie — accesoriile",
+                 "Dobânzile și penalitățile merg pe același cont de datorie, cu "
+                 "cheltuiala lor proprie, tot nedeductibilă.",
+                 dr=[("6581", 2700)], cr=[("4481.decizie", 2700)],
+                 rol="Accesoriile, pe același analitic de decizie"),
+             pas(3, "Extras de cont — plata deciziei",
                  "Se plătește ca orice datorie fiscală.",
-                 dr=[("4423.ANAF", 18000)], cr=[("5121", 18000)],
+                 dr=[("4481.decizie", 20700)], cr=[("5121", 20700)],
                  rol="Stingerea datoriei"),
-             pas(3, "Închiderea lunară de TVA",
-                 "ROLUL ANALITICULUI se vede aici: închiderea lunii lucrează pe "
-                 "4423 curent și NU atinge 4423.ANAF. Fără analitic, suma din decizie "
-                 "ar intra în soldul care se compară cu decontul, iar decontul ar "
-                 "părea greșit cu exact 18.000 — o eroare care se face singură.",
-                 rol="Analiticul ține decizia în afara circuitului declarativ",
+             pas(4, "Închiderea lunară de TVA",
+                 "AICI se vede rostul contului separat: închiderea lunii lucrează pe "
+                 "4423 și NU are ce atinge, pentru că decizia n-a intrat niciodată "
+                 "acolo. Un ANALITIC al lui 4423 n-ar fi fost de ajuns — rămâne tot în "
+                 "soldul lui 4423, adică fix contul pe care decontul îl reconciliază.",
+                 rol="Pas revelator: decizia stă în afara contului pe care îl "
+                     "reconciliază decontul",
                  revelator=True),
-             pas(4, "Verificare",
-                 "Sold 4423.ANAF = 0 după plată, iar soldul 4423 curent se potrivește cu "
-                 "decontul lunii. Cele două nu se însumează niciodată în decont.",
-                 rol="Stare terminală: 4423.ANAF stins; corelația decont ↔ balanță "
-                     "rămâne valabilă pe analiticul curent"),
+             pas(5, "Verificare",
+                 "Sold 4481 = 0 după plată. Rulajele lui 4423, 4426 și 4427 rămân exact "
+                 "cele din jurnalele de TVA, deci corelația decont ↔ balanță trece "
+                 "nemodificată. Sold 4481 rămas de la un an la altul = decizie "
+                 "neachitată sau neurmărită.",
+                 rol="Stare terminală: 4481 = 0; corelația decont ↔ balanță intactă"),
          ],
-         principiu="Un analitic nu e o preferință de organizare când separă două lucruri "
-                   "care se supun unor reguli diferite. TVA-ul din decizia de impunere e "
-                   "datorie, dar nu e TVA declarativ — iar dacă stau pe același cont, "
-                   "corelația sfântă dintre decont și balanță se rupe fără ca nimeni să "
-                   "vadă de ce."),
+         principiu="Formatorul a dat două reguli incompatibile pentru același caz, la "
+                   "cinci zile distanță: 21.08 — „4423 cu analitic distinct, ca să nu "
+                   "ajungă în decont”; 26.08 — „nu prin 4423, pentru că denaturează "
+                   "rulajul curent, ci prin 4481”. Fluxul urmează varianta din 26.08 "
+                   "pentru că e singura care dă un motiv VERIFICABIL: analiticul separă "
+                   "evidența, dar nu separă SOLDUL, iar decontul se compară pe soldul "
+                   "sintetic. Decizia finală îi aparține însă formatorului, nu "
+                   "monografiei — de aceea cazul e și întrebare deschisă."),
 
     flux("F-70", "Închiderea lunară a obligațiilor salariale (rulaj = sold)",
          didactic=True,

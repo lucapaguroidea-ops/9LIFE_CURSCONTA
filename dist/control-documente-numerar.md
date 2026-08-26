@@ -169,6 +169,120 @@ verificate: ele n-au corespondent afară.
 
 ---
 
+## 7. Conturile care țin rulajele curate
+### 7.1 Taxele locale prin 446, nu direct pe cheltuială
+
+
+```
+446 = 5121                  plata taxei
+471 = 446                   dacă acoperă o perioadă mai lungă
+635 = 471                   eșalonat, pe luni
+635 = 446                   direct, dacă suma e mică
+```
+
+➕ Rostul lui 446 ca punct de trecere: taxa plătită anticipat pentru un an întreg nu e
+cheltuiala lunii în care s-a plătit. Pentru sume mici nu merită mecanismul cu 471.
+
+
+### 7.2 Contul 4481 — datorii din acte de control
+
+
+**4481 este cont de pasiv**: dobânzi, penalități și sume stabilite prin acte de control,
+inclusiv cele aferente perioadelor anterioare.
+
+Când ANAF vine în control și întocmește o decizie de impunere — să zicem 10.000 lei TVA
+suplimentar — suma **nu se înregistrează în 4423**, pentru că ar denatura rulajul curent
+și ar produce diferență la decont.
+
+```
+6588 = 4481       cheltuială nedeductibilă fiscal
+```
+
+❓ **Contradicție de rezolvat cu formatorul.** Notițele din 21.08.2026 spun că sumele din
+decizii de impunere se înregistrează „în 4423 cu analitic distinct, tocmai ca să nu ajungă
+din greșeală în decontul lunii următoare". Notițele din 26.08.2026 spun exact invers: nu
+prin 4423, ci prin 4481, „pentru că denaturează rulajul curent".
+
+Ambele afirmații vin de la același formator, la cinci zile distanță. Am adoptat varianta
+din 26.08 pentru că e cea care dă motivul, iar motivul e verificabil: un analitic al lui
+4423 rămâne totuși în soldul lui 4423, adică fix contul pe care decontul îl reconciliază.
+Dar decizia îi aparține formatorului, nu mie.
+
+
+### 7.3 Contul 4482 — plăți eronate către buget
+
+
+**4482 este cont de activ**: ține sumele plătite eronat, până la lămurire.
+
+Exemplu: impozit pe salarii de plată 715 lei, în soldul creditor al lui 444. Din bancă a
+ieșit o plată de 751 lei (cifre inversate):
+
+```
+444  = 5121       715        cât se datora
+4482 = 5121        36        diferența plătită în plus
+```
+
+Luna următoare, soldul lui 4482 diminuează plata datorată.
+
+Al doilea caz, frecvent la cei cu mai multe firme: ordinul de plată pleacă din contul
+firmei, dar cu **alt CUI de plătitor**. Banii sting datoria altei firme, iar firma plătitoare
+rămâne cu datoria neachitată la ANAF. Plata se înregistrează pe 4482 — sold în așteptare,
+care se disecă — până când cealaltă firmă returnează sumele.
+
+➕ Rostul ambelor conturi e același: **să nu altereze rulajele conturilor curente**. ANAF
+contraverifică exact corelațiile pe care ele le protejează.
+
+
+### 7.4 Conturile 461 / 462 — coșul firmei
+
+
+461 și 462 sunt printre primele conturi la care se uită **și ANAF, și băncile**. Sunt și
+cele mai ușor de transformat în coș: sume decontate care n-au corespondent prin 401, 419
+sau alt cont dedicat ajung acolo și rămân.
+
+⚠️ Cazul concret: nu mai există sold pe 4551, dar asociatul continuă să ia bani din bancă
+— iar sumele se pun pe 461. La control apare o creditare de societate inexistentă și bani
+scoși fără temei.
+
+**Utilizări corecte:**
+
+Vânzarea unui mijloc fix se face prin 461, nu prin cont de client — cumpărătorul nu e
+client pentru activitatea curentă:
+
+```
+461 = 7583        venit din active cedate
+461 = 4427        TVA colectată
+```
+
+Imputația către un salariat care a produs pagube — nu e client, deci nu 4111:
+
+```
+461 = 7588        826,45     venit din exploatare
+461 = 4427        173,55     TVA colectată
+```
+
+pentru o pagubă de 1.000 lei cu TVA (1.000 ÷ 1,21 = 826,45).
+
+⚠️ Notița scria debitul ca `121`. Contul corect este **461**; sumele erau bune.
+
+➕ 7588 se folosește când nu există un cont de venit asociat direct, cum e 707 pentru
+marfă. Dacă bunul deteriorat a fost dedus, TVA se colectează.
+
+❓ Imputația nu se poate face fără ca salariatul să fie informat și de acord — Codul
+muncii. Notița menționează un plafon „la nivelul a 5 salarii medii", cu observația
+formatorului „de verificat suma".
+
+## 8. Verificarea care încheie ședința
+Regula generală, formulată de formator ca temă: **să verificăm activul și pasivul —
+conturile care stau pe invers.** Un cont de activ cu sold creditor sau un cont de pasiv
+cu sold debitor nu e o curiozitate de balanță; e o eroare care încă n-a fost căutată.
+
+Conturile din ședința asta care se verifică așa: 455 (niciodată debitor), 461/462, 4482,
+463 față de 121.
+
+➕ Tema dată: identificarea în balanță a lucrurilor care pot fi rezolvate — pentru că, o
+dată ce li se stabilește cursul, nu mai sunt erori.
+
 ---
 
 ## Anexa B — Checklist practic
@@ -227,6 +341,7 @@ Extrasă automat din textul documentului: sunt listate actele și articolele car
 - Legea 70/2015
 - Legea 296/2023
 - Codul fiscal
+- Codul muncii
 
 **Articole citate**
 

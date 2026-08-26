@@ -97,6 +97,20 @@ CADENTA = [
     ("223 Instalații tehnice și mijloace de transport în curs de aprovizionare",
      "Cel puțin trimestrial",
      "tranzit pe imobilizări; sold ≠ 0 înseamnă recepție neînregistrată (F-207)"),
+
+    # Cele trei de mai jos vin din sursa 26.08 și au aceeași logică: sunt conturi în
+    # care o sumă STĂ până se lămurește ceva. Fără urmărire periodică, „până se
+    # lămurește” devine „pentru totdeauna”, iar contul se transformă în coș — exact
+    # cuvântul formatorului.
+    ("4754 Plusuri de inventar de natura imobilizărilor", "Lunar — obligatoriu",
+     "reluarea la venit trebuie să însoțească amortizarea, lună de lună; sold rămas "
+     "după ce activul s-a amortizat integral = reluarea s-a oprit pe drum (F-216)"),
+    ("4481 Alte datorii față de bugetul statului", "Cel puțin trimestrial",
+     "datorii din decizii de impunere; sold purtat de la un an la altul = decizie "
+     "neachitată sau neurmărită (F-421)"),
+    ("4482 Alte creanțe privind bugetul statului", "Cel puțin trimestrial",
+     "plăți eronate în așteptare; soldul se disecă până la lămurire, nu se reportează "
+     "(F-424)"),
 ]
 
 # ---------------------------------------------------------------------------
@@ -118,6 +132,9 @@ FARA_CADENTA = {
            "acolo e normal cât timp există stoc.",
     "711": "Se închide la 31.12 împreună cu variația stocurilor (F-314). Sold în cursul "
            "anului e starea normală, nu o eroare.",
+    "1011": "Se golește la înregistrarea mențiunii la ONRC, nu la o dată din calendar "
+            "(F-101, F-112). Cât timp stă cu sold, motivul e la registrul comerțului, "
+            "nu în contabilitate — o verificare lunară n-ar avea ce să constate.",
 }
 
 # ---------------------------------------------------------------------------
