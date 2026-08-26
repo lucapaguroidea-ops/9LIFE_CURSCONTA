@@ -253,4 +253,93 @@ CORELATII = [
         severitate="Înaltă — decontul nu are variantă rectificativă; corecția se face "
                    "doar pe regularizări",
     ),
+    # ======================================================================
+    # Sursa 26.08.2026 — dividende, creditare, conturile în așteptare
+    #
+    # Cele cinci au un tipar comun cu C-23 (sold contrar naturii), dar merg mai
+    # departe: nu întreabă doar „ce semn are soldul”, ci „ce document extern trebuie
+    # să spună același lucru”. Hotărârea AGA, certificatul ONRC și decizia de impunere
+    # sunt a doua sursă — iar o corelație fără a doua sursă e doar o preferință.
+    # ======================================================================
+    dict(
+        id="C-30",
+        formula="sold 4551 NICIODATĂ debitor\n(pe fiecare analitic de asociat, nu pe total)",
+        unde="Balanța analitică a lui 455, la orice moment",
+        legitim="Nimic. 4551 e cont de pasiv: sold debitor nu are variantă legitimă.\n"
+                "Sold ZERO e starea normală de final, nu o abatere.",
+        suspect="Asociatul a ridicat mai mult decât a pus — creditare inexistentă\n"
+                "Înregistrare pe sensul greșit\n"
+                "Compensare între doi asociați, fără act notarial: soldul total\n"
+                "  pare curat, analiticele nu\n"
+                "Ridicări puse pe 461 după ce 4551 a ajuns la zero (vezi C-33)",
+        flux="F-111, F-112, F-113",
+        severitate="Înaltă — la control apare drept bani scoși fără temei, cu efect "
+                   "și asupra persoanei, nu doar a firmei",
+    ),
+    dict(
+        id="C-31",
+        formula="Σ analitice 1012 = sold 1012\nȘI Σ procentelor din denumiri = 100%",
+        unde="Balanța analitică + certificatul constatator ONRC",
+        legitim="Firmă nouă preluată cu 1012 „la grămadă”, înainte de spargerea pe\n"
+                "  analitice — dar atunci corelația e o SARCINĂ, nu o excepție (F-114)\n"
+                "Majorare de capital în curs, cu mențiunea nedepusă încă la ONRC:\n"
+                "  partea nouă stă pe 1011, nu pe 1012",
+        suspect="Fuziune sau cedare de părți sociale operată în acte și nu în analitice\n"
+                "Hotărâre AGA care repartizează pe procente inexistente în balanță\n"
+                "Analitice cu procente care nu însumează 100% — cineva a fost uitat",
+        flux="F-114, F-109, F-112",
+        severitate="Înaltă — cazurile ajunse la comisia de disciplină la ANAF au "
+                   "pornit exact de aici",
+    ),
+    dict(
+        id="C-32",
+        formula="sold debitor 463 ≤ sold creditor 121\n(la orice moment, nu doar la 31.12)",
+        unde="Balanța la data bilanțului interimar și la 31.12",
+        legitim="Egalitate: s-a repartizat exact profitul realizat — plafonul atins,\n"
+                "  nu depășit\n"
+                "Sold 463 = 0 după regularizarea de la 31.12 și trecerea prin 1171",
+        suspect="Dividende interimare peste profitul realizat: la 31.12 se stornează,\n"
+                "  se depune D710, iar asociatul trebuie să aducă banii înapoi\n"
+                "Repartizare făcută pe disponibilul din bancă, nu pe soldul lui 121\n"
+                "Lipsa bilanțului interimar sau a inventarierii — condiții legale,\n"
+                "  nu formalități",
+        flux="F-110",
+        severitate="Înaltă — corecția e un proces lung, cu bani de restituit și "
+                   "rectificativă printr-un formular separat (D710), pentru că "
+                   "decontul nu are variantă rectificativă",
+    ),
+    dict(
+        id="C-33",
+        formula="4481 și 4482 se sting până la finalul exercițiului\n(sold reportat = 0)",
+        unde="Balanța la 31.12, pe fiecare analitic de decizie sau de plată",
+        legitim="Decizie de impunere contestată, cu suspendarea executării — soldul\n"
+                "  rămâne, dar are dosar\n"
+                "Plată eronată descoperită în decembrie, returnată în ianuarie",
+        suspect="Sold purtat de la un an la altul: decizia n-a fost achitată sau\n"
+                "  nimeni n-a mai urmărit-o\n"
+                "4482 folosit ca depozit pentru diferențe pe care nu le-a disecat\n"
+                "  nimeni — devine coș, ca 461\n"
+                "Sume din decizii trecute prin 4423: soldul lui 4481 pare curat,\n"
+                "  dar decontul de TVA e cel stricat (vezi C-29)",
+        flux="F-421, F-424",
+        severitate="Medie — conturile există tocmai ca să protejeze corelațiile pe "
+                   "care ANAF le contraverifică; nefolosite corect, le strică",
+    ),
+    dict(
+        id="C-34",
+        formula="Σ analitice 457 = dividendele din hotărârea AGA\nȘI 457 se stinge doar prin 446 sau 5121",
+        unde="Hotărârea AGA + balanța analitică a lui 457 + fișa contului 446",
+        legitim="Dividende repartizate și neridicate: 457 rămâne cu sold creditor,\n"
+                "  chiar dacă impozitul e deja plătit (termenul e 25.01, indiferent\n"
+                "  de ridicare)\n"
+                "Renunțare la dividend, documentată prin hotărâre",
+        suspect="Sold 457 fără hotărâre AGA în spate — cea mai frecventă cauză de\n"
+                "  ajungere la comisia de disciplină\n"
+                "457 stins prin 4551 sau 461: dividendul nu se compensează cu\n"
+                "  creditarea decât documentat\n"
+                "D205 care nu se potrivește cu D100 și cu fișa lui 446 — se caută\n"
+                "  o plată făcută fără declarație",
+        flux="F-109",
+        severitate="Înaltă — impozitul se datorează la data DISTRIBUIRII, nu a plății",
+    ),
 ]

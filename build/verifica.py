@@ -265,6 +265,79 @@ def poarta_corelatii():
     if abs(sold_1621 - 15000 * 5.01) > 0.01:
         cade("7", f"F-49: sold 1621 = {sold_1621}, se aștepta 15.000 × 5,0100 = 75.150")
 
+    # --- sursa 26.08 ----------------------------------------------------
+    # C-31 pe F-71: repartizarea se face în cote EGALE din 1012, deci fiecare analitic
+    # de 457 primește exact o treime. Verificarea nu se uită la total: un total corect
+    # cu analitice strâmbe e chiar cazul pe care corelația îl caută.
+    pe_asociat = {}
+    for f in FLUXURI:
+        if f["id"] != "F-71":
+            continue
+        for p in f["pasi"]:
+            for c, s_ in p["cr"]:
+                if c.startswith("457."):
+                    pe_asociat[c] = round(pe_asociat.get(c, 0) + s_, 2)
+    if len(pe_asociat) < 3:
+        cade("7", f"C-31 pe F-71: doar {len(pe_asociat)} analitice de 457 — "
+                  f"repartizarea nu e pe asociat")
+    elif len(set(pe_asociat.values())) != 1:
+        cade("7", f"C-31 pe F-71: cotele nu sunt egale — {pe_asociat}")
+    if round(sum(pe_asociat.values()), 2) != rulaj("F-71", "C", "457"):
+        cade("7", f"C-31 pe F-71: Σ analitice 457 = {sum(pe_asociat.values())} "
+                  f"≠ rulajul sintetic {rulaj('F-71', 'C', '457')}")
+
+    # C-34 pe F-71: impozitul reținut e 16% din brutul repartizat, pe a doua cale
+    brut = rulaj("F-71", "C", "457")
+    impozit = rulaj("F-71", "C", "446")
+    if abs(impozit - round(brut * 0.16, 2)) > 0.01:
+        cade("7", f"C-34 pe F-71: impozit {impozit} ≠ 16% × {brut}")
+    # și 457 se stinge integral: nimic nu rămâne agățat
+    if rulaj("F-71", "D", "457") != rulaj("F-71", "C", "457"):
+        cade("7", "C-34 pe F-71: 457 nu se stinge integral")
+
+    # C-32 pe F-72: repartizarea interimară nu depășește soldul lui 121 (80.000 la
+    # bilanțul interimar), iar administratorul ridică net exact brut − impozit
+    plafon = 80000
+    if rulaj("F-72", "D", "463") > plafon:
+        cade("7", f"C-32 pe F-72: 463 debitat cu {rulaj('F-72', 'D', '463')} "
+                  f"peste plafonul de {plafon}")
+    net = rulaj("F-72", "C", "5121")
+    if abs(net - (plafon - round(plafon * 0.16, 2))) > 0.01:
+        cade("7", f"C-32 pe F-72: netul ridicat {net} ≠ 80.000 − 16%")
+
+    # C-30 pe F-73: fiecare analitic de 4551 se închide — niciunul nu rămâne debitor
+    for analitic in ("4551.A", "4551.B"):
+        d = sum(s_ for f in FLUXURI if f["id"] == "F-73" for p in f["pasi"]
+                for c, s_ in p["dr"] if c == analitic)
+        c_ = sum(s_ for f in FLUXURI if f["id"] == "F-73" for p in f["pasi"]
+                 for c, s_ in p["cr"] if c == analitic)
+        if round(d - c_, 2) > 0:
+            cade("7", f"C-30 pe F-73: {analitic} rămâne cu sold debitor {d - c_}")
+
+    # F-77: reluarea lunară e cota de finanțare aplicată valorii SUBVENȚIONATE, nu
+    # 80% din amortizarea rotunjită — cele două diferă cu un ban, iar ăsta e chiar
+    # miezul corecției din notițe
+    amo = rulaj("F-77", "D", "6811")
+    reluare = rulaj("F-77", "C", "7584")
+    if abs(amo - round(100000 / 480, 2)) > 0.005:
+        cade("7", f"F-77: amortizarea {amo} ≠ 100.000/480")
+    if abs(reluare - round(80000 / 480, 2)) > 0.005:
+        cade("7", f"F-77: reluarea {reluare} ≠ 80.000/480")
+    if abs(round(amo - reluare, 2) - 41.66) > 0.005:
+        cade("7", f"F-77: efectul net {round(amo - reluare, 2)} ≠ 41,66")
+
+    # F-78: finanțare de 100%, deci efect net ZERO în fiecare lună
+    if rulaj("F-78", "D", "6811") != rulaj("F-78", "C", "7584"):
+        cade("7", "F-78: plusul de inventar nu are efect net nul pe rezultat")
+
+    # F-82: decontul de participație lasă fiecărei societăți jumătate din profitul
+    # comun. Calculat pe a doua cale — din rulaje, nu din cifra afirmată în text.
+    profit_A = (rulaj("F-82", "C", "704") - rulaj("F-82", "D", "704")
+                - 20000 - rulaj("F-82", "D", "628"))
+    if profit_A != 20000:
+        cade("7", f"F-82: rezultatul societății A din participație = {profit_A}, "
+                  f"se aștepta jumătate din 40.000")
+
     # F-46: repartizarea acoperă integral profitul de 2.500
     if rulaj("F-46", "D", "121") != 2500:
         cade("7", f"F-46: 121 nu se închide integral (debit {rulaj('F-46', 'D', '121')})")

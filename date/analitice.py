@@ -161,4 +161,48 @@ ANALITICE = [
          nota="⚠ NU 711 (variația stocurilor). Softul intern = 233 → 721 → 208; "
               "hala în regie proprie = 231 → 722 → 212.",
          flux="F-52, F-58, F-28"),
+    # ======================================================================
+    # Sursa 26.08.2026
+    #
+    # Toate patru au același test de necesitate: fără analitic, o VERIFICARE devine
+    # imposibilă, nu doar incomodă. 1012 fără analitic nu poate confirma hotărârea AGA;
+    # 4551 fără analitic ascunde compensarea între asociați într-un sold total curat;
+    # 457 fără analitic nu spune cui i s-a plătit; 475x fără analitic nu poate lega
+    # reluarea de proiectul care o justifică.
+    # ======================================================================
+    dict(simbol="1012", denumire="Capital subscris vărsat",
+         structura="1012 pe fiecare ASOCIAT, cu PROCENTUL în denumirea analiticului",
+         factor="N C O",
+         rupe="Hotărârea AGA nu se poate contraverifica din balanță: cotele rămân doar "
+              "în actul constitutiv, iar repartizarea de dividende se face pe încredere",
+         nota="Procentul în denumire nu e cosmetic — el face balanța să răspundă singură "
+              "la „cine cât deține”. La preluarea unei firme cu 1012 „la grămadă”, cota "
+              "se ia de la ONRC și se creează analiticele (F-114). C-31.",
+         flux="F-114, F-109, F-112"),
+    dict(simbol="457", denumire="Dividende de plată",
+         structura="457 pe fiecare ASOCIAT, în oglindă cu analiticele lui 1012",
+         factor="C F O",
+         rupe="Nu poți spune cui i s-a plătit și cui nu; impozitul se datorează oricum "
+              "la 25.01, deci soldul rămas trebuie să fie atribuibil unei persoane",
+         nota="Se stinge doar prin 446 (impozit) sau 5121/5311 (plată). Stins prin 4551 "
+              "sau 461 = compensare nedocumentată. C-34.",
+         flux="F-109"),
+    dict(simbol="4551", denumire="Acționari/asociați — conturi curente",
+         structura="4551 pe fiecare ASOCIAT, urmărit în AMBELE sensuri",
+         factor="C O",
+         rupe="Compensarea între asociați devine invizibilă: soldul total al lui 455 "
+              "poate arăta curat în timp ce un asociat e pe debit și altul pe credit",
+         nota="Contract pentru fiecare creditare — sau unul pe lună, pe totalul fișei. "
+              "Nu se compensează între analitice decât prin act notarial. Niciun "
+              "analitic nu are voie cu sold debitor. C-30.",
+         flux="F-111, F-112, F-113"),
+    dict(simbol="475x", denumire="Subvenții pentru investiții (venit amânat)",
+         structura="4751 / 4752 / 4753 / 4754 / 4758 pe fiecare PROIECT de finanțare",
+         factor="C F O",
+         rupe="Reluarea la venit nu se mai poate lega de activul care o justifică: cu "
+              "două proiecte pe același cont, nimeni nu mai știe care s-a epuizat",
+         nota="Perechea creanță ↔ venit amânat se ține pe același analitic de proiect: "
+              "4452 ↔ 4758. Reluarea urmează amortizarea, în cota de finanțare — o lună "
+              "cu amortizare din proiect și fără reluare e o eroare (F-215).",
+         flux="F-215, F-216, F-210"),
 ]

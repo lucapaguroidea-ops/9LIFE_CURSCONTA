@@ -93,12 +93,12 @@ Necesită `openpyxl`, `formulas`, `numpy` (`pip install openpyxl formulas numpy`
 |---|---|
 | Conturi în planul clasificat pe rol | 279 |
 | Conturi clasificate Tier A | 107 |
-| Dintre ele, cu rând detaliat de analitice | 39 |
-| Corelații de control | 29 |
+| Dintre ele, cu rând detaliat de analitice | 42 |
+| Corelații de control | 34 |
 | Rânduri de cadență în „Închideri periodice” | 27 |
 | Foi în workbook-ul de referință | 12 |
 | Documente de studiu | 5 |
-| Întrebări: deschise / verificate / decizii de cabinet | 20 / 13 / 9 |
+| Întrebări: deschise / verificate / decizii de cabinet | 23 / 13 / 9 |
 | Porți de calitate | 29 |
 
 *Cifrele de mai sus se citesc din workbook-urile construite la fiecare `make tot`. Dacă nu corespund, blocul e vechi — nu fișierele.*

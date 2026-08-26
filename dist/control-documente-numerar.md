@@ -329,6 +329,22 @@ Suma încasată în plus e TVA-inclusivă: din 5.000 lei ies 4.132,23 bază și 
 
 **Ce am presupus între timp:** Am scris fluxul cu extragerea explicită a TVA-ului, ca pas separat, tocmai ca să nu depindă de comportamentul softului.
 
+**❓ Care e plafonul legal al sumei care se poate imputa unui salariat pentru o pagubă produsă, și în ce ritm se poate reține din salariu?**
+
+*Salarii — praguri și baze de calcul · training 26.08.2026, punctul 1*
+
+Notițele din 26.08 menționează un plafon „la nivelul a 5 salarii medii”, cu observația formatorului însuși: „de verificat suma”. Separat, notițele spun că imputația nu se poate face fără ca salariatul să fie informat și de acord — Codul muncii.
+
+**Ce am presupus între timp:** Am modelat imputația integrală, cu reținere într-o singură lună, pentru că exemplul din notițe e de 1.000 lei — sub orice plafon plauzibil. Pasul poartă ❓. De verificat art. 254 (răspunderea patrimonială) și art. 169 (reținerile din salariu) din Codul muncii.
+
+**❓ Sumele stabilite prin decizie de impunere pe TVA se înregistrează în 4423 cu analitic distinct, sau în 4481?**
+
+*Acte de control — 4423 sau 4481 · training 26.08.2026, punctul 3*
+
+Cele două traininguri spun exact invers, la cinci zile distanță. 21.08: „se înregistrează în 4423 cu analitic distinct, tocmai ca să nu ajungă din greșeală în decontul lunii următoare”. 26.08: „nu mă duc prin 4423, pentru că denaturează rulajul curent — și mă duc prin 4481”.
+
+**Ce am presupus între timp:** Am adoptat varianta din 26.08, pentru că e singura care dă un motiv verificabil: un analitic separă EVIDENȚA, dar nu separă SOLDUL, iar decontul se compară pe soldul sintetic al lui 4423. F-421 e rescris pe 4481, cu ❓ pe el. Dacă formatorul confirmă varianta din 21.08, fluxul se întoarce — dar atunci trebuie explicat cum rămâne corelația decont ↔ balanță valabilă, pentru că azi nu văd cum.
+
 
 ---
 

@@ -419,6 +419,58 @@ TEME = [
           raspuns="Sunt **trei** reguli, nu una. **1/2** din venitul net lunar pentru obligații de întreținere sau alocații pentru copii; **1/3** pentru orice alte datorii. Când există mai multe popriri pe aceeași sumă, reținerea totală nu poate depăși **1/2**, indiferent de natura creanțelor. Iar dacă venitul e sub salariul minim net pe economie, se poate urmări doar partea care depășește **jumătate din salariul minim net** — prag de protecție pe care notițele nu-l aveau deloc.",
           temei="Codul de procedură civilă, art. 729 — Limitele urmăririi veniturilor bănești.",
           verificat="21.08.2026"),
+        q("training 26.08.2026, punctul 1",
+          "Care e plafonul legal al sumei care se poate imputa unui salariat pentru o "
+          "pagubă produsă, și în ce ritm se poate reține din salariu?",
+          "Notițele din 26.08 menționează un plafon „la nivelul a 5 salarii medii”, cu "
+          "observația formatorului însuși: „de verificat suma”. Separat, notițele spun "
+          "că imputația nu se poate face fără ca salariatul să fie informat și de acord "
+          "— Codul muncii.",
+          "F-426 pasul 5, unde reținerea din 421 stinge creanța de pe 461. Dacă "
+          "plafonul e mai mic decât paguba, fluxul are nevoie de un pas de eșalonare, "
+          "iar creanța rămâne pe 461 mai multe luni.",
+          "Am modelat imputația integrală, cu reținere într-o singură lună, pentru că "
+          "exemplul din notițe e de 1.000 lei — sub orice plafon plauzibil. Pasul "
+          "poartă ❓. De verificat art. 254 (răspunderea patrimonială) și art. 169 "
+          "(reținerile din salariu) din Codul muncii."),
+    ]),
+
+    ("Dividende — CASS, declarații și termene", [
+        q("training 26.08.2026, punctul 2",
+          "CASS pe dividende se datorează la dividendele DISTRIBUITE sau la cele "
+          "efectiv RIDICATE?",
+          "Notițele din 26.08 spun explicit: „la dividendele ridicate se plătește "
+          "sănătate, nu la cele distribuite”. Formatorul a legat asta de cele două "
+          "rubrici distincte din D205 — dividende distribuite și dividende ridicate.",
+          "Momentul în care se naște obligația de CASS și, prin el, ce arată "
+          "Declarația Unică față de soldul lui 457. Un 457 cu sold creditor la 31.12 "
+          "înseamnă dividende distribuite și neridicate: dacă baza CASS e distribuirea, "
+          "obligația există deja; dacă e ridicarea, nu.",
+          "Am urmat notițele — baza e ridicarea — pentru că le confirmă structura "
+          "declarației (două rubrici înseamnă două momente). Locul de verificat e "
+          "art. 170 din Codul fiscal, care descrie ce venituri intră în baza anuală; "
+          "n-am putut-o confirma pe sursă publică, deci rămâne întrebare, nu răspuns. "
+          "Contrastul cu impozitul e clar și el e sigur: impozitul de 16% se "
+          "datorează la DISTRIBUIRE, cu termen 25.01, indiferent de ridicare."),
+    ]),
+
+    ("Acte de control — 4423 sau 4481", [
+        q("training 26.08.2026, punctul 3",
+          "Sumele stabilite prin decizie de impunere pe TVA se înregistrează în 4423 "
+          "cu analitic distinct, sau în 4481?",
+          "Cele două traininguri spun exact invers, la cinci zile distanță. 21.08: "
+          "„se înregistrează în 4423 cu analitic distinct, tocmai ca să nu ajungă din "
+          "greșeală în decontul lunii următoare”. 26.08: „nu mă duc prin 4423, pentru "
+          "că denaturează rulajul curent — și mă duc prin 4481”.",
+          "F-421 în întregime, corelațiile C-29 și C-33, și structura analitică a lui "
+          "4423. Nu e o nuanță de stil: cele două variante dau solduri diferite pe "
+          "contul pe care decontul de TVA îl reconciliază.",
+          "Am adoptat varianta din 26.08, pentru că e singura care dă un motiv "
+          "verificabil: un analitic separă EVIDENȚA, dar nu separă SOLDUL, iar "
+          "decontul se compară pe soldul sintetic al lui 4423. F-421 e rescris pe "
+          "4481, cu ❓ pe el. Dacă formatorul confirmă varianta din 21.08, fluxul se "
+          "întoarce — dar atunci trebuie explicat cum rămâne corelația decont ↔ "
+          "balanță valabilă, pentru că azi nu văd cum."),
     ]),
 
     ("Microîntreprindere — prag și cotă", [
@@ -506,6 +558,11 @@ DOC_EXPLICIT = {
     "training 21.08.2026, punctul 5": "doc:stocuri-tva",  # rândurile D300
     "training 21.08.2026, punctul 6": "doc:stocuri-tva",  # ordinea la redepunere
     "training 21.08.2026, punctul 7": "doc:stocuri-tva",  # corelațiile D300 ↔ fișă rol
+    # 26.08 se împarte la două: dividendele la capitaluri, imputația și actele de
+    # control la documentul de control — acolo unde stau și conturile lor.
+    "training 26.08.2026, punctul 1": "doc:control",      # plafonul imputației
+    "training 26.08.2026, punctul 2": "doc:capitaluri",   # CASS pe dividende
+    "training 26.08.2026, punctul 3": "doc:control",      # 4423 vs. 4481
 }
 
 
