@@ -1,0 +1,486 @@
+Subventii
+
+445
+
+
+corespondente:
+
+4451 - 4751
+4452 - 4752
+4458 - 4753 / 4754 / 4758
+
+
+Avem in derulare un proiect cu fonduri Europene => societatea trebuie sa vina cu un aport, de 10 / 20 / 30 % - in functie de proiectul pe care-l derulez si ramura pe care ma incadrez 
+
+Un proiect pe fondurile Europene se inregistreaza in contabilitatea cand primesc aprobarea de la autoritate - nu cand primesc banii, nu la consultanta - cand mi se aproba acel proiect; 
+
+
+
+
+proiect = 100k, 80% primesc subventie => valori fara TVA; TVA-ul nu se deconteaza, nu va face parte dintr-un proiect European;
+
+
+4452 - 4758 = 80k
+
+	ea poate sa ramana in starea asta latenta, pana incep derularea proiectului -> cand am prima cheltuiala, la o cladire - o amortizare -> aceasta subventie se reia la venituri 
+
+
+7584 = venituri din subventii pentru investitii 
+
+
+
+4758 - 7584 = 80k 
+
+cladirea, o amortizam pe o perioada de 30-40 ani; sa zicem 40; => amortizarea lunara: 
+
+
+
+
+nota contabila:
+
+?
+
+208 lei amortizarea = cheltuiala pe care o am cu aceasta cladire din proiect (pe toata suma)
+
+
+4758 - 7584 = 166.40
+
+
+T 121: cheltuiala cu diferenta; 
+
+timp de 40 de ani am cheltuiala, venit, cheltuiala, venit; 
+
+
+
+
+5121 - 4452 = 80k primirea fondurilor Europene 
+
+
+
+
+
+
+Plusurile la inventar, pentru imobilizari
+
+4458 - 4754 
+
+O imobilizare, ce are ea ca si cheltuiala? Amortizarea 
+
+7584 / 7588
+
+
+
+
+concluzie: subventii - trebuie sa ma gandesc ca daca am o cheltuiala, trebuie sa am un venit {AI: de updatat nota contabila, sa reflecte}
+
+
+
+
+Cand platim taxele locale, sa nu le punem direct pe cheltuiala - sa le punem pe 446; 
+
+446 - 5121
+471 - 446 = daca e o perioada mai lunga
+
+635 - 471 (cu lunile)
+635 - 446 (daca e o suma mica, nu ne mai chinuim cu 471)
+
+
+
+
+Impozitul pe dividente -> se plateste in luna urmatoare ridicarii dividendelor 
+
+Documentul de baza pentur distribuirea dividendelor = hotararea AGA; daca am mai multi, repartizarea se face in functie de participarea la capitalul social => 1012 pe analitic - sa nu ne confuzam => ce vand in 1012 daca il am pe analiticul = procentul la participarea la capitalul social; => cand vine AGA, ma duc si contraverific ce a scris el in AGA;  daca avem o firma noua, cu un 1012 la gramada => vreau sa fac un ONRC, nu stiu ce cota de participare are fiecare actionat => si mergem si cream analiticile (1012.1, 1012.2, 1012.3 = Ion, Popescu, si Georgel).
+
+
+
+
+cazuri la comisia de disciplina la ANAF - fuzionari, cedari - si s-au trezit expertii contabili, ca nu au obtinut procentele pe analitice => afecteaza si persoana in cauza - cand vine vorba de ce aduce si poate ridica din societare; 
+
+
+analitice la 1012 - 4551 creditarea de societate 
+
+4551 - 457
+
+457 = dividende din anii anteriori 
+
+cate tipuri de dividende stim ca exista:
+-> interimare = 456
+-> certe = 457
+
+
+
+
+prima data - trebuie sa luam balanta din capul locului; si la 1012 trebuie sa vedem cota de participare in societate - pentru ca asta ne ajuta la dividende; 
+
+
+Ne aduce asociatul hotararea AGA, pe baza careia fac inregistrarea pe dividende (intocmita statutar, semnata);
+
+Sa zicem ca repartizez dividende din anii precedenti exercitiului financiar curent;
+
+1171 pe analitice pe ani - poate avea sold Dr cand am avut pierdere, si sold Cr cand am avut profit; 
+
+
+Sa zic ca repartizez cate 10,000 lei la fiecare actionar 
+
+
+1171 (cu sold Cr) - 457.1 = 10,000 lei  
+1171 (cu sold Cr) - 457.2 = 10,000 lei  
+1171 (cu sold Cr) - 457.3 = 10,000 lei  
+ 
+
+1171 = profitul nerepartizat din anii anteriori;
+
+
+457 = cand fac repartizare de dividende, certe 
+
+
+457 pe analitice pe persoana fizica - actionar, conform procentelor din 1012; 
+
+
+Trecut procentele la numele contului - balanta sa vorbeasca de la sine;
+
+1012.1 = Ionescu 33.3%
+1012.2 = Popescu 33.3%
+1012.3 = Xulesc 33.3%
+
+
+
+
+
+Daca firma vrea sa plateasca impozitul inainte: 
+
+16% pe dividende = 1,600 lei 
+
+
+457.1 - 446 = 1,600 lei 
+457.2 - 446 = 1,600 lei 
+457.3 - 446 = 1,600 lei 
+
+
+T 457.1 = 8,400 lei
+
+
+platile:
+
+457.1 - 5121 = 8,400 lei la plata dividende net 
+446 - 5121 = 1,600 lei la plata impozit
+
+
+
+
+
+:
+
+nu inregistrati fara hotararea AGA => experti contabili care au ajuns la comisia de disciplina, pentru ca au inregistrat fara hotararea AGA; + % corect in balanta, si la repartizarea capitalului, si la dividende; 
+
+
+
+
+
+
+fiscal, si ca sa platesc impozitul in luna pe care trebuie sa o platesc =  D100
+	=> fiti atenti cand o declarati, ca avem persoane fizice, si persoane juridice; => avem rubrica speciala, pentru impozit pe dividende, pentru persoane fizice; 
+
+
+D205 = declaratie informativa = o data pe an; 
+	si din alte surse:
+		chiri
+		dividende
+
+
+	sunt 2 cazuri la 205:
+		dividende:
+			repartizare din anii precedente
+			din anii precedenti, pe care le ridic in anul curent - pe care nu mai platesc impozit; 
+
+			cel mai tarziu trebuie sa platesc impozitul pe dividente pe 25.01 a anului urmator repartizarii - CHIAR DACA NU AM RIDICAT DIVIDENDELE - sunt obligat sa platesc la buget; 
+
+
+
+		205 - rubrica pentru:
+
+			dividende distribuite
+
+				205 trebuie sa fie corelat cu D100 => cand o intocmim, sa solicitam o fisa pe platitor / fisa simplificata - si la impozit pe dividende, vedem ce am declarat in 100 / verificam cu fisa de cont din balanta (446) [sa nu fi platit un depozit, dar sa nu-l fi declarat <-> unii administratori care sunt mai puti intelegatori ....; trebuie sa fim atentie la fisa impozitului pe dividende;]
+
+
+			dividende ridicate
+			
+				Declaratia Unica - intrebari puse de patroni => la dividendele ridicare se plateste sanatate (nu si la cele distribuite); singurul venit la care se plateste sanatate, la ridicate, nu distribuite; pentru ca la chirii este ce am in contractul de inchiriere, indiferent de ce s-a platit (re DU - Declaratia Unica)
+
+
+
+	D100 - ori de cate ori am de plata impozit
+
+	D205 - cumulativ pe an 
+
+
+
+
+Dividendele interimare, dupa cum le spune si numele - sunt distribuite din cursul anului curent => ce trbeuie sa fiu foarte atent => se fac tot in baza AGA, si legea spune ca trebuie sa fac si inventariere <=> si se intocmeste si un bilant interimar; 
+	sa zic ca sunt la luna Iulie - am in soldul contului 121, profit; se acorda doar trimestrial - am inchis 6 luni; am in soldul contului 80k, dupa ce am inregistrat impozit - am balanta finala; vine administratorul ca vrea sa ridice niste sume -> trebuie sa avem balanta finala (cu tot cu impozit profit / micro calculat) si ii spunem ca avem profit doar 80k, deci nu poate sa ridice 100k din banca -> pentru acest profit ce se aplica, la aceste divdende (pe langa cota de participare) <-> impozitul pe dividende  (12.8k) => ii dam 67.2k lei => uite cum din 100k cat are el in banca, ajunge sa ridice 67.2k lei; inregistrarea dividendelor interimare se face prin 463;
+
+
+463 - 456 = 80k lei (maximum este soldul contului 121)
+456 - 446 = 12.8k lei (impozitul pe dividende)
+456 - 5121 = 67.2k lei (plata dividendelor catre administrator) 
+
+
+
+
+
+
+Dr contului 463 -> raman cu acest sold debitor -> pana cand?  <=> fiind dividende interimare => daca societatea nu ramana pana la sf anului, in 121, cu cel putin soldul contului 463 - am o problema; pentru ca la sfarsitul anului am dreptul legal sa ridic dividendele legale exercitiliui => soldul contului 463, comparat cu soldul contului 121 (dupa ce am balanta finala = calculele impozitului, etc) - si in conditiile in care soldul contului 121 < 463 cu 10k lei = avem doar 70k lei profit => trebuie sa regularizez aceasta operatiune, si sa stornez: 453 - 456 = -10k lei;  456 - 446 = 1,600 lei; fac rectificativa la D100, pentru ca a platit impozit pe dividende mai mare; si atunci el trebuie sa aduca banii inapoi; in momentul cand depunem rectificativa la D100 = care are codul D710 -> in care apare, suma platita in Iunie de 1.6k lei, si suma corectata (16,000 - 1.6 lei) -> ramane platit in plus, la ANAF = 1.6k lei, pe care ulterior pot sa fac cerere de compensare (daca vrea sa o lase acolo), sau de restituire; fiind sfarsit de an; in anul 2027, soldul contului 121, cand se intruneste AGA (cel de 70k) => 121 - 1171; a mai ramas deschis 463 => ce inregistrare contabila fac, sa il soldez, pentru ca ma repartizat dividende interimare; 1171 - 463, cu suma de 70k lei; concluzie: la dividendele interimare sa fim extrem de atenti, pentru ca trebuie sa merge in limita lui 121 - si sa ii convingem sa ia mai putin, pentru ca nu stim ce prognoza avem pana la sf anului, pentru ca ele nu sunt certe, si trebuie sa luam doar cat putem acoperii la sf anului - altfel e un proces complex si lung de corectie prin care banii trebuie dati inapoi;
+
+
+hotararea AGA o fac in luna Iulie (pentru ca trebuie sa am indicatorii corecti - adica balanta inchisa), dar inregistrarea contabila, pentru aceste dividende interimare, o fac in luna Iunie, cand fac si bilantul (pentru ca, in bilantul interimar, exista rubrica separata, pentru 463 => ANAF-ul stie, ce sume am repartizat ca sume interimare); dar bilantul il depund pana pe 31 Iulie (!!) 
+
+
+
+se acorda aceste dividende (interimare), dupa ce se inchid toate pierderile din anii curenti si anterior (le inchid din rezerve) => nu pot sa dau dividende (interimare sau certe), daca am pierderi din anii anterior (sold pe 1171, debitor)
+
+daca vrei dividede = ma suni sa ma consulti pe mine - si apoi faci AGA, etc; s-au produs niste modificari, si trebuie sa avem atentie cum le repartizam;
+
+
+
+463 =  taxe de timbru, cand am insolventa; orice avem de inregistrat cu impozite si taxe (taxa de exploatare pentru busteni, de mediu) - daca nu vreau sa inregistrez pe cheltuiala (pe langa cele care sunt obligatoriu aici) => aici este zona in care inregistram taxele pentru alte institutii ale statului;
+
+
+4481 / 4482 
+
+
+
+
+
+4481 = pasiv = dobanzi, penalitati; daca sunt aferente perioadelor anterioare (prin 4423, ex), la bugetul de stat; 
+
+cand vine ANAF-ul in control, intocmeste o decizie de impunere = 10k lei, Dr suplimentar la TVA (din multe motive) => si nu ma duc prin 4423, pentru ca denatureaza rulajul curent - si ma duc prin 4481;
+
+
+6588 - 4481 = 5k lei (pentru cheltuiala neded fiscla)
+
+
+
+
+
+TVA-ul si impozitul de profit - cele care dau batai de capat, si trebuie tinute clar; 
+
+
+
+4482 = activ = as putea sa platesc eronat, niste sume, catre bugetul statului; in loc de 715, platesc 751; si ca sa nu denaturez rulajul conturilor curente - ex (am impozit pe salariu, de plata - 615 lei - in soldul contului 444, pe Cr; daca il plateam in mod normal: 444 - 5121 = 715 lei; in banca ne-a aparut o plata de 751; ma duc cu 751 in 444, si diferenta o duc in 4482)
+
+
+4482 = 444 => la luna viitoare, avem soldul care ne ajuta sa scadem datoria/plata in luna viitoare; ma ajuta sa pastrez corelatiile nealterare in balanta; si ANAF il contraverifica in scopul asta;
+
+
+corelatia sold Dr cu sold Cr, la salarii;
+
+ 
+
+
+
+
+exercitiu intalnit in practica - cand facem ordinul fiscal, sa viram din contul firmei respective, dar sa trecem un alt CUI pe platitor - si se duc la alt CUI pe platitor -> firma ramane cu datorii neachitate la ANAF => patronul poate sa greseasca, CUI-ul, si el zice, ca am platit x ron din cont - dar ne uitam ca a platit pe alt CUI; => ca sa nu alterez rulajele, inregistrez aceasta plata pe 4482, care este un sold in asteptare, si il disec; <+> firma respectiva o sa trebuiasca sa ne dea banii, pentru ca s-au trezit cu datoria stinsa pe fisa; se intampla des in practica, la cei care au mai multe firme; 
+
+
+
+
+cand pot sa am o cheltuila neded fiscal => 4481 fiind pasiv, creditor - il utilizam cel mai mult cand este o datorie (anterioara lunii care lucrez, sau nu neaparat) - inregistrez orice suma care vine printr-un act de control - ca sa nu inregistrez in rulajul conturilor curente (4423 - pentru ca se duce pe soldul creditor 4423, care o sa faca diferenta intre decont;
+
+
+control ANAF = decizie de impunere - se incarca in fisa pe platitor - trbeuie sa inregistrez aceste sume in contabilitate, care pot fi facute in mai multe feluri - ca pe cheltuiala, etc => 
+
+
+4481 - ce avem de dat la stat, printr-o impunere (I.E. dintr-o eroare, nu din exercitiul curent)
+
+
+
+
+
+
+
+
+
+
+
+
+
+decontari intre entitati afilitate (cele care au mai mult de 25% actionari comuni):
+	imprumuturi intre societati = cand raman fara bani, imprumut = contract 
+
+		Soc A si Soc B sunt in oglinda 
+
+
+
+niste sume cu care ne-am trezit in banca, trebuie sa vorbim cu asociatii firmei, pentru ca ei stiu cel mai bine 
+
+
+
+
+(!) => sa verificam activul si pasivul - conturile care sunt pe invers (!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!) 
+
+
+Creditarea de societate:
+
+
+455 de exe trebuie sa apar doar pe credit, fiind cont de pasiv => daca apare pe debit, poate fi inregistrat gresit, sau, a ridicat asociatul mai multi bani decat avea voie; 
+
+unele conturi sunt obligatoriu de urmarit pe activ si pasiv - administratorul nu tine mine; nu iau dividende, ca am creditat societate cu x, si nu tine minte cat a ridicat - pentru ca pot fi greu de verificat ulteiror; 
+
+raman cu soldul 0, la 455; 
+
+eu fac inregistraril la 455, trebuie sa avem contract;
+
+455 functioneaza ca 451, dar pe persoana fizica, nu la entitati; 
+
+
+
+
+5121 - 4551 = incasez
+4551 - 5121 = platesc 
+
+
+tragetii de mana sa isi faca contracte de imprumut -> generat automat, din softul de conta, si doar dat de semnat 
+
+contract de imrpumut pentru fiecare tranzactii => sau, fisa de cont, ai creditat 100,000 lei luna asta - contract de 100,000 lei
+
+nu trebuie cine stie ce contract, dar trebuie sa fie - nu e suficienta inregistrarea din banca; 
+
+455 => nu trebuie sa prezinte nicodata sold debitor; 
+
+
+daca am 3 sociati, trebuie sa am 3 analitice 455 (!!!) 
+
+
+niciodata nu pot face creditarea unui asociat, si creditarea unui alt asociat <=> pot doar daca isi fac o intelegere prin notar (nu ii crezi pe cuvant, sau prin mesaj pe Wapp) 
+
+
+
+
+deasemeni putem facem majorare de capital social, din creditarea de societate - pe baza (ceva, ceva) a expertului contabil 
+	cine are dreptul sa crediteze societatea = actionarii
+	cine constituie capitalul social = asocatii 
+
+
+
+
+455.1 - 456 = 5,000 lei (capitalul este subscris si nevarsat - pentru ca nu am ajuns cu el la registrul comertului)
+456 - 1011 = 5,000 lei (sa diminuez 456) 
+
+
+aste 2 inregistrari se fac in baza rapoartelor:
+
+=> AGA
+=> expertiza contabila - certe, lichide, si exhigibile (au existat in realitate, am virat, am contract)
+
+
+cand primesc de la ONRC:
+
+1011 - 1012
+
+
+am in 1012, capital subscris si varsat - suma de 5,000 lei; 
+
+
+
+
+
+societati comercial care ajung intr-un impas => bancile le sugereaza, sa renunte, la acesti bani => actul: remitere de datorie <=> se face prin notariat; => i-am donat - ei devin un venit - care se inchide in 121 => din pierdere de 50,000 lei - daca renunt la creditare de 50,000 lei => din 2 inregistrari, am ajuns cu societatea pe profit (nu din exploatare) => dar trebuie sa am aceasta remitere de datorie, trebuie facuta prin notariat - care se face tot prin:
+
+
+baza rapoartelor:
+
+=> AGA
+=> expertiza contabila - certe, lichide, si exhigibile (au existat in realitate, am virat, am contract)
+
+
+
+nota
+4551 - 7582 
+7582 - 121 
+
+
+sa zicem ca am avut pierdere (100k), renunt la creditara de societate (120k) => profit 20k <=> 121 cr 20k; 
+
+
+
+
+
+Decontari prin operatiuni in participatie = 458 
+
+
+sunt societati comerciale, care fac un contract de participatiune - o societate vine cu utilajele, o societate vine cu angajatii, si fac un bloc => presupune ca societatile respective isi unes fortele => parte din venituri, si cheltuieli, se transfera, astfel incat fiecare societate sa plateasca impozit pe profit doar pe activitatea lui; 
+
+ca eveniment ce se poate desfasura, aici se inregistreaza contractele de participatie, facute intre 2 sau mai multe societati comerciale, pentru a realizat un obiectiv comun => conturi de decontare; 
+
+
+
+ 
+
+
+
+
+461 / 462 2 vorbe la modul general
+	pot ajunge cosul firmei
+	unul dintre primele conturi in care se uita si ANAF-ul si bancile 
+		multe sume care se deconteaza si nu au prin 401, 419, etc ... am o suma platita in banca, si nu am corespondentul... 
+			am posibilitatea sa ma duc prin 473, si ma duc la 461 => problema e cand uit de sumele astea de acolo; 
+
+
+nu mai au sold in 4551, dar iau sume din banca -> si ma duc in 461 => e un cos al contabilitatii, sa fim foarte atenti cand le utilizam; sa nu uitam de sumele imprastiate pe acolo, si sa ne trezim la un control, ca exista o creditare de societate, si eu nu trebuia sa mai scot bani din firma; 
+
+
+vanzarea unui mijloc fix, e prin 461 - nu prin client => am posibilitatea sa inregistrez
+
+
+ex: 
+
+461
+	- 7583 (venit active cedate)
+	- 4427 (TVA colectat, oricand vand ceva)
+
+
+ o alta utilizare corecta a contului - cand am un salariat care mi-a adus pagube -> nu fac client, ca el nu e client pentru; 
+	imputatie la nivel de salariat <=> sa fiti atenti, cand vine un administrator ca vrea sa fac o imputatie pe angajat <=> prin codul muncii nu puteti face aceste inregistrari, daca salariatului nu este informat si nu este de acord (si la nivelul a 5 salarii medii (de verificat suma)) <=> de informat
+
+
+461 - 7*
+461 - 7588 (venituri din exploatare) 
+
+7588 se adreseaza cand nu exista un venit cu care exista un venit asociat direct (707, cu marfa) 
+
+
+daca ce mi-a stricat a fost deductibil, am un TVA de colectat 
+
+
+1,000 lei cu TVA 
+
+
+
+121 - 826.45
+4427 - 173.55
+
+
+de fiecare data cand primim firme cu solduri in 461 / 462, sa nu le credem pe cuvant - sa investigam 
+
+
+
+
+
+
+
+tema: sa putem sa identificam in balanta - lucruri care pot fi rezolvate (pentru ca daca le stabilim cursul, nu mai pot fi numite erori)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
