@@ -338,6 +338,63 @@ def poarta_corelatii():
         cade("7", f"F-82: rezultatul societății A din participație = {profit_A}, "
                   f"se aștepta jumătate din 40.000")
 
+    # --- sursa 28.08 ----------------------------------------------------
+    # Cifrele traversează trei fluxuri: factura din F-84 naște efectul care se
+    # scontează în F-85. Verificarea le leagă, ca o schimbare într-unul să nu treacă
+    # neobservată în celălalt.
+    efect = rulaj("F-84", "D", "4111")
+    if efect != rulaj("F-84", "C", "707") + rulaj("F-84", "C", "4427"):
+        cade("7", "F-84: totalul facturii ≠ bază + TVA")
+    if abs(rulaj("F-84", "C", "4427") - round(rulaj("F-84", "C", "707") * 0.21, 2)) > 0.01:
+        cade("7", f"F-84: TVA {rulaj('F-84', 'C', '4427')} ≠ 21% × baza")
+
+    # F-85: 5114 se închide EXACT — bani + cost, fără rest. Cele două se compară cu
+    # valoarea efectului, nu între ele: altfel ar ieși mereu, prin construcție.
+    remis = rulaj("F-85", "D", "5114")
+    incasat, cost = rulaj("F-85", "D", "5121"), rulaj("F-85", "D", "667")
+    if round(incasat + cost, 2) != remis:
+        cade("7", f"F-85: 5114 nu se închide — {incasat} + {cost} ≠ {remis}")
+    if abs(incasat - round(remis * 0.8, 2)) > 0.01:
+        cade("7", f"F-85: încasat {incasat} ≠ 80% × {remis}")
+    # legătura între fluxuri: efectul scontat e chiar factura din F-84
+    if remis != efect:
+        cade("7", f"F-85: efectul remis {remis} ≠ factura din F-84 ({efect})")
+
+    # F-86: dobânda eșalonată acoperă exact avansul, iar rata lunară e totalul/durata
+    if rulaj("F-86", "D", "471") and rulaj("F-86", "C", "471"):
+        luni = rulaj("F-86", "D", "471") / rulaj("F-86", "C", "471")
+        if abs(luni - 24) > 0.01:
+            cade("7", f"F-86: eșalonarea dă {luni:.2f} luni, se aștepta 24")
+    if rulaj("F-86", "D", "5186") != rulaj("F-86", "C", "5121"):
+        cade("7", "F-86: plata dobânzii nu stinge datoria cu aceeași sumă")
+
+    # F-87: creanța, venitul amânat și încasarea sunt aceeași sumă, pe trei pași
+    if not (rulaj("F-87", "D", "5187") == rulaj("F-87", "C", "472")
+            == rulaj("F-87", "C", "5187")):
+        cade("7", "F-87: creanța, venitul amânat și încasarea nu sunt aceeași sumă")
+
+    # F-88: soldul liniei = tras − restituit, și nu poate fi negativ (C-35)
+    sold_5191 = rulaj("F-88", "C", "5191") - rulaj("F-88", "D", "5191")
+    if sold_5191 < 0:
+        cade("7", f"C-35 pe F-88: 5191 ajunge cu sold debitor {-sold_5191}")
+
+    # F-89: tichetele neacordate = cumpărate − acordate, iar reținerile sunt 10% + 10%
+    ramase = rulaj("F-89", "D", "5328") - rulaj("F-89", "C", "5328")
+    if ramase < 0:
+        cade("7", f"F-89: s-au acordat mai multe tichete decât s-au cumpărat ({ramase})")
+    acordate = rulaj("F-89", "C", "5328")
+    for cont, cota, nume in (("444", 0.10, "impozit"), ("4315", 0.10, "CASS")):
+        if abs(rulaj("F-89", "C", cont) - round(acordate * cota, 2)) > 0.01:
+            cade("7", f"F-89: {nume} {rulaj('F-89', 'C', cont)} ≠ "
+                      f"{cota:.0%} × {acordate}")
+
+    # F-90: gestiunea de mărfuri se golește exact în cea de materii prime, iar
+    # consumul scoate exact cât a intrat
+    if not (rulaj("F-90", "D", "371") == rulaj("F-90", "C", "371")
+            == rulaj("F-90", "D", "301") == rulaj("F-90", "C", "301")
+            == rulaj("F-90", "D", "601")):
+        cade("7", "F-90: transferul și consumul nu păstrează aceeași sumă")
+
     # F-46: repartizarea acoperă integral profitul de 2.500
     if rulaj("F-46", "D", "121") != 2500:
         cade("7", f"F-46: 121 nu se închide integral (debit {rulaj('F-46', 'D', '121')})")

@@ -342,4 +342,90 @@ CORELATII = [
         flux="F-109",
         severitate="Înaltă — impozitul se datorează la data DISTRIBUIRII, nu a plății",
     ),
+    # ======================================================================
+    # Sursa 28.08.2026 — trezoreria și verificarea balanței
+    #
+    # C-37 e altfel decât toate celelalte 26: nu verifică un cont anume, verifică o
+    # PROPRIETATE a balanței. E corelația pe care formatorul a repetat-o toată ședința
+    # și singura care se aplică la orice cont cu analitic, indiferent de subiect. Tot
+    # ea e motorul lui MOD_CONTROL_BALANTA.
+    # ======================================================================
+    dict(
+        id="C-35",
+        formula="sold 5191 NICIODATĂ debitor\nȘI sold 5191 = soldul confirmat de bancă,\npe fiecare analitic de linie",
+        unde="Extrasul de LINIE DE CREDIT (separat de extrasul de cont), la sfârșit de lună",
+        legitim="Sold zero: linia e disponibilă și netrasă — starea normală între trageri.",
+        suspect="Sold debitor: s-a restituit mai mult decât s-a tras, deci o înregistrare\n"
+                "  pe sensul greșit\n"
+                "Dobânda operată prin 5191 în loc de 666, pentru că extrasul de linie\n"
+                "  n-a fost cerut clientului — cheltuiala dispare, iar impozitul pe\n"
+                "  profit se plătește în plus\n"
+                "Două linii pe același analitic: totalul poate ieși, liniile nu",
+        flux="F-507",
+        severitate="Înaltă — la linie NU există scadențar, deci soldul confirmat de "
+                   "bancă e singura verificare independentă disponibilă",
+    ),
+    dict(
+        id="C-36",
+        formula="sold 581 = 0 la sfârșit de lună\nȘI diferența de curs valutar NU trece prin 581",
+        unde="Balanța la sfârșit de lună + jurnalul de bancă",
+        legitim="Transfer inițiat la sfârșitul lunii și primit la începutul lunii\n"
+                "  următoare: soldul e chiar realitatea, banii sunt pe drum.",
+        suspect="Diferența de curs de la transferul valută → lei lăsată în 581: contul\n"
+                "  nu se mai închide, iar soldul rămas devine imposibil de citit —\n"
+                "  transfer în curs sau diferență necontabilizată?\n"
+                "Transfer înregistrat pe o singură parte",
+        flux="F-501",
+        severitate="Medie — 581 e cont de tranzit PUR: trebuie să iasă cu exact cât a "
+                   "intrat, iar diferența de curs aparține contului în valută, unde s-a "
+                   "și produs",
+    ),
+    dict(
+        id="C-37",
+        formula="Σ analitice = sold sintetic,\npe FIECARE cont cu analitic obligatoriu\n"
+                "(4111 · 401 · 512x · 542 · 446 · 455 · 1012)",
+        unde="Balanța analitică vs. balanța sintetică; la bancă, și extrasul de cont",
+        legitim="Nimic. Nu există motiv legitim pentru care suma analiticelor să difere\n"
+                "  de sintetic — e o identitate, nu o estimare.",
+        suspect="Operațiune făcută DUPĂ închiderea de lună, fără refacerea închiderii —\n"
+                "  cauza cea mai frecventă, și nu se anunță singură\n"
+                "Sume nealocate lăsate pe 4111 sau 401 fără analitic de partener\n"
+                "Cont pornit fără analitic și spart ulterior: istoricul rămâne pe\n"
+                "  sintetic\n"
+                "La bancă: jurnalul dă cu extrasul, dar nu dă cu balanța — semn că\n"
+                "  diferența e între analitic și sintetic, nu în operare",
+        flux="F-214, F-503, F-507",
+        severitate="Înaltă — e verificarea pe care formatorul o cere la preluarea "
+                   "oricărei societăți, înaintea oricărei alte analize",
+    ),
+    dict(
+        id="C-38",
+        formula="sold 5311 ≤ 50.000 lei la sfârșitul FIECĂREI ZILE",
+        unde="Registrul de casă, pe fiecare casierie",
+        legitim="Depășirea cu sumele aferente plății salariilor și altor drepturi de\n"
+                "  personal, pentru perioada scurtă prevăzută de lege.",
+        suspect="Sold peste plafon purtat de la o zi la alta: ce depășește trebuie\n"
+                "  depus în cont\n"
+                "Casierie deschisă special ca să se multiplice plafonul ❓\n"
+                "Sold de casă mare și constant, fără numerar real în casă — cazul pe\n"
+                "  care controlul îl cere arătat efectiv",
+        flux="F-502",
+        severitate="Înaltă — plafonul a fost introdus relativ recent; cine lucrează "
+                   "după obiceiul vechi, când soldul era nelimitat, îl încalcă fără să știe",
+    ),
+    dict(
+        id="C-39",
+        formula="la preluarea unei balanțe ÎN CURSUL ANULUI\nse preiau TOTAL SUME debitoare și creditoare,\nnu soldurile",
+        unde="Balanța de preluare vs. balanța lunii următoare",
+        legitim="Preluare la 1 ianuarie: acolo soldurile CHIAR sunt punctul de plecare,\n"
+                "  iar rulajele anului pornesc de la zero pe bună dreptate.",
+        suspect="Preluare la mijloc de an cu soldurile puse ca sold inițial: rulajele\n"
+                "  anului pornesc de la zero din luna preluării, iar ORICE verificare\n"
+                "  pe rulaj devine falsă — corelația cu fișa de rol la TVA, CAM-ul ca\n"
+                "  procent din brut, rulajul creditor al obligațiilor salariale\n"
+                "Total sume care nu cresc monoton de la o lună la alta",
+        flux="F-422, F-405",
+        severitate="Înaltă — eroarea nu se vede în luna preluării, ci la prima "
+                   "verificare pe rulaj, când nu mai știe nimeni de unde vine",
+    ),
 ]
