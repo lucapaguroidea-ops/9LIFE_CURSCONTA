@@ -37,6 +37,15 @@ ACTUALIZARI = {
     "168":  dict(analitice="1682 dobânzi credite pe termen lung", factor="V", flux="F-49", tier="B"),
     "167":  dict(analitice="167 PE CONTRACT (1:1) și pe tip de valută", factor="C V O",
                  flux="F-50", tier="A"),
+    "501":  dict(observatie="Investiție pe termen SCURT, cumpărată ca plasament. ⚠ Nu se "
+                            "confundă cu 261, care poartă aceeași denumire în plan: ce "
+                            "le deosebește nu e emitentul, e INTENȚIA de deținere. "
+                            "Participația durabilă merge la imobilizări financiare — "
+                            "261 afiliate / 263 controlate în comun / 265 alte titluri. "
+                            "Intenția nu se citește din denumire, se declară la "
+                            "achiziție.",
+                 analitice="501 pe fiecare societate emitentă", factor="C O",
+                 flux="F-503", tier="A"),
     # ---- clasa 2 -----------------------------------------------------------
     "203":  dict(analitice="203 pe proiect de dezvoltare", factor="O", flux="F-52", tier="B"),
     "205":  dict(analitice="205 pe titlu (marcă, licență, brevet)", factor="O", flux="F-52", tier="A"),

@@ -553,6 +553,14 @@ Notițele din 26.08 menționează un plafon „la nivelul a 5 salarii medii”, 
 
 **Ce am presupus între timp:** Am modelat imputația integrală, cu reținere într-o singură lună, pentru că exemplul din notițe e de 1.000 lei — sub orice plafon plauzibil. Pasul poartă ❓. De verificat art. 254 (răspunderea patrimonială) și art. 169 (reținerile din salariu) din Codul muncii.
 
+**❓ Există un plafon de sold de casă separat, de 500.000 lei, pentru magazinele de tip cash & carry, supermagazine și hipermagazine?**
+
+*Trezorerie — diferențe de curs și plafoane · training 28.08.2026, punctul 8*
+
+Nu era în notițele de la curs. O a doua revizuire a acelorași notițe îl afirmă, alături de plafonul general de 50.000 lei.
+
+**Ce am presupus între timp:** Cifra e plauzibilă: un hipermarket trece de 50.000 lei într-o oră de vârf, iar depunerea zilnică a excedentului ar fi impracticabilă. Dar plauzibil nu e verificat, iar eu n-am confirmat-o pe textul legii — deci C-38 a rămas cu un singur prag și cu întrebarea marcată.
+
 **❓ Plafonul de 50.000 lei la soldul de casă e per societate sau per casierie / punct de lucru?**
 
 *Trezorerie — diferențe de curs și plafoane · training 28.08.2026, punctul 2*
@@ -560,6 +568,14 @@ Notițele din 26.08 menționează un plafon „la nivelul a 5 salarii medii”, 
 Notițele spun „50.000 lei pe fiecare punct de lucru” și povestesc un client care, aflând de plafon, „a mai făcut rost de o casierie cu 50.000 lei”. Notițele nu spun dacă practica aceea rezistă la control.
 
 **Ce am presupus între timp:** Am formulat C-38 pe casierie, cum spun notițele, dar cu semnalul „casierie deschisă special ca să se multiplice plafonul” trecut la SUSPECT — pentru că intenția se vede, indiferent cum e textul. De confirmat art. 4 din Legea 70/2015 în forma în vigoare.
+
+**❓ Ce documentație face diferența, la un control, între „rate contractuale” și fragmentarea unei plăți?**
+
+*Trezorerie — convenții de înregistrare · training 28.08.2026, punctul 6*
+
+Notițele spun că un contract cu plata în rate scoate operațiunea de sub acuzația de fragmentare: „am scadențar, am o dată fixă pe care încasez ratele”. Nu spun ce se prezintă efectiv.
+
+**Ce am presupus între timp:** Am scris în document că apărarea cade dacă ratele se încasează la alte date sau în alte sume decât scadențarul. Ce nu știu e dacă se cere contract cu dată certă, sau dacă e de ajuns unul sub semnătură privată.
 
 **❓ Ce document susține compensarea 4091 ↔ 419 la același partener, și de la ce prag trebuie făcută prin sistemul reglementat?**
 

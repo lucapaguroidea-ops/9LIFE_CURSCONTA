@@ -414,6 +414,22 @@ Notițele din 28.08 spun: diferențele de curs curente prin 665/765, iar reevalu
 
 **Ce am presupus între timp:** Am păstrat 665/765 pentru ambele situații, cu analitic .DEC și .REV. Motivul: funcțiunea contului 665 din OMFP 1802/2014 include explicit diferențele rezultate „la sfârșitul lunii/exercițiului financiar, din evaluarea disponibilităților bancare și a numerarului în valută” — deci reevaluarea e chiar în funcțiunea lui. Iar 668/768 au alt rost: creanțele și datoriile exprimate în LEI, decontabile după cursul unei valute. Scopul formatorului — reevaluarea separată de decontare — se atinge cu analiticul, fără să mute reevaluarea în afara contului de diferențe de curs. Dacă formatorul confirmă varianta lui, se schimbă; dar atunci trebuie explicat cum se raportează diferențele de curs care nu mai sunt în contul lor.
 
+**❓ Dobânda de plătit trece obligatoriu prin 5186, sau `666 = 5121` direct e acceptat în cabinet?**
+
+*Trezorerie — convenții de înregistrare · training 28.08.2026, punctul 5*
+
+Notițele descriu ambele variante fără să spună care e standardul: „5186 = 5121, și, 666 = 5186, în caz că nu vreau să fac direct 666 = 5121”.
+
+**Ce am presupus între timp:** Am scris fluxul cu 5186 ca variantă principală, pentru că păstrează vizibilă datoria, și am notat varianta directă ca alternativă acceptată. Dacă cabinetul are altă convenție, F-505 se ajustează.
+
+**❓ Care e monografia completă a răscumpărării de obligațiuni — preț de emisiune vs. preț de răscumpărare, primă sau discount, și curs valutar dacă emisiunea e în valută?**
+
+*Gestiuni, bonuri de consum și compensări · training 28.08.2026, punctul 9*
+
+Notița spune doar că obligațiunea „se cumpără la un anumit preț, se răscumpără la un anumit preț + cheltuieli la un anumit curs valutar”, cu mențiunea „de detaliat” adresată mie. N-am putut să o detaliez din notițe: nu sunt cifre.
+
+**Ce am presupus între timp:** Am scris distincția conceptuală și diferența 505 / 506, fără să inventez cifre. Fluxul se scrie când există un exemplu real.
+
 
 ---
 

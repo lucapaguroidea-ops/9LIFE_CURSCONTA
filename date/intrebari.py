@@ -436,6 +436,19 @@ TEME = [
     ]),
 
     ("Trezorerie — diferențe de curs și plafoane", [
+        q("training 28.08.2026, punctul 8",
+          "Există un plafon de sold de casă separat, de 500.000 lei, pentru magazinele "
+          "de tip cash & carry, supermagazine și hipermagazine?",
+          "Nu era în notițele de la curs. O a doua revizuire a acelorași notițe îl "
+          "afirmă, alături de plafonul general de 50.000 lei.",
+          "C-38, care azi are un singur prag. Dacă se confirmă, corelația are nevoie de "
+          "un al doilea prag, după tipul unității — iar la un client cu magazin mare, "
+          "pragul de 50.000 ar fi semnalat greșit ca depășire în fiecare zi.",
+          "Cifra e plauzibilă: un hipermarket trece de 50.000 lei într-o oră de vârf, "
+          "iar depunerea zilnică a excedentului ar fi impracticabilă. Dar plauzibil nu "
+          "e verificat, iar eu n-am confirmat-o pe textul legii — deci C-38 a rămas cu "
+          "un singur prag și cu întrebarea marcată."),
+
         q("training 28.08.2026, punctul 1",
           "Reevaluarea de sfârșit de lună a conturilor în valută se înregistrează pe "
           "665/765 sau pe 668/768?",
@@ -472,7 +485,62 @@ TEME = [
           "70/2015 în forma în vigoare."),
     ]),
 
+    ("Trezorerie — convenții de înregistrare", [
+        q("training 28.08.2026, punctul 5",
+          "Dobânda de plătit trece obligatoriu prin 5186, sau `666 = 5121` direct e "
+          "acceptat în cabinet?",
+          "Notițele descriu ambele variante fără să spună care e standardul: „5186 = "
+          "5121, și, 666 = 5186, în caz că nu vreau să fac direct 666 = 5121”.",
+          "F-505 arată ambele căi, deci cine îl citește nu află care se folosește. "
+          "Consecința practică e la verificare: cu 5186, dobânda datorată și neplătită "
+          "se vede în balanță; direct pe 666, nu se vede deloc până la plată.",
+          "Am scris fluxul cu 5186 ca variantă principală, pentru că păstrează "
+          "vizibilă datoria, și am notat varianta directă ca alternativă acceptată. "
+          "Dacă cabinetul are altă convenție, F-505 se ajustează."),
+
+        q("training 28.08.2026, punctul 6",
+          "Ce documentație face diferența, la un control, între „rate contractuale” și "
+          "fragmentarea unei plăți?",
+          "Notițele spun că un contract cu plata în rate scoate operațiunea de sub "
+          "acuzația de fragmentare: „am scadențar, am o dată fixă pe care încasez "
+          "ratele”. Nu spun ce se prezintă efectiv.",
+          "C-38 și secțiunea de plafoane din documentul de control. Diferența dintre "
+          "legal și amendabil stă în ce poți arăta, nu în ce ai făcut.",
+          "Am scris în document că apărarea cade dacă ratele se încasează la alte date "
+          "sau în alte sume decât scadențarul. Ce nu știu e dacă se cere contract cu "
+          "dată certă, sau dacă e de ajuns unul sub semnătură privată."),
+
+        q("training 28.08.2026, punctul 7",
+          "Consumabilele auto nestocate — lichid de parbriz, aditivi — merg pe 6022 "
+          "împreună cu combustibilul, sau pe 604?",
+          "Notițele descriu cazul concret al unui bon cu benzină și lichid de parbriz, "
+          "și lasă alegerea deschisă: „fiecare firmă decide ce și cum, că nu îți ia "
+          "nimeni gâtul dacă pui lichidul în 6022; corect ar fi lichid de parbriz în "
+          "604”.",
+          "Convenția de înregistrare pe bonurile mixte, care apar lunar la orice firmă "
+          "cu mașini. Fără o regulă fixată, același bon se înregistrează diferit de la "
+          "o lună la alta, iar rulajul lui 6022 nu mai spune nimic despre consumul de "
+          "combustibil.",
+          "Am scris în document criteriul general — se stochează sau nu — care duce "
+          "lichidul spre 604. Dar formatorul spune explicit că e alegere de firmă, deci "
+          "convenția trebuie fixată de cabinet, nu dedusă de mine."),
+    ]),
+
     ("Gestiuni, bonuri de consum și compensări", [
+        q("training 28.08.2026, punctul 9",
+          "Care e monografia completă a răscumpărării de obligațiuni — preț de emisiune "
+          "vs. preț de răscumpărare, primă sau discount, și curs valutar dacă emisiunea "
+          "e în valută?",
+          "Notița spune doar că obligațiunea „se cumpără la un anumit preț, se "
+          "răscumpără la un anumit preț + cheltuieli la un anumit curs valutar”, cu "
+          "mențiunea „de detaliat” adresată mie. N-am putut să o detaliez din notițe: "
+          "nu sunt cifre.",
+          "Documentul de trezorerie descrie distincția acțiuni/obligațiuni și conturile "
+          "(505, 506, 161), dar nu are monografie. Fără cifre nu se poate scrie un flux "
+          "care să treacă porțile 1 și 2.",
+          "Am scris distincția conceptuală și diferența 505 / 506, fără să inventez "
+          "cifre. Fluxul se scrie când există un exemplu real."),
+
         q("training 28.08.2026, punctul 3",
           "Care e forma obligatorie a bonului de consum, și în ce cazuri poate fi "
           "înlocuit cu alt document?",
@@ -635,6 +703,11 @@ DOC_EXPLICIT = {
     "training 28.08.2026, punctul 2": "doc:control",      # plafonul de casă
     "training 28.08.2026, punctul 3": "doc:stocuri-tva",  # bonul de consum
     "training 28.08.2026, punctul 4": "doc:control",      # compensarea 4091 ↔ 419
+    "training 28.08.2026, punctul 5": "doc:trezorerie",   # 5186 obligatoriu?
+    "training 28.08.2026, punctul 6": "doc:control",      # rate vs. fragmentare
+    "training 28.08.2026, punctul 7": "doc:stocuri-tva",  # 604 vs. 6022 auto
+    "training 28.08.2026, punctul 8": "doc:control",      # plafonul la magazine mari
+    "training 28.08.2026, punctul 9": "doc:trezorerie",   # monografia obligațiunilor
 }
 
 
