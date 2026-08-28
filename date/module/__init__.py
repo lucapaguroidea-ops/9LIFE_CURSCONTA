@@ -11,17 +11,17 @@ ordinii pe care acest fișier o declara în propriul docstring. Lista de mai jos
 alfabetică — poziția în workbook nu depinde de ea.
 """
 from .comun import CATALOG_RANDURI, cheie_ordine, formula_activ  # noqa: F401
-from . import (aprov_tranzit, avansuri, capitaluri, credit_valuta, decont,
-               dividende, fara_document, iesire_mf, imobilizari, import_vamal,
-               inchidere_ex,
+from . import (aprov_tranzit, avansuri, capitaluri, control_balanta, credit_valuta,
+               decont, dividende, fara_document, iesire_mf, imobilizari,
+               import_vamal, inchidere_ex,
                inchidere_lunara, inchidere_tva, intermediar, leasing_fin,
                neutralizare, provizion, salarii, salarii_evenimente, subventie,
                taxare_inversa, tva_incasare, vanz_amanunt)
 
 #: Toate modulele, în ordine alfabetică. Ordinea de aici NU contează.
-_TOATE = [aprov_tranzit, avansuri, capitaluri, credit_valuta, decont, dividende,
-          fara_document, iesire_mf, imobilizari, import_vamal, inchidere_ex,
-          inchidere_lunara,
+_TOATE = [aprov_tranzit, avansuri, capitaluri, control_balanta, credit_valuta,
+          decont, dividende, fara_document, iesire_mf, imobilizari, import_vamal,
+          inchidere_ex, inchidere_lunara,
           inchidere_tva, intermediar, leasing_fin, neutralizare, provizion, salarii,
           salarii_evenimente, subventie, taxare_inversa, tva_incasare, vanz_amanunt]
 
