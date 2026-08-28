@@ -435,6 +435,72 @@ TEME = [
           "(reținerile din salariu) din Codul muncii."),
     ]),
 
+    ("Trezorerie — diferențe de curs și plafoane", [
+        q("training 28.08.2026, punctul 1",
+          "Reevaluarea de sfârșit de lună a conturilor în valută se înregistrează pe "
+          "665/765 sau pe 668/768?",
+          "Notițele din 28.08 spun: diferențele de curs curente prin 665/765, iar "
+          "reevaluarea de la sfârșitul lunii prin 668/768, cu observația „să fie clară "
+          "diferența de curs din reevaluare, și cea de la furnizori”.",
+          "F-107 pasul de reevaluare, MOD_CREDIT_VALUTA în întregime, și structura "
+          "analitică a lui 665/765. Nu e nuanță de stil: cele două variante pun "
+          "aceeași sumă în conturi care se raportează diferit.",
+          "Am păstrat 665/765 pentru ambele situații, cu analitic .DEC și .REV. "
+          "Motivul: funcțiunea contului 665 din OMFP 1802/2014 include explicit "
+          "diferențele rezultate „la sfârșitul lunii/exercițiului financiar, din "
+          "evaluarea disponibilităților bancare și a numerarului în valută” — deci "
+          "reevaluarea e chiar în funcțiunea lui. Iar 668/768 au alt rost: creanțele "
+          "și datoriile exprimate în LEI, decontabile după cursul unei valute. Scopul "
+          "formatorului — reevaluarea separată de decontare — se atinge cu analiticul, "
+          "fără să mute reevaluarea în afara contului de diferențe de curs. Dacă "
+          "formatorul confirmă varianta lui, se schimbă; dar atunci trebuie explicat "
+          "cum se raportează diferențele de curs care nu mai sunt în contul lor."),
+
+        q("training 28.08.2026, punctul 2",
+          "Plafonul de 50.000 lei la soldul de casă e per societate sau per casierie / "
+          "punct de lucru?",
+          "Notițele spun „50.000 lei pe fiecare punct de lucru” și povestesc un client "
+          "care, aflând de plafon, „a mai făcut rost de o casierie cu 50.000 lei”. "
+          "Notițele nu spun dacă practica aceea rezistă la control.",
+          "C-38 și cadența pe 5311. Dacă limita e per societate, o a doua casierie nu "
+          "rezolvă nimic și clientul e în neregulă; dacă e per casierie, orice "
+          "societate poate multiplica plafonul deschizând puncte de lucru, ceea ce ar "
+          "goli restricția de sens.",
+          "Am formulat C-38 pe casierie, cum spun notițele, dar cu semnalul „casierie "
+          "deschisă special ca să se multiplice plafonul” trecut la SUSPECT — pentru că "
+          "intenția se vede, indiferent cum e textul. De confirmat art. 4 din Legea "
+          "70/2015 în forma în vigoare."),
+    ]),
+
+    ("Gestiuni, bonuri de consum și compensări", [
+        q("training 28.08.2026, punctul 3",
+          "Care e forma obligatorie a bonului de consum, și în ce cazuri poate fi "
+          "înlocuit cu alt document?",
+          "Notițele stabilesc ordinea — întâi se creează gestiunea, apoi se pune "
+          "problema consumului — și spun că orice ieșire din gestiune se face pe bon de "
+          "consum. Formatorul a marcat însă explicit subiectul ca „de contraverificat, "
+          "de clarificat detaliat”.",
+          "F-321 pasul 3 și regula „consumul trece prin gestiune” din documentul de "
+          "stocuri. De forma documentului depinde ce i se cere clientului să aducă "
+          "lunar — iar cerința se face o dată, la preluare, sau nu se mai face.",
+          "Am modelat consumul pe bon de consum, fără să afirm o formă anume. "
+          "Alternativele de verificat: fișa limită de consum la consumuri repetitive, "
+          "și avizul intern la transferurile între gestiuni."),
+
+        q("training 28.08.2026, punctul 4",
+          "Ce document susține compensarea 4091 ↔ 419 la același partener, și de la ce "
+          "prag trebuie făcută prin sistemul reglementat?",
+          "Notițele scriu doar „4091 - 419 <=> să faci compensări ulterior”, cu "
+          "mențiunea „de analizat” adresată mie.",
+          "Dacă apare un flux de compensare, el are nevoie de documentul justificativ "
+          "ca stare inițială. Fără el, compensarea e o decizie unilaterală asupra unor "
+          "solduri care aparțin la două raporturi juridice diferite.",
+          "Analiza e în documentul de control, §9.4: compensarea e posibilă, dar cere "
+          "acord scris între părți, iar TVA-ul NU se compensează odată cu avansurile — "
+          "regularizarea lui se face la facturile finale, prin stornarea fiecărui avans "
+          "în parte. N-am scris flux, pentru că starea inițială depinde de răspuns."),
+    ]),
+
     ("Dividende — CASS, declarații și termene", [
         q("training 26.08.2026, punctul 2",
           "CASS pe dividende se datorează la dividendele DISTRIBUITE sau la cele "
@@ -563,6 +629,12 @@ DOC_EXPLICIT = {
     "training 26.08.2026, punctul 1": "doc:control",      # plafonul imputației
     "training 26.08.2026, punctul 2": "doc:capitaluri",   # CASS pe dividende
     "training 26.08.2026, punctul 3": "doc:control",      # 4423 vs. 4481
+    # 28.08 se împarte la două: trezoreria la documentul nou, gestiunile și
+    # compensările la stocuri și control, unde stau regulile lor.
+    "training 28.08.2026, punctul 1": "doc:trezorerie",   # 665/765 vs. 668/768
+    "training 28.08.2026, punctul 2": "doc:control",      # plafonul de casă
+    "training 28.08.2026, punctul 3": "doc:stocuri-tva",  # bonul de consum
+    "training 28.08.2026, punctul 4": "doc:control",      # compensarea 4091 ↔ 419
 }
 
 

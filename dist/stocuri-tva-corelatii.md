@@ -1,5 +1,5 @@
 # Stocuri, TVA și corelații de balanță
-### Surse: training 14.08.2026 · adâncit cu 19.08.2026 — stocuri (clasa 3), TVA și corelații de balanță, versiune revizuită
+### Surse: training 14.08.2026 · adâncit cu 19.08.2026, 21.08.2026 și 28.08.2026 — stocuri (clasa 3), TVA și corelații de balanță, versiune revizuită
 
 ---
 
@@ -352,6 +352,80 @@ Exemple de formulări corecte:
 ➕ Lipsa mențiunii = factură incompletă = risc de refuz al scutirii la inspecție. Este cel mai ieftin risc de eliminat din toată lista asta: se rezolvă cu o setare în softul de facturare.
 
 ---
+
+### 5.5 Ce operațiuni intră
+
+
+Taxarea inversă e o **măsură fiscală de protecție**: statul mută obligația de plată a
+TVA de la furnizor la cumpărător, în domeniile unde frauda e cea mai ușoară.
+
+Din lista discutată la curs:
+
+| Operațiunea | Nuanța care se uită |
+|---|---|
+| Construcții și terenuri | Se aplică la livrările **taxabile** — construcțiile noi sunt taxabile prin efectul legii, cele vechi doar prin opțiune |
+| Cereale și plante tehnice | **Sămânța pentru însămânțat NU intră** — are alt cod tarifar decât cerealele de consum |
+| Deșeuri feroase și neferoase | Doar cele din listă, nu orice rebut |
+| Masă lemnoasă — cherestea, buștean | Materialele lemnoase din listă |
+
+➕ Precizare la construcții: notița spune „construcții noi (la prima ocupare)”. Criteriul
+din lege nu e vechimea, ci **regimul livrării**: taxarea inversă se aplică oriunde
+livrarea e taxabilă, fie prin efectul legii (construcție nouă), fie prin **opțiunea**
+vânzătorului (construcție veche). O construcție veche vândută cu opțiune de taxare intră
+la fel de bine.
+
+
+### 5.6 Codurile din nomenclatorul D394
+
+
+Fiecare tip de tranzacție cu taxare inversă are un **cod** pe care D394 îl recunoaște.
+Formatorul a dat exemplul deșeurilor — cod **22**.
+
+⚠️ Fără codul asociat, **D394 nu se validează**. Nu e o eroare de conținut care se vede
+la control peste doi ani; e un refuz la depunere, în ziua declarației.
+
+❓ Nomenclatorul complet de coduri nu era în notițe și nu se poate reconstitui din
+memorie. Se ia din instrucțiunile de completare ale formularului D394, în vigoare la data
+depunerii, și se atașează configurării programului **înainte** de prima operațiune cu
+taxare inversă, nu la depunere.
+
+
+### 5.7 Ce se înregistrează și ce nu
+
+
+La **cumpărare**, autolichidarea produce notă contabilă:
+
+```
+4426 = 4427        cu aceeași sumă
+```
+
+Suma apare în **ambele jurnale** — și de cumpărări, și de vânzări — exact ca la
+achizițiile intracomunitare.
+
+La **livrare** de bunuri supuse taxării inverse, situația e alta:
+
+➕ **Nu se face notă contabilă pentru TVA.** Furnizorul nu colectează nimic: factura
+poartă mențiunea „taxare inversă”, iar obligația trece la cumpărător. Ce rămâne în sarcina
+furnizorului e **mențiunea în jurnalul de vânzări** și **codul de operațiune** pentru
+D394. Cine caută nota contabilă la livrare n-o găsește pentru că nu există — nu pentru că
+a uitat-o cineva.
+
+Codul se asociază **și la intrare, și la ieșire**.
+
+
+### 5.8 Rubricile separate din jurnale
+
+
+Jurnalele trebuie să aibă rubrici distincte, nu o coloană comună:
+
+- taxare inversă România
+- taxare inversă intracomunitară
+- achiziții scutite (de la neplătitori de TVA)
+- importuri
+
+➕ Rostul separării: fiecare rubrică alimentează alt rând din D300 și altă declarație
+(D390 doar la intracomunitar). Amestecate, cifrele sunt corecte în total și greșite pe
+fiecare rând.
 
 ## 6. Producția: 33x, 34x și conturile 711/712
 
@@ -1270,6 +1344,118 @@ Lucrare de 100.000 lei, avans 30%, TVA 21%.
 ```
 
 ---
+
+## 12. Cheltuielile de clasa 6 și gestiunile de clasa 3
+### 12.1 Tabelul corespondențelor
+
+
+Notița cerea contraverificarea și completarea listei. Fiecare cont de cheltuială are
+gestiunea lui:
+
+| Cheltuiala | Gestiunea | Ce cuprinde |
+|---|---|---|
+| 601 | 301 | Materii prime |
+| 6021 | 3021 | Materiale auxiliare |
+| 6022 | 3022 | Combustibili |
+| 6023 | 3023 | Materiale pentru ambalat |
+| 6024 | 3024 | Piese de schimb |
+| 6028 | 3028 | Alte materiale consumabile |
+| 603 | 303 | Obiecte de inventar — **și 8035**, extrabilanțier |
+| 604 | — | Materiale nestocate: direct pe cheltuială, fără gestiune |
+| 605 | — | Utilități: energie, apă — direct din factură |
+| 607 | 371 | Mărfuri |
+| 608 | 381 | Ambalaje |
+| 609 / 709 | — | Reduceri comerciale primite / acordate, **ulterioare facturii** |
+
+⚠️ Notița scria perechea lui 608 ca `308`. E o transpoziție de cifre: **381** e contul de
+ambalaje, iar `308` e „Diferențe de preț la materii prime și materiale” — un cont
+rectificativ, care nu poate fi gestiunea pe care 608 o consumă.
+
+➕ 603 e singurul care are și un pas **extrabilanțier**: obiectele de inventar date în
+folosință ies din gestiune, dar rămân pe 8035, ca să știi ce ai pe teren. Fără el, un
+obiect dat în folosință dispare din evidență în ziua consumului.
+
+➕ 609/709 nu sunt reducerile de pe factura inițială — alea se scad direct din bază. Sunt
+reducerile primite sau acordate **ulterior**, pe o factură separată.
+
+
+### 12.2 Regula: consumul trece prin gestiune
+
+
+⚠️ **Nu se recomandă înregistrarea directă `6021 = 401`.** Corect e în doi pași:
+
+```
+3021 = 401        intrarea în gestiune
+6021 = 3021       consumul, pe bază de bon de consum
+```
+
+Motivul: un bun trecut direct pe cheltuială **n-a intrat niciodată în evidență**, deci nu
+poate fi scos din ea. Nu ai ce inventaria, nu ai ce justifica, și nu poți răspunde la
+întrebarea „unde e”.
+
+Verificarea inversă, pe care o face și controlul: **de ce am rulaj pe 601 dacă n-am rulaj
+pe 301?** O cheltuială cu materii prime fără gestiune de materii prime spune că bunurile
+n-au trecut niciodată prin depozit.
+
+➕ De când s-a implementat **SAF-T**, modulul de stocuri se cere la control. Nu ajunge să
+existe — trebuie să fie **deja gestionat** și prezentabil.
+
+
+### 12.3 Excepțiile
+
+
+**Bonul de benzină:** `6022 = 401` direct e acceptabil. Când vine factură sau când
+combustibilul se stochează, se aplică regula gestiunii.
+
+**Materialele nestocate (604):** apa pentru angajați, pixurile, hârtia — bunuri cumpărate
+și consumate imediat, care nu se stochează.
+
+Criteriul nu e valoarea, ci **dacă bunul stă**: o mie de pixuri cumpărate de o firmă care
+le consumă în timp intră în 3028, cu bon de consum la fiecare ieșire. Aceleași o mie de
+pixuri duse toate pe șantier în aceeași zi n-au ce căuta în 3028 — se consumă imediat,
+deci 604.
+
+➕ Al treilea caz, care lipsea din notiță: dacă firma **revinde** pixurile, ele nu sunt
+nici 3028, nici 604 — sunt **marfă, 371**. Criteriul e destinația, nu obiectul.
+
+**Anvelopele** sunt piese de schimb: șapte anvelope cumpărate și folosite pe rând intră în
+**3024**, nu pe cheltuială directă.
+
+**Reparațiile (611):** se folosesc când factura are **deviz** în spate — de exemplu piese
+de 5.000 lei și manoperă de 2.000. Devizul e cel care permite separarea: manopera pe 611,
+piesele după regula gestiunii.
+
+
+### 12.4 Transferul între gestiuni: marfa devenită materie primă
+
+
+Cazul apare des: ai recepționat ceva ca **marfă** în 371, dar se dovedește că-l consumi
+într-o lucrare, nu-l revinzi.
+
+```
+301 = 371         transferul, pe bază de bon de transfer
+601 = 301         consumul, pe bază de bon de consum
+```
+
+➕ Nu se sare peste primul pas. `601 = 371` ar asocia o cheltuială cu materii prime unei
+gestiuni de mărfuri, iar contul de cheltuială și-ar pierde înțelesul. Formatorul e explicit:
+**niciodată 601 la 371**, nici dacă programul îl propune prestabilit.
+
+
+### 12.5 Bonul de consum
+
+
+Notița cerea clarificarea. Ordinea e:
+
+1. **Se creează gestiunea** — se definește ce ține, cine răspunde de ea;
+2. **Abia apoi se pune problema consumului**, pe bază de bon de consum.
+
+Orice ieșire din gestiune se face pe bon de consum. Fără el, scăderea din stoc nu are
+document justificativ, iar diferența se constată la inventar fără explicație.
+
+❓ Forma obligatorie a bonului de consum și cazurile în care poate fi înlocuit cu alt
+document (fișă limită de consum, aviz intern) nu erau în notițe. De clarificat, pentru că
+de asta depinde ce se cere clientului să aducă lunar.
 
 ## Anexa A — Recapitulare: conturi și perechile lor
 

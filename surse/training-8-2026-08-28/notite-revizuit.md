@@ -296,7 +296,7 @@ pot reconcilia cu extrasele.
 ⚠️ **5191 nu ajunge niciodată cu sold debitor.** E cont de pasiv; un sold debitor
 înseamnă că s-a restituit mai mult decât s-a tras, deci o înregistrare greșită.
 
-## 5. Casa și alte valori
+## 5. Casa și plafoanele de numerar
 
 ### 5.1 Plafonul soldului de casă
 
@@ -343,7 +343,7 @@ prevăzute.
 ➕ Condiția nu e formalitatea contractului, ci **respectarea lui**: dacă ratele se încasează
 la alte date sau în alte sume decât scrie în scadențar, apărarea cade.
 
-### 5.4 Tichetele de masă
+## 6. Tichete de masă și alte valori
 
 ```
 5328 = 401        achiziția tichetelor de la furnizor
@@ -371,9 +371,9 @@ de 4 ore poate fi funcție de bază, dar dintre două contracte de 8 ore doar un
 Se acordă la sfârșitul lunii, când se știe efectiv cine a fost la lucru: nu se dau pentru
 zilele de concediu.
 
-## 6. Avansuri de trezorerie (542)
+## 7. Avansuri de trezorerie (542)
 
-### 6.1 Monografia decontului
+### 7.1 Monografia decontului
 
 Acordarea avansului către salariat:
 
@@ -400,7 +400,7 @@ Salariatul se întoarce cu decontul și documentele. **Fiecare cheltuială cu TV
 401  = 542        1.000,00
 ```
 
-### 6.2 Diurna — partea care lipsea
+### 7.2 Diurna — partea care lipsea
 
 Notița se opreşte la „part 3 din 3: 2.000 lei decontul = diurna”, fără înregistrare.
 
@@ -418,7 +418,7 @@ Decontul se închide exact: 2.000 + 1.000 + 2.000 = **5.000 lei**, cât s-a acor
 asimilează salariului și se impozitează ca atare — deci cifra contează. De confirmat
 nivelul în vigoare la data deplasării.
 
-### 6.3 De ce analiticul e obligatoriu aici
+### 7.3 De ce analiticul e obligatoriu aici
 
 Formatorul e categoric: **„542 pe analitic este esențial”**, cu patru semne de exclamare.
 
@@ -430,15 +430,15 @@ zero — corect ca total, fals pe fiecare om.
 Partea asta e cea mai greu de ținut din toată trezoreria, și fiecare program de
 contabilitate o tratează altfel.
 
-## 7. Viramente interne (581)
+## 8. Viramente interne (581)
 
-### 7.1 Când 581 are voie să aibă sold
+### 8.1 Când 581 are voie să aibă sold
 
 581 trebuie să ajungă la **zero**. Excepția legitimă: transferul făcut la sfârșitul lunii
 și primit la începutul lunii următoare — atunci soldul e chiar realitatea, banii sunt pe
 drum.
 
-### 7.2 Diferența de curs la transferul valută → lei
+### 8.2 Diferența de curs la transferul valută → lei
 
 ⚠️ La transferul din valută în lei, diferența de curs **se reglează prin bancă, nu prin
 581** — notițele subliniază cu șase semne de exclamare.
@@ -448,9 +448,9 @@ Dacă diferența de curs se lasă acolo, contul nu se mai închide și devine im
 dacă soldul rămas e un transfer în curs sau o diferență necontabilizată. Diferența
 aparține contului de bancă în valută, unde s-a și produs.
 
-## 8. Cheltuielile de clasa 6 și gestiunile de clasa 3
+## 9. Cheltuielile de clasa 6 și gestiunile de clasa 3
 
-### 8.1 Tabelul corespondențelor
+### 9.1 Tabelul corespondențelor
 
 Notița cerea contraverificarea și completarea listei. Fiecare cont de cheltuială are
 gestiunea lui:
@@ -481,7 +481,7 @@ obiect dat în folosință dispare din evidență în ziua consumului.
 ➕ 609/709 nu sunt reducerile de pe factura inițială — alea se scad direct din bază. Sunt
 reducerile primite sau acordate **ulterior**, pe o factură separată.
 
-### 8.2 Regula: consumul trece prin gestiune
+### 9.2 Regula: consumul trece prin gestiune
 
 ⚠️ **Nu se recomandă înregistrarea directă `6021 = 401`.** Corect e în doi pași:
 
@@ -501,7 +501,7 @@ n-au trecut niciodată prin depozit.
 ➕ De când s-a implementat **SAF-T**, modulul de stocuri se cere la control. Nu ajunge să
 existe — trebuie să fie **deja gestionat** și prezentabil.
 
-### 8.3 Excepțiile
+### 9.3 Excepțiile
 
 **Bonul de benzină:** `6022 = 401` direct e acceptabil. Când vine factură sau când
 combustibilul se stochează, se aplică regula gestiunii.
@@ -524,7 +524,7 @@ nici 3028, nici 604 — sunt **marfă, 371**. Criteriul e destinația, nu obiect
 de 5.000 lei și manoperă de 2.000. Devizul e cel care permite separarea: manopera pe 611,
 piesele după regula gestiunii.
 
-### 8.4 Transferul între gestiuni: marfa devenită materie primă
+### 9.4 Transferul între gestiuni: marfa devenită materie primă
 
 Cazul apare des: ai recepționat ceva ca **marfă** în 371, dar se dovedește că-l consumi
 într-o lucrare, nu-l revinzi.
@@ -538,7 +538,7 @@ Cazul apare des: ai recepționat ceva ca **marfă** în 371, dar se dovedește c
 gestiuni de mărfuri, iar contul de cheltuială și-ar pierde înțelesul. Formatorul e explicit:
 **niciodată 601 la 371**, nici dacă programul îl propune prestabilit.
 
-### 8.5 Bonul de consum
+### 9.5 Bonul de consum
 
 Notița cerea clarificarea. Ordinea e:
 
@@ -552,15 +552,15 @@ document justificativ, iar diferența se constată la inventar fără explicați
 document (fișă limită de consum, aviz intern) nu erau în notițe. De clarificat, pentru că
 de asta depinde ce se cere clientului să aducă lunar.
 
-## 9. Verificarea analitic ↔ sintetic
+## 10. Verificarea analitic ↔ sintetic
 
-### 9.1 De ce se rupe
+### 10.1 De ce se rupe
 
 Programul te lasă să mai faci o operațiune **după** ce ai dat închiderea de lună. Dacă nu
 te întorci să refaci închiderea, apare o diferență între analitic și sintetic — care nu se
 anunță singură.
 
-### 9.2 Conturile la care se rupe cel mai des
+### 10.2 Conturile la care se rupe cel mai des
 
 **Banca.** Extrasul de cont trebuie să se potrivească cu balanța. Cazul tipic: jurnalul de
 bancă dă cu extrasul, dar nu dă cu balanța — semn că diferența e între analitic și
@@ -574,7 +574,7 @@ pare inutil — 446 se ține pe `446.1` de la bun început, nu pe sintetic, pent
 taxă apare întotdeauna, iar despărțirea retroactivă e mult mai scumpă decât analiticul
 făcut din prima.
 
-### 9.3 Sumele nealocate și contul 473
+### 10.3 Sumele nealocate și contul 473
 
 Când o încasare nu se poate aloca înainte de închiderea lunii, se pune în **473**, cu
 notiță despre proveniență:
@@ -588,7 +588,7 @@ notiță despre proveniență:
 problemă să stornezi luna viitoare și să pui pe clientul corect. Problema e să ratezi
 alocarea cu totul.
 
-### 9.4 Compensările 4091 ↔ 419
+### 10.4 Compensările 4091 ↔ 419
 
 Notița cerea analiza. Cazul: același partener e și furnizor, și client. I-ai plătit un
 avans (4091) și el ți-a plătit un avans (419). Tentația e să le stingi unul cu altul.
@@ -605,7 +605,7 @@ Se poate, dar cu două condiții pe care notița nu le spune:
 ❓ Ce document folosește cabinetul pentru compensare, și dacă se aplică pragul de la care
 compensarea trebuie făcută prin sistemul reglementat — de confirmat.
 
-### 9.5 Preluarea unei balanțe în cursul anului
+### 10.5 Preluarea unei balanțe în cursul anului
 
 ⚠️ La preluarea unei societăți **în cursul anului** nu se preiau soldurile, ci **totalul
 sumelor** debitoare și creditoare.
@@ -623,7 +623,7 @@ procent din brut, rulajul creditor al obligațiilor salariale.
 
 Numai al treilea permite reconstituirea anului întreg dintr-o balanță de mijloc de an.
 
-### 9.6 Cele trei verificări din softul formatorului
+### 10.6 Cele trei verificări din softul formatorului
 
 Formatorul a descris trei „căsuțe care se înverzesc” din programul lui — și ele sunt exact
 modelul de verificare pe care îl urmărim:
@@ -640,7 +640,7 @@ A treia se vede cel mai bine la bilanț: dacă 6 și 7 nu s-au închis, cifrele 
 chiar dacă linia din extras apare la încasări. Contul urmează natura operațiunii, nu poziția
 ei în extras.
 
-## 10. Ce s-a cerut pentru sesiunile următoare
+## 11. Ce s-a cerut pentru sesiunile următoare
 
 **Lista corelațiilor de verificat pe balanță**, cu precizarea formatorului că fiecare
 balanță e unică — fiecare firmă are alt obiect de activitate. Se cer: conturile cele mai

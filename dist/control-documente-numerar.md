@@ -1,5 +1,5 @@
 # Control, documente și numerar
-### Sursă: training 19.08.2026 — cum se citește un cont, ce cere legea de la un document și unde se rupe disciplina de casă
+### Surse: training 19.08.2026 · adâncit cu 21.08.2026, 26.08.2026 și 28.08.2026 — cum se citește un cont, ce cere legea de la un document și unde se rupe disciplina de casă
 
 ---
 
@@ -283,6 +283,173 @@ Conturile din ședința asta care se verifică așa: 455 (niciodată debitor), 4
 ➕ Tema dată: identificarea în balanță a lucrurilor care pot fi rezolvate — pentru că, o
 dată ce li se stabilește cursul, nu mai sunt erori.
 
+## 9. Casa și plafoanele de numerar
+### 9.1 Plafonul soldului de casă
+
+
+Soldul de casă nu poate depăși **50.000 lei la sfârșitul zilei**, pe fiecare punct de
+lucru. Ce depășește se depune în cont.
+
+➕ Istoric: soldul **a fost** nelimitat, cu singura cerință ca banii să existe efectiv și
+să poată fi arătați la control. Plafonul e o restricție relativ nouă, iar cine lucrează
+după obiceiul vechi îl încalcă fără să știe.
+
+❓ **Per societate sau per casierie?** Notițele povestesc un client care, aflând de
+plafon, „a mai făcut rost de o casierie cu 50.000 lei” — deci a înțeles că limita e per
+casierie. Dacă e așa, orice societate poate multiplica plafonul deschizând puncte de
+lucru, ceea ce ar goli restricția de sens. De confirmat cu formatorul care e textul exact
+și dacă practica clientului rezistă la control.
+
+
+### 9.2 Ce plăți sunt plafonate și ce plăți nu
+
+
+**Fără plafon**, oricât de mare e suma:
+
+- salariile și alte drepturi de personal
+- plățile către bugetul statului și alte instituții publice
+
+**Cu plafon:**
+
+- 5.000 lei către persoane juridice
+- 10.000 lei în relația cu persoane fizice
+
+Aceleași limite se aplică **în oglindă la încasări**.
+
+➕ Plafoanele și interdicțiile complete — inclusiv interdicția totală a operațiunilor în
+numerar pe contul 455 — sunt verificate pe surse și consemnate separat. Aici rămâne doar
+ce a adăugat trainingul ăsta: plafonul de sold și regula punctelor de lucru.
+
+
+### 9.3 Plăți fragmentate și contractul cu plata în rate
+
+
+Fragmentarea unei plăți ca să încapă sub plafon e **interzisă expres**.
+
+Există însă o cale legitimă: **contractul cu plata în rate**. Dacă există contract, cu
+scadențar și date fixe, încasarea în tranșe nu mai e fragmentare — e executarea
+contractului. Din 20.000 lei se poate încasa de la o persoană fizică toată suma, în ratele
+prevăzute.
+
+➕ Condiția nu e formalitatea contractului, ci **respectarea lui**: dacă ratele se încasează
+la alte date sau în alte sume decât scrie în scadențar, apărarea cade.
+
+## 10. Verificarea analitic ↔ sintetic
+### 10.1 De ce se rupe
+
+
+Programul te lasă să mai faci o operațiune **după** ce ai dat închiderea de lună. Dacă nu
+te întorci să refaci închiderea, apare o diferență între analitic și sintetic — care nu se
+anunță singură.
+
+
+### 10.2 Conturile la care se rupe cel mai des
+
+
+**Banca.** Extrasul de cont trebuie să se potrivească cu balanța. Cazul tipic: jurnalul de
+bancă dă cu extrasul, dar nu dă cu balanța — semn că diferența e între analitic și
+sintetic, nu în operare.
+
+**Clienții și furnizorii.** Nu se lasă solduri nealocate pe 4111 sau 401: denaturează și
+fișa partenerului, și corelația analitic ↔ sintetic.
+
+➕ Regula formatorului, repetată: **niciodată nu pleci fără analitic.** Chiar și acolo unde
+pare inutil — 446 se ține pe `446.1` de la bun început, nu pe sintetic, pentru că a doua
+taxă apare întotdeauna, iar despărțirea retroactivă e mult mai scumpă decât analiticul
+făcut din prima.
+
+
+### 10.3 Sumele nealocate și contul 473
+
+
+Când o încasare nu se poate aloca înainte de închiderea lunii, se pune în **473**, cu
+notiță despre proveniență:
+
+```
+473  = 4111       la închiderea lunii, dacă nu se știe alocarea
+4111 = 473        luna următoare, la stornare și alocare corectă
+```
+
+➕ Importantul nu e contul, e **să fie într-un cont de care să-ți mai amintești**. Nu e o
+problemă să stornezi luna viitoare și să pui pe clientul corect. Problema e să ratezi
+alocarea cu totul.
+
+
+### 10.4 Compensările 4091 ↔ 419
+
+
+Notița cerea analiza. Cazul: același partener e și furnizor, și client. I-ai plătit un
+avans (4091) și el ți-a plătit un avans (419). Tentația e să le stingi unul cu altul.
+
+Se poate, dar cu două condiții pe care notița nu le spune:
+
+1. **Compensarea are nevoie de document** — acord scris între părți, nu decizie
+   unilaterală. Soldurile sunt față de aceeași persoană, dar din raporturi juridice
+   diferite;
+2. **TVA-ul nu se compensează odată cu avansurile.** La avansul plătit ai dedus TVA, la
+   cel încasat ai colectat. Regularizarea se face la facturile finale, prin stornarea
+   fiecărui avans în parte — nu prin compensare.
+
+❓ Ce document folosește cabinetul pentru compensare, și dacă se aplică pragul de la care
+compensarea trebuie făcută prin sistemul reglementat — de confirmat.
+
+
+### 10.5 Preluarea unei balanțe în cursul anului
+
+
+⚠️ La preluarea unei societăți **în cursul anului** nu se preiau soldurile, ci **totalul
+sumelor** debitoare și creditoare.
+
+Motivul: balanța trebuie să aibă **continuitate**. Cu soldurile preluate ca sold inițial,
+rulajele anului pornesc de la zero în luna preluării — iar orice verificare care se face pe
+rulaj, nu pe sold, devine falsă: corelația cu fișa de rol la TVA, verificarea CAM-ului ca
+procent din brut, rulajul creditor al obligațiilor salariale.
+
+➕ Distincția e chiar întrebarea pusă pentru sesiunea următoare:
+
+- **soldul** — diferența, la un moment dat, între ce a intrat și ce a ieșit;
+- **rulajul** — mișcarea unei perioade, pe fiecare sens;
+- **totalul sumelor** — rulajul CUMULAT de la începutul anului, pe fiecare sens.
+
+Numai al treilea permite reconstituirea anului întreg dintr-o balanță de mijloc de an.
+
+
+### 10.6 Cele trei verificări din softul formatorului
+
+
+Formatorul a descris trei „căsuțe care se înverzesc” din programul lui — și ele sunt exact
+modelul de verificare pe care îl urmărim:
+
+| Verificarea | Ce compară | Când e verde |
+|---|---|---|
+| **Decontul de TVA** | 4426 și 4427 din balanță vs. ce se duce în decont | ce se declară = ce e în balanță |
+| **Balanța pe furnizor** | analiticul furnizorilor vs. sinteticul lui 401 | analitic = sintetic |
+| **Contul 121** | rulajul claselor 6 și 7 vs. 121 | 6 și 7 s-au închis complet în 121 |
+
+A treia se vede cel mai bine la bilanț: dacă 6 și 7 nu s-au închis, cifrele nu se leagă.
+
+➕ Notă legată, din aceeași secțiune: **comisioanele bancare se înregistrează `627 = 5121`**
+chiar dacă linia din extras apare la încasări. Contul urmează natura operațiunii, nu poziția
+ei în extras.
+
+## 11. Ce s-a cerut pentru sesiunile următoare
+**Lista corelațiilor de verificat pe balanță**, cu precizarea formatorului că fiecare
+balanță e unică — fiecare firmă are alt obiect de activitate. Se cer: conturile cele mai
+comune, cele mai esențiale, și **în ce ordine** se verifică.
+
+**O aplicație care rulează verificările analitic ↔ sintetic pe balanță**, cerută explicit
+sub titlul „Later”:
+
+- mijloacele fixe și celelalte corelații de analitic;
+- 121 cu clasele 6 și 7;
+- TVA.
+
+**Întrebări pentru sesiunea următoare:**
+
+1. La preluarea unei societăți, ce se disecă analitic ↔ sintetic — mai multe exemple decât
+   4111 / 401 și 512x;
+2. Diferența dintre sold, rulaje și total sume (răspuns propus la §9.5, de confirmat).
+
 ---
 
 ## Anexa B — Checklist practic
@@ -336,6 +503,22 @@ Suma încasată în plus e TVA-inclusivă: din 5.000 lei ies 4.132,23 bază și 
 Notițele din 26.08 menționează un plafon „la nivelul a 5 salarii medii”, cu observația formatorului însuși: „de verificat suma”. Separat, notițele spun că imputația nu se poate face fără ca salariatul să fie informat și de acord — Codul muncii.
 
 **Ce am presupus între timp:** Am modelat imputația integrală, cu reținere într-o singură lună, pentru că exemplul din notițe e de 1.000 lei — sub orice plafon plauzibil. Pasul poartă ❓. De verificat art. 254 (răspunderea patrimonială) și art. 169 (reținerile din salariu) din Codul muncii.
+
+**❓ Plafonul de 50.000 lei la soldul de casă e per societate sau per casierie / punct de lucru?**
+
+*Trezorerie — diferențe de curs și plafoane · training 28.08.2026, punctul 2*
+
+Notițele spun „50.000 lei pe fiecare punct de lucru” și povestesc un client care, aflând de plafon, „a mai făcut rost de o casierie cu 50.000 lei”. Notițele nu spun dacă practica aceea rezistă la control.
+
+**Ce am presupus între timp:** Am formulat C-38 pe casierie, cum spun notițele, dar cu semnalul „casierie deschisă special ca să se multiplice plafonul” trecut la SUSPECT — pentru că intenția se vede, indiferent cum e textul. De confirmat art. 4 din Legea 70/2015 în forma în vigoare.
+
+**❓ Ce document susține compensarea 4091 ↔ 419 la același partener, și de la ce prag trebuie făcută prin sistemul reglementat?**
+
+*Gestiuni, bonuri de consum și compensări · training 28.08.2026, punctul 4*
+
+Notițele scriu doar „4091 - 419 <=> să faci compensări ulterior”, cu mențiunea „de analizat” adresată mie.
+
+**Ce am presupus între timp:** Analiza e în documentul de control, §9.4: compensarea e posibilă, dar cere acord scris între părți, iar TVA-ul NU se compensează odată cu avansurile — regularizarea lui se face la facturile finale, prin stornarea fiecărui avans în parte. N-am scris flux, pentru că starea inițială depinde de răspuns.
 
 **❓ Sumele stabilite prin decizie de impunere pe TVA se înregistrează în 4423 cu analitic distinct, sau în 4481?**
 

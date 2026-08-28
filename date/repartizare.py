@@ -43,6 +43,7 @@ DESTINATII = {
     "doc:salarii":      ("dist/salarii-contributii-retineri.md", "fisier"),
     "date:plan":        ("Plan de conturi", "foaie"),
     "foaie:inchideri":  ("Închideri periodice", "foaie"),
+    "doc:trezorerie":   ("dist/trezorerie.md", "fisier"),
     "date:intrebari":   ("dist/intrebari-formator.md", "fisier"),
 }
 
@@ -460,6 +461,169 @@ ABSORBITE_26_08 = {
 }
 
 # ===========================================================================
+# Sursa din 28.08.2026 — trezoreria și verificarea balanței
+#
+# A patra sursă care se împarte, și a doua care naște un document nou. Motivul e
+# același ca la salarii, în 21.08: materialul e clasa 5, coerent și mare, iar niciunul
+# din cele cinci documente existente nu-l putea găzdui fără să mintă.
+#
+# Împărțirea are un caz de rupere pe dinăuntru, ca §2 din 19.08: §5 e despre casă, dar
+# §5.1–5.3 sunt plafoane și reguli de numerar, care stau deja în documentul de control.
+# Doar §5.4 (tichetele) merge la trezorerie. Granularitatea pe subsecțiune există exact
+# pentru cazul ăsta.
+# ===========================================================================
+
+REPARTIZARE_28_08 = [
+    # --- §1 taxarea inversă: la TVA, unde stă deja mecanica ---------------
+    ("## 1. Recapitulare: taxarea inversă", "doc:stocuri-tva",
+     "Recapitulare peste F-402 și MOD_TAXARE_INVERSA. Teritoriul TVA e al "
+     "documentului de stocuri, indiferent că materialul a venit într-o zi de "
+     "trezorerie."),
+    ("### 1.1 Ce operațiuni intră", "doc:stocuri-tva",
+     "Lista art. 331, cu nuanța semințelor și cea a construcțiilor: criteriul nu e "
+     "vechimea, e regimul livrării."),
+    ("### 1.2 Codurile din nomenclatorul D394", "doc:stocuri-tva",
+     "Material NOU: fără codul de operațiune, D394 nu se validează. E un refuz la "
+     "depunere, nu o eroare care se vede la control peste doi ani."),
+    ("### 1.3 Ce se înregistrează și ce nu", "doc:stocuri-tva",
+     "Nuanța care lipsea din MOD_TAXARE_INVERSA: la LIVRARE nu se face notă contabilă, "
+     "doar mențiune în jurnal și cod. Cine caută nota n-o găsește pentru că nu există."),
+    ("### 1.4 Rubricile separate din jurnale", "doc:stocuri-tva",
+     "Fiecare rubrică alimentează alt rând din D300 și altă declarație."),
+
+    # --- §2–§4 trezoreria: documentul nou ---------------------------------
+    ("## 2. Investiții pe termen scurt: acțiuni și obligațiuni", "doc:trezorerie",
+     "Clasa 50. Deschide documentul nou cu partea cea mai puțin operațională, dar care "
+     "explică restul: ce fel de bani sunt ăștia."),
+    ("### 2.1 Achiziția de acțiuni", "doc:trezorerie",
+     "501 și analiticul pe emitent, condiție pentru ajustările de valoare."),
+    ("### 2.2 Acțiuni vs. obligațiuni — ce cumperi de fapt", "doc:trezorerie",
+     "Rezolvă instrucțiunea `{AI: de detaliat}` din notițe: proprietate vs. împrumut, "
+     "cu consecințele pe risc, pe venit și pe rangul la lichidare."),
+
+    ("## 3. Efecte de încasat: CEC-uri și bilete la ordin", "doc:trezorerie",
+     "F-503 și F-504. Miezul documentului: banii au mai multe stări între „am dreptul "
+     "la ei” și „sunt în cont”."),
+    ("### 3.1 De la factură la încasare", "doc:trezorerie",
+     "F-503: creanța se stinge înaintea încasării, iar riscul se mută pe 511x."),
+    ("### 3.2 Scontarea biletului la ordin", "doc:trezorerie",
+     "F-504. Aici stau corecțiile 6067 → 667 și baza de 12.100."),
+    ("### 3.3 Când merită scontarea și când nu", "doc:trezorerie",
+     "Contabilitatea de angajamente ca motiv economic: faci factura, n-o încasezi, și "
+     "statul cere banii oricum."),
+
+    ("## 4. Conturile la bănci", "doc:trezorerie",
+     "512x, 518x, 5191 — partea cea mai operațională a clasei 5."),
+    ("### 4.1 Conturile în valută și reevaluarea lunară", "doc:trezorerie",
+     "Cele patru cazuri de diferență de curs, cu regula unică din care ies toate; aici "
+     "stă corecția sensurilor inversate la creanțe."),
+    ("### 4.2 Diferențele de curs: 665/765 sau 668/768?", "doc:trezorerie",
+     "Divergența declarată cu formatorul. Stă în document, nu doar în lista de "
+     "întrebări: cititorul trebuie s-o vadă unde ar aplica regula."),
+    ("### 4.3 Dobânzi de plătit și de încasat", "doc:trezorerie",
+     "F-505 și F-506: 471 înseamnă „știu suma ȘI perioada”, deci dobânda variabilă "
+     "n-are ce căuta acolo."),
+    ("### 4.4 Linii de credit (5191) vs. credite cu scadențar (1621)", "doc:trezorerie",
+     "F-507 și C-35: la linie nu există scadențar, deci soldul de la bancă e singura "
+     "verificare independentă."),
+
+    # --- §5 numerarul, §6 valorile de trezorerie --------------------------
+    # Prima variantă a documentului revizuit le ținea împreună, sub „Casa și alte
+    # valori”, iar repartizarea le rupea la subsecțiune. Ieșea corect ca CONȚINUT și
+    # strâmb ca TITLU: documentul de trezorerie primea o secțiune care anunța „Casa” și
+    # livra numai tichete. Sursa chiar acoperă două subiecte — disciplina numerarului
+    # și valorile ținute în trezorerie — deci s-au despărțit acolo, nu aici.
+    ("## 5. Casa și plafoanele de numerar", "doc:control",
+     "Plafoane și reguli de plată în numerar — adâncesc secțiunea care le are deja."),
+    ("### 5.1 Plafonul soldului de casă", "doc:control",
+     "Adâncește §3 „Numerar și plafoane” cu plafonul de SOLD, care lipsea de acolo: "
+     "documentul avea plafoanele de tranzacție, nu pe cel de sold."),
+    ("### 5.2 Ce plăți sunt plafonate și ce plăți nu", "doc:control",
+     "Completează aceeași secțiune cu excepțiile — salarii și buget, fără plafon."),
+    ("### 5.3 Plăți fragmentate și contractul cu plata în rate", "doc:control",
+     "Calea legitimă în afara fragmentării, cu condiția respectării scadențarului."),
+    ("## 6. Tichete de masă și alte valori", "doc:trezorerie",
+     "Tichetele sunt STOC DE TREZORERIE (5328), nu o regulă de numerar: stau alături "
+     "de bancă și casă, nu de plafoane. F-508."),
+
+    # --- §6–§7 trezoreria, continuare -------------------------------------
+    ("## 7. Avansuri de trezorerie (542)", "doc:trezorerie",
+     "Adâncește F-502 cu monografia completă a decontului."),
+    ("### 7.1 Monografia decontului", "doc:trezorerie",
+     "Cele două părți cu TVA, pe cote diferite (21% și 11%), fiecare prin furnizor."),
+    ("### 7.2 Diurna — partea care lipsea", "doc:trezorerie",
+     "Completarea care închide decontul la exact 5.000: diurna n-are furnizor și "
+     "n-are TVA, deci rupe tiparul primelor două părți."),
+    ("### 7.3 De ce analiticul e obligatoriu aici", "doc:trezorerie",
+     "Soldul merge în ambele sensuri pe persoane diferite; pe sintetic se anulează."),
+
+    ("## 8. Viramente interne (581)", "doc:trezorerie",
+     "Adâncește F-501, care azi nu spune nimic despre valută."),
+    ("### 8.1 Când 581 are voie să aibă sold", "doc:trezorerie",
+     "Excepția legitimă: transferul la cumpăna lunii. C-36."),
+    ("### 8.2 Diferența de curs la transferul valută → lei", "doc:trezorerie",
+     "Regula pe care notițele o subliniază cu șase semne de exclamare. E regulă de "
+     "control, nu pas de monografie — de aceea trăiește în C-36 și aici, nu în F-501, "
+     "a cărui monografie vine din workbook-ul-sămânță."),
+
+    # --- §8 gestiunile: la stocuri ----------------------------------------
+    ("## 9. Cheltuielile de clasa 6 și gestiunile de clasa 3", "doc:stocuri-tva",
+     "Teritoriul stocurilor. Rezolvă instrucțiunea `{AI: de contraverificat și "
+     "completat}` din notițe."),
+    ("### 9.1 Tabelul corespondențelor", "doc:stocuri-tva",
+     "Tabelul complet cheltuială ↔ gestiune. Aici stă corecția 608 ↔ 381."),
+    ("### 9.2 Regula: consumul trece prin gestiune", "doc:stocuri-tva",
+     "F-321. Un bun trecut direct pe cheltuială n-a intrat niciodată în evidență, deci "
+     "nu poate fi scos din ea."),
+    ("### 9.3 Excepțiile", "doc:stocuri-tva",
+     "Bonul de benzină, nestocatele, anvelopele, devizul de reparație. Criteriul e "
+     "destinația bunului, nu obiectul lui."),
+    ("### 9.4 Transferul între gestiuni: marfa devenită materie primă", "doc:stocuri-tva",
+     "F-321 pasul revelator: 301 = 371 înaintea consumului, niciodată 601 la 371."),
+    ("### 9.5 Bonul de consum", "doc:stocuri-tva",
+     "Ordinea gestiune → consum, cu forma documentului lăsată ❓."),
+
+    # --- §9–§10 verificarea: la control -----------------------------------
+    ("## 10. Verificarea analitic ↔ sintetic", "doc:control",
+     "Miezul celei de-a doua jumătăți a trainingului. Documentul de control e exact "
+     "despre cum se vede că un cont arată greșit."),
+    ("### 10.1 De ce se rupe", "doc:control",
+     "Operațiunea făcută după închiderea de lună, fără refacerea ei — cauza cea mai "
+     "frecventă, și nu se anunță singură."),
+    ("### 10.2 Conturile la care se rupe cel mai des", "doc:control",
+     "Banca, clienții, furnizorii. Plus regula „niciodată fără analitic”, cu 446.1 ca "
+     "exemplu de analitic făcut din prima."),
+    ("### 10.3 Sumele nealocate și contul 473", "doc:control",
+     "Adâncește F-411: important nu e contul, e să fie unul de care să-ți amintești."),
+    ("### 10.4 Compensările 4091 ↔ 419", "doc:control",
+     "Rezolvă instrucțiunea `{AI: de analizat}`: se poate, dar cu acord scris, iar "
+     "TVA-ul nu se compensează odată cu avansurile."),
+    ("### 10.5 Preluarea unei balanțe în cursul anului", "doc:control",
+     "C-39, plus distincția sold / rulaj / total sume — răspunsul la a doua întrebare "
+     "pusă pentru sesiunea următoare."),
+    ("### 10.6 Cele trei verificări din softul formatorului", "doc:control",
+     "Modelul pe care îl execută MOD_CONTROL_BALANTA. Aici se spune și care dintre ele "
+     "era deja implementată."),
+
+    ("## 11. Ce s-a cerut pentru sesiunile următoare", "doc:control",
+     "Cererea de aplicație și întrebările rămase. Stă la control pentru că despre "
+     "verificări e vorba, iar MOD_CONTROL_BALANTA e răspunsul la ea."),
+]
+
+ABSORBITE_28_08 = {
+    "# Trezorerie, efecte de încasat și verificarea balanței — notițe training 28.08.2026":
+        "Titlul sursei. Materialul se împarte la trei documente cu titluri pe subiect.",
+    "*Versiune revizuită. Sursa: notițele brute din 28.08.2026.*":
+        "Rândul de versiune al sursei. Fiecare document își primește subtitlul din "
+        "`date/documente.py`, cu zilele-sursă din care e făcut.",
+    "## 1. Recapitulare: taxarea inversă":
+        "Absorbit în „## 5. Taxarea inversă pe teritoriul României” din documentul de "
+        "stocuri. Două titluri pe același subiect ar fi doar zgomot — conținutul "
+        "adâncește secțiunea, nu concurează cu ea.",
+
+}
+
+# ===========================================================================
 # Vederile derivate
 # ===========================================================================
 
@@ -478,6 +642,10 @@ SURSE = [
          cale="surse/training-7-2026-08-26/notite-revizuit.md",
          repartizare=REPARTIZARE_26_08,
          absorbite=ABSORBITE_26_08),
+    dict(cheie="28.08.2026",
+         cale="surse/training-8-2026-08-28/notite-revizuit.md",
+         repartizare=REPARTIZARE_28_08,
+         absorbite=ABSORBITE_28_08),
 ]
 
 #: Toate intrările, pentru numărători și pentru parcurgerea în ordine.

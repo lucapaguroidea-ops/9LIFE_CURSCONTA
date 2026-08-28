@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ro"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trezorerie: bancă, casă, efecte de încasat și avansuri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F8F9F7; --surface:#FFFFFF; --sunk:#F1F4F1;
+  --ink:#1A2421; --ink-2:#3D4A45; --muted:#6B7671;
+  --accent:#1B5E44; --accent-soft:#E6EFEA; --accent-line:#B9D2C6;
+  --storno:#A6342B;
+  --rule:#DDE2DE; --rule-soft:#EAEEEB;
+  --shadow:0 1px 2px rgba(26,36,33,.05), 0 8px 24px -12px rgba(26,36,33,.14);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+    --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+    --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+    --storno:#E08278;
+    --rule:#2A3430; --rule-soft:#222B27;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+  --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+  --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+  --storno:#E08278;
+  --rule:#2A3430; --rule-soft:#222B27;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased}
+.masthead{border-bottom:1px solid var(--rule); background:var(--surface); padding:56px 28px 40px}
+.mast-in{max-width:1180px; margin:0 auto; display:flex; flex-direction:column; gap:16px}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0}
+h1{font-family:Spectral,Georgia,"Times New Roman",serif; font-weight:600;
+  font-size:clamp(2rem,4.6vw,3.15rem); line-height:1.12; letter-spacing:-.015em;
+  margin:0; text-wrap:balance; max-width:22ch}
+.lede{color:var(--muted); font-size:1.02rem; margin:0; max-width:66ch}
+.wrap{max-width:1180px; margin:0 auto; padding:0 28px; display:grid;
+  grid-template-columns:232px minmax(0,1fr); gap:56px; align-items:start}
+nav.rail{position:sticky; top:24px; padding:36px 0 40px; max-height:100vh; overflow-y:auto}
+.rail-h{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.66rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+  margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--rule)}
+.rail ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px}
+.rail a{display:grid; grid-template-columns:24px 1fr; gap:8px; align-items:baseline;
+  text-decoration:none; color:var(--ink-2); padding:6px 8px; border-radius:5px;
+  font-size:.845rem; line-height:1.35; transition:background .12s,color .12s}
+.rail a:hover{background:var(--sunk); color:var(--accent)}
+.rail a:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+.tnum{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  color:var(--muted); font-variant-numeric:tabular-nums}
+main{padding:36px 0 96px; min-width:0; max-width:74ch}
+h2{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.62rem; line-height:1.22;
+  letter-spacing:-.01em; margin:44px 0 18px; text-wrap:balance;
+  padding-top:20px; border-top:1px solid var(--rule-soft); scroll-margin-top:20px}
+h3{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.14rem;
+  margin:30px 0 10px; scroll-margin-top:20px}
+h4{font-size:1rem; margin:22px 0 8px; scroll-margin-top:20px}
+p{margin:0 0 14px; max-width:72ch}
+ul,ol{margin:0 0 16px; padding-left:1.2rem; max-width:72ch}
+li{margin-bottom:7px}
+li::marker{color:var(--muted)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.875em;
+  background:var(--sunk); border:1px solid var(--rule-soft); border-radius:4px;
+  padding:1px 5px; color:var(--ink)}
+hr{border:0; border-top:1px solid var(--rule); margin:32px 0}
+pre.cod{background:var(--sunk); border:1px solid var(--rule); border-radius:7px;
+  padding:14px 16px; overflow-x:auto; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; color:var(--ink-2)}
+.ledger{margin:0 0 20px; border:1px solid var(--rule); border-left:3px solid var(--accent);
+  border-radius:0 7px 7px 0; background:var(--surface); overflow-x:auto; box-shadow:var(--shadow)}
+.led-row{display:grid; grid-template-columns:6.5em 1.2em 6.5em 8.5em 1fr; gap:10px;
+  align-items:baseline; padding:8px 16px; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; white-space:nowrap; scroll-margin-top:20px}
+.led-row+.led-row{border-top:1px solid var(--rule-soft)}
+.led-row:target{background:var(--accent-soft)}
+.led-d,.led-c{color:var(--ink); font-weight:500}
+.led-eq{color:var(--muted)}
+.led-amt{text-align:right; font-variant-numeric:tabular-nums; color:var(--accent); font-weight:500}
+.led-amt.neg{color:var(--storno)}
+.led-note{color:var(--muted); font-size:.9em; white-space:normal;
+  font-family:"IBM Plex Sans",sans-serif}
+.note{border-left:3px solid var(--accent-line); background:var(--sunk);
+  padding:13px 18px; border-radius:0 6px 6px 0; margin:0 0 20px; max-width:72ch}
+.note p{margin:0; color:var(--ink-2); font-size:.94rem}
+.tw{overflow-x:auto; margin:0 0 22px; border:1px solid var(--rule); border-radius:7px;
+  background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem}
+thead th{text-align:left; font-family:"IBM Plex Mono",ui-monospace,monospace; font-weight:500;
+  font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; color:var(--muted);
+  padding:11px 14px; border-bottom:1px solid var(--rule); background:var(--sunk)}
+tbody td{padding:10px 14px; border-bottom:1px solid var(--rule-soft);
+  vertical-align:top; color:var(--ink-2)}
+tbody tr:nth-child(even){background:var(--accent-soft)}
+tbody tr:last-child td{border-bottom:none}
+tbody td code{background:transparent; border:none; padding:0}
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr; gap:0; padding:0 22px}
+  nav.rail{position:static; max-height:none; padding:28px 0 8px; border-bottom:1px solid var(--rule)}
+  .rail ol{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:2px}
+  main{padding-top:26px}
+  .masthead{padding:40px 22px 30px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style></head><body>
+<header class="masthead"><div class="mast-in">
+<p class="eyebrow">Notițe de curs · contabilitate</p>
+<h1>Trezorerie: bancă, casă, efecte de încasat și avansuri</h1>
+<p class="lede">Sursă: training 28.08.2026 — stările prin care trec banii între „am dreptul la ei” și „sunt în cont”</p>
+</div></header>
+<div class="wrap">
+<nav class="rail" aria-label="Cuprins"><p class="rail-h">Cuprins</p><ol><li><a href="#cum-cite-ti-acest-document"><span class="tnum">1</span><span>Cum citești acest document</span></a></li><li><a href="#1-investi-ii-pe-termen-scurt-ac-iuni-i-obliga-iu"><span class="tnum">2</span><span>1. Investiții pe termen scurt: acțiuni și obligațiuni</span></a></li><li><a href="#2-efecte-de-ncasat-cec-uri-i-bilete-la-ordin"><span class="tnum">3</span><span>2. Efecte de încasat: CEC-uri și bilete la ordin</span></a></li><li><a href="#3-conturile-la-b-nci"><span class="tnum">4</span><span>3. Conturile la bănci</span></a></li><li><a href="#4-tichete-de-mas-i-alte-valori"><span class="tnum">5</span><span>4. Tichete de masă și alte valori</span></a></li><li><a href="#5-avansuri-de-trezorerie-542"><span class="tnum">6</span><span>5. Avansuri de trezorerie (542)</span></a></li><li><a href="#6-viramente-interne-581"><span class="tnum">7</span><span>6. Viramente interne (581)</span></a></li><li><a href="#anexa-d-r-mase-deschise"><span class="tnum">8</span><span>Anexa D — Rămase deschise</span></a></li><li><a href="#anexa-e-baza-legal-citat"><span class="tnum">9</span><span>Anexa E — Baza legală citată</span></a></li></ol></nav>
+<main>
+<h3 id="surs-training-28-08-2026-st-rile-prin-care-trec-">Sursă: training 28.08.2026 — stările prin care trec banii între „am dreptul la ei” și „sunt în cont”</h3>
+<hr>
+<h2 id="cum-cite-ti-acest-document">Cum citești acest document</h2>
+<div class="tw"><table><thead><tr><th>Marcaj</th><th>Semnificație</th></tr></thead><tbody><tr><td>✅</td><td>Notița originală era corectă — doar reformulată/completată</td></tr><tr><td>⚠️</td><td><strong>Eroare în notița originală</strong> — corectată aici, cu explicație</td></tr><tr><td>➕</td><td>Completare (lucru care lipsea, dar era necesar ca raționamentul să stea în picioare)</td></tr><tr><td>❓</td><td>Rămas deschis — de clarificat cu formatorul (vezi Anexa D)</td></tr></tbody></table></div>
+<hr>
+<h2 id="1-investi-ii-pe-termen-scurt-ac-iuni-i-obliga-iu">1. Investiții pe termen scurt: acțiuni și obligațiuni</h2>
+<h3 id="1-1-achizi-ia-de-ac-iuni">1.1 Achiziția de acțiuni</h3>
+<div class="ledger"><div class="led-row" id="m1-a1"><span class="led-d">501</span><span class="led-eq">=</span><span class="led-c">5121</span><span class="led-amt"></span><span class="led-note">achiziția acțiunilor</span></div></div>
+<p>➕ <strong>Analitic pe fiecare societate emitentă.</strong> Dacă firma deține participații la mai</p>
+<p>multe societăți, un 501 sintetic nu poate spune care participație s-a apreciat și care</p>
+<p>s-a depreciat — iar ajustările pentru pierdere de valoare (591) se constituie pe fiecare</p>
+<p>titlu, nu pe total.</p>
+<h3 id="1-2-ac-iuni-vs-obliga-iuni-ce-cumperi-de-fapt">1.2 Acțiuni vs. obligațiuni — ce cumperi de fapt</h3>
+<p>Notița cerea detalierea distincției. E mai mult decât o diferență de cont:</p>
+<div class="tw"><table><thead><tr><th></th><th>Acțiuni</th><th>Obligațiuni</th></tr></thead><tbody><tr><td><strong>Ce sunt</strong></td><td>Drept de <strong>proprietate</strong> — deții o parte din societate</td><td><strong>Împrumut</strong> — ai dat bani societății</td></tr><tr><td><strong>Ce primești</strong></td><td>Dividende, dacă se repartizează</td><td>Dobândă, contractual, indiferent de profit</td></tr><tr><td><strong>Riscul</strong></td><td>Dacă societatea pierde, valoarea scade</td><td>Dacă societatea pierde, dobânda se datorează oricum</td></tr><tr><td><strong>La lichidare</strong></td><td>Ultimul la împărțire</td><td>Înaintea acționarilor — ești creditor</td></tr><tr><td><strong>Contul</strong></td><td>501 (afiliate) / 508</td><td>506</td></tr></tbody></table></div>
+<p>În SA sunt <strong>acțiuni</strong>, în SRL sunt <strong>părți sociale</strong> — nu e o diferență de vocabular:</p>
+<p>părțile sociale nu se tranzacționează liber, cesiunea lor cere hotărâre și mențiune la</p>
+<p>ONRC.</p>
+<p>Obligațiunea se cumpără la un preț și se răscumpără la altul; diferența, plus dobânda și</p>
+<p>eventualele diferențe de curs dacă e în valută, formează rezultatul operațiunii. De aceea</p>
+<p>ajustările pentru pierdere de valoare au conturi separate pe fiecare fel de titlu — 591</p>
+<p>pentru acțiuni la afiliate, 595 pentru obligațiuni emise și răscumpărate, 596 pentru</p>
+<p>obligațiuni, 598 pentru alte investiții.</p>
+<h2 id="2-efecte-de-ncasat-cec-uri-i-bilete-la-ordin">2. Efecte de încasat: CEC-uri și bilete la ordin</h2>
+<h3 id="2-1-de-la-factur-la-ncasare">2.1 De la factură la încasare</h3>
+<p>Punctul de plecare — o vânzare de marfă de 10.000 lei fără TVA:</p>
+<div class="ledger"><div class="led-row" id="m2-a1"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">707</span><span class="led-amt">10.000</span><span class="led-note">venitul din vânzare</span></div><div class="led-row" id="m2-a2"><span class="led-d">4111</span><span class="led-eq">=</span><span class="led-c">4427</span><span class="led-amt">2.100</span><span class="led-note">TVA colectată, 21%</span></div></div>
+<p>Clientul plătește cu un <strong>CEC de 12.100 lei</strong>:</p>
+<div class="ledger"><div class="led-row" id="m3-a1"><span class="led-d">5112</span><span class="led-eq">=</span><span class="led-c">4111</span><span class="led-amt">12.100</span><span class="led-note">efectul primit stinge creanța</span></div><div class="led-row" id="m3-a2"><span class="led-d">5121</span><span class="led-eq">=</span><span class="led-c">5112</span><span class="led-amt">12.100</span><span class="led-note">încasarea efectivă, la scadență</span></div></div>
+<p>➕ Aici e nuanța care contează: **primul pas stinge clientul, dar banii nu sunt încă în</p>
+<p>bancă.** Efectele se emit la termen — rar se emite factura azi și se primește CEC-ul tot</p>
+<p>azi. Între cele două înregistrări, 4111 arată zero, iar riscul de neîncasare stă pe 5112.</p>
+<p>Cine se uită doar la soldul clienților crede că a încasat.</p>
+<p><strong>Biletul la ordin</strong> funcționează identic, pe contul 5113:</p>
+<div class="ledger"><div class="led-row" id="m4-a1"><span class="led-d">5113</span><span class="led-eq">=</span><span class="led-c">4111</span><span class="led-amt">12.100</span><span class="led-note">la primirea biletului</span></div><div class="led-row" id="m4-a2"><span class="led-d">5121</span><span class="led-eq">=</span><span class="led-c">5113</span><span class="led-amt">12.100</span><span class="led-note">la încasare</span></div></div>
+<h3 id="2-2-scontarea-biletului-la-ordin">2.2 Scontarea biletului la ordin</h3>
+<p>Dacă biletul are scadență peste două luni, banca poate să-l <strong>sconteze</strong>: îți dă acum un</p>
+<p>procent din valoare, și încasează ea efectul la scadență.</p>
+<p>Pe biletul de <strong>12.100 lei</strong>, cu 80% avansat de bancă:</p>
+<div class="ledger"><div class="led-row" id="m5-a1"><span class="led-d">5114</span><span class="led-eq">=</span><span class="led-c">5113</span><span class="led-amt">12.100</span><span class="led-note">efectul pleacă spre scontare</span></div><div class="led-row" id="m5-a2"><span class="led-d">5121</span><span class="led-eq">=</span><span class="led-c">5114</span><span class="led-amt">9.680</span><span class="led-note">lichiditatea primită, 80%</span></div><div class="led-row" id="m5-a3"><span class="led-d">667</span><span class="led-eq">=</span><span class="led-c">5114</span><span class="led-amt">2.420</span><span class="led-note">costul scontării, restul de 20%</span></div></div>
+<p>⚠️ Notița scria contul de cheltuială ca <code>6067</code>. Contul corect este **667 — „Cheltuieli</p>
+<p>privind sconturile acordate”**. <code>6067</code> nu există în planul de conturi.</p>
+<p>⚠️ Notița pornea de la „bilet la ordine de <strong>12k</strong> lei”, dar calcula 80% = 9,68k. 80% din</p>
+<p>12.000 dă 9.600. Baza corectă e <strong>12.100</strong> — suma cu TVA din exemplul de mai sus.</p>
+<p>➕ De ce trece prin 5114 și nu direct din 5113: mutarea spune că efectul **a plecat din</p>
+<p>mâna ta**. Cât timp stă pe 5113, îl mai ai. Din 5114 se închide în trei direcții — bani,</p>
+<p>cost, și zero rest — iar dacă rămâne sold acolo, scontarea nu s-a finalizat.</p>
+<p>Contul 5114 se închide exact: 9.680 + 2.420 = 12.100.</p>
+<h3 id="2-3-c-nd-merit-scontarea-i-c-nd-nu">2.3 Când merită scontarea și când nu</h3>
+<p>Scontarea e un instrument <strong>scump</strong> — cei 20% nu sunt dobândă la an, sunt costul</p>
+<p>operațiunii. Banca o acordă societăților cu activitate îndelungată și clienți la fel; nu</p>
+<p>e o facilitate pentru firme mici.</p>
+<p>Rostul ei e altul decât costul: <strong>contabilitatea românească e de angajamente.</strong> Faci</p>
+<p>factura, nu o încasezi, și statul cere TVA-ul și impozitul oricum. Societatea se poate</p>
+<p>bloca având vânzări. Scontarea aduce lichiditatea mai devreme decât încasarea, iar analiza</p>
+<p>băncii e mult mai rapidă decât la un credit clasic — pentru că se uită la efectul din</p>
+<p>mână, nu la indicatorii tăi de profit.</p>
+<h2 id="3-conturile-la-b-nci">3. Conturile la bănci</h2>
+<h3 id="3-1-conturile-n-valut-i-reevaluarea-lunar">3.1 Conturile în valută și reevaluarea lunară</h3>
+<p>Conturile în valută se <strong>reevaluează la cursul BNR de la sfârșitul lunii</strong>. Diferența</p>
+<p>rezultată se înregistrează, nu se lasă în așteptare.</p>
+<p>La decontări în valută apar diferențe pentru că datoria s-a înregistrat la **cursul</p>
+<p>istoric** — cel de la data recepției — și se plătește la cursul zilei:</p>
+<div class="tw"><table><thead><tr><th>Situația</th><th>Curs istoric</th><th>Curs la decontare</th><th>Rezultatul</th></tr></thead><tbody><tr><td>Datorie de 100 EUR către furnizor</td><td>5,00</td><td>6,00</td><td><strong>cheltuială</strong> — plătești mai mulți lei</td></tr><tr><td>Datorie de 100 EUR către furnizor</td><td>5,00</td><td>4,00</td><td><strong>venit</strong></td></tr><tr><td>Creanță de 100 EUR de la client</td><td>5,00</td><td>6,00</td><td><strong>venit</strong> — încasezi mai mulți lei</td></tr><tr><td>Creanță de 100 EUR de la client</td><td>5,00</td><td>4,00</td><td><strong>cheltuială</strong></td></tr></tbody></table></div>
+<p>⚠️ Notița inversa sensurile la creanțe: scria „100 eur de la furnizor; istoric era 5, și</p>
+<p>la încasare era 6, avem un venit” — dar „de la furnizor” cu „încasare” amestecă cele două</p>
+<p>cazuri. Regula unică, din care ies toate patru: **la curs mai mare, elementul de ACTIV</p>
+<p>aduce venit, iar elementul de PASIV aduce cheltuială.**</p>
+<h3 id="3-2-diferen-ele-de-curs-665-765-sau-668-768">3.2 Diferențele de curs: 665/765 sau 668/768?</h3>
+<p>❓ <strong>Divergență de rezolvat cu formatorul.</strong> Notițele spun:</p>
+<div class="note"><p>diferențele de curs valutar, curent, le înregistrăm prin 665 / 765 diferența de reevaluare la sfârșitul lunii (financiare): 668 / 768</p></div>
+<p>Funcțiunea contului <strong>665</strong> din OMFP 1802/2014 include explicit diferențele nefavorabile</p>
+<p>rezultate *„la sfârșitul lunii/exercițiului financiar, din evaluarea disponibilităților</p>
+<p>bancare și a numerarului în valută”*. Adică reevaluarea de lună e chiar în funcțiunea lui</p>
+<p>665/765, nu în afara ei.</p>
+<p>Conturile <strong>668/768</strong> („alte cheltuieli / venituri financiare”) au un rost diferit:</p>
+<p>creanțele și datoriile **exprimate în lei, dar decontabile în funcție de cursul unei</p>
+<p>valute** — alt caz decât valuta propriu-zisă.</p>
+<p><strong>Scopul formatorului e însă corect</strong> și merită păstrat: el vrea ca diferența din</p>
+<p>reevaluare să se vadă separat de cea de la decontare, altfel nu poți explica soldul.</p>
+<p>Rezultatul se obține cu <strong>analitic pe 665/765</strong>, nu cu alt sintetic:</p>
+<pre class="cod">665.DEC / 765.DEC     diferențe la decontare
+665.REV / 765.REV     diferențe din reevaluarea de sfârșit de lună</pre>
+<p>Așa rămân ambele în „diferențe de curs valutar” la raportare, dar se separă acolo unde</p>
+<p>contează — la explicat.</p>
+<p>Am păstrat 665/765 pentru ambele situații, cu analitic. Dacă formatorul confirmă varianta</p>
+<p>cu 668/768, se schimbă — dar atunci trebuie explicat cum se raportează diferențele de</p>
+<p>curs care nu mai sunt în contul de diferențe de curs.</p>
+<h3 id="3-3-dob-nzi-de-pl-tit-i-de-ncasat">3.3 Dobânzi de plătit și de încasat</h3>
+<p><strong>Dobânda la credit, când e FIXĂ pe toată durata</strong>, se cunoaște din scadențar de la</p>
+<p>început, deci se recunoaște în avans:</p>
+<div class="ledger"><div class="led-row" id="m7-a1"><span class="led-d">471</span><span class="led-eq">=</span><span class="led-c">5186</span><span class="led-amt"></span><span class="led-note">dobânda totală din scadențar, ca cheltuială în avans</span></div><div class="led-row" id="m7-a2"><span class="led-d">5186</span><span class="led-eq">=</span><span class="led-c">5121</span><span class="led-amt"></span><span class="led-note">la fiecare plată</span></div><div class="led-row" id="m7-a3"><span class="led-d">666</span><span class="led-eq">=</span><span class="led-c">471</span><span class="led-amt"></span><span class="led-note">eșalonat, lună de lună</span></div></div>
+<p><strong>Dobânda VARIABILĂ</strong>, calculată de bancă la sold, nu se poate anticipa — deci nu are ce</p>
+<p>căuta în 471:</p>
+<div class="ledger"><div class="led-row" id="m8-a1"><span class="led-d">5186</span><span class="led-eq">=</span><span class="led-c">5121</span><span class="led-amt"></span><span class="led-note">la plată</span></div><div class="led-row" id="m8-a2"><span class="led-d">666</span><span class="led-eq">=</span><span class="led-c">5186</span><span class="led-amt"></span><span class="led-note">recunoașterea cheltuielii</span></div></div>
+<p>sau, mai scurt, <code>666 = 5121</code> direct.</p>
+<p>➕ Distincția nu e de stil. 471 înseamnă „știu suma și știu perioada”. La dobândă</p>
+<p>variabilă nu știi nici una, nici alta, iar o sumă pusă acolo se dovedește greșită la prima</p>
+<p>schimbare de indice.</p>
+<p><strong>Dobânzile de încasat</strong> merg în oglindă, prin 5187 (cont de <strong>activ</strong>):</p>
+<div class="ledger"><div class="led-row" id="m9-a1"><span class="led-d">5187</span><span class="led-eq">=</span><span class="led-c">472</span><span class="led-amt"></span><span class="led-note">creanța și venitul amânat</span></div><div class="led-row" id="m9-a2"><span class="led-d">472</span><span class="led-eq">=</span><span class="led-c">766</span><span class="led-amt"></span><span class="led-note">recunoașterea venitului</span></div><div class="led-row" id="m9-a3"><span class="led-d">5121</span><span class="led-eq">=</span><span class="led-c">5187</span><span class="led-amt"></span><span class="led-note">încasarea</span></div></div>
+<p>➕ Notițele insistă că primele două se fac <strong>concomitent</strong> — ține de politica fiecărei</p>
+<p>societăți când anume, dar nu una fără cealaltă. Al treilea pas lipsea din notițe: fără el,</p>
+<p>5187 rămâne cu sold și pare creanță neîncasată.</p>
+<h3 id="3-4-linii-de-credit-5191-vs-credite-cu-scaden-ar">3.4 Linii de credit (5191) vs. credite cu scadențar (1621)</h3>
+<div class="tw"><table><thead><tr><th></th><th>Linie de credit</th><th>Credit cu scadențar</th></tr></thead><tbody><tr><td><strong>Contul</strong></td><td>5191 — datorie pe termen scurt</td><td>1621 — datorie pe termen lung</td></tr><tr><td><strong>Documentul</strong></td><td>fără scadențar; se reînnoiește anual</td><td>scadențar cu rata și dobânda pe fiecare lună</td></tr><tr><td><strong>Cum funcționează</strong></td><td>tragi și restitui de câte ori vrei</td><td>rate fixe, la date fixe</td></tr><tr><td><strong>Ce plătești</strong></td><td>doar ce utilizezi — dar e produs scump</td><td>tot ce e în scadențar</td></tr></tbody></table></div>
+<div class="ledger"><div class="led-row" id="m10-a1"><span class="led-d">5121</span><span class="led-eq">=</span><span class="led-c">5191</span><span class="led-amt"></span><span class="led-note">tragerea din linie</span></div><div class="led-row" id="m10-a2"><span class="led-d">5191</span><span class="led-eq">=</span><span class="led-c">5121</span><span class="led-amt"></span><span class="led-note">restituirea</span></div></div>
+<p>⚠️ <strong>Riscul specific</strong>, subliniat de formator: la linia de credit <strong>nu ai scadențar</strong>.</p>
+<p>Extrasele au explicații evazive, diferite de la o bancă la alta, iar unele (exemplul dat —</p>
+<p>UniCredit) nu afișează sold intermediar, deci se operează la sfârșit de lună.</p>
+<p>Fără extrasul de linie de credit cerut clientului, se ajunge să se opereze totul prin 5121</p>
+<p>și să se rateze dobânda (666). Consecința nu e cosmetică: **cheltuiala nedeclarată</p>
+<p>înseamnă impozit pe profit plătit în plus.**</p>
+<p>La un credit cu scadențar, dacă înregistrezi rata în loc de dobândă te uiți în scadențar</p>
+<p>și îți dai seama. La linie nu ai la ce să te uiți — de aceea se cere **soldul de la</p>
+<p>sfârșit de lună**, ca verificare independentă.</p>
+<p>➕ Analitic pe fiecare linie de credit, ca la 501: două linii pe același cont nu se mai</p>
+<p>pot reconcilia cu extrasele.</p>
+<p>⚠️ <strong>5191 nu ajunge niciodată cu sold debitor.</strong> E cont de pasiv; un sold debitor</p>
+<p>înseamnă că s-a restituit mai mult decât s-a tras, deci o înregistrare greșită.</p>
+<h2 id="4-tichete-de-mas-i-alte-valori">4. Tichete de masă și alte valori</h2>
+<div class="ledger"><div class="led-row" id="m11-a1"><span class="led-d">5328</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt"></span><span class="led-note">achiziția tichetelor de la furnizor</span></div><div class="led-row" id="m11-a2"><span class="led-d">6422</span><span class="led-eq">=</span><span class="led-c">5328</span><span class="led-amt"></span><span class="led-note">acordarea, la înregistrarea statului de plată</span></div></div>
+<p>⚠️ Notița scrie contul ca <code>5238</code> în două locuri și ca <code>5328</code> în altele. Corect e</p>
+<p><strong>5328</strong>; <code>5238</code> nu există — grupa 52 nu există deloc în planul de conturi.</p>
+<p>➕ Denumirea lui 5328 în OMFP 1802/2014 este <strong>„Alte valori”</strong>, nu „tichete de masă”:</p>
+<p>planul nu are un cont dedicat lor. Grupa 532 are conturi proprii pentru timbre (5321),</p>
+<p>bilete de tratament (5322) și bilete de călătorie (5323), iar tichetele de masă intră la</p>
+<ol><li>De aceea analiticul e util și aici: 5328 poate ține simultan tichete de masă,</li></ol>
+<p>tichete cadou și carduri valorice, care au regimuri fiscale diferite.</p>
+<p>Fiscalizarea se face pe statul de plată: <strong>impozit 10% și CASS 10%</strong>. Nu se datorează CAS</p>
+<p>și nu se datorează CAM.</p>
+<p>➕ Tichetele stau pe 5328 ca <strong>stoc de trezorerie</strong> între achiziție și acordare. Contul se</p>
+<p>verifică <strong>lunar</strong>, nu trimestrial: un sold acolo înseamnă tichete cumpărate și</p>
+<p>neacordate, iar la fiecare lună trecută devine mai greu de spus cui i se cuveneau.</p>
+<p><strong>Regula funcției de bază:</strong> tichetele se acordă doar la locul de muncă de bază — o normă</p>
+<p>de 4 ore poate fi funcție de bază, dar dintre două contracte de 8 ore doar unul poate fi.</p>
+<p>Se acordă la sfârșitul lunii, când se știe efectiv cine a fost la lucru: nu se dau pentru</p>
+<p>zilele de concediu.</p>
+<h2 id="5-avansuri-de-trezorerie-542">5. Avansuri de trezorerie (542)</h2>
+<h3 id="5-1-monografia-decontului">5.1 Monografia decontului</h3>
+<p>Acordarea avansului către salariat:</p>
+<div class="ledger"><div class="led-row" id="m12-a1"><span class="led-d">542</span><span class="led-eq">=</span><span class="led-c">5121</span><span class="led-amt">5.000</span><span class="led-note">(sau 5311, dacă se dă din casă)</span></div></div>
+<p>Salariatul se întoarce cu decontul și documentele. **Fiecare cheltuială cu TVA trece</p>
+<p>întâi prin furnizor** — altfel TVA-ul nu se poate deduce:</p>
+<p><strong>Motorină — 2.000 lei, cotă 21%:</strong></p>
+<div class="ledger"><div class="led-row" id="m13-a1"><span class="led-d">6022</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">1.652,89</span><span class="led-note"></span></div><div class="led-row" id="m13-a2"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">347,11</span><span class="led-note"></span></div><div class="led-row" id="m13-a3"><span class="led-d">401</span><span class="led-eq">=</span><span class="led-c">542</span><span class="led-amt">2.000</span><span class="led-note">plata furnizorului din avans</span></div></div>
+<p><strong>Cazare — 1.000 lei, cotă 11%:</strong></p>
+<div class="ledger"><div class="led-row" id="m14-a1"><span class="led-d">625</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">900,90</span><span class="led-note"></span></div><div class="led-row" id="m14-a2"><span class="led-d">4426</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt">99,10</span><span class="led-note"></span></div><div class="led-row" id="m14-a3"><span class="led-d">401</span><span class="led-eq">=</span><span class="led-c">542</span><span class="led-amt">1.000</span><span class="led-note"></span></div></div>
+<h3 id="5-2-diurna-partea-care-lipsea">5.2 Diurna — partea care lipsea</h3>
+<p>Notița se opreşte la „part 3 din 3: 2.000 lei decontul = diurna”, fără înregistrare.</p>
+<p>➕ Nu e o omisiune de transcriere: <strong>diurna rupe tiparul primelor două.</strong> Nu are furnizor</p>
+<p>și nu are TVA de dedus — e o sumă cuvenită salariatului pentru deplasare. Deci nu trece</p>
+<p>prin 401:</p>
+<div class="ledger"><div class="led-row" id="m15-a1"><span class="led-d">625</span><span class="led-eq">=</span><span class="led-c">542</span><span class="led-amt">2.000</span><span class="led-note">direct, fără furnizor și fără TVA</span></div></div>
+<p>Decontul se închide exact: 2.000 + 1.000 + 2.000 = <strong>5.000 lei</strong>, cât s-a acordat.</p>
+<p>❓ <strong>Plafonul de deductibilitate al diurnei</strong> nu era în notițe. Peste plafon, diurna se</p>
+<p>asimilează salariului și se impozitează ca atare — deci cifra contează. De confirmat</p>
+<p>nivelul în vigoare la data deplasării.</p>
+<h3 id="5-3-de-ce-analiticul-e-obligatoriu-aici">5.3 De ce analiticul e obligatoriu aici</h3>
+<p>Formatorul e categoric: <strong>„542 pe analitic este esențial”</strong>, cu patru semne de exclamare.</p>
+<p>Motivul e că soldul poate merge în ambele sensuri, pe același cont, pe persoane diferite:</p>
+<p>un șofer a pus bani de la el și firma îi datorează, altul a primit avans mai mare și</p>
+<p>trebuie să restituie. Pe un 542 sintetic, cele două se anulează și soldul arată aproape</p>
+<p>zero — corect ca total, fals pe fiecare om.</p>
+<p>Partea asta e cea mai greu de ținut din toată trezoreria, și fiecare program de</p>
+<p>contabilitate o tratează altfel.</p>
+<h2 id="6-viramente-interne-581">6. Viramente interne (581)</h2>
+<h3 id="6-1-c-nd-581-are-voie-s-aib-sold">6.1 Când 581 are voie să aibă sold</h3>
+<p>581 trebuie să ajungă la <strong>zero</strong>. Excepția legitimă: transferul făcut la sfârșitul lunii</p>
+<p>și primit la începutul lunii următoare — atunci soldul e chiar realitatea, banii sunt pe</p>
+<p>drum.</p>
+<h3 id="6-2-diferen-a-de-curs-la-transferul-valut-lei">6.2 Diferența de curs la transferul valută → lei</h3>
+<p>⚠️ La transferul din valută în lei, diferența de curs **se reglează prin bancă, nu prin</p>
+<p>581** — notițele subliniază cu șase semne de exclamare.</p>
+<p>Motivul: 581 e un cont de <strong>tranzit pur</strong>, care trebuie să iasă cu exact cât a intrat.</p>
+<p>Dacă diferența de curs se lasă acolo, contul nu se mai închide și devine imposibil de spus</p>
+<p>dacă soldul rămas e un transfer în curs sau o diferență necontabilizată. Diferența</p>
+<p>aparține contului de bancă în valută, unde s-a și produs.</p>
+<hr>
+<h2 id="anexa-d-r-mase-deschise">Anexa D — Rămase deschise</h2>
+<p>Ce e încă provizoriu în documentul ăsta. Lista nu e scrisă aici: vine din <code>date/intrebari.py</code>, aceeași sursă cu foaia „Întrebări deschise” a workbook-ului și cu lista trimisibilă formatorului.</p>
+<p><strong>❓ Reevaluarea de sfârșit de lună a conturilor în valută se înregistrează pe 665/765 sau pe 668/768?</strong></p>
+<p><em>Trezorerie — diferențe de curs și plafoane · training 28.08.2026, punctul 1</em></p>
+<p>Notițele din 28.08 spun: diferențele de curs curente prin 665/765, iar reevaluarea de la sfârșitul lunii prin 668/768, cu observația „să fie clară diferența de curs din reevaluare, și cea de la furnizori”.</p>
+<p><strong>Ce am presupus între timp:</strong> Am păstrat 665/765 pentru ambele situații, cu analitic .DEC și .REV. Motivul: funcțiunea contului 665 din OMFP 1802/2014 include explicit diferențele rezultate „la sfârșitul lunii/exercițiului financiar, din evaluarea disponibilităților bancare și a numerarului în valută” — deci reevaluarea e chiar în funcțiunea lui. Iar 668/768 au alt rost: creanțele și datoriile exprimate în LEI, decontabile după cursul unei valute. Scopul formatorului — reevaluarea separată de decontare — se atinge cu analiticul, fără să mute reevaluarea în afara contului de diferențe de curs. Dacă formatorul confirmă varianta lui, se schimbă; dar atunci trebuie explicat cum se raportează diferențele de curs care nu mai sunt în contul lor.</p>
+<hr>
+<h2 id="anexa-e-baza-legal-citat">Anexa E — Baza legală citată</h2>
+<p>Extrasă automat din textul documentului: sunt listate actele și articolele care apar efectiv citate mai sus. Contextul fiecărei citări e în secțiunea unde apare.</p>
+<p><strong>Acte normative citate</strong></p>
+<ul><li>OMFP 1802/2014</li></ul>
+<hr>
+<p><em>Clasa 5 avea, până la sursa asta, două fluxuri și două conturi de patru cifre în plan. Documentul e primul care o tratează ca teritoriu, nu ca anexă a altor subiecte.</em></p>
+</main></div></body></html>

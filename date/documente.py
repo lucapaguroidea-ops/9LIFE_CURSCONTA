@@ -201,7 +201,8 @@ DOCUMENTE = [
         sursa="surse/training-4-2026-08-14/notite-revizuit.md",
         iesire="dist/stocuri-tva-corelatii.md",
         titlu="Stocuri, TVA și corelații de balanță",
-        subtitlu="Surse: training 14.08.2026 · adâncit cu 19.08.2026 — "
+        subtitlu="Surse: training 14.08.2026 · adâncit cu 19.08.2026, 21.08.2026 și "
+                 "28.08.2026 — "
                  "stocuri (clasa 3), TVA și corelații de balanță, versiune revizuită",
         adaugiri=[
             dict(bloc="## 4. Mecanica TVA", in_sectiune="## 7. Conturile de TVA"),
@@ -218,6 +219,17 @@ DOCUMENTE = [
                  sectiune_noua="Furnizori și clienți — clasele 40 și 41"),
             dict(bloc="## 6. Clienți — clasa 41",
                  sectiune_noua="Furnizori și clienți — clasele 40 și 41"),
+            # Recapitularea taxării inverse (28.08) intră în secțiunea care o tratează
+            # deja: aduce codurile D394 și regula că la LIVRARE nu se face notă
+            # contabilă — două lucruri care lipseau de acolo.
+            dict(bloc="## 1. Recapitulare: taxarea inversă",
+                 in_sectiune="## 5. Taxarea inversă pe teritoriul României "
+                             "(art. 331 Cod fiscal)"),
+            # Corespondențele clasa 6 ↔ clasa 3 traversează TOATE secțiunile de stocuri
+            # — 301, 302, 303, 371, 381 — deci n-au o gazdă naturală. Sunt un subiect
+            # propriu: nu „ce stoc”, ci „cum iese stocul pe cheltuială”.
+            dict(bloc="## 9. Cheltuielile de clasa 6 și gestiunile de clasa 3",
+                 sectiune_noua="Cheltuielile de clasa 6 și gestiunile de clasa 3"),
         ],
         legenda_veche=[],          # are deja forma canonică
         anexe={},                  # anexele A–E sunt deja denumite corect
@@ -291,6 +303,29 @@ DOCUMENTE = [
              "iar materialul e coerent și mare cât să stea singur.",
     ),
     dict(
+        # Al șaselea document, și al treilea construit integral din repartizare.
+        # Precedentul e exact cel al salariilor din 21.08: clasa 5 e material coerent și
+        # mare, iar niciunul din cele cinci documente existente nu-l putea găzdui fără
+        # să mintă. Documentul de control avea deja plafoanele de numerar, dar plafonul
+        # nu e trezorerie — e disciplină de numerar, ceea ce e altceva.
+        nume="trezorerie",
+        zi=None,   # sursa din 28.08 se împarte la trei documente
+        cheie="doc:trezorerie",
+        repartizat=True,
+        sursa=None,
+        iesire="dist/trezorerie.md",
+        titlu="Trezorerie: bancă, casă, efecte de încasat și avansuri",
+        subtitlu="Sursă: training 28.08.2026 — stările prin care trec banii între "
+                 "„am dreptul la ei” și „sunt în cont”",
+        legenda_veche=[],
+        inlocuiri=[],
+        anexe={},
+        genereaza=["D", "E", "G"],
+        nota="Clasa 5 avea, până la sursa asta, două fluxuri și două conturi de patru "
+             "cifre în plan. Documentul e primul care o tratează ca teritoriu, nu ca "
+             "anexă a altor subiecte.",
+    ),
+    dict(
         # Construit integral din secțiunile pe care `date/repartizare.py` i le dă.
         # Materialul lui nu e monografie: plafoane, reguli de document, practică de
         # control. De-asta n-avea unde să intre în celelalte trei — sistemul e făcut
@@ -302,7 +337,8 @@ DOCUMENTE = [
         sursa="surse/training-5-2026-08-19/ghid-contabilitate.md",
         iesire="dist/control-documente-numerar.md",
         titlu="Control, documente și numerar",
-        subtitlu="Sursă: training 19.08.2026 — cum se citește un cont, ce cere legea de "
+        subtitlu="Surse: training 19.08.2026 · adâncit cu 21.08.2026, 26.08.2026 și "
+                 "28.08.2026 — cum se citește un cont, ce cere legea de "
                  "la un document și unde se rupe disciplina de casă",
         legenda_veche=[],
         adaugiri=[
