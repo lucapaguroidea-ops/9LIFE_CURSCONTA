@@ -81,6 +81,7 @@ CLASA_3 = [
     ("F-318", "F-40", "Retur din gestiune amănunt"),
     ("F-319", "F-15", "Import prin comisionar (446.VAMA)"),
     ("F-320", "F-16", "Import cu plată directă în vamă"),
+    ("F-321", "F-90", "Marfa devenită materie primă (301 = 371) și consumul din gestiune"),
 ]
 
 CLASA_4 = [
@@ -115,6 +116,12 @@ CLASA_4 = [
 CLASA_5 = [
     ("F-501", "F-33", "Viramente interne 581"),
     ("F-502", "F-35", "Avansuri de trezorerie (542)"),
+    ("F-503", "F-84", "Efecte de încasat: CEC (5112) și bilet la ordin (5113)"),
+    ("F-504", "F-85", "Scontarea biletului la ordin (5114)"),
+    ("F-505", "F-86", "Dobânda la credit: fixă prin 471 vs. variabilă prin 5186"),
+    ("F-506", "F-87", "Dobânzi de încasat (5187 → 472 → 766)"),
+    ("F-507", "F-88", "Linie de credit (5191) vs. credit cu scadențar"),
+    ("F-508", "F-89", "Tichete de masă: 5328 → 6422"),
 ]
 
 CLASA_8 = [

@@ -346,6 +346,92 @@ CONTURI_NOI = [
                     "la fiecare închidere, cu diferențele pe 765/665 — spre deosebire "
                     "de 5121, care nu are ce reevalua.",
          analitice="5124 pe bancă ȘI pe valută", factor="V O", flux="F-107", tier="A"),
+    # ------------------------------------------------------------------
+    # Conturile de trezorerie cerute de sursa 28.08
+    #
+    # Clasa 5 era, până azi, cea mai subțire parte a planului: 242 de sintetice, dar
+    # doar 5121 și 5124 la patru cifre — adăugate când le-a cerut un flux. Trainingul
+    # din 28.08 e aproape integral clasa 5, deci golul se închide acum.
+    #
+    # Două dintre ele — 5186 și 5187 — le CERE poarta 29: sinteticul 518 e bifuncțional,
+    # iar 5187 e creanță și 5186 datorie. Rândul lui 518 nu poate răspunde pentru
+    # niciunul la întrebarea „ce sold trebuie să aibă”. Restul intră pentru navigarea
+    # cont → flux, ca cele 17 din 26.08.
+    # ------------------------------------------------------------------
+    # ---- efecte de încasat (grupa 511) ---------------------------------
+    dict(simbol="5112", denumire="Cecuri de încasat", fct="A",
+         natura="Rol in flux", subtip="Tranzit / reflectare",
+         observatie="Efectul primit stinge creanța pe 4111 ÎNAINTE de încasare. Între "
+                    "cele două momente, clientul arată zero, iar riscul de neîncasare "
+                    "stă aici — cine se uită doar la soldul clienților crede că a "
+                    "încasat. Sold ≠ 0 la scadență = efect neonorat.",
+         analitice="5112 pe emitent și pe scadență", factor="C O", flux="F-503",
+         tier="A"),
+    dict(simbol="5113", denumire="Efecte de încasat", fct="A",
+         natura="Rol in flux", subtip="Tranzit / reflectare",
+         observatie="Biletele la ordin și cambiile primite de la clienți. Aceeași "
+                    "mecanică cu 5112. Din 5113 efectul poate pleca spre scontare, în "
+                    "5114 — și atunci nu-l mai ai în mână.",
+         analitice="5113 pe emitent și pe scadență", factor="C O", flux="F-503, F-504",
+         tier="A"),
+    dict(simbol="5114", denumire="Efecte remise spre scontare", fct="A",
+         natura="Rol in flux", subtip="Tranzit / reflectare",
+         observatie="Mutarea din 5113 aici spune că efectul A PLECAT din mâna ta. Se "
+                    "închide în trei direcții — bani încasați (5121), costul scontării "
+                    "(667) și zero rest. Sold rămas = scontare nefinalizată.",
+         analitice="5114 pe efect scontat", factor="C O", flux="F-504", tier="A"),
+    # ---- dobânzi (grupa 518, bifuncțională) ----------------------------
+    dict(simbol="5186", denumire="Dobânzi de plătit", fct="P",
+         natura="Patrimonial (real)", subtip="Datorie",
+         observatie="Datoria de dobândă până la plată. La dobândă FIXĂ din scadențar se "
+                    "recunoaște integral în avans (471); la dobândă VARIABILĂ nu se "
+                    "poate anticipa, deci nu trece prin 471. Sold normal: creditor.",
+         analitice="5186 pe contract de credit", factor="C O", flux="F-505", tier="A"),
+    dict(simbol="5187", denumire="Dobânzi de încasat", fct="A",
+         natura="Patrimonial (real)", subtip="Creanță",
+         observatie="Oglinda lui 5186, dar cont de ACTIV — motivul pentru care 518 nu "
+                    "poate răspunde în locul niciunuia dintre ele. Creanța și venitul "
+                    "amânat (472) se recunosc concomitent. Sold ≠ 0 după încasare = "
+                    "pasul de încasare lipsește.",
+         analitice="5187 pe plasament", factor="C O", flux="F-506", tier="A"),
+    # ---- credite pe termen scurt ---------------------------------------
+    dict(simbol="5191", denumire="Credite bancare pe termen scurt", fct="P",
+         natura="Patrimonial (real)", subtip="Datorie",
+         observatie="Liniile de credit, care se reînnoiesc anual și NU au scadențar — "
+                    "spre deosebire de 1621. Fără extrasul de linie cerut clientului se "
+                    "operează tot prin 5121 și se ratează dobânda (666), cu impozit pe "
+                    "profit plătit în plus. NU ajunge niciodată cu sold debitor.",
+         analitice="5191 pe fiecare LINIE de credit", factor="C O", flux="F-507",
+         tier="A"),
+    # ---- casa ----------------------------------------------------------
+    dict(simbol="5311", denumire="Casa în lei", fct="A",
+         natura="Patrimonial (real)", subtip="Trezorerie",
+         observatie="Sold maxim 50.000 lei la sfârșitul zilei (L. 70/2015). Plăți fără "
+                    "plafon: salarii și buget; cu plafon: 5.000 lei către persoane "
+                    "juridice, 10.000 în relația cu persoane fizice. Fragmentarea e "
+                    "interzisă expres; contractul cu plata în rate nu e fragmentare.",
+         analitice="5311 pe casierie / punct de lucru", factor="N O", flux="F-502",
+         tier="A"),
+    dict(simbol="5314", denumire="Casa în valută", fct="A",
+         natura="Patrimonial (real)", subtip="Trezorerie",
+         observatie="Se reevaluează la cursul BNR de la sfârșitul lunii, ca 5124. "
+                    "Analitic pe fiecare valută — un sold în lei fără valuta din spate "
+                    "nu se poate reevalua.",
+         analitice="5314 pe fiecare VALUTĂ", factor="V O", flux="F-502", tier="B"),
+    dict(simbol="5328", denumire="Alte valori", fct="A",
+         natura="Patrimonial (real)", subtip="Trezorerie",
+         observatie="Planul NU are cont dedicat tichetelor de masă: 5321 e timbre, 5322 "
+                    "bilete de tratament, 5323 bilete de călătorie, iar tichetele intră "
+                    "aici. Sunt stoc de trezorerie între achiziție și acordare. Se "
+                    "verifică LUNAR: sold = tichete cumpărate și neacordate.",
+         analitice="5328 pe fel de tichet (masă / cadou / card valoric)", factor="F O",
+         flux="F-508", tier="A"),
+    dict(simbol="6422", denumire="Cheltuieli cu tichetele acordate salariaților",
+         fct="A", natura="Patrimonial (real)", subtip="Cheltuiala",
+         observatie="Se înregistrează la acordare, pe statul de plată, nu la achiziție. "
+                    "Fiscalizare: impozit 10% și CASS 10%; NU se datorează CAS și NU se "
+                    "datorează CAM. Se acordă doar la funcția de BAZĂ.",
+         analitice="6422 pe fel de tichet", factor="F", flux="F-508", tier="A"),
     dict(simbol="4482", denumire="Alte creanțe privind bugetul statului", fct="A",
          natura="Rol in flux", subtip="Intermediar / clarificare",
          observatie="Sumele plătite eronat către buget, până la lămurire: cifre "
@@ -372,6 +458,22 @@ CORECTII = [
 # 4. Rânduri noi pentru foaia `Matrice acoperire`
 # --------------------------------------------------------------------------
 MATRICE = [
+    # ---- trezorerie (sursa 28.08) ------------------------------------------
+    ("5112 / 5113", "Efecte de încasat: CEC-uri și bilete la ordin", "A", "F-503",
+     "F-503 pas 2: creanța se stinge înaintea încasării", "NU"),
+    ("5114", "Efecte remise spre scontare", "A", "F-504",
+     "F-504 pas 2: efectul remis nu mai e efect deținut", "NU"),
+    ("5186", "Dobânzi de plătit", "A", "F-505",
+     "F-505 pas 3: plata stinge datoria, eșalonarea consumă avansul", "NU"),
+    ("5187", "Dobânzi de încasat", "A", "F-506",
+     "F-506 pas 1: creanța și venitul amânat, în aceeași notă", "NU"),
+    ("5191", "Credite bancare pe termen scurt (linii de credit)", "A", "F-507",
+     "F-507 pas 4: fără extrasul de linie, dobânda dispare din cheltuieli", "NU"),
+    ("5328 / 6422", "Tichete de masă: stoc de trezorerie și cheltuială", "A", "F-508",
+     "F-508 pas 3: cheltuiala se naște la acordare, nu la cumpărare", "NU"),
+    ("301 / 371", "Transferul între gestiuni", "A", "F-321",
+     "F-321 pas 2: gestiunea se schimbă înaintea consumului", "NU"),
+
     # ---- subvenții, dividende, conturile-coș (sursa 26.08) -----------------
     ("1012", "Capital subscris vărsat — analitice pe asociat", "A", "F-76, F-74",
      "F-76 pas 3: cotele se citesc din balanță, fără actul constitutiv", "NU"),

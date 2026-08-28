@@ -111,6 +111,19 @@ CADENTA = [
     ("4482 Alte creanțe privind bugetul statului", "Cel puțin trimestrial",
      "plăți eronate în așteptare; soldul se disecă până la lămurire, nu se reportează "
      "(F-424)"),
+
+    # Trezoreria (sursa 28.08). Toate trei sunt conturi de TRANZIT: o sumă stă acolo
+    # între două stări, iar dacă nimeni nu se uită, „între” devine „pentru totdeauna”.
+    # Cadența e lunară pentru că scadențele efectelor sunt lunare, nu trimestriale.
+    ("5112 / 5113 Efecte de încasat", "Lunar — obligatoriu",
+     "sold după scadență = efect neonorat, nu creanță curentă; se tratează ca atare, "
+     "cu ajustare dacă e cazul (F-503)"),
+    ("5114 Efecte remise spre scontare", "Lunar — obligatoriu",
+     "se închide în bani + cost, fără rest; sold rămas = scontare nefinalizată, cel mai "
+     "probabil costul neînregistrat (F-504)"),
+    ("5328 Alte valori (tichete)", "Lunar — obligatoriu",
+     "sold = tichete cumpărate și neacordate; la fiecare lună trecută devine mai greu "
+     "de spus cui i se cuveneau (F-508)"),
 ]
 
 # ---------------------------------------------------------------------------

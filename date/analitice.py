@@ -205,4 +205,61 @@ ANALITICE = [
               "4452 ↔ 4758. Reluarea urmează amortizarea, în cota de finanțare — o lună "
               "cu amortizare din proiect și fără reluare e o eroare (F-215).",
          flux="F-215, F-216, F-210"),
+    # ======================================================================
+    # Sursa 28.08.2026 — trezoreria
+    #
+    # Formatorul repetă regula ca pe un refren: „niciodată nu pleci fără analitic”.
+    # Cele cinci de mai jos sunt cazurile în care lipsa lui nu încurcă raportarea, ci
+    # face o VERIFICARE imposibilă — testul pe care îl trece orice analitic din foaia
+    # asta.
+    # ======================================================================
+    dict(simbol="512x", denumire="Conturi curente la bănci",
+         structura="5121 lei / 5124 valută, analitic pe BANCĂ și, la valută, pe MONEDĂ",
+         factor="V C O",
+         rupe="Extrasul nu se mai poate confrunta cu balanța: jurnalul de bancă dă cu "
+              "extrasul, dar nu dă cu sinteticul, și nu ai unde căuta diferența",
+         nota="Conturile în valută se reevaluează la cursul BNR de la sfârșitul lunii. "
+              "Un sold în lei fără moneda din spate nu se poate reevalua. C-37.",
+         flux="F-107, F-503, F-507"),
+    dict(simbol="542", denumire="Avansuri de trezorerie",
+         structura="542 pe FIECARE SALARIAT care a primit avans",
+         factor="C O",
+         rupe="Soldul merge în ambele sensuri pe persoane diferite — unul a pus bani de "
+              "la el, altul are avans nejustificat — iar pe sintetic cele două se "
+              "anulează. Totalul arată aproape zero: corect ca sumă, fals pe fiecare om",
+         nota="Formatorul: „542 pe analitic este esențial”, cu patru semne de "
+              "exclamare. E partea cea mai greu de ținut din toată trezoreria, și "
+              "fiecare program o tratează altfel. Plafon de numerar: 5.000 lei/zi de "
+              "persoană care a primit avansul.",
+         flux="F-502"),
+    dict(simbol="5191", denumire="Credite bancare pe termen scurt (linii de credit)",
+         structura="5191 pe fiecare LINIE de credit",
+         factor="C O",
+         rupe="Două linii pe același cont nu se mai pot reconcilia cu extrasele — iar "
+              "la linie extrasul e singura sursă, pentru că nu există scadențar",
+         nota="Fără extrasul de linie cerut clientului se operează tot prin 5121 și se "
+              "ratează dobânda (666): impozit pe profit plătit în plus. Sold debitor = "
+              "imposibil pe un cont de pasiv. C-35.",
+         flux="F-507"),
+    dict(simbol="302", denumire="Materiale consumabile",
+         structura="3021…3028 în OGLINDĂ cu 6021…6028 (auxiliare · combustibili · "
+                   "ambalat · piese de schimb · alte materiale)",
+         factor="C O",
+         rupe="Verificarea inversă, pe care o face și controlul: de ce am rulaj pe 6024 "
+              "dacă n-am rulaj pe 3024? Fără oglindă, întrebarea n-are răspuns",
+         nota="Consumul trece PRIN GESTIUNE: `3021 = 401`, apoi `6021 = 3021` pe bon de "
+              "consum. Direct pe cheltuială, bunul n-a intrat niciodată în evidență, "
+              "deci nu poate fi scos din ea. Excepție acceptată: bonul de benzină.",
+         flux="F-301, F-321"),
+    dict(simbol="665 / 765", denumire="Diferențe de curs valutar",
+         structura="analitic .DEC (decontare) și .REV (reevaluare de sfârșit de lună)",
+         factor="V C",
+         rupe="Nu mai poți explica soldul: diferența realizată la plata unui furnizor "
+              "și cea nerealizată din reevaluarea disponibilului stau amestecate",
+         nota="❓ Notițele din 28.08 cer conturi DIFERITE — 668/768 pentru reevaluare. "
+              "Funcțiunea lui 665 din OMFP 1802/2014 include însă explicit evaluarea de "
+              "la sfârșitul lunii a disponibilităților în valută. Scopul formatorului e "
+              "corect și se atinge cu analiticul de aici, fără să mute reevaluarea în "
+              "afara contului de diferențe de curs.",
+         flux="F-107, F-501"),
 ]

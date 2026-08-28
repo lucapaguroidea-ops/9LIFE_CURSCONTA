@@ -1,9 +1,9 @@
 """Fluxurile documentului de control — conturile la care se vede că ceva e greșit.
 
 Sursele: `surse/training-5-2026-08-19/ghid-contabilitate.md` §7.3 (F-63) și
-`surse/training-7-2026-08-26/notite-revizuit.md` §4 (F-79…F-82).
+`surse/training-7-2026-08-26/notite-revizuit.md` §4 (F-79…F-82) și §8 (F-90).
 
-Fișierul a pornit cu un singur flux și a rămas coerent crescând: toate cinci sunt
+Fișierul a pornit cu un singur flux și a rămas coerent crescând: toate șase sunt
 locuri unde o sumă se așază CORECT ca să nu denatureze un cont pe care altcineva îl
 reconciliază — decontul de TVA, fișa de rol, soldul clienților, balanța de la bancă.
 Numele fișierului e „control” în ambele sensuri ale cuvântului: controlul intern care
@@ -268,6 +268,52 @@ FLUXURI = [
                 "20.000 lei, adică exact jumătate din profitul comun de 40.000 "
                 "(100.000 − 60.000). La B iese aceeași cifră, pe drumul invers.",
                 rol="Stare terminală: 458 = 0, profitul împărțit în cotele contractuale"),
+        ],
+    ),
+    # ------------------------------------------------------------------ F-90
+    # Clasa 3, nu 4 — dar stă aici pentru că e despre același lucru ca restul
+    # fișierului: cum se vede, dintr-o balanță, că ceva e greșit. Întrebarea
+    # „de ce am rulaj pe 601 dacă n-am rulaj pe 301?” e o verificare de control,
+    # iar răspunsul ei e o monografie.
+    flux(
+        "F-90", "Marfa devenită materie primă (301 = 371) și consumul din gestiune",
+        didactic=True,
+        roluri="Transfer între gestiuni + Consum documentat",
+        conturi="301, 371, 601, 401, 4426",
+        note="⚠ Notițele scriau perechea lui 608 ca `308`. E transpoziție de cifre: 381 "
+             "e contul de ambalaje, iar 308 e „Diferențe de preț la materii prime” — un "
+             "cont rectificativ, nu o gestiune de consumat.",
+        principiu="Consumul trece PRIN GESTIUNE. Un bun trecut direct pe cheltuială "
+                  "n-a intrat niciodată în evidență, deci nu poate fi scos din ea: n-ai "
+                  "ce inventaria, n-ai ce justifica, și nu poți răspunde la întrebarea "
+                  "„unde e”. Verificarea inversă, pe care o face și controlul: de ce am "
+                  "rulaj pe 601 dacă n-am rulaj pe 301?",
+        pasi=[
+            pas(1, "Factură + notă de recepție",
+                "Bunul intră ca MARFĂ, pentru că la recepție se credea că se revinde. "
+                "10.000 lei + TVA 21%.",
+                dr=[("371", 10000), ("4426", 2100)], cr=[("401.furnizor", 12100)],
+                rol="Intrare în gestiunea de mărfuri"),
+            pas(2, "Bon de transfer între gestiuni",
+                "Se dovedește că bunul se consumă într-o lucrare, nu se revinde. Se mută "
+                "în gestiunea de materii prime — pe bon de transfer, nu prin cheltuială.",
+                dr=[("301", 10000)], cr=[("371", 10000)],
+                rol="Pas revelator: gestiunea se schimbă înaintea consumului",
+                revelator=True),
+            pas(3, "Bon de consum",
+                "Abia acum bunul devine cheltuială. ⚠ `601 = 371` ar fi asociat o "
+                "cheltuială cu materii prime unei gestiuni de mărfuri, iar contul de "
+                "cheltuială și-ar fi pierdut înțelesul. Formatorul e explicit: "
+                "niciodată 601 la 371, nici dacă programul îl propune prestabilit.",
+                dr=[("601", 10000)], cr=[("301", 10000)],
+                rol="Consumul, cu document justificativ"),
+            pas(4, "Verificare",
+                "Sold 371 = 0 pe bunul transferat, sold 301 = 0 după consum, iar "
+                "cheltuiala e pe contul care corespunde gestiunii din care a ieșit. "
+                "Testul de coerență pe rulaje: rulaj 601 ≠ 0 cere rulaj 301 ≠ 0. De când "
+                "s-a implementat SAF-T, modulul de stocuri se cere la control — nu "
+                "ajunge să existe, trebuie să fie deja gestionat.",
+                rol="Stare terminală: gestiunile golite, cheltuiala pe contul potrivit"),
         ],
     ),
 ]

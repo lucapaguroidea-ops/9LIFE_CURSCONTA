@@ -33,10 +33,10 @@ Tabelul de mai jos nu e scris aici: e citit din foaia `Legendă`, secțiunea „
 | Foaie | Ce ține |
 |---|---|
 | Legendă | Taxonomia rolurilor + tipologia factorilor + convenția de analitic + tierizare + TVA confirmat |
-| Plan de conturi | 279 conturi, cu 3 coloane noi: Analitice recomandate · Factor · Flux (pas) |
+| Plan de conturi | 289 conturi, cu 3 coloane noi: Analitice recomandate · Factor · Flux (pas) |
 | Doar rol în flux | 80 conturi de serviciu, grupate pe rol |
 | Analitice (Tier A) | Detaliu pe conturile Tier A: structură, factor, ce se rupe și de ce |
-| Fluxuri | 80 fluxuri × pași, tabelar cu note complete + coloană Declarativ |
+| Fluxuri | 87 fluxuri × pași, tabelar cu note complete + coloană Declarativ |
 | Matrice acoperire | Cont → flux(uri) → pas revelator; arată golurile |
 | Index module | Legătura cu Module_Declarative_Fluxuri.xlsx: ce modul acoperă ce flux, cu ce foi și când se rulează |
 | Arbore analitice | Arborele de decizie pentru analitice (3 întrebări) + contra-regula: când analiticul e o greșeală |
@@ -172,6 +172,7 @@ Fiecare poartă are un motiv scris în `build/verifica.py`. Dacă un text chiar 
 | `date/fluxuri_control.py` | Fluxurile documentului de control — conturile la care se vede că ceva e greșit. |
 | `date/fluxuri_imobilizari.py` | Fluxurile F-52…F-62 — imobilizări necorporale, corporale, în curs, ieșiri, financiare. |
 | `date/fluxuri_salarii.py` | Fluxurile din trainingul 21.08.2026 — salarii, rețineri, impozit pe venit. |
+| `date/fluxuri_trezorerie.py` | Fluxurile de clasa 5 din trainingul 28.08.2026 — efecte, dobânzi, linii, tichete. |
 | `date/inchideri.py` | Cadența de urmărire a conturilor — partea care NU se poate deduce din fluxuri. |
 | `date/intrebari.py` | Cele 21 de întrebări deschise, grupate pe temă contabilă. |
 | `date/monografii.py` | Excepțiile porții 18 — blocuri de monografie care NU trebuie să se echilibreze. |
@@ -190,9 +191,9 @@ ID-ul codifică clasa contului principal. Un flux nou primește următorul numă
 |---|---|---|---|
 | `F-1xx` | CAPITALURI, PROVIZIOANE, ÎMPRUMUTURI | 14 | `F-115` |
 | `F-2xx` | IMOBILIZĂRI | 16 | `F-217` |
-| `F-3xx` | STOCURI ȘI PRODUCȚIE | 20 | `F-321` |
+| `F-3xx` | STOCURI ȘI PRODUCȚIE | 21 | `F-322` |
 | `F-4xx` | TERȚI, TVA, DECONTĂRI | 26 | `F-427` |
-| `F-5xx` | TREZORERIE | 2 | `F-503` |
+| `F-5xx` | TREZORERIE | 8 | `F-509` |
 | `F-8xx` | CONTURI ÎN AFARA BILANȚULUI | 2 | `F-803` |
 
 ### Modulele existente *[generat]*
@@ -348,4 +349,4 @@ Poarta 19 leagă marcajele de întrebări la nivel de DOCUMENT: unul cu întreb�
 
 ---
 
-*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 29 porți, 23 module, 80 fluxuri la data generării.*
+*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 29 porți, 23 module, 87 fluxuri la data generării.*
