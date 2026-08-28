@@ -58,55 +58,61 @@ Porțile 12 și 13 verifică **forma** rezultatului (nimic pierdut, legendă și
 canonice). Nu verifică nimic din ce urmează: acolo nu există automatizare, doar citire
 atentă.
 
-**1. Ce spunea notița, cuvânt cu cuvânt?**
+**1. Ce din materialul ăsta e deja în sistem?**
+
+Înainte de a scrie orice, fiecare temă din notițe se pune lângă fluxul, modulul sau corelația care o acoperă deja. Ce rămâne e material nou; restul e ADÂNCIRE, și se scrie ca adâncire — cu trimitere la ce adâncește. Fără pasul ăsta, duplicarea se descoperă în faza B, în timpul scrierii codului, sau deloc: la trainingul 8, mecanismul codului din nomenclatorul D394 a fost scris ca material nou, deși era pasul revelator al lui F-203 de la trainingul 3. Tabelul rezultat intră ca §0 în documentul revizuit, unde poate fi verificat.
+
+↳ `date/ordine.py:DENUMIRE`, foaia `CatalogModule` și `date/corelatii.py` — trei liste citibile, care răspund în cinci minute
+
+**2. Ce spunea notița, cuvânt cu cuvânt?**
 
 Notița brută rămâne sursa. Documentul revizuit o citează înainte de a o corecta, altfel corecția nu se poate judeca — și nici reface, dacă se dovedește greșită.
 
 ↳ `surse/training-*/notite-brut.txt` rămân în repo, neatinse, exact pentru asta
 
-**2. Care afirmații sunt verificabile în lege și care sunt practică de cabinet?**
+**3. Care afirmații sunt verificabile în lege și care sunt practică de cabinet?**
 
 Sunt două feluri de adevăr, iar amestecul lor e cea mai frecventă sursă de eroare. Primul se verifică; al doilea se întreabă.
 
 ↳ practica se marchează ❓ și ajunge în `date/intrebari.py` — vezi cele 21 existente
 
-**3. Pentru fiecare corecție ⚠️: care e temeiul, cu articol?**
+**4. Pentru fiecare corecție ⚠️: care e temeiul, cu articol?**
 
 O corecție fără temei e o opinie. Cu temei, se poate contesta — și e exact ce vrei să se poată face.
 
 ↳ Anexa E a fiecărui document revizuit adună actele citate; se generează din text
 
-**4. Cifrele din exemplele în proză se leagă?**
+**5. Cifrele din exemplele în proză se leagă?**
 
 Poarta 1 verifică ΣD=ΣC doar pentru fluxurile din `date/`, NU pentru monografiile scrise în document. Exemplul rezervei legale din trainingul 2 nu se lega — 5% din 250 nu dau 125 — și a fost prins de citire, nu de o poartă. Recalculează fiecare exemplu cu creionul.
 
 ↳ gol cunoscut, candidat de automatizare — vezi secțiunea de goluri
 
-**5. Conturile citate există, cu denumirea aia?**
+**6. Conturile citate există, cu denumirea aia?**
 
 Notițele brute conțineau `7815`, `2114`, `1067`, `4424` — conturi inexistente sau confundate. Fiecare simbol se confruntă cu planul de conturi înainte de a intra în document.
 
 ↳ foaia `Plan de conturi`; erorile deja prinse sunt în Anexa F a trainingului 4
 
-**6. Cotele, pragurile și termenele sunt cele în vigoare LA DATA trainingului?**
+**7. Cotele, pragurile și termenele sunt cele în vigoare LA DATA trainingului?**
 
 Se schimbă prin OUG peste noapte. Un prag corect acum poate fi fals la aplicare, iar documentul trebuie să spună la ce dată a fost verificat.
 
 ↳ secțiunea de verificare legislativă din foaia `Legendă`, cu data ei
 
-**7. Ce lipsea din raționament ca să stea în picioare?**
+**8. Ce lipsea din raționament ca să stea în picioare?**
 
 Completările ➕ sunt partea care transformă notițele în material utilizabil. Trebuie însă marcate ca atare: cititorul are dreptul să știe ce a spus formatorul și ce am adăugat eu.
 
 ↳ legenda de marcaje, identică în toate documentele (poarta 13)
 
-**8. Ce a rămas ambiguu?**
+**9. Ce a rămas ambiguu?**
 
 Ambiguitatea nu se rezolvă prin ghicit. Se marchează ❓, se scrie ce am presupus ca să pot merge mai departe, și intră în lista pentru formator.
 
 ↳ `date/intrebari.py` → documentul, pagina publicată ȘI foaia `Întrebări deschise`
 
-**9. Ce erori din notițele brute NU trebuie reintroduse?**
+**10. Ce erori din notițele brute NU trebuie reintroduse?**
 
 Cine reia notițele originale peste un an va relua și erorile. Lista lor explicită e singura apărare.
 

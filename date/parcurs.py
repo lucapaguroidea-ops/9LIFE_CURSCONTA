@@ -42,6 +42,17 @@ atentă.\
 
 #: (întrebare, de ce contează, unde se vede răspunsul în documentele existente)
 FAZA_A = [
+    ("Ce din materialul ăsta e deja în sistem?",
+     "Înainte de a scrie orice, fiecare temă din notițe se pune lângă fluxul, modulul "
+     "sau corelația care o acoperă deja. Ce rămâne e material nou; restul e ADÂNCIRE, "
+     "și se scrie ca adâncire — cu trimitere la ce adâncește. Fără pasul ăsta, "
+     "duplicarea se descoperă în faza B, în timpul scrierii codului, sau deloc: la "
+     "trainingul 8, mecanismul codului din nomenclatorul D394 a fost scris ca material "
+     "nou, deși era pasul revelator al lui F-203 de la trainingul 3. Tabelul rezultat "
+     "intră ca §0 în documentul revizuit, unde poate fi verificat.",
+     "`date/ordine.py:DENUMIRE`, foaia `CatalogModule` și `date/corelatii.py` — trei "
+     "liste citibile, care răspund în cinci minute"),
+
     ("Ce spunea notița, cuvânt cu cuvânt?",
      "Notița brută rămâne sursa. Documentul revizuit o citează înainte de a o corecta, "
      "altfel corecția nu se poate judeca — și nici reface, dacă se dovedește greșită.",
