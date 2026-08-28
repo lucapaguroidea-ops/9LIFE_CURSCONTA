@@ -2,6 +2,40 @@
 
 *Versiune revizuită. Sursa: notițele brute din 28.08.2026.*
 
+## 0. Ce e deja în sistem
+
+Primul pas al revizuirii, înaintea oricărei linii de material nou: fiecare temă din
+notițe se pune lângă fluxul, modulul sau corelația care o acoperă deja. Ce rămâne e
+material nou; restul e **adâncire**, și se scrie ca adâncire — cu trimitere la ce
+adâncește.
+
+| Tema din notițe | Ce o acoperă deja |
+|---|---|
+| Taxare inversă internă, `4426 = 4427` | F-402, MOD_TAXARE_INVERSA |
+| Taxare inversă intracomunitară | F-303, MOD_TAXARE_INVERSA |
+| Codul de operațiune din nomenclatorul D394 | **F-203** — cod 27 la clădiri |
+| Închiderea lunară de TVA | F-405, MOD_INCHIDERE_TVA |
+| Decontul de TVA ↔ soldul din balanță | C-29, MOD_INCHIDERE_LUNARA (blocul V4) |
+| Sumă neidentificată din extras → 473 | F-411, MOD_INTERMEDIAR |
+| Viramente interne 581 | F-501, MOD_INTERMEDIAR |
+| Avansuri de trezorerie 542 | F-502, MOD_DECONT |
+| Reevaluarea lunară a valutei | F-107, MOD_CREDIT_VALUTA |
+| Obiecte de inventar `603 ↔ 303` + 8035 | F-305, F-802 |
+| Reduceri comerciale ulterioare `609 / 709` | F-409 |
+| Control analitic ↔ sintetic la imobilizări | F-214, C-15 |
+| Sold contrar naturii contului | C-23 |
+
+⚠️ Rândul cu **codul D394** e cel care justifică tot tabelul. La prima revizuire a
+notițelor ăstora, mecanismul „fără cod, declarația nu recunoaște operațiunea” a fost
+scris ca material nou. Nu era: e pasul revelator al lui F-203, scris cu cinci
+traininguri în urmă, cu exemplul codului 27 la clădiri. Duplicarea s-a descoperit abia
+la comparația cu o a doua revizuire.
+
+➕ Ce rămâne **cu adevărat nou** după tabel: scontarea (5114, 667), liniile de credit
+(5191), dobânzile pe 5186/5187, plafonul de sold al casei, tichetele ca stoc de
+trezorerie (5328), perechile clasă 6 ↔ clasă 3, și verificarea analitic ↔ sintetic ca
+procedură generală.
+
 ## 1. Recapitulare: taxarea inversă
 
 ### 1.1 Ce operațiuni intră
@@ -31,6 +65,12 @@ Formatorul a dat exemplul deșeurilor — cod **22**.
 
 ⚠️ Fără codul asociat, **D394 nu se validează**. Nu e o eroare de conținut care se vede
 la control peste doi ani; e un refuz la depunere, în ziua declarației.
+
+➕ Mecanismul nu e nou: e chiar pasul revelator al lui **F-203**, unde apare cu codul
+**27** la livrarea de clădiri în regim de taxare inversă. Ce adaugă trainingul ăsta e că
+regula e **generală**, nu specifică clădirilor: fiecare categorie din art. 331 are codul
+ei, iar deșeurile sunt exemplul al doilea. Regula, formulată o dată pentru toate
+categoriile: **codul e condiție de recunoaștere declarativă, nu ornament.**
 
 ❓ Nomenclatorul complet de coduri nu era în notițe și nu se poate reconstitui din
 memorie. Se ia din instrucțiunile de completare ale formularului D394, în vigoare la data
@@ -84,6 +124,21 @@ multe societăți, un 501 sintetic nu poate spune care participație s-a aprecia
 s-a depreciat — iar ajustările pentru pierdere de valoare (591) se constituie pe fiecare
 titlu, nu pe total.
 
+⚠️ **501 nu e contul oricăror acțiuni.** El e în clasa 50 — investiții pe termen
+**SCURT**, cumpărate ca plasament, cu intenția de a fi revândute. Participația deținută
+**durabil** merge în clasa 26 — imobilizări financiare:
+
+| Termen scurt (plasament) | Termen lung (participație) |
+|---|---|
+| 501 Acțiuni deținute la entitățile afiliate | 261 Acțiuni deținute la entitățile afiliate |
+| 506 Obligațiuni | 263 Acțiuni deținute la entități controlate în comun |
+| 508 Alte investiții pe termen scurt | 265 Alte titluri imobilizate |
+
+Capcana e că **501 și 261 poartă aceeași denumire în plan**. Ce le deosebește nu e
+emitentul, e INTENȚIA de deținere — iar intenția nu se citește din denumire, se
+declară la achiziție. Cine ia contul după nume înregistrează o participație de zece ani
+ca plasament pe termen scurt.
+
 ### 2.2 Acțiuni vs. obligațiuni — ce cumperi de fapt
 
 Notița cerea detalierea distincției. E mai mult decât o diferență de cont:
@@ -101,10 +156,26 @@ părțile sociale nu se tranzacționează liber, cesiunea lor cere hotărâre ș
 ONRC.
 
 Obligațiunea se cumpără la un preț și se răscumpără la altul; diferența, plus dobânda și
-eventualele diferențe de curs dacă e în valută, formează rezultatul operațiunii. De aceea
-ajustările pentru pierdere de valoare au conturi separate pe fiecare fel de titlu — 591
-pentru acțiuni la afiliate, 595 pentru obligațiuni emise și răscumpărate, 596 pentru
-obligațiuni, 598 pentru alte investiții.
+eventualele diferențe de curs dacă e în valută, formează rezultatul operațiunii.
+
+⚠️ **506 și 505 nu sunt același lucru**, deși ambele au „obligațiuni” în nume:
+
+| Cont | Ce ține | Cine e emitentul |
+|---|---|---|
+| **506** Obligațiuni | plasamentul TĂU în obligațiunile altcuiva | altă societate |
+| **505** Obligațiuni emise și răscumpărate | propriile tale obligațiuni, pe care le-ai răscumpărat | tu |
+
+505 e oglinda lui 161 „Împrumuturi din emisiuni de obligațiuni”: ai împrumutat de la
+piață, apoi ți-ai cumpărat înapoi titlurile. 506 e un activ de plasament; 505 e stingerea
+unei datorii proprii.
+
+De aceea și ajustările pentru pierdere de valoare au conturi separate pe fiecare fel de
+titlu — 591 pentru acțiuni la afiliate, 595 pentru obligațiuni emise și răscumpărate, 596
+pentru obligațiuni, 598 pentru alte investiții.
+
+❓ Monografia completă a răscumpărării (preț de emisiune vs. preț de răscumpărare, primă
+sau discount, curs valutar dacă emisiunea e în valută) nu era în notițe — formatorul a
+marcat subiectul „de detaliat” fără cifre. Rămâne de cerut.
 
 ## 3. Efecte de încasat: CEC-uri și bilete la ordin
 
@@ -150,7 +221,9 @@ Pe biletul de **12.100 lei**, cu 80% avansat de bancă:
 ```
 
 ⚠️ Notița scria contul de cheltuială ca `6067`. Contul corect este **667 — „Cheltuieli
-privind sconturile acordate”**. `6067` nu există în planul de conturi.
+privind sconturile acordate”**, cu perechea de venit **767 — „Venituri din sconturi
+obținute”** (scontul pe care îl obții tu, când plătești un furnizor înainte de scadență).
+`6067` nu există în planul de conturi.
 
 ⚠️ Notița pornea de la „bilet la ordine de **12k** lei”, dar calcula 80% = 9,68k. 80% din
 12.000 dă 9.600. Baza corectă e **12.100** — suma cu TVA din exemplul de mai sus.
@@ -311,7 +384,16 @@ după obiceiul vechi îl încalcă fără să știe.
 plafon, „a mai făcut rost de o casierie cu 50.000 lei” — deci a înțeles că limita e per
 casierie. Dacă e așa, orice societate poate multiplica plafonul deschizând puncte de
 lucru, ceea ce ar goli restricția de sens. De confirmat cu formatorul care e textul exact
-și dacă practica clientului rezistă la control.
+și dacă practica clientului rezistă la control — mai ales pentru un punct de lucru fără
+activitate reală de încasări.
+
+❓ **Plafon separat la magazinele mari?** O a doua lectură a acelorași notițe indică un
+plafon de **500.000 lei** pentru magazinele de tip cash & carry, supermagazine și
+hipermagazine, în locul celui de 50.000. Cifra e plauzibilă — un hipermarket depășește
+50.000 lei într-o oră de vârf, iar depunerea zilnică a excedentului ar fi impracticabilă —
+dar **nu era în notițele de la curs și n-am putut-o confirma pe textul legii**. Rămâne
+întrebare, nu afirmație: dacă se confirmă, C-38 are nevoie de un al doilea prag, după
+tipul unității.
 
 ### 5.2 Ce plăți sunt plafonate și ce plăți nu
 
@@ -322,10 +404,17 @@ lucru, ceea ce ar goli restricția de sens. De confirmat cu formatorul care e te
 
 **Cu plafon:**
 
-- 5.000 lei către persoane juridice
-- 10.000 lei în relația cu persoane fizice
+| Operațiunea | Plafonul |
+|---|---|
+| Încasări de la o persoană juridică | 5.000 lei / persoană / zi |
+| Plăți către o persoană juridică | 5.000 lei / persoană / zi, **dar maximum 10.000 lei/zi în total** |
+| Încasări și plăți față de o persoană fizică | 10.000 lei / persoană / zi |
+| Avansuri spre decontare (plăți din 542) | 5.000 lei / persoană |
 
-Aceleași limite se aplică **în oglindă la încasări**.
+⚠️ Notița reține doar „5.000 la juridice, 10.000 la fizice”. Direcția e corectă, dar
+plafonul pe persoană **nu e singurul**: la plățile către persoane juridice există și un
+plafon TOTAL de 10.000 lei pe zi. Cinci furnizori × 5.000 lei într-o zi respectă primul
+plafon și îl încalcă pe al doilea.
 
 ➕ Plafoanele și interdicțiile complete — inclusiv interdicția totală a operațiunilor în
 numerar pe contul 455 — sunt verificate pe surse și consemnate separat. Aici rămâne doar
@@ -413,6 +502,12 @@ prin 401:
 ```
 
 Decontul se închide exact: 2.000 + 1.000 + 2.000 = **5.000 lei**, cât s-a acordat.
+
+➕ Există și varianta prin **421**, când diurna se plătește odată cu salariul în loc să
+se deconteze din avansul de trezorerie: `625 = 421`, iar 542 se închide numai cu ce s-a
+cheltuit efectiv. E o alegere de politică de decont, nu de corectitudine — dar trebuie
+făcută consecvent, altfel aceeași deplasare apare când pe 542, când pe 421, și niciun
+analitic nu mai spune nimic.
 
 ❓ **Plafonul de deductibilitate al diurnei** nu era în notițe. Peste plafon, diurna se
 asimilează salariului și se impozitează ca atare — deci cifra contează. De confirmat

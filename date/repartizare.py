@@ -474,6 +474,17 @@ ABSORBITE_26_08 = {
 # ===========================================================================
 
 REPARTIZARE_28_08 = [
+    # --- §0 inventarul: la parcurs, nu într-un document -------------------
+    # Tabelul „ce e deja în sistem” nu e conținut contabil, e METODĂ: rezultatul
+    # primului pas al fazei A. Locul lui e documentul de parcurs, lângă întrebarea
+    # care îl cere — nu într-un document de subiect, unde ar fi o listă de referințe
+    # care se învechește la fiecare training.
+    ("## 0. Ce e deja în sistem", "doc:control",
+     "Rezultatul pasului 0 din faza A. Merge la control pentru că e o procedură de "
+     "verificare — de data asta a materialului contra sistemului, nu a balanței contra "
+     "documentelor. Rândul despre codul D394 e cel care justifică pasul: mecanismul "
+     "fusese scris ca material nou deși era pasul revelator al lui F-203."),
+
     # --- §1 taxarea inversă: la TVA, unde stă deja mecanica ---------------
     ("## 1. Recapitulare: taxarea inversă", "doc:stocuri-tva",
      "Recapitulare peste F-402 și MOD_TAXARE_INVERSA. Teritoriul TVA e al "

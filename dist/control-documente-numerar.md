@@ -283,8 +283,41 @@ Conturile din ședința asta care se verifică așa: 455 (niciodată debitor), 4
 ➕ Tema dată: identificarea în balanță a lucrurilor care pot fi rezolvate — pentru că, o
 dată ce li se stabilește cursul, nu mai sunt erori.
 
-## 9. Casa și plafoanele de numerar
-### 9.1 Plafonul soldului de casă
+## 9. Ce e deja în sistem
+Primul pas al revizuirii, înaintea oricărei linii de material nou: fiecare temă din
+notițe se pune lângă fluxul, modulul sau corelația care o acoperă deja. Ce rămâne e
+material nou; restul e **adâncire**, și se scrie ca adâncire — cu trimitere la ce
+adâncește.
+
+| Tema din notițe | Ce o acoperă deja |
+|---|---|
+| Taxare inversă internă, `4426 = 4427` | F-402, MOD_TAXARE_INVERSA |
+| Taxare inversă intracomunitară | F-303, MOD_TAXARE_INVERSA |
+| Codul de operațiune din nomenclatorul D394 | **F-203** — cod 27 la clădiri |
+| Închiderea lunară de TVA | F-405, MOD_INCHIDERE_TVA |
+| Decontul de TVA ↔ soldul din balanță | C-29, MOD_INCHIDERE_LUNARA (blocul V4) |
+| Sumă neidentificată din extras → 473 | F-411, MOD_INTERMEDIAR |
+| Viramente interne 581 | F-501, MOD_INTERMEDIAR |
+| Avansuri de trezorerie 542 | F-502, MOD_DECONT |
+| Reevaluarea lunară a valutei | F-107, MOD_CREDIT_VALUTA |
+| Obiecte de inventar `603 ↔ 303` + 8035 | F-305, F-802 |
+| Reduceri comerciale ulterioare `609 / 709` | F-409 |
+| Control analitic ↔ sintetic la imobilizări | F-214, C-15 |
+| Sold contrar naturii contului | C-23 |
+
+⚠️ Rândul cu **codul D394** e cel care justifică tot tabelul. La prima revizuire a
+notițelor ăstora, mecanismul „fără cod, declarația nu recunoaște operațiunea” a fost
+scris ca material nou. Nu era: e pasul revelator al lui F-203, scris cu cinci
+traininguri în urmă, cu exemplul codului 27 la clădiri. Duplicarea s-a descoperit abia
+la comparația cu o a doua revizuire.
+
+➕ Ce rămâne **cu adevărat nou** după tabel: scontarea (5114, 667), liniile de credit
+(5191), dobânzile pe 5186/5187, plafonul de sold al casei, tichetele ca stoc de
+trezorerie (5328), perechile clasă 6 ↔ clasă 3, și verificarea analitic ↔ sintetic ca
+procedură generală.
+
+## 10. Casa și plafoanele de numerar
+### 10.1 Plafonul soldului de casă
 
 
 Soldul de casă nu poate depăși **50.000 lei la sfârșitul zilei**, pe fiecare punct de
@@ -298,10 +331,19 @@ după obiceiul vechi îl încalcă fără să știe.
 plafon, „a mai făcut rost de o casierie cu 50.000 lei” — deci a înțeles că limita e per
 casierie. Dacă e așa, orice societate poate multiplica plafonul deschizând puncte de
 lucru, ceea ce ar goli restricția de sens. De confirmat cu formatorul care e textul exact
-și dacă practica clientului rezistă la control.
+și dacă practica clientului rezistă la control — mai ales pentru un punct de lucru fără
+activitate reală de încasări.
+
+❓ **Plafon separat la magazinele mari?** O a doua lectură a acelorași notițe indică un
+plafon de **500.000 lei** pentru magazinele de tip cash & carry, supermagazine și
+hipermagazine, în locul celui de 50.000. Cifra e plauzibilă — un hipermarket depășește
+50.000 lei într-o oră de vârf, iar depunerea zilnică a excedentului ar fi impracticabilă —
+dar **nu era în notițele de la curs și n-am putut-o confirma pe textul legii**. Rămâne
+întrebare, nu afirmație: dacă se confirmă, C-38 are nevoie de un al doilea prag, după
+tipul unității.
 
 
-### 9.2 Ce plăți sunt plafonate și ce plăți nu
+### 10.2 Ce plăți sunt plafonate și ce plăți nu
 
 
 **Fără plafon**, oricât de mare e suma:
@@ -311,17 +353,24 @@ lucru, ceea ce ar goli restricția de sens. De confirmat cu formatorul care e te
 
 **Cu plafon:**
 
-- 5.000 lei către persoane juridice
-- 10.000 lei în relația cu persoane fizice
+| Operațiunea | Plafonul |
+|---|---|
+| Încasări de la o persoană juridică | 5.000 lei / persoană / zi |
+| Plăți către o persoană juridică | 5.000 lei / persoană / zi, **dar maximum 10.000 lei/zi în total** |
+| Încasări și plăți față de o persoană fizică | 10.000 lei / persoană / zi |
+| Avansuri spre decontare (plăți din 542) | 5.000 lei / persoană |
 
-Aceleași limite se aplică **în oglindă la încasări**.
+⚠️ Notița reține doar „5.000 la juridice, 10.000 la fizice”. Direcția e corectă, dar
+plafonul pe persoană **nu e singurul**: la plățile către persoane juridice există și un
+plafon TOTAL de 10.000 lei pe zi. Cinci furnizori × 5.000 lei într-o zi respectă primul
+plafon și îl încalcă pe al doilea.
 
 ➕ Plafoanele și interdicțiile complete — inclusiv interdicția totală a operațiunilor în
 numerar pe contul 455 — sunt verificate pe surse și consemnate separat. Aici rămâne doar
 ce a adăugat trainingul ăsta: plafonul de sold și regula punctelor de lucru.
 
 
-### 9.3 Plăți fragmentate și contractul cu plata în rate
+### 10.3 Plăți fragmentate și contractul cu plata în rate
 
 
 Fragmentarea unei plăți ca să încapă sub plafon e **interzisă expres**.
@@ -334,8 +383,8 @@ prevăzute.
 ➕ Condiția nu e formalitatea contractului, ci **respectarea lui**: dacă ratele se încasează
 la alte date sau în alte sume decât scrie în scadențar, apărarea cade.
 
-## 10. Verificarea analitic ↔ sintetic
-### 10.1 De ce se rupe
+## 11. Verificarea analitic ↔ sintetic
+### 11.1 De ce se rupe
 
 
 Programul te lasă să mai faci o operațiune **după** ce ai dat închiderea de lună. Dacă nu
@@ -343,7 +392,7 @@ te întorci să refaci închiderea, apare o diferență între analitic și sint
 anunță singură.
 
 
-### 10.2 Conturile la care se rupe cel mai des
+### 11.2 Conturile la care se rupe cel mai des
 
 
 **Banca.** Extrasul de cont trebuie să se potrivească cu balanța. Cazul tipic: jurnalul de
@@ -359,7 +408,7 @@ taxă apare întotdeauna, iar despărțirea retroactivă e mult mai scumpă dec�
 făcut din prima.
 
 
-### 10.3 Sumele nealocate și contul 473
+### 11.3 Sumele nealocate și contul 473
 
 
 Când o încasare nu se poate aloca înainte de închiderea lunii, se pune în **473**, cu
@@ -375,7 +424,7 @@ problemă să stornezi luna viitoare și să pui pe clientul corect. Problema e 
 alocarea cu totul.
 
 
-### 10.4 Compensările 4091 ↔ 419
+### 11.4 Compensările 4091 ↔ 419
 
 
 Notița cerea analiza. Cazul: același partener e și furnizor, și client. I-ai plătit un
@@ -394,7 +443,7 @@ Se poate, dar cu două condiții pe care notița nu le spune:
 compensarea trebuie făcută prin sistemul reglementat — de confirmat.
 
 
-### 10.5 Preluarea unei balanțe în cursul anului
+### 11.5 Preluarea unei balanțe în cursul anului
 
 
 ⚠️ La preluarea unei societăți **în cursul anului** nu se preiau soldurile, ci **totalul
@@ -414,7 +463,7 @@ procent din brut, rulajul creditor al obligațiilor salariale.
 Numai al treilea permite reconstituirea anului întreg dintr-o balanță de mijloc de an.
 
 
-### 10.6 Cele trei verificări din softul formatorului
+### 11.6 Cele trei verificări din softul formatorului
 
 
 Formatorul a descris trei „căsuțe care se înverzesc” din programul lui — și ele sunt exact
@@ -432,7 +481,7 @@ A treia se vede cel mai bine la bilanț: dacă 6 și 7 nu s-au închis, cifrele 
 chiar dacă linia din extras apare la încasări. Contul urmează natura operațiunii, nu poziția
 ei în extras.
 
-## 11. Ce s-a cerut pentru sesiunile următoare
+## 12. Ce s-a cerut pentru sesiunile următoare
 **Lista corelațiilor de verificat pe balanță**, cu precizarea formatorului că fiecare
 balanță e unică — fiecare firmă are alt obiect de activitate. Se cer: conturile cele mai
 comune, cele mai esențiale, și **în ce ordine** se verifică.

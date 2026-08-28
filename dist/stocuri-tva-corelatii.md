@@ -384,6 +384,12 @@ Formatorul a dat exemplul deșeurilor — cod **22**.
 ⚠️ Fără codul asociat, **D394 nu se validează**. Nu e o eroare de conținut care se vede
 la control peste doi ani; e un refuz la depunere, în ziua declarației.
 
+➕ Mecanismul nu e nou: e chiar pasul revelator al lui **F-203**, unde apare cu codul
+**27** la livrarea de clădiri în regim de taxare inversă. Ce adaugă trainingul ăsta e că
+regula e **generală**, nu specifică clădirilor: fiecare categorie din art. 331 are codul
+ei, iar deșeurile sunt exemplul al doilea. Regula, formulată o dată pentru toate
+categoriile: **codul e condiție de recunoaștere declarativă, nu ornament.**
+
 ❓ Nomenclatorul complet de coduri nu era în notițe și nu se poate reconstitui din
 memorie. Se ia din instrucțiunile de completare ale formularului D394, în vigoare la data
 depunerii, și se atașează configurării programului **înainte** de prima operațiune cu

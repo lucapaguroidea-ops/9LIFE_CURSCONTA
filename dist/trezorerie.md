@@ -27,6 +27,21 @@ multe societăți, un 501 sintetic nu poate spune care participație s-a aprecia
 s-a depreciat — iar ajustările pentru pierdere de valoare (591) se constituie pe fiecare
 titlu, nu pe total.
 
+⚠️ **501 nu e contul oricăror acțiuni.** El e în clasa 50 — investiții pe termen
+**SCURT**, cumpărate ca plasament, cu intenția de a fi revândute. Participația deținută
+**durabil** merge în clasa 26 — imobilizări financiare:
+
+| Termen scurt (plasament) | Termen lung (participație) |
+|---|---|
+| 501 Acțiuni deținute la entitățile afiliate | 261 Acțiuni deținute la entitățile afiliate |
+| 506 Obligațiuni | 263 Acțiuni deținute la entități controlate în comun |
+| 508 Alte investiții pe termen scurt | 265 Alte titluri imobilizate |
+
+Capcana e că **501 și 261 poartă aceeași denumire în plan**. Ce le deosebește nu e
+emitentul, e INTENȚIA de deținere — iar intenția nu se citește din denumire, se
+declară la achiziție. Cine ia contul după nume înregistrează o participație de zece ani
+ca plasament pe termen scurt.
+
 
 ### 1.2 Acțiuni vs. obligațiuni — ce cumperi de fapt
 
@@ -46,10 +61,26 @@ părțile sociale nu se tranzacționează liber, cesiunea lor cere hotărâre ș
 ONRC.
 
 Obligațiunea se cumpără la un preț și se răscumpără la altul; diferența, plus dobânda și
-eventualele diferențe de curs dacă e în valută, formează rezultatul operațiunii. De aceea
-ajustările pentru pierdere de valoare au conturi separate pe fiecare fel de titlu — 591
-pentru acțiuni la afiliate, 595 pentru obligațiuni emise și răscumpărate, 596 pentru
-obligațiuni, 598 pentru alte investiții.
+eventualele diferențe de curs dacă e în valută, formează rezultatul operațiunii.
+
+⚠️ **506 și 505 nu sunt același lucru**, deși ambele au „obligațiuni” în nume:
+
+| Cont | Ce ține | Cine e emitentul |
+|---|---|---|
+| **506** Obligațiuni | plasamentul TĂU în obligațiunile altcuiva | altă societate |
+| **505** Obligațiuni emise și răscumpărate | propriile tale obligațiuni, pe care le-ai răscumpărat | tu |
+
+505 e oglinda lui 161 „Împrumuturi din emisiuni de obligațiuni”: ai împrumutat de la
+piață, apoi ți-ai cumpărat înapoi titlurile. 506 e un activ de plasament; 505 e stingerea
+unei datorii proprii.
+
+De aceea și ajustările pentru pierdere de valoare au conturi separate pe fiecare fel de
+titlu — 591 pentru acțiuni la afiliate, 595 pentru obligațiuni emise și răscumpărate, 596
+pentru obligațiuni, 598 pentru alte investiții.
+
+❓ Monografia completă a răscumpărării (preț de emisiune vs. preț de răscumpărare, primă
+sau discount, curs valutar dacă emisiunea e în valută) nu era în notițe — formatorul a
+marcat subiectul „de detaliat” fără cifre. Rămâne de cerut.
 
 ## 2. Efecte de încasat: CEC-uri și bilete la ordin
 ### 2.1 De la factură la încasare
@@ -97,7 +128,9 @@ Pe biletul de **12.100 lei**, cu 80% avansat de bancă:
 ```
 
 ⚠️ Notița scria contul de cheltuială ca `6067`. Contul corect este **667 — „Cheltuieli
-privind sconturile acordate”**. `6067` nu există în planul de conturi.
+privind sconturile acordate”**, cu perechea de venit **767 — „Venituri din sconturi
+obținute”** (scontul pe care îl obții tu, când plătești un furnizor înainte de scadență).
+`6067` nu există în planul de conturi.
 
 ⚠️ Notița pornea de la „bilet la ordine de **12k** lei”, dar calcula 80% = 9,68k. 80% din
 12.000 dă 9.600. Baza corectă e **12.100** — suma cu TVA din exemplul de mai sus.
@@ -322,6 +355,12 @@ prin 401:
 ```
 
 Decontul se închide exact: 2.000 + 1.000 + 2.000 = **5.000 lei**, cât s-a acordat.
+
+➕ Există și varianta prin **421**, când diurna se plătește odată cu salariul în loc să
+se deconteze din avansul de trezorerie: `625 = 421`, iar 542 se închide numai cu ce s-a
+cheltuit efectiv. E o alegere de politică de decont, nu de corectitudine — dar trebuie
+făcută consecvent, altfel aceeași deplasare apare când pe 542, când pe 421, și niciun
+analitic nu mai spune nimic.
 
 ❓ **Plafonul de deductibilitate al diurnei** nu era în notițe. Peste plafon, diurna se
 asimilează salariului și se impozitează ca atare — deci cifra contează. De confirmat
