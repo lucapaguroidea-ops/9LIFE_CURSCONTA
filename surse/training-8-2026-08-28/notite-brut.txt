@@ -1,0 +1,668 @@
+
+
+recap la inceputul cursului:
+
+
+taxarea inversa
+
+masura fiscala de protectie:
+
+- livrarea de constructii noi (la prima ocupare - o zona de fiscalitate) = terenuri + constructii 
+	- pentru terenurile curs constructie se pot aplica principiul taxarii inverse 
+- cereale suppose vanzarii; samanta, nu este supusa; 
+- o parte de deseuri
+- cheresteaua / busteanul 
+
+
+ce trebuie sa tinem minte la taxarea inversa la 394;
+
+tranzactiile astea au un cod, pe care 394 le recunoaste => i.e. deseurile au cod 22 - si trebuie sa aiba acest cod, ca 394 sa le recunoasca; 
+
+exista un nomenclator de coduri pentru taxarea inversa 
+	=> daca nu atasam acest cost, 394 nu se va valida
+
+
+
+nota la taxare inversa:
+
+4426 - 4427 <=> apare pe ambele Jurnale, si de cumparari si de vanzari; ca la tranzactii intracomunitare; 
+
+
+
+si cand livrez produse supuse taxarii inverse - eu bifez modul de colectare a TVA-ului, dar nu se face nota contabila la livrare => dar obligatia trecerii acelui cod; 
+
+la livrare, mentionez in jurnalul de vanzari, ca este supusa taxarii inverse - dar nu fac nota contabila => doar la vanzare; 
+
+pe 394, si la intrare si la iesire, trebuie sa asociez acest cod; 
+
+si pe jurnale trebuie sa fie pe rubrica separata; 
+
+exemple de rubrici:
+
+taxare inversa Ro
+taxare inversa intracomunitara
+achizitii scutite (de la persoane neplatitoare de TVA)
+importurile
+
+
+
+
+Conturile de Trezorerie - clasa 5 
+
+
+
+
+Intr-o societate comerciala, capitalul social pot sa il am:
+	- doar cu persoane fizice
+	- doar cu persoane juridice
+	- combinatie fizice cu juridice 
+
+
+Achizitionarea actiunilor:
+
+501 - 5121 
+
+	de facut analitice pe 501, daca sunt mai multe firme la care
+
+
+
+
+Actiuni VS Obligatiuni:
+
+
+In SA am actiuni, in SRL am parti sociale;
+
+Cand am actiuni, imi confera dividende;
+
+
+
+
+Plata si rascumpararea actiunilor / obligatiunilor; 
+
+
+Care este diferenta:
+
+	actiuni - un drept ca ascoiat 
+	obligatiuni - reprezinta un imprumut, pe care societatea il primeste de la investitori - pentru care societatea ofera o dobanda;
+		se cumpara la un anumit pret, se rascumpara la un anumt pret + cheltuieli la un anumit curs valutar;
+
+	{AI: de detaliat}
+
+
+
+Efecte de incasat
+
+
+CEC-uri, BO (bilete la ordine) => sunt lucruri cu care ne vom intalni mai rar intr-o firma de contabilitate; 
+
+
+
+Vand marfa fara TVA, 10k RON:
+
+
+371
+4111
+4427
+707
+
+
+
+4111 - 707 = 10k lei
+4111 - 4427 = 2.1k lei
+4427 - 4423 = 2.1k lei    (daca nu am nimic dedus)
+
+
+
+CEC de 12.1k lei 
+
+5112 - 4111 = 12.1k lei (sa stingem inregistrarea pe client); dpdv economic = am stins valoarea clientului, cu cec-ul de incasat; cec-urile se emit la termen (rareori emit factura azi, si azi primesc cec)
+
+5121 - 5112 = 12.1k lei (incasarea in sine)
+
+
+
+Ce instrumente mai avem in afara de CEC-uri? 
+
+Bilete la ordine =  5113 
+
+5113 = 4111 = 12.1k lei cand primesc biletul la ordin
+5121 = 5113 = 12.1k lei cand incasez biletul la ordin
+
+Banca spune asa - daca tu ai bilete la ordin <-> de obicei nu se acorda aceasta facilitate societatilor mici - cand avem un rulaj consist / contracte in derulare cu clientul respectiv => daca BO este peste 2 luni, pot sa iti scontez Biletul la Ordine <=> un altfel de imprumut pe termen scurt, prin care banca imi ofera un procent din Biletul la Ordin respectiv <=> banca nu mi-l sconteaza 100%; 
+
+Scontarea este un instrument pe care banca il utilizeaza cu societatile cu activitate indelungata care au clienti cu activitate indelungata; Daca am BO peste 2 luni, iar banca mi-l sconteaza, obtin o lichiditate in banca, mai devreme decat daca voi fi incasat acel Bilet la ordin....
+
+
+Se face o intreaga documentatie; este o posibilitate prin care societatea poate sa obtina, lichiditatii mai devreme; => daca eu incasez banii, trebuie sa dau la stat, TVA si impozit, fara sa am o lichiditatea curenta - motiv din care societatea se poate bloca; 
+
+Contabilitatea in Romania este o contabilitate de angajamnete: eu fac factura, nu o incasez, si statul imi cere bani (!!!)
+
+Exemplu:
+
+Bilet la ordine de 12k lei 
+
+Banca imi acorda 80% din valoarea biletului la ordin = 9.68k lei
+
+Ne putem trezi cu situatia asta: Societatile se duc la banca, isi negociaza scontarile - si gasim o suma de la banca, cu care nu stim ce sa facem 
+
+
+Primul pas pe care il fac - mut valoarea BO de la 5113 in 5114 - ca sa stiu ca valoarea acelui bilet a fost dat inspre scontare; 
+
+5114 - 5113 = 12.1k lei 
+5121 - 5114 = 9.68k lei
+
+6067 - 5114 = 2.42k lei (cheltuiala cu sconturile acordate) - circuitul apei in natura s-a stins - clientul este 0, banii sunt la mine in banca - 
+
+
+aia 20% e "dobanda", pe care o cere banca;
+
+
+scontarile nu sunt in proportie de 100% - este un instrument destul de scump - dar cand societatile sunt presate de anumite evenimente, e mai rapid decat anumite credite (cand nu am profit, desi am vanzari - desi banca ma analizeaza pe indicatori de profit/pierdere) <=> pe aceste BO, analiza merge mult mai rapid, decat analiza clasica; lichiditati mai devreme, decat le-as fi incasat; 
+
+
+
+
+Zona de conturi la banci:
+
+conturile in valuta = reevaluarea in cursul BNR de la sf lunii; 
+
+
+cand incasam prin valuta / platim prin valuata -> diferente de curs valutar <- care tot timpul se raporteaza la 
+
+
+100 euro de plata la furnizorul x, calculat la un curs de 5 lei; fiind furnizor, se inregistreaza la "cursul istoric" (cursul de la data receptiei) -> si vine la plata, 6 lei, la cursul de azi => am o cheltuiala; daca venea 4 lei, aveam un venit; 
+
+100 eur de la furnizor; istoric era 5, si la incasare era 6, avem un venit; si daca incasez la 4 lei, am o cheltuiala; 
+
+
+diferentele de curs valutar, curent, le inregistram prin:
+665 / 765
+
+diferenta de reevaluarea la sf lunii (financiare):
+668 / 768
+
+sa fie clara diferenta de curs din reevaluare, si cea de la furnizori; 
+
+
+
+
+
+SAGA:
+
+i-am dat in inchidere; mai fac o operatiuni, si SAGA te lasa sa o faci; daca nu te mai duci sa dai inchiderea de luna - am o diferenta intre analitic si sintetic;  {exemplu la banca}
+
+
+
+
+Extrasul de cont cu ceea ce gasim in balanta <=> analitic versus sintetic;
+
+
+
+Diferenta intre analitic si sintetic; ma duc in jurnalul de banca = unde imi da cu extrasul <=> dar nu imi da cu balanta; 
+
+
+sa verificam analiticul cu sinteticul <=> mai ales la banca; 
+
+
+alt ex:
+
+sa nu lasam 4111 => sa nu lasam solduri nelegate la furnizorul respectiv; 
+	denaturez fisa clientului, si balanta (sinteticul cu analiticul)
+
+
+	incasarea in avans - 473
+	urmatoare luna, pentru ca luna inchisa - 473 (pus notite, sa stii de unde vin, ca sa stii de unde ii ai / unde ii aloci)
+
+	important e sa inregistrezi intr-un cont contabil, de care sa mai stii; 
+		nu e problema daca luna viitoare stornezi, si pui pe furnizori/clienti <=> sa nu ratati alocarea pe furnizori / clienti; 
+
+
+
+	4091 - 419 <=> sa faci compensari ulterior ... {AI: de analizat}
+
+
+
+	consider:
+		401 sintetic
+		401 analitic - dar nu cu toti clientii
+
+
+		facturi neachitate / neincasate
+
+		balanta analitica in SAGA este o imensitate 
+
+
+
+		in momentul in care preluati balanta in cursul anului <=> nu preiau soldul, preiau total sume - pentru ca balanta trebuie sa aiba continuitate; 
+
+
+
+re SAGA:
+
+niciodata sa nu pleci in SAGA fara analitic;
+
+
+446 
+	nu folosesc 446 sintetic
+		ii pun din capul locul 446.1 = chiar daca zic nu, ca nu ii pun = de altfel cum e si corect 
+
+ex decont pe angajat, cu analitic 
+
+
+functie in SAGA dupa care poti face transferul din SAGA in analitic => 
+
+
+
+
+
+dna trainer are soft facut in colaborare cu IT-ist <=> are multe parghii de verificare rapida = 3 exemple:
+
+	decontul de TVA - casutele de inverzesc (4426, 4427) - ca ceea ce se duce in decont, este ce este in balanta
+
+	la intrari - balanta pe furnizor - casusta care se inverzeste (cand analiticul = sintetic) <=> sa nu mai pierd timp sa le verific;
+	
+	contul 121 - cheltuiala pe credit; venit pe debit; ma gasesc la bilant ca nu se inchid 6 si 7 cu 121 = casuta verde
+		- 627 = 5121 {inregistrarea corecta, chiar daca am o incasare}
+
+
+
+
+
+Dobanzi:
+
+din practica - cum trebuie sa inregistrez:
+
+	Credit:
+		ce vine in scadentar: rata (ramane fixa pe toata durata) + dobanda {(daca dobanda ramane fixa pe toata durata: cont de cheltuaiala (666) / cheltuiala in avans (471) = 5186; cand primesc banii in banca 5186 = 5121, si, 666 = 471) / (daca am dobanda variabila, pe care mi-o calculeaza banca la sold <-> cand platesc dobanda in banca: 5186 = 5121, si, 666 = 5186, in caz ca nu vreau sa fac direct 666 = 5121)} + comision
+
+
+
+daca am dobanzi de incasat:
+
+
+venituri in avans = 472
+
+
+cand am inchiderea acestor venituri in avans - le duc printr-un cont de venit (dobanda incasata)
+
+
+
+
+
+
+5187 = cont de activ 
+
+sa le urmarim ca trebuie sa le facem concomitent - tine de politica fiecare societati:
+
+5187 = 472
+472 = 766
+
+
+
+
+credite bancare pe terme scurt / linii de credit: 5191 (pasiv = datorie)
+
+	imprumuturi, si, linii de credit (credite bancare pe termen scurt); liniile de credit se reinnoiesc la 1 an; 
+
+credite (care au scadentar) = 1621 
+
+
+
+5121 - 5191
+
+din practica: la linia din practica, nu am scandetar; frecam niste bani prin banca - ii primim, ii luam x ori - functioneaza la modul ai primit 10,000 ron, ai platit 9,000 furnizor, si 1,000 tii duc inapoi; eu platesc la linia de credit, ceea ce utilizez - fiind un produs destul de scump; ce trebuie sa fim atenti - explicatiile sunt evazive - in functie de software-ul lor, trec tot fel de explicatii prin extras (ex extrase UniCredit, nu au sold interimat - operezi la ele la sf luni)
+
+
+sa fim foarte atenti sa le solicitam clientilor, extrasele de linie de credit - pentru ca ajungem sa operam prin 5121 si sa ratam 666, si sa le dam mai mult de plata la impozitul pe profit; 
+
+daca prin comparative cu un scadentar de imprumut - daca inregistrez rata in loc de dobanda, sau dobanda in loc de rata - ma uit in scandetar si imi dau seama ca am gresit; 
+
+la linia de credit - uite banii, tii dau, zilnic => sa solicitam un sold la linia de credit la sf de luna sa ne asiguram ca nu s-au incurcat 5191 cu 666;
+
+
+
+
+
+sunt impartite: pe trezorerie, pe termen neincasat; 
+
+analitice la 5191, per linie de credit; 
+
+
+
+5191 sa nu ajunga niciodata cu sold debitor; 
+
+
+
+53. Casa
+
+
+Casa in lei, casa in valuta => plafonul la sold casa - care este abordarea privind cate caserii - cate si in ce fel; 
+
+
+
+sold plafon de casa = 50k lei pe fiecare punct de lucru; 
+
+inventia unui client = da ce, nu pot sa am caserie la un sediu - si a mai facut rost de o caserie cu 50k lei;
+
+
+soldul A FOST nelimitat, cu cerinta ca sa ii avem si sa ii aratam la un control; 
+
+
+
+
+inregistrari contabile prin casa, si casa in valuta:
+
+
+
+ce plati am nelimitate prin caserie - nu am plafoane:
+	- salariile
+	- plati la bugetul statului si alte institutii (daca vreau sa platesc 100k lei cash) 
+
+	altfel, sunt limitat:
+		5k lei pers juridice
+		10k lei pers fizice
+
+	si la fel se aplica si la incasari - in oglinda; 
+
+
+
+platile fragmentate - ce ne poate salva - cand am un contract cu plata in rate => nu se mai considera plata fragmentata, si pot, din 20k lei, sa incasez de la o pers fizica 20k lei, dar cu conditia sa avem contract; 
+
+daca am contract cu plata in rate = am scadentar, am o data fixa pe care incasez ratele <=> trebuie sa respecte conditiile de plata in rate; 
+
+
+re ticehte de masa:
+
+5328 - 401 = inregistrarea tichetelor de plata, de la furnizori
+
+le includ in statul de plata, pentru fiscalizare - unde reduc 10% pentru impozit, si 10% pentru CASS; 
+
+cand am inregistrat statul:
+
+6422 - 5328
+
+
+
+
+
+5238 trebuie verificat lunar - nu la 3 luni, awaleu ce am eu aici
+
+
+
+
+5238 => legiutorii au zis ca trebuie date la sf lunii - cand stiti clar salariatul unde este incadrat - pentru ca nu pot sa le acord re concediu, cand angajatul nu este la munca => se ofera doar la conditia de baza (pot sa am o zi de 4 ore, si sa fie conditia de baza); dar daca am 2 contracte de munca de 8 ore fiecare, pot primit tichete doar la functia pe care eu o consider de baza; 
+
+
+
+
+
+
+
+
+542 = avansuri de trezorerie - decontul
+
+
+542 - 5121 / 5311 = 5,000lei acordarea avansului
+
+vine salariatul cu decontul = dovada platilor
+
+la toate trebuie sa inregistrez pe furnizori, pentru ca am TVA; 
+
+
+part 1 din 3: 2,000lei decontul = motorina 
+
+a) inregistrat furnizorul:
+
+6022 - 401 = 1652.89 lei
+4426 - 401 = 347.11 lei (21%)
+
+b) inregistrat plata pe furnizor, din avans:
+
+401 - 542 = 2,000 lei
+
+
+part 2 din 3: 1,000 lei decontul = cazare
+
+a) inregistrat furnizorul:
+
+625 - 401 = 900.90 lei
+4426 - 401 = 99.10 lei (11%)
+
+b) inregistrat plata pe furnizor, din avans:
+
+401 - 542 = 1,000 lei
+
+
+
+
+part 3 din 3: 2,000 lei decontul = diurna
+
+
+
+
+
+
+partea asta de deconturi (542) este destul de dificil de tinut  - este extraordinar de tinut aceasta parte de avansuri - si fiecare sistem de contabilitate le tine diferit; 
+
+	soferul a pus bani de la el si trebuie sa ii dau, sau i-am dat avansul mai mare si trebuie sa restitui avansul;  
+	542 pe analitic este esential (!!!!!)
+
+
+
+
+
+
+Viramente interne: 581 
+
+sunt cazuri de exceptie cand poate sa prezinte sold, cand transfer banii la sfarsitul lunii - si primesc banii la inceputul lunii urmatoare; 
+
+
+la dif de curs intre transfer valuta in lei -> ce regasesc in valuta, ma duc si in lei - si reglez diferenta de curs prin banca, nu prin 581 (!!!!!!!) 
+
+
+
+
+
+
+ajustarile pentru pierderea de valore - pe obligatiuni, pe actiuni
+
+
+
+
+
+
+
+601, 602, 603 - se utilizeaza in corespondenta cu - 301 ... etc {AI: de contraverificat si completat}
+
+
+
+
+
+niciodata nu asociez 601 la 371 - daca vine prestaiblit in balanta; 
+
+
+
+
+
+corelatii:
+
+6021 - 3021
+6023 - 3023
+6024 - 3024
+.
+.
+.
+6028 - 3028
+
+
+
+ATENTIE AICI:
+
+
+nu recomandam inregistrari contabile:
+
+
+3021 - 401
+6021 - 3021 
+
+
+nu trec din 6021 direct pe furnizor -> il trec prin gestiune, ca sa il pot scoate de acolo 
+
+
+
+se poate: 6022 - 401 => cand am bon de benzina; dar cand este factura, sau stocare; 
+
+
+
+
+
+de cand s-a implentat SAF-T, se solicita modulul de stocuri la control (trebuie sa il am in societate, deja gestionat - si sa il prezint) 
+
+
+
+corelatii:
+
+603 - 303 (trecut prin 8035 - conturi in afara bilantului - ca stiu ce obiecte de inventar am pe teren) 
+
+
+
+605 - 401 
+
+
+607 - 37*
+
+608 -  308
+
+609 / 709 => utilizat cand avem REDUCERI COMERCIALE PRIMITE ULTERIOR -> reducere comerciala pe o factura ulterioara; 
+
+
+
+
+
+604 = cand nu am o gestiune = corelatie directa cu 401 => apa pe care ne-o ofera angajatorul; pixuri, pachete de foi; cheltuiala pentur produse achizionate de firma, dar nu le stochezi; 
+
+
+daca e firma de vanzare pixuri = 1,000 pixuri -> 3028 
+
+
+dar daca am luat 1,000 de pixuri, si le duci pe toate pe santier, ca e firma de santier => nu le mai treci pe 3028 
+
+
+orice scot din gestiune, se face pe baza bonului de consum {AI: de contraverificat, de clarificat detaliat}
+
+
+
+1. creezi gestiunea = o definesti 
+2. apoi iti pui problema cum le consume (bon de consum)
+
+
+ 
+
+
+
+calupul de intrare la clasa 6, de trecut prin clasa 3  + totdeauna uitat la denumirea contului ca sa stiu cu ce cont il pun impreuna; 
+
+daca o marfa consider ca iam facut receptie in 371, dar vreau sa ii fac bon de consum pentru ca este aferenta unei lucrari => ce ii fac: il mut din marfa, in materii prime: 301 = 371 (le mut printr-un bon de transfer); apoi, daca le consum din 301 => 601= 301; o mare atentie, a acestor imperecheri de conturi de clasa 3 => ca sa vad si din anumite rulaje, ce face acea firma -> de ce am 601, dar nu am 301; 
+
+ 
+
+pe un bon si lichid de parbirz, si bezina -> separ lichidul de parbriz pe alt cont (re 6022) => fiecare firma decide ce si cum, ca nu iti ia nimeni gatul daca pui lichidul in 6022; corect ar fi lichid de parbriz in 604 <=> lichidul pe drumul lui, si nestocatele pe drumul lui; 
+
+
+
+
+
+
+
+611 = se utilizeaza cand am un deviz (piese de 5k lei, reparatii de 2k lei) in spatele facturii 
+
+
+
+spre exemplu, daca o firma isi cumpara 7 anvelope, si le utilizeaza pe rand = 3024  (pentru ca sunt piese de schimb, sau piese pentru utilaje)
+
+
+
+
+
+
+
+
+
+clasa 3 = gestiuni cu gestionari, sau obiecte care nu se consuma in aceasi; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+La sf sesiunii:
+
+
+	lista a corelatiilor de verificat pe balanta
+	
+		fiecare balanta in parte, este unica = pentru ca fiecare firma are obiectul ei de activitate; o lista mult; 
+
+	conturile cele mai comune
+		cele mai esentiale
+		in ce ordine
+
+
+
+
+
+
+
+
+
+
+
+
+Later:
+
+aplicatie care ruleaza verificarile analitic cu sintetic pe balanta
+	mijloacele fixe (& celelalte corelatii) 
+	121 cu 6 si 7
+	TVA
+	
+	
+
+
+
+
+
+
+Intrebari pentru Luni:
+
+cand preluam o societate - trebuie sa o disecam analitic-sintetic:
+
+Exemple de analitic cu sintetic, la (ne-ati dat deja, ne-ar mai trebui):
+	4111 / 401 
+	512*
+
+
+2. diferente intre:
+sold
+rulaje
+total sume
+
+
+
+
+
+
+
+
+
+
+
+
+
+
