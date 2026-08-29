@@ -142,9 +142,9 @@ O firmă poate să **emită în continuare facturi cu TVA înscris pe ele deși 
 ✅ Contul 301 se folosește cel mai des în **producție**. Din punct de vedere al tratamentului contabil, este cuplat cu:
 - **601** „Cheltuieli cu materiile prime" — la consum;
 - **711** „Venituri aferente costurilor stocurilor de produse" — la obținerea produsului;
-- **7015** „Venituri din vânzarea produselor finite" — la vânzare.
+- **701** „Venituri din vânzarea produselor finite" — la vânzare (în multe softuri se ține pe analiticul **7015**).
 
-⚠️ Notița originală zicea „*cuplat cu 704 și 7015*". **704** este „Venituri din servicii prestate" — nu are legătură cu materiile prime consumate în producția de bunuri. 704 apare când vinzi manoperă/servicii, nu produse. Corect este **7015** (+ 711 pe traseu).
+⚠️ Notița originală zicea „*cuplat cu 704 și 7015*". **704** este „Venituri din servicii prestate" — nu are legătură cu materiile prime consumate în producția de bunuri. 704 apare când vinzi manoperă/servicii, nu produse. Corect este **701** (+ 711 pe traseu); 7015 e analiticul lui în multe softuri.
 
 ---
 
@@ -1034,7 +1034,7 @@ Dacă deductibilul ar fi fost mai mare decât colectatul, diferența mergea inve
 4423 = 5121   ·     440
 ```
 
-**5121** este contul de bancă, indiferent de instrumentul folosit (ordin de plată, internet banking, mandat). Nu confunda: **5311** este casa în lei, iar **5111** este *Cecuri de încasat* — un cont de **încasări**, care nu are ce căuta într-o plată de TVA.
+**5121** este contul de bancă, indiferent de instrumentul folosit (ordin de plată, internet banking, mandat). Nu confunda: **5311** este casa în lei, iar **5112** este *Cecuri de încasat* — un cont de **încasări**, care nu are ce căuta într-o plată de TVA.
 
 Dacă ai TVA de recuperat din luna anterioară (sold debitor pe 4424) și TVA de plată în luna curentă, se pot compensa:
 
@@ -1549,7 +1549,7 @@ de asta depinde ce se cere clientului să aducă lunar.
 | 2 | Taxare inversă: `301 = 401 + 4427` | `301 = 401` **și separat** `4426 = 4427` |
 | 3 | „nedepunere D300 **2 luni** consecutive" | **6 luni** consecutive / 2 trimestre (art. 316 alin. 11 lit. d) |
 | 4 | „verificăm pe Google" | registrele oficiale ANAF + VIES |
-| 5 | „301 cuplat cu **704** și 7015" | 704 = servicii prestate; corect **7015** și 711 |
+| 5 | „301 cuplat cu **704** și 7015" | 704 = servicii prestate; corect **701** și 711 |
 | 6 | „>1 an durată, chiar dacă <5.000 ⟹ mijloc fix" | condițiile sunt **cumulative**; sub prag = obiect de inventar |
 | 7 | prag 5.000 fără context | OUG 8/2026, de la 25.02.2026, **prag fiscal**, cu regim tranzitoriu |
 | 8 | audit: „balanța analitică la **401** — debit achiziții, credit consum" | corelația debit=intrări / credit=consum e la **conturile de stoc 3xx** |

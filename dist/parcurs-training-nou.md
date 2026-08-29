@@ -266,6 +266,7 @@ Un flux e util și fără modul: fluxul explică, modulul execută. Dacă adaugi
 | **26** | harta de diacritice e aplicată complet: niciun cuvânt din partea ei stângă nu mai apare în foile pe care le acoperă, iar simbolurile de cont sunt neatinse |
 | **24** | nicio frază cu cifră din workbook-uri nu contrazice cifra reală („17 module declarative”, „68 fluxuri × pași”) — foaia Istoric e scutită, acolo cifrele vechi sunt chiar conținutul |
 | **29** | contul de 4 cifre folosit într-un pas de flux, al cărui sintetic e BIFUNCȚIONAL, există ca rând propriu în plan — acolo unde rezerva porții 20 dă un răspuns fals |
+| **30** | denumirea de cont afirmată în proza documentelor aparține simbolului afirmat: „5111 Cecuri de încasat” e o eroare, pentru că denumirea aia e a lui 5112 |
 
 Motivul fiecărei porți e scris în `build/verifica.py`, lângă ea. Când o poartă pică, acolo scrie de ce există.
 
@@ -356,4 +357,4 @@ Poarta 19 leagă marcajele de întrebări la nivel de DOCUMENT: unul cu întreb�
 
 ---
 
-*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 29 porți, 24 module, 87 fluxuri la data generării.*
+*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 30 porți, 24 module, 87 fluxuri la data generării.*

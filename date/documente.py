@@ -233,6 +233,32 @@ DOCUMENTE = [
         ],
         legenda_veche=[],          # are deja forma canonică
         anexe={},                  # anexele A–E sunt deja denumite corect
+        # Defecte prinse de poarta 30 (denumirea afirmată aparține altui simbol) la
+        # contraverificarea cu revizuirile paralele T2–T7. 7015 e cel mult un analitic
+        # al lui 701 în softuri; denumirea „Venituri din vânzarea produselor finite” e
+        # a sinteticului 701. 5111 nu există — Cecuri de încasat e 5112. Nu se ating
+        # monografiile: o postare pe analiticul 7015 e legitimă; doar AFIRMAȚIA că 7015
+        # poartă denumirea sinteticului e greșită.
+        inlocuiri=[
+            dict(text='- **7015** „Venituri din vânzarea produselor finite" — la '
+                      'vânzare.',
+                 devine='- **701** „Venituri din vânzarea produselor finite" — la '
+                        'vânzare (în multe softuri se ține pe analiticul **7015**).',
+                 motiv="Denumirea e a sinteticului 701; 7015 e analitic, nu sintetic. "
+                       "Poarta 30."),
+            dict(text="Corect este **7015** (+ 711 pe traseu).",
+                 devine="Corect este **701** (+ 711 pe traseu); 7015 e analiticul lui "
+                        "în multe softuri.",
+                 motiv="Corecția mea înlocuise 704 cu 7015 — un cont fără rând în plan. "
+                       "Sinteticul care poartă denumirea e 701."),
+            dict(text="corect **7015** și 711",
+                 devine="corect **701** și 711",
+                 motiv="Aceeași corecție, în rândul din Anexa C. Partea din stânga "
+                       "(citatul brutului „704 și 7015”) rămâne, e ce a scris nota."),
+            dict(text="iar **5111** este *Cecuri de încasat*",
+                 devine="iar **5112** este *Cecuri de încasat*",
+                 motiv="5111 nu există în plan; Cecuri de încasat e 5112. Poarta 30."),
+        ],
         genereaza=["F", "G"],
         extinde_anexe={"C": CORECTII_SURSA_19_08},
         nota="Singurul care avea deja anexele denumite. Primește Anexa F, care exista "
@@ -358,6 +384,15 @@ DOCUMENTE = [
                  motiv="Aceeași trimitere moartă. Plafoanele sunt primul lucru pe care "
                        "cineva îl aplică la un client, deci marcajul trebuie să fie "
                        "acolo unde se citește, nu doar în anexă."),
+            # Același defect ca în stocuri-tva, a treia oară: 5111 nu există, iar Cecuri
+            # de încasat e 5112. Aici e într-o listă de confuzii de trezorerie, cu
+            # simbolul netformatat, deci poarta 30 nu-l prinde — dar e la fel de greșit.
+            dict(text="**Confuzia 5121 / 5311 / 5111.** 5121 = bancă, 5311 = casa în "
+                      "lei, 5111 = *cecuri de încasat*.",
+                 devine="**Confuzia 5121 / 5311 / 5112.** 5121 = bancă, 5311 = casa în "
+                        "lei, 5112 = *cecuri de încasat*.",
+                 motiv="5111 nu există în plan; contul de cecuri de încasat e 5112. "
+                       "Prins de aceeași contraverificare ca defectele din poarta 30."),
         ],
         nota="Singurul document care nu vine dintr-o zi de training proprie: e partea "
              "din 19.08.2026 care nu adâncea niciun subiect existent.",

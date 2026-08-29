@@ -503,7 +503,7 @@ sub titlul „Later”:
 
 ## Anexa B — Checklist practic
 
-1. **Confuzia 5121 / 5311 / 5111.** 5121 = bancă, 5311 = casa în lei, 5111 = *cecuri de încasat*. Orice plată bancară — inclusiv prin ordin de plată — trece prin **5121**.
+1. **Confuzia 5121 / 5311 / 5112.** 5121 = bancă, 5311 = casa în lei, 5112 = *cecuri de încasat*. Orice plată bancară — inclusiv prin ordin de plată — trece prin **5121**.
 
 2. **Impozitul pe profit calculat pe baza greșită.** Soldul creditor al lui 121 este **baza**, nu impozitul. Impozitul este 16% din el.
 
