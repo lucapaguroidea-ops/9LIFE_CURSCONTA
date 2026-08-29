@@ -49,6 +49,8 @@ descris multă vreme nouă porți, cu poarta 9 în forma ei veche.
      vechi sunt chiar conținutul
  29. contul de 4 cifre folosit într-un pas de flux, al cărui sintetic e BIFUNCȚIONAL,
      există ca rând propriu în plan — acolo unde rezerva porții 20 dă un răspuns fals
+ 30. denumirea de cont afirmată în proza documentelor aparține simbolului afirmat:
+     „5111 Cecuri de încasat” e o eroare, pentru că denumirea aia e a lui 5112
 
 Rulare:  python build/verifica.py
 """
@@ -1056,6 +1058,79 @@ def poarta_analitice_bifunctionale(wb):
                  f"monografii au rând propriu în plan ({n} conturi)")
 
 
+def poarta_denumire_asertata(wb):
+    """Poarta 30 — denumirea afirmată în proză aparține simbolului afirmat.
+
+    Porțile 20 și 29 verifică simbolurile de cont din pașii fluxurilor. Niciuna nu se
+    uită la PROZA documentelor — iar acolo au trecut două defecte pe care le-a scos la
+    iveală o revizuire paralelă: „5111 Cecuri de încasat” (denumirea e a lui 5112, iar
+    5111 nu există) și „7015 Venituri din vânzarea produselor finite” (e a lui 701).
+    Ambele erau conturi inexistente, prezentate în text cu denumirea unui cont vecin —
+    exact tiparul pe care poarta 20 nu-l vede, pentru că sinteticul lor (511, 701)
+    există și rezerva îl acceptă.
+
+    Regula: dacă proza împerechează un simbol cu o denumire, iar denumirea aia aparține
+    ÎN PLAN altui simbol, e o eroare. Se măsoară pe denumirea normalizată (primele patru
+    cuvinte, fără diacritice), nu pe simbol — pentru că defectul e chiar o denumire pusă
+    pe simbolul greșit.
+
+    O corecție NU se semnalează, fără listă de excepții: o corecție citează AMBELE
+    simboluri pe același rând („`391` … Corect: `397`”), o eroare îl afirmă doar pe cel
+    greșit. Deci dacă rândul conține și simbolul-proprietar din plan, e o corecție
+    declarată, nu o afirmație falsă.
+    """
+    import unicodedata
+
+    def norm(s):
+        s = unicodedata.normalize("NFKD", s.lower())
+        s = "".join(c for c in s if not unicodedata.combining(c))
+        return tuple(re.sub(r"[^a-z ]+", " ", s).split()[:4])
+
+    nume = {}
+    for r in wb["Plan de conturi"].iter_rows(min_col=1, max_col=2, values_only=True):
+        v = str(r[0] or "").strip()
+        if re.fullmatch(r"\d{3,4}", v) and r[1]:
+            nume[v] = str(r[1]).strip()
+
+    # denumire normalizată → simbolurile din plan care o poartă
+    dupa_nume = {}
+    for sim, d in nume.items():
+        dupa_nume.setdefault(norm(d), set()).add(sim)
+
+    # proza: „**NNNN** «Denumire»” cu copulă opțională (este / e / = / — / -)
+    rx = re.compile(r'[`*]{1,2}(\d{3,4})[`*]{1,2}\s*(?:este|e|=|—|-)?\s*[„"*]?'
+                    r'([A-ZĂÂÎȘȚ][^"”|*`\n]{8,60})')
+    gasite = []
+    for cfg in ddoc.DOCUMENTE:
+        cale = os.path.join(RADACINA, cfg["iesire"])
+        if not os.path.exists(cale):
+            continue
+        with open(cale, encoding="utf-8") as f:
+            for n, linie in enumerate(f.read().split("\n"), 1):
+                for m in rx.finditer(linie):
+                    sim, den = m.group(1), m.group(2).strip()
+                    cheie = norm(den)
+                    if len(cheie) < 3:
+                        continue
+                    proprietari = dupa_nume.get(cheie, set())
+                    if not proprietari or sim in proprietari:
+                        continue
+                    # corecția citează și proprietarul pe același rând → nu e eroare
+                    if any(re.search(rf'[`*]{{1,2}}{p}[`*]{{1,2}}', linie)
+                           for p in proprietari):
+                        continue
+                    gasite.append((os.path.basename(cfg["iesire"]), n, sim, den,
+                                   sorted(proprietari)))
+
+    for f, n, sim, den, own in gasite:
+        cade("30", f"{f}:{n}: „{sim} {den[:36]}” — denumirea aia e a lui "
+                   f"{', '.join(own)} în plan, iar {sim} "
+                   f"{'nu există' if sim not in nume else 'are altă denumire'}")
+    if not gasite:
+        ok("30", "toate denumirile de cont afirmate în proza celor "
+                 f"{len(ddoc.DOCUMENTE)} documente aparțin simbolului afirmat")
+
+
 def poarta_module_declara(wb_plan):
     """Poarta 21 — fluxurile declarate de module există cu adevărat.
 
@@ -1315,6 +1390,7 @@ def main():
     poarta_marcaje()
     poarta_conturi_in_plan(wb)
     poarta_analitice_bifunctionale(wb)
+    poarta_denumire_asertata(wb)
     poarta_module_declara(wb)
     poarta_readme()
     poarta_cifre_in_proza()
