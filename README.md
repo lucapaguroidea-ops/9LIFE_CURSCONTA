@@ -98,8 +98,8 @@ Necesită `openpyxl`, `formulas`, `numpy` (`pip install openpyxl formulas numpy`
 | Rânduri de cadență în „Închideri periodice” | 30 |
 | Foi în workbook-ul de referință | 12 |
 | Documente de studiu | 6 |
-| Întrebări: deschise / verificate / decizii de cabinet | 32 / 13 / 9 |
-| Porți de calitate | 29 |
+| Întrebări: deschise / verificate / decizii de cabinet | 33 / 13 / 9 |
+| Porți de calitate | 30 |
 
 *Cifrele de mai sus se citesc din workbook-urile construite la fiecare `make tot`. Dacă nu corespund, blocul e vechi — nu fișierele.*
 

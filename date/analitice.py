@@ -260,6 +260,9 @@ ANALITICE = [
               "Funcțiunea lui 665 din OMFP 1802/2014 include însă explicit evaluarea de "
               "la sfârșitul lunii a disponibilităților în valută. Scopul formatorului e "
               "corect și se atinge cu analiticul de aici, fără să mute reevaluarea în "
-              "afara contului de diferențe de curs.",
+              "afara contului de diferențe de curs. Se reevaluează doar elementele "
+              "MONETARE: avansurile în valută sunt nemonetare (dau dreptul la un bun, "
+              "nu la bani), deci rămân la cursul plății și nu produc rulaj pe niciun "
+              "analitic .REV.",
          flux="F-107, F-501"),
 ]

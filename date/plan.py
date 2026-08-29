@@ -60,7 +60,12 @@ ACTUALIZARI = {
                  flux="F-57, F-61", tier="A"),
     "215":  dict(analitice="analitic pe imobil, cu defalcare teren / construcție", factor="N C O",
                  flux="F-56", tier="A"),
-    "223":  dict(analitice="223 (tranzit) → 213 la recepție", factor="O", flux="F-57", tier="A"),
+    "223":  dict(analitice="223 (tranzit) → 213 la recepție", factor="O", flux="F-57", tier="A",
+                 observatie="Cont de TRANZIT, nu de avans: ține mijlocul fix facturat dar "
+                            "nerecepționat, până intră în 213. ⚠ Nu se confundă cu avansurile "
+                            "pentru imobilizări — acelea sunt 232 (corporale) și 234 "
+                            "(necorporale), sau 4093/4094 după plan. O revizuire paralelă îl "
+                            "dădea drept „avans pentru necorporale”; e o confuzie de prevenit."),
     "224":  dict(analitice="224 (tranzit) → 214 la recepție", factor="O", flux="F-57", tier="A"),
     "231":  dict(analitice="analitic PE OBIECTIV de investiții", factor="C O B",
                  flux="F-58, F-27", tier="A"),

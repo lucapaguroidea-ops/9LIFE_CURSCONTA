@@ -177,6 +177,15 @@ la încasare era 6, avem un venit” — dar „de la furnizor” cu „încasar
 cazuri. Regula unică, din care ies toate patru: **la curs mai mare, elementul de ACTIV
 aduce venit, iar elementul de PASIV aduce cheltuială.**
 
+➕ **Avansurile în valută NU se reevaluează.** Regula de reevaluare lunară privește
+elementele **monetare** — disponibilul, creanțele și datoriile care se vor stinge în
+bani. Un avans plătit sau încasat e **nemonetar**: dă dreptul la un bun sau la un
+serviciu, nu la o sumă. Deci rămâne la **cursul de la data plății**, indiferent cum se
+mișcă cursul până la factura finală, iar la factură se folosește tot acel curs istoric
+pentru partea acoperită de avans. Cine reevaluează avansul umflă sau dezumflă un cont
+care n-are ce diferență de curs să producă. ❓ Articolul exact din OMFP 1802/2014 pe
+elementele nemonetare — regula e fermă, referința rămâne de confirmat.
+
 
 ### 3.2 Diferențele de curs: 665/765 sau 668/768?
 
@@ -405,6 +414,14 @@ aparține contului de bancă în valută, unde s-a și produs.
 ## Anexa D — Rămase deschise
 
 Ce e încă provizoriu în documentul ăsta. Lista nu e scrisă aici: vine din `date/intrebari.py`, aceeași sursă cu foaia „Întrebări deschise” a workbook-ului și cu lista trimisibilă formatorului.
+
+**❓ Care e articolul din OMFP 1802/2014 care spune că elementele NEMONETARE (inclusiv avansurile în valută) nu se reevaluează la cursul de închidere?**
+
+*Trezorerie — diferențe de curs și plafoane · training 28.08.2026, punctul 10*
+
+Regula a apărut la contraverificarea cu revizuirile paralele: avansurile în valută rămân la cursul plății, nu se reevaluează lunar ca disponibilul și creanțele monetare.
+
+**Ce am presupus între timp:** Regula e fermă și o pot motiva — un avans dă dreptul la un bun, nu la o sumă, deci e nemonetar, iar reevaluarea privește doar monetarul. Ce n-am confirmat e articolul exact (probabil pct. 319 din OMFP 1802/2014, secțiunea de conversie a elementelor în valută) — de aceea rămâne întrebare, nu răspuns cu temei.
 
 **❓ Reevaluarea de sfârșit de lună a conturilor în valută se înregistrează pe 665/765 sau pe 668/768?**
 

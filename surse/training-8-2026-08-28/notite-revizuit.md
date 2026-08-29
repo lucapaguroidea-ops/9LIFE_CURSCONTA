@@ -268,6 +268,15 @@ la încasare era 6, avem un venit” — dar „de la furnizor” cu „încasar
 cazuri. Regula unică, din care ies toate patru: **la curs mai mare, elementul de ACTIV
 aduce venit, iar elementul de PASIV aduce cheltuială.**
 
+➕ **Avansurile în valută NU se reevaluează.** Regula de reevaluare lunară privește
+elementele **monetare** — disponibilul, creanțele și datoriile care se vor stinge în
+bani. Un avans plătit sau încasat e **nemonetar**: dă dreptul la un bun sau la un
+serviciu, nu la o sumă. Deci rămâne la **cursul de la data plății**, indiferent cum se
+mișcă cursul până la factura finală, iar la factură se folosește tot acel curs istoric
+pentru partea acoperită de avans. Cine reevaluează avansul umflă sau dezumflă un cont
+care n-are ce diferență de curs să producă. ❓ Articolul exact din OMFP 1802/2014 pe
+elementele nemonetare — regula e fermă, referința rămâne de confirmat.
+
 ### 4.2 Diferențele de curs: 665/765 sau 668/768?
 
 ❓ **Divergență de rezolvat cu formatorul.** Notițele spun:

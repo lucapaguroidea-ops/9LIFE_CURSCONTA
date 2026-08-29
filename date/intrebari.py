@@ -449,6 +449,21 @@ TEME = [
           "e verificat, iar eu n-am confirmat-o pe textul legii — deci C-38 a rămas cu "
           "un singur prag și cu întrebarea marcată."),
 
+        q("training 28.08.2026, punctul 10",
+          "Care e articolul din OMFP 1802/2014 care spune că elementele NEMONETARE "
+          "(inclusiv avansurile în valută) nu se reevaluează la cursul de închidere?",
+          "Regula a apărut la contraverificarea cu revizuirile paralele: avansurile în "
+          "valută rămân la cursul plății, nu se reevaluează lunar ca disponibilul și "
+          "creanțele monetare.",
+          "F-107 și MOD_CREDIT_VALUTA: dacă un avans în valută ar fi reevaluat, ar "
+          "produce diferențe de curs pe un cont care n-are ce diferență să genereze. "
+          "Regula e scrisă în §4.1 al documentului de trezorerie ca ➕.",
+          "Regula e fermă și o pot motiva — un avans dă dreptul la un bun, nu la o sumă, "
+          "deci e nemonetar, iar reevaluarea privește doar monetarul. Ce n-am confirmat "
+          "e articolul exact (probabil pct. 319 din OMFP 1802/2014, secțiunea de "
+          "conversie a elementelor în valută) — de aceea rămâne întrebare, nu răspuns "
+          "cu temei."),
+
         q("training 28.08.2026, punctul 1",
           "Reevaluarea de sfârșit de lună a conturilor în valută se înregistrează pe "
           "665/765 sau pe 668/768?",
@@ -708,6 +723,7 @@ DOC_EXPLICIT = {
     "training 28.08.2026, punctul 7": "doc:stocuri-tva",  # 604 vs. 6022 auto
     "training 28.08.2026, punctul 8": "doc:control",      # plafonul la magazine mari
     "training 28.08.2026, punctul 9": "doc:trezorerie",   # monografia obligațiunilor
+    "training 28.08.2026, punctul 10": "doc:trezorerie",  # avansurile în valută nemonetare
 }
 
 

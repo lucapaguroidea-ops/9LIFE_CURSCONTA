@@ -129,6 +129,7 @@ EXEMPLU = {
 EXEMPLU_SOLD = {
     "4111": 238400, "401": -176250, "409": 8500, "419": -12100,
     "4551": -20000, "5191": -1000, "444": -3250, "4282": 1200,
+    "1621": -85000,
 }
 
 #: (cont, natura, sensul normal) — pentru blocul V3. Natura vine din planul de conturi,
@@ -142,6 +143,10 @@ NATURI = [
     ("5191", "Pasiv", "Creditor"),
     ("444", "Pasiv", "Creditor"),
     ("4282", "Activ", "Debitor"),
+    # 1621 e datorie: sold debitor la finalul creditului = prea multă rambursare sau
+    # prea puțină dobândă înregistrată, cu impozit pe profit și dividende strâmbe.
+    # Semnalat de contraverificarea cu revizuirea paralelă din 07.08.
+    ("1621", "Pasiv", "Creditor"),
 ]
 
 #: (ce se sprijină pe el, temei) — secțiunea finală din `Reguli`.
