@@ -148,6 +148,10 @@ FARA_CADENTA = {
     "1011": "Se golește la înregistrarea mențiunii la ONRC, nu la o dată din calendar "
             "(F-101, F-112). Cât timp stă cu sold, motivul e la registrul comerțului, "
             "nu în contabilitate — o verificare lunară n-ar avea ce să constate.",
+    "169": "Prima de rambursare se amortizează pe DURATA împrumutului obligatar (686 = "
+           "169) și se scoate parțial la răscumpărarea de titluri proprii — se golește "
+           "prin operațiune, ca amortizarea, nu la o dată din calendar (F-115). Un sold "
+           "acolo e normal cât timp împrumutul e viu.",
 }
 
 # ---------------------------------------------------------------------------

@@ -307,6 +307,14 @@ CONTURI_NOI = [
                     "interimare.",
          analitice="1171 PE AN (sens D/C)", factor="N F", flux="F-104, F-109, F-110",
          tier="A"),
+    # ---- împrumutul obligatar (F-115) ----------------------------------
+    dict(simbol="1681", denumire="Dobânzi aferente împrumuturilor din emisiuni de obligațiuni",
+         fct="P", natura="Patrimonial (real)", subtip="Datorie",
+         observatie="Cuponul datorat deținătorilor de obligațiuni, între recunoaștere și "
+                    "plată. Se golește la fiecare scadență de cupon (1681 = 512). "
+                    "Analiticul lui 168 pentru împrumutul obligatar — nu se confundă cu "
+                    "1682 (dobânzi la credite bancare).",
+         analitice="1681 pe emisiune de obligațiuni", factor="V", flux="F-115", tier="B"),
     # ---- conturile care țin rulajele curate ----------------------------
     dict(simbol="4481", denumire="Alte datorii față de bugetul statului", fct="P",
          natura="Rol in flux", subtip="Intermediar / clarificare",
@@ -487,6 +495,10 @@ MATRICE = [
      "F-508 pas 3: cheltuiala se naște la acordare, nu la cumpărare", "NU"),
     ("301 / 371", "Transferul între gestiuni", "A", "F-321",
      "F-321 pas 2: gestiunea se schimbă înaintea consumului", "NU"),
+
+    # ---- împrumutul obligatar (28.08, întrebarea 9) -----------------------
+    ("161 / 169 / 505", "Emisiune și răscumpărare de obligațiuni proprii", "A", "F-91",
+     "F-91 pas 4: răscumpărarea anulează nominalul contra prețului, nu e plată", "NU"),
 
     # ---- subvenții, dividende, conturile-coș (sursa 26.08) -----------------
     ("1012", "Capital subscris vărsat — analitice pe asociat", "A", "F-76, F-74",

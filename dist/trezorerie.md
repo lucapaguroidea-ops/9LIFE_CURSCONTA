@@ -445,7 +445,7 @@ Notițele descriu ambele variante fără să spună care e standardul: „5186 =
 
 Notița spune doar că obligațiunea „se cumpără la un anumit preț, se răscumpără la un anumit preț + cheltuieli la un anumit curs valutar”, cu mențiunea „de detaliat” adresată mie. N-am putut să o detaliez din notițe: nu sunt cifre.
 
-**Ce am presupus între timp:** Am scris distincția conceptuală și diferența 505 / 506, fără să inventez cifre. Fluxul se scrie când există un exemplu real.
+**Ce am presupus între timp:** Am scris distincția conceptuală și diferența 505 / 506, fără să inventez cifre. UPDATE: fluxul F-115 există acum, cu un exemplu AUTOCONSISTENT construit de mine (emisiune sub par la 95/100, primă 5.000 pe 169, cupon 10%, răscumpărarea și anularea a 200 de titluri proprii cu pierdere de 200 pe 668, plus un tranșon în valută cu diferența de curs pe 665). Trece porțile 1–3, dar cifrele și tratamentul sunt ilustrative, nu dictate de formator — de aceea întrebarea rămâne deschisă până le confirmă.
 
 
 ---

@@ -229,7 +229,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 
 **De ce contează.** Documentul de trezorerie descrie distincția acțiuni/obligațiuni și conturile (505, 506, 161), dar nu are monografie. Fără cifre nu se poate scrie un flux care să treacă porțile 1 și 2.
 
-**Ce am presupus.** Am scris distincția conceptuală și diferența 505 / 506, fără să inventez cifre. Fluxul se scrie când există un exemplu real.
+**Ce am presupus.** Am scris distincția conceptuală și diferența 505 / 506, fără să inventez cifre. UPDATE: fluxul F-115 există acum, cu un exemplu AUTOCONSISTENT construit de mine (emisiune sub par la 95/100, primă 5.000 pe 169, cupon 10%, răscumpărarea și anularea a 200 de titluri proprii cu pierdere de 200 pe 668, plus un tranșon în valută cu diferența de curs pe 665). Trece porțile 1–3, dar cifrele și tratamentul sunt ilustrative, nu dictate de formator — de aceea întrebarea rămâne deschisă până le confirmă.
 
 <sub>sursa: training 28.08.2026, punctul 9</sub>
 

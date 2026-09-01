@@ -568,4 +568,76 @@ FLUXURI = [
                 rol="Stare terminală: cotele sunt citibile din balanță, fără acte"),
         ],
     ),
+    # ------------------------------------------------------------------ F-91
+    # Cifrele NU vin din notițe: notița din 28.08 spunea doar „se cumpără la un preț,
+    # se răscumpără la un preț + cheltuieli la un curs valutar”, cu „de detaliat”
+    # adresat mie. Exemplul de mai jos e construit de mine ca să fie autoconsistent și
+    # să treacă poarta 1 — e ilustrativ, nu dictat de formator. Rămâne de confirmat cu
+    # el (întrebarea „training 28.08.2026, punctul 9”).
+    flux(
+        "F-91", "Emisiune și răscumpărare de obligațiuni proprii (161 / 169 / 505)",
+        didactic=True,
+        roluri="Împrumut obligatar + Primă de rambursare + Răscumpărare de titluri proprii",
+        conturi="161, 169, 1681, 505, 461, 512, 666, 686, 668, 768, 665",
+        note="Emitentul, nu investitorul: 161 e datoria, 505 sunt propriile obligațiuni "
+             "răscumpărate. Investitorul care CUMPĂRĂ obligațiunile altcuiva le ține pe "
+             "506 — alt cont, altă poveste (vezi §2.2 din documentul de trezorerie).",
+        principiu="Prețul de EMISIUNE și cel de RAMBURSARE sunt două lucruri diferite, "
+                  "iar diferența dintre ele — prima de rambursare (169) — nu e nici "
+                  "cheltuială la emisiune, nici venit: e un cost al finanțării, întins "
+                  "pe toată durata împrumutului prin 686. Răscumpărarea propriilor "
+                  "obligațiuni înainte de scadență nu stinge datoria la preț de piață, "
+                  "ci ANULEAZĂ nominalul (161) contra prețului plătit (505) și a primei "
+                  "neamortizate aferente (169) — iar ce rămâne e câștig (768) sau "
+                  "pierdere (668), nu o simplă plată.",
+        pasi=[
+            pas(1, "Prospect de emisiune + subscriere",
+                "1.000 de obligațiuni, valoare nominală (= de rambursare) 100 lei, "
+                "emise la 95 lei. Se încasează prețul de emisiune (95.000), dar datoria "
+                "se naște la valoarea de RAMBURSARE (100.000). Diferența de 5.000 e "
+                "prima de rambursare, un activ care se va amortiza.",
+                dr=[("461.subscriitori", 95000), ("169", 5000)],
+                cr=[("161.emisiune", 100000)],
+                rol="Creanță subscriere + Primă (169) + Datoria la valoarea de rambursare"),
+            pas(2, "Extras de cont — încasarea subscrierii",
+                "Banii intră la prețul de emisiune, nu la nominal.",
+                dr=[("512", 95000)], cr=[("461.subscriitori", 95000)],
+                rol="Trezorerie + stingerea creanței de subscriere"),
+            pas(3, "Nota anuală — cuponul și amortizarea primei",
+                "Cuponul de 10% pe an se calculează pe NOMINAL (100.000), deci 10.000 "
+                "lei, recunoscut și plătit. În paralel, prima se amortizează liniar pe "
+                "cei 5 ani: 5.000 ÷ 5 = 1.000 lei/an, pe cheltuială financiară (686). "
+                "Cuponul e remunerația; amortizarea primei e costul emisiunii sub par.",
+                dr=[("666", 10000), ("1681", 10000), ("686", 1000)],
+                cr=[("1681", 10000), ("512", 10000), ("169", 1000)],
+                rol="Cheltuială cu dobânda + amortizarea primei de rambursare"),
+            pas(4, "Răscumpărarea și anularea a 200 de obligațiuni proprii (anul 3)",
+                "După doi ani de amortizare, societatea cumpără de pe piață 200 din "
+                "propriile obligațiuni la 98 lei = 19.600 lei (pe 505). Apoi le "
+                "ANULEAZĂ: stinge nominalul de 20.000 (161) și scoate prima neamortizată "
+                "aferentă — 3.000 rămas × 200/1.000 = 600 (169). Datoria netă anulată e "
+                "20.000 − 600 = 19.400; s-au plătit 19.600, deci o pierdere de 200 (668).",
+                dr=[("161.emisiune", 20000), ("668", 200)],
+                cr=[("505", 19600), ("169", 600)],
+                rol="Pas revelator: răscumpărarea nu e plată, e anulare cu rezultat",
+                revelator=True),
+            pas(5, "Scadența finală — rambursarea celor 800 rămase, emise în valută",
+                "Dacă emisiunea fusese în valută, la rambursare apare și diferența de "
+                "curs. Ilustrativ, pe un tranșon de 100 de obligațiuni EUR (nominal 100 "
+                "EUR, curs emisiune 4,95 → 49.500 lei), rambursate la curs 5,05 = 50.500 "
+                "lei: diferența de 1.000 lei e nefavorabilă și merge pe 665 (nu pe 668 — "
+                "e diferență de curs pe un element monetar).",
+                dr=[("161.emisiune.EUR", 49500), ("665", 1000)],
+                cr=[("512", 50500)],
+                rol="Rambursarea la scadență, cu diferența de curs pe 665"),
+            pas(6, "Verificare",
+                "Sold 161 = 0 după rambursarea integrală, sold 169 = 0 (amortizat plus "
+                "porțiunea anulată la răscumpărare), sold 505 = 0 (obligațiunile proprii "
+                "s-au anulat, nu se păstrează în portofoliu), sold 1681 = 0 după fiecare "
+                "cupon plătit. 505 cu sold la sfârșit de an = obligațiuni proprii "
+                "răscumpărate și neanulate — un titlu care se ține pe sine, semnal de "
+                "anulare uitată.",
+                rol="Stare terminală: 161 = 0, 169 = 0, 505 = 0"),
+        ],
+    ),
 ]

@@ -39,6 +39,7 @@ CLASA_1 = [
     ("F-112", "F-74", "Majorarea capitalului social din creditare"),
     ("F-113", "F-75", "Remiterea de datorie (4551 → 7582)"),
     ("F-114", "F-76", "Analiticele pe 1012 = cotele de participare"),
+    ("F-115", "F-91", "Emisiune și răscumpărare de obligațiuni proprii (161 / 169 / 505)"),
 ]
 
 CLASA_2 = [
