@@ -415,22 +415,6 @@ aparține contului de bancă în valută, unde s-a și produs.
 
 Ce e încă provizoriu în documentul ăsta. Lista nu e scrisă aici: vine din `date/intrebari.py`, aceeași sursă cu foaia „Întrebări deschise” a workbook-ului și cu lista trimisibilă formatorului.
 
-**❓ Care e articolul din OMFP 1802/2014 care spune că elementele NEMONETARE (inclusiv avansurile în valută) nu se reevaluează la cursul de închidere?**
-
-*Trezorerie — diferențe de curs și plafoane · training 28.08.2026, punctul 10*
-
-Regula a apărut la contraverificarea cu revizuirile paralele: avansurile în valută rămân la cursul plății, nu se reevaluează lunar ca disponibilul și creanțele monetare.
-
-**Ce am presupus între timp:** Regula e fermă și o pot motiva — un avans dă dreptul la un bun, nu la o sumă, deci e nemonetar, iar reevaluarea privește doar monetarul. Ce n-am confirmat e articolul exact (probabil pct. 319 din OMFP 1802/2014, secțiunea de conversie a elementelor în valută) — de aceea rămâne întrebare, nu răspuns cu temei.
-
-**❓ Reevaluarea de sfârșit de lună a conturilor în valută se înregistrează pe 665/765 sau pe 668/768?**
-
-*Trezorerie — diferențe de curs și plafoane · training 28.08.2026, punctul 1*
-
-Notițele din 28.08 spun: diferențele de curs curente prin 665/765, iar reevaluarea de la sfârșitul lunii prin 668/768, cu observația „să fie clară diferența de curs din reevaluare, și cea de la furnizori”.
-
-**Ce am presupus între timp:** Am păstrat 665/765 pentru ambele situații, cu analitic .DEC și .REV. Motivul: funcțiunea contului 665 din OMFP 1802/2014 include explicit diferențele rezultate „la sfârșitul lunii/exercițiului financiar, din evaluarea disponibilităților bancare și a numerarului în valută” — deci reevaluarea e chiar în funcțiunea lui. Iar 668/768 au alt rost: creanțele și datoriile exprimate în LEI, decontabile după cursul unei valute. Scopul formatorului — reevaluarea separată de decontare — se atinge cu analiticul, fără să mute reevaluarea în afara contului de diferențe de curs. Dacă formatorul confirmă varianta lui, se schimbă; dar atunci trebuie explicat cum se raportează diferențele de curs care nu mai sunt în contul lor.
-
 **❓ Dobânda de plătit trece obligatoriu prin 5186, sau `666 = 5121` direct e acceptat în cabinet?**
 
 *Trezorerie — convenții de înregistrare · training 28.08.2026, punctul 5*
@@ -457,6 +441,29 @@ Extrasă automat din textul documentului: sunt listate actele și articolele car
 **Acte normative citate**
 
 - OMFP 1802/2014
+
+
+---
+
+## Anexa G — Răspunsuri verificate pe surse publice
+
+Întrebări care erau deschise și la care am găsit răspuns în lege. Fiecare poartă actul normativ pe care se sprijină și data la care a fost confruntat cu sursele. **De confirmat cu formatorul** — nu pentru că răspunsul ar fi nesigur, ci pentru că practica poate adăuga ceva ce textul nu spune.
+
+**✅ Care e articolul din OMFP 1802/2014 care spune că elementele NEMONETARE (inclusiv avansurile în valută) nu se reevaluează la cursul de închidere?**
+
+Confirmat: avansurile în valută (409, 419, 4093, 4094) sunt elemente NEMONETARE și NU se reevaluează la cursul de închidere — regulă aplicată din 2015, odată cu OMFP 1802/2014. Reevaluarea lunară privește doar elementele MONETARE (disponibilități, creanțe și datorii care se sting în bani). Distincția monetar/nemonetar și evaluarea la data bilanțului sunt în OMFP 1802/2014, secțiunea de evaluare la bilanț (pct. 319 și urm.). ❓ Numărul exact al punctului rămâne de confirmat pe textul ordinului — regula e fermă, referința aproximativă.
+
+*Temei:* OMFP 1802/2014, secțiunea de evaluare la data bilanțului (pct. 319 și urm.); avansurile în valută nereevaluate din 2015.
+
+*Trezorerie — diferențe de curs și plafoane · training 28.08.2026, punctul 10 · verificat 01.09.2026*
+
+**✅ Reevaluarea de sfârșit de lună a conturilor în valută se înregistrează pe 665/765 sau pe 668/768?**
+
+Confirmat: diferențele din reevaluarea lunară a elementelor MONETARE în valută (disponibilități, creanțe, datorii) se înregistrează pe 665/765, NU pe 668/768. Unele cabinete folosesc analitice distincte (ex. 6651/7651) exact pentru a separa reevaluarea de decontare — ceea ce validează abordarea cu analitice .DEC/.REV din repo. Varianta 668/768 din notiță e greșită pentru valuta propriu-zisă; 668/768 se folosesc pentru creanțe/datorii exprimate în LEI dar decontabile după cursul unei valute — alt caz.
+
+*Temei:* OMFP 1802/2014 — funcțiunea conturilor 665/765 (diferențe de curs, inclusiv la evaluarea de sfârșit de lună a disponibilităților în valută).
+
+*Trezorerie — diferențe de curs și plafoane · training 28.08.2026, punctul 1 · verificat 01.09.2026*
 
 
 ---

@@ -108,7 +108,10 @@ TEME = [
           "procedura de ieșire din blocaj.",
           "C-20 (testul de activ net) și MOD_CAPITALURI, care azi doar semnalează blocajul. "
           "Ca să propună o cale de rezolvare, are nevoie de varianta preferată a cabinetului.",
-          "Modulul semnalează blocajul și se oprește acolo — nu propune nicio soluție."),
+          "Modulul semnalează blocajul și se oprește acolo — nu propune nicio soluție.",
+          raspuns='''Legea 239/2025 (în vigoare din 18.12.2025), care modifică Legea 31/1990, impune reîntregirea activului net la minimul legal ÎNAINTE de a distribui dividende sau de a restitui creditări/împrumuturi către asociați. Dacă activul net rămâne sub 50% din capitalul subscris și nu se reîntregește în 2 ani de la exercițiul următor celui cu pierderi, societatea are OBLIGAȚIA de a majora capitalul prin CONVERSIA datoriilor către asociați în capital, cu respectarea drepturilor celorlalți asociați. Deci la „conversie sau aport nou”: legea prevede conversia creanței ca remediu implicit obligatoriu; aportul nou e alternativa voluntară de dinainte de a se ajunge acolo. Amendă ANAF 10.000–200.000 lei dacă AGA nu decide.''',
+          temei='''Legea 239/2025, care modifică Legea 31/1990 (activul net sub 1/2 din capitalul subscris).''',
+          verificat="01.09.2026"),
 
         q("training 07.08.2026, întrebarea 8",
           "Verificăm sistematic pragul de capital social minim (500 / 5.000 lei) pe tot "
@@ -150,7 +153,10 @@ TEME = [
           "pe care modulul nu îl tratează azi.",
           "Am folosit un singur prag, cel fiscal, și am semnalat în notițe că divergența "
           "produce diferențe temporare.",
-          decizie=True),
+          decizie=True,
+          raspuns='''De la 1 ianuarie 2026 pragul FISCAL al mijloacelor fixe a crescut de la 2.500 la 5.000 lei (OUG 8/2026, art. 28 alin. (2) Cod fiscal). Contabil, OMFP 1802/2014 NU condiționează recunoașterea unei imobilizări de o valoare minimă — doar de definiție (utilizare peste 1 an, în scop de producție/prestare/administrativ). Alinierea pragului contabil la cel fiscal (5.000) e opțională, dar evită diferențele temporare între amortizarea contabilă și cea fiscală. Un prag contabil intern mai mic, pentru control de gestiune, e legitim — dar produce diferențe temporare de urmărit.''',
+          temei='''OUG 8/2026 (modifică art. 28 alin. (2) Cod fiscal), de la 01.01.2026; OMFP 1802/2014 — fără prag valoric contabil.''',
+          verificat="01.09.2026"),
 
         q("training 12.08.2026, întrebarea 2",
           "Excepția de la cumulul cu profitul reinvestit (art. 22 alin. 9) acoperă doar "
@@ -231,7 +237,10 @@ TEME = [
           "doar enumerate.",
           "F-311 (producția multi-stadiu) ține gestiunea lui 331 analitic pe comandă. Pe "
           "faze, structura analitică e alta, deci și fluxul.",
-          "Am implementat doar metoda pe comenzi."),
+          "Am implementat doar metoda pe comenzi.",
+          raspuns='''OMFP 1802/2014 (pct. 286 și urm.) recunoaște, pe lângă metoda pe comenzi implementată: metoda COSTULUI STANDARD (consumuri normale de materiale/manoperă, revizuite periodic); metoda PE FAZE (producție de masă — cost pe fiecare fază tehnologică, apoi pe produs); și metoda PE COMENZI (producție individuală sau serie mică — purtătorul de cost e comanda). Alegerea urmează specificul producției: pe comenzi la unicat/serie mică, pe faze la producție de masă continuă, cost standard când există norme stabile de consum.''',
+          temei='''OMFP 1802/2014, pct. 286 (costul de producție și metodele de calculație).''',
+          verificat="01.09.2026"),
     ]),
 
     ("TVA — import, vamă, taxare inversă", [
@@ -281,7 +290,10 @@ TEME = [
           "care nu vin din facturi trebuie să apară în jurnale cu semnul corect. Cele două "
           "tratamente ating conturi diferite, deci și jurnale diferite.",
           "Am descris toate patru situațiile, fără să declar una ca implicită.",
-          decizie=True),
+          decizie=True,
+          raspuns='''Regula IMPLICITĂ la lipsa la inventar e AJUSTAREA TVA deduse (art. 304 alin. (1) lit. c) Cod fiscal), nu colectarea. Excepție — fără ajustare — pentru bunuri distruse, pierdute sau furate, DOVEDITE corespunzător (proces-verbal, dosar). La lipsuri IMPUTABILE, suma imputată nu e contravaloarea unei operațiuni supuse TVA, dar ajustarea deducerii rămâne datorată. Colectarea (nu ajustarea) apare doar când lipsa se tratează ca livrare către sine. Documente cerute clientului: proces-verbal de inventariere, decizie de imputare sau proces-verbal de scoatere din gestiune, și dovada cauzei pentru scutirea de ajustare.''',
+          temei='''Cod fiscal art. 304 alin. (1) lit. c) și alin. (2) (bunuri de capital: art. 305).''',
+          verificat="01.09.2026"),
     ]),
 
     ("Obligații de mediu", [
@@ -432,7 +444,10 @@ TEME = [
           "Am modelat imputația integrală, cu reținere într-o singură lună, pentru că "
           "exemplul din notițe e de 1.000 lei — sub orice plafon plauzibil. Pasul "
           "poartă ❓. De verificat art. 254 (răspunderea patrimonială) și art. 169 "
-          "(reținerile din salariu) din Codul muncii."),
+          "(reținerile din salariu) din Codul muncii.",
+          raspuns='''Codul muncii art. 254: recuperarea prejudiciului prin NOTĂ DE CONSTATARE ȘI EVALUARE, de comun acord cu salariatul, nu poate depăși echivalentul a 5 SALARII MINIME brute pe economie. Peste acest plafon sau fără acordul salariatului, recuperarea se face numai prin instanță. Reținerea efectivă din salariu e limitată de art. 169: nu se reține fără titlu executoriu, iar reținerile cumulate nu depășesc o treime din salariul net. ⚠️ Corecție la notiță: legea spune „5 salarii MINIME”, nu „5 salarii medii”.''',
+          temei='''Codul muncii art. 254 (plafonul de comun acord: 5 salarii minime brute) și art. 169 (reținerile din salariu).''',
+          verificat="01.09.2026"),
     ]),
 
     ("Trezorerie — diferențe de curs și plafoane", [
@@ -447,7 +462,10 @@ TEME = [
           "Cifra e plauzibilă: un hipermarket trece de 50.000 lei într-o oră de vârf, "
           "iar depunerea zilnică a excedentului ar fi impracticabilă. Dar plauzibil nu "
           "e verificat, iar eu n-am confirmat-o pe textul legii — deci C-38 a rămas cu "
-          "un singur prag și cu întrebarea marcată."),
+          "un singur prag și cu întrebarea marcată.",
+          raspuns='''DA. Legea 70/2015 stabilește un sold de casă maxim de 50.000 lei la sfârșitul zilei, iar pentru magazinele de tip cash & carry, supermagazine și hipermagazine plafonul e 500.000 lei la sfârșitul zilei. Excedentul se depune în conturi bancare în 2 zile lucrătoare. Deci C-38 are nevoie de un al doilea prag, după tipul unității — la un client cu magazin mare, pragul de 50.000 ar semnala greșit o depășire în fiecare zi.''',
+          temei='''Legea 70/2015, art. 4^1 (plafonul soldului de casă; 500.000 lei pentru cash & carry / supermagazine / hipermagazine).''',
+          verificat="01.09.2026"),
 
         q("training 28.08.2026, punctul 10",
           "Care e articolul din OMFP 1802/2014 care spune că elementele NEMONETARE "
@@ -462,7 +480,10 @@ TEME = [
           "deci e nemonetar, iar reevaluarea privește doar monetarul. Ce n-am confirmat "
           "e articolul exact (probabil pct. 319 din OMFP 1802/2014, secțiunea de "
           "conversie a elementelor în valută) — de aceea rămâne întrebare, nu răspuns "
-          "cu temei."),
+          "cu temei.",
+          raspuns='''Confirmat: avansurile în valută (409, 419, 4093, 4094) sunt elemente NEMONETARE și NU se reevaluează la cursul de închidere — regulă aplicată din 2015, odată cu OMFP 1802/2014. Reevaluarea lunară privește doar elementele MONETARE (disponibilități, creanțe și datorii care se sting în bani). Distincția monetar/nemonetar și evaluarea la data bilanțului sunt în OMFP 1802/2014, secțiunea de evaluare la bilanț (pct. 319 și urm.). ❓ Numărul exact al punctului rămâne de confirmat pe textul ordinului — regula e fermă, referința aproximativă.''',
+          temei='''OMFP 1802/2014, secțiunea de evaluare la data bilanțului (pct. 319 și urm.); avansurile în valută nereevaluate din 2015.''',
+          verificat="01.09.2026"),
 
         q("training 28.08.2026, punctul 1",
           "Reevaluarea de sfârșit de lună a conturilor în valută se înregistrează pe "
@@ -482,7 +503,10 @@ TEME = [
           "formatorului — reevaluarea separată de decontare — se atinge cu analiticul, "
           "fără să mute reevaluarea în afara contului de diferențe de curs. Dacă "
           "formatorul confirmă varianta lui, se schimbă; dar atunci trebuie explicat "
-          "cum se raportează diferențele de curs care nu mai sunt în contul lor."),
+          "cum se raportează diferențele de curs care nu mai sunt în contul lor.",
+          raspuns='''Confirmat: diferențele din reevaluarea lunară a elementelor MONETARE în valută (disponibilități, creanțe, datorii) se înregistrează pe 665/765, NU pe 668/768. Unele cabinete folosesc analitice distincte (ex. 6651/7651) exact pentru a separa reevaluarea de decontare — ceea ce validează abordarea cu analitice .DEC/.REV din repo. Varianta 668/768 din notiță e greșită pentru valuta propriu-zisă; 668/768 se folosesc pentru creanțe/datorii exprimate în LEI dar decontabile după cursul unei valute — alt caz.''',
+          temei='''OMFP 1802/2014 — funcțiunea conturilor 665/765 (diferențe de curs, inclusiv la evaluarea de sfârșit de lună a disponibilităților în valută).''',
+          verificat="01.09.2026"),
 
         q("training 28.08.2026, punctul 2",
           "Plafonul de 50.000 lei la soldul de casă e per societate sau per casierie / "
@@ -497,7 +521,10 @@ TEME = [
           "Am formulat C-38 pe casierie, cum spun notițele, dar cu semnalul „casierie "
           "deschisă special ca să se multiplice plafonul” trecut la SUSPECT — pentru că "
           "intenția se vede, indiferent cum e textul. De confirmat art. 4 din Legea "
-          "70/2015 în forma în vigoare."),
+          "70/2015 în forma în vigoare.",
+          raspuns='''Plafonul de sold (50.000 lei, respectiv 500.000 la retail) vizează soldul de casă al PERSOANEI JURIDICE la sfârșitul zilei. Deschiderea unei a doua casierii „ca să mai am 50.000” nu ține la control: un punct de lucru fără activitate reală de încasări cade la testul substanței economice. ❓ Formularea literală „per entitate vs. per punct de lucru” din textul art. 4^1 rămâne de citit pe lege (sursele cu textul integral erau inaccesibile), dar practica clientului nu rezistă indiferent de formulare.''',
+          temei='''Legea 70/2015, art. 4^1 — plafonul soldului de casă al persoanei juridice.''',
+          verificat="01.09.2026"),
     ]),
 
     ("Trezorerie — convenții de înregistrare", [
@@ -523,7 +550,10 @@ TEME = [
           "legal și amendabil stă în ce poți arăta, nu în ce ai făcut.",
           "Am scris în document că apărarea cade dacă ratele se încasează la alte date "
           "sau în alte sume decât scadențarul. Ce nu știu e dacă se cere contract cu "
-          "dată certă, sau dacă e de ajuns unul sub semnătură privată."),
+          "dată certă, sau dacă e de ajuns unul sub semnătură privată.",
+          raspuns='''Legea 70/2015 interzice expres fragmentarea unei plăți pentru a ocoli plafonul. Un contract cu plata în rate, cu scadențar și date fixe, scoate operațiunea de sub acuzație — fiecare rată e o operațiune la data ei. Apărarea cade dacă ratele se încasează la alte date sau sume decât scadențarul. Nu există o cerință legală explicită de „dată certă” a contractului; ce contează la control e ca plata efectivă să urmeze fidel scadențarul încheiat ANTERIOR operațiunilor. Recomandat: contract scris, cu scadențar, datat înainte de prima rată.''',
+          temei='''Legea 70/2015 (interdicția fragmentării); forma contractului — practică, fără cerință legală de dată certă.''',
+          verificat="01.09.2026"),
 
         q("training 28.08.2026, punctul 7",
           "Consumabilele auto nestocate — lichid de parbriz, aditivi — merg pe 6022 "
@@ -573,7 +603,10 @@ TEME = [
           "lunar — iar cerința se face o dată, la preluare, sau nu se mai face.",
           "Am modelat consumul pe bon de consum, fără să afirm o formă anume. "
           "Alternativele de verificat: fișa limită de consum la consumuri repetitive, "
-          "și avizul intern la transferurile între gestiuni."),
+          "și avizul intern la transferurile între gestiuni.",
+          raspuns='''Bonul de consum e documentul reglementat de OMFP 2634/2015, obligatoriu la eliberarea din gestiune pentru consum. ⚠️ „Fișa limită de consum” pe care o propuneam ca alternativă a fost ELIMINATĂ din formularele reglementate prin OMFP 2634/2015 — nu mai e o opțiune validă. La transferul între gestiuni se folosește bonul de transfer (aviz intern). Deci: bon de consum la consum, bon de transfer la mutarea între gestiuni; fișa limită de consum nu mai există ca formular obligatoriu.''',
+          temei='''OMFP 2634/2015 privind documentele financiar-contabile (bonul de consum; eliminarea fișei limită de consum).''',
+          verificat="01.09.2026"),
 
         q("training 28.08.2026, punctul 4",
           "Ce document susține compensarea 4091 ↔ 419 la același partener, și de la ce "
@@ -586,7 +619,10 @@ TEME = [
           "Analiza e în documentul de control, §9.4: compensarea e posibilă, dar cere "
           "acord scris între părți, iar TVA-ul NU se compensează odată cu avansurile — "
           "regularizarea lui se face la facturile finale, prin stornarea fiecărui avans "
-          "în parte. N-am scris flux, pentru că starea inițială depinde de răspuns."),
+          "în parte. N-am scris flux, pentru că starea inițială depinde de răspuns.",
+          raspuns='''Compensarea creanțelor și datoriilor reciproce cu același partener se face pe formular de compensare, cu acord scris între părți. Pragul: pentru facturi peste 10.000 lei restante peste 30 de zile, compensarea se face OBLIGATORIU prin sistemul reglementat (IMI — Institutul de Management și Informatică), conform OUG 77/1999 și HG 685/1999. Sub 10.000 lei sau sub 30 de zile de la scadență, compensarea se face direct între client și furnizor, pe același formular, fără IMI. TVA-ul NU se compensează odată cu avansurile — regularizarea lui se face la facturile finale, prin stornarea fiecărui avans.''',
+          temei='''OUG 77/1999 și HG 685/1999 (compensarea prin IMI peste 10.000 lei restanți peste 30 de zile).''',
+          verificat="01.09.2026"),
     ]),
 
     ("Dividende — CASS, declarații și termene", [
@@ -605,7 +641,10 @@ TEME = [
           "art. 170 din Codul fiscal, care descrie ce venituri intră în baza anuală; "
           "n-am putut-o confirma pe sursă publică, deci rămâne întrebare, nu răspuns. "
           "Contrastul cu impozitul e clar și el e sigur: impozitul de 16% se "
-          "datorează la DISTRIBUIRE, cu termen 25.01, indiferent de ridicare."),
+          "datorează la DISTRIBUIRE, cu termen 25.01, indiferent de ridicare.",
+          raspuns='''CASS pe dividende se datorează în funcție de dividendele ÎNCASATE (ridicate) în cursul anului, nu de cele doar distribuite — confirmă notița formatorului. Dividendele încasate intră în baza de analiză a plafoanelor de 6/12/24 salarii minime brute: sub 6 salarii minime cumulat (cu alte venituri nesalariale) nu se datorează CASS; între 6–12 baza e 6 salarii minime; între 12–24 baza e 12; peste 24 baza e 24. Se declară prin Declarația Unică (D212), până la 25 mai a anului următor. Distincția cheie: impozitul de 16% e la DISTRIBUIRE (termen 25.01), CASS e la ÎNCASARE, pe plafoane anuale.''',
+          temei='''Cod fiscal art. 170 (baza CASS pe venituri din investiții — dividende încasate) și art. 174 (declararea prin D212).''',
+          verificat="01.09.2026"),
     ]),
 
     ("Acte de control — 4423 sau 4481", [

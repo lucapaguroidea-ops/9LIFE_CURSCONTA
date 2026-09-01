@@ -902,6 +902,14 @@ Termenul de 25 iunie **nu a fost de la început permanent**: a venit prin **OUG 
 
 *Repartizarea rezultatului și rezultatul reportat · training 07.08.2026, întrebarea 6 · verificat 21.08.2026*
 
+**✅ Cum se documentează reîntregirea activului net cerută de Legea 239/2025 — prin conversia creanței asociatului în capital sau prin aport nou?**
+
+Legea 239/2025 (în vigoare din 18.12.2025), care modifică Legea 31/1990, impune reîntregirea activului net la minimul legal ÎNAINTE de a distribui dividende sau de a restitui creditări/împrumuturi către asociați. Dacă activul net rămâne sub 50% din capitalul subscris și nu se reîntregește în 2 ani de la exercițiul următor celui cu pierderi, societatea are OBLIGAȚIA de a majora capitalul prin CONVERSIA datoriilor către asociați în capital, cu respectarea drepturilor celorlalți asociați. Deci la „conversie sau aport nou”: legea prevede conversia creanței ca remediu implicit obligatoriu; aportul nou e alternativa voluntară de dinainte de a se ajunge acolo. Amendă ANAF 10.000–200.000 lei dacă AGA nu decide.
+
+*Temei:* Legea 239/2025, care modifică Legea 31/1990 (activul net sub 1/2 din capitalul subscris).
+
+*Capital social și activ net · training 07.08.2026, întrebarea 7 · verificat 01.09.2026*
+
 **✅ TVA nedeductibilă de pe rata de capital la leasingul financiar: se capitalizează în valoarea mijlocului fix (2133) sau se trece pe cheltuială (635 / 6588)?**
 
 **Cheltuială, nu capitalizare.** La leasing, tratamentul diferă de achiziția directă: la cumpărarea internă a unui autoturism, TVA-ul nedeductibil de 50% intră în costul de achiziție, dar la leasing **nu** intră în valoarea mijlocului fix. Se înregistrează pe cheltuială, defalcat după componenta ratei: `635 = 4426` pentru 50% din TVA aferent ratei de capital, `666 = 4426` pentru cel aferent dobânzii, `628 = 4426` pentru cel aferent comisionului.
@@ -909,6 +917,14 @@ Termenul de 25 iunie **nu a fost de la început permanent**: a venit prin **OUG 
 *Temei:* Cod fiscal art. 298 (limitarea la 50%) coroborat cu OMFP 1802/2014 privind costul de achiziție; tratamentul distinct al leasingului față de achiziția directă.
 
 *Leasing și vehicule · training 07.08.2026, întrebarea 3 · verificat 21.08.2026*
+
+**✅ CASS pe dividende se datorează la dividendele DISTRIBUITE sau la cele efectiv RIDICATE?**
+
+CASS pe dividende se datorează în funcție de dividendele ÎNCASATE (ridicate) în cursul anului, nu de cele doar distribuite — confirmă notița formatorului. Dividendele încasate intră în baza de analiză a plafoanelor de 6/12/24 salarii minime brute: sub 6 salarii minime cumulat (cu alte venituri nesalariale) nu se datorează CASS; între 6–12 baza e 6 salarii minime; între 12–24 baza e 12; peste 24 baza e 24. Se declară prin Declarația Unică (D212), până la 25 mai a anului următor. Distincția cheie: impozitul de 16% e la DISTRIBUIRE (termen 25.01), CASS e la ÎNCASARE, pe plafoane anuale.
+
+*Temei:* Cod fiscal art. 170 (baza CASS pe venituri din investiții — dividende încasate) și art. 174 (declararea prin D212).
+
+*Dividende — CASS, declarații și termene · training 26.08.2026, punctul 2 · verificat 01.09.2026*
 
 **✅ Care sunt pragul de venituri și cota de impozit pentru microîntreprinderi, în vigoare la data operațiunii?**
 

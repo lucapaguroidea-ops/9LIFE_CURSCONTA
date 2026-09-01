@@ -23,7 +23,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 
 # Partea I — rămase deschise
 
-**24 întrebări de drept sau de practică la care n-am găsit răspuns cu certitudine.** Astea sunt cele care se trimit.
+**13 întrebări de drept sau de practică la care n-am găsit răspuns cu certitudine.** Astea sunt cele care se trimit.
 
 ---
 
@@ -75,22 +75,9 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 07.08.2026, întrebarea 5</sub>
 
 
-## Capital social și activ net
-
-### 5. Cum se documentează reîntregirea activului net cerută de Legea 239/2025 — prin conversia creanței asociatului în capital sau prin aport nou?
-
-**Context.** Legea condiționează dividendele și restituirile de împrumuturi de un activ net de cel puțin jumătate din capitalul social. Notițele semnalau problema, fără procedura de ieșire din blocaj.
-
-**De ce contează.** C-20 (testul de activ net) și MOD_CAPITALURI, care azi doar semnalează blocajul. Ca să propună o cale de rezolvare, are nevoie de varianta preferată a cabinetului.
-
-**Ce am presupus.** Modulul semnalează blocajul și se oprește acolo — nu propune nicio soluție.
-
-<sub>sursa: training 07.08.2026, întrebarea 7</sub>
-
-
 ## Imobilizări — control și raportare
 
-### 6. În secțiunea Active din D406 (SAF-T) se raportează și 231 (investiții neterminate), și 261 (imobilizări financiare)?
+### 5. În secțiunea Active din D406 (SAF-T) se raportează și 231 (investiții neterminate), și 261 (imobilizări financiare)?
 
 **Context.** Notițele menționau că informația din modulul de imobilizări „merge în 406”, fără să delimiteze ce anume intră.
 
@@ -101,22 +88,9 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 12.08.2026, întrebarea 4</sub>
 
 
-## Stocuri și producție
-
-### 7. Care sunt celelalte metode de calculație a costurilor acceptate de OMFP 1802/2014, și în ce situații se alege fiecare?
-
-**Context.** Notițele menționau metoda pe comenzi ca fiind cea mai utilizată, în contextul producției de termopane. Celelalte (pe faze, pe produs, standard-cost) au rămas doar enumerate.
-
-**De ce contează.** F-311 (producția multi-stadiu) ține gestiunea lui 331 analitic pe comandă. Pe faze, structura analitică e alta, deci și fluxul.
-
-**Ce am presupus.** Am implementat doar metoda pe comenzi.
-
-<sub>sursa: training 14.08.2026, întrebarea 1</sub>
-
-
 ## Material lipsă din notițe
 
-### 8. Ce fișier și ce sarcină erau în spatele notițelor „Fișierul atașat arată corelații importante între conturi” și „task”?
+### 6. Ce fișier și ce sarcină erau în spatele notițelor „Fișierul atașat arată corelații importante între conturi” și „task”?
 
 **Context.** Ambele au rămas fără conținut în notițele originale — un rând care trimite la un atașament și un rând cu un singur cuvânt, „task”.
 
@@ -127,68 +101,9 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 14.08.2026, întrebarea 6</sub>
 
 
-## Salarii — praguri și baze de calcul
-
-### 9. Care e plafonul legal al sumei care se poate imputa unui salariat pentru o pagubă produsă, și în ce ritm se poate reține din salariu?
-
-**Context.** Notițele din 26.08 menționează un plafon „la nivelul a 5 salarii medii”, cu observația formatorului însuși: „de verificat suma”. Separat, notițele spun că imputația nu se poate face fără ca salariatul să fie informat și de acord — Codul muncii.
-
-**De ce contează.** F-426 pasul 5, unde reținerea din 421 stinge creanța de pe 461. Dacă plafonul e mai mic decât paguba, fluxul are nevoie de un pas de eșalonare, iar creanța rămâne pe 461 mai multe luni.
-
-**Ce am presupus.** Am modelat imputația integrală, cu reținere într-o singură lună, pentru că exemplul din notițe e de 1.000 lei — sub orice plafon plauzibil. Pasul poartă ❓. De verificat art. 254 (răspunderea patrimonială) și art. 169 (reținerile din salariu) din Codul muncii.
-
-<sub>sursa: training 26.08.2026, punctul 1</sub>
-
-
-## Trezorerie — diferențe de curs și plafoane
-
-### 10. Există un plafon de sold de casă separat, de 500.000 lei, pentru magazinele de tip cash & carry, supermagazine și hipermagazine?
-
-**Context.** Nu era în notițele de la curs. O a doua revizuire a acelorași notițe îl afirmă, alături de plafonul general de 50.000 lei.
-
-**De ce contează.** C-38, care azi are un singur prag. Dacă se confirmă, corelația are nevoie de un al doilea prag, după tipul unității — iar la un client cu magazin mare, pragul de 50.000 ar fi semnalat greșit ca depășire în fiecare zi.
-
-**Ce am presupus.** Cifra e plauzibilă: un hipermarket trece de 50.000 lei într-o oră de vârf, iar depunerea zilnică a excedentului ar fi impracticabilă. Dar plauzibil nu e verificat, iar eu n-am confirmat-o pe textul legii — deci C-38 a rămas cu un singur prag și cu întrebarea marcată.
-
-<sub>sursa: training 28.08.2026, punctul 8</sub>
-
-
-### 11. Care e articolul din OMFP 1802/2014 care spune că elementele NEMONETARE (inclusiv avansurile în valută) nu se reevaluează la cursul de închidere?
-
-**Context.** Regula a apărut la contraverificarea cu revizuirile paralele: avansurile în valută rămân la cursul plății, nu se reevaluează lunar ca disponibilul și creanțele monetare.
-
-**De ce contează.** F-107 și MOD_CREDIT_VALUTA: dacă un avans în valută ar fi reevaluat, ar produce diferențe de curs pe un cont care n-are ce diferență să genereze. Regula e scrisă în §4.1 al documentului de trezorerie ca ➕.
-
-**Ce am presupus.** Regula e fermă și o pot motiva — un avans dă dreptul la un bun, nu la o sumă, deci e nemonetar, iar reevaluarea privește doar monetarul. Ce n-am confirmat e articolul exact (probabil pct. 319 din OMFP 1802/2014, secțiunea de conversie a elementelor în valută) — de aceea rămâne întrebare, nu răspuns cu temei.
-
-<sub>sursa: training 28.08.2026, punctul 10</sub>
-
-
-### 12. Reevaluarea de sfârșit de lună a conturilor în valută se înregistrează pe 665/765 sau pe 668/768?
-
-**Context.** Notițele din 28.08 spun: diferențele de curs curente prin 665/765, iar reevaluarea de la sfârșitul lunii prin 668/768, cu observația „să fie clară diferența de curs din reevaluare, și cea de la furnizori”.
-
-**De ce contează.** F-107 pasul de reevaluare, MOD_CREDIT_VALUTA în întregime, și structura analitică a lui 665/765. Nu e nuanță de stil: cele două variante pun aceeași sumă în conturi care se raportează diferit.
-
-**Ce am presupus.** Am păstrat 665/765 pentru ambele situații, cu analitic .DEC și .REV. Motivul: funcțiunea contului 665 din OMFP 1802/2014 include explicit diferențele rezultate „la sfârșitul lunii/exercițiului financiar, din evaluarea disponibilităților bancare și a numerarului în valută” — deci reevaluarea e chiar în funcțiunea lui. Iar 668/768 au alt rost: creanțele și datoriile exprimate în LEI, decontabile după cursul unei valute. Scopul formatorului — reevaluarea separată de decontare — se atinge cu analiticul, fără să mute reevaluarea în afara contului de diferențe de curs. Dacă formatorul confirmă varianta lui, se schimbă; dar atunci trebuie explicat cum se raportează diferențele de curs care nu mai sunt în contul lor.
-
-<sub>sursa: training 28.08.2026, punctul 1</sub>
-
-
-### 13. Plafonul de 50.000 lei la soldul de casă e per societate sau per casierie / punct de lucru?
-
-**Context.** Notițele spun „50.000 lei pe fiecare punct de lucru” și povestesc un client care, aflând de plafon, „a mai făcut rost de o casierie cu 50.000 lei”. Notițele nu spun dacă practica aceea rezistă la control.
-
-**De ce contează.** C-38 și cadența pe 5311. Dacă limita e per societate, o a doua casierie nu rezolvă nimic și clientul e în neregulă; dacă e per casierie, orice societate poate multiplica plafonul deschizând puncte de lucru, ceea ce ar goli restricția de sens.
-
-**Ce am presupus.** Am formulat C-38 pe casierie, cum spun notițele, dar cu semnalul „casierie deschisă special ca să se multiplice plafonul” trecut la SUSPECT — pentru că intenția se vede, indiferent cum e textul. De confirmat art. 4 din Legea 70/2015 în forma în vigoare.
-
-<sub>sursa: training 28.08.2026, punctul 2</sub>
-
-
 ## Trezorerie — convenții de înregistrare
 
-### 14. Dobânda de plătit trece obligatoriu prin 5186, sau `666 = 5121` direct e acceptat în cabinet?
+### 7. Dobânda de plătit trece obligatoriu prin 5186, sau `666 = 5121` direct e acceptat în cabinet?
 
 **Context.** Notițele descriu ambele variante fără să spună care e standardul: „5186 = 5121, și, 666 = 5186, în caz că nu vreau să fac direct 666 = 5121”.
 
@@ -199,18 +114,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 28.08.2026, punctul 5</sub>
 
 
-### 15. Ce documentație face diferența, la un control, între „rate contractuale” și fragmentarea unei plăți?
-
-**Context.** Notițele spun că un contract cu plata în rate scoate operațiunea de sub acuzația de fragmentare: „am scadențar, am o dată fixă pe care încasez ratele”. Nu spun ce se prezintă efectiv.
-
-**De ce contează.** C-38 și secțiunea de plafoane din documentul de control. Diferența dintre legal și amendabil stă în ce poți arăta, nu în ce ai făcut.
-
-**Ce am presupus.** Am scris în document că apărarea cade dacă ratele se încasează la alte date sau în alte sume decât scadențarul. Ce nu știu e dacă se cere contract cu dată certă, sau dacă e de ajuns unul sub semnătură privată.
-
-<sub>sursa: training 28.08.2026, punctul 6</sub>
-
-
-### 16. Consumabilele auto nestocate — lichid de parbriz, aditivi — merg pe 6022 împreună cu combustibilul, sau pe 604?
+### 8. Consumabilele auto nestocate — lichid de parbriz, aditivi — merg pe 6022 împreună cu combustibilul, sau pe 604?
 
 **Context.** Notițele descriu cazul concret al unui bon cu benzină și lichid de parbriz, și lasă alegerea deschisă: „fiecare firmă decide ce și cum, că nu îți ia nimeni gâtul dacă pui lichidul în 6022; corect ar fi lichid de parbriz în 604”.
 
@@ -223,7 +127,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 
 ## Gestiuni, bonuri de consum și compensări
 
-### 17. Care e monografia completă a răscumpărării de obligațiuni — preț de emisiune vs. preț de răscumpărare, primă sau discount, și curs valutar dacă emisiunea e în valută?
+### 9. Care e monografia completă a răscumpărării de obligațiuni — preț de emisiune vs. preț de răscumpărare, primă sau discount, și curs valutar dacă emisiunea e în valută?
 
 **Context.** Notița spune doar că obligațiunea „se cumpără la un anumit preț, se răscumpără la un anumit preț + cheltuieli la un anumit curs valutar”, cu mențiunea „de detaliat” adresată mie. N-am putut să o detaliez din notițe: nu sunt cifre.
 
@@ -234,44 +138,9 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 28.08.2026, punctul 9</sub>
 
 
-### 18. Care e forma obligatorie a bonului de consum, și în ce cazuri poate fi înlocuit cu alt document?
-
-**Context.** Notițele stabilesc ordinea — întâi se creează gestiunea, apoi se pune problema consumului — și spun că orice ieșire din gestiune se face pe bon de consum. Formatorul a marcat însă explicit subiectul ca „de contraverificat, de clarificat detaliat”.
-
-**De ce contează.** F-321 pasul 3 și regula „consumul trece prin gestiune” din documentul de stocuri. De forma documentului depinde ce i se cere clientului să aducă lunar — iar cerința se face o dată, la preluare, sau nu se mai face.
-
-**Ce am presupus.** Am modelat consumul pe bon de consum, fără să afirm o formă anume. Alternativele de verificat: fișa limită de consum la consumuri repetitive, și avizul intern la transferurile între gestiuni.
-
-<sub>sursa: training 28.08.2026, punctul 3</sub>
-
-
-### 19. Ce document susține compensarea 4091 ↔ 419 la același partener, și de la ce prag trebuie făcută prin sistemul reglementat?
-
-**Context.** Notițele scriu doar „4091 - 419 <=> să faci compensări ulterior”, cu mențiunea „de analizat” adresată mie.
-
-**De ce contează.** Dacă apare un flux de compensare, el are nevoie de documentul justificativ ca stare inițială. Fără el, compensarea e o decizie unilaterală asupra unor solduri care aparțin la două raporturi juridice diferite.
-
-**Ce am presupus.** Analiza e în documentul de control, §9.4: compensarea e posibilă, dar cere acord scris între părți, iar TVA-ul NU se compensează odată cu avansurile — regularizarea lui se face la facturile finale, prin stornarea fiecărui avans în parte. N-am scris flux, pentru că starea inițială depinde de răspuns.
-
-<sub>sursa: training 28.08.2026, punctul 4</sub>
-
-
-## Dividende — CASS, declarații și termene
-
-### 20. CASS pe dividende se datorează la dividendele DISTRIBUITE sau la cele efectiv RIDICATE?
-
-**Context.** Notițele din 26.08 spun explicit: „la dividendele ridicate se plătește sănătate, nu la cele distribuite”. Formatorul a legat asta de cele două rubrici distincte din D205 — dividende distribuite și dividende ridicate.
-
-**De ce contează.** Momentul în care se naște obligația de CASS și, prin el, ce arată Declarația Unică față de soldul lui 457. Un 457 cu sold creditor la 31.12 înseamnă dividende distribuite și neridicate: dacă baza CASS e distribuirea, obligația există deja; dacă e ridicarea, nu.
-
-**Ce am presupus.** Am urmat notițele — baza e ridicarea — pentru că le confirmă structura declarației (două rubrici înseamnă două momente). Locul de verificat e art. 170 din Codul fiscal, care descrie ce venituri intră în baza anuală; n-am putut-o confirma pe sursă publică, deci rămâne întrebare, nu răspuns. Contrastul cu impozitul e clar și el e sigur: impozitul de 16% se datorează la DISTRIBUIRE, cu termen 25.01, indiferent de ridicare.
-
-<sub>sursa: training 26.08.2026, punctul 2</sub>
-
-
 ## Acte de control — 4423 sau 4481
 
-### 21. Sumele stabilite prin decizie de impunere pe TVA se înregistrează în 4423 cu analitic distinct, sau în 4481?
+### 10. Sumele stabilite prin decizie de impunere pe TVA se înregistrează în 4423 cu analitic distinct, sau în 4481?
 
 **Context.** Cele două traininguri spun exact invers, la cinci zile distanță. 21.08: „se înregistrează în 4423 cu analitic distinct, tocmai ca să nu ajungă din greșeală în decontul lunii următoare”. 26.08: „nu mă duc prin 4423, pentru că denaturează rulajul curent — și mă duc prin 4481”.
 
@@ -284,7 +153,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 
 ## Decontul de TVA și fișa de rol
 
-### 22. Ce rânduri din D300 sunt preluate în fișa de rol: 36 și 37, sau 44 și 45?
+### 11. Ce rânduri din D300 sunt preluate în fișa de rol: 36 și 37, sau 44 și 45?
 
 **Context.** Notițele afirmă amândouă variantele, în două locuri diferite. Numerele de rând se schimbă între versiunile formularului, deci una dintre ele e dintr-o versiune anterioară.
 
@@ -295,7 +164,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 21.08.2026, punctul 5</sub>
 
 
-### 23. La declarațiile care admit rectificare, contează ordinea cronologică a înregistrării facturilor la redepunere?
+### 12. La declarațiile care admit rectificare, contează ordinea cronologică a înregistrării facturilor la redepunere?
 
 **Context.** Întrebarea era notată ca presupunere: dacă facturile nu sunt înregistrate cronologic, poate că redepunerea nu mai e posibilă și ar trebui altă metodă de corecție.
 
@@ -306,7 +175,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 21.08.2026, punctul 6</sub>
 
 
-### 24. Care sunt corelațiile complete între D300 și fișa de rol la TVA?
+### 13. Care sunt corelațiile complete între D300 și fișa de rol la TVA?
 
 **Context.** Temă lăsată explicit la training. Notițele dau două fragmente: fișa preia rulajul lunii, nu soldul; și ANAF încarcă doar suma lunii, de unde greșeala de a omite TVA-ul neachitat din perioadele precedente.
 
@@ -319,13 +188,13 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 
 # Partea a II-a — decizii de cabinet
 
-**9 întrebări la care nicio sursă publică nu poate răspunde.** Nu sunt lucruri neaflate, sunt alegeri: ce cont folosim, ce prag intern stabilim, ce documente cerem clientului. Răspunsul e o decizie, nu o informație.
+**7 întrebări la care nicio sursă publică nu poate răspunde.** Nu sunt lucruri neaflate, sunt alegeri: ce cont folosim, ce prag intern stabilim, ce documente cerem clientului. Răspunsul e o decizie, nu o informație.
 
 ---
 
 ## Capital social și activ net
 
-### 25. Verificăm sistematic pragul de capital social minim (500 / 5.000 lei) pe tot portofoliul de clienți, sau doar la firmele noi?
+### 14. Verificăm sistematic pragul de capital social minim (500 / 5.000 lei) pe tot portofoliul de clienți, sau doar la firmele noi?
 
 **Context.** Pragurile noi din 2026: 500 lei la înființare, 5.000 lei la cifră de afaceri netă peste 400.000 lei. Al doilea prag prinde firme existente, nu doar noi.
 
@@ -336,22 +205,9 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 07.08.2026, întrebarea 8</sub>
 
 
-## Imobilizări — prag și amortizare
-
-### 26. Recomandați alinierea pragului contabil de recunoaștere la cel fiscal (5.000 lei), sau menținerea unui prag intern mai mic pentru control de gestiune?
-
-**Context.** OUG 8/2026 a urcat pragul fiscal la 5.000 lei. Pragul contabil rămâne la latitudinea entității, prin politici contabile.
-
-**De ce contează.** MOD_IMOBILIZARI face un test de prag la intrare. Dacă cele două praguri diferă, apar diferențe temporare de urmărit în registrul de evidență fiscală — un lucru pe care modulul nu îl tratează azi.
-
-**Ce am presupus.** Am folosit un singur prag, cel fiscal, și am semnalat în notițe că divergența produce diferențe temporare.
-
-<sub>sursa: training 12.08.2026, întrebarea 1</sub>
-
-
 ## Imobilizări — control și raportare
 
-### 27. Ne puteți da procedura scrisă de reconciliere, pentru cazul în care analiticul din balanța contabilă nu corespunde cu registrul mijloacelor fixe?
+### 15. Ne puteți da procedura scrisă de reconciliere, pentru cazul în care analiticul din balanța contabilă nu corespunde cu registrul mijloacelor fixe?
 
 **Context.** Ultimul punct al trainingului 3, rămas nefinalizat: „am verificat analiticul cu sinteticul → am verificat firma X, avem în 212 x lei, dar în balanța contabilă / imobilizări am x, y, z → să vedem o procedură, ce e de făcut.” Formatorul a promis-o și sesiunea s-a încheiat înainte.
 
@@ -364,7 +220,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 
 ## TVA — import, vamă, taxare inversă
 
-### 28. La decontarea cu comisionarul vamal folosiți 446 sau 462? Care e standardul cabinetului și de ce?
+### 16. La decontarea cu comisionarul vamal folosiți 446 sau 462? Care e standardul cabinetului și de ce?
 
 **Context.** Notițele foloseau 446, cu observația proprie că „e o înregistrare puțin forțată, pentru că e un cont de pasiv”. Unele cabinete folosesc 461/462.
 
@@ -375,7 +231,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 14.08.2026, întrebarea 3</sub>
 
 
-### 29. Verificăm sistematic dacă clienții importatori îndeplinesc condițiile pentru certificatul de amânare de la plata TVA în vamă?
+### 17. Verificăm sistematic dacă clienții importatori îndeplinesc condițiile pentru certificatul de amânare de la plata TVA în vamă?
 
 **Context.** Certificatul înlocuiește plata efectivă a TVA în vamă cu taxare inversă (4426 = 4427) — avantaj mare de cash-flow. Notițele nu îl menționau deloc; l-am adăugat eu la revizuire.
 
@@ -386,22 +242,9 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 14.08.2026, întrebarea 4</sub>
 
 
-## TVA — ajustări fără document
-
-### 30. La lipsa la inventar, practica implicită a cabinetului este colectarea de TVA sau ajustarea dreptului de deducere? Ce set de documente se cere clientului?
-
-**Context.** Notițele spuneau simplu „trebuie să colectez și TVA”. La revizuire am găsit că tratamentul diferă: lipsă imputabilă → colectare; neimputabilă nejustificată → ajustare; bunuri distruse cu documente → fără ajustare.
-
-**De ce contează.** F-406 (înregistrări fără document) și corelațiile C-03 / C-04, unde ajustările care nu vin din facturi trebuie să apară în jurnale cu semnul corect. Cele două tratamente ating conturi diferite, deci și jurnale diferite.
-
-**Ce am presupus.** Am descris toate patru situațiile, fără să declar una ca implicită.
-
-<sub>sursa: training 14.08.2026, întrebarea 2</sub>
-
-
 ## Comportamentul softului la încasarea în plus
 
-### 31. Programul de contabilitate extrage automat TVA-ul din diferența trecută pe 419 la o încasare mai mare decât factura, sau trebuie forțat manual?
+### 18. Programul de contabilitate extrage automat TVA-ul din diferența trecută pe 419 la o încasare mai mare decât factura, sau trebuie forțat manual?
 
 **Context.** Suma încasată în plus e TVA-inclusivă: din 5.000 lei ies 4.132,23 bază și 867,77 TVA. Dacă softul nu face extragerea, TVA-ul rămâne necolectat fără ca nimic să semnaleze.
 
@@ -414,7 +257,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 
 ## Convenții de analitic rămase de fixat
 
-### 32. Care e structura analitică exactă pe 4428 — pe situație și pe cotă?
+### 19. Care e structura analitică exactă pe 4428 — pe situație și pe cotă?
 
 **Context.** 4428 apare în trei situații cu sensuri diferite: debitor la achiziția pe aviz (4428 = 408), creditor la livrarea pe aviz (418 = 4428) și creditor la mărfuri la preț cu amănuntul (371 = 4428). Notițele cer analitice pe fiecare situație ȘI pe fiecare cotă, dar nu dau nomenclatorul.
 
@@ -425,7 +268,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 19.08.2026, punctul 4</sub>
 
 
-### 33. Facturile nesosite pentru imobilizări se țin pe 408 cu analitic sau direct pe 404 cu analitic?
+### 20. Facturile nesosite pentru imobilizări se țin pe 408 cu analitic sau direct pe 404 cu analitic?
 
 **Context.** Exemplul din notițe folosește 231 = 408, dar furnizorul de imobilizări e 404. Notițele semnalează singure problema și cer stabilirea unei convenții consecvente.
 
@@ -438,13 +281,13 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 
 # Partea a III-a — răspunsuri verificate, de confirmat
 
-**13 întrebări la care am găsit răspuns pe surse publice**, fiecare cu actul normativ citat și data verificării. Nu înlocuiesc confirmarea — o scurtează: în loc de „care e regula?”, întrebarea devine „am citit bine?”.
+**26 întrebări la care am găsit răspuns pe surse publice**, fiecare cu actul normativ citat și data verificării. Nu înlocuiesc confirmarea — o scurtează: în loc de „care e regula?”, întrebarea devine „am citit bine?”.
 
 ---
 
 ## Repartizarea rezultatului și rezultatul reportat
 
-### 34. Care este actul normativ care a permanentizat termenul de 25 iunie pentru D101?
+### 21. Care este actul normativ care a permanentizat termenul de 25 iunie pentru D101?
 
 **Răspuns.** Termenul de 25 iunie **nu a fost de la început permanent**: a venit prin **OUG 153/2020**, care l-a prelungit pentru perioada 2021–2025, odată cu bonificațiile pentru capital propriu pozitiv și în creștere. 2025 a fost ultimul an de aplicare a acelui mecanism, iar termenul uniform de 25 iunie a anului următor se aplică de la 2026. ❓ Actul care l-a permanentizat nu l-am putut identifica cu certitudine — surse îl descriu ca măsură adoptată în 2026, dar fără să-l numească. De confirmat înainte de a-l cita unui client.
 
@@ -459,9 +302,26 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 07.08.2026, întrebarea 6</sub>
 
 
+## Capital social și activ net
+
+### 22. Cum se documentează reîntregirea activului net cerută de Legea 239/2025 — prin conversia creanței asociatului în capital sau prin aport nou?
+
+**Răspuns.** Legea 239/2025 (în vigoare din 18.12.2025), care modifică Legea 31/1990, impune reîntregirea activului net la minimul legal ÎNAINTE de a distribui dividende sau de a restitui creditări/împrumuturi către asociați. Dacă activul net rămâne sub 50% din capitalul subscris și nu se reîntregește în 2 ani de la exercițiul următor celui cu pierderi, societatea are OBLIGAȚIA de a majora capitalul prin CONVERSIA datoriilor către asociați în capital, cu respectarea drepturilor celorlalți asociați. Deci la „conversie sau aport nou”: legea prevede conversia creanței ca remediu implicit obligatoriu; aportul nou e alternativa voluntară de dinainte de a se ajunge acolo. Amendă ANAF 10.000–200.000 lei dacă AGA nu decide.
+
+**Temei.** Legea 239/2025, care modifică Legea 31/1990 (activul net sub 1/2 din capitalul subscris).
+
+<sub>verificat pe surse publice la 01.09.2026 — confirmă sau corectează</sub>
+
+**Context.** Legea condiționează dividendele și restituirile de împrumuturi de un activ net de cel puțin jumătate din capitalul social. Notițele semnalau problema, fără procedura de ieșire din blocaj.
+
+**De ce contează.** C-20 (testul de activ net) și MOD_CAPITALURI, care azi doar semnalează blocajul. Ca să propună o cale de rezolvare, are nevoie de varianta preferată a cabinetului.
+
+<sub>sursa: training 07.08.2026, întrebarea 7</sub>
+
+
 ## Leasing și vehicule
 
-### 35. TVA nedeductibilă de pe rata de capital la leasingul financiar: se capitalizează în valoarea mijlocului fix (2133) sau se trece pe cheltuială (635 / 6588)?
+### 23. TVA nedeductibilă de pe rata de capital la leasingul financiar: se capitalizează în valoarea mijlocului fix (2133) sau se trece pe cheltuială (635 / 6588)?
 
 **Răspuns.** **Cheltuială, nu capitalizare.** La leasing, tratamentul diferă de achiziția directă: la cumpărarea internă a unui autoturism, TVA-ul nedeductibil de 50% intră în costul de achiziție, dar la leasing **nu** intră în valoarea mijlocului fix. Se înregistrează pe cheltuială, defalcat după componenta ratei: `635 = 4426` pentru 50% din TVA aferent ratei de capital, `666 = 4426` pentru cel aferent dobânzii, `628 = 4426` pentru cel aferent comisionului.
 
@@ -478,7 +338,22 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 
 ## Imobilizări — prag și amortizare
 
-### 36. Excepția de la cumulul cu profitul reinvestit (art. 22 alin. 9) acoperă doar amortizarea accelerată, sau și pe cea superaccelerată de 65%?
+### 24. Recomandați alinierea pragului contabil de recunoaștere la cel fiscal (5.000 lei), sau menținerea unui prag intern mai mic pentru control de gestiune?
+
+**Răspuns.** De la 1 ianuarie 2026 pragul FISCAL al mijloacelor fixe a crescut de la 2.500 la 5.000 lei (OUG 8/2026, art. 28 alin. (2) Cod fiscal). Contabil, OMFP 1802/2014 NU condiționează recunoașterea unei imobilizări de o valoare minimă — doar de definiție (utilizare peste 1 an, în scop de producție/prestare/administrativ). Alinierea pragului contabil la cel fiscal (5.000) e opțională, dar evită diferențele temporare între amortizarea contabilă și cea fiscală. Un prag contabil intern mai mic, pentru control de gestiune, e legitim — dar produce diferențe temporare de urmărit.
+
+**Temei.** OUG 8/2026 (modifică art. 28 alin. (2) Cod fiscal), de la 01.01.2026; OMFP 1802/2014 — fără prag valoric contabil.
+
+<sub>verificat pe surse publice la 01.09.2026 — confirmă sau corectează</sub>
+
+**Context.** OUG 8/2026 a urcat pragul fiscal la 5.000 lei. Pragul contabil rămâne la latitudinea entității, prin politici contabile.
+
+**De ce contează.** MOD_IMOBILIZARI face un test de prag la intrare. Dacă cele două praguri diferă, apar diferențe temporare de urmărit în registrul de evidență fiscală — un lucru pe care modulul nu îl tratează azi.
+
+<sub>sursa: training 12.08.2026, întrebarea 1</sub>
+
+
+### 25. Excepția de la cumulul cu profitul reinvestit (art. 22 alin. 9) acoperă doar amortizarea accelerată, sau și pe cea superaccelerată de 65%?
 
 **Răspuns.** Regula: cine aplică scutirea de impozit a profitului reinvestit **nu poate opta pentru amortizarea accelerată** pentru activele respective — se amortizează liniar sau degresiv. Există însă o **excepție pentru 2026**: dacă scutirea se aplică pentru subgrupa 2.1 (echipamente tehnologice — mașini, utilaje și instalații de lucru) și pentru calculatoare și echipamente periferice, contribuabilul **poate** opta pentru amortizare accelerată.
 
@@ -495,7 +370,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 
 ## Imobilizări — ieșiri din gestiune
 
-### 37. Care este baza legală exactă pentru a trata ca nedeductibilă diferența dintre valoarea rămasă și prețul de vânzare, față de art. 28 alin. (17)?
+### 26. Care este baza legală exactă pentru a trata ca nedeductibilă diferența dintre valoarea rămasă și prețul de vânzare, față de art. 28 alin. (17)?
 
 **Răspuns.** **Nu există un asemenea temei — presupunerea din notițe e inversă.** La vânzarea unui mijloc fix la prețul pieței, valoarea rămasă neamortizată e cheltuială **deductibilă**, chiar dacă prețul e sub ea. Limitarea reală e alta și privește doar **autoturismele din categoria M1**: acolo valoarea rămasă e deductibilă în limita a **1.500 lei × numărul de luni rămase** de amortizat din durata normală de funcționare.
 
@@ -510,7 +385,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 12.08.2026, întrebarea 3</sub>
 
 
-### 38. La o casare din care nu rezultă nici deșeuri, nici piese reutilizabile, cum se justifică deductibilitatea valorii rămase neamortizate?
+### 27. La o casare din care nu rezultă nici deșeuri, nici piese reutilizabile, cum se justifică deductibilitatea valorii rămase neamortizate?
 
 **Răspuns.** **Nu se cere nici deșeu, nici piesă reutilizabilă.** Cheltuielile înregistrate ca urmare a casării unui mijloc fix cu valoare fiscală incomplet amortizată sunt, prin lege, cheltuieli efectuate în scopul desfășurării activității economice — deci deductibile. Documentația de casare rămâne necesară ca probă a operațiunii, nu ca o condiție de deductibilitate.
 
@@ -525,9 +400,26 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 12.08.2026, întrebarea 5</sub>
 
 
+## Stocuri și producție
+
+### 28. Care sunt celelalte metode de calculație a costurilor acceptate de OMFP 1802/2014, și în ce situații se alege fiecare?
+
+**Răspuns.** OMFP 1802/2014 (pct. 286 și urm.) recunoaște, pe lângă metoda pe comenzi implementată: metoda COSTULUI STANDARD (consumuri normale de materiale/manoperă, revizuite periodic); metoda PE FAZE (producție de masă — cost pe fiecare fază tehnologică, apoi pe produs); și metoda PE COMENZI (producție individuală sau serie mică — purtătorul de cost e comanda). Alegerea urmează specificul producției: pe comenzi la unicat/serie mică, pe faze la producție de masă continuă, cost standard când există norme stabile de consum.
+
+**Temei.** OMFP 1802/2014, pct. 286 (costul de producție și metodele de calculație).
+
+<sub>verificat pe surse publice la 01.09.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele menționau metoda pe comenzi ca fiind cea mai utilizată, în contextul producției de termopane. Celelalte (pe faze, pe produs, standard-cost) au rămas doar enumerate.
+
+**De ce contează.** F-311 (producția multi-stadiu) ține gestiunea lui 331 analitic pe comandă. Pe faze, structura analitică e alta, deci și fluxul.
+
+<sub>sursa: training 14.08.2026, întrebarea 1</sub>
+
+
 ## TVA — import, vamă, taxare inversă
 
-### 39. Derogarea UE pentru taxarea inversă la cereale și electronice avea termen 31.12.2026 — a fost prelungită?
+### 29. Derogarea UE pentru taxarea inversă la cereale și electronice avea termen 31.12.2026 — a fost prelungită?
 
 **Răspuns.** Derogarea e prelungită până la **31 decembrie 2026** și acoperă opt operațiuni: cereale și plante tehnice, certificate de emisii de gaze cu efect de seră, energie electrică și gaze naturale către comercianți persoane impozabile, certificate verzi, telefoane mobile, dispozitive cu circuite integrate, console de jocuri, tablete și laptopuri. Pentru ultimele patru categorii, taxarea inversă se aplică **doar dacă valoarea fără TVA de pe factură e cel puțin 22.500 lei**. La data verificării **nu e publicată o prelungire dincolo de 31.12.2026** — deci expiră peste patru luni dacă nu intervine una.
 
@@ -542,9 +434,26 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 14.08.2026, întrebarea 7</sub>
 
 
+## TVA — ajustări fără document
+
+### 30. La lipsa la inventar, practica implicită a cabinetului este colectarea de TVA sau ajustarea dreptului de deducere? Ce set de documente se cere clientului?
+
+**Răspuns.** Regula IMPLICITĂ la lipsa la inventar e AJUSTAREA TVA deduse (art. 304 alin. (1) lit. c) Cod fiscal), nu colectarea. Excepție — fără ajustare — pentru bunuri distruse, pierdute sau furate, DOVEDITE corespunzător (proces-verbal, dosar). La lipsuri IMPUTABILE, suma imputată nu e contravaloarea unei operațiuni supuse TVA, dar ajustarea deducerii rămâne datorată. Colectarea (nu ajustarea) apare doar când lipsa se tratează ca livrare către sine. Documente cerute clientului: proces-verbal de inventariere, decizie de imputare sau proces-verbal de scoatere din gestiune, și dovada cauzei pentru scutirea de ajustare.
+
+**Temei.** Cod fiscal art. 304 alin. (1) lit. c) și alin. (2) (bunuri de capital: art. 305).
+
+<sub>verificat pe surse publice la 01.09.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele spuneau simplu „trebuie să colectez și TVA”. La revizuire am găsit că tratamentul diferă: lipsă imputabilă → colectare; neimputabilă nejustificată → ajustare; bunuri distruse cu documente → fără ajustare.
+
+**De ce contează.** F-406 (înregistrări fără document) și corelațiile C-03 / C-04, unde ajustările care nu vin din facturi trebuie să apară în jurnale cu semnul corect. Cele două tratamente ating conturi diferite, deci și jurnale diferite.
+
+<sub>sursa: training 14.08.2026, întrebarea 2</sub>
+
+
 ## Obligații de mediu
 
-### 40. Care este termenul curent de depunere a declarației la Fondul pentru Mediu — lunar sau trimestrial?
+### 31. Care este termenul curent de depunere a declarației la Fondul pentru Mediu — lunar sau trimestrial?
 
 **Răspuns.** **Lunar sau trimestrial**, după tipul de obligație, cu termen **25 a lunii următoare** perioadei de raportare. Depunerea se face exclusiv electronic, prin platforma AFM-Online, cu semnătură electronică calificată — de la 1 iulie 2022 nu se mai acceptă depunerea pe hârtie.
 
@@ -561,7 +470,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 
 ## Plafoane de numerar și contul 455
 
-### 41. Care sunt valorile exacte ale plafoanelor din Legea 70/2015 în forma modificată prin Legea 296/2023, la data operațiunii?
+### 32. Care sunt valorile exacte ale plafoanelor din Legea 70/2015 în forma modificată prin Legea 296/2023, la data operațiunii?
 
 **Răspuns.** Între persoane juridice: **5.000 lei/zi și de persoană**. Magazine cash & carry: 5.000 lei de persoană, dar maximum **10.000 lei total pe zi**; plăți către ele, maximum 10.000 lei/zi. Avansuri spre decontare: **5.000 lei/zi** pentru fiecare persoană care a primit avansul. **Fragmentarea e interzisă expres** pentru facturi peste 5.000 lei, respectiv 10.000 la cash & carry. Legea 239/2025 **nu a modificat plafoanele** de la 1.01.2026, dar a eliminat pragul de 50.000 lei de la care era obligatorie acceptarea cardului și a introdus obligația unui cont de plăți deschis în România.
 
@@ -576,7 +485,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 19.08.2026, punctul 1</sub>
 
 
-### 42. Care sunt exact operațiunile în numerar interzise pe contul 455 și care e temeiul legal?
+### 33. Care sunt exact operațiunile în numerar interzise pe contul 455 și care e temeiul legal?
 
 **Răspuns.** Nu e un plafon, e o **interdicție**. Din **11 noiembrie 2023**, încasările și plățile reprezentând împrumuturi — indiferent de sumă — de la sau către asociați, acționari, administratori și alte persoane fizice **nu se mai pot face în numerar**, ci doar prin instrumente de plată fără numerar. Înalta Curte a stabilit că amenda de 25% se calculează la **totalul operațiunilor**, nu la depășirea unui plafon.
 
@@ -593,7 +502,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 
 ## Salarii — praguri și baze de calcul
 
-### 43. Care este salariul minim brut pe economie în vigoare, și de la ce dată?
+### 34. Care este salariul minim brut pe economie în vigoare, și de la ce dată?
 
 **Răspuns.** **4.325 lei** brut, de la **1 iulie 2026** (anterior 4.050 lei). Minimul se aplică proporțional cu norma: 2.162,50 lei la jumătate de normă, 1.081,25 la un sfert. Tot de la 1 iulie 2026 și până la 31.12.2026, suma neimpozabilă scade de la 300 la 200 lei/lună.
 
@@ -608,7 +517,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 21.08.2026, punctul 1</sub>
 
 
-### 44. Ce contribuții se datorează pentru indemnizația de concediu medical, și pe ce parte se rețin?
+### 35. Ce contribuții se datorează pentru indemnizația de concediu medical, și pe ce parte se rețin?
 
 **Răspuns.** Din indemnizație se rețin **CAS 25%** și **impozit 10%**. **CASS 10% se datorează începând cu veniturile lunii august 2026** — până atunci nu se datora. Fac excepție indemnizațiile pentru accidente de muncă și boli profesionale, care rămân scutite de CASS. **CAM 2,25% NU se datorează** pe partea suportată din FNUASS: angajatorul datorează CAM doar pe zilele pe care le suportă el. Baza de calcul e media veniturilor brute din ultimele 6 luni, plafonată la 12 salarii minime brute pe lună.
 
@@ -623,7 +532,7 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 <sub>sursa: training 21.08.2026, punctul 3</sub>
 
 
-### 45. Care e limita de reținere prin poprire pentru obligațiile de întreținere, față de treimea aplicabilă datoriilor obișnuite?
+### 36. Care e limita de reținere prin poprire pentru obligațiile de întreținere, față de treimea aplicabilă datoriilor obișnuite?
 
 **Răspuns.** Sunt **trei** reguli, nu una. **1/2** din venitul net lunar pentru obligații de întreținere sau alocații pentru copii; **1/3** pentru orice alte datorii. Când există mai multe popriri pe aceeași sumă, reținerea totală nu poate depăși **1/2**, indiferent de natura creanțelor. Iar dacă venitul e sub salariul minim net pe economie, se poate urmări doar partea care depășește **jumătate din salariul minim net** — prag de protecție pe care notițele nu-l aveau deloc.
 
@@ -636,6 +545,149 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 **De ce contează.** Fluxul de popriri (427). Un procent greșit înseamnă ori reținere insuficientă — firma răspunde față de executor — ori excesivă, față de salariat.
 
 <sub>sursa: training 21.08.2026, punctul 4</sub>
+
+
+### 37. Care e plafonul legal al sumei care se poate imputa unui salariat pentru o pagubă produsă, și în ce ritm se poate reține din salariu?
+
+**Răspuns.** Codul muncii art. 254: recuperarea prejudiciului prin NOTĂ DE CONSTATARE ȘI EVALUARE, de comun acord cu salariatul, nu poate depăși echivalentul a 5 SALARII MINIME brute pe economie. Peste acest plafon sau fără acordul salariatului, recuperarea se face numai prin instanță. Reținerea efectivă din salariu e limitată de art. 169: nu se reține fără titlu executoriu, iar reținerile cumulate nu depășesc o treime din salariul net. ⚠️ Corecție la notiță: legea spune „5 salarii MINIME”, nu „5 salarii medii”.
+
+**Temei.** Codul muncii art. 254 (plafonul de comun acord: 5 salarii minime brute) și art. 169 (reținerile din salariu).
+
+<sub>verificat pe surse publice la 01.09.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele din 26.08 menționează un plafon „la nivelul a 5 salarii medii”, cu observația formatorului însuși: „de verificat suma”. Separat, notițele spun că imputația nu se poate face fără ca salariatul să fie informat și de acord — Codul muncii.
+
+**De ce contează.** F-426 pasul 5, unde reținerea din 421 stinge creanța de pe 461. Dacă plafonul e mai mic decât paguba, fluxul are nevoie de un pas de eșalonare, iar creanța rămâne pe 461 mai multe luni.
+
+<sub>sursa: training 26.08.2026, punctul 1</sub>
+
+
+## Trezorerie — diferențe de curs și plafoane
+
+### 38. Există un plafon de sold de casă separat, de 500.000 lei, pentru magazinele de tip cash & carry, supermagazine și hipermagazine?
+
+**Răspuns.** DA. Legea 70/2015 stabilește un sold de casă maxim de 50.000 lei la sfârșitul zilei, iar pentru magazinele de tip cash & carry, supermagazine și hipermagazine plafonul e 500.000 lei la sfârșitul zilei. Excedentul se depune în conturi bancare în 2 zile lucrătoare. Deci C-38 are nevoie de un al doilea prag, după tipul unității — la un client cu magazin mare, pragul de 50.000 ar semnala greșit o depășire în fiecare zi.
+
+**Temei.** Legea 70/2015, art. 4^1 (plafonul soldului de casă; 500.000 lei pentru cash & carry / supermagazine / hipermagazine).
+
+<sub>verificat pe surse publice la 01.09.2026 — confirmă sau corectează</sub>
+
+**Context.** Nu era în notițele de la curs. O a doua revizuire a acelorași notițe îl afirmă, alături de plafonul general de 50.000 lei.
+
+**De ce contează.** C-38, care azi are un singur prag. Dacă se confirmă, corelația are nevoie de un al doilea prag, după tipul unității — iar la un client cu magazin mare, pragul de 50.000 ar fi semnalat greșit ca depășire în fiecare zi.
+
+<sub>sursa: training 28.08.2026, punctul 8</sub>
+
+
+### 39. Care e articolul din OMFP 1802/2014 care spune că elementele NEMONETARE (inclusiv avansurile în valută) nu se reevaluează la cursul de închidere?
+
+**Răspuns.** Confirmat: avansurile în valută (409, 419, 4093, 4094) sunt elemente NEMONETARE și NU se reevaluează la cursul de închidere — regulă aplicată din 2015, odată cu OMFP 1802/2014. Reevaluarea lunară privește doar elementele MONETARE (disponibilități, creanțe și datorii care se sting în bani). Distincția monetar/nemonetar și evaluarea la data bilanțului sunt în OMFP 1802/2014, secțiunea de evaluare la bilanț (pct. 319 și urm.). ❓ Numărul exact al punctului rămâne de confirmat pe textul ordinului — regula e fermă, referința aproximativă.
+
+**Temei.** OMFP 1802/2014, secțiunea de evaluare la data bilanțului (pct. 319 și urm.); avansurile în valută nereevaluate din 2015.
+
+<sub>verificat pe surse publice la 01.09.2026 — confirmă sau corectează</sub>
+
+**Context.** Regula a apărut la contraverificarea cu revizuirile paralele: avansurile în valută rămân la cursul plății, nu se reevaluează lunar ca disponibilul și creanțele monetare.
+
+**De ce contează.** F-107 și MOD_CREDIT_VALUTA: dacă un avans în valută ar fi reevaluat, ar produce diferențe de curs pe un cont care n-are ce diferență să genereze. Regula e scrisă în §4.1 al documentului de trezorerie ca ➕.
+
+<sub>sursa: training 28.08.2026, punctul 10</sub>
+
+
+### 40. Reevaluarea de sfârșit de lună a conturilor în valută se înregistrează pe 665/765 sau pe 668/768?
+
+**Răspuns.** Confirmat: diferențele din reevaluarea lunară a elementelor MONETARE în valută (disponibilități, creanțe, datorii) se înregistrează pe 665/765, NU pe 668/768. Unele cabinete folosesc analitice distincte (ex. 6651/7651) exact pentru a separa reevaluarea de decontare — ceea ce validează abordarea cu analitice .DEC/.REV din repo. Varianta 668/768 din notiță e greșită pentru valuta propriu-zisă; 668/768 se folosesc pentru creanțe/datorii exprimate în LEI dar decontabile după cursul unei valute — alt caz.
+
+**Temei.** OMFP 1802/2014 — funcțiunea conturilor 665/765 (diferențe de curs, inclusiv la evaluarea de sfârșit de lună a disponibilităților în valută).
+
+<sub>verificat pe surse publice la 01.09.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele din 28.08 spun: diferențele de curs curente prin 665/765, iar reevaluarea de la sfârșitul lunii prin 668/768, cu observația „să fie clară diferența de curs din reevaluare, și cea de la furnizori”.
+
+**De ce contează.** F-107 pasul de reevaluare, MOD_CREDIT_VALUTA în întregime, și structura analitică a lui 665/765. Nu e nuanță de stil: cele două variante pun aceeași sumă în conturi care se raportează diferit.
+
+<sub>sursa: training 28.08.2026, punctul 1</sub>
+
+
+### 41. Plafonul de 50.000 lei la soldul de casă e per societate sau per casierie / punct de lucru?
+
+**Răspuns.** Plafonul de sold (50.000 lei, respectiv 500.000 la retail) vizează soldul de casă al PERSOANEI JURIDICE la sfârșitul zilei. Deschiderea unei a doua casierii „ca să mai am 50.000” nu ține la control: un punct de lucru fără activitate reală de încasări cade la testul substanței economice. ❓ Formularea literală „per entitate vs. per punct de lucru” din textul art. 4^1 rămâne de citit pe lege (sursele cu textul integral erau inaccesibile), dar practica clientului nu rezistă indiferent de formulare.
+
+**Temei.** Legea 70/2015, art. 4^1 — plafonul soldului de casă al persoanei juridice.
+
+<sub>verificat pe surse publice la 01.09.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele spun „50.000 lei pe fiecare punct de lucru” și povestesc un client care, aflând de plafon, „a mai făcut rost de o casierie cu 50.000 lei”. Notițele nu spun dacă practica aceea rezistă la control.
+
+**De ce contează.** C-38 și cadența pe 5311. Dacă limita e per societate, o a doua casierie nu rezolvă nimic și clientul e în neregulă; dacă e per casierie, orice societate poate multiplica plafonul deschizând puncte de lucru, ceea ce ar goli restricția de sens.
+
+<sub>sursa: training 28.08.2026, punctul 2</sub>
+
+
+## Trezorerie — convenții de înregistrare
+
+### 42. Ce documentație face diferența, la un control, între „rate contractuale” și fragmentarea unei plăți?
+
+**Răspuns.** Legea 70/2015 interzice expres fragmentarea unei plăți pentru a ocoli plafonul. Un contract cu plata în rate, cu scadențar și date fixe, scoate operațiunea de sub acuzație — fiecare rată e o operațiune la data ei. Apărarea cade dacă ratele se încasează la alte date sau sume decât scadențarul. Nu există o cerință legală explicită de „dată certă” a contractului; ce contează la control e ca plata efectivă să urmeze fidel scadențarul încheiat ANTERIOR operațiunilor. Recomandat: contract scris, cu scadențar, datat înainte de prima rată.
+
+**Temei.** Legea 70/2015 (interdicția fragmentării); forma contractului — practică, fără cerință legală de dată certă.
+
+<sub>verificat pe surse publice la 01.09.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele spun că un contract cu plata în rate scoate operațiunea de sub acuzația de fragmentare: „am scadențar, am o dată fixă pe care încasez ratele”. Nu spun ce se prezintă efectiv.
+
+**De ce contează.** C-38 și secțiunea de plafoane din documentul de control. Diferența dintre legal și amendabil stă în ce poți arăta, nu în ce ai făcut.
+
+<sub>sursa: training 28.08.2026, punctul 6</sub>
+
+
+## Gestiuni, bonuri de consum și compensări
+
+### 43. Care e forma obligatorie a bonului de consum, și în ce cazuri poate fi înlocuit cu alt document?
+
+**Răspuns.** Bonul de consum e documentul reglementat de OMFP 2634/2015, obligatoriu la eliberarea din gestiune pentru consum. ⚠️ „Fișa limită de consum” pe care o propuneam ca alternativă a fost ELIMINATĂ din formularele reglementate prin OMFP 2634/2015 — nu mai e o opțiune validă. La transferul între gestiuni se folosește bonul de transfer (aviz intern). Deci: bon de consum la consum, bon de transfer la mutarea între gestiuni; fișa limită de consum nu mai există ca formular obligatoriu.
+
+**Temei.** OMFP 2634/2015 privind documentele financiar-contabile (bonul de consum; eliminarea fișei limită de consum).
+
+<sub>verificat pe surse publice la 01.09.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele stabilesc ordinea — întâi se creează gestiunea, apoi se pune problema consumului — și spun că orice ieșire din gestiune se face pe bon de consum. Formatorul a marcat însă explicit subiectul ca „de contraverificat, de clarificat detaliat”.
+
+**De ce contează.** F-321 pasul 3 și regula „consumul trece prin gestiune” din documentul de stocuri. De forma documentului depinde ce i se cere clientului să aducă lunar — iar cerința se face o dată, la preluare, sau nu se mai face.
+
+<sub>sursa: training 28.08.2026, punctul 3</sub>
+
+
+### 44. Ce document susține compensarea 4091 ↔ 419 la același partener, și de la ce prag trebuie făcută prin sistemul reglementat?
+
+**Răspuns.** Compensarea creanțelor și datoriilor reciproce cu același partener se face pe formular de compensare, cu acord scris între părți. Pragul: pentru facturi peste 10.000 lei restante peste 30 de zile, compensarea se face OBLIGATORIU prin sistemul reglementat (IMI — Institutul de Management și Informatică), conform OUG 77/1999 și HG 685/1999. Sub 10.000 lei sau sub 30 de zile de la scadență, compensarea se face direct între client și furnizor, pe același formular, fără IMI. TVA-ul NU se compensează odată cu avansurile — regularizarea lui se face la facturile finale, prin stornarea fiecărui avans.
+
+**Temei.** OUG 77/1999 și HG 685/1999 (compensarea prin IMI peste 10.000 lei restanți peste 30 de zile).
+
+<sub>verificat pe surse publice la 01.09.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele scriu doar „4091 - 419 <=> să faci compensări ulterior”, cu mențiunea „de analizat” adresată mie.
+
+**De ce contează.** Dacă apare un flux de compensare, el are nevoie de documentul justificativ ca stare inițială. Fără el, compensarea e o decizie unilaterală asupra unor solduri care aparțin la două raporturi juridice diferite.
+
+<sub>sursa: training 28.08.2026, punctul 4</sub>
+
+
+## Dividende — CASS, declarații și termene
+
+### 45. CASS pe dividende se datorează la dividendele DISTRIBUITE sau la cele efectiv RIDICATE?
+
+**Răspuns.** CASS pe dividende se datorează în funcție de dividendele ÎNCASATE (ridicate) în cursul anului, nu de cele doar distribuite — confirmă notița formatorului. Dividendele încasate intră în baza de analiză a plafoanelor de 6/12/24 salarii minime brute: sub 6 salarii minime cumulat (cu alte venituri nesalariale) nu se datorează CASS; între 6–12 baza e 6 salarii minime; între 12–24 baza e 12; peste 24 baza e 24. Se declară prin Declarația Unică (D212), până la 25 mai a anului următor. Distincția cheie: impozitul de 16% e la DISTRIBUIRE (termen 25.01), CASS e la ÎNCASARE, pe plafoane anuale.
+
+**Temei.** Cod fiscal art. 170 (baza CASS pe venituri din investiții — dividende încasate) și art. 174 (declararea prin D212).
+
+<sub>verificat pe surse publice la 01.09.2026 — confirmă sau corectează</sub>
+
+**Context.** Notițele din 26.08 spun explicit: „la dividendele ridicate se plătește sănătate, nu la cele distribuite”. Formatorul a legat asta de cele două rubrici distincte din D205 — dividende distribuite și dividende ridicate.
+
+**De ce contează.** Momentul în care se naște obligația de CASS și, prin el, ce arată Declarația Unică față de soldul lui 457. Un 457 cu sold creditor la 31.12 înseamnă dividende distribuite și neridicate: dacă baza CASS e distribuirea, obligația există deja; dacă e ridicarea, nu.
+
+<sub>sursa: training 26.08.2026, punctul 2</sub>
 
 
 ## Microîntreprindere — prag și cotă
@@ -657,4 +709,4 @@ Sub fiecare întrebare, **„Ce am presupus”** spune ce am ales acolo unde a t
 
 ---
 
-*46 de întrebări în total: 24 deschise, 9 decizii de cabinet, 13 cu răspuns verificat. Fiecare se poate urmări înapoi la training și la numărul ei original.*
+*46 de întrebări în total: 13 deschise, 7 decizii de cabinet, 26 cu răspuns verificat. Fiecare se poate urmări înapoi la training și la numărul ei original.*

@@ -206,10 +206,12 @@ FLUXURI = [
                 cr=[("7588", 826.45), ("4427", 173.55)],
                 rol="Creanță față de salariat + venit + TVA colectată"),
             pas(5, "Stat de plată",
-                "Reținerea din drepturile salariale. ❓ Imputația nu se poate face fără "
-                "ca salariatul să fie informat și de acord (Codul muncii), iar notițele "
-                "menționează un plafon „la nivelul a 5 salarii medii”, cu observația "
-                "formatorului „de verificat suma”.",
+                "Reținerea din drepturile salariale. Imputația nu se poate face fără ca "
+                "salariatul să fie informat și de acord (Codul muncii art. 254). "
+                "Plafonul recuperării de comun acord e 5 salarii MINIME brute pe "
+                "economie — verificat pe Codul muncii art. 254; notița spunea „5 salarii "
+                "medii”, ceea ce era greșit. Peste plafon sau fără acord, doar prin "
+                "instanță; reținerea efectivă e limitată la o treime din net (art. 169).",
                 dr=[("421", 1000)], cr=[("461.salariat", 1000)],
                 rol="Recuperarea prin reținere"),
             pas(6, "Verificare",

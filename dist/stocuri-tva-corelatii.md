@@ -1459,9 +1459,11 @@ Notița cerea clarificarea. Ordinea e:
 Orice ieșire din gestiune se face pe bon de consum. Fără el, scăderea din stoc nu are
 document justificativ, iar diferența se constată la inventar fără explicație.
 
-❓ Forma obligatorie a bonului de consum și cazurile în care poate fi înlocuit cu alt
-document (fișă limită de consum, aviz intern) nu erau în notițe. De clarificat, pentru că
-de asta depinde ce se cere clientului să aducă lunar.
+✅ Forma bonului de consum e reglementată de OMFP 2634/2015. „Fișa limită de consum”, pe
+care o pusesem aici ca posibilă alternativă, a fost ELIMINATĂ prin același ordin — nu mai
+e formular valid, așa că notița brută avea dreptate să nu o pomenească. La transferul între
+gestiuni se folosește bonul de transfer (aviz intern), exact ca în notiță. Răspuns
+verificat pe OMFP 2634/2015; vezi Anexa G.
 
 ## Anexa A — Recapitulare: conturi și perechile lor
 
@@ -1650,6 +1652,14 @@ originale.
 
 Întrebări care erau deschise și la care am găsit răspuns în lege. Fiecare poartă actul normativ pe care se sprijină și data la care a fost confruntat cu sursele. **De confirmat cu formatorul** — nu pentru că răspunsul ar fi nesigur, ci pentru că practica poate adăuga ceva ce textul nu spune.
 
+**✅ Care sunt celelalte metode de calculație a costurilor acceptate de OMFP 1802/2014, și în ce situații se alege fiecare?**
+
+OMFP 1802/2014 (pct. 286 și urm.) recunoaște, pe lângă metoda pe comenzi implementată: metoda COSTULUI STANDARD (consumuri normale de materiale/manoperă, revizuite periodic); metoda PE FAZE (producție de masă — cost pe fiecare fază tehnologică, apoi pe produs); și metoda PE COMENZI (producție individuală sau serie mică — purtătorul de cost e comanda). Alegerea urmează specificul producției: pe comenzi la unicat/serie mică, pe faze la producție de masă continuă, cost standard când există norme stabile de consum.
+
+*Temei:* OMFP 1802/2014, pct. 286 (costul de producție și metodele de calculație).
+
+*Stocuri și producție · training 14.08.2026, întrebarea 1 · verificat 01.09.2026*
+
 **✅ Derogarea UE pentru taxarea inversă la cereale și electronice avea termen 31.12.2026 — a fost prelungită?**
 
 Derogarea e prelungită până la **31 decembrie 2026** și acoperă opt operațiuni: cereale și plante tehnice, certificate de emisii de gaze cu efect de seră, energie electrică și gaze naturale către comercianți persoane impozabile, certificate verzi, telefoane mobile, dispozitive cu circuite integrate, console de jocuri, tablete și laptopuri. Pentru ultimele patru categorii, taxarea inversă se aplică **doar dacă valoarea fără TVA de pe factură e cel puțin 22.500 lei**. La data verificării **nu e publicată o prelungire dincolo de 31.12.2026** — deci expiră peste patru luni dacă nu intervine una.
@@ -1658,6 +1668,14 @@ Derogarea e prelungită până la **31 decembrie 2026** și acoperă opt operaț
 
 *TVA — import, vamă, taxare inversă · training 14.08.2026, întrebarea 7 · verificat 21.08.2026*
 
+**✅ La lipsa la inventar, practica implicită a cabinetului este colectarea de TVA sau ajustarea dreptului de deducere? Ce set de documente se cere clientului?**
+
+Regula IMPLICITĂ la lipsa la inventar e AJUSTAREA TVA deduse (art. 304 alin. (1) lit. c) Cod fiscal), nu colectarea. Excepție — fără ajustare — pentru bunuri distruse, pierdute sau furate, DOVEDITE corespunzător (proces-verbal, dosar). La lipsuri IMPUTABILE, suma imputată nu e contravaloarea unei operațiuni supuse TVA, dar ajustarea deducerii rămâne datorată. Colectarea (nu ajustarea) apare doar când lipsa se tratează ca livrare către sine. Documente cerute clientului: proces-verbal de inventariere, decizie de imputare sau proces-verbal de scoatere din gestiune, și dovada cauzei pentru scutirea de ajustare.
+
+*Temei:* Cod fiscal art. 304 alin. (1) lit. c) și alin. (2) (bunuri de capital: art. 305).
+
+*TVA — ajustări fără document · training 14.08.2026, întrebarea 2 · verificat 01.09.2026*
+
 **✅ Care este termenul curent de depunere a declarației la Fondul pentru Mediu — lunar sau trimestrial?**
 
 **Lunar sau trimestrial**, după tipul de obligație, cu termen **25 a lunii următoare** perioadei de raportare. Depunerea se face exclusiv electronic, prin platforma AFM-Online, cu semnătură electronică calificată — de la 1 iulie 2022 nu se mai acceptă depunerea pe hârtie.
@@ -1665,6 +1683,14 @@ Derogarea e prelungită până la **31 decembrie 2026** și acoperă opt operaț
 *Temei:* Procedura de declarare la Fondul pentru mediu; depunere electronică obligatorie din 1.07.2022.
 
 *Obligații de mediu · training 14.08.2026, întrebarea 5 · verificat 21.08.2026*
+
+**✅ Care e forma obligatorie a bonului de consum, și în ce cazuri poate fi înlocuit cu alt document?**
+
+Bonul de consum e documentul reglementat de OMFP 2634/2015, obligatoriu la eliberarea din gestiune pentru consum. ⚠️ „Fișa limită de consum” pe care o propuneam ca alternativă a fost ELIMINATĂ din formularele reglementate prin OMFP 2634/2015 — nu mai e o opțiune validă. La transferul între gestiuni se folosește bonul de transfer (aviz intern). Deci: bon de consum la consum, bon de transfer la mutarea între gestiuni; fișa limită de consum nu mai există ca formular obligatoriu.
+
+*Temei:* OMFP 2634/2015 privind documentele financiar-contabile (bonul de consum; eliminarea fișei limită de consum).
+
+*Gestiuni, bonuri de consum și compensări · training 28.08.2026, punctul 3 · verificat 01.09.2026*
 
 
 ---

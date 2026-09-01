@@ -652,9 +652,11 @@ Notița cerea clarificarea. Ordinea e:
 Orice ieșire din gestiune se face pe bon de consum. Fără el, scăderea din stoc nu are
 document justificativ, iar diferența se constată la inventar fără explicație.
 
-❓ Forma obligatorie a bonului de consum și cazurile în care poate fi înlocuit cu alt
-document (fișă limită de consum, aviz intern) nu erau în notițe. De clarificat, pentru că
-de asta depinde ce se cere clientului să aducă lunar.
+✅ Forma bonului de consum e reglementată de OMFP 2634/2015. „Fișa limită de consum”, pe
+care o pusesem aici ca posibilă alternativă, a fost ELIMINATĂ prin același ordin — nu mai
+e formular valid, așa că notița brută avea dreptate să nu o pomenească. La transferul între
+gestiuni se folosește bonul de transfer (aviz intern), exact ca în notiță. Răspuns
+verificat pe OMFP 2634/2015; vezi Anexa G.
 
 ## 10. Verificarea analitic ↔ sintetic
 

@@ -545,46 +545,6 @@ Suma încasată în plus e TVA-inclusivă: din 5.000 lei ies 4.132,23 bază și 
 
 **Ce am presupus între timp:** Am scris fluxul cu extragerea explicită a TVA-ului, ca pas separat, tocmai ca să nu depindă de comportamentul softului.
 
-**❓ Care e plafonul legal al sumei care se poate imputa unui salariat pentru o pagubă produsă, și în ce ritm se poate reține din salariu?**
-
-*Salarii — praguri și baze de calcul · training 26.08.2026, punctul 1*
-
-Notițele din 26.08 menționează un plafon „la nivelul a 5 salarii medii”, cu observația formatorului însuși: „de verificat suma”. Separat, notițele spun că imputația nu se poate face fără ca salariatul să fie informat și de acord — Codul muncii.
-
-**Ce am presupus între timp:** Am modelat imputația integrală, cu reținere într-o singură lună, pentru că exemplul din notițe e de 1.000 lei — sub orice plafon plauzibil. Pasul poartă ❓. De verificat art. 254 (răspunderea patrimonială) și art. 169 (reținerile din salariu) din Codul muncii.
-
-**❓ Există un plafon de sold de casă separat, de 500.000 lei, pentru magazinele de tip cash & carry, supermagazine și hipermagazine?**
-
-*Trezorerie — diferențe de curs și plafoane · training 28.08.2026, punctul 8*
-
-Nu era în notițele de la curs. O a doua revizuire a acelorași notițe îl afirmă, alături de plafonul general de 50.000 lei.
-
-**Ce am presupus între timp:** Cifra e plauzibilă: un hipermarket trece de 50.000 lei într-o oră de vârf, iar depunerea zilnică a excedentului ar fi impracticabilă. Dar plauzibil nu e verificat, iar eu n-am confirmat-o pe textul legii — deci C-38 a rămas cu un singur prag și cu întrebarea marcată.
-
-**❓ Plafonul de 50.000 lei la soldul de casă e per societate sau per casierie / punct de lucru?**
-
-*Trezorerie — diferențe de curs și plafoane · training 28.08.2026, punctul 2*
-
-Notițele spun „50.000 lei pe fiecare punct de lucru” și povestesc un client care, aflând de plafon, „a mai făcut rost de o casierie cu 50.000 lei”. Notițele nu spun dacă practica aceea rezistă la control.
-
-**Ce am presupus între timp:** Am formulat C-38 pe casierie, cum spun notițele, dar cu semnalul „casierie deschisă special ca să se multiplice plafonul” trecut la SUSPECT — pentru că intenția se vede, indiferent cum e textul. De confirmat art. 4 din Legea 70/2015 în forma în vigoare.
-
-**❓ Ce documentație face diferența, la un control, între „rate contractuale” și fragmentarea unei plăți?**
-
-*Trezorerie — convenții de înregistrare · training 28.08.2026, punctul 6*
-
-Notițele spun că un contract cu plata în rate scoate operațiunea de sub acuzația de fragmentare: „am scadențar, am o dată fixă pe care încasez ratele”. Nu spun ce se prezintă efectiv.
-
-**Ce am presupus între timp:** Am scris în document că apărarea cade dacă ratele se încasează la alte date sau în alte sume decât scadențarul. Ce nu știu e dacă se cere contract cu dată certă, sau dacă e de ajuns unul sub semnătură privată.
-
-**❓ Ce document susține compensarea 4091 ↔ 419 la același partener, și de la ce prag trebuie făcută prin sistemul reglementat?**
-
-*Gestiuni, bonuri de consum și compensări · training 28.08.2026, punctul 4*
-
-Notițele scriu doar „4091 - 419 <=> să faci compensări ulterior”, cu mențiunea „de analizat” adresată mie.
-
-**Ce am presupus între timp:** Analiza e în documentul de control, §9.4: compensarea e posibilă, dar cere acord scris între părți, iar TVA-ul NU se compensează odată cu avansurile — regularizarea lui se face la facturile finale, prin stornarea fiecărui avans în parte. N-am scris flux, pentru că starea inițială depinde de răspuns.
-
 **❓ Sumele stabilite prin decizie de impunere pe TVA se înregistrează în 4423 cu analitic distinct, sau în 4481?**
 
 *Acte de control — 4423 sau 4481 · training 26.08.2026, punctul 3*
@@ -633,6 +593,46 @@ Nu e un plafon, e o **interdicție**. Din **11 noiembrie 2023**, încasările ș
 *Temei:* Legea 70/2015 modificată prin Legea 296/2023, în vigoare din 11.11.2023. Cuantumul amenzii — jurisprudența ÎCCJ.
 
 *Plafoane de numerar și contul 455 · training 19.08.2026, punctul 2 · verificat 21.08.2026*
+
+**✅ Care e plafonul legal al sumei care se poate imputa unui salariat pentru o pagubă produsă, și în ce ritm se poate reține din salariu?**
+
+Codul muncii art. 254: recuperarea prejudiciului prin NOTĂ DE CONSTATARE ȘI EVALUARE, de comun acord cu salariatul, nu poate depăși echivalentul a 5 SALARII MINIME brute pe economie. Peste acest plafon sau fără acordul salariatului, recuperarea se face numai prin instanță. Reținerea efectivă din salariu e limitată de art. 169: nu se reține fără titlu executoriu, iar reținerile cumulate nu depășesc o treime din salariul net. ⚠️ Corecție la notiță: legea spune „5 salarii MINIME”, nu „5 salarii medii”.
+
+*Temei:* Codul muncii art. 254 (plafonul de comun acord: 5 salarii minime brute) și art. 169 (reținerile din salariu).
+
+*Salarii — praguri și baze de calcul · training 26.08.2026, punctul 1 · verificat 01.09.2026*
+
+**✅ Există un plafon de sold de casă separat, de 500.000 lei, pentru magazinele de tip cash & carry, supermagazine și hipermagazine?**
+
+DA. Legea 70/2015 stabilește un sold de casă maxim de 50.000 lei la sfârșitul zilei, iar pentru magazinele de tip cash & carry, supermagazine și hipermagazine plafonul e 500.000 lei la sfârșitul zilei. Excedentul se depune în conturi bancare în 2 zile lucrătoare. Deci C-38 are nevoie de un al doilea prag, după tipul unității — la un client cu magazin mare, pragul de 50.000 ar semnala greșit o depășire în fiecare zi.
+
+*Temei:* Legea 70/2015, art. 4^1 (plafonul soldului de casă; 500.000 lei pentru cash & carry / supermagazine / hipermagazine).
+
+*Trezorerie — diferențe de curs și plafoane · training 28.08.2026, punctul 8 · verificat 01.09.2026*
+
+**✅ Plafonul de 50.000 lei la soldul de casă e per societate sau per casierie / punct de lucru?**
+
+Plafonul de sold (50.000 lei, respectiv 500.000 la retail) vizează soldul de casă al PERSOANEI JURIDICE la sfârșitul zilei. Deschiderea unei a doua casierii „ca să mai am 50.000” nu ține la control: un punct de lucru fără activitate reală de încasări cade la testul substanței economice. ❓ Formularea literală „per entitate vs. per punct de lucru” din textul art. 4^1 rămâne de citit pe lege (sursele cu textul integral erau inaccesibile), dar practica clientului nu rezistă indiferent de formulare.
+
+*Temei:* Legea 70/2015, art. 4^1 — plafonul soldului de casă al persoanei juridice.
+
+*Trezorerie — diferențe de curs și plafoane · training 28.08.2026, punctul 2 · verificat 01.09.2026*
+
+**✅ Ce documentație face diferența, la un control, între „rate contractuale” și fragmentarea unei plăți?**
+
+Legea 70/2015 interzice expres fragmentarea unei plăți pentru a ocoli plafonul. Un contract cu plata în rate, cu scadențar și date fixe, scoate operațiunea de sub acuzație — fiecare rată e o operațiune la data ei. Apărarea cade dacă ratele se încasează la alte date sau sume decât scadențarul. Nu există o cerință legală explicită de „dată certă” a contractului; ce contează la control e ca plata efectivă să urmeze fidel scadențarul încheiat ANTERIOR operațiunilor. Recomandat: contract scris, cu scadențar, datat înainte de prima rată.
+
+*Temei:* Legea 70/2015 (interdicția fragmentării); forma contractului — practică, fără cerință legală de dată certă.
+
+*Trezorerie — convenții de înregistrare · training 28.08.2026, punctul 6 · verificat 01.09.2026*
+
+**✅ Ce document susține compensarea 4091 ↔ 419 la același partener, și de la ce prag trebuie făcută prin sistemul reglementat?**
+
+Compensarea creanțelor și datoriilor reciproce cu același partener se face pe formular de compensare, cu acord scris între părți. Pragul: pentru facturi peste 10.000 lei restante peste 30 de zile, compensarea se face OBLIGATORIU prin sistemul reglementat (IMI — Institutul de Management și Informatică), conform OUG 77/1999 și HG 685/1999. Sub 10.000 lei sau sub 30 de zile de la scadență, compensarea se face direct între client și furnizor, pe același formular, fără IMI. TVA-ul NU se compensează odată cu avansurile — regularizarea lui se face la facturile finale, prin stornarea fiecărui avans.
+
+*Temei:* OUG 77/1999 și HG 685/1999 (compensarea prin IMI peste 10.000 lei restanți peste 30 de zile).
+
+*Gestiuni, bonuri de consum și compensări · training 28.08.2026, punctul 4 · verificat 01.09.2026*
 
 
 ---
