@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ro"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Declarații, fișa pe plătitor și bilanțul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F8F9F7; --surface:#FFFFFF; --sunk:#F1F4F1;
+  --ink:#1A2421; --ink-2:#3D4A45; --muted:#6B7671;
+  --accent:#1B5E44; --accent-soft:#E6EFEA; --accent-line:#B9D2C6;
+  --storno:#A6342B;
+  --rule:#DDE2DE; --rule-soft:#EAEEEB;
+  --shadow:0 1px 2px rgba(26,36,33,.05), 0 8px 24px -12px rgba(26,36,33,.14);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+    --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+    --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+    --storno:#E08278;
+    --rule:#2A3430; --rule-soft:#222B27;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121715; --surface:#1A211E; --sunk:#161D1A;
+  --ink:#E4E9E6; --ink-2:#BAC5C0; --muted:#8C9A94;
+  --accent:#5FBF92; --accent-soft:#172C23; --accent-line:#2E5544;
+  --storno:#E08278;
+  --rule:#2A3430; --rule-soft:#222B27;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased}
+.masthead{border-bottom:1px solid var(--rule); background:var(--surface); padding:56px 28px 40px}
+.mast-in{max-width:1180px; margin:0 auto; display:flex; flex-direction:column; gap:16px}
+.eyebrow{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0}
+h1{font-family:Spectral,Georgia,"Times New Roman",serif; font-weight:600;
+  font-size:clamp(2rem,4.6vw,3.15rem); line-height:1.12; letter-spacing:-.015em;
+  margin:0; text-wrap:balance; max-width:22ch}
+.lede{color:var(--muted); font-size:1.02rem; margin:0; max-width:66ch}
+.wrap{max-width:1180px; margin:0 auto; padding:0 28px; display:grid;
+  grid-template-columns:232px minmax(0,1fr); gap:56px; align-items:start}
+nav.rail{position:sticky; top:24px; padding:36px 0 40px; max-height:100vh; overflow-y:auto}
+.rail-h{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.66rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--muted);
+  margin:0 0 14px; padding-bottom:10px; border-bottom:1px solid var(--rule)}
+.rail ol{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px}
+.rail a{display:grid; grid-template-columns:24px 1fr; gap:8px; align-items:baseline;
+  text-decoration:none; color:var(--ink-2); padding:6px 8px; border-radius:5px;
+  font-size:.845rem; line-height:1.35; transition:background .12s,color .12s}
+.rail a:hover{background:var(--sunk); color:var(--accent)}
+.rail a:focus-visible{outline:2px solid var(--accent); outline-offset:1px}
+.tnum{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  color:var(--muted); font-variant-numeric:tabular-nums}
+main{padding:36px 0 96px; min-width:0; max-width:74ch}
+h2{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.62rem; line-height:1.22;
+  letter-spacing:-.01em; margin:44px 0 18px; text-wrap:balance;
+  padding-top:20px; border-top:1px solid var(--rule-soft); scroll-margin-top:20px}
+h3{font-family:Spectral,Georgia,serif; font-weight:600; font-size:1.14rem;
+  margin:30px 0 10px; scroll-margin-top:20px}
+h4{font-size:1rem; margin:22px 0 8px; scroll-margin-top:20px}
+p{margin:0 0 14px; max-width:72ch}
+ul,ol{margin:0 0 16px; padding-left:1.2rem; max-width:72ch}
+li{margin-bottom:7px}
+li::marker{color:var(--muted)}
+code{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.875em;
+  background:var(--sunk); border:1px solid var(--rule-soft); border-radius:4px;
+  padding:1px 5px; color:var(--ink)}
+hr{border:0; border-top:1px solid var(--rule); margin:32px 0}
+pre.cod{background:var(--sunk); border:1px solid var(--rule); border-radius:7px;
+  padding:14px 16px; overflow-x:auto; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; color:var(--ink-2)}
+.ledger{margin:0 0 20px; border:1px solid var(--rule); border-left:3px solid var(--accent);
+  border-radius:0 7px 7px 0; background:var(--surface); overflow-x:auto; box-shadow:var(--shadow)}
+.led-row{display:grid; grid-template-columns:6.5em 1.2em 6.5em 8.5em 1fr; gap:10px;
+  align-items:baseline; padding:8px 16px; font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:.855rem; white-space:nowrap; scroll-margin-top:20px}
+.led-row+.led-row{border-top:1px solid var(--rule-soft)}
+.led-row:target{background:var(--accent-soft)}
+.led-d,.led-c{color:var(--ink); font-weight:500}
+.led-eq{color:var(--muted)}
+.led-amt{text-align:right; font-variant-numeric:tabular-nums; color:var(--accent); font-weight:500}
+.led-amt.neg{color:var(--storno)}
+.led-note{color:var(--muted); font-size:.9em; white-space:normal;
+  font-family:"IBM Plex Sans",sans-serif}
+.note{border-left:3px solid var(--accent-line); background:var(--sunk);
+  padding:13px 18px; border-radius:0 6px 6px 0; margin:0 0 20px; max-width:72ch}
+.note p{margin:0; color:var(--ink-2); font-size:.94rem}
+.tw{overflow-x:auto; margin:0 0 22px; border:1px solid var(--rule); border-radius:7px;
+  background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:.9rem}
+thead th{text-align:left; font-family:"IBM Plex Mono",ui-monospace,monospace; font-weight:500;
+  font-size:.7rem; letter-spacing:.09em; text-transform:uppercase; color:var(--muted);
+  padding:11px 14px; border-bottom:1px solid var(--rule); background:var(--sunk)}
+tbody td{padding:10px 14px; border-bottom:1px solid var(--rule-soft);
+  vertical-align:top; color:var(--ink-2)}
+tbody tr:nth-child(even){background:var(--accent-soft)}
+tbody tr:last-child td{border-bottom:none}
+tbody td code{background:transparent; border:none; padding:0}
+@media (max-width:900px){
+  .wrap{grid-template-columns:1fr; gap:0; padding:0 22px}
+  nav.rail{position:static; max-height:none; padding:28px 0 8px; border-bottom:1px solid var(--rule)}
+  .rail ol{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:2px}
+  main{padding-top:26px}
+  .masthead{padding:40px 22px 30px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important; animation:none!important}}
+</style></head><body>
+<header class="masthead"><div class="mast-in">
+<p class="eyebrow">Notițe de curs · contabilitate</p>
+<h1>Declarații, fișa pe plătitor și bilanțul</h1>
+<p class="lede">Sursă: training 31.08.2026 — lanțul de la balanța lunii până la bilanțul depus, și verificările care îl țin drept</p>
+</div></header>
+<div class="wrap">
+<nav class="rail" aria-label="Cuprins"><p class="rail-h">Cuprins</p><ol><li><a href="#cum-cite-ti-acest-document"><span class="tnum">1</span><span>Cum citești acest document</span></a></li><li><a href="#1-ce-e-deja-n-sistem-la-31-08"><span class="tnum">2</span><span>1. Ce e deja în sistem la 31.08</span></a></li><li><a href="#2-clasele-6-i-7-se-verific-n-fiecare-lun"><span class="tnum">3</span><span>2. Clasele 6 și 7 se verifică în fiecare lună</span></a></li><li><a href="#3-vocabularul-balan-ei"><span class="tnum">4</span><span>3. Vocabularul balanței</span></a></li><li><a href="#4-impozitul-pe-profit-i-d101"><span class="tnum">5</span><span>4. Impozitul pe profit și D101</span></a></li><li><a href="#5-saf-t"><span class="tnum">6</span><span>5. SAF-T</span></a></li><li><a href="#6-chiriile-de-la-persoane-fizice"><span class="tnum">7</span><span>6. Chiriile de la persoane fizice</span></a></li><li><a href="#7-bilan-ul"><span class="tnum">8</span><span>7. Bilanțul</span></a></li><li><a href="#8-redepunerea-declara-iilor"><span class="tnum">9</span><span>8. Redepunerea declarațiilor</span></a></li><li><a href="#9-reevalu-rile-f-cute-cu-nt-rziere"><span class="tnum">10</span><span>9. Reevaluările făcute cu întârziere</span></a></li><li><a href="#10-handover-ul-final"><span class="tnum">11</span><span>10. Handover-ul final</span></a></li><li><a href="#anexa-d-r-mase-deschise"><span class="tnum">12</span><span>Anexa D — Rămase deschise</span></a></li><li><a href="#anexa-e-baza-legal-citat"><span class="tnum">13</span><span>Anexa E — Baza legală citată</span></a></li></ol></nav>
+<main>
+<h3 id="surs-training-31-08-2026-lan-ul-de-la-balan-a-lu">Sursă: training 31.08.2026 — lanțul de la balanța lunii până la bilanțul depus, și verificările care îl țin drept</h3>
+<hr>
+<h2 id="cum-cite-ti-acest-document">Cum citești acest document</h2>
+<div class="tw"><table><thead><tr><th>Marcaj</th><th>Semnificație</th></tr></thead><tbody><tr><td>✅</td><td>Notița originală era corectă — doar reformulată/completată</td></tr><tr><td>⚠️</td><td><strong>Eroare în notița originală</strong> — corectată aici, cu explicație</td></tr><tr><td>➕</td><td>Completare (lucru care lipsea, dar era necesar ca raționamentul să stea în picioare)</td></tr><tr><td>❓</td><td>Rămas deschis — de clarificat cu formatorul (vezi Anexa D)</td></tr></tbody></table></div>
+<hr>
+<h2 id="1-ce-e-deja-n-sistem-la-31-08">1. Ce e deja în sistem la 31.08</h2>
+<p>Primul pas al revizuirii, înaintea oricărei linii de material nou: fiecare temă din</p>
+<p>notițe se pune lângă fluxul, modulul sau corelația care o acoperă deja. Ce rămâne e</p>
+<p>material nou; restul e <strong>adâncire</strong>, și se scrie ca adâncire — cu trimitere la ce</p>
+<p>adâncește.</p>
+<div class="tw"><table><thead><tr><th>Tema din notițe</th><th>Ce o acoperă deja</th></tr></thead><tbody><tr><td>Reduceri comerciale <code>609 / 709</code></td><td>F-409</td></tr><tr><td><code>711</code> ca venit al producției stocate</td><td>F-311, F-314 — și scutirea de cadență din <code>date/inchideri.py</code></td></tr><tr><td>Închiderea exercițiului <code>121 / 129 / 117 + 691</code></td><td>F-104, MOD_INCHIDERE_EX</td></tr><tr><td>Repartizarea rezultatului → <code>1171</code></td><td>F-103</td></tr><tr><td>Dividende din rezultatul reportat</td><td>F-109, F-110, MOD_DIVIDENDE</td></tr><tr><td>Închiderea lunară a obligațiilor salariale</td><td>F-422, MOD_INCHIDERE_LUNARA</td></tr><tr><td>Fișa pe plătitor confruntată cu balanța</td><td>MOD_CONTROL_BALANTA, C-29</td></tr><tr><td>Amortizare liniară; plafonul auto de 50%</td><td>F-204, F-108, MOD_IMOBILIZARI, MOD_LEASING_FIN</td></tr><tr><td>Amortizarea accelerată vs. profitul reinvestit</td><td>întrebarea 12.08 î2 — <strong>deja cu răspuns verificat</strong></td></tr><tr><td>Pragul fiscal de 5.000 lei al mijloacelor fixe</td><td>întrebarea 12.08 î1 — <strong>deja cu răspuns verificat</strong></td></tr><tr><td>SAF-T pe mijloace fixe (D406)</td><td>MOD_IMOBILIZARI</td></tr><tr><td>Taxare inversă internă / intracomunitară</td><td>F-402, F-303, MOD_TAXARE_INVERSA</td></tr><tr><td>Codurile din nomenclatorul D394</td><td>F-203</td></tr><tr><td>Piese de schimb <code>3024</code>, valorificate din casare</td><td>F-212 (<code>3024 → 371</code>)</td></tr><tr><td>Scutirea de impozit pentru handicap accentuat</td><td><strong>limitare DECLARATĂ</strong> în MOD_SALARII, tabelul C</td></tr><tr><td>Corecție după D300 depusă</td><td>F-407</td></tr><tr><td>Debitori diverși <code>461</code></td><td>F-425</td></tr><tr><td>Sold contrar naturii contului</td><td>C-23</td></tr><tr><td>Bon de consum la ieșirea din gestiune</td><td>F-321, §9.5 din sursa 28.08</td></tr></tbody></table></div>
+<p>⚠️ Rândul cu <strong>scutirea pentru handicap accentuat</strong> e cel care justifică tabelul. MOD_SALARII</p>
+<p>o declară explicit ca limitare — „Scutiri (handicap, studenți): regim special, pe document</p>
+<p>justificativ” — deci nu e material nou, e o limitare cunoscută care acum primește conținut.</p>
+<p>Ce e nou e <strong>cealaltă</strong> față a subiectului: fondul de handicap datorat de angajator, care</p>
+<p>n-are nicio legătură cu scutirea salariatului în afară de cuvânt.</p>
+<p>➕ Ce rămâne <strong>cu adevărat nou</strong> după tabel: fondul de handicap (<code>635 = 447</code>), chiriile de la</p>
+<p>persoane fizice (<code>462</code>), vocabularul balanței (sold inițial / rulaje / total sume), impozitul</p>
+<p>pe profit calculat <strong>cumulat</strong>, plafonul de 1.500 lei la amortizarea autoturismelor, structura</p>
+<p>bilanțului (F10/F20/F30/F40), regimul de redepunere pe fiecare declarație, extrasele</p>
+<p>înregistrate necronologic, <code>622</code> / <code>628</code>, locuința de serviciu și codul fiscal al salariatului</p>
+<p>de la punctul de lucru.</p>
+<h2 id="2-clasele-6-i-7-se-verific-n-fiecare-lun">2. Clasele 6 și 7 se verifică în fiecare lună</h2>
+<h3 id="2-1-de-ce-tocmai-ele">2.1 De ce tocmai ele</h3>
+<p>Formatorul le pune primele: <strong>ridică cel mai des întrebări</strong>. Motivul e structural — clasele</p>
+<p>6 și 7 nu au sold care să se reporteze, deci o eroare acolo nu se autodenunță luna următoare</p>
+<p>printr-un sold ciudat. Se vede doar dacă te uiți la rulaj în luna în care s-a produs.</p>
+<h3 id="2-2-reducerile-care-se-citesc-invers">2.2 Reducerile care se citesc invers</h3>
+<div class="tw"><table><thead><tr><th>Cont</th><th>Perechea</th><th>Ce e</th></tr></thead><tbody><tr><td><code>609</code> Reduceri comerciale primite</td><td>cu <code>401</code></td><td>cheltuială cu semn <strong>inversat</strong></td></tr><tr><td><code>709</code> Reduceri comerciale acordate</td><td>cu <code>411</code></td><td>venit cu semn <strong>inversat</strong></td></tr></tbody></table></div>
+<p><code>609</code> stă în clasa 6, dar economic e un <strong>venit</strong>: reduce cheltuiala. De aceea rulajul lui</p>
+<p>normal e <strong>creditor</strong>, iar dacă apare „cu +” — adică debitor, ca o cheltuială obișnuită — e</p>
+<p>semn de operare greșită.</p>
+<p>➕ Instrumentul de verificat, numit în notiță: <strong>fișa de cont / cartea mare</strong>. Nu balanța:</p>
+<p>balanța dă soldul net, care poate ascunde un rulaj pe sensul greșit compensat de altul pe</p>
+<p>sensul bun. Fișa arată fiecare mișcare cu sensul ei.</p>
+<p>↳ adâncește F-409, care are deja monografia celor două conturi.</p>
+<h3 id="2-3-711-singurul-venit-care-se-nchide-prin-sold">2.3 <code>711</code> — singurul venit care se închide prin sold</h3>
+<p>Regula, cuvânt cu cuvânt din notiță: **<code>711</code> e singurul venit care se închide prin sold, nu</p>
+<p>prin rulaje; restul se închid prin rulaje.**</p>
+<p>Motivul: <code>711</code> „Venituri aferente costurilor stocurilor de produse” e un **cont intermediar</p>
+<p>de venituri**, care oglindește variația stocului de produse. În cursul anului se mișcă în</p>
+<p>ambele sensuri — crește când producția intră în stoc, scade când iese — iar ce contează la</p>
+<p>închidere e <strong>variația netă</strong>, adică soldul. Închiderea pe rulaje ar dubla mișcarea.</p>
+<p>↳ e chiar motivul pentru care <code>711</code> figurează în <code>FARA_CADENTA</code>: „Se închide la 31.12</p>
+<p>împreună cu variația stocurilor (F-314). Sold în cursul anului e starea normală, nu o eroare.”</p>
+<p>Notița de acum confirmă regula scrisă acolo cu un training în urmă.</p>
+<h2 id="3-vocabularul-balan-ei">3. Vocabularul balanței</h2>
+<h3 id="3-1-cele-cinci-m-rimi">3.1 Cele cinci mărimi</h3>
+<p>Material nou, și e fundația pe care stă orice verificare de balanță:</p>
+<div class="tw"><table><thead><tr><th>Mărimea</th><th>Definiția</th></tr></thead><tbody><tr><td><strong>Sold inițial</strong></td><td>tot timpul la <strong>începutul anului</strong> — nu al lunii</td></tr><tr><td><strong>Rulaje</strong></td><td>mișcările <strong>din luna</strong> curentă</td></tr><tr><td><strong>Total sume</strong></td><td>sold inițial + rulaje</td></tr><tr><td><strong>Total sume precedente</strong></td><td>sold inițial + rulajele până la începutul lunii curente</td></tr><tr><td><strong>Sold</strong></td><td>diferența dintre totalurile de sume — <strong>întotdeauna</strong></td></tr></tbody></table></div>
+<p>➕ Precizarea care lipsea și care e sursa celor mai multe confuzii: soldul <strong>nu</strong> se citește</p>
+<p>din rulaje, ci din totalurile de sume. Un cont poate avea rulaj pe ambele sensuri într-o lună</p>
+<p>și totuși sold neschimbat; și invers, poate avea sold fără niciun rulaj în luna curentă.</p>
+<h3 id="3-2-exemplul-din-noti-e-verificat">3.2 Exemplul din notițe, verificat</h3>
+<p>Notița dă un exemplu pe <code>121</code>. Îl reiau cu cifrele ei:</p>
+<ul><li>sold inițial: <code>121</code> creditor <strong>10.000</strong></li><li>rulaj ianuarie: debitor <strong>7.000</strong>, creditor <strong>5.000</strong></li><li>total sume: debitor <strong>7.000</strong>, creditor <strong>15.000</strong></li><li>sold: creditor <strong>8.000</strong></li></ul>
+<p>Verificarea: creditor <code>10.000 + 5.000 = 15.000</code>; debitor <code>0 + 7.000 = 7.000</code>; soldul</p>
+<p><code>15.000 − 7.000 = 8.000</code> creditor.</p>
+<p>⚠️ Notița scrie, pe rândul de mijloc, „pe rulaje la 121 Dr 2k”. Cifra e corectă ca **diferență</p>
+<p>de rulaje** (<code>7.000 − 5.000 = 2.000</code> debitor), dar nu e soldul; e mișcarea netă a lunii.</p>
+<p>Soldul rămâne 8.000 creditor. Confuzia dintre „diferența rulajelor” și „sold” e exact ce</p>
+<p>previne tabelul de la §2.1.</p>
+<h2 id="4-impozitul-pe-profit-i-d101">4. Impozitul pe profit și D101</h2>
+<h3 id="4-1-se-calculeaz-cumulat-nu-pe-trimestru">4.1 Se calculează cumulat, nu pe trimestru</h3>
+<p>Capcana, descrisă în notiță: profit în trimestrul 1, pierdere în trimestrul 2 — declari 0 —</p>
+<p>iar în trimestrul 3 <strong>impozitul se calculează cumulat de la începutul anului</strong>, nu pe</p>
+<p>trimestrul izolat. Cine declară trimestru cu trimestru, ca și cum ar fi exerciții separate,</p>
+<p>ajunge la altă sumă.</p>
+<p>➕ De aceea <code>691</code> poate avea rulaj în <strong>ambele sensuri</strong>: regularizarea cumulată poate cere o</p>
+<p>diminuare a cheltuielii cu impozitul înregistrate anterior.</p>
+<h3 id="4-2-soldul-din-d101-trebuie-s-ias-cu-441">4.2 Soldul din D101 trebuie să iasă cu <code>441</code></h3>
+<p>Regula de contraverificare, luată ca atare: **tot timpul soldul din D101 trebuie să iasă cu</p>
+<p><code>441</code>.** Dacă nu iese, declarația e greșită, nu balanța.</p>
+<p>➕ Practica numită de formator: <strong>listat din fișa pe plătitor, caseta de impozit pe profit</strong> —</p>
+<p>ca să nu te încurci în ce ai declarat. Fișa pe plătitor e adevărul ANAF; balanța e adevărul</p>
+<p>tău; corelația dintre ele e singura care prinde divergența.</p>
+<p>↳ e aceeași mecanică pe care MOD_CONTROL_BALANTA o aplică la TVA și la salarii. Impozitul pe</p>
+<p>profit e a treia instanță a aceleiași reguli.</p>
+<h3 id="4-3-1171-are-nevoie-de-analitic">4.3 <code>1171</code> are nevoie de analitic</h3>
+<p><strong>Material nou, cu motiv fiscal:</strong> <code>1171</code> trebuie ținut pe analitic ca să știi **cât poți să</p>
+<p>compensezi**. Pierderea fiscală se recuperează pe ani, în ordine, cu termen limită — iar dacă</p>
+<p>toate exercițiile stau grămadă într-un singur sold, nu mai poți spune ce parte din el mai e</p>
+<p>recuperabilă și ce parte s-a prescris.</p>
+<h3 id="4-4-pierderea-nedeductibil">4.4 Pierderea nedeductibilă</h3>
+<p>La D101, dacă rezultatul e pierdere, <strong>trebuie calculată partea nedeductibilă fiscal</strong>.</p>
+<p>Pierderea contabilă și cea fiscală nu sunt același lucru: cheltuielile nedeductibile se adaugă</p>
+<p>înapoi, iar ce rămâne recuperabil e pierderea <strong>fiscală</strong>.</p>
+<h2 id="5-saf-t">5. SAF-T</h2>
+<h3 id="5-1-ce-se-depune-i-c-nd">5.1 Ce se depune și când</h3>
+<div class="tw"><table><thead><tr><th>SAF-T</th><th>Când</th></tr></thead><tbody><tr><td>Balanță, furnizori, clienți, plăți</td><td><strong>lunar / trimestrial</strong>, după vector</td></tr><tr><td>Mijloace fixe</td><td><strong>o dată pe an, cu depunerea bilanțului</strong></td></tr><tr><td>Stocuri</td><td><strong>doar la cererea organelor de control</strong></td></tr></tbody></table></div>
+<p>➕ Situația mijloacelor fixe se depune ca <strong>SAF-T separat</strong>, la sfârșit de an, odată cu bilanțul —</p>
+<p>nu în declarația lunară.</p>
+<h3 id="5-2-stocurile-i-eviden-a-primar">5.2 Stocurile și evidența primară</h3>
+<p>SAF-T pentru stocuri include <strong>materiile prime</strong>, iar întrebarea practică e la ce preț se ține</p>
+<p>gestiunea: <strong>cu ridicata sau cu amănuntul</strong>.</p>
+<p>Dacă <code>301</code> se operează „la grămadă” în loc de bucată cu bucată, evidența primară trebuie cerută</p>
+<p>de la cine o ține, iar la stocuri trebuie atașat SAF-T-ul de stocuri. Notița semnalează că</p>
+<p>SmartBill și SAGA au dezvoltat partea de gestiune tocmai pentru asta.</p>
+<h3 id="5-3-consumabilele-nu-ocolesc-gestiunea">5.3 Consumabilele nu ocolesc gestiunea</h3>
+<p>⚠️ Eroarea numită explicit de formator, cu trei motive: **<code>6024 = 401</code> și <code>6028 = 401</code> nu sunt</p>
+<p>corecte** — nici din punctul de vedere al corelațiilor, nici al auditului, nici al</p>
+<p>contabilității.</p>
+<p>Traseul corect trece prin gestiune, chiar când consumul e imediat:</p>
+<div class="ledger"><div class="led-row" id="m1-a1"><span class="led-d">3024</span><span class="led-eq">=</span><span class="led-c">401</span><span class="led-amt"></span><span class="led-note">piese de schimb intrate în gestiune</span></div><div class="led-row" id="m1-a2"><span class="led-d">6024</span><span class="led-eq">=</span><span class="led-c">3024</span><span class="led-amt"></span><span class="led-note">consumul, pe bon de consum</span></div></div>
+<p><code>3024</code> și <code>3028</code> sunt conturi de stoc „cu posibilitate de consum imediat” — dar <em>posibilitatea</em></p>
+<p>consumului imediat nu desființează intrarea în gestiune. Fără ea nu există bon de consum, deci</p>
+<p>nu există document justificativ pentru cheltuială.</p>
+<p>↳ e aceeași regulă ca la §9.5 din sursa 28.08 („orice ieșire din gestiune se face pe bon de</p>
+<p>consum”) și ca la F-321, unde marfa devenită materie primă trece tot prin gestiune.</p>
+<h2 id="6-chiriile-de-la-persoane-fizice">6. Chiriile de la persoane fizice</h2>
+<p><strong>Material nou.</strong> Societatea plătește chirie către o persoană fizică, iar cheltuiala e a ei.</p>
+<h3 id="6-1-c-i-proprietari-are-contractul">6.1 Câți proprietari are contractul</h3>
+<p>De sesizat <strong>pe contract</strong>: câți proprietari sunt. Soț și soție înseamnă <strong>două</strong> persoane, iar</p>
+<p>în contabilitate trebuie înregistrat <strong>CNP-ul fiecăruia</strong> — pentru că D205 se depune anul viitor</p>
+<p>pe CNP, iar informația nu se mai poate reconstitui atunci.</p>
+<h3 id="6-2-impozitul">6.2 Impozitul</h3>
+<p>⚠️ Notița dă două variante de calcul, ca și cum ar fi echivalente:</p>
+<div class="note"><p>valoarea din brut (10.000) − 40%, × 10% — <strong>sau</strong> — valoarea din brut (10.000) × 8%</p></div>
+<p>Cele două <strong>nu</strong> dau același rezultat: prima dă 600, a doua dă 800. Cota forfetară de cheltuieli</p>
+<p>la cedarea folosinței bunurilor este <strong>20%</strong>, nu 40%, iar cu ea cele două variante coincid:</p>
+<ul><li><code>10.000 − 20%</code> = 8.000 venit net; <code>8.000 × 10%</code> = <strong>800</strong></li><li>scurtătura: <code>10.000 × 8%</code> = <strong>800</strong></li></ul>
+<p>Tocmai de aceea circulă „8%”: e produsul <code>80% × 10%</code>. Cota de 40% e cea <strong>veche</strong>, dinaintea</p>
+<p>reducerii la 20%; cu ea, scurtătura de 8% n-ar mai fi validă.</p>
+<p>✅ Temeiul: <strong>Codul fiscal, art. 84</strong> — venitul net din cedarea folosinței bunurilor se stabilește</p>
+<p>scăzând din venitul brut o cotă forfetară de cheltuieli de <strong>20%</strong>, iar impozitul de <strong>10%</strong> se</p>
+<p>reține <strong>la sursă</strong> de plătitorul de venit, la momentul plății, și este <strong>final</strong>. Coerența internă</p>
+<p>a notiței a fost cea care a dat semnalul: două variante prezentate ca echivalente care nu dădeau</p>
+<p>același număr.</p>
+<h3 id="6-3-obliga-ia-se-urm-re-te-lunar">6.3 Obligația se urmărește lunar</h3>
+<p>Regula, cu accentul formatorului: **te interesează, lună de lună, obligația de plată — nu când</p>
+<p>se plătește.<strong> Consecința practică: fișă </strong>pe analitic la <code>462</code>**, din care se vede ce s-a</p>
+<p>plătit și care e soldul.</p>
+<p>↳ <code>462</code> era până acum un <strong>gol declarat</strong> în disciplina de închidere: „Nu există flux pe</p>
+<p>debitori/creditori diverși”. Chiriile de la persoane fizice sunt exact cazul care îl umple.</p>
+<h3 id="6-4-declara-iile">6.4 Declarațiile</h3>
+<div class="tw"><table><thead><tr><th>Declarația</th><th>Ce</th></tr></thead><tbody><tr><td><strong>D100</strong></td><td>codul <strong>628</strong> — impozitul pe chiria plătită persoanei fizice</td></tr><tr><td><strong>D205</strong></td><td>informativă, pe CNP, se depune <strong>în ultima zi a lui februarie</strong></td></tr><tr><td><strong>D394</strong></td><td>cod <strong>34</strong> la chirii, cod <strong>35</strong> la prestări servicii</td></tr></tbody></table></div>
+<p>⚠️ Fără codurile 34/35 atașate, <strong>D394 nu se validează</strong> — e refuz la depunere, nu eroare</p>
+<p>descoperită târziu. Regula privește tot ce înseamnă achiziții de la persoane **neplătitoare</p>
+<p>de TVA**.</p>
+<p>➕ Procedura pentru D205, ca să nu ajungi la rectificativă: **scoți din fișa pe plătitor ce ai</p>
+<p>declarat în D100** și compari, pentru că D205 se confruntă cu D100 — la dividende, la impozitul</p>
+<p>pe venituri din alte surse și la chirii — chiar dacă D205 e doar informativă.</p>
+<p>❓ Notița spune „207 = dividende pentru persoane juridice + impozitul pentru nerezidenți”, cu</p>
+<p>mențiunea formatorului „{de contraverificat}”. O las marcată: D207 e declarația informativă</p>
+<p>pentru <strong>beneficiari nerezidenți</strong>, iar partea cu dividendele către persoane juridice rezidente</p>
+<p>pare să aparțină altui formular.</p>
+<h2 id="7-bilan-ul">7. Bilanțul</h2>
+<h3 id="7-1-structura-pe-formulare">7.1 Structura pe formulare</h3>
+<div class="tw"><table><thead><tr><th>Formular</th><th>Ce preia</th></tr></thead><tbody><tr><td><strong>F10</strong></td><td>partea de <strong>solduri</strong>, la decembrie</td></tr><tr><td><strong>F20</strong></td><td><strong>cheltuieli și venituri</strong>, <code>121</code></td></tr><tr><td><strong>F30</strong></td><td><strong>numărul de salariați</strong></td></tr><tr><td><strong>F40</strong></td><td>corelațiile de imobilizări, cu F10</td></tr></tbody></table></div>
+<p>Corelațiile numite: în <strong>F10</strong>, imobilizările se corelează cu <strong>F40</strong>, iar **activul net =</p>
+<p>capitalurile proprii**.</p>
+<p>⚠️ „Active − pasive” din notiță nu e egalitatea clasică de bilanț, ci <strong>activul net</strong>, care se</p>
+<p>confruntă cu capitalurile proprii. E o corelație de control, nu identitatea contabilă.</p>
+<h3 id="7-2-condi-iile-de-pornire">7.2 Condițiile de pornire</h3>
+<ul><li>până la bilanț trebuie să avem <strong>balanța întocmită</strong>;</li><li>dacă avem conturi cu <strong>soldurile pe invers</strong>, nu generăm bilanțul deloc.</li></ul>
+<p>↳ a doua condiție e chiar C-23 (sold contrar naturii contului), promovată de la verificare de</p>
+<p>lună la <strong>condiție de poartă</strong> pentru bilanț.</p>
+<h3 id="7-3-nu-exist-bilan-rectificativ">7.3 Nu există bilanț rectificativ</h3>
+<p>Regula, tranșant: <strong>nu există bilanț rectificativ.</strong> Consecințele:</p>
+<ul><li>toate modificările făcute în balanță care nu se mai potrivesc cu bilanțul depus **se explică</li></ul>
+<p>în notele bilanțului următor** — asta spune legea;</p>
+<ul><li>singurele lucruri la care se poate interveni sunt <strong>adresa, codul CAEN și numărul de angajați</strong>,</li></ul>
+<p>și sunt informative;</p>
+<ul><li>⚠️ dacă modificăm balanța după depunere, apare o problemă <strong>la bănci</strong>: la o cerere de credit</li></ul>
+<p>ei confruntă bilanțul cu balanța.</p>
+<p>Corelațiile de bilanț le dă softul; ce rămâne în sarcina ta e să fii sigur că ai **activul pe</p>
+<p>debit și pasivul pe credit**.</p>
+<p>➕ Când bilanțul se face <strong>direct la ANAF</strong>, aplicația te anunță de neconcordanțe. Dacă îl rulezi</p>
+<p>din soft, corelațiile trebuie verificate de tine.</p>
+<h3 id="7-4-formularul-unic">7.4 Formularul unic</h3>
+<p>Se urcă „în pliculeț”, cu formularul de contact, pe <strong>SPV</strong>: adresa, codul CAEN și numărul de</p>
+<p>salariați.</p>
+<h2 id="8-redepunerea-declara-iilor">8. Redepunerea declarațiilor</h2>
+<p><strong>Material nou</strong>, și e cel mai practic tabel din notițe: fiecare declarație are alt mecanism de</p>
+<p>corectare.</p>
+<div class="tw"><table><thead><tr><th>Declarația</th><th>Cum se corectează</th></tr></thead><tbody><tr><td><strong>D100</strong></td><td>bifă de rectificativă; prin <strong>D710</strong> — pui ce ai pus greșit inițial, apoi suma corectă</td></tr><tr><td><strong>D101</strong></td><td>bifă de rectificativă</td></tr><tr><td><strong>D112</strong></td><td>bifă de rectificativă</td></tr><tr><td><strong>D390</strong></td><td>bifă de rectificativă — mai ales pentru sume; un cod de TVA greșit e prins de validare și nu se preia</td></tr><tr><td><strong>D205 / D207 / D107</strong></td><td>bifă de rectificativă</td></tr><tr><td><strong>D300</strong></td><td><strong>nu are bifă</strong> — se face <strong>decont de corecții materiale</strong>, manual, prin formularul de contact, cu toate anexele și cu motivul</td></tr><tr><td><strong>D394</strong></td><td><strong>nu are bifă</strong> — se depune <strong>peste</strong> declarația inițială</td></tr><tr><td><strong>D406</strong></td><td><strong>nu are bifă</strong> — se depune <strong>peste</strong> declarația inițială</td></tr></tbody></table></div>
+<h3 id="8-1-decontul-de-corec-ii-materiale">8.1 Decontul de corecții materiale</h3>
+<p>Detaliul care contează la D300: decontul de corecții încarcă <strong>doar partea de rulaje din lună</strong>.</p>
+<p>Dacă o factură nu a fost înregistrată cronologic, o înregistrezi și vii pe **regularizări luna</p>
+<p>viitoare**.</p>
+<p>➕ Atenție la <code>4424</code> preluat greșit din decontul trecut: sistemul trimite o <strong>atentionare</strong>, nu o</p>
+<p>eroare. E o distincție care schimbă reacția — atenționarea nu blochează depunerea.</p>
+<h3 id="8-2-unde-te-ui-i-c-nd-corectezi">8.2 Unde te uiți când corectezi</h3>
+<p>Regula scurtă: <strong>la rectificativă te uiți în declarație, nu în balanță.</strong> Declarația depusă e</p>
+<p>faptul care se corectează; balanța e doar sursa cifrei corecte.</p>
+<h2 id="9-reevalu-rile-f-cute-cu-nt-rziere">9. Reevaluările făcute cu întârziere</h2>
+<p>Exemplul din notiță: dacă nu ai făcut reevaluările în februarie și ai depus D100 în martie, faci</p>
+<p>reevaluările în <strong>aprilie / luna curentă deschisă</strong> și depui D100 corect în **trimestrul</p>
+<p>următor**. Nu se redeschide luna închisă.</p>
+<h2 id="10-handover-ul-final">10. Handover-ul final</h2>
+<p>Cele două referințe cu care formatorul închide, ambele de ținut la îndemână:</p>
+<ul><li><strong>OMFP 1802</strong>, partea a 2-a din secțiunea de contabilitate — <strong>corelațiile la planul de conturi</strong>;</li><li><strong>catalogul mijloacelor fixe</strong> — pentru încadrarea corectă.</li></ul>
+<p>Se predau în ambele forme: <strong>digital și pe hârtie</strong>.</p>
+<hr>
+<h2 id="anexa-d-r-mase-deschise">Anexa D — Rămase deschise</h2>
+<p>Ce e încă provizoriu în documentul ăsta. Lista nu e scrisă aici: vine din <code>date/intrebari.py</code>, aceeași sursă cu foaia „Întrebări deschise” a workbook-ului și cu lista trimisibilă formatorului.</p>
+<p><strong>❓ Ce cuprinde de fapt D207 — doar veniturile plătite nerezidenților, sau și dividendele către persoane juridice rezidente?</strong></p>
+<p><em>Declarații informative și avantaje salariale · training 31.08.2026, punctul 1</em></p>
+<p>Notița spune „207 = dividende pentru persoane juridice + impozitul pentru nerezidenți”, dar formatorul a marcat-o el însuși „{de contraverificat}”. Cele două jumătăți ale afirmației par să aparțină unor formulare diferite.</p>
+<p><strong>Ce am presupus între timp:</strong> Am consemnat afirmația ca atare, marcată ❓, și n-am construit niciun checklist pe ea. D207 nu apare în tabelul de rectificative decât cu bifa, care e sigură.</p>
+<hr>
+<h2 id="anexa-e-baza-legal-citat">Anexa E — Baza legală citată</h2>
+<p>Extrasă automat din textul documentului: sunt listate actele și articolele care apar efectiv citate mai sus. Contextul fiecărei citări e în secțiunea unde apare.</p>
+<p><strong>Acte normative citate</strong></p>
+<ul><li>Codul fiscal</li></ul>
+<p><strong>Articole citate</strong></p>
+<p>art. 84</p>
+<hr>
+<p><em>Documentul închide o buclă rămasă deschisă de la trainingul 5: MOD_CONTROL_BALANTA verifica balanța contra fișei pe plătitor la TVA și la salarii, dar nimic nu spunea de unde vine fișa pe plătitor și ce se întâmplă când declarația e greșită. Aici se spune — inclusiv că unele declarații se corectează cu bifă, altele se depun peste, iar bilanțul nu se corectează deloc.</em></p>
+</main></div></body></html>

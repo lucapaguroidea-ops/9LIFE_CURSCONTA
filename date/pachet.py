@@ -75,6 +75,22 @@ ITEME = [
      "Nu conține impozitul pe profit sau pe venit — acela ține de rezultatul "
      "exercițiului și stă la capitaluri, chiar dacă a fost predat în aceeași zi."),
 
+    ("Studiezi", "doc:trezorerie", "trezorerie",
+     "Banca, casa, efectele de încasat și avansurile de trezorerie: stările prin care "
+     "trec banii între „am dreptul la ei” și „sunt în cont”. Aici stau scontarea, "
+     "liniile de credit, dobânzile pe 5186/5187 și tichetele ca stoc de trezorerie.",
+     "Nu conține disciplina de numerar — plafoanele de casă și regulile de document "
+     "sunt la control, pentru că sunt despre ce se poate face, nu despre cum se "
+     "înregistrează."),
+
+    ("Studiezi", "doc:declaratii", "declaratii-fisa-platitor-bilant",
+     "Capătul lanțului: ce se declară, cum se confruntă declarația cu balanța și ce se "
+     "face când e greșită. Vocabularul balanței, impozitul pe profit calculat cumulat, "
+     "SAF-T, fondul de handicap, chiriile cu stopaj la sursă, bilanțul pe F10–F40 și "
+     "regimul de rectificare al fiecărei declarații.",
+     "Nu e un document de monografii. Monografiile lui stau în celelalte — aici e "
+     "despre locurile unde contabilitatea și declarația trebuie să dea la fel."),
+
     ("Studiezi", "doc:control", "control-documente-numerar",
      "Transversal, și cel mai practic: cum se citește un cont și ce înseamnă un sold "
      "contrar naturii lui, ce cere legea de la un document, plafoanele de numerar, "

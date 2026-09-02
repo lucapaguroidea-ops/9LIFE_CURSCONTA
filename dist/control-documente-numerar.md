@@ -499,6 +499,17 @@ sub titlul „Later”:
    4111 / 401 și 512x;
 2. Diferența dintre sold, rulaje și total sume (răspuns propus la §9.5, de confirmat).
 
+## 13. Două conturi de cheltuieli care se încurcă
+| Cont | Ce ține, din notiță |
+|---|---|
+| `622` | comisioane acordate **nerezidenților**; comisioanele agenților de vânzări cu PFA |
+| `628` | **onorariile de notar** |
+
+➕ Nuanța: `622` se cheamă „Cheltuieli privind comisioanele și onorariile”, deci ar părea că
+onorariul de notar îi aparține. Practica pe care o dă formatorul îl trimite la `628` — „alte
+cheltuieli cu serviciile executate de terți”. Distincția utilă e **cine prestează**: comision
+de intermediere pe `622`, taxă notarială pe `628`.
+
 ---
 
 ## Anexa B — Checklist practic

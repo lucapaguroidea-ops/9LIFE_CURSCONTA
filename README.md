@@ -97,8 +97,8 @@ Necesită `openpyxl`, `formulas`, `numpy` (`pip install openpyxl formulas numpy`
 | Corelații de control | 42 |
 | Rânduri de cadență în „Închideri periodice” | 32 |
 | Foi în workbook-ul de referință | 12 |
-| Documente de studiu | 6 |
-| Întrebări: deschise / verificate / decizii de cabinet | 20 / 26 / 7 |
+| Documente de studiu | 7 |
+| Întrebări: deschise / verificate / decizii de cabinet | 22 / 26 / 7 |
 | Porți de calitate | 30 |
 
 *Cifrele de mai sus se citesc din workbook-urile construite la fiecare `make tot`. Dacă nu corespund, blocul e vechi — nu fișierele.*

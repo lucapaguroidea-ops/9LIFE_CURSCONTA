@@ -1,5 +1,5 @@
 # Imobilizări
-### Surse: training 12.08.2026 · adâncit cu 19.08.2026 și 26.08.2026 — versiune revizuită, reorganizată și contraverificată
+### Surse: training 12.08.2026 · adâncit cu 19.08.2026, 26.08.2026 și 31.08.2026 — versiune revizuită, reorganizată și contraverificată
 
 ---
 
@@ -860,6 +860,52 @@ Cele două nu sunt echivalente: 7584 e „venituri din subvenții pentru investi
 „alte venituri din exploatare". Presupun **7584**, prin simetrie cu 475x, dar rămâne de
 confirmat.
 
+## 20. Amortizarea contabilă față de cea fiscală
+### 20.1 Se țin separat
+
+
+Regula: amortizarea fiscală se face **conform catalogului**; cea contabilă poate diferi.
+Trebuie ținute **separat, inclusiv în Excel**, pentru că — spune notița — sistemele contabile
+rareori le țin pe amândouă în paralel.
+
+
+### 20.2 Plafonul de 1.500 lei la autoturisme
+
+
+**Material nou.** Pentru autoturismele a căror amortizare depășește 1.500 lei pe lună, statul
+lasă amortizarea **contabilă** să meargă conform catalogului, dar recunoaște **fiscal** doar
+1.500 lei pe lună. Diferența e cheltuială nedeductibilă și se urmărește ca atare la D101.
+
+Temeiul: **Codul fiscal, art. 28 alin. (14)** — pentru vehiculele de transport persoane cu cel
+mult **9 locuri** (categoria M1), amortizarea e deductibilă în limita a 1.500 lei/lună, pe
+fiecare vehicul.
+
+↳ e a doua limitare pe autoturisme din sistem, lângă deductibilitatea de 50% de la F-108. Sunt
+reguli diferite, care se aplică simultan și se confundă des: 50% privește **TVA și
+cheltuielile de exploatare**, plafonul de 1.500 lei privește **amortizarea**.
+
+➕ Nuanța care decide corect cazurile de graniță: folosirea **exclusivă** în activitatea economică
+ridică limitarea de 50% de pe cheltuielile de exploatare, dar **nu** ridică plafonul de 1.500 lei
+de pe amortizare. Plafonul se aplică oricărui vehicul M1, indiferent cât de mult e folosit în
+firmă. Excepțiile sunt pe **destinație** — taxi, transport de persoane cu plată, curierat, agenți
+de vânzări, școli de șoferi, intervenție și pază — nu pe intensitatea utilizării.
+
+
+### 20.3 Amortizarea accelerată
+
+
+Recomandarea formatorului, pentru **utilaje**: amortizare accelerată — jumătate din valoare în
+primul an, restul eșalonat pe durata rămasă, exact cât e fiscal. Se aplică atunci când clientul
+cere o amortizare contabilă diferită de cea fiscală.
+
+⚠️ Regula care nu trebuie ratată: **o metodă de amortizare, o dată implementată, rămâne așa pe
+toată durata de viață a mijlocului fix.** Nu se schimbă în mijlocul drumului pentru că într-un
+an ar fi mai convenabil altfel.
+
+↳ atenție la interacțiunea deja documentată: cine aplică scutirea pentru profit reinvestit **nu**
+poate opta pentru accelerată pe acele active, cu excepția din 2026 pentru subgrupa 2.1 și pentru
+calculatoare. Vezi răspunsul verificat la întrebarea 12.08 î2.
+
 ---
 
 ## Anexa A — Recapitulare: conturi și perechile lor
@@ -947,7 +993,7 @@ Extrasă automat din textul documentului: sunt listate actele și articolele car
 
 **Articole citate**
 
-art. 11, art. 22 alin. (9), art. 25 alin. (1), art. 25 alin. (3), art. 28, art. 28 alin. (2), art. 28 alin. (5), art. 28 alin. (8), art. 28 alin. (12), art. 28 alin. (17), art. 292 alin. (3), art. 298, art. 331, art. 331 alin. (2), art. 461, art. 461 alin. (1), art. 461 alin. (2), art. 466, art. 471
+art. 11, art. 22 alin. (9), art. 25 alin. (1), art. 25 alin. (3), art. 28, art. 28 alin. (2), art. 28 alin. (5), art. 28 alin. (8), art. 28 alin. (12), art. 28 alin. (14), art. 28 alin. (17), art. 292 alin. (3), art. 298, art. 331, art. 331 alin. (2), art. 461, art. 461 alin. (1), art. 461 alin. (2), art. 466, art. 471
 
 
 ---

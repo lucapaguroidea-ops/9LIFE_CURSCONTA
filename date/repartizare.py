@@ -45,6 +45,7 @@ DESTINATII = {
     "foaie:inchideri":  ("Închideri periodice", "foaie"),
     "doc:trezorerie":   ("dist/trezorerie.md", "fisier"),
     "date:intrebari":   ("dist/intrebari-formator.md", "fisier"),
+    "doc:declaratii":   ("dist/declaratii-fisa-platitor-bilant.md", "fisier"),
 }
 
 # ---------------------------------------------------------------------------
@@ -634,6 +635,185 @@ ABSORBITE_28_08 = {
 
 }
 
+REPARTIZARE_31_08 = [
+    # --- §0 inventarul ------------------------------------------------------
+    ("## 0. Ce e deja în sistem la 31.08", "doc:declaratii",
+     "Rezultatul pasului 0 din faza A. Rămâne în documentul propriu al sursei, nu la "
+     "control ca la 28.08: acolo tabelul era despre material care adâncea alte "
+     "documente, aici e despre material care își naște documentul lui."),
+
+    # --- §1 clasele 6 și 7 --------------------------------------------------
+    ("## 1. Clasele 6 și 7 se verifică în fiecare lună", "doc:declaratii",
+     "Verificare lunară, nu monografie: rezultatul ei alimentează D101 și bilanțul."),
+    ("### 1.1 De ce tocmai ele", "doc:declaratii",
+     "Motivul structural: clasele 6 și 7 n-au sold care se reportează, deci eroarea nu "
+     "se autodenunță luna următoare."),
+    ("### 1.2 Reducerile care se citesc invers", "doc:declaratii",
+     "Adâncește F-409 cu instrumentul de verificare — fișa de cont, nu balanța, pentru "
+     "că soldul net ascunde rulajul pe sensul greșit. Devine C-41."),
+    ("### 1.3 `711` — singurul venit care se închide prin sold", "doc:declaratii",
+     "Confirmă regula deja scrisă în `date/inchideri.py` la scutirea lui 711; sursa o "
+     "spune acum explicit, deci merită consemnată acolo unde se verifică."),
+
+    # --- §2 vocabularul balanței -------------------------------------------
+    ("## 2. Vocabularul balanței", "doc:declaratii",
+     "Fundația oricărei verificări de balanță; fără ea, corelațiile din celelalte "
+     "documente se citesc greșit."),
+    ("### 2.1 Cele cinci mărimi", "doc:declaratii",
+     "Definițiile — material nou. Soldul se citește din totalurile de sume, nu din "
+     "rulaje."),
+    ("### 2.2 Exemplul din notițe, verificat", "doc:declaratii",
+     "Exemplul pe 121, cu corecția confuziei dintre „diferența rulajelor” și „sold”."),
+
+    # --- §3 impozitul pe profit --------------------------------------------
+    ("## 3. Impozitul pe profit și D101", "doc:declaratii",
+     "Teritoriul declarației. Monografia stă în F-429, aici stă regula de verificare."),
+    ("### 3.1 Se calculează cumulat, nu pe trimestru", "doc:declaratii",
+     "Capcana centrală a sursei; pe cifre e F-429, aici e enunțul."),
+    ("### 3.2 Soldul din D101 trebuie să iasă cu `441`", "doc:declaratii",
+     "Regula de contraverificare cerută explicit de formator. Devine C-40."),
+    ("### 3.3 `1171` are nevoie de analitic", "doc:declaratii",
+     "Rămâne cu secțiunea-mamă, deși contul e de capitaluri: motivul analiticului e "
+     "fiscal, nu contabil — „cât pot să compensez” e o întrebare de completare a "
+     "D101, iar ruperea ei de §3 ar lăsa declarația fără jumătate din raționament."),
+    ("### 3.4 Pierderea nedeductibilă", "doc:declaratii",
+     "Distincția pierdere contabilă / pierdere fiscală, la completarea D101."),
+
+    # --- §4 amortizarea -----------------------------------------------------
+    ("## 4. Amortizarea contabilă față de cea fiscală", "doc:imobilizari",
+     "Teritoriul imobilizărilor, indiferent că materialul a venit într-o zi de "
+     "declarații."),
+    ("### 4.1 Se țin separat", "doc:imobilizari",
+     "Regula de ținere în paralel, inclusiv în Excel — sistemele contabile rareori o fac."),
+    ("### 4.2 Plafonul de 1.500 lei la autoturisme", "doc:imobilizari",
+     "Material NOU, cu temei verificat (art. 28 alin. (14)). Nuanța decisivă: folosirea "
+     "exclusivă ridică limitarea de 50%, dar NU plafonul de amortizare."),
+    ("### 4.3 Amortizarea accelerată", "doc:imobilizari",
+     "Adâncește alegerea metodei din MOD_IMOBILIZARI, cu regula că metoda aleasă rămâne "
+     "pe toată durata de viață."),
+
+    # --- §5 SAF-T -----------------------------------------------------------
+    ("## 5. SAF-T", "doc:declaratii",
+     "Raportare, deci teritoriul documentului de declarații."),
+    ("### 5.1 Ce se depune și când", "doc:declaratii",
+     "Tabelul celor trei cadențe — lunar/trimestrial, anual cu bilanțul, la cerere."),
+    ("### 5.2 Stocurile și evidența primară", "doc:declaratii",
+     "Condiția practică: fără gestiune ținută, SAF-T-ul de stocuri nu se poate produce."),
+    ("### 5.3 Consumabilele nu ocolesc gestiunea", "doc:declaratii",
+     "Rămâne cu §5, unde a fost spusă: e consecința de gestiune a lui SAF-T — fără "
+     "gestiune ținută pe bon de consum, raportarea nu se poate produce. Regula "
+     "contabilă în sine e deja în documentul de stocuri, la F-321 și la §9.5 din "
+     "sursa 28.08; aici e motivul de raportare pentru care ea nu se poate ocoli."),
+
+    # --- §6 fondul de handicap ---------------------------------------------
+    ("## 6. Fondul de handicap", "doc:salarii",
+     "Obligație calculată din numărul de salariați, deci teritoriu de salarii — chiar "
+     "dacă nu trece prin 421 și nu apare pe statul de plată."),
+    ("### 6.1 Când se datorează", "doc:salarii",
+     "Pragul de 50 și cota de 4%, cu temeiul din Legea 448/2006 art. 78."),
+    ("### 6.2 Numărul mediu de angajați — metoda", "doc:salarii",
+     "Metoda pe ore, cu corecția normei lunii: 20 × 8 = 160, nu 180."),
+    ("### 6.3 Cota și calculul obligației", "doc:salarii",
+     "Exemplul refăcut coerent pe 60 de angajați, plus distincția accentuat / "
+     "ușor-mediu și parametrul salariului minim, cu data lui."),
+    ("### 6.4 Înregistrarea și declararea", "doc:salarii",
+     "`635 = 447`, D100 rândul 810, fără D700 și fără vector — de aceea nimeni nu o "
+     "reclamă până la control."),
+    ("### 6.5 Reducerea prin achiziții de la unități protejate", "doc:salarii",
+     "Varianta B din F-427, cu plafonul de 50% verificat pe lege."),
+
+    # --- §7 chiriile --------------------------------------------------------
+    ("## 7. Chiriile de la persoane fizice", "doc:declaratii",
+     "Stopaj la sursă: obligația se naște la firmă, se declară în D100 și se confruntă "
+     "cu D205. Monografia e F-428."),
+    ("### 7.1 Câți proprietari are contractul", "doc:declaratii",
+     "Informația se culege la semnare sau nu se mai culege: D205 se depune pe CNP anul "
+     "următor."),
+    ("### 7.2 Impozitul", "doc:declaratii",
+     "Corecția cotei forfetare — 20%, nu 40% — cu temeiul art. 84 și cu dovada internă: "
+     "cele două variante din notiță nu dădeau același număr."),
+    ("### 7.3 Obligația se urmărește lunar", "doc:declaratii",
+     "Analiticul pe 462, care umple golul declarat până acum în disciplina de închidere."),
+    ("### 7.4 Declarațiile", "doc:declaratii",
+     "D100 cod 628, D205 pe CNP, D394 codurile 34/35 — fără care declarația nu se "
+     "validează."),
+
+    # --- §8 conturi de cheltuieli ------------------------------------------
+    ("## 8. Două conturi de cheltuieli care se încurcă", "doc:control",
+     "Încadrarea corectă a cheltuielii pe cont e disciplină de document și de control, "
+     "nu monografie: `622` vs `628` se decide după cine prestează."),
+
+    # --- §9 taxarea inversă -------------------------------------------------
+    ("## 9. Taxarea inversă — completările din notiță", "doc:stocuri-tva",
+     "Teritoriul TVA e al documentului de stocuri; adâncește F-402 și F-303."),
+    ("### 9.1 Când factura vine din afară cu TVA străin", "doc:stocuri-tva",
+     "Regula ratată cel mai des: RO → RO e scutită, nu taxare inversă — criteriul e "
+     "traseul fizic, nu naționalitatea furnizorului."),
+    ("### 9.2 Facturile fără trasabilitate", "doc:stocuri-tva",
+     "Procedura de investigare și limita responsabilității cabinetului."),
+
+    # --- §10 extrasele întârziate ------------------------------------------
+    ("## 10. Extrasele bancare înregistrate cu întârziere", "doc:trezorerie",
+     "Bancă, deci trezorerie. E o procedură de operare, nu o regulă contabilă: "
+     "necronologic, dar cu data reală în descriere."),
+
+    # --- §11 bilanțul -------------------------------------------------------
+    ("## 11. Bilanțul", "doc:declaratii",
+     "Raportarea anuală, capătul lanțului pe care documentul îl descrie."),
+    ("### 11.1 Structura pe formulare", "doc:declaratii",
+     "F10/F20/F30/F40 și corelațiile dintre ele. Devine C-42."),
+    ("### 11.2 Condițiile de pornire", "doc:declaratii",
+     "Balanța întocmită și niciun sold contrar naturii — C-23 promovat la condiție de "
+     "pornire, nu doar verificare de lună."),
+    ("### 11.3 Nu există bilanț rectificativ", "doc:declaratii",
+     "Consecința care schimbă comportamentul: ce se modifică după depunere se explică "
+     "în notele bilanțului următor, iar băncile confruntă bilanțul cu balanța."),
+    ("### 11.4 Formularul unic", "doc:declaratii",
+     "Ce se poate corecta totuși — adresa, CAEN, numărul de salariați."),
+
+    # --- §12 redepunerea ----------------------------------------------------
+    ("## 12. Redepunerea declarațiilor", "doc:declaratii",
+     "Tabelul cel mai practic al sursei: fiecare declarație are alt mecanism de "
+     "corectare, iar confuzia dintre ele costă o depunere respinsă."),
+    ("### 12.1 Decontul de corecții materiale", "doc:declaratii",
+     "D300 nu are bifă; decontul încarcă doar rulajele lunii, iar 4424 preluat greșit "
+     "produce atenționare, nu eroare."),
+    ("### 12.2 Unde te uiți când corectezi", "doc:declaratii",
+     "La rectificativă te uiți în declarație, nu în balanță."),
+
+    # --- §13 reevaluările ---------------------------------------------------
+    ("## 13. Reevaluările făcute cu întârziere", "doc:declaratii",
+     "Nu se redeschide luna închisă: se lucrează în luna curentă și se depune corect în "
+     "trimestrul următor."),
+
+    # --- §14 personal -------------------------------------------------------
+    ("## 14. Două chestiuni de personal", "doc:salarii",
+     "Ambele privesc salariatul, deci teritoriul salariilor."),
+    ("### 14.1 Codul fiscal al salariatului de la punctul de lucru", "doc:salarii",
+     "Material nou: raportarea se face la primăria de care ține punctul de lucru, "
+     "sectoarele incluse."),
+    ("### 14.2 Locuința de serviciu", "doc:salarii",
+     "Deductibilitate 20% din salariul minim, pe salariat; ultima propoziție rămâne ❓, "
+     "marcată de formator."),
+
+    # --- §15 handover -------------------------------------------------------
+    ("## 15. Handover-ul final", "doc:declaratii",
+     "Cele două referințe cu care se închide cursul; stau în documentul care închide "
+     "anul, nu într-unul de subiect."),
+]
+
+ABSORBITE_31_08 = {
+    "# Declarații, fișa pe plătitor și bilanțul — notițe training 31.08.2026":
+        "Titlul sursei. Documentul propriu îl primește din `date/documente.py`, "
+        "împreună cu subtitlul care spune din ce zile e făcut.",
+    "*Versiune revizuită. Sursa: notițele brute din 31.08.2026.*":
+        "Rândul de versiune al sursei, înlocuit de subtitlul documentului.",
+    "## 9. Taxarea inversă — completările din notiță":
+        "Absorbit în „## 5. Taxarea inversă pe teritoriul României” din documentul de "
+        "stocuri, ca și recapitularea din 28.08. Conținutul adâncește secțiunea; un "
+        "al doilea titlu pe același subiect ar fi doar zgomot.",
+}
+
 # ===========================================================================
 # Vederile derivate
 # ===========================================================================
@@ -657,6 +837,10 @@ SURSE = [
          cale="surse/training-8-2026-08-28/notite-revizuit.md",
          repartizare=REPARTIZARE_28_08,
          absorbite=ABSORBITE_28_08),
+    dict(cheie="31.08.2026",
+         cale="surse/training-9-2026-08-31/notite-revizuit.md",
+         repartizare=REPARTIZARE_31_08,
+         absorbite=ABSORBITE_31_08),
 ]
 
 #: Toate intrările, pentru numărători și pentru parcurgerea în ordine.

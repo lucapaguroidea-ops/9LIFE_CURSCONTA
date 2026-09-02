@@ -165,8 +165,8 @@ DOCUMENTE = [
         sursa="surse/training-3-2026-08-12/notite-revizuit.md",
         iesire="dist/imobilizari.md",
         titlu="Imobilizări",
-        subtitlu="Surse: training 12.08.2026 · adâncit cu 19.08.2026 și 26.08.2026 — "
-                 "versiune revizuită, reorganizată și contraverificată",
+        subtitlu="Surse: training 12.08.2026 · adâncit cu 19.08.2026, 26.08.2026 și "
+                 "31.08.2026 — versiune revizuită, reorganizată și contraverificată",
         adaugiri=[
             dict(bloc="## 7. Operațiuni speciale",
                  in_sectiune="## 11. Ieșiri din gestiune"),
@@ -175,6 +175,13 @@ DOCUMENTE = [
             # secțiune pe subiect, deși F-210 exista — e un gol de temă, nu o tranșă.
             dict(bloc="## 1. Subvenții pentru investiții și fonduri europene",
                  sectiune_noua="Subvenții pentru investiții și fonduri europene"),
+            # Amortizarea fiscală (31.08) n-are gazdă: documentul tratează amortizarea
+            # CONTABILĂ, pe durate și metode, dar nu spune nicăieri că cea fiscală e
+            # alt calcul, ținut separat. E un gol de subiect, nu o tranșă — plus că
+            # plafonul de 1.500 lei la autoturisme e o limitare pe care documentul
+            # n-o cunoștea deloc.
+            dict(bloc="## 4. Amortizarea contabilă față de cea fiscală",
+                 sectiune_noua="Amortizarea contabilă față de cea fiscală"),
         ],
         legenda_veche=[
             "**Legendă folosită în document:**",
@@ -230,6 +237,13 @@ DOCUMENTE = [
             # propriu: nu „ce stoc”, ci „cum iese stocul pe cheltuială”.
             dict(bloc="## 9. Cheltuielile de clasa 6 și gestiunile de clasa 3",
                  sectiune_noua="Cheltuielile de clasa 6 și gestiunile de clasa 3"),
+            # Completările din 31.08 intră în secțiunea care tratează deja subiectul.
+            # Aduc regula pe care documentul n-o avea: RO → RO e scutită, nu taxare
+            # inversă, chiar dacă furnizorul e din afara țării — criteriul e traseul
+            # fizic al bunului, nu naționalitatea furnizorului.
+            dict(bloc="## 9. Taxarea inversă — completările din notiță",
+                 in_sectiune="## 5. Taxarea inversă pe teritoriul României "
+                             "(art. 331 Cod fiscal)"),
         ],
         legenda_veche=[],          # are deja forma canonică
         anexe={},                  # anexele A–E sunt deja denumite corect
@@ -350,6 +364,32 @@ DOCUMENTE = [
         nota="Clasa 5 avea, până la sursa asta, două fluxuri și două conturi de patru "
              "cifre în plan. Documentul e primul care o tratează ca teritoriu, nu ca "
              "anexă a altor subiecte.",
+    ),
+    dict(
+        # Al șaptelea document. Până acum sistemul descria ce se ÎNREGISTREAZĂ; sursa
+        # din 31.08 descrie ce se DECLARĂ și cum se confruntă declarația cu
+        # contabilitatea. Sunt două adevăruri paralele — balanța și fișa pe plătitor —
+        # iar materialul e despre locurile unde ele trebuie să coincidă. N-avea unde
+        # să intre: celelalte șase sunt organizate pe teritorii de conturi.
+        nume="declaratii-bilant",
+        zi=None,   # sursa din 31.08 se împarte la șase documente
+        cheie="doc:declaratii",
+        repartizat=True,
+        sursa=None,
+        iesire="dist/declaratii-fisa-platitor-bilant.md",
+        titlu="Declarații, fișa pe plătitor și bilanțul",
+        subtitlu="Sursă: training 31.08.2026 — lanțul de la balanța lunii până la "
+                 "bilanțul depus, și verificările care îl țin drept",
+        legenda_veche=[],
+        inlocuiri=[],
+        anexe={},
+        genereaza=["D", "E", "G"],
+        nota="Documentul închide o buclă rămasă deschisă de la trainingul 5: "
+             "MOD_CONTROL_BALANTA verifica balanța contra fișei pe plătitor la TVA și "
+             "la salarii, dar nimic nu spunea de unde vine fișa pe plătitor și ce se "
+             "întâmplă când declarația e greșită. Aici se spune — inclusiv că unele "
+             "declarații se corectează cu bifă, altele se depun peste, iar bilanțul "
+             "nu se corectează deloc.",
     ),
     dict(
         # Construit integral din secțiunile pe care `date/repartizare.py` i le dă.

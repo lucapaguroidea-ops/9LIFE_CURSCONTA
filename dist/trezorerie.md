@@ -409,6 +409,22 @@ Dacă diferența de curs se lasă acolo, contul nu se mai închide și devine im
 dacă soldul rămas e un transfer în curs sau o diferență necontabilizată. Diferența
 aparține contului de bancă în valută, unde s-a și produs.
 
+## 7. Extrasele bancare înregistrate cu întârziere
+**Material nou**, și e o procedură, nu o regulă contabilă.
+
+Dacă extrasele sunt **din anul curent**: se înregistrează **necronologic** — nu ne mai întoarcem
+la lunile respective — și rămân **deductibile fiscal**, pentru că nu țin de ani trecuți.
+
+Ce se face în plus, după caz:
+
+- informații vechi de câteva luni, cu **dobânzi mari**, care au produs un impozit pe venit
+  eronat: rămâne la latitudinea cabinetului; minimul e să **menționezi în descriere** la ce dată
+  se referă („înregistrat pe 01.08, dar era din 15.06”);
+- **cheltuieli mari**: se depun rectificative pentru **D394** și **D406**; dacă firma e la **TVA
+  la încasare**, se schimbă și TVA-ul.
+
+**Sumar, cuvânt cu cuvânt:** le înregistrezi necronologic, dar să ai informația în descriere.
+
 ---
 
 ## Anexa D — Rămase deschise

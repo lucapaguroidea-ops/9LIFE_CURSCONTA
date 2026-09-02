@@ -714,6 +714,38 @@ TEME = [
           "Am scris corelația pe sold și am lăsat-o pe cea pe rulaj ca gol declarat — "
           "n-am fișă de rol de citit."),
     ]),
+
+    ("Declarații informative și avantaje salariale", [
+        q("training 31.08.2026, punctul 1",
+          "Ce cuprinde de fapt D207 — doar veniturile plătite nerezidenților, sau și "
+          "dividendele către persoane juridice rezidente?",
+          "Notița spune „207 = dividende pentru persoane juridice + impozitul pentru "
+          "nerezidenți”, dar formatorul a marcat-o el însuși „{de contraverificat}”. "
+          "Cele două jumătăți ale afirmației par să aparțină unor formulare diferite.",
+          "Lista declarațiilor cu regim de rectificare din §12 și confruntarea D205 ↔ "
+          "D100. Dacă D207 e strict pentru nerezidenți, atunci dividendele către "
+          "persoane juridice rezidente se urmăresc pe alt drum, iar checklistul de "
+          "sfârșit de an are un rând în plus sau în minus.",
+          "Am consemnat afirmația ca atare, marcată ❓, și n-am construit niciun "
+          "checklist pe ea. D207 nu apare în tabelul de rectificative decât cu bifa, "
+          "care e sigură."),
+
+        q("training 31.08.2026, punctul 2",
+          "Dacă avantajul locuinței de serviciu e neimpozabil în limita a 20% din "
+          "salariul minim, ce se brutează — tot avantajul, sau doar excedentul?",
+          "Notița spune întâi că e „avantaj de natură salarială neimpozabil”, apoi că "
+          "„în zona de salarii se calculează un avantaj salariat NET, pentru care se "
+          "calculează un brut impozabil”. Formatorul a marcat exact ultima propoziție "
+          "„{de contraverificat}”.",
+          "MOD_SALARII și F-413. Cele două afirmații nu se pot împăca: dacă avantajul "
+          "e neimpozabil, brutarea lui n-are obiect. Dacă se brutează tot, atunci "
+          "plafonul de 20% nu mai e o scutire, ci doar un prag de raportare.",
+          "Nu am implementat brutarea. Am consemnat plafonul de 20% pe salariat și "
+          "presupunerea cea mai probabilă — că se brutează DOAR excedentul peste plafon, "
+          "cum se procedează la celelalte avantaje plafonate — dar am lăsat-o marcată, "
+          "pentru că e o presupunere, nu o regulă citită.",
+          decizie=False),
+    ]),
 ]
 
 TOTAL = sum(len(qs) for _, qs in TEME)
@@ -768,6 +800,10 @@ DOC_EXPLICIT = {
     "training 28.08.2026, punctul 8": "doc:control",      # plafonul la magazine mari
     "training 28.08.2026, punctul 9": "doc:trezorerie",   # monografia obligațiunilor
     "training 28.08.2026, punctul 10": "doc:trezorerie",  # avansurile în valută nemonetare
+    # 31.08 se împarte la două: declarațiile la documentul nou, avantajul salarial la
+    # salarii — acolo unde stă mecanica brutării.
+    "training 31.08.2026, punctul 1": "doc:declaratii",   # ce conține de fapt D207
+    "training 31.08.2026, punctul 2": "doc:salarii",      # locuința de serviciu, brutarea
 }
 
 

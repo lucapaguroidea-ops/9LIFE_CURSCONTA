@@ -433,6 +433,30 @@ Jurnalele trebuie să aibă rubrici distincte, nu o coloană comună:
 (D390 doar la intracomunitar). Amestecate, cifrele sunt corecte în total și greșite pe
 fiecare rând.
 
+### 5.9 Când factura vine din afară cu TVA străin
+
+
+Situațiile numite: când produsul **pleacă din România**, sau când **nu s-a dat codul de TVA cu
+prefix RO**.
+
+Primul lucru de cerut: **AWB / CMR** — documentul de transport care arată că marfa chiar a
+plecat din Ungaria și a ajuns în România.
+
+⚠️ Regula care se ratează cel mai des: dacă livrarea e **din România în România**, chiar dacă
+furnizorul e o firmă din afara țării, operațiunea se pune pe **scutită** — nu pe taxare inversă.
+Criteriul e traseul fizic al bunului, nu naționalitatea furnizorului.
+
+
+### 5.10 Facturile fără trasabilitate
+
+
+Procedura, luată ca atare: când ai un document care „nu te duce nicăieri”, o iei **din aproape
+în aproape**. La valori mari, discuțiile se poartă **în scris** (mail / WhatsApp) — un cabinet
+de contabilitate nu își poate asuma singur o trasabilitate pe care n-o poate proba.
+
+➕ Singurele care **nu se vămuiesc** sunt **serviciile** (coduri de acces etc.); în rest,
+bunurile din afara UE se vămuiesc.
+
 ## 6. Producția: 33x, 34x și conturile 711/712
 
 ### 6.1 Principiul — de ce există contul 331

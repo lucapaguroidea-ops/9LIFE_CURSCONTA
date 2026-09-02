@@ -387,6 +387,117 @@ Bilanțul prezintă activele pe o parte și pasivele pe alta. Un activ cu sold c
 se prezintă greșit, ori trebuie reclasificat ca datorie — și atunci nu mai e ce spune
 numele contului.
 
+## 9. Fondul de handicap
+**Material integral nou.**
+
+
+### 9.1 Când se datorează
+
+
+Din momentul în care societatea are **peste 50 de angajați ca număr mediu**. Formatorul spune
+că formula legală e greoaie și dă una simplă, cu abatere neglijabilă.
+
+Temeiul: **Legea 448/2006, art. 78** — angajatorii cu **cel puțin 50 de angajați** au obligația
+de a angaja persoane cu handicap în proporție de **cel puțin 4%** din numărul total de angajați.
+
+
+### 9.2 Numărul mediu de angajați — metoda
+
+
+Se însumează **orele lucrate** și se împart la norma lunii:
+
+- 5 angajați × 20 zile × 8 h = **800** ore
+- 2 angajați × 20 zile × 4 h = **160** ore
+- total = **960** ore
+- norma lunii = 20 zile × 8 h = **160** ore
+- `960 / 160` = **6** angajați medii
+
+Rezultatul e 6, nu 7 — și asta e toată ideea: doi oameni cu normă de 4 ore fac un singur
+angajat mediu, nu doi.
+
+⚠️ Notița scrie norma lunii ca „(20 zile × 8h) = 180 ore”. **`20 × 8 = 160`, nu 180.** Cifra
+180 e o scăpare de scris: cu 180 rezultatul ar fi 5,33, nu 6. Restul exemplului confirmă că
+norma folosită efectiv a fost 160.
+
+➕ Ce intră în orele lucrate, din enumerarea formatorului: orele **lucrate** (nu lucrătoare),
+fără concedii, **plus** liberul plătit prevăzut de Codul muncii (căsătorie 5 zile, deces 3 zile
+etc.) **plus** orele suplimentare. Sursa e pontajul.
+
+
+### 9.3 Cota și calculul obligației
+
+
+⚠️ Aici notița rulează două exemple ca și cum ar fi unul singur. Numărul mediu calculat mai sus
+e 6, dar pasul următor înmulțește cu 4% și obține 2,4 — ceea ce cere un număr mediu de **60**,
+nu 6. Le separ, pentru că un exemplu cu 6 angajați n-ar declanșa oricum obligația: pragul e 50.
+
+Exemplul coerent, cu media de **60** de angajați:
+
+- locuri rezervate: `4% × 60` = **2,4**
+- se scade cel cu handicap **accentuat** deja angajat: `2,4 − 1` = **1,4**
+- obligația: `1,4 × 4.325` = **6.055** lei
+
+✅ Salariul minim de **4.325** lei folosit de formator e cel corect **la data trainingului**:
+a crescut de la 4.050 la 4.325 începând cu **1 iulie 2026**. Cifra e însă un **parametru**, nu o
+constantă — se schimbă cel puțin anual, iar obligația se recalculează la fiecare modificare.
+Cine reia exemplul peste un an trebuie să înlocuiască întâi salariul minim, apoi să recalculeze.
+
+Distincția care contează:
+
+| Gradul de handicap | Efectul |
+|---|---|
+| **Accentuat** | salariatul **nu plătește impozit pe salarii**; ocupă un loc rezervat |
+| **Ușor / mediu** | intră la fondul de handicap, fără scutirea de impozit |
+
+
+### 9.4 Înregistrarea și declararea
+
+
+```
+635 = 447    6.055
+```
+
+Se declară în **D100, rândul 810**. Nu e obligatoriu să treacă prin D700 și **nu apare pe
+vector**.
+
+
+### 9.5 Reducerea prin achiziții de la unități protejate
+
+
+Varianta pe care formatorul o recomandă de explorat: contract cu o societate **acreditată**,
+de la care se fac achiziții direct pe `401`, se scad din `447`, și se declară doar diferența.
+
+⚠️ Plafonul: **nu se poate depăși 50%** din valoarea obligației. Restul se plătește oricum.
+
+✅ Temeiul confirmă și structura, și plafonul: **Legea 448/2006, art. 78** dă angajatorului care
+nu ocupă cota de 4% două variante — (a) plata integrală a **salariului de bază minim brut pe
+țară × numărul de locuri de muncă neocupate**, sau (b) plata a **cel puțin 50%** din această
+sumă la bugetul de stat, diferența fiind folosită pentru **achiziția de produse sau servicii
+de la unități protejate autorizate**. Varianta (b) e exact ce descrie notița, iar „maximum 50%”
+e reversul lui „cel puțin 50% la buget”.
+
+## 10. Două chestiuni de personal
+### 10.1 Codul fiscal al salariatului de la punctul de lucru
+
+
+**Material nou.** Dacă ai punct de lucru și ai salariat acolo, trebuie **cerut cod fiscal pentru
+acel salariat**. Se aplică și la **sectoare**, pentru că sunt primării diferite: raportarea se
+face la primăria de care ține punctul de lucru.
+
+
+### 10.2 Locuința de serviciu
+
+
+Societățile pot acorda **locuință de serviciu** salariaților care îndeplinesc condițiile din
+Codul fiscal. Deductibilitatea e **20% din salariul minim**, calculată **pe salariat** — nu pe
+firmă. Este un **avantaj de natură salarială neimpozabil**, încadrat ca atare în Codul fiscal.
+
+❓ Ultima propoziție a notiței — că în zona de salarii se calculează un avantaj **net**, pentru
+care se determină apoi un **brut impozabil** — e marcată de formator „{de contraverificat}”. O
+las deschisă: dacă avantajul e neimpozabil, brutarea lui nu se justifică; dacă se depășește
+plafonul de 20%, doar **excedentul** ar trebui brutat. Cele două afirmații nu se pot împăca fără
+confirmare.
+
 ---
 
 ## Anexa B — Checklist practic
@@ -421,6 +532,17 @@ numele contului.
 
 ---
 
+## Anexa D — Rămase deschise
+
+Ce e încă provizoriu în documentul ăsta. Lista nu e scrisă aici: vine din `date/intrebari.py`, aceeași sursă cu foaia „Întrebări deschise” a workbook-ului și cu lista trimisibilă formatorului.
+
+**❓ Dacă avantajul locuinței de serviciu e neimpozabil în limita a 20% din salariul minim, ce se brutează — tot avantajul, sau doar excedentul?**
+
+*Declarații informative și avantaje salariale · training 31.08.2026, punctul 2*
+
+Notița spune întâi că e „avantaj de natură salarială neimpozabil”, apoi că „în zona de salarii se calculează un avantaj salariat NET, pentru care se calculează un brut impozabil”. Formatorul a marcat exact ultima propoziție „{de contraverificat}”.
+
+**Ce am presupus între timp:** Nu am implementat brutarea. Am consemnat plafonul de 20% pe salariat și presupunerea cea mai probabilă — că se brutează DOAR excedentul peste plafon, cum se procedează la celelalte avantaje plafonate — dar am lăsat-o marcată, pentru că e o presupunere, nu o regulă citită.
 
 
 ---
@@ -428,6 +550,16 @@ numele contului.
 ## Anexa E — Baza legală citată
 
 Extrasă automat din textul documentului: sunt listate actele și articolele care apar efectiv citate mai sus. Contextul fiecărei citări e în secțiunea unde apare.
+
+**Acte normative citate**
+
+- Legea 448/2006
+- Codul muncii
+- Codul fiscal
+
+**Articole citate**
+
+art. 78
 
 
 ---
