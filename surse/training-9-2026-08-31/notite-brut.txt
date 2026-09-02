@@ -1,0 +1,386 @@
+de verificat cls 6 si 7 in fiecare luna; astea ridic cel mai des intrebari; 
+
+609 - in partida cu 401
+709 - in partida cu 
+
+711 => singurul venit care se inchide prin sold,  nu prin rulaje; restul se inchid prin rulaje;
+	cont intermediar de venituri; 
+
+609 cu +, trebuie considerat ca un venit = ar trebui sa fie cu -; fisa de cont / cartea mare ajuta; 
+
+
+
+
+
+
+re D101 => daca e pierdere, trebuie calculata pierderea nedeductibila fiscal; 
+
+1171 - trebuie sa aiba analitic, sa stiu cat pot sa compensez; 
+
+
+sold- inceputul anului
+
+
+sold intial 121 C 10k lei
+
+rulaj Ian Dr 7k Cr 5k 
+
+pe rulaje la 121 Dr 2k
+
+sume totale Dr 7k Cr 15k 
+
+
+
+
+sold initial = tot timpul la inceput de an
+
+rulaje = in fiecare luna
+totale sume = sold initial + rulaje
+total sume precendente  = sold initial + rulaje pana la inceputul lunii vitoare
+
+sold = diferenta intre total sume (intotdeauna)
+
+
+
+
+
+
+
+
+FYI:
+
+daca ai punct de lucru, si ai salariat acolo - trebuie sa ceri cod fiscal pentru acel salariat (se aplica si la sectoare - pentru ca sunt primarii diferite) <=> ne raportam la primaria de care tine punctul de lucru; 
+
+
+
+
+declaratii importante dpdv fiscal - cu impact pe fisa pe platitor - si trebuie sa putem verifica fisa pe platitor cu balanta:
+
+D300
+D100
+D112 (salarii)
+
+
+celelalte sunt cu caracter informativ, fara impact fiscal; 
+
+
+
+
+
+
+
+
+
+
+listat din fisa pe platitor - caseta de impozit pe profit - ca sa nu ne ametim in ce am declarat - pentru ca in 691 poti sa ai +-
+	ne putem pacali, cand are profit in trimestrul 1; in trimestrul 2 vine cu pierdere, si declar 0; in trimestrul 3,
+	impozitul se calculeaza cumulat - nu in trimestru;
+	tot timpul soldul din D101 trebuie sa iasa cu 441 <=> asa ne contraverificam daca am facut corect declaratia D101; 
+		atentie la cei 1,500 lei => amortizarea pentru autotirsmele a caror amortizare totala depaseste 1,500 lei => statul ma lasa sa amortizez conform catalogului, dar sa le inregistrez amortizare doar in suma de 1,500 lei; 
+
+
+
+
+
+re amortizare contabila vs amortizare fiscala => cea fiscala, conform catalogului <=> si cea contabila; trebuie tinute separat, si in Excel - pentru ca rareori sistemel contabile le tin pe amandoua in paralel; 
+
+
+
+situatia mijloacelor se depune separat, un SAF-T separat, la sfarsit de an (bilant)
+
+
+
+SAF-T pentru stocuri = se depune doar la cererea organelor de control (motiv pentru care se cere :3024, 3028 = cu posibilitatea de consum imediat, pe baza bonului de consum (pentru care nu e corect: 6024/6028 - 401; nici dpdv corelatii, nici audit, nici contbailitate)
+
+SAF-T pentru mijloace fixe = se depune cu depunerea bilantului
+
+SAF-T = balanta, furnizori, clienti, si partea de plati (lunar/trimestrial
+
+
+
+
+daca operam 301 bucata cu bucata - ori - {de informat persoana, care trebuie sa stie} e la gramada, si solicitam evidenta primara de la cel care tine primaria => trebuie sa ai atasat la stocuri, SAF-T pentru stocuri (SmartBill / SAGA au creat si partea de gestiune pentru stocuri)
+
+
+
+
+
+
+recomandat amortizarea accelarata (pentru utilaje) - care inseamna jumatate din amortizare in primul an, si restul in urmatorii ani exact cat este fiscal {daca clientul cere amortizare contabila diferita de cea fiscala}; o amortizare o data implementata, asa ramane, pe toata durata de viata a mijlocului fix;
+
+
+ 
+
+
+
+
+
+
+fondul de handicap 
+
+
+= momentul in care o societate comerciala are peste 50 de angajati ca numar mediu (este o intreaga formula, si este greu de aplica) = formula simpla cu o abatere de 0,00% = 
+
+se iau numarul de zile lucrate (20) * 8h * 5 angajati = 160 * 5 = 800
+se iau numarul de zile lucrate (20) * 4h * 2 angajati = 80 * 2 = 160
+
+total = 960 ore lucrate intr-o luna 
+
+se imparte la norma din luna (20 zile * 8h) = 180 ore
+
+960 / 180 = 6 angajati medii (in loc de 7)
+
+
+
+
+
+
+acest numar mediu se inmulteste cu 4% (la fondul de handicap) = 2.4
+
+
+
+cei care au handicap accentuat - nu platesc impozitul pe salarii; 
+cei cu handicap usor/mediu - intra la fondul de handicap
+
+
+se scade cel cu handicap accentuat
+
+1.4
+
+1.4 x salariul minimum pe economie (4,325) = 6,055 lei
+
+
+
+
+635 - 447 = 6,055 => se declara la D100; nu e obligatoriu sa fie prin D700, si nu apare pe vector;
+
+
+
+luat legatura cu o societate acreditata pentru achiziti de produse, pentru a putea fac achizitii direct pe 401, de pe 447, si sa scad fondul => si declar diferenta (nu pot sa depasesc 50% din valoarea asta)
+
+
+pasii, repetati, pentru fondul de handicap:
+
+1. calculat numarul mediu de angajati (vazut din pontaj, sa fie > 50 (numarul de ore lucrate (nu lucratoare, si nu luat in seama concedii) + liber platit (prin contractul de plata, date prin codul muncii: cand te casatoresti 5 zile, cand ai dece 3 zile ... ) +  orele suplimentare))
+2. 
+3.
+4.
+5.
+6.
+7.
+
+
+se declara in D100, la randul: 810
+
+
+
+
+
+chirii de la persoane fizice - pe cheltuiala - societatea plateste catre pers fizica; 
+	de sesizat, pe contract = cati proprietari (re DU)
+		sot si sotie = in contabilitate de inregistrat CUI-ul fiecaruia, pentru ca se depunde D205 anul viitor - unde trebuie sa am informatia pe CNP; 
+
+impozitul = valoarea din brut (10k ron) - 40% * 10% sau valoarea din brut (10k ron) * 8% 
+
+te intereseaza, luna de luna, obligatia de plata - nu cand se plateste (!) {AI: vezi nota}
+	=> fisa, pe analitic, la 462 - ce s-a platit, si care-i soldul; 
+
+D100 = cod 628, impozitul pentru pentru chiria asta; 
+
+
+
+
+
+
+re D205 - scoateti din fisa pe platitor, ce am declarat in D100 - pentru ca se compara cu ce am declarat in D100 (dividente, impozit pe venit din alte surse, si la asta cu chiriile), chiar daca D205 e informativa <=> ca sa nu depunem rectificativa la D205; scos fisa analitica din softul in care depun; se depunde in ultima zi a lui Februarie; 
+
+
+207 = dividende pentru persoane juridice + impozitul pentru nerezidenti {de contraverificat}
+
+
+
+
+
+
+la chirii: tot ce inseamna achizitii de la persoane neplatitoare de TVA; re 394, si codurile ei - trebuie sa avem atasat codul 35 la prestari serviicii, si 34 la chirii - altfel nu se valideaza; 
+
+
+
+
+sunt societati comerciale care acorda locuita de serviciu salariatiilor care indeplinesc conditiile regasite in codul fiscal <=> de gasit varianta de inregistrarea in softul de conta => deductibilitatea e 20% din salariul minimum pe salariat (dpdv salariat, nu firma) = avantaj salariat neimpozabil; apoi, in zona de salarii, unde se calculeaza un avantaj salariat net, pentru care se calculeaza un brut impozabil {AI: de contraverificat ultima propozitie}
+
+
+
+avantajul de natura sariala, neimpozabila (atentie); sa incadreaza, in codul fiscal;
+
+
+
+
+
+
+
+
+taxare inversa: 
+
+factura vine din afara cu cota de TVA din afara:
+	- cand produsul pleaca din RO
+	- cand nu se da codul de TVA cu RO 
+
+
+	prima si prima data, de cerut AVB / CMR - ca marfa a plecat din Ungaria si ajuns in Ro; 
+	daca e din Ro in Ro livrarea, chiar daca firma e din afara tarii, se pune pe scutita - nu pe taxare inversa; 
+
+
+
+
+
+re facturile care nu au trasabilitate clara, trebuie investigate = cand ai un document care te duci nicaieri, o iei din aproape, in aproape; cand ai valori foarte mari, trebuie sa porti discutii, in scris (mail/wapp), si nu iti poti asuma tu ca si cabinet de contabilitate;
+
+	singurele scare nu se vamuiesc, sunt serviciile (cod access, etc) <=> in rest, bunurile se vamuiesc - in afara UE 
+
+
+
+
+
+
+
+622 = comisioane acordate la nerezidenti; comisioanele agentilor de vanzari care au PFA-uri (ce ar factura ei ca si comisioane);
+
+
+628 = onorarile de notar; 
+
+
+
+
+
+
+
+
+extrase bancare, care nu au fost inregistrate la timp:
+
+daca sunt aferente anului respectiv - inregistrate necronologic (nu ne mai intoarcem la lunile respective) -> si poti sa le inregistrezi deductibile fiscal, pentru ca nu tin de anii trecuti; 
+
+	daca sunt informatii vechi, de 3 luni, si sunt dobanzi foarte mari - si am calculat un impozit pe venit eronat => la latiduinea cabinetului de contabilitate => poti sa mentionezi in descriere, la ce data se refera (am inregistrat pe 01.08, dar erau de pe 15.06, 15.03 - macar in descriere sa poti mentiona, in descriere)
+
+	daca sunt cheltuieli foarte mari, si depui rectificative pentru: 394, 406; daca ai TVA la incasare, se schimba si TVA-ul; 
+
+
+sumar: le inregistrezi necronologic, dar sa ai informatia in descriere;
+
+
+
+
+
+
+re bilant - cand il faci la ANAF, te anunta de neconcordantele pe care le ai ANAF; 
+
+
+daca il rulezi din soft, trebuie sa verifici corelatiile;
+
+active - pasive, dar nu cel clasic => 
+
+in F10 se preia partea de solduri (la Decembrie)
+in F20 cheltuieli si venituri, 121 
+in F30 numarul de salariati
+
+F10:
+	imobilizari corelatii la F40
+	activ net = capitaluri proprii
+
+
+pana la bilant, trebuie sa avem balanta intocmita;
+
+daca avem conturile cu soldurile pe invers -> nici sa nu generam bilantul;
+
+
+
+nu exista bilant rectificativ; 
+
+formularul unic - urcat in pliculet cu formularul de contact, pe SPV = re adresa, codul CAEN, si numarul de salariati 
+
+
+
+
+
+
+
+
+
+
+la redepunere: 
+
+
+100 = rectificativa/bifa; 710, declaratie rectificativa; pui ce ai pus intial gresit, si apoi suma corecta; 
+
+101 = rectificativa/bifa;
+
+112 = rectificativa/bifa; 
+
+390 = rectificativa/bifa; in special pentru sume, daca gresit un cod de TVA - exista validare - si nu ni-l preia; 
+
+205 / 207 / 107 = rectificativa/bifa; 
+
+
+
+
+300 = decont de corectii materiale - manual - tot in formularul de contact, cu toate anexele - cu motivul; daca nu e inregistrata cronologic, o inregistrez, si vin pe regularizari luna viitoare; re 4424 din decontul trecut, pentru ca trimite atentionare; acest decont incarca doar partea de rulaje din luna; partea de atentionare, nu de eroare, cand preiau soldul gresit pe 4424 din decontul trecut; 
+
+
+
+394 = nu au bifa de rectificativa, dar se depun peste declartiile deja depuse - se incarca peste declaraitile depuse initial;
+
+406 = nu au bifa de rectificativa, dar se depun peste declartiile deja depuse - se incarca peste declaraitile depuse initial;
+
+
+
+
+balanta la Decembrie trebuie sa o discutam cu clientul; 
+
+bilantul = legea spune ca toate modificarile pe care le faci in balanta, si nu se potrivesc cu bilantul - le explici in notele bilantului urmator; singurele lucruri la care poti interveni, sunt adresa, CAEN-ul, numarul de angajati - informativ; {daca modificam balanta, o sa avem problema la banci - re luare de credit - pentru ca ei verifica bilantul cu balantul}; corelatii la bilant ti le da soft-ul, tu trebuie sa fii sigur ca ai pe activ, Debit, si pe pasiv, Credit; 
+
+
+
+la rectificativa/bifa = te uiti in declaratie, nu in balanta; 
+
+
+
+
+
+
+
+
+alt ex:
+
+daca nu ai facut reevaluarile in Feb, si ai depus D100 in martie - faci reevaluarile in Aprilie / luna curenta deschisa, si depus D100 corect in trimestrul urmator;
+
+rutina pentru contraverificarea corelatiilor de balanta, sa fie cat mai corecta - informatie cat mai corecta asupra indicatorilor; 
+
+
+
+
+
+
+re SAF-T stocuri: include materii prime
+
+la ce pret tinem gestiunea: cu ridicatul / cu amanuntul
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Final handover: digital and paper:
+
+OMF 1802, in partea de contabilitate, partea a 2-a -> corelatiile, la planul de conturi
+
+catalogul mijloacelor fixe -> incadrarea corecta
