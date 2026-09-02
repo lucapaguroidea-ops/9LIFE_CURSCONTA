@@ -112,6 +112,12 @@ CLASA_4 = [
     ("F-424", "F-80", "Plată eronată către buget (4482)"),
     ("F-425", "F-81", "Debitori diverși 461 (mijloc fix vândut și imputație)"),
     ("F-426", "F-82", "Decontări din operațiuni în participație (458)"),
+    ("F-427", "F-92", "Fondul de handicap: obligația angajatorului cu peste 50 de "
+                      "salariați (635 / 447)"),
+    ("F-428", "F-93", "Chirie plătită unei persoane fizice, cu impozit reținut la sursă "
+                      "(612 / 462 / 446)"),
+    ("F-429", "F-94", "Impozitul pe profit se calculează cumulat, nu pe trimestru "
+                      "(691 / 4411)"),
 ]
 
 CLASA_5 = [

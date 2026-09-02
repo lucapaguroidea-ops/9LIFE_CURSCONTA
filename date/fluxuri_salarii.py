@@ -284,4 +284,68 @@ FLUXURI_SALARII = [
                    "coincidență de calendar, e o consecință a decalajului de scadență — "
                    "și de aceea orice depășire e restanță, nu decalaj. Verificarea nu "
                    "cere niciun document în plus: totul e deja în balanță."),
+
+    # ------------------------------------------------------------------ F-92
+    # Cifrele urmează exemplul din notițele 31.08, cu o corecție de scară: notița
+    # calculează un număr mediu de 6 și apoi aplică 4% obținând 2,4 — ceea ce cere 60,
+    # nu 6. Am separat metoda (care e corectă la orice scară) de exemplul obligației
+    # (care trebuie să pornească de peste prag, altfel obligația nici nu se naște).
+    flux(
+        "F-92", "Fondul de handicap: obligația angajatorului cu peste 50 de salariați "
+                "(635 / 447)", didactic=True,
+        roluri="Datorie față de un fond special — cu variantă de stingere în natură",
+        conturi="635, 447, 302, 401, 4426, 5121",
+        note="Numărul mediu din exemplul de calcul e 6, ca în notițe; obligația se "
+             "exemplifică însă pe 60 de angajați medii, pentru că pragul legal e 50.",
+        principiu="Obligația nu se naște din salarii, ci din NUMĂRUL de salariați: 4% din "
+                  "numărul mediu, minus posturile ocupate efectiv de persoane cu handicap. "
+                  "De aceea nu apare pe statul de plată și nu trece prin 421 — e o taxă pe "
+                  "structura de personal, nu pe remunerație. Iar varianta cu unități "
+                  "protejate e singurul loc din sistem unde o datorie față de buget se "
+                  "stinge cumpărând ceva de care firma chiar are nevoie: aceiași bani, dar "
+                  "cu marfă în schimb.",
+        pasi=[
+            pas(1, "Notă de calcul (pontaj)",
+                "Numărul mediu se obține din ORE, nu din capete: 5 salariați × 20 zile × "
+                "8 h = 800 ore, plus 2 salariați × 20 zile × 4 h = 160 ore, total 960 ore. "
+                "Norma lunii e 20 zile × 8 h = 160 ore, deci 960 / 160 = 6 angajați medii. "
+                "Doi oameni cu jumătate de normă fac un singur angajat mediu, nu doi.",
+                rol="Baza de calcul: ore lucrate, plus liberul plătit și orele suplimentare"),
+            pas(2, "Notă contabilă — varianta A, plata integrală",
+                "La 60 de angajați medii: 4% × 60 = 2,4 locuri rezervate; minus 1 ocupat "
+                "de un salariat cu handicap accentuat rămân 1,4 locuri neocupate; "
+                "1,4 × 4.325 = 6.055 lei.",
+                dr=[("635", 6055)], cr=[("447", 6055)],
+                rol="Constituirea obligației lunare"),
+            pas(3, "Ordin de plată",
+                "Se virează integral la buget. Firma rămâne doar cu cheltuiala.",
+                dr=[("447", 6055)], cr=[("5121", 6055)],
+                rol="Stingerea în bani"),
+            pas(4, "Notă contabilă — varianta B, cu unitate protejată",
+                "Aceeași lună, altă decizie: la buget se varsă doar jumătate, iar "
+                "diferența se folosește pentru achiziții de la o unitate protejată "
+                "autorizată. Obligația constituită față de buget e, de la început, "
+                "6.055 / 2 = 3.027,50 lei — restul nu se datorează, pentru că e acoperit "
+                "prin achiziție.",
+                dr=[("635", 3027.50)], cr=[("447", 3027.50)],
+                rol="Pas revelator: jumătate din taxă se transformă în marfă",
+                revelator=True),
+            pas(5, "Ordin de plată — varianta B",
+                "Partea care rămâne datorată bugetului.",
+                dr=[("447", 3027.50)], cr=[("5121", 3027.50)],
+                rol="Stingerea părții bănești"),
+            pas(6, "Factură de la unitatea protejată — varianta B",
+                "Achiziția care acoperă cealaltă jumătate. Nu e o cheltuială în plus: "
+                "sunt bunuri pe care firma le primește și le folosește, cu TVA deductibilă "
+                "ca la orice furnizor.",
+                dr=[("302", 3027.50), ("4426", 635.77)], cr=[("401", 3663.27)],
+                rol="Stingerea în natură, prin achiziție reală"),
+            pas(7, "Verificare",
+                "Sold 447 = 0 la finalul lunii, în ambele variante. Plafonul: achiziția "
+                "nu poate acoperi mai mult de 50% din obligație — restul se plătește "
+                "oricum. Se declară în D100, rândul 810; nu trece prin D700 și nu apare "
+                "pe vector, deci nu se vede la o verificare de vector.",
+                rol="Stare terminală: 447 = 0, obligația declarată în D100"),
+        ],
+    ),
 ]

@@ -640,4 +640,63 @@ FLUXURI = [
                 rol="Stare terminală: 161 = 0, 169 = 0, 505 = 0"),
         ],
     ),
+
+    # ------------------------------------------------------------------ F-94
+    # Capcana descrisă în notițele 31.08: profit în T1, pierdere în T2, „declar 0”, iar
+    # în T3 impozitul se calculează CUMULAT. Fluxul o arată cu cifre, pentru că pe cifre
+    # se vede ce nu se vede în vorbe: contul 691 trebuie să scadă, iar 4411 trece prin
+    # sold debitor — adică prin exact semnalul pe care C-23 îl tratează ca eroare.
+    flux(
+        "F-94", "Impozitul pe profit se calculează cumulat, nu pe trimestru "
+                "(691 / 4411)", didactic=True,
+        roluri="Datorie fiscală recalculată de la începutul anului, nu adunată pe bucăți",
+        conturi="691, 4411, 5121",
+        note="Profit cumulat: 100.000 la 31.03, 60.000 la 30.06, 150.000 la 30.09. "
+             "Cota de impozit pe profit 16%.",
+        principiu="Impozitul pe profit e datorat pe REZULTATUL CUMULAT de la începutul "
+                  "anului, nu pe rezultatul fiecărui trimestru luat separat. De aceea "
+                  "691 e singurul cont de cheltuială din sistem care are rulaj normal pe "
+                  "ambele sensuri: când profitul cumulat scade, cheltuiala înregistrată "
+                  "anterior trebuie diminuată. Cine adună trimestrele ca pe niște "
+                  "exerciții separate plătește impozit pe un profit pe care nu l-a avut.",
+        pasi=[
+            pas(1, "Declarația D100 — trimestrul I",
+                "Profit cumulat la 31.03: 100.000 lei. Impozit: 16% × 100.000 = 16.000 lei.",
+                dr=[("691", 16000)], cr=[("4411", 16000)],
+                rol="Constituirea datoriei pe rezultatul cumulat al T1"),
+            pas(2, "Ordin de plată — trimestrul I",
+                "Se plătește tot, pentru că nu s-a plătit nimic înainte.",
+                dr=[("4411", 16000)], cr=[("5121", 16000)],
+                rol="Stingerea datoriei T1"),
+            pas(3, "Declarația D100 — trimestrul II",
+                "Trimestrul II aduce pierdere, iar profitul CUMULAT scade la 60.000 lei. "
+                "Impozitul cumulat datorat devine 16% × 60.000 = 9.600 lei, dar în "
+                "contabilitate e deja înregistrat 16.000. Diferența de "
+                "16.000 − 9.600 = 6.400 lei se STORNEAZĂ: cheltuiala cu impozitul scade. "
+                "4411 rămâne cu sold DEBITOR de 6.400 — nu e o eroare de tipul C-23, e o "
+                "plată în plus, reală, care se va regulariza.",
+                dr=[("4411", 6400)], cr=[("691", 6400)],
+                rol="Pas revelator: cheltuiala cu impozitul poate să scadă",
+                revelator=True),
+            pas(4, "Declarația D100 — trimestrul III",
+                "Profit cumulat la 30.09: 150.000 lei. Impozit cumulat: "
+                "16% × 150.000 = 24.000 lei. Înregistrat până acum, net: 9.600 lei. "
+                "Diferența de completat: 24.000 − 9.600 = 14.400 lei.",
+                dr=[("691", 14400)], cr=[("4411", 14400)],
+                rol="Completarea până la impozitul cumulat"),
+            pas(5, "Ordin de plată — trimestrul III",
+                "Datorat cumulat 24.000, plătit deja 16.000, deci se virează "
+                "24.000 − 16.000 = 8.000 lei. Soldul debitor de 6.400 din T2 se absoarbe "
+                "aici, fără să fi fost vreodată cerut înapoi de la buget.",
+                dr=[("4411", 8000)], cr=[("5121", 8000)],
+                rol="Stingerea prin diferență, nu prin sumă nouă"),
+            pas(6, "Verificare",
+                "Σ691 = 16.000 − 6.400 + 14.400 = 24.000, adică exact 16% din profitul "
+                "cumulat de 150.000. Sold 4411 = 0 după plata din T3. Regula de "
+                "contraverificare a formatorului: soldul din D101 trebuie să iasă cu 441 — "
+                "dacă nu iese, declarația e greșită, nu balanța. Instrumentul e caseta de "
+                "impozit pe profit din fișa pe plătitor, listată și confruntată cu balanța.",
+                rol="Stare terminală: 4411 = 0, Σ691 = impozitul pe rezultatul cumulat"),
+        ],
+    ),
 ]

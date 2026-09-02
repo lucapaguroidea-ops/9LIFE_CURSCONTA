@@ -318,4 +318,54 @@ FLUXURI = [
                 rol="Stare terminală: gestiunile golite, cheltuiala pe contul potrivit"),
         ],
     ),
+
+    # ------------------------------------------------------------------ F-93
+    # Umple un gol declarat: `date/inchideri.py` spunea despre 462 „Nu există flux pe
+    # debitori/creditori diverși”. Chiria plătită unei persoane fizice e chiar cazul —
+    # și e cazul în care contul chiar trebuie ținut pe analitic, pentru că D205 se
+    # depune anul următor pe CNP, iar informația nu se mai poate reconstitui atunci.
+    flux(
+        "F-93", "Chirie plătită unei persoane fizice, cu impozit reținut la sursă "
+                "(612 / 462 / 446)", didactic=True,
+        roluri="Datorie față de un creditor divers + stopaj la sursă",
+        conturi="612, 462, 446, 5121",
+        note="Chirie brută 10.000 lei pe lună. Impozitul e 8% din brut — echivalentul "
+             "cotei de 10% aplicate venitului net, după forfetara de 20%.",
+        principiu="Plătitorul de venit nu e doar plătitor: e și cel care REȚINE impozitul. "
+                  "Proprietarul primește netul și nu mai are nimic de declarat, pentru că "
+                  "impozitul e final. De aceea suma care iese din bancă (9.200) nu e "
+                  "cheltuiala (10.000): diferența n-a rămas la firmă, a plecat la buget pe "
+                  "alt drum. Cine înregistrează doar plata pierde exact partea pe care o "
+                  "datorează statului.",
+        pasi=[
+            pas(1, "Contract de închiriere + document de plată",
+                "Chiria lunii intră pe cheltuială integral, la valoarea BRUTĂ din "
+                "contract. Datoria se naște față de persoana fizică, pe 462 — nu pe 401, "
+                "care e rezervat furnizorilor.",
+                dr=[("612", 10000)], cr=[("462.chirii-pf", 10000)],
+                rol="Cheltuiala la brut și datoria față de proprietar"),
+            pas(2, "Notă contabilă — reținerea la sursă",
+                "Impozitul de 8% din 10.000 = 800 lei se reține din ce i se cuvine "
+                "proprietarului și devine datorie a FIRMEI față de buget. Datoria față de "
+                "persoana fizică scade cu exact atât.",
+                dr=[("462.chirii-pf", 800)], cr=[("446.impozit-chirii", 800)],
+                rol="Pas revelator: impozitul se mută de la proprietar la firmă",
+                revelator=True),
+            pas(3, "Ordin de plată către proprietar",
+                "Se plătește netul: 10.000 − 800 = 9.200 lei.",
+                dr=[("462.chirii-pf", 9200)], cr=[("5121", 9200)],
+                rol="Stingerea datoriei față de proprietar"),
+            pas(4, "Ordin de plată către buget",
+                "Impozitul reținut se virează separat și se declară în D100, cod 628.",
+                dr=[("446.impozit-chirii", 800)], cr=[("5121", 800)],
+                rol="Stingerea datoriei față de buget"),
+            pas(5, "Verificare",
+                "Sold 462 analitic = 0 și sold 446 analitic = 0 la finalul lunii. "
+                "Analiticul pe 462 e obligatoriu, nu ornament: dacă în contract sunt doi "
+                "proprietari — soț și soție — fiecare are CNP-ul lui, iar D205 se depune "
+                "pe CNP până în ultima zi a lui februarie. Un sold care persistă pe 462 "
+                "înseamnă chirie datorată și neplătită, nu o eroare de operare.",
+                rol="Stare terminală: 462 = 0, 446 = 0, D100 și D205 alimentate din analitic"),
+        ],
+    ),
 ]

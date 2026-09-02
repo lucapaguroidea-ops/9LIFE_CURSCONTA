@@ -315,6 +315,19 @@ CONTURI_NOI = [
                     "Analiticul lui 168 pentru împrumutul obligatar — nu se confundă cu "
                     "1682 (dobânzi la credite bancare).",
          analitice="1681 pe emisiune de obligațiuni", factor="V", flux="F-115", tier="B"),
+    # ---- impozitul pe profit (F-429) -----------------------------------
+    # Rând propriu cerut de poarta 29: sinteticul 441 e bifuncțional (A/P), deci
+    # rezerva porții 20 n-ar putea spune ce sold se așteaptă de la analitic. Aici
+    # se poate spune: 4411 e datorie, iar soldul lui debitor e o plată în plus.
+    dict(simbol="4411", denumire="Impozitul pe profit", fct="P",
+         natura="Patrimonial (real)", subtip="Datorie fiscală",
+         observatie="Impozitul pe profit datorat, calculat pe rezultatul CUMULAT de la "
+                    "începutul anului. Soldul debitor nu e eroarea din C-23, ci o plată "
+                    "în plus rămasă după un trimestru cu pierdere — se absoarbe la "
+                    "regularizarea următoare (F-429). Soldul lui trebuie să iasă cu "
+                    "declarația D101; dacă nu iese, declarația e greșită, nu balanța.",
+         analitice="4411 pe an fiscal, cât timp regularizarea e deschisă", factor="V",
+         flux="F-429", tier="B"),
     # ---- conturile care țin rulajele curate ----------------------------
     dict(simbol="4481", denumire="Alte datorii față de bugetul statului", fct="P",
          natura="Rol in flux", subtip="Intermediar / clarificare",
@@ -527,6 +540,14 @@ MATRICE = [
      "F-81 pas 1: cumpărătorul unui mijloc fix nu e client", "NU"),
     ("458", "Decontări din operațiuni în participație", "A", "F-82",
      "F-82 pas 3: venitul se redistribuie, ca impozitul să urmeze activitatea", "NU"),
+
+    # ---- obligații și rețineri din sursa 31.08 ------------------------------
+    ("635 / 447", "Fondul de handicap — taxă pe structura de personal", "A", "F-92",
+     "F-92 pas 4: jumătate din obligație se stinge cumpărând, nu plătind", "NU"),
+    ("612 / 462 / 446", "Chirie către persoană fizică, cu stopaj la sursă", "A", "F-93",
+     "F-93 pas 2: impozitul se mută de la proprietar la firmă, care îl reține", "NU"),
+    ("691 / 4411", "Impozitul pe profit, calculat cumulat", "A", "F-94",
+     "F-94 pas 3: cheltuiala cu impozitul scade când profitul cumulat scade", "NU"),
 
     # ---- salarii și rețineri (sursa 21.08) ---------------------------------
     ("423", "Personal — ajutoare materiale datorate", "A", "F-64",

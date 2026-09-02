@@ -33,10 +33,10 @@ Tabelul de mai jos nu e scris aici: e citit din foaia `Legendă`, secțiunea „
 | Foaie | Ce ține |
 |---|---|
 | Legendă | Taxonomia rolurilor + tipologia factorilor + convenția de analitic + tierizare + TVA confirmat |
-| Plan de conturi | 290 conturi, cu 3 coloane noi: Analitice recomandate · Factor · Flux (pas) |
+| Plan de conturi | 291 conturi, cu 3 coloane noi: Analitice recomandate · Factor · Flux (pas) |
 | Doar rol în flux | 80 conturi de serviciu, grupate pe rol |
 | Analitice (Tier A) | Detaliu pe conturile Tier A: structură, factor, ce se rupe și de ce |
-| Fluxuri | 88 fluxuri × pași, tabelar cu note complete + coloană Declarativ |
+| Fluxuri | 91 fluxuri × pași, tabelar cu note complete + coloană Declarativ |
 | Matrice acoperire | Cont → flux(uri) → pas revelator; arată golurile |
 | Index module | Legătura cu Module_Declarative_Fluxuri.xlsx: ce modul acoperă ce flux, cu ce foi și când se rulează |
 | Arbore analitice | Arborele de decizie pentru analitice (3 întrebări) + contra-regula: când analiticul e o greșeală |
@@ -198,7 +198,7 @@ ID-ul codifică clasa contului principal. Un flux nou primește următorul numă
 | `F-1xx` | CAPITALURI, PROVIZIOANE, ÎMPRUMUTURI | 15 | `F-116` |
 | `F-2xx` | IMOBILIZĂRI | 16 | `F-217` |
 | `F-3xx` | STOCURI ȘI PRODUCȚIE | 21 | `F-322` |
-| `F-4xx` | TERȚI, TVA, DECONTĂRI | 26 | `F-427` |
+| `F-4xx` | TERȚI, TVA, DECONTĂRI | 29 | `F-430` |
 | `F-5xx` | TREZORERIE | 8 | `F-509` |
 | `F-8xx` | CONTURI ÎN AFARA BILANȚULUI | 2 | `F-803` |
 
@@ -357,4 +357,4 @@ Poarta 19 leagă marcajele de întrebări la nivel de DOCUMENT: unul cu întreb�
 
 ---
 
-*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 30 porți, 24 module, 88 fluxuri la data generării.*
+*Secțiunile [generat] provin din `build/verifica.py`, `date/ordine.py`, `date/documente.py` și din workbook-urile construite. 30 porți, 24 module, 91 fluxuri la data generării.*

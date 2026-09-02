@@ -76,14 +76,14 @@ Necesită `openpyxl`, `formulas`, `numpy` (`pip install openpyxl formulas numpy`
 
 <!-- generat: cifre — nu edita între marcaje, se suprascrie la `make tot` -->
 
-**88 fluxuri** cu monografie pas cu pas, ordonate după planul de conturi. ID-ul codifică clasa contului principal, deci un flux adăugat peste un an primește următorul număr liber din clasa lui și stă fizic la locul lui.
+**91 fluxuri** cu monografie pas cu pas, ordonate după planul de conturi. ID-ul codifică clasa contului principal, deci un flux adăugat peste un an primește următorul număr liber din clasa lui și stă fizic la locul lui.
 
 | Bloc | Conținut | Fluxuri |
 |---|---|---|
 | `F-1xx` | capitaluri, provizioane, împrumuturi, închiderea exercițiului, leasing | 15 |
 | `F-2xx` | imobilizări: intrare pe grupe → în curs → regie proprie → subvenții → ieșiri → control analitic ↔ sintetic | 16 |
 | `F-3xx` | stocuri și producție: aprovizionare, obiecte de inventar, producție, mărfuri, import | 21 |
-| `F-4xx` | terți, TVA, salarii: TVA la încasare, taxare inversă, închidere lunară, 408/418, salarii, medicale, popriri, impozit micro | 26 |
+| `F-4xx` | terți, TVA, salarii: TVA la încasare, taxare inversă, închidere lunară, 408/418, salarii, medicale, popriri, impozit micro | 29 |
 | `F-5xx` | trezorerie | 8 |
 | `F-8xx` | conturi în afara bilanțului | 2 |
 
@@ -91,7 +91,7 @@ Necesită `openpyxl`, `formulas`, `numpy` (`pip install openpyxl formulas numpy`
 
 | Ce | Cât |
 |---|---|
-| Conturi în planul clasificat pe rol | 290 |
+| Conturi în planul clasificat pe rol | 291 |
 | Conturi clasificate Tier A | 116 |
 | Dintre ele, cu rând detaliat de analitice | 45 |
 | Corelații de control | 39 |
