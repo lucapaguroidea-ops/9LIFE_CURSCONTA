@@ -428,4 +428,58 @@ CORELATII = [
         severitate="Înaltă — eroarea nu se vede în luna preluării, ci la prima "
                    "verificare pe rulaj, când nu mai știe nimeni de unde vine",
     ),
+
+    # ---- sursa 31.08: declarațiile confruntate cu contabilitatea -----------
+    dict(
+        id="C-40",
+        formula="sold 441 din balanță = impozitul pe profit din D101\n"
+                "  și = caseta de impozit pe profit din FIȘA PE PLĂTITOR",
+        unde="Balanța la 31.12 vs. D101 depusă vs. fișa pe plătitor de la ANAF",
+        legitim="Diferență de rotunjire între lei și lei fără subdiviziuni, dacă\n"
+                "  declarația se completează rotunjit.\n"
+                "Sold debitor pe 4411 în cursul anului: e plata în plus rămasă după\n"
+                "  un trimestru cu pierdere, care se absoarbe la regularizare (F-429).",
+        suspect="Impozit declarat trimestru cu trimestru, ca și cum fiecare trimestru\n"
+                "  ar fi un exercițiu separat: în T3 impozitul se calculează CUMULAT,\n"
+                "  iar cine adună trimestrele plătește pe un profit pe care nu l-a avut.\n"
+                "Sold 441 care nu iese cu D101: declarația e greșită, nu balanța.\n"
+                "Cheltuiala 691 fără rulaj creditor într-un an cu trimestru pierdut:\n"
+                "  semn că diminuarea cumulată n-a fost înregistrată deloc.",
+        flux="F-429, F-104",
+        severitate="Înaltă — se descoperă la control, cu accesorii pe toată perioada, "
+                   "iar reconstituirea cere refacerea tuturor trimestrelor",
+    ),
+    dict(
+        id="C-41",
+        formula="609 și 709 au rulaj pe sensul INVERS clasei lor:\n"
+                "  609 (clasa 6) rulează în CREDIT · 709 (clasa 7) rulează în DEBIT",
+        unde="Fișa de cont / cartea mare, nu balanța",
+        legitim="Storno de reducere acordată din greșeală, care readuce contul pe\n"
+                "  sensul propriu clasei pentru o singură operațiune.",
+        suspect="609 cu rulaj debitor, ca o cheltuială obișnuită: reducerea primită a\n"
+                "  fost operată ca achiziție, deci cheltuiala e umflată de două ori.\n"
+                "709 cu rulaj creditor: reducerea acordată a fost operată ca vânzare,\n"
+                "  deci cifra de afaceri e umflată.",
+        flux="F-409",
+        severitate="Medie — nu rupe balanța și nu se vede în sold, pentru că soldul "
+                   "net poate ascunde un rulaj greșit compensat de altul corect; de "
+                   "aceea verificarea se face pe fișă, unde fiecare mișcare are sensul ei",
+    ),
+    dict(
+        id="C-42",
+        formula="ACTIV NET din F10 = CAPITALURI PROPRII din F10\n"
+                "  și imobilizările din F10 = imobilizările din F40",
+        unde="Bilanț: F10 (solduri) · F20 (cheltuieli, venituri, 121) · F30 (salariați) "
+             "· F40 (imobilizări)",
+        legitim="Nimic. Corelația e o identitate: dacă nu iese, e eroare, nu situație "
+                "particulară.",
+        suspect="Conturi cu soldul pe invers: în cazul ăsta bilanțul nu se generează\n"
+                "  deloc — se repară întâi balanța (vezi C-23).\n"
+                "Balanța modificată DUPĂ depunerea bilanțului: nu există bilant\n"
+                "  rectificativ, iar diferența se explică în notele bilanțului următor.\n"
+                "  La bănci se vede imediat: la creditare confruntă bilanțul cu balanța.",
+        flux="F-104",
+        severitate="Înaltă — bilanțul depus nu se mai poate corecta, deci eroarea "
+                   "rămâne în evidența publică a firmei până la exercițiul următor",
+    ),
 ]

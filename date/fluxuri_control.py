@@ -360,7 +360,7 @@ FLUXURI = [
                 dr=[("446.impozit-chirii", 800)], cr=[("5121", 800)],
                 rol="Stingerea datoriei față de buget"),
             pas(5, "Verificare",
-                "Sold 462 analitic = 0 și sold 446 analitic = 0 la finalul lunii. "
+                "Sold 462 = 0 și sold 446 = 0 la finalul lunii, pe fiecare analitic. "
                 "Analiticul pe 462 e obligatoriu, nu ornament: dacă în contract sunt doi "
                 "proprietari — soț și soție — fiecare are CNP-ul lui, iar D205 se depune "
                 "pe CNP până în ultima zi a lui februarie. Un sold care persistă pe 462 "

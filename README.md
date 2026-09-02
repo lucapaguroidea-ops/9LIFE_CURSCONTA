@@ -94,8 +94,8 @@ Necesită `openpyxl`, `formulas`, `numpy` (`pip install openpyxl formulas numpy`
 | Conturi în planul clasificat pe rol | 291 |
 | Conturi clasificate Tier A | 116 |
 | Dintre ele, cu rând detaliat de analitice | 45 |
-| Corelații de control | 39 |
-| Rânduri de cadență în „Închideri periodice” | 30 |
+| Corelații de control | 42 |
+| Rânduri de cadență în „Închideri periodice” | 32 |
 | Foi în workbook-ul de referință | 12 |
 | Documente de studiu | 6 |
 | Întrebări: deschise / verificate / decizii de cabinet | 20 / 26 / 7 |

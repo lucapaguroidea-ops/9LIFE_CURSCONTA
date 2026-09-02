@@ -115,6 +115,17 @@ CADENTA = [
     # Trezoreria (sursa 28.08). Toate trei sunt conturi de TRANZIT: o sumă stă acolo
     # între două stări, iar dacă nimeni nu se uită, „între” devine „pentru totdeauna”.
     # Cadența e lunară pentru că scadențele efectelor sunt lunare, nu trimestriale.
+    # Obligațiile și reținerile din sursa 31.08. Toate trei sunt conturi în care o sumă
+    # datorată STĂ până la scadență, iar scadența e lunară sau trimestrială — nu anuală.
+    ("447 Fonduri speciale — taxe și vărsăminte asimilate", "Lunar — obligatoriu",
+     "fondul de handicap se constituie și se plătește lunar; sold rămas = obligație "
+     "declarată și neachitată, iar ea nu apare pe vector, deci nimeni nu o reclamă "
+     "până la control (F-427)"),
+    ("4411 Impozitul pe profit", "Cel puțin trimestrial",
+     "se recalculează CUMULAT la fiecare trimestru; soldul debitor e plată în plus, nu "
+     "eroare, dar trebuie să se absoarbă la regularizarea următoare, altfel rămâne bani "
+     "ai firmei la buget (F-429, C-40)"),
+
     ("5112 / 5113 Efecte de încasat", "Lunar — obligatoriu",
      "sold după scadență = efect neonorat, nu creanță curentă; se tratează ca atare, "
      "cu ajustare dacă e cazul (F-503)"),
@@ -181,6 +192,8 @@ GOLURI = {
     "411": "Idem 401 — vezi C-23.",
     "455": "Nu există flux pe 455. Restricțiile de numerar sunt rămase deschise.",
     "461": "Nu există flux pe debitori/creditori diverși.",
-    "462": "Idem 461.",
+    # 462 NU mai e gol: F-428 (chiria către persoană fizică) îi declară starea
+    # terminală „Sold 462 = 0”. Rândul a stat aici de la trainingul 5 până acum;
+    # se scoate în momentul în care ancora chiar există, nu mai devreme.
     "5187": "F-107 declară starea lui 1621, nu și dobânda de calculat pe 5187.",
 }
